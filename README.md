@@ -1,7 +1,16 @@
+# BRW Spring Boot Web Application
 
-1. Install the application: `npm install`
-2. Start the server: `node start.js`
-3. View in browser at `http://localhost:8080`
+You Need:
+
+1. Java 1.8
+2. Maven 3.6
+3. Tomcat v9.0
+
+Open your terminal then type this : `mvn clean spring-boot:run`
+
+Open your browser then type this : `http://localhost:8080/`
+
+
 
 Create token
 https://mycart.auth0.com/oauth/token
@@ -24,9 +33,9 @@ http://localhost:8080/api/v1/propertyList
 
 POST
 {
-	"latitude": 37.57613630000001,
-	"longitude": -122.03861259999996,
-	"zipCode": 94555
+    "latitude": 37.57613630000001,
+    "longitude": -122.03861259999996,
+    "zipCode": 94555
 }
 
 Create new gas Station
