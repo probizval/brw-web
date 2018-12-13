@@ -1,0 +1,28 @@
+/*	13.	Profile
+-------------------------------------------------------------------*/
+
+/* Profile Classes*/
+
+.profile-pic {
+	// position: relative;
+	width: 200px;
+	height: 200px;
+	// display: inline-block;
+}
+
+.profile-pic:hover .edit {
+	display: block;
+}
+
+.edit {
+	padding-top: 7px;
+	padding-right: 7px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: none;
+}
+
+.edit a {
+	color: #000;
+}

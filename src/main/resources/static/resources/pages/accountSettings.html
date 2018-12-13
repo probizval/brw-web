@@ -1,0 +1,25 @@
+<div id="content">
+  <div class="container">
+    <div class="row justify-content-md-center">
+          <div class="col col-lg-12 col-xl-10">
+        <div class="row has-sidebar">
+          <div class="col-md-5 col-lg-4 col-xl-4">
+            <div id="sidebar" class="sidebar-left">
+              <div class="sidebar_inner">
+                <div class="list-group no-border list-unstyled">
+                  <span class="list-group-item heading">Manage Account</span>
+                  <a ui-sref=".changePassword" class="list-group-item"><i class="fa fa-fw fa-lock"></i> Change Password</a>
+                  <a ui-sref=".notification" class="list-group-item"><i class="fa fa-fw fa-bell-o"></i> Email Subscription</a>
+                  <a ui-sref=".socialAccounts" class="list-group-item"><i class="fa fa-fw fa-cog"></i> Social Accounts</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7 col-lg-8 col-xl-8">
+            <div ui-view></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

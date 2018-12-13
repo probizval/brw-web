@@ -1,0 +1,29 @@
+<div id="content">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col col-lg-12 col-xl-12">
+        <div class="row has-sidebar">
+          <div class="col-md-4 col-lg-3 col-xl-3">
+            <div id="sidebar" class="sidebar-left">
+              <div class="sidebar_inner">
+                <div class="list-group no-border list-unstyled">
+                  <span class="list-group-item heading">Manage Listings</span>
+                  <a ui-sref=".addListing" class="list-group-item"><i class="fa fa-fw fa-plus-square-o"></i> Add Listing</a>
+                  <a ui-sref=".bookmarkedListing" class="list-group-item d-flex justify-content-between align-items-center"><span><i class="fa fa-fw fa-bookmark-o"></i> Bookmarked Listing</span>
+                    <span class="badge badge-primary badge-pill">10</span>
+                  </a>
+                  <a ui-sref=".myListing" class="list-group-item d-flex justify-content-between align-items-center"><span><i class="fa fa-fw fa-bars"></i> My Listings</span>
+                    <span class="badge badge-primary badge-pill">7</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 col-lg-9 col-xl-9">
+            <div ui-view></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

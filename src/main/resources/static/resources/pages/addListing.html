@@ -1,0 +1,227 @@
+<div class="page-header bordered">
+              <h1>Submit your property <small>We've over 15 Lac buyers and tenants for you!</small></h1>
+            </div>
+            <form action="index.php">
+              <h3 class="subheadline">Basic Details</h3>
+              <div class="form-group">
+                <label for="title">Property Title</label>
+                <input type="text" class="form-control form-control-lg" id="title" ng-model="property.propertyTitle" placeholder="Property Title" autofocus>
+              </div>
+              <div class="form-group">
+                <label for="title">Property Image</label>
+                <input type="text" class="form-control form-control-lg" id="img" ng-model="property.image_url" placeholder="Property Image">
+              </div>
+              <div class="form-group">
+                <label for="title">Contact Number</label>
+                <input type="text" class="form-control form-control-lg" style="width:200px;" id="phonenumber" ng-model="property.display_phone" placeholder="Phone Number">
+              </div>
+               <div class="form-group">
+                <label for="type">Type</label>
+                <select name="type" id="type" ng-model="property.type"  ng-options="type.name for type in types" ng-change="change()" class="form-control form-control-lg ui-select">
+                </select>
+              </div>
+              <div class="form-group">
+                <label>For Sell/Rent?</label>
+                <div>
+                  <div class="radio radio-inline">
+                    <input type="radio" name="type" id="sell" ng-model="property.rentSale" value="Buy">
+                    <label for="sell">Sell</label>
+                  </div>
+                  <div class="radio radio-inline">
+                    <input type="radio" name="type" id="lease" ng-model="property.rentSale" value="Lease">
+                    <label for="lease">Lease</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Price (IN USD $)</label>
+                    <input type="text" class="form-control form-control-lg" ng-model="property.price" placeholder="Price (IN USD $)">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>MLS No.</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="" ng-model="property.mlsNumber">
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="bedrooms">Bedrooms</label>
+                    <select name="bedrooms" id="bedrooms" ng-model="property.bedrooms" ng-options="bed.numberofbeds for bed in bedrooms" class="form-control form-control-lg ui-select">
+                      <option value="">Select</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="bathrooms">Bathrooms</label>
+                    <select name="bathrooms" id="bathrooms" ng-model="property.bathrooms" ng-options="bath.numberofbathrooms for bath in bathrooms" class="form-control form-control-lg ui-select">
+                      <option value="">Select</option>
+                    </select>
+                  </div>
+                </div>
+              </div> -->
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Area Sq/ft</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="" ng-model="property.sqFt">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Price per Sq/ft.</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="" ng-model="property.pricePerSqFt">
+                  </div>
+                </div>
+              </div>
+              <h3 class="subheadline" ng-if="property.type.name === 'Restaurant'">Restaurants</h3>
+              <div class="row" ng-if="property.type.name === 'Restaurant'">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Cuisine Type</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="" ng-model="property.rest.cuisineType">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="" ng-model="property.rest.desc">
+                  </div>
+                </div>
+              </div>
+
+              <h3 class="subheadline" ng-if="property.type.name === 'Gas station'">Gas station</h3>
+              <div class="row" ng-if="property.type.name === 'Gas station'">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Brand</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="" ng-model="property.gas.brand">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Fuel Type</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="" ng-model="property.gas.fuelType">
+                  </div>
+                </div>
+              </div>
+              
+              <h3 class="subheadline">Location</h3>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" class="form-control form-control-lg" id="autocomplete" placeholder="Enter your location">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" class="form-control form-control-lg" ng-model="property.address" id="address" placeholder="">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>City</label>
+                    <input type="text" class="form-control form-control-lg" ng-model="property.city" placeholder="" id="locality">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>State</label>
+                    <input type="text" class="form-control form-control-lg" ng-model="property.state" placeholder="" id="administrative_area_level_1">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Country</label>
+                    <input type="text" class="form-control form-control-lg" ng-model="property.country" placeholder="" id="country">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Zipcode</label>
+                    <input type="text" class="form-control form-control-lg" ng-model="property.zipcode" placeholder="" id="postal_code">
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="form-group">
+                <h3 class="subheadline">Additional Features</h3>
+                <div class="feature-list three_cols">
+                  <div class="checkbox">
+                    <input type="checkbox" id="Garden">
+                    <label for="Garden">Garden</label>
+                  </div>
+                  <div class="checkbox">
+                    <input type="checkbox" id="Gym">
+                    <label for="Gym">Gym</label>
+                  </div>
+                  <div class="checkbox">
+                    <input type="checkbox" id="Internet">
+                    <label for="Internet">Internet</label>
+                  </div>
+                  <div class="checkbox">
+                    <input type="checkbox" id="Pool">
+                    <label for="Pool">Swimming Pool</label>
+                  </div>
+                  <div class="checkbox">
+                    <input type="checkbox" id="Window">
+                    <label for="Window">Window Covering</label>
+                  </div>
+                  <div class="checkbox">
+                    <input type="checkbox" id="Parking">
+                    <label for="Parking">Parking</label>
+                  </div>
+                  <div class="checkbox">
+                    <input type="checkbox" id="School">
+                    <label for="School">School</label>
+                  </div>
+                  <div class="checkbox">
+                    <input type="checkbox" id="Bank">
+                    <label for="Bank">Bank</label>
+                  </div>
+                  <div class="checkbox">
+                    <input type="checkbox" id="Metro">
+                    <label for="Metro">Metro</label>
+                  </div>
+                  <div class="checkbox">
+                    <input type="checkbox" id="Airport">
+                    <label for="Airport">Airport</label>
+                  </div>
+                </div>
+              </div> -->
+              <div class="form-group">
+                <label>Property Description</label>
+                <textarea class="form-control form-control-lg text-editor" ng-model="property.propertyDescription" placeholder=""></textarea>
+              </div>
+              <!-- <div class="form-group">
+                <h3 class="subheadline">Upload Photos</h3>
+                <div class="ui-dropzone">
+                  <div class="icon"></div>
+                  <div>Drag and drop images or click to upload</div>
+                  <input type="file" class="form-control form-control-lg" id="gallery" multiple>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="checkbox">
+                  <input type="checkbox" id="featured">
+                  <label for="featured">Yes ‚ feature this listing. </label>
+                </div>
+              </div> -->
+              <hr>
+              <div class="form-group">
+                <button type="button" class="btn btn-lg btn-primary" ng-click="saveProperty()">Submit Property</button>
+              </div>
+              
+              <input type="text" class="form-control form-control-lg" ng-model="property.lat" id="lat" hidden="hidden">
+              <input type="text" class="form-control form-control-lg" ng-model="property.lng" id="lng" hidden="hidden">
+            </form>

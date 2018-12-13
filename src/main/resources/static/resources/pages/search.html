@@ -1,0 +1,149 @@
+<div ng-include="'resources/pages/advanceFilterMenuBar.html'"></div>
+
+<div class="map-listing">
+  <div class="row no-gutters has-map fixed">
+    <div class="col-sm-4 col-md-6 col-lg-7 col-xl-6">
+        <div id="map-wrapper">
+            <div class="map-panel">
+                <div id="map_wrapper">
+                    <div id="map_canvas" class="mapping"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5 col-xl-6">
+        <div class="search-results">
+            <div class="search-results-list">
+                <div class="page-header">
+                    <h1>Property for rent near Fremont, CA</h1>
+                </div>
+                <div class="sorting">
+                  <div class="row justify-content-between">
+                    <div class="col-sm-6 col-lg-4">
+                      <div class="form-group">
+                        <select class="form-control form-control-md">
+                            <option selected="selected">Most recent</option>
+                            <option>Highest price</option>
+                            <option>Lowest price</option>
+                            <option>Most reduced</option>
+                            <option>Most popular</option>
+                        </select>
+                      </div>
+                    </div>
+                  <!-- <div class="col-sm-6 col-lg-4">
+                  <div class="btn-group float-right" role="group"> <a href="property_grid.html" class="btn btn-light"><i class="fa fa-th"></i></a> <a href="property_listing.html" class="btn btn-light active"><i class="fa fa-bars"></i></a> </div>
+                  </div> -->
+                  </div>
+                </div>
+            
+                <div class="clearfix"></div>
+
+                <div class="row item-listing grid">
+                    <div ng-repeat="prop in searchList track by $index" class="item col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-6" id="prop{{index}}">
+                        <div class="item-image">
+                            <a class="item-image" href="#propertyDetails/{{prop.id}}">
+                                <img src="{{prop.img_url}}" style="width:400px;height:240px" class="img-fluid" alt="">
+                                <a href="#" class="save-item"><i class="fa fa-star"></i></a>
+                            </a>
+
+                            <a href="#propertyDetails/{{prop.id}}" class="item-meta">
+                                <span class="item-badge-left item-address">For Sale{{prop.property_available_for}}</span>
+                                <span class="item-badge-right item-address">{{prop.business_type}}</span>
+                                <br/>
+                                <span class="item-price" ng-if="prop.estated_estimated_value">{{ prop.estated_estimated_value | currency : "$" : false }}</span> &nbsp;&nbsp;
+                                <span class="item-badge-right item-price" ng-if="prop.lot_size">{{prop.lot_size}} sq ft.</span>
+                                <br/>
+                                <span class="item-address" ng-if="prop.property_name">{{prop.property_name}}</span>
+                                <br/>
+                                <span class="item-address">{{ prop.property_address }}, {{prop.city}}, {{prop.state}} {{prop.zip_code}}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="item-listing list">-->
+            <!--<div ng-repeat="prop in searchList track by $index" class="item" id="prop{{index}}">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-lg-5">-->
+                        <!--<div class="item-image"> <a href="#propertyDetails/{{prop.id}}"><img src="{{prop.img_url}}" style="width:440px;height:200px" class="img-fluid" alt="">-->
+                            <!--<div class="item-badges">-->
+                                <!--&lt;!&ndash; <div class="item-badge-left">Sponsored</div> &ndash;&gt;-->
+                                <!--<div class="item-badge-right">For {{prop.property_available_for}}</div>-->
+                            <!--</div>-->
+                            <!--<div class="item-meta">-->
+                                <!--<div class="item-price">-->
+                                    <!--<small>${{prop.pricePerSqFt}} / sq ft</small>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</a>-->
+                            <!--<a href="#" class="save-item"><i class="fa fa-star"></i></a> </div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="item-listing list">-->
+          <!--<div ng-repeat="prop in searchList track by $index" class="item" id="prop{{index}}">-->
+            <!--<div class="row">-->
+              <!--<div class="col-lg-5">-->
+                <!--<div class="item-image"> <a href="#propertyDetails/{{prop.id}}"><img src="{{prop.img_url}}" style="width:440px;height:200px" class="img-fluid" alt="">-->
+                  <!--<div class="item-badges">-->
+                  <!--&lt;!&ndash; <div class="item-badge-left">Sponsored</div> &ndash;&gt;-->
+                  <!--<div class="item-badge-right">For {{prop.property_available_for}}</div>-->
+                  <!--</div>-->
+                  <!--<div class="item-meta">-->
+                  <!--<div class="item-price">-->
+                  <!--<small>${{prop.pricePerSqFt}} / sq ft</small>-->
+                  <!--</div>-->
+                  <!--</div>-->
+                  <!--</a>-->
+                  <!--<a href="#" class="save-item"><i class="fa fa-star"></i></a> </div>-->
+              <!--</div>-->
+              <!--<div class="col-lg-7">-->
+              <!--<div class="item-info">-->
+                <!--<h3 class="item-title">-->
+                  <!--<a href="#propertyDetails/{{prop.id}}" ng-if="isAuthenticated">{{ prop.property_name }}</a>-->
+                  <!--<a ng-click="authService.login()" ng-if="!isAuthenticated">{{ prop.property_name }}</a>-->
+                <!--</h3>-->
+                <!--<div class="item-location"><i class="fa fa-map-marker"></i> {{prop.property_address}} {{prop.city}} {{prop.state}} {{prop.zip_code}}</div>-->
+                <!--&lt;!&ndash; <div class="item-details-i"> <span class="bedrooms" data-toggle="tooltip" title="3 Bedrooms">3 <i class="fa fa-bed"></i></span> <span class="bathrooms" data-toggle="tooltip" title="2 Bathrooms">2 <i class="fa fa-bath"></i></span> </div> &ndash;&gt;-->
+                <!--<div class="item-details">-->
+                  <!--<ul>-->
+                    <!--<li>Sq Ft <span>{{prop.lot_size}}</span></li>-->
+                    <!--<li>Type <span>{{prop.zoning_category}}</span></li>-->
+                  <!--</ul>-->
+                <!--</div>-->
+             <!--</div>-->
+                <!--<div class="row">-->
+                <!--<div class="col-md-6">-->
+                                    <!--<div class="added-on">Listed on {{prop.listedOn}} </div>-->
+
+                <!--</div>-->
+                <!--<div class="col-md-6">-->
+                                     <!--<a href="#" class="added-by">by {{prop.current_owner_name}}</a>-->
+
+                <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+<!--  <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+          </ul>
+        </nav> -->
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script src="lib/map/markerclusterer.js"></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_hBkjJyRoMYVqN6DdM7E8mWTtDO-mVns&callback=initMap"></script>

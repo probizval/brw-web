@@ -1,0 +1,180 @@
+<div id="content" ng-init="getprofile()">
+    <div class="container">
+      <div class="row justify-content-md-center">
+            <div class="col col-lg-12 col-xl-12">
+              <div class="page-header bordered">
+                <h1>My profile <small>Manage your public profile</small></h1>
+              </div>
+              <div class="col-md-12 col-lg-12 col-xl-12">
+                <div class="row has-sidebar">
+                  <div class="col-md-5 col-lg-4 col-xl-4">
+                    <div class="page-header sidebar-left">
+                      <div class="sidebar-inner">
+                        <div class="list-group no-border list-unstyled">
+                          <div class="profile-pic">
+                            <img ng-src="{{ profile.picture }}" style="width:300px;height:300px" class="img-fluid" alt="">
+                            <div class="edit">
+                              <button data-toggle="modal" data-target="#uploadPictureModal">
+                                <img src="../../img/edit_profile_pic_icon.png">
+                              </button>
+                            </div>
+                          </div>
+                          <!--<input type="file" ng-file-select="onFileSelect($files)" ng-model="profile.picture">-->
+                          <!--<img ng-src="{{profile.picture}}" />-->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7 col-lg-8 col-xl-8">
+                     <form action="index.php">
+                       <h3 class="subheadline">Basic Information</h3>
+                       <div class="row">
+                         <div class="col-md-6">
+                           <div class="form-group">
+                             <label>First Name</label>
+                             <input type="text" class="form-control form-control-lg" placeholder="" value="{{profile.given_name}}">
+                           </div>
+                         </div>
+                         <div class="col-md-6">
+                           <div class="form-group">
+                             <label>Last Name</label>
+                             <input type="text" class="form-control form-control-lg" placeholder="" value="{{profile.family_name}}">
+                           </div>
+                         </div>
+                       </div>
+                       <div class="form-group">
+                         <label>Your Email</label>
+                         <input type="text" class="form-control form-control-lg" value="{{profile.email}}">
+                       </div>
+                       <div class="row">
+                         <div class="col-md-6">
+                           <div class="form-group">
+                             <label>Phone</label>
+                             <input type="text" class="form-control form-control-lg" placeholder="" value="+14156230182">
+                           </div>
+                         </div>
+                         <div class="col-md-6">
+                           <div class="form-group">
+                             <label>Fax</label>
+                             <input type="text" class="form-control form-control-lg" placeholder="" value="">
+                           </div>
+                         </div>
+                       </div>
+                       <div class="form-group">
+                         <label>About Me</label>
+                         <textarea class="form-control form-control-lg text-editor" placeholder=""></textarea>
+                       </div>
+                       <h3 class="subheadline">Social Links</h3>
+                       <div class="form-group">
+                         <label>Twitter</label>
+                         <div class="input-group"> <span class="input-group-addon"><i class="fa fa-fw fa-twitter"></i></span>
+                           <input type="text" class="form-control form-control-lg" placeholder="">
+                         </div>
+                       </div>
+                       <div class="form-group">
+                         <label>Facebook</label>
+                         <div class="input-group"> <span class="input-group-addon"><i class="fa fa-fw fa-facebook"></i></span>
+                           <input type="text" class="form-control form-control-lg" placeholder="">
+                         </div>
+                       </div>
+                       <div class="form-group">
+                         <label>Google Plus</label>
+                         <div class="input-group"> <span class="input-group-addon"><i class="fa fa-fw fa-google-plus"></i></span>
+                           <input type="text" class="form-control form-control-lg" placeholder="">
+                         </div>
+                       </div>
+                       <div class="form-group">
+                         <label>Linkedin</label>
+                         <div class="input-group"> <span class="input-group-addon"><i class="fa fa-fw fa-linkedin"></i></span>
+                           <input type="text" class="form-control form-control-lg" placeholder="">
+                         </div>
+                       </div>
+                       <h3 class="subheadline">Agent/Company Profile</h3>
+                       <div class="form-group">
+                         <label>Agent/Company Title</label>
+                         <input type="text" class="form-control form-control-lg">
+                       </div>
+                       <div class="row">
+                         <div class="col-lg-6">
+                           <div class="form-group">
+                             <label>Location</label>
+                             <input type="text" class="form-control form-control-lg" id="autocomplete" placeholder="Enter your location">
+                           </div>
+                         </div>
+                         <div class="col-lg-6">
+                           <div class="form-group">
+                             <label>Address</label>
+                             <input type="text" class="form-control form-control-lg" placeholder="">
+                           </div>
+                         </div>
+                       </div>
+                       <div class="row">
+                         <div class="col-lg-6">
+                           <div class="form-group">
+                             <label>City</label>
+                             <input type="text" class="form-control form-control-lg" placeholder="" id="locality">
+                           </div>
+                         </div>
+                         <div class="col-lg-6">
+                           <div class="form-group">
+                             <label>State</label>
+                             <input type="text" class="form-control form-control-lg" placeholder="" id="administrative_area_level_1">
+                           </div>
+                         </div>
+                       </div>
+                       <div class="row">
+                         <div class="col-lg-6">
+                           <div class="form-group">
+                             <label>Country</label>
+                             <input type="text" class="form-control form-control-lg" placeholder="" id="country">
+                           </div>
+                         </div>
+                         <div class="col-lg-6">
+                           <div class="form-group">
+                             <label>Zipcode</label>
+                             <input type="text" class="form-control form-control-lg" placeholder="" id="postal_code">
+                           </div>
+                         </div>
+                       </div>
+                       <hr>
+                       <div class="form-group action">
+                         <button type="submit" class="btn btn-lg btn-primary">Update Profile</button>
+                       </div>
+                     </form>
+                   </div>
+                 </div>
+               </div>
+             </div>
+         </div>
+       </div>
+     </div>
+
+
+
+<div class="modal fade" id="uploadPictureModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Upload profile picture</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body-image-upload">
+          <input type="file"  accept="image/*" id="img" style="display:none;" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
+          <label class="col-md-12" for="img" style="font-size: 20px; color: #868e96; font-weight: bold; text-align: center;"> + Upload Photo</label>
+          <div class="col-md-12" ng-if="imageSrc !== ''">
+            <img style="width:440px;height:440px" ng-src="{{imageSrc}}"/>
+          </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" data-ng-click="cancelUpload()">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="uploadPicture(profile)">Upload</button>
+      </div>
+    </div>
+  </div>
+</div>

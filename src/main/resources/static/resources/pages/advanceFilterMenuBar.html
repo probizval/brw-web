@@ -1,0 +1,177 @@
+<div class="menu-bar-with-background">
+          <div class="mb-0 mt-1">
+              <form name="filterForm">
+              <div class="row col-md-12 col-lg-12 col-xl-12">
+                  <label style="margin-top: 5px;">Search</label>
+                  <div class="col-md-3 col-lg-3 col-xl-3">
+                      <input type="text" id="autocomplete_search" ng-change="filterByAddress()" ng-model="searchAddress"
+                             class="form-control form-control-sm" placeholder="Enter an address, city or zipcode">
+                  </div>
+                  <div class="col-md-2 col-lg-2 col-xl-2">
+                      <div class="row">
+                          <div class="col-md-12 col-lg-12 col-xl-12">
+                          <select class="form-control form-control-sm" name="businessType" ng-model="businessType"
+                                  id="businessType" ng-change="filterByBusinessType()">
+                                  <option value="">Business Type</option>
+                                  <option value="Restaurant">Restaurant</option>
+                                  <option value="Gas station">Gas station</option>
+                                  <option value="Grocery store">Grocery store</option>
+                                  <option value="Liquor store">Liquor store</option>
+                                  <option value="Motels">Motels</option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-2 col-lg-2 col-xl-2">
+                      <div class="row">
+                          <div class="col-md-12 col-lg-12 col-xl-12">
+                              <select class="form-control form-control-sm" name="listingType" ng-model="listingType"
+                                      id="listingType" ng-change="filterByListingType()">
+                                  <option value="">Listing Type</option>
+                                  <option value="For Sale By Agent">For Sale by Agent</option>
+                                  <option value="For Sale By Owner">For Sale by Owner</option>
+                                  <option value="For Sale Foreclosures">For Sale Foreclosures</option>
+                                  <option value="Recently Sold">Recently Sold</option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+
+                  <label style="margin-top: 5px;">Price Range</label>
+                  <div class="col-md-1 col-lg-1 col-xl-1">
+                      <div class="row">
+                          <div class="col-md-12 col-lg-12 col-xl-12">
+                              <select class="form-control form-control-sm" name="minPrice" ng-model="minPrice" ng-change="filterByMinPrice()"
+                                      ng-options="minPrice.price for minPrice in minPriceList">
+                                  <option default selected style="color:#868e96;" value="">No Min</option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+                  <label style="margin-top: 5px;"> to </label>
+                  <div class="col-md-1 col-lg-1 col-xl-1">
+                      <div class="row">
+                          <div class="col-md-12 col-lg-12 col-xl-12">
+                              <select class="form-control form-control-sm" name="maxPrice" ng-model="maxPrice" ng-change="filterByMaxPrice()"
+                                id="maxPrice" ng-options="maxPrice.price for maxPrice in maxPriceList">
+                                  <option default selected style="color:#868e96;" value="">No Max</option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+                  <button class="btn btn-sm btn-primary" style="margin-bottom: 5px;" data-toggle="modal" data-target="#moreFiltersModal">More Filters</button>
+                  <!--<div class="col-md-1 col-lg-1 col-xl-1">-->
+                      <!--&lt;!&ndash;<a href="#" style="margin-top: 5px;">More Filters</a>&ndash;&gt;-->
+
+                  <!--</div>-->
+              </div>
+              </form>
+          </div>
+</div>
+
+                  <!-- The Modal -->
+                  <div class="modal fade" id="moreFiltersModal">
+                      <div class="modal-dialog ng-modal-dialog modal-lg">
+                          <div class="modal-content">
+
+                              <!-- Modal Header -->
+                              <div class="modal-header">
+                                  <h4 class="modal-title">More Filters to Search Business</h4>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+
+                              <!-- Modal body -->
+                              <div class="modal-body">
+                                    <div class="row" >
+                                        <label class="col-md-2 col-lg-2 col-xl-2" style="margin-top: 5px;margin-left: 30px;">Square Feet</label>
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                                  <select class="form-control form-control-sm" name="minSqFeet" ng-model="minSqFeet" ng-change="filterByMinSqFeet()"
+                                                          id="minSqFeet" ng-options="minSqFeet.size for minSqFeet in minSqFeetList">
+                                                      <option default selected style="color:#868e96;" value="">No Min</option>
+                                                  </select>
+                                        </div>
+                                        <label class="col-md-1 col-lg-1 col-xl-1" style="margin-top: 5px;margin-left: 15px;"> to </label>
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                                  <select class="form-control form-control-sm" name="maxSqFeet" ng-model="maxSqFeet" ng-change="filterByMaxSqFeet()"
+                                                          id="maxSqFeet" ng-options="maxSqFeet.size for maxSqFeet in maxSqFeetList">
+                                                      <option default selected style="color:#868e96;" value="">No Max</option>
+                                                  </select>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="row">
+                                        <label class="col-md-2 col-lg-2 col-xl-2" style="margin-top: 5px;margin-left: 30px;">Lot Size</label>
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                                <select class="form-control form-control-sm" name="minLotSize" ng-model="minLotSize" ng-change="filterByMinLotSize()"
+                                                        id="minLotSize" ng-options="minLotSize.size for minLotSize in minLotSizeList">
+                                                    <option default selected style="color:#868e96;" value="">No Min</option>
+                                                </select>
+                                        </div>
+                                        <label class="col-md-1 col-lg-1 col-xl-1" style="margin-top: 5px;margin-left: 15px;"> to </label>
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                                <select class="form-control form-control-sm" name="maxLotSize" ng-model="maxLotSize" ng-change="filterByMaxLotSize()"
+                                                        id="maxLotSize" ng-options="maxLotSize.size for maxLotSize in maxLotSizeList">
+                                                    <option default selected style="color:#868e96;" value="">No Max</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                  <br/>
+                                  <div class="row">
+                                      <label class="col-md-2 col-lg-2 col-xl-2" style="margin-top: 5px;margin-left: 30px;">Year Built</label>
+                                      <div class="col-md-3 col-lg-3 col-xl-3">
+                                          <select class="form-control form-control-sm" name="minYearBuilt" ng-model="minYearBuilt" ng-change="filterByMinYearBuilt()"
+                                                  id="minYearBuilt" ng-options="minYearBuilt.year for minYearBuilt in minYearBuiltList">
+                                              <option default selected style="color:#868e96;" value="">No Min</option>
+                                          </select>
+                                      </div>
+                                      <label class="col-md-1 col-lg-1 col-xl-1" style="margin-top: 5px;margin-left: 15px;"> to </label>
+                                      <div class="col-md-3 col-lg-3 col-xl-3">
+                                          <select class="form-control form-control-sm" name="maxYearBuilt" ng-model="maxYearBuilt" ng-change="filterByMaxYearBuilt()"
+                                                  id="maxYearBuilt" ng-options="maxYearBuilt.year for maxYearBuilt in maxYearBuiltList">
+                                              <option default selected style="color:#868e96;" value="">No Max</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <br/>
+                                  <div class="row">
+                                      <label class="col-md-3 col-lg-3 col-xl-3" style="margin-top: 5px;margin-left: 30px;">Max HOA Fees</label>&nbsp;&nbsp;&nbsp;
+                                      <div class="col-md-6 col-lg-6 col-xl-6">
+                                          <select class="form-control form-control-sm" name="maxHoaFees" ng-model="maxHoaFees" ng-change="filterByMaxHoaFees()"
+                                                  id="maxHoaFees" ng-options="maxHoaFees.price for maxHoaFees in maxHoaFeesList">
+                                              <option default selected style="color:#868e96;" value="">Any</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <br/>
+                                  <div class="row">
+                                      <label class="col-md-3 col-lg-3 col-xl-3" style="margin-top: 5px;margin-left: 30px;">Time on BizRealWorth</label>&nbsp;&nbsp;&nbsp;
+                                      <div class="col-md-6 col-lg-6 col-xl-6">
+                                          <select class="form-control form-control-sm" name="timeListed" ng-model="timeListed" ng-change="filterByTimeListed()"
+                                                  id="timeListed" ng-options="timeListed.time for timeListed in timeListedList">
+                                              <option default selected style="color:#868e96;" value="">Any</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <br/>
+                                  <div class="row">
+                                      <label class="col-md-3 col-lg-3 col-xl-3" style="margin-top: 5px;margin-left: 30px;">Keywords</label>&nbsp;&nbsp;&nbsp;
+                                      <div class="col-md-6 col-lg-6 col-xl-6">
+                                          <input type=text class="form-control form-control-sm" id="keywords" name="keywords" ng-model="keywords"
+                                                 ng-change="filterByKeywords()" placeholder="eg. Italian Restaurant">&nbsp
+                                      </div>
+                                  </div>
+
+                              </div>
+
+                              <!-- Modal footer -->
+                              <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                  <button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="applyFilters()">Apply Filter</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              <!--</div>-->
+              <!--</form>-->
+          <!--</div>-->
+<!--</div>-->
