@@ -24,6 +24,7 @@ import com.brw.dao.PropertyDetailsDAO;
 import com.brw.dto.GasStationDetailsDTO;
 import com.brw.dto.PropertyDetailsDTO;
 import com.brw.dto.PropertyListDTO;
+import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.exceptions.PropertyDetailsException;
 import com.brw.dto.FilterDTO;
 import com.brw.service.PropertyDetailsService;
@@ -103,8 +104,16 @@ public class PropertyDetailsController implements ErrorController {
 				return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
 			}
 			return ApiResponse.withData(gasStationDetailsDTO);
+		} else if (propertyDetailsDTO.getBusinessType().equalsIgnoreCase("Restaurants and Food")) {
+			RestaurantDetailsDTO restaurantDetailsDTO = null;
+			try {
+				restaurantDetailsDTO = propertyDetailsService.getRestaurantPropertyDetails(id);
+			} catch (PropertyDetailsException e) {
+				return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+			}
+			return ApiResponse.withData(restaurantDetailsDTO);
 		} else {
-			return ApiResponse.withData(propertyDetailsDTO);
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found.");
 		}
 
 	}
@@ -117,6 +126,44 @@ public class PropertyDetailsController implements ErrorController {
 			return ApiResponse.withData(pDTo);
 		} catch (InternalServerError e) {
 			// TODO: handle exception
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PutMapping(value = "property/gasstation")
+	public ApiResponse<?> updateGasStationProperty(
+			@RequestBody GasStationDetailsDTO gasStationDetailsDTO) {
+		try {
+			GasStationDetailsDTO pDTo = propertyDetailsService.updateGasStationPropertyDetail(gasStationDetailsDTO);
+			return ApiResponse.withData(pDTo);
+		} catch (InternalServerError e) {
+			// TODO: handle exception
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PostMapping(value = "property/restaurant")
+	public ApiResponse<?> createRestaurantProperty(@RequestBody RestaurantDetailsDTO restaurantDetailsDTO) {
+		try {
+			RestaurantDetailsDTO restDTO = propertyDetailsService.saveRestaurantPropertyDetail(restaurantDetailsDTO);
+			return ApiResponse.withData(restDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PutMapping(value = "property/restaurant")
+	public ApiResponse<?> updateRestaurantProperty(@RequestBody RestaurantDetailsDTO restaurantDetailsDTO) {
+		try {
+			RestaurantDetailsDTO restDTO = propertyDetailsService.updateRestaurantPropertyDetail(restaurantDetailsDTO);
+			return ApiResponse.withData(restDTO);
+		} catch (InternalServerError e) {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
 		} catch (PropertyDetailsException e) {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
