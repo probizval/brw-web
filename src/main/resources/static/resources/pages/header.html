@@ -1,0 +1,193 @@
+<style>
+#menu .nav-item .nav-link {
+	padding-right: 0px;
+	font-size: 14px;
+}
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark" id="menu" ng-init="getprofile()">
+  <div class="container">
+  <a class="navbar-brand" href="#home">
+  	<div class="" style="display: flex;"><img src="img/logo1.png" alt="" style="height: 50px;width: 200px;"><h3 style="color:rgba(0,0,0,.5);padding-left:10px;"></h3></div>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-content" aria-controls="menu-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="menu-content">
+    <ul class="navbar-nav mr-auto">
+      <!-- <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Home <span class="sr-only">(current)</span>
+        </a>
+        <div class="dropdown-menu">
+            <a href="#" class="dropdown-item">Link 1</a>
+            <a href="#" class="dropdown-item">Link 2</a>
+        </div>
+      </li> -->
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#search/Buy" role="button" aria-haspopup="true" aria-expanded="false">
+          Buy
+        </a>
+        <div class="dropdown-menu">
+            <a href="#postBuy" class="dropdown-item">Post Buy Requirement</a>
+            <a href="#search/Buy" class="dropdown-item">Buy a Business</a>
+            <a href="#businessBuyGuidance" class="dropdown-item">Business Buying Guidance</a>
+        </div>
+      </li>
+
+      <li class="nav-item  dropdown">
+        <a class="nav-link  dropdown-toggle" href="#search/sell" role="button" aria-haspopup="true" aria-expanded="false">
+          Sell
+        </a>
+        <div class="dropdown-menu">
+            <a href="#" class="dropdown-item">Sell a Business</a>
+            <a href="#" class="dropdown-item">Business Selling Guidance</a>
+        </div>
+      </li>
+      <!-- <li class="nav-item  dropdown">
+        <a class="nav-link  dropdown-toggle" href="#search/Lease" role="button" aria-haspopup="true" aria-expanded="false">
+          Lease
+        </a>
+        <div class="dropdown-menu">
+            <a href="#" class="dropdown-item">Lease a Business</a>
+            <a href="#" class="dropdown-item">Lease a Property</a>
+            <a href="#" class="dropdown-item">Business/Property Leasing Guidance</a>
+        </div>
+      </li> -->
+      <li class="nav-item  dropdown">
+        <a class="nav-link  dropdown-toggle" href="#search" role="button" aria-haspopup="true" aria-expanded="false">
+          Agent
+        </a>
+        <div class="dropdown-menu">
+            <a href="#searchAgents" class="dropdown-item">Search local Business Broker</a>
+            <!-- <a href="#" class="dropdown-item">Business Brokers</a>
+            <a href="#" class="dropdown-item">Real Estate agents</a>
+            <a href="#" class="dropdown-item">Agents Reviews</a>
+            <a href="#" class="dropdown-item">Agents Alerts</a> -->
+        </div>
+      </li>
+      <li class="nav-item  dropdown">
+        <a class="nav-link  dropdown-toggle" href="#search" role="button" aria-haspopup="true" aria-expanded="false">
+          Estimators
+        </a>
+        <div class="dropdown-menu">
+            <a href="#" class="dropdown-item">BRW Estimator</a>
+            <a href="#" class="dropdown-item">BRW ROI Estimator</a>
+        </div>
+      </li>
+			<div class="nav-item" ng-if="isAuthenticated">
+	      <a class="nav-link" href="#search" role="button" aria-haspopup="true" aria-expanded="false">
+	        Claim a Business
+	      </a>
+			</div>
+			<div class="nav-item" ng-if="!isAuthenticated">
+				<a class="nav-link" ng-click="authService.login()" role="button" aria-haspopup="true" aria-expanded="false">
+					Claim a Business
+				</a>
+			</div>
+
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+
+
+      <li class="nav-item dropdown user-account" ng-if="isAuthenticated">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="user-image" style="background-image:url({{ profile.picture }});"></span> Hi, {{ profile.given_name }}
+        </a>
+        <div class="dropdown-menu">
+						<a class="dropdown-item" href="#myProfile">Profile</a>
+						<a class="dropdown-item" href="#accountSettings/changePassword">Account Settings</a>
+						<a class="dropdown-item" href="#membershipPayment/membership">Membership & Payements</a>
+            <a class="dropdown-item"  href="#" ng-click="authService.logout()">Log out</a>
+        </div>
+      </li>
+      <li class="nav-item" ng-if="!isAuthenticated">
+      	<a class="nav-link nav-btn" ng-click="authService.login()">Log In</a>
+      </li>
+      <li class="nav-item" ng-if="isAuthenticated"><a class="nav-link nav-btn" href="#property/addListing"><span><i class="fa fa-plus" aria-hidden="true"></i> Add listing</span></a></li>
+    </ul>
+
+  </div>
+  </div>
+</nav>
+
+ <div class="modal fade" id="newlogin" tabindex="-1" role="dialog">
+    <div class="modal-dialog omb_login">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title"><i class="fa icon-info-circled-alt"></i> Login
+                </h4>
+            </div>
+            <div class="modal-body">
+            <div class="row omb_row-sm-offset-3 omb_socialButtons">
+    	    <div class="col-xs-5 col-sm-3">
+		        <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
+			        <i class="fa fa-facebook visible-xs"></i>
+			        <span class="hidden-xs">Facebook</span>
+		        </a>
+	        </div>
+        	<div class="col-xs-5 col-sm-3">
+		        <a href="#" id="authorize-button" style="display: none;" class="btn btn-lg btn-block omb_btn-google">
+			        <i class="fa fa-google-plus visible-xs"></i>
+			        <span class="hidden-xs">Google+</span>
+		        </a>
+		        <a href="#" id="signout-button" style="display: none;" class="btn btn-lg btn-block omb_btn-google">
+			        <i class="fa fa-google-plus visible-xs"></i>
+			        <span class="hidden-xs">Sign out</span>
+		        </a>
+	        </div>
+		</div>
+
+		<div class="row omb_row-sm-offset-3 omb_loginOr">
+			<div class="col-xs-12 col-sm-6">
+				<hr class="omb_hrOr">
+				<span class="omb_spanOr">or</span>
+			</div>
+		</div>
+                <form role="form">
+                     <div class="form-group">
+                         <label for="sender-email" class="control-label">Username:</label>
+
+                         <div class="input-icon"><i class="icon-user fa"></i>
+                             <input id="sender-email" type="text" placeholder="Username"
+                                    class="form-control email">
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label for="user-pass" class="control-label">Password:</label>
+
+                         <div class="input-icon"><i class="icon-lock fa"></i>
+                             <input type="password" class="form-control" placeholder="Password"
+                                    id="user-pass">
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <a href="account-home.html" class="btn btn-primary  btn-block">Submit</a>
+                     </div>
+                 </form>
+            </div>
+            <div class="modal-footer">
+                <div class="checkbox pull-left">
+                    <label> <input type="checkbox" value="1" name="remember" id="remember"> Keep me logged
+                        in</label>
+                </div>
+
+
+                <p class="text-center pull-right"><a href="forgot-password.html"> Lost your password? </a>
+                </p>
+
+                <div style=" clear:both"></div>
+            </div>
+            <div class="login-box-btm text-center">
+                        <p> Don't have an account? <br>
+                            <a href="#newsignup"  data-toggle="modal"><strong>Sign Up !</strong> </a></p>
+                            <p><div id="content"></div></p>
+                    </div>
+        </div>
+    </div>
+</div>

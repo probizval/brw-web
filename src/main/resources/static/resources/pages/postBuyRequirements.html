@@ -1,0 +1,222 @@
+<div id="content">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-12 col-xl-12">
+              <div class="page-header bordered">
+                <h1>Post your requirements for buying Business <small>Get best response from business owners/agents when some business matches your buy requirements.</small></h1>
+              </div>
+              <div class="col-md-12 col-lg-12 col-xl-12">
+                <form name="postBuyForm" ng-controller="postBuyRequirementsController" ng-submit="submitted = true" novalidate>
+                  <div class="alert-danger" ng-show="submitted && postBuyForm.$invalid">
+                    <h2> Error, There are some problems with your input </h2>
+                  </div>
+                  <h3 class="subheadline">Information about the Business you wanted to Buy</h3>
+                  <div class="row form-group">
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <label for="title">Business Categories*</label>
+                        <select class="form-control form-control-md" name="businessCategory" ng-model="businessCategory"
+                          ng-options="businessCategory.name for businessCategory in businessCategories"
+                          id="businessCategory" ng-change="getBusinessType()" required>
+                            <option default selected style="color:#868e96;" value="">-- Choose Business Category --</option>
+                        </select>
+                        <span style="color:red" ng-show="submitted && postBuyForm.businessCategory.$error.required">Business Category is required.</span>
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 col-xl-6" ng-show="businessCategory.name !== 'Other'">
+                        <label for="title">Business Type*</label>
+                        <select class="form-control form-control-md" name="businessType" ng-model="businessType"
+                          ng-options="businessType for businessType in businessTypes" id="businessType" required>
+                            <option style="color:#868e96;" value="">-- Choose Business Type --</option>
+                        </select>
+                        <span style="color:red" ng-show="submitted && postBuyForm.businessType.$error.required">Business Type is Required</span>
+                        <div ng-show="businessType === 'Other'" >
+
+                          <input type="text" class="form-control form-control-sm"
+                            name="otherBusinessType" ng-model="otherBusinessType" placeholder="Write other type of business" >
+                          <span style="color:red" ng-show="submitted && postBuyForm.otherBusinessType.$error.$touched">Other Business type is required.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2"></div>
+                    <div class="col-md-6 col-lg-6 col-xl-6" ng-show="businessCategory.name === 'Other'" >
+                        <!-- <label for="title">Other Business Category</label> -->
+                        <input type="text" class="form-control form-control-sm"
+                          name="otherBusinessCategory" ng-model="otherBusinessCategory" placeholder="Write other category of business">
+                        <span style="color:red" ng-show="submitted && postBuyForm.otherBusinessCategory.$error.$touched">Other Business Category is required.</span>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-6" ng-show="businessCategory.name === 'Other'" >
+                        <!-- <label for="title">Other Business Type</label> -->
+                        <input type="text" class="form-control form-control-sm"
+                          name="otherBusinessType" ng-model="otherBusinessType" placeholder="Write other type of business">
+                    </div>
+
+                  </div>
+
+                  <div class="row form-group">
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <label>Location*</label>
+                        <input type="text" class="form-control form-control-md" name="location" ng-model="location"
+                          id="autocomplete" placeholder="Enter an address, city or zipcode" required>
+                        <!-- <span style="color:red" ng-show="submitted && postBuyForm.location.$error.required">Location is required.</span> -->
+                        <div class="errors" ng-show="submitted || postBuyForm.location.$touched">
+                          <div style="color:red" ng-show="postBuyForm.location.$error.required">Location is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <label>Address</label>
+                        <input type="text" class="form-control form-control-md" ng-model="business.address"
+                          id="address" placeholder="">
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <label>City</label>
+                        <input type="text" class="form-control form-control-md" ng-model="business.city"
+                          placeholder="" id="locality">
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <label>State</label>
+                        <input type="text" class="form-control form-control-md" ng-model="business.state"
+                          placeholder="" id="administrative_area_level_1">
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <label>Country</label>
+                        <input type="text" class="form-control form-control-md" ng-model="business.country"
+                          placeholder="" id="country">
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <label>Zipcode</label>
+                        <input type="text" class="form-control form-control-md" ng-model="business.zipCode"
+                               placeholder="" id="zipCode">
+                    </div>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label>Businesses within radius of given location*</label><br />
+                    <div class="row col-md-12 col-lg-12 col-xl-12">
+                      <input style="margin-top: 3px;" id="5Miles" type="radio" ng-model="radius" value="5" /> &nbsp
+                      <label for="5Miles">5 miles</label> &nbsp &nbsp
+                      <input style="margin-top: 3px;" id="10Miles" type="radio" ng-model="radius" value="10" /> &nbsp
+                      <label for="10Miles">10 miles</label> &nbsp &nbsp
+                      <input style="margin-top: 3px;" id="25Miles" type="radio" ng-model="radius" value="25" ng-checked="true" />&nbsp
+                      <label for="25Miles">25 miles</label>&nbsp &nbsp
+                      <input style="margin-top: 3px;" id="50Miles" type="radio" ng-model="radius" value="50" />&nbsp
+                      <label for="50Miles">50 miles</label>&nbsp &nbsp
+                      <input style="margin-top: 3px;" id="specifiedMiles" type="radio" ng-model="radius" value="specifiedMiles" />&nbsp
+                      <label for="specifiedMiles">Specify radius in miles </label>&nbsp &nbsp
+                      <div ng-show="radius == 'specifiedMiles'">
+                        <input type=text id="other" name="radiusInMiles" class="col-lg-4" ng-model="radiusInMiles" placeholder="0">&nbsp
+                        <span style="color:red" ng-show="submitted && postBuyForm.radiusInMiles.$error.$touched">Radius in miles cannot be empty.</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                      <label> Price Range (Optional)</label> <br />
+                      <div class="row col-md-12 col-lg-12 col-xl-12">
+                        <label style="margin-bottom: 10px; margin-top: 10px;"> Min </label> &nbsp &nbsp
+                        <input type=text id="minPrice" class="col-lg-4 form-control form-control-md" ng-model="minPrice" placeholder="$">&nbsp &nbsp
+                        <label style="margin-bottom: 10px; margin-top: 10px;"> - Max </label> &nbsp &nbsp
+                        <input type=text id="maxPrice" class="col-lg-4 form-control form-control-md" ng-model="maxPrice" placeholder="$">&nbsp &nbsp
+                    </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                      <label> Lot Size Range (Optional)</label> <br />
+                      <div class="row col-md-12 col-lg-12 col-xl-12">
+                        <label style="margin-bottom: 10px; margin-top: 10px;"> Min </label> &nbsp &nbsp
+                        <input type=text id="minLotSize" class="col-lg-4 form-control form-control-md" ng-model="minLotSize" placeholder="sq. ft">&nbsp &nbsp
+                        <label style="margin-bottom: 10px; margin-top: 10px;"> - Max </label> &nbsp &nbsp
+                        <input type=text id="maxLotSize" class="col-lg-4 form-control form-control-md" ng-model="maxLotSize" placeholder="sq. ft">&nbsp &nbsp
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <!-- <ui-select ng-model="businessCategory">
+                    <ui-select-match placeholder="-- Choose Business Category --">{{businessCategory.name}}</ui-select-match>
+                    <ui-select-choices repeat="businessCategory in businessCategories">
+                      <span ng-bind-html="businessCategory.name"></span>
+                    </ui-select-choices>
+                  </ui-select> -->
+
+                  <div class="form-group">
+                    <label>Detailed description of the Business you want (Optional)</label>
+                    <textarea class="form-control form-control-md text-editor" ng-model="businessDescription" placeholder="10000 characters allowed"></textarea>
+                  </div>
+                  <br />
+
+                  <h3 class="subheadline">Your Contact Information</h3>
+                  <div class="row form-group">
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <label>First Name*</label>
+                        <input type="text" class="form-control form-control-md" name="firstName" ng-model="contact.firstName"
+                           id="firstName" placeholder="" required>
+                        <div ng-show="submitted || postBuyForm.firstName.$touched">
+                          <div style="color:red" ng-show="postBuyForm.firstName.$error.required">First Name is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <label>Last Name*</label>
+                        <input type="text" class="form-control form-control-md" name="lastName" ng-model="contact.lastName"
+                           id="lastName" placeholder="" required>
+                        <div class="errors" ng-show="submitted || postBuyForm.lastName.$touched">
+                           <div style="color:red" ng-show="postBuyForm.lastName.$error.required">Last name is required.</div>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <label>Phone Number*</label>
+                        <input type="text" class="form-control form-control-md" name="phoneNumber" ng-model="contact.phoneNumber"
+                           id="phoneNumber" placeholder="" ng-pattern="/^(\d{10})$/" required>
+                        <div class="errors" ng-show="submitted || postBuyForm.phoneNumber.$touched">
+                           <div style="color:red" ng-show="postBuyForm.phoneNumber.$error.required">Phone Number is required.</div>
+                           <div style="color:red" ng-show="postBuyForm.phoneNumber.$error.pattern">Phone Number is invalid.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <label>Email Address*</label>
+                        <input type="email" class="form-control form-control-md" name="emailAddress" ng-model="contact.emailAddress"
+                           id="emailAddress" placeholder="" required>
+                        <div class="errors" ng-show="submitted || postBuyForm.emailAddress.$touched">
+                            <div style="color:red" ng-show="postBuyForm.emailAddress.$error.required">E-mail is required.</div>
+                            <div style="color:red" ng-show="postBuyForm.emailAddress.$error.email">Email is invalid.</div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row form-group col-md-12 col-lg-12 col-xl-12">
+                    <label>Preference for mode of Contact*</label>&nbsp &nbsp &nbsp
+                    <input style="margin-top: 3px;" id="emailMode" type="radio" ng-model="modeOfContact" value="E-mail" ng-checked="true" /> &nbsp
+                    <label for="emailMode">E-mail</label> &nbsp &nbsp &nbsp
+                    <input style="margin-top: 3px;" id="phoneMode" type="radio" ng-model="modeOfContact" value="Phone" /> &nbsp
+                    <label for="phoneMode">Phone</label>
+                  </div>
+
+                  <div class="form-group">
+                      <label class="checkbox-inline">
+                          <input type="checkbox" name="connectWithLocalAgents" ng-model="connectWithLocalAgents" ng-checked="true">
+                            Is it OK if local Agents connect with you?
+                      </label>
+                      <br />
+                      <label class="checkbox-inline">
+                          <input type="checkbox" name="sendMatchedBusinessesEmail" ng-model="sendMatchedBusinessesEmail" ng-checked="true">
+                            Do yo want us to send an email for matched businesses as per above requirements?
+                      </label>
+                  </div>
+
+                  <hr>
+                  <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-lg btn-primary" ng-click="saveBuyBusinessRequirements(postBuyForm)"/>
+                  </div>
+
+                  <input type="text" class="form-control form-control-lg" ng-model="business.lat" id="lat" hidden="hidden">
+                  <input type="text" class="form-control form-control-lg" ng-model="business.lng" id="lng" hidden="hidden">
+                </form>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<style>
+#menu .nav-item .nav-link {
+	.search-form.main.v2, .search-form.main.v5{
+		min-height: 500px;
+	}
+	.col-md-12.col-lg-10.central-content {
+	    background-color: rgba(0,0,0,.4);
+	    margin: 80px 0 65px 0;
+	    padding: 30px 45px 45px 45px;
+	    color: #fff;
+	    display: inline-block;
+	}
+}
+</style>
+<div class="home-search">
+<div class="main search-form v2" style="min-height: 500px;">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-12 col-lg-10 central-content">
+        <div class="heading">
+          <h2>Find your property</h2>
+          <h3>We will help you to find the best property in any city in the world.</h3>
+        </div>
+        <form action="property_listing.html">
+          <div class="row justify-content-md-center">
+            <div class="col-md-9 col-lg-8">
+            <div class="input-group input-group-lg">
+      <input type="text" id="autocomplete" class="form-control" ng-init="initialize" placeholder="Enter an address, city or zipcode">
+      <span class="input-group-btn">
+      <button class="btn btn-white" type="button"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
+        <button class="btn btn-primary" type="button" ng-click="search()">Search!</button>
+      </span>
+    </div>
+    <div class="search-in">
+<div class="radio-box">
+<input type="radio" name="searchin" value="buy" id="buy22" checked>
+<label class="radio-inline" for="buy22">Buy</label>
+</div>
+<div class="radio-box">
+<input type="radio" name="searchin" value="sell" id="sell22">
+<label class="radio-inline" for="sell22" >Sell</label>
+</div>
+<!-- <div class="radio-box">
+<input type="radio" name="searchin" value="lease" id="lease22">
+<label class="radio-inline" for="lease22" >Lease</label>
+</div> -->
+<!-- <div class="radio-box">
+<input type="radio" name="searchin" value="bizval" id="bizval22">
+<label class="radio-inline" for="bizval22" >BizVal</label>
+</div>
+<div class="radio-box">
+<input type="radio" name="searchin" value="proval" id="proval22">
+<label class="radio-inline" for="proval22" >ProVal</label>
+</div> -->
+
+    </div>
+    </div>
+          </div>
+          
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
+</div>

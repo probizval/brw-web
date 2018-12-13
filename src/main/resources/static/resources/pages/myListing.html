@@ -1,0 +1,49 @@
+
+            <div class="page-header bordered">
+              <h1>My Listings</h1>
+            </div>
+            <div class="item-listing list">
+              <div ng-repeat="prop in myList" class="item">
+                <div class="row">
+                  <div class="col-lg-5">
+                    <div class="item-image"> <a href="#/property/editProperty/{{prop.id}}"><img src="{{prop.img_url}}" style="width:440px;height:200px" class="img-fluid" alt="">
+                      <div class="item-badges">
+                      <!-- <div class="item-badge-left">Sponsored</div> -->
+                      <div class="item-badge-right">For {{prop.property_available_for}}</div>
+                      </div>
+                      <div class="item-meta">
+                      <div class="item-price">${{prop.price}}
+                      <small>${{prop.pricePerSqFt}} / sq ft</small>
+                      </div>
+                      </div>
+                      </a>
+                      <a href="#" class="save-item" style="display:none;"><i class="fa fa-star"></i></a> </div>
+                      <a href="#" class="remove-item"><i class="fa fa-trash-o"></i> Remove</a>
+                  </div>
+                  <div class="col-lg-7">
+                  <div class="item-info">
+                    <h3 class="item-title"><a href="#/property/editProperty/{{prop.id}}">{{prop.property_name}}</a></h3>
+                    <div class="item-location"><i class="fa fa-map-marker"></i>{{prop.property_address}} {{prop.city}} {{prop.state}} {{prop.zip_code}}</div>
+                    <div class="item-details-i"> <span class="bedrooms" data-toggle="tooltip" title="3 Bedrooms">3 <i class="fa fa-bed"></i></span> <span class="bathrooms" data-toggle="tooltip" title="2 Bathrooms">2 <i class="fa fa-bath"></i></span> </div>
+                    <div class="item-details">
+                      <ul>
+                        <li>Sq Ft <span>{{prop.lot_size}}</span></li>
+                        <li>Type <span>{{prop.property_type}}</span></li>
+                      </ul>
+                    </div>
+                 </div>
+                    <div class="row">
+                    <div class="col-md-6">
+                                        <div class="added-on">Listed on {{prop.listedOn}} </div>
+
+                    </div>
+                    <div class="col-md-6">
+                                         <a href="#" class="added-by">by {{prop.userName}}</a>
+
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+            </div>

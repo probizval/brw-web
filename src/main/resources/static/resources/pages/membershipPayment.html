@@ -1,0 +1,24 @@
+<div id="content">
+  <div class="container">
+    <div class="row justify-content-md-center">
+          <div class="col col-lg-12 col-xl-10">
+        <div class="row has-sidebar">
+          <div class="col-md-5 col-lg-4 col-xl-4">
+            <div id="sidebar" class="sidebar-left">
+              <div class="sidebar_inner">
+                <div class="list-group no-border list-unstyled">
+                  <span class="list-group-item heading">Manage Membership & Payments</span>
+    				      <a ui-sref=".membership" class="list-group-item"><i class="fa fa-fw fa-cubes"></i> Membership</a>
+    				      <a ui-sref=".payment" class="list-group-item"><i class="fa fa-fw fa-credit-card"></i> Payments</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7 col-lg-8 col-xl-8">
+            <div ui-view></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

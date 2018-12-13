@@ -1,0 +1,56 @@
+<div class="content">
+  <div class="container justify-content-xl-center">
+    <div class="col-md-10 col-lg-10 col-xl-10">
+      <div class="page-header bordered">
+        <h1>Agents near Fremont, CA</h1>
+      </div>
+      <div class="sorting">
+              <div class="row justify-content-between">
+              <div class="col-sm-6 col-lg-4">
+              <div class="form-group">
+                  <select class="form-control ui-select">
+                    <option selected="selected">Most active</option>
+                    <option>Most recent salee</option>
+                    <option>Best local reviews</option>
+                    <option>Most listing</option>
+                  </select>
+                </div>
+              </div>
+              </div>
+      </div>
+            
+      <div class="clearfix"></div>
+    
+      <div class="item-listing list">
+              <div ng-repeat="prop in agentsList track by $index" class="item" id="prop{{index}}">
+                <div class="row">
+                  <div class="col-md-3 col-lg-3 col-xl-3">
+                    <div class="item-image">
+                      <!--<a href="#propertyDetails/{{prop.id}}">-->
+                          <img src="{{prop.user_img_url}}" style="width:440px;height:200px" class="img-fluid" alt="">
+                      <!--</a>-->
+                    </div>
+                  </div>
+                  <div class="col-md-8 col-lg-8 col-xl-8">
+                      <div class="item-info">
+                        <h3 class="item-title">
+                          <a href="#" ng-if="isAuthenticated">{{ prop.first_name + " " + prop.last_name }}</a>
+                          <a ng-click="authService.login()" ng-if="!isAuthenticated">{{ prop.first_name + " " + prop.last_name }}</a>
+                        </h3>
+                        <div class="item-location"><i class="fa fa-map-marker"></i> {{prop.address}} {{prop.city}} {{prop.state}} {{prop.zipcode}}</div>
+                        <div class="item-details">
+                          <span>{{prop.about_agent}}</span>
+                            <hr>
+                          <span>{{prop.contact_number}}</span>
+                        </div>
+
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+      </div>
+
+    </div>
+  </div>
+</div>

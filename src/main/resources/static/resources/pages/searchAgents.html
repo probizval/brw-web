@@ -1,0 +1,102 @@
+<div id="content">
+  <div class="main search-agent-form v2">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-12 col-lg-12 col-xl-12">
+          <div class="page-header bordered">
+              <h1 style="color: #fff">Find a Business Agent
+                  <small style="color: #fff">Search an agent who can help with Buy/sell a Business.</small>
+              </h1>
+          </div>
+          <form name="searchAgentsForm" ng-controller="searchAgentsController" ng-submit="submitted = true" novalidate>
+            <div class="form-with-background">
+              <div class="row form-group">
+                <div class="col-md-3 col-lg-3 col-xl-3">
+                    <label style="margin-top:1rem">Location*</label>
+                    <input type="text" id="autocomplete" name="location" ng-model="location" class="form-control"
+                             ng-init="initialize" placeholder="Enter an address, city or zipcode" required>
+                    <div class="errors" ng-show="submitted || searchAgentsForm.location.$touched">
+                        <div style="color:red" ng-show="searchAgentsForm.location.$error.required">Location is required.</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3">
+                    <label style="margin-top:1rem">Service Needed*</label>
+                    <select class="form-control form-control-md" name="serviceNeeded" ng-model="serviceNeeded"
+                            ng-options="serviceNeeded.name for serviceNeeded in servicesNeeded"
+                            id="serviceNeeded" required>
+                        <option default selected style="color:#868e96;" value="">-- Choose the service --</option>
+                    </select>
+                    <span style="color:red" ng-show="submitted && searchAgentsForm.serviceNeeded.$error.required">Service is required.</span>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3">
+                  <label style="margin-top:1rem">Business Category (Optional)</label>
+                    <select class="form-control form-control-md" name="businessCategory" ng-model="businessCategory"
+                            ng-options="businessCategory.name for businessCategory in businessCategories"
+                            id="businessCategory" ng-change="getBusinessType()">
+                        <option default selected style="color:#868e96;" value="">-- Choose Business Category --</option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3">
+                  <label style="margin-top:1rem">Business Type (Optional)</label>
+                    <select class="form-control form-control-md" name="businessType" ng-model="businessType"
+                            ng-options="businessType for businessType in businessTypes" id="businessType">
+                        <option style="color:#868e96;" value="">-- Choose Business Type --</option>
+                    </select>
+                </div>
+                <hr>
+                <div class="col-md-3 col-lg-3 col-xl-3">
+                  <label style="margin-top:1rem">Specialities (Optional)</label>
+                  <select class="form-control form-control-md" name="speciality" ng-model="speciality"
+                          ng-options="speciality.name for speciality in specialities" id="speciality">
+                      <option style="color:#868e96;" value="">-- Choose Specialty --</option>
+                  </select>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3">
+                  <label style="margin-top:1rem">Years of experience (Optional)</label>
+                  <select class="form-control form-control-md" name="year" ng-model="year"
+                          ng-options="year for year in yearsOfExperience" id="year">
+                      <option style="color:#868e96;" value="">-- Years --</option>
+                  </select>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3">
+                  <label style="margin-top:1rem">Languages (Optional)</label>
+                  <select class="form-control form-control-md" name="language" ng-model="language"
+                          ng-options="language for language in languages" id="language">
+                      <option style="color:#868e96;" value="">-- Languages --</option>
+                  </select>
+                </div>
+                <div class="col-md-2 col-lg-2 col-xl-2">
+                  <label style="color:#eee;margin-top:1rem;visibility:hidden">Test</label>
+                    <div class="form-group">
+                      <input type="submit" value="Search" class="btn btn-md btn-primary"  ng-click="searchAgents(searchAgentsForm)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div style="padding: 20px 0px 20px 0px">
+              <h3 style="color: #fff">Why use a Business Broker? </h3>
+              <hr>
+                <p style="color:#fff">The thought of owning a business may sound exciting - and it can be -- but to get off to the best possible start, it is important to consider the use of a professional business broker. There are many things to account for when buying and running a business such as current market conditions, pricing and business financing. Business brokers will also help you realize your lifestyle goals -- where considerations such business hours can often be overlooked.</p>
+                <p style="color:#fff">When selling a business, business brokers can help you properly value the price of the business. Because business brokers know what buyers are looking for, they can provide valuable advice so that you can attend to the details that will help make your business more attractive to buyers. Business brokers can also help attract more prospects to your business for sale with their extended network of business resources and contacts.</p>
+                <p style="color:#fff">So when you are faced with the question as to whether it is worth using a business broker to buy or sell a business, consider these benefits. You should find that the benefits can easily justify any fees that may be involved.</p>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+    .col-md-12.col-lg-12.col-xl-12 {
+        background-color: #111111d4;
+        margin: 20px 0 20px 0;
+        display: inline-block;
+    }
+    .search-agent-form.main {
+        background-image: url("../img/connectToAgents.jpg");
+        opacity: 0.8;
+        background-size: cover;
+    }
+
+</style>

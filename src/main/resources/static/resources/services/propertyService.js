@@ -1,0 +1,130 @@
+
+var propertyService = angular.module('propertyService', [])
+propertyService.factory('propertyService', ['$http', function ($http) {
+
+    var urlBase = '/MyCarts/category';
+    var propertyDataOp = {};
+
+    propertyDataOp.getPropertyList = function (type) {
+      console.log("--------getBuyPropertylist" );
+        return $http.get('/api/v1/property').success(function(res) {
+          // console.log("getBuyPropertylist", JSON.stringify(res));
+			return  JSON.stringify(res);
+        })
+        .error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+
+    propertyDataOp.getPropertyDetails =  function (id) {
+        return $http.get('/getPropertyListById/'+id).success(function(res) {
+            return  JSON.stringify(res);
+        })
+        .error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+
+    propertyDataOp.getImagesByPropertyCode =  function (property_code) {
+      return $http.get('/getImagesByPropertyCode/'+property_code).success(function(res) {
+        // console.log("getImagesByPropertyCode", JSON.stringify(res) );
+        return  JSON.stringify(res);
+      })
+        .error(function (error) {
+          return 'Unable to load store data: ' + error.message;
+        });
+    };
+
+    propertyDataOp.savePropertyDetails =  function (obj) {
+        return $http.post('/savePropertyDetails', obj).success(function(res) {
+            return  JSON.stringify(res);
+        })
+        .error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+    /*propertyDataOp.savePropertyDetails =  function (obj) {
+        return $http.post('/saveProp', obj).success(function(res) {
+            return  JSON.parse(res);
+        })
+        .error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };*/
+   //  propertyDataOp.getPropertyListByUser = function () {
+   //  	var obj = {userName: localStorage.getItem('userName')};
+   //      return $http.post('/getPropertyListByUser', obj).success(function(res) {
+			// return  JSON.parse(res);
+   //      })
+   //      .error(function (error) {
+   //          return 'Unable to load store data: ' + error.message;
+   //      });
+   //  };
+   propertyDataOp.getPropertyListByUser = function () {
+        var obj = JSON.parse(localStorage.getItem('userprofile'));
+        return $http.get('/getPropertyListByUser/'+obj.id).success(function(res) {
+            return  JSON.stringify(res);
+        })
+        .error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+    propertyDataOp.updatePropertyDetails = function (obj) {
+    	return $http.post('/updatePropertyDetails', obj).success(function(res) {
+			return  JSON.stringify(res);
+        })
+        .error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+    // propertyDataOp.updatePropertyDetails = function (obj) {
+    //     return $http.post('/updatePropertyListByUser', obj).success(function(res) {
+    //         return  JSON.parse(res);
+    //     })
+    //     .error(function (error) {
+    //         return 'Unable to load store data: ' + error.message;
+    //     });
+    // };
+    propertyDataOp.saveProfile = function (obj) {
+
+        console.log("save profile ", obj);
+        return $http.post('/createProfile', obj).success(function(res) {
+            return  JSON.stringify(res);
+        })
+        .error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+
+    propertyDataOp.sendEmailWithBuyRequirements = function (obj) {
+      console.log("------sendEmailWithBuyRequirements------", obj);
+      return $http.post('/sendEmailWithBuyRequirements', obj).success(function(res) {
+          return  JSON.stringify(res);
+      })
+      .error(function (error) {
+          return 'Unable to load store data: ' + error.message;
+      });
+    };
+
+    propertyDataOp.saveBuyBusinessRequirements = function (obj) {
+      console.log("------saveBuyBusinessRequirements------", obj);
+    	return $http.post('/saveBuyBusinessRequirement', obj).success(function(res) {
+			     return  JSON.stringify(res);
+        })
+        .error(function (error) {
+            console.log("--------------error-------------", error);
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+    propertyDataOp.getAgentsList = function (type) {
+      console.log("--------getAgentsList");
+      return $http.get('/getAgentsList/'+type).success(function(res) {
+        return  JSON.stringify(res);
+      })
+        .error(function (error) {
+          return 'Unable to load store data: ' + error.message;
+        });
+    };
+    return propertyDataOp;
+
+}]);
