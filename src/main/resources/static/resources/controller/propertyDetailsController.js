@@ -10,8 +10,8 @@
 
     function propertyDetailsController($rootScope, $scope, $state, propDetails, propImages, propertyService) {
 
-        $scope.propDetails = propDetails.data[0];
-        $scope.imageArray = propImages.data;
+        $scope.propDetails = propDetails.data.data;
+        $scope.imageArray = propImages.data || [];
         console.log($scope.propDetails, $scope.imageArray);
         var galleryThumbs = new Swiper('.gallery-thumbs', {
           spaceBetween: 10,

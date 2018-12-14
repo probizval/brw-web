@@ -65,7 +65,8 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
                      return propertyService.getPropertyDetails($stateParams.id);
                 },
                 propImages: function(propertyService, propDetails) {
-                		return propertyService.getImagesByPropertyCode(propDetails.data[0].property_code)
+                		//return propertyService.getImagesByPropertyCode(propDetails.data[0].property_code)
+                	return [];//Need to add service
 								}
             }
         })

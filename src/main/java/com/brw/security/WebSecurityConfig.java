@@ -6,9 +6,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Configuration
 @EnableWebSecurity
+@CrossOrigin(origins = "*")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${auth0.audience}")
     private String audience;
@@ -20,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/api/v1/property").permitAll()
-                .antMatchers("/api/v1/property/*").authenticated();
+                .antMatchers("/api/v1/*").authenticated();
 
         JwtWebSecurityConfigurer
                 .forRS256(audience, issuer)

@@ -6,9 +6,9 @@
     .module('myApp')
     .controller('addListingController', addListingController);
 
-  addListingController.$inject = ['$scope', '$state', 'propertyService'];
-    function addListingController($scope, $state, propertyService) {
-        
+  addListingController.$inject = ['$scope', '$state', 'propertyService', '$timeout'];
+    function addListingController($scope, $state, propertyService, $timeout) {
+        $scope.imageFiles = [];
         $scope.property = {
                 "propertyTitle": "",
                 "image_url": "",
@@ -37,7 +37,8 @@
                 "gas": {
                     "brand": "SHELL",
                     "fuelType": "GAS"
-                }
+                },
+                "uploaded_image_aws_urls": []
         };
         
         
@@ -73,6 +74,7 @@
             $scope.property.country = document.getElementById("country").value;
             $scope.property.address = document.getElementById("address").value;
             $scope.property.userName = localStorage.getItem('userName');
+            $scope.uploadPhotoOnAWS();
 
             console.log($scope.property);
             $scope.property.userProfile = JSON.parse(localStorage.getItem('userprofile'));
@@ -85,8 +87,19 @@
             })
             .error(function (error) {
                 $scope.status = 'Unable to load store data: ' + error.message;
-            });;
-        }
+            });
+            // TODO Create api for saving uploaded business images to database table
+            // propertyService.savePropertyImages($scope.property)
+            //   .success(function(res) {
+            //     console.log("res "+ res);
+            //     console.log("res "+ res.status);
+            //     //$state.go("property.confirmation", {status: res.status});
+            //     $state.go("property.confirmation");
+            //   })
+            //   .error(function (error) {
+            //     $scope.status = 'Unable to load store data: ' + error.message;
+            //   });
+        };
         
         $scope.initialize = function() {
             // This example displays an address form, using the autocomplete feature
@@ -167,7 +180,80 @@
             console.log($scope.property.type.name);
         };
 
-        $scope.initialize();
+      $scope.imagesAsDataURL = [];
+
+      $scope.imageUpload = function(event){
+        var files = event.target.files;
+        for (var i = 0; i < files.length; i++) {
+          var file = files[i];
+          $scope.imageFiles.push(file);
+          var reader = new FileReader();
+          reader.onload = $scope.imageIsLoaded;
+          reader.readAsDataURL(file);
+        }
+      };
+
+      $scope.imageIsLoaded = function(e){
+        $scope.$apply(function() {
+          $scope.imagesAsDataURL.push(e.target.result);
+        });
+      };
+
+      $scope.removePhoto = function(image){
+        var itemIndex = $scope.imagesAsDataURL.indexOf(image);
+        $scope.imagesAsDataURL.splice(itemIndex, 1);
+        $scope.imageFiles.splice(itemIndex, 1);
+      };
+
+      $scope.progress=0;
+      $scope.uploadPhotoOnAWS = function(){
+        for (var i=0; i < $scope.imageFiles.length; i++) {
+          var photo = $scope.imageFiles[i];
+          // console.log("-here-----", photo.name, photo.type);
+          //amazon aws credentials
+          AWS.config.update({
+            accessKeyId: 'AKIAIRYE5BJ3NCFM6L4Q',
+            secretAccessKey: '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'
+          });
+          //amazon s3 region
+          AWS.config.region = 'us-west-1';
+          //amazon s3 bucket name
+          var bucket = new AWS.S3({params: {Bucket: 'proswift'}});
+          var params = { Key: photo.name, ContentType: photo.type, Body: photo};
+          bucket.upload(params).on('httpUploadProgress', function (evt) {
+            //logs the image uploading progress
+            console.log("Uploaded :: " + parseInt((evt.loaded * 100) / evt.total) + '%');
+            var progress = parseInt((evt.loaded * 100) / evt.total);
+            if (progress === 100) {
+              console.log("photo uploaded successfully");
+            }
+          }).send(function (err, data) {
+            if (data) {
+              //displays the image location on amazon s3 bucket
+              console.log(data.Location);
+              $scope.property.uploaded_image_aws_urls.push(data.Location);
+            }
+          });
+          // bucket.putObject(params, function(err, data) {
+          //   if(err) {
+          //     // There Was An Error With Your S3 Config
+          //     alert(err.message);
+          //     return false;
+          //   }
+          //   else {
+          //     // Success!
+          //     console.log(data);
+          //     alert('Upload Done', data);
+          //   }
+          // })
+          // .on('httpUploadProgress',function(progress) {
+          //   // Log Progress Information
+          //   console.log(Math.round(progress.loaded / progress.total * 100) + '% done');
+          // });
+        }
+      };
+
+      $scope.initialize();
         
       console.log('In addListingController');
     }    

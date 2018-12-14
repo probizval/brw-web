@@ -2440,3 +2440,36 @@ input[type="radio"], input[type="checkbox"] {
 .gallery-thumbs .swiper-slide-thumb-active {
   opacity: 1;
 }
+
+.add-listing-photo-container {
+  padding: 10px 0px 10px 0px;
+  border: 1px solid #ced4da;
+}
+.gallery-images {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+  max-height: 160px;
+  display: inline-block;
+}
+.gallery-images .thumb{
+  width: 180px;
+  height: 140px;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #ced4da;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.1)
+}
+.gallery-images .close-image{
+  position: absolute;
+  top: 11px;
+  right: 6px;
+  padding: 0px;
+  background-color: #ccc; /* Blue background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  cursor: pointer; /* Mouse pointer on hover */
+}
+.gallery-images .close-image:hover{
+  background-color: #e4e4e4;
+}

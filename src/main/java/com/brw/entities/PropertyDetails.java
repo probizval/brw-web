@@ -1,6 +1,7 @@
 package com.brw.entities;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,8 +16,10 @@ import javax.persistence.InheritanceType;
 @Entity
 @Table(name = "rw_property_details")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class PropertyDetails {
+public class PropertyDetails implements Serializable {
 	
+	private static final long serialVersionUID = -8504035975938683238L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
