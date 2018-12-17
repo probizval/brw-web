@@ -12,15 +12,18 @@ import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
 import com.brw.dao.GasStationDAO;
 import com.brw.dao.PropertyDetailsDAO;
+import com.brw.dao.PropertyImagesDAO;
 import com.brw.dao.RestaurentDAO;
 import com.brw.dto.FilterDTO;
 import com.brw.dto.GasStationDetailsDTO;
 import com.brw.dto.PropertyDetailsDTO;
+import com.brw.dto.PropertyImagesDTO;
 import com.brw.dto.PropertyListDTO;
 import com.brw.dto.RestaurantDTO;
 import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.entities.GasStation;
 import com.brw.entities.PropertyDetails;
+import com.brw.entities.PropertyImages;
 import com.brw.entities.Restaurant;
 import com.brw.exceptions.PropertyDetailsException;
 
@@ -35,6 +38,9 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	
 	@Autowired
 	private RestaurentDAO restaurentDAO;
+	
+	@Autowired
+	private PropertyImagesDAO propertImagesDAO;
 	
 	@Override
 	public PropertyListDTO getAllPropertyList(FilterDTO filter) {
@@ -165,7 +171,8 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		gasStationDTO.setFireEquip(gasStation.getFireEquip());
 		gasStationDTO.setFireCapacity(gasStation.getFireCapacity());
 		gasStationDTO.setAutoSupplyRepairMaintShop(gasStation.getAutoSupplyRepairMaintShop());
-		
+		List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyCode(propertyDetails.getPropertyCode());
+		gasStationDTO.setPropertyImages(propertyImages);
 		gasStationDTO.setPropertyMetaData(propertyDetails);
 		return gasStationDTO;
 		
@@ -256,6 +263,9 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		restaurantDetailsDTO.setType(restaurant.getType());
 		restaurantDetailsDTO.setDescription(restaurant.getDescription());
 		restaurantDetailsDTO.setPropertyMetaData(propertyDetails);
+		
+		List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyCode(propertyDetails.getPropertyCode());
+		restaurantDetailsDTO.setPropertyImages(propertyImages);
 		
 		return restaurantDetailsDTO;
 	}

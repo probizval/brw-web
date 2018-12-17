@@ -7,7 +7,17 @@ myapp.config.$inject = ['$routeProvider', '$httpProvider','angularAuth0Provider'
 myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider, $httpProvider, angularAuth0Provider) {
 	
 	
-	 //$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+	var lochash    = window.location.hash.substr(1),
+    token =  localStorage.getItem('access_token') || lochash.substr(lochash.search(/(?<=^|&)access_token=/))
+                  .split('&')[0]
+                  .split('=')[1];
+	
+	if(lochash && token) {
+		$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+		$httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
+		$httpProvider.defaults.headers.common['authorization'] = "Bearer " + token;
+	}
+	 
 	 $httpProvider.defaults.useXDomain = true;
      delete $httpProvider.defaults.headers.common['X-Requested-With'];
     //$urlRouterProvider.otherwise('/index');
@@ -41,6 +51,7 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
             templateUrl: 'resources/pages/search.html',
             controller: 'searchController',
             reload: true,
+            requireLogin: true,
             resolve: {
             	propList: function(propertyService, $stateParams) {
             		 //return propertyService.getPropertyList($stateParams.type);
@@ -179,7 +190,8 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
       clientID: AUTH0_CLIENT_ID,
       domain: AUTH0_DOMAIN,
       responseType: 'token id_token',
-      audience: 'https://' + AUTH0_DOMAIN + '/userinfo',
+      //audience: 'https://' + AUTH0_DOMAIN + '/userinfo',
+      audience: 'https://' + AUTH0_DOMAIN + '/api/v2/',
       redirectUri: window.location.href,
       scope: 'openid profile email user_metadata app_metadata picture'
     });

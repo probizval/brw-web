@@ -3,6 +3,7 @@ package com.brw.dto;
 import java.util.List;
 
 import com.brw.entities.PropertyDetails;
+import com.brw.entities.PropertyImages;
 
 public class GasStationDetailsDTO {
 	private int id;
@@ -43,6 +44,16 @@ public class GasStationDetailsDTO {
 	
 	private PropertyDetails propertyMetaData;
 	
+	private List<PropertyImages> propertyImages;
+	
+
+	public List<PropertyImages> getPropertyImages() {
+		return propertyImages;
+	}
+
+	public void setPropertyImages(List<PropertyImages> propertyImages) {
+		this.propertyImages = propertyImages;
+	}
 	
 	public String getFrannchise() {
 		return frannchise;

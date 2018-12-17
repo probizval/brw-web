@@ -2,8 +2,10 @@ package com.brw.dto;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import com.brw.entities.PropertyDetails;
+import com.brw.entities.PropertyImages;
 
 public class RestaurantDetailsDTO implements Serializable {
 
@@ -106,6 +108,17 @@ public class RestaurantDetailsDTO implements Serializable {
 	private String parttiem_emp;
 	
 	private PropertyDetails propertyMetaData;
+	
+	private List<PropertyImages> propertyImages;
+	
+
+	public List<PropertyImages> getPropertyImages() {
+		return propertyImages;
+	}
+
+	public void setPropertyImages(List<PropertyImages> propertyImages) {
+		this.propertyImages = propertyImages;
+	}
 
 	public PropertyDetails getPropertyMetaData() {
 		return propertyMetaData;
