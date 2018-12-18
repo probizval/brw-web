@@ -1,0 +1,73 @@
+<!--Beauty Salon/Nail/Spa-->
+<h3 class="subheadline" >Beauty Salon / Nail /Spa</h3>
+<div class="row form-group">
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <label>Type Of Service</label><br/>
+        <div class="row form-group">
+            <div ng-repeat="beautySalonService in beautySalonServiceList track by $index" id="beautySalonService{{index}}"
+                 class="col-md-6 col-lg-6 col-xl-6">
+                <div class="checkbox checkbox-inline">
+                    <input type="checkbox" name="{{beautySalonService.model}}" id="{{beautySalonService.model}}"
+                           ng-checked="{{beautySalonService.checked}}">
+                    <label for="{{beautySalonService.model}}">{{beautySalonService.label}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Open Hours</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.openHours">
+    </div>
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Number of Restrooms</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.numberOfRestrooms">
+    </div>
+
+
+    <!--Interior-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideInterior = ! hideInterior">
+            <label ng-class="{'details-not-expanded': hideInterior, 'details-expanded': !hideInterior}" >Interior Details</label>
+            <img ng-show="!hideInterior" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideInterior" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideInterior">
+            <div class="row">
+                <div ng-repeat="interiorInput in interiorInputList track by $index" id="interiorInput{{index}}"
+                     class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>{{interiorInput.label}}</label>
+                    <input type="text" name="{{interiorInput.model}}" class="form-control form-control-md"
+                           placeholder="{{interiorInput.placeholder}}" id="{{interiorInput.model}}">
+                </div>
+                <div ng-repeat="beautySalonEquipment in beautySalonEquipmentsList track by $index" id="beautySalonEquipment{{index}}"
+                     class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>{{beautySalonEquipment.label}}</label>
+                    <input type="text" name="{{beautySalonEquipment.model}}" class="form-control form-control-md"
+                           placeholder="{{beautySalonEquipment.placeholder}}" id="{{beautySalonEquipment.model}}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Expenses-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideExpenses = ! hideExpenses">
+            <label ng-class="{'details-not-expanded': hideExpenses, 'details-expanded': !hideExpenses}" >Expense Details</label>
+            <img ng-show="!hideExpenses" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideExpenses" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideExpenses">
+            <div class="row">
+                <div ng-repeat="expense in expensesList track by $index" id="expense{{index}}"
+                     class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>{{expense.label}}</label>
+                    <input type="text" name="{{expense.model}}" class="form-control form-control-md"
+                           placeholder="{{expense.placeholder}}" id="{{expense.model}}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

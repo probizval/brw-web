@@ -111,7 +111,7 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
         })
 		        .state('property.addListing', {
 		            url: '/addListing',
-		            templateUrl: 'resources/pages/addListing.html',
+		            templateUrl: 'resources/pages/addListingForm.html',
 		            controller: 'addListingController',
 		            reload: true
 		        })

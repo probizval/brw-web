@@ -1,0 +1,76 @@
+<!--Laundry-->
+<h3 class="subheadline">Laundry</h3>
+<div class="row form-group">
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Number of Washers</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.laundry.numberOfWashers">
+    </div>
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Number of Dryers</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.laundry.numberOfDryers">
+    </div>
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Supplies</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.laundry.supplies">
+    </div>
+
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Coin Dispenser</label><br/>
+        <div class="radio radio-inline">
+            <input type="radio" id="coinDispenser" ng-model="property.laundry.coinDispenser" value="Yes">
+            <label for="coinDispenser">Yes</label>
+        </div>
+        <div class="radio radio-inline">
+            <input type="radio" id="noCoinDispenser" ng-model="property.laundry.coinDispenser" value="No">
+            <label for="noCoinDispenser">No</label>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Open Hours</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.openHours">
+    </div>
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Number of Restrooms</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.numberOfRestrooms">
+    </div>
+
+    <!--Expenses-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideExpenses = ! hideExpenses">
+            <label ng-class="{'details-not-expanded': hideExpenses, 'details-expanded': !hideExpenses}" >Expense Details</label>
+            <img ng-show="!hideExpenses" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideExpenses" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideExpenses">
+            <div class="row">
+                <div ng-repeat="expense in expensesList track by $index" id="expense{{index}}"
+                     class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>{{expense.label}}</label>
+                    <input type="text" name="{{expense.model}}" class="form-control form-control-md"
+                           placeholder="{{expense.placeholder}}" id="{{expense.model}}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideMachineDetails = ! hideMachineDetails">
+            <label ng-class="{'details-not-expanded': hideMachineDetails, 'details-expanded': !hideMachineDetails}" >Machine Details</label>
+            <img ng-show="!hideMachineDetails" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideMachineDetails" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideMachineDetails">
+            <div class="row">
+                <div ng-repeat="machineDetail in laundryMachineDetailsList track by $index" id="machineDetail{{index}}"
+                     class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>{{machineDetail.label}}</label>
+                    <input type="text" name="{{machineDetail.model}}" class="form-control form-control-md"
+                           placeholder="{{machineDetail.placeholder}}" id="{{machineDetail.model}}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
