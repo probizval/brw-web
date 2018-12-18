@@ -12,6 +12,6 @@ import com.brw.entities.PropertyImages;
 @Repository
 public interface PropertyImagesDAO  extends PagingAndSortingRepository<PropertyImages, Integer> {
 
-	List<PropertyImages> findByPropertyCode(@Param ("propertyCode") String propertyCode);
+	List<PropertyImages> findByPropertyDetailsId(@Param ("propertyDetailsId") int propertyDetailsId);
 	
 }

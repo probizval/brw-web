@@ -35,7 +35,7 @@ public class PropertyDetails implements Serializable {
 	private String propertyType;
 	
 	@Column(name = "property_id")
-	private String propertyId;
+	private Integer propertyId;
 
 	@Column(name = "business_type_code")
 	private String businessTypeCode;
@@ -195,11 +195,11 @@ public class PropertyDetails implements Serializable {
 		this.zoningCategory = zoningCategory;
 	}
 
-	public String getPropertyId() {
+	public Integer getPropertyId() {
 		return propertyId;
 	}
 
-	public void setPropertyId(String propertyId) {
+	public void setPropertyId(Integer propertyId) {
 		this.propertyId = propertyId;
 	}
 

@@ -19,6 +19,7 @@ import com.brw.dto.GasStationDetailsDTO;
 import com.brw.dto.PropertyDetailsDTO;
 import com.brw.dto.PropertyImagesDTO;
 import com.brw.dto.PropertyListDTO;
+import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDTO;
 import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.entities.GasStation;
@@ -73,7 +74,7 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	}
 
 	@Override
-	public PropertyDetailsDTO getPropertyDetails(int id) throws PropertyDetailsException {
+	public PropertyMetaDataDTO getPropertyDetails(int id) throws PropertyDetailsException {
 		// TODO Auto-generated method stub
 		
 		PropertyDetails propertyDetails = null;
@@ -82,21 +83,10 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		} catch (Exception e) {
 			throw new PropertyDetailsException("Record not found...");
 		}
-		PropertyDetailsDTO propertyDetailsDTO = new PropertyDetailsDTO();
-		propertyDetailsDTO.setId(propertyDetails.getId());
-		propertyDetailsDTO.setPropertyName(propertyDetails.getPropertyName());		
-		propertyDetailsDTO.setPropertyType(propertyDetails.getPropertyType());
-		propertyDetailsDTO.setBusinessType(propertyDetails.getBusinessType());
-		propertyDetailsDTO.setCity(propertyDetails.getCity());
-		propertyDetailsDTO.setCurrentOwner(propertyDetails.getCurrentOwner());
-		propertyDetailsDTO.setEstatedEstimatedValue(propertyDetails.getEstatesEstimatedValue());
-		propertyDetailsDTO.setImageUrl(propertyDetails.getImageUrl());
-		propertyDetailsDTO.setLatitude(propertyDetails.getLatitude());
-		propertyDetailsDTO.setLongitude(propertyDetails.getLongitude());
-		propertyDetailsDTO.setLotSize(propertyDetails.getLotSize());
-		propertyDetailsDTO.setPropertyAddress(propertyDetails.getPropertyAddress());
-		propertyDetailsDTO.setState(propertyDetails.getState());
-		propertyDetailsDTO.setZipCode(propertyDetails.getZipCode());
+		PropertyMetaDataDTO propertyDetailsDTO = new PropertyMetaDataDTO();
+		propertyDetailsDTO.setPropertyMetaData(propertyDetails);
+		List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
+		propertyDetailsDTO.setPropertyImages(propertyImages);
 		return propertyDetailsDTO;
 	}
 
@@ -146,11 +136,11 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		 //TODO Auto-generated method stub
 		PropertyDetails propertyDetails = propertyDetailsDAO.findById(id).get();
 		
-		if(propertyDetails.getPropertyId() == null) {
+		if(String.valueOf(propertyDetails.getPropertyId()) == null) {
 			throw new PropertyDetailsException("Record not found");
 		}
 		
-		GasStation gasStation = gasStationDAO.findById(Integer.parseInt(propertyDetails.getPropertyId())).get();
+		GasStation gasStation = gasStationDAO.findById(propertyDetails.getPropertyId()).get();
 		GasStationDetailsDTO gasStationDTO = new GasStationDetailsDTO();
 		gasStationDTO.setId(gasStation.getId());
 		gasStationDTO.setBrand(gasStation.getBrand());
@@ -171,7 +161,7 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		gasStationDTO.setFireEquip(gasStation.getFireEquip());
 		gasStationDTO.setFireCapacity(gasStation.getFireCapacity());
 		gasStationDTO.setAutoSupplyRepairMaintShop(gasStation.getAutoSupplyRepairMaintShop());
-		List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyCode(propertyDetails.getPropertyCode());
+		List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
 		gasStationDTO.setPropertyImages(propertyImages);
 		gasStationDTO.setPropertyMetaData(propertyDetails);
 		return gasStationDTO;
@@ -218,7 +208,7 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 			throw new PropertyDetailsException("Duplicate record");
 		} else {			
 			gasStation = gasStationDAO.save(gasStationDetails);
-			propertyDetails.setPropertyId(String.valueOf(gasStation.getId()));
+			propertyDetails.setPropertyId(gasStation.getId());
 			propertyDetails.setBusinessTypeCode("b_type_2");
 			propertyDetails.setPropertyCode("b_type_2");
 			property = propertyDetailsDAO.save(propertyDetails);
@@ -254,17 +244,17 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	public RestaurantDetailsDTO getRestaurantPropertyDetails(int id) throws PropertyDetailsException {
 		// TODO Auto-generated method stub
 		PropertyDetails propertyDetails = propertyDetailsDAO.findById(id).get();		
-		if(propertyDetails.getPropertyId() == null) {
+		if( String.valueOf(propertyDetails.getPropertyId()) == null) {
 			throw new PropertyDetailsException("Record not found");
 		}
-		Restaurant restaurant = restaurentDAO.findById(Integer.parseInt(propertyDetails.getPropertyId())).get();
+		Restaurant restaurant = restaurentDAO.findById(propertyDetails.getPropertyId()).get();
 		RestaurantDetailsDTO restaurantDetailsDTO = new RestaurantDetailsDTO();
 		restaurantDetailsDTO.setId(restaurant.getId());
 		restaurantDetailsDTO.setType(restaurant.getType());
 		restaurantDetailsDTO.setDescription(restaurant.getDescription());
 		restaurantDetailsDTO.setPropertyMetaData(propertyDetails);
 		
-		List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyCode(propertyDetails.getPropertyCode());
+		List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
 		restaurantDetailsDTO.setPropertyImages(propertyImages);
 		
 		return restaurantDetailsDTO;
@@ -288,7 +278,7 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 			throw new PropertyDetailsException("Duplicate record");
 		} else {			
 			restaurant = restaurentDAO.save(restaurant);
-			propertyDetails.setPropertyId(String.valueOf(restaurant.getId()));
+			propertyDetails.setPropertyId(restaurant.getId());
 			propertyDetails.setBusinessTypeCode("b_type_1");
 			propertyDetails.setPropertyCode("b_type_1");
 			property = propertyDetailsDAO.save(propertyDetails);
@@ -331,7 +321,7 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		
 		PropertyDetails propertyDetails = gasStationDetailsDTO.getPropertyMetaData();
 		
-		if(propertyDetails.getPropertyId() == null) {
+		if( String.valueOf(propertyDetails.getPropertyId()) == null) {
 			throw new PropertyDetailsException("Record not found");
 		}
 		

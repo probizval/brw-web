@@ -76,3 +76,30 @@ POST
             "zoningCategory": ""
         }
     }
+`To update images table`
+update rw_property_images as b 
+inner join rw_property_details as a on a.property_code = b.property_code
+set b.property_details_id = a.id; 
+
+
+update `rw_property_details` set `property_id` = 1 WHERE business_type_code = 'b_type_1'
+
+
+-------
+
+ALTER TABLE `rw_property_details` ADD `property_id` INT NULL DEFAULT NULL AFTER `property_address`, ADD `property_type` VARCHAR(50) NULL DEFAULT NULL AFTER `property_id`;
+
+INSERT INTO rw_restaurant (type,description) values ('Asian', 'All foods');
+
+ALTER TABLE `rw_property_images` ADD `property_details_id` INT NULL DEFAULT NULL AFTER `image_url`;
+
+update rw_property_images as b 
+inner join rw_property_details as a on a.property_code = b.property_code
+set b.property_details_id = a.id; 
+
+update `rw_property_details` set `property_id` = 1 WHERE business_type_code = 'b_type_1';
+
+update `rw_property_details` set `property_id` = 1 WHERE business_type_code = 'b_type_2';
+
+
+
