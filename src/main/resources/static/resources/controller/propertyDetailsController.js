@@ -6,12 +6,12 @@
     .module('myApp')
     .controller('propertyDetailsController', propertyDetailsController);
 
-    propertyDetailsController.$inject = ['$rootScope', '$scope', '$state', 'propDetails', 'propImages', 'propertyService'];
+    propertyDetailsController.$inject = ['$rootScope', '$scope', '$state', 'propDetails', 'propertyService'];
 
-    function propertyDetailsController($rootScope, $scope, $state, propDetails, propImages, propertyService) {
+    function propertyDetailsController($rootScope, $scope, $state, propDetails, propertyService) {
 
         $scope.propDetails = propDetails.data.data;
-        $scope.imageArray = propImages.data || [];
+        $scope.imageArray = propDetails.data.data.propertyImages || [];
         console.log($scope.propDetails, $scope.imageArray);
         var galleryThumbs = new Swiper('.gallery-thumbs', {
           spaceBetween: 10,

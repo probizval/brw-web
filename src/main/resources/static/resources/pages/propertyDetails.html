@@ -26,7 +26,6 @@
     </div>
   </div>
 </div>
-
 <div id="content" class="item-single">
   <div class="container">
     <div class="row justify-content-md-center">
@@ -40,7 +39,7 @@
                         <div class="swiper-slide" ng-repeat="image_prop in imageArray track by $index" id="image_prop{{index}}">
                           <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                             <a href="img1" itemprop="contentUrl" data-size="2000x1414">
-                              <img src="{{image_prop.image_url}}" class="img-fluid swiper-lazy" style="height:450px; width:635px;" alt="Drawing Room">
+                              <img src="{{image_prop.imageUrl}}" class="img-fluid swiper-lazy" style="height:450px; width:635px;" alt="Drawing Room">
                             </a>
                           </figure>
                         </div>
@@ -84,7 +83,7 @@
                   <div class="swiper-container gallery-thumbs">
                     <div class="swiper-wrapper">
                       <div class="swiper-slide" style="width:60px;height:50px;" ng-repeat="prop in imageArray track by $index" id="prop{{index}}">
-                        <img style="width:60px;height:50px;" src="{{prop.image_url}}" alt="">
+                        <img style="width:60px;height:50px;" src="{{prop.imageUrl}}" alt="">
                       </div>
 
                       <!--<div class="swiper-slide"><img src="{{propDetails.img_url}}" style="width:60px;height:50px;" alt=""></div>-->
@@ -105,7 +104,7 @@
                 <div ng-if="imageArray.length === 0">
                   <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                     <a href="img1" itemprop="contentUrl" data-size="2000x1414">
-                      <img src="{{propDetails.img_url}}" class="img-fluid swiper-lazy" style="height:450px; width:610px;" alt="Drawing Room">
+                      <img src="{{propDetails.imageUrl}}" class="img-fluid swiper-lazy" style="height:450px; width:610px;" alt="Drawing Room">
                     </a>
                   </figure>
                 </div>

@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/api/v1/property").permitAll()
-                .antMatchers("/api/v1/*").authenticated();
+                .antMatchers("/api/v1/propertydetails/*").authenticated();
 
         JwtWebSecurityConfigurer
                 .forRS256(audience, issuer)

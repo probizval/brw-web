@@ -51,7 +51,6 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
             templateUrl: 'resources/pages/search.html',
             controller: 'searchController',
             reload: true,
-            requireLogin: true,
             resolve: {
             	propList: function(propertyService, $stateParams) {
             		 //return propertyService.getPropertyList($stateParams.type);
@@ -71,6 +70,7 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
             templateUrl: 'resources/pages/propertyDetails.html',
             controller: 'propertyDetailsController',
             reload: true,
+            requireLogin: true,
             resolve: {
                 propDetails: function(propertyService, $stateParams) {
                      return propertyService.getPropertyDetails($stateParams.id);

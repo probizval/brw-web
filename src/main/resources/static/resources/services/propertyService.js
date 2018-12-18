@@ -25,7 +25,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     
 
     propertyDataOp.getPropertyDetails =  function (id) {
-        return $http.get('/api/v1/propertydetails/26').success(function(res) {
+        return $http.get('/api/v1/propertydetails/'+id).success(function(res) {
             return  res.data;
         })
         .error(function (error) {
