@@ -110,16 +110,7 @@
 
   function searchController($rootScope, $scope, $state, propertyService, propList) {
 
-			$scope.searchList = propList.data;
-    	//$scope.searchList[3].listedOn = new Date(propList.data[3].listedOn).toDateString();
-    	/*propertyService.getPropertyList()
-        .success(function(res) {
-             $scope.searchList = JSON.parse(res.data);
-        })
-        .error(function (error) {
-            $scope.status = 'Unable to load store data: ' + error.message;
-        });
-    	 */
+			$scope.searchList = propList.data.data.propertyList;
 
     	$scope.minPriceList = allPriceList;
       $scope.maxPriceList = allPriceList;
@@ -306,7 +297,7 @@
         	  ];
         	  */
         	  for(var i=0;i<dataset.length;i = i + 1) {
-        		  arrDestinations.push({'lat':dataset[i].latitude,'lon':dataset[i].longitude,'title':dataset[i].property_name,'description':dataset[i].property_name,'image_url': 'https://capi.myleasestar.com/v2/dimg-crop/17153218/300x438/17153218.jpg'});
+        		  arrDestinations.push({'lat':dataset[i].latitude,'lon':dataset[i].longitude,'title':dataset[i].propertyName,'description':dataset[i].propertyName,'image_url': 'https://capi.myleasestar.com/v2/dimg-crop/17153218/300x438/17153218.jpg'});
         	  }
 
             var searchAddress = JSON.parse(localStorage.getItem('searchAddress'));
@@ -369,6 +360,7 @@
                 propertyService.getPropertyList(JSON.stringify(searchAddress))
                   .success(function(res) {
                     arrDestinations = res;
+           
                     console.log("res ", res.length);
                     // console.log("res ", res.status);
 
@@ -380,7 +372,7 @@
             		console.log("Zoom changes",map.getZoom() , map, arrDestinations);
 								setTimeout(function(){
 									$scope.$apply(function(){
-                    $scope.searchList = arrDestinations;
+                    $scope.searchList = arrDestinations.data.propertyList;
 									})
 								}, 100);
 								var bounds1 =  map.getBounds();
@@ -388,6 +380,7 @@
 								var sw = bounds1.getSouthWest();
 								console.log("ne, sw", ne.lat(), ne.lng(), sw.lat(), sw.lng());
                 // arrDestinations = [{title: 'test', lat:37.55621007689943, lon:-121.9509967554608}];
+				arrDestinations = arrDestinations.data.propertyList;
                 for (i = 0; i < arrDestinations.length; i++) {
                   var marker = new google.maps.Marker({
                     title: arrDestinations[i].title,
@@ -435,7 +428,7 @@
         	  }); 
         	} 
 
-        	$scope.initialize(propList.data);
+        	$scope.initialize(propList.data.data.propertyList);
 
 	}
 

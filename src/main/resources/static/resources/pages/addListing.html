@@ -8,8 +8,28 @@
                 <input type="text" class="form-control form-control-lg" id="title" ng-model="property.propertyTitle" placeholder="Property Title" autofocus>
               </div>
               <div class="form-group">
-                <label for="title">Property Image</label>
-                <input type="text" class="form-control form-control-lg" id="img" ng-model="property.image_url" placeholder="Property Image">
+                <label for="title">Property Images</label>
+                <!--<input type="text" class="form-control form-control-lg" id="img" ng-model="property.image_url" placeholder="Property Image">-->
+                <div class="add-listing-photo-container">
+                  <div class="row col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div ng-class="{'col-sm-12 col-md-12 col-lg-12 col-xl-12': imagesAsDataURL.length === 0,
+                                    'col-sm-4 col-md-4 col-lg-4 col-xl-4': imagesAsDataURL.length !== 0}" style="align-items: center; width:200px;">
+                      <br/>
+                      <input type='file' accept="image/*" id="property_image" style="display:none;" onchange="angular.element(this).scope().imageUpload(event)" multiple>
+                      <div style="text-align: center">
+                        <label class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="font-size: 15px; color: #868e96; font-weight: bold; text-align: center;">Drop photos here to Upload</label>
+                        <label for="property_image" class="btn btn-primary"> Add New Photo</label>
+                      </div>
+                      <button type="button" name="button" class="btn btn-primary" ng-click="uploadPhotoOnAWS()">AWS Upload</button>
+                    </div>
+                    <div ng-repeat="image in imagesAsDataURL track by $index" id="image{{index}}" class="gallery-images col-md-4 col-lg-4 col-xl-4">
+                        <img class="thumb" ng-src="{{image}}">
+                        <button type="button" class="close-image" ng-click="removePhoto(image)">
+                          <img ng-src="../../img/icon/close.png" />
+                        </button>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="title">Contact Number</label>
@@ -214,7 +234,7 @@
               <div class="form-group">
                 <div class="checkbox">
                   <input type="checkbox" id="featured">
-                  <label for="featured">Yes ‚ feature this listing. </label>
+                  <label for="featured">Yes ï¿½ feature this listing. </label>
                 </div>
               </div> -->
               <hr>

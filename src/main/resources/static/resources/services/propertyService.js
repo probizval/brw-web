@@ -1,24 +1,32 @@
 
 var propertyService = angular.module('propertyService', [])
-propertyService.factory('propertyService', ['$http', function ($http) {
+propertyService.factory('propertyService', ['$http', 'authService', function ($http, authService) {
 
     var urlBase = '/MyCarts/category';
     var propertyDataOp = {};
 
     propertyDataOp.getPropertyList = function (type) {
-      console.log("--------getBuyPropertylist" );
-        return $http.get('/api/v1/property').success(function(res) {
+    	type = JSON.parse(type);
+    	
+      console.log("--------getBuyPropertylist" + "Bearer "+localStorage.getItem('id_token') );
+        return $http.post('/api/v1/propertyList', {
+                          "latitude": type.latitude,
+                          "longitude": type.longitude,
+                          "zipCode": type.postal_code || null
+                        }).success(function(res) {
           // console.log("getBuyPropertylist", JSON.stringify(res));
-			return  JSON.stringify(res);
+        return  res;
         })
         .error(function (error) {
             return 'Unable to load store data: ' + error.message;
         });
     };
 
+    
+
     propertyDataOp.getPropertyDetails =  function (id) {
-        return $http.get('/getPropertyListById/'+id).success(function(res) {
-            return  JSON.stringify(res);
+        return $http.get('/api/v1/propertydetails/'+id).success(function(res) {
+            return  res.data;
         })
         .error(function (error) {
             return 'Unable to load store data: ' + error.message;

@@ -5,12 +5,12 @@
       <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
           <li class="breadcrumb-item"><a href="#">Property for sale</a></li>
-          <li class="breadcrumb-item active" aria-current="page">{{propDetails.property_name}}</li>
+          <li class="breadcrumb-item active" aria-current="page">{{propDetails.propertyMetaData.propertyName}}</li>
         </ol>
       <div class="page-header bordered">
         <div class="row">
           <div class="col-md-10"> <a href="#" class="btn-return" title="Back"><i class="fa fa-angle-left"></i></a>
-            <h1>{{propDetails.property_name}} ({{propDetails.business_type}}) <small><i class="fa fa-map-marker"></i> {{propDetails.property_address}} {{propDetails.city}} {{propDetails.state}}</small></h1>
+            <h1>{{propDetails.propertyMetaData.propertyName}} ({{propDetails.propertyMetaData.businessType}}) <small><i class="fa fa-map-marker"></i> {{propDetails.propertyMetaData.propertyAddress}} {{propDetails.propertyMetaData.city}} {{propDetails.propertyMetaData.state}}</small></h1>
           </div>
           <div class="col-md-2">
             <div class="btn-group btn-group-justified" role="group">
@@ -26,7 +26,6 @@
     </div>
   </div>
 </div>
-
 <div id="content" class="item-single">
   <div class="container">
     <div class="row justify-content-md-center">
@@ -40,7 +39,7 @@
                         <div class="swiper-slide" ng-repeat="image_prop in imageArray track by $index" id="image_prop{{index}}">
                           <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                             <a href="img1" itemprop="contentUrl" data-size="2000x1414">
-                              <img src="{{image_prop.image_url}}" class="img-fluid swiper-lazy" style="height:450px; width:635px;" alt="Drawing Room">
+                              <img src="{{image_prop.imageUrl}}" class="img-fluid swiper-lazy" style="height:450px; width:635px;" alt="Drawing Room">
                             </a>
                           </figure>
                         </div>
@@ -84,7 +83,7 @@
                   <div class="swiper-container gallery-thumbs">
                     <div class="swiper-wrapper">
                       <div class="swiper-slide" style="width:60px;height:50px;" ng-repeat="prop in imageArray track by $index" id="prop{{index}}">
-                        <img style="width:60px;height:50px;" src="{{prop.image_url}}" alt="">
+                        <img style="width:60px;height:50px;" src="{{prop.imageUrl}}" alt="">
                       </div>
 
                       <!--<div class="swiper-slide"><img src="{{propDetails.img_url}}" style="width:60px;height:50px;" alt=""></div>-->
@@ -105,7 +104,7 @@
                 <div ng-if="imageArray.length === 0">
                   <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                     <a href="img1" itemprop="contentUrl" data-size="2000x1414">
-                      <img src="{{propDetails.img_url}}" class="img-fluid swiper-lazy" style="height:450px; width:610px;" alt="Drawing Room">
+                      <img src="{{propDetails.imageUrl}}" class="img-fluid swiper-lazy" style="height:450px; width:610px;" alt="Drawing Room">
                     </a>
                   </figure>
                 </div>
@@ -122,7 +121,7 @@
                     <div class="row">
                       <div class="col-md-4 col-lg-4 col-xl-4">
                         <h6>Lot Size</h6>
-                        <span style="text-align: center;">{{propDetails.lot_size}}</span>
+                        <span style="text-align: center;">{{propDetails.lotSize}}</span>
                       </div>
                       <div class="col-md-4 col-lg-4 col-xl-4">
                         <h6>Brand</h6>

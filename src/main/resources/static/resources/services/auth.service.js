@@ -60,6 +60,7 @@
       localStorage.setItem('id_token', authResult.idToken);
       localStorage.setItem('expires_at', expiresAt);
       localStorage.setItem('userName', authResult.idTokenPayload.name);
+      location.reload();
     }
     
     function logout() {
@@ -68,7 +69,7 @@
       localStorage.removeItem('id_token');
       localStorage.removeItem('expires_at');
       localStorage.removeItem('userName');
-      $state.go('home',null, {'reload':true});
+      location.reload();
     }
     
     function isAuthenticated() {
