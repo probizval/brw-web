@@ -297,7 +297,7 @@
         	  ];
         	  */
         	  for(var i=0;i<dataset.length;i = i + 1) {
-        		  arrDestinations.push({'lat':dataset[i].latitude,'lon':dataset[i].longitude,'title':dataset[i].propertyName,'description':dataset[i].propertyName,'image_url': dataset[i].imageUrl});
+        		  arrDestinations.push({'lat':dataset[i].latitude,'lon':dataset[i].longitude,'title':dataset[i].propertyName,'description':dataset[i].propertyName,'image_url': 'https://capi.myleasestar.com/v2/dimg-crop/17153218/300x438/17153218.jpg'});
         	  }
 
             var searchAddress = JSON.parse(localStorage.getItem('searchAddress'));
@@ -375,6 +375,23 @@
                     $scope.searchList = arrDestinations.data.propertyList;
 									})
 								}, 100);
+								var bounds1 =  map.getBounds();
+								var ne = bounds1.getNorthEast();
+								var sw = bounds1.getSouthWest();
+								console.log("ne, sw", ne.lat(), ne.lng(), sw.lat(), sw.lng());
+                // arrDestinations = [{title: 'test', lat:37.55621007689943, lon:-121.9509967554608}];
+				arrDestinations = arrDestinations.data.propertyList;
+                for (i = 0; i < arrDestinations.length; i++) {
+                  var marker = new google.maps.Marker({
+                    title: arrDestinations[i].title,
+                    icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png',
+                    position: new google.maps.LatLng(arrDestinations[i].lat, arrDestinations[i].lon),
+                    map: map
+                  });
+                  // marker.setMap(map);
+                  // add an event listener for this marker
+                  bindInfoWindow(marker, map, infowindow, "<p> <a href=\"#prop" + i + "\"><img src=\"" + arrDestinations[i].image_url + "\" style=\"width:40px;height:40px\" class=\"img-fluid\" alt=\"\"> " + arrDestinations[i].description + "</p>");
+                }
 
             });
 
