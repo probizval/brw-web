@@ -7,13 +7,14 @@ import com.brw.dto.FilterDTO;
 import com.brw.dto.GasStationDetailsDTO;
 import com.brw.dto.PropertyDetailsDTO;
 import com.brw.dto.PropertyListDTO;
+import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.exceptions.PropertyDetailsException;
 
 
 public interface PropertyDetailsService {
 	public PropertyListDTO getAllPropertyList(FilterDTO filter);
-	public PropertyDetailsDTO getPropertyDetails(int id) throws PropertyDetailsException;
+	public PropertyMetaDataDTO getPropertyDetails(int id) throws PropertyDetailsException;
 	public PropertyDetailsDTO savePropertyDetail(PropertyDetailsDTO propertyDetailsDTO);
 	public PropertyDetailsDTO updatePropertyDetail(PropertyDetailsDTO propertyDetailsDTO);
 	public GasStationDetailsDTO getGasStationPropertyDetails(int id) throws PropertyDetailsException;

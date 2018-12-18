@@ -28,6 +28,18 @@ public class PropertyImages implements Serializable {
 	
 	@Column(name = "image_url", nullable = false)
 	private String imageUrl;
+	
+	@Column(name = "property_details_id", nullable = false)
+	private int propertyDetailsId;
+	
+
+	public int getPropertyDetailsId() {
+		return propertyDetailsId;
+	}
+
+	public void setPropertyDetailsId(int propertyDetailsId) {
+		this.propertyDetailsId = propertyDetailsId;
+	}
 
 	public int getId() {
 		return id;

@@ -25,6 +25,7 @@ import com.brw.dao.PropertyDetailsDAO;
 import com.brw.dto.GasStationDetailsDTO;
 import com.brw.dto.PropertyDetailsDTO;
 import com.brw.dto.PropertyListDTO;
+import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.exceptions.PropertyDetailsException;
 import com.brw.dto.FilterDTO;
@@ -56,7 +57,7 @@ public class PropertyDetailsController implements ErrorController {
 	@RequestMapping(value = "property/{id}", method = RequestMethod.GET, produces = "application/json")
 	public ApiResponse<?> getPropertyDetails(@PathVariable int id) {
 
-		PropertyDetailsDTO propertyDetailsDTO = null;
+		PropertyMetaDataDTO propertyDetailsDTO = null;
 		try {
 			propertyDetailsDTO = propertyDetailsService.getPropertyDetails(id);
 		} catch (PropertyDetailsException e) {
@@ -91,14 +92,14 @@ public class PropertyDetailsController implements ErrorController {
 	@RequestMapping(value = "propertydetails/{id}", method = RequestMethod.GET, produces = "application/json")
 	public ApiResponse<?> getGasStationPropertyDetails(@PathVariable int id) {
 
-		PropertyDetailsDTO propertyDetailsDTO = null;
+		PropertyMetaDataDTO propertyMetaDataDTO = null;
 		try {
-			propertyDetailsDTO = propertyDetailsService.getPropertyDetails(id);
+			propertyMetaDataDTO = propertyDetailsService.getPropertyDetails(id);
 		} catch (PropertyDetailsException e) {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 
-		if (propertyDetailsDTO.getBusinessType().equalsIgnoreCase("Gas Station")) {
+		if (propertyMetaDataDTO.getPropertyMetaData().getBusinessType().equalsIgnoreCase("Gas Station")) {
 			GasStationDetailsDTO gasStationDetailsDTO = null;
 			try {
 				gasStationDetailsDTO = propertyDetailsService.getGasStationPropertyDetails(id);
@@ -106,7 +107,7 @@ public class PropertyDetailsController implements ErrorController {
 				return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
 			}
 			return ApiResponse.withData(gasStationDetailsDTO);
-		} else if (propertyDetailsDTO.getBusinessType().equalsIgnoreCase("Restaurants and Food")) {
+		} else if (propertyMetaDataDTO.getPropertyMetaData().getBusinessType().equalsIgnoreCase("Restaurants and Food")) {
 			RestaurantDetailsDTO restaurantDetailsDTO = null;
 			try {
 				restaurantDetailsDTO = propertyDetailsService.getRestaurantPropertyDetails(id);
@@ -115,7 +116,7 @@ public class PropertyDetailsController implements ErrorController {
 			}
 			return ApiResponse.withData(restaurantDetailsDTO);
 		} else {
-			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found.");
+			return ApiResponse.withData(propertyMetaDataDTO);
 		}
 
 	}
