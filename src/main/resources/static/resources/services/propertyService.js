@@ -15,7 +15,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
                           "zipCode": type.postal_code || null
                         }).success(function(res) {
           // console.log("getBuyPropertylist", JSON.stringify(res));
-        return  res;
+          return res.data;
         })
         .error(function (error) {
             return 'Unable to load store data: ' + error.message;

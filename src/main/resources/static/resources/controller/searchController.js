@@ -254,179 +254,234 @@
         }
 			};
 
-    			$scope.initialize = function(dataset) {
-        	  var i;
-        	  var arrDestinations = [];
+			var map;
+    	var markers = [];
+			var infowindow =  new google.maps.InfoWindow({
+				content: ''
+			});
+			$scope.initialize = function(dataset) {
+        	  // var arrDestinations = [];
         	  /*
         	    {
-        	      lat: 37.5044441223145, 
-        	      lon: -121.908317565918, 
-        	      title: "Brighton Pier", 
+        	      lat: 37.5044441223145,
+        	      lon: -121.908317565918,
+        	      title: "Brighton Pier",
         	      description: "Brighton Palace Pier dates to 1899"
         	    },
         	    {
-          	      lat: 37.5495200924684, 
-          	      lon: -121.986431338286, 
-          	      title: "Brighton Pier", 
+          	      lat: 37.5495200924684,
+          	      lon: -121.986431338286,
+          	      title: "Brighton Pier",
           	      description: "Brighton Palace Pier dates to 1899"
           	    },
           	    {
-          	      lat: 37.5330543518066, 
-          	      lon: -122.001739501953, 
-          	      title: "Brighton Pier", 
+          	      lat: 37.5330543518066,
+          	      lon: -122.001739501953,
+          	      title: "Brighton Pier",
           	      description: "Brighton Palace Pier dates to 1899"
           	    },
           	    {
-        	      lat: 37.5505241, 
-        	      lon: -121.9793462, 
-        	      title: "Brighton Pier", 
+        	      lat: 37.5505241,
+        	      lon: -121.9793462,
+        	      title: "Brighton Pier",
         	      description: "Brighton Palace Pier dates to 1899"
         	    },
           	    {
-          	      lat: 37.5577268634313, 
-          	      lon: -122.006441241109, 
-          	      title: "Brighton Pier", 
+          	      lat: 37.5577268634313,
+          	      lon: -122.006441241109,
+          	      title: "Brighton Pier",
           	      description: "Brighton Palace Pier dates to 1899"
           	    },
           	    {
-          	      lat: 37.5625444, 
-          	      lon: -122.0098005, 
-          	      title: "Brighton Pier", 
+          	      lat: 37.5625444,
+          	      lon: -122.0098005,
+          	      title: "Brighton Pier",
           	      description: "Brighton Palace Pier dates to 1899"
           	    }
         	  ];
         	  */
-        	  for(var i=0;i<dataset.length;i = i + 1) {
-        		  arrDestinations.push({'lat':dataset[i].latitude,'lon':dataset[i].longitude,'title':dataset[i].propertyName,'description':dataset[i].propertyName,'image_url': 'https://capi.myleasestar.com/v2/dimg-crop/17153218/300x438/17153218.jpg'});
-        	  }
+        	  // for(var i=0;i<dataset.length;i = i + 1) {
+        		 //  arrDestinations.push({'lat':dataset[i].latitude,'lon':dataset[i].longitude,'title':dataset[i].property_name,'description':dataset[i].property_name,'image_url': dataset[i].img_url});
+        	  // }
 
-            var searchAddress = JSON.parse(localStorage.getItem('searchAddress'));
-        	  
-        	  var myOptions = {
-        	    zoom: 12,
-        	    center: new google.maps.LatLng(searchAddress.latitude,searchAddress.longitude),
-        	    mapTypeId: google.maps.MapTypeId.ROADMAP,
-              streetViewControl: false,
-              fullscreenControl: false,
-							scaleControl: false,
+				var searchAddress = JSON.parse(localStorage.getItem('searchAddress'));
+				console.log("dataset",dataset);
+				var mapOptions = {
+					zoom: 12,
+					center: new google.maps.LatLng(searchAddress.latitude,searchAddress.longitude),
+					mapTypeId: google.maps.MapTypeId.ROADMAP,
+					streetViewControl: false,
+					fullscreenControl: false,
+					scaleControl: false,
 
-              mapTypeControl: true,
-              mapTypeControlOptions: {
-                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-                mapTypeIds: ['roadmap', 'satellite', 'hybrid'],
-                position: google.maps.ControlPosition.TOP_RIGHT
-              },
-              minZoom: 10,
-              maxZoom: 20,
-              zoomControl: true,
-              zoomControlOptions: {
-                position: google.maps.ControlPosition.RIGHT_TOP
-              },
-              gestureHandling: 'greedy'
-        	  };
-        	  
-        	  var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-        	  
-        	  var infowindow =  new google.maps.InfoWindow({
-        	    content: ''
-        	  });
+					mapTypeControl: true,
+					mapTypeControlOptions: {
+						style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+						mapTypeIds: ['roadmap', 'satellite', 'hybrid'],
+						position: google.maps.ControlPosition.TOP_RIGHT
+					},
+					minZoom: 10,
+					maxZoom: 20,
+					zoomControl: true,
+					zoomControlOptions: {
+						position: google.maps.ControlPosition.RIGHT_TOP
+					},
+					gestureHandling: 'greedy'
+				};
+
+				map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+				addMarker(dataset);
+				showMarkers();
+				// When map becomes idle after zoom ing or panning
+        console.log("Initial zoom", map.getZoom());
+        map.addListener('idle', function(e) {
+          mapZoomPanChangeListeners();
+        });
+
+        function mapWindow() {
+          var windowHeight = $(window).height();
+          var windowWidth = $(window).width();
+          var menuHeight = $('#menu').height();
+          var advanceFilterMenuHeight = $(".menu-bar-with-background").height() || 40;
+          var heightD = windowHeight;
+          if(windowWidth > 767) {
+            $('#map_wrapper').height(heightD - menuHeight - advanceFilterMenuHeight);
+            $('.search-results').height(heightD - menuHeight - advanceFilterMenuHeight);
+
+          } else {
+            $('#map_wrapper').height('auto');
+            $('.search-results').height('auto');
+          }
+        }
+        mapWindow();
+        $(window).resize(function() {
+          mapWindow();
+        });
+            // var geocoder =  new google.maps.Geocoder();
+            // geocoder.geocode( { 'address': 'Sunnyvale, CA, USA'}, function(results, status) {
+            //   if (status === google.maps.GeocoderStatus.OK) {
+            //   	console.log("lat lng result", results)
+            //     alert("location : " + results[0].geometry.location.lat() + " " +results[0].geometry.location.lng());
+            //   } else {
+            //     alert("Something got wrong " + status);
+            //   }
+            // });
+            //
+            // var flightPlanCoordinates = [
+            //   {lat: 37.66918637046184, lng: -121.81309596319335},
+            //   {lat: 37.386020446229786, lng: -122.2608961226477},
+            // ];
+            // var flightPath = new google.maps.Polyline({
+            //   path: flightPlanCoordinates,
+            //   geodesic: true,
+            //   strokeColor: '#FF0000',
+            //   strokeOpacity: 1.0,
+            //   strokeWeight: 2,
+							// map: map
+            // });
+            // var cityCircle = new google.maps.Circle({
+            //   strokeColor: '#FF0000',
+            //   strokeOpacity: 0.8,
+            //   strokeWeight: 2,
+            //   fillColor: '#FF0000',
+            //   fillOpacity: 0.35,
+            //   map: map,
+            //   center: {lat: searchAddress.latitude, lng: searchAddress.longitude},
+            //   radius: 10000,
+            // });
+
             // map.fitBounds(searchAddress.viewport);
 						// console.log("map bounds", map.getBounds());
-        	  // loop over our array
-        	  for (i = 0; i < arrDestinations.length; i++) {
-        	    // create a marker
-                var marker = new google.maps.Marker({
-                  title: arrDestinations[i].title,
-                  icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png',
-                  position: new google.maps.LatLng(arrDestinations[i].lat, arrDestinations[i].lon),
-                  map: map
-                });
-                
-                // add an event listener for this marker
-                bindInfoWindow(marker, map, infowindow, "<p> <a href=\"#prop"+i+"\"><img src=\""+arrDestinations[i].image_url+"\" style=\"width:40px;height:40px\" class=\"img-fluid\" alt=\"\"> " + arrDestinations[i].description + "</p>");
+			};
 
-        	    }
-						console.log("Initial zoom", map.getZoom());
-            map.addListener('idle', function() {
-            		var bounds = map.getCenter();
-            		console.log(bounds.lat(), bounds.lng());
-                var searchAddress = {
-                  type: "All",
-                  postal_code: 0,
-                  latitude: bounds.lat(),
-                  longitude: bounds.lng()
-                };
+			function mapZoomPanChangeListeners() {
+				var arrDestinations = [];
+				var bounds = map.getCenter();
+				deleteMarkers();
+				console.log(bounds.lat(), bounds.lng());
+				var searchAddress = {
+					type: "All",
+					postal_code: 0,
+					latitude: bounds.lat(),
+					longitude: bounds.lng()
+				};
+        // var response = [];
+        // setTimeout(function () {
+        //   response = propertyService.getPropertyList(JSON.stringify(searchAddress));
+        // }, 100);
+        // // var response = propertyService.getPropertyList(JSON.stringify(searchAddress));
+        // arrDestinations = response;
+        // console.log("res ", response, response.length);
+        // addMarker(arrDestinations);
+        // showMarkers();
 
-                propertyService.getPropertyList(JSON.stringify(searchAddress))
-                  .success(function(res) {
-                    arrDestinations = res;
-           
-                    console.log("res ", res.length);
-                    // console.log("res ", res.status);
+				propertyService.getPropertyList(JSON.stringify(searchAddress))
+					.success(function(res) {
+            console.log("res ", res, res.length);
+            arrDestinations = res.data.propertyList;
+						addMarker(arrDestinations);
+						showMarkers();
+						// console.log("res ", res.status);
+					})
+					.error(function (error) {
+						$scope.status = 'Unable to load store data: ' + error.message;
+						console.log("res ", $scope.status);
+					});
+				setTimeout(function(){
+					$scope.$apply(function(){
+						$scope.searchList = arrDestinations;
+					})
+				}, 100);
+				// var bounds1 =  map.getBounds();
+				// var ne = bounds1.getNorthEast();
+				// var sw = bounds1.getSouthWest();
+				// console.log("ne, sw", ne.lat(), ne.lng(), sw.lat(), sw.lng());
+				// arrDestinations = [{title: 'test', lat:37.55621007689943, lon:-121.9509967554608}];
 
-                  })
-                  .error(function (error) {
-                    $scope.status = 'Unable to load store data: ' + error.message;
-                    console.log("res ", $scope.status);
-                  });
-            		console.log("Zoom changes",map.getZoom() , map, arrDestinations);
-								setTimeout(function(){
-									$scope.$apply(function(){
-                    $scope.searchList = arrDestinations.data.propertyList;
-									})
-								}, 100);
-								var bounds1 =  map.getBounds();
-								var ne = bounds1.getNorthEast();
-								var sw = bounds1.getSouthWest();
-								console.log("ne, sw", ne.lat(), ne.lng(), sw.lat(), sw.lng());
-                // arrDestinations = [{title: 'test', lat:37.55621007689943, lon:-121.9509967554608}];
-				arrDestinations = arrDestinations.data.propertyList;
-                for (i = 0; i < arrDestinations.length; i++) {
-                  var marker = new google.maps.Marker({
-                    title: arrDestinations[i].title,
-                    icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png',
-                    position: new google.maps.LatLng(arrDestinations[i].lat, arrDestinations[i].lon),
-                    map: map
-                  });
-                  // marker.setMap(map);
-                  // add an event listener for this marker
-                  bindInfoWindow(marker, map, infowindow, "<p> <a href=\"#prop" + i + "\"><img src=\"" + arrDestinations[i].image_url + "\" style=\"width:40px;height:40px\" class=\"img-fluid\" alt=\"\"> " + arrDestinations[i].description + "</p>");
-                }
+			}
 
-            });
+			function addMarker(arrDestinations) {
+				console.log("Add markers", arrDestinations);
+				for (var i = 0; i < arrDestinations.length; i++) {
+					var marker = new google.maps.Marker({
+						title: arrDestinations[i].propertyName,
+						icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png',
+						position: new google.maps.LatLng(arrDestinations[i].latitude, arrDestinations[i].longitude),
+						map: map
+					});
+					markers.push(marker);
+					// add an event listener for this marker
+					bindInfoWindow(marker, map, "<p> <a href=\"#prop" + i + "\"><img src=\"" + arrDestinations[i].imageUrl + "\" style=\"width:40px;height:40px\" class=\"img-fluid\" alt=\"\"> " + arrDestinations[i].propertyName + "</p>");
+				}
+			}
+			// Sets the map on all markers in the array.
+			function setMapOnAll(map) {
+				for (var i = 0; i < markers.length; i++) {
+					markers[i].setMap(map);
+				}
+			}
 
-        	  function mapWindow() {
-      			var windowHeight = $(window).height();
-      			var windowWidth = $(window).width();
-      			var menuHeight = $('#menu').height();
-      			var advanceFilterMenuHeight = $(".menu-bar-with-background").height() || 40;
-      			var heightD = windowHeight;
-      			if(windowWidth > 767) {
-      				$('#map_wrapper').height(heightD - menuHeight - advanceFilterMenuHeight);
-      				$('.search-results').height(heightD - menuHeight - advanceFilterMenuHeight);
-      				
-      			} else {
-      				$('#map_wrapper').height('auto');
-      				$('.search-results').height('auto');
-            }
-      			
-      			
-      		}
-      		mapWindow();
-      		$(window).resize(function() {
-      			mapWindow();
-      		});
-        	  
-					};
-    	
-    	
+			// Removes the markers from the map, but keeps them in the array.
+			function clearMarkers() {
+				setMapOnAll(null);
+			}
 
-        	function bindInfoWindow(marker, map, infowindow, html) { 
-        	  google.maps.event.addListener(marker, 'click', function() { 
-        	    infowindow.setContent(html); 
-        	    infowindow.open(map, marker); 
-        	  }); 
-        	} 
+			// Shows any markers currently in the array.
+			function showMarkers() {
+				setMapOnAll(map);
+			}
+			// Deletes all markers in the array by removing references to them.
+			function deleteMarkers() {
+				clearMarkers();
+				markers = [];
+			}
+
+			function bindInfoWindow(marker, map, html) {
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.setContent(html);
+					infowindow.open(map, marker);
+				});
+			}
 
         	$scope.initialize(propList.data.data.propertyList);
 

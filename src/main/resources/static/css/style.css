@@ -881,7 +881,7 @@ h4.title {
   margin: 20px 0 20px 0;
   padding-bottom: 15px;
   border-bottom: 1px solid #ddd;
-  color: #869e9e;
+  color: #142b2b;
   font-weight: 500; }
 
 .main-title {
@@ -2472,4 +2472,12 @@ input[type="radio"], input[type="checkbox"] {
 }
 .gallery-images .close-image:hover{
   background-color: #e4e4e4;
+}
+.details-expanded {
+  font-size: 16px;
+  color: #1a1a1a;
+}
+.details-not-expanded {
+  font-size: 16px;
+  color: #0074e4;
 }

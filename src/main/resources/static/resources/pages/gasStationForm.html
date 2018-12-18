@@ -1,0 +1,142 @@
+<!--Gas Station-->
+<h3 class="subheadline" >Gas station</h3>
+<div class="row form-group">
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Gas Brand</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.brand">
+    </div>
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Number of Pumps</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.numberOfPumps">
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+            <label>Fuel Type</label>
+            <select class="form-control form-control-md" name="fuelType" ng-model="property.gas.fuelType"
+                    id="fuelType">
+                <option value="">Both Gasoline and Diesel</option>
+                <option>Gasoline</option>
+                <option>Diesel</option>
+            </select>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 col-lg-6 col-xl-6"
+                 ng-if="property.gas.fuelType === 'Both Gasoline and Diesel' || property.gas.fuelType === 'Gasoline'">
+                <label>Gasoline Tank Capacity</label>
+                <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.gasTankCapacity">
+            </div>
+            <div class="form-group col-md-6 col-lg-6 col-xl-6"
+                 ng-if="property.gas.fuelType === 'Both Gasoline and Diesel' || property.gas.fuelType === 'Diesel'">
+                <label>Diesel Tank Capacity</label>
+                <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.dieselTankCapacity">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Type Of Service</label>
+        <select class="form-control form-control-md" name="typeOfService" ng-model="property.gas.typeOfService"
+                id="typeOfService">
+            <option value="">Full Service</option>
+            <option>Self Service</option>
+        </select>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+            <label>Convenient Store</label><br/>
+            <div class="radio radio-inline">
+                <input type="radio" id="convenientStore" ng-model="property.gas.convenientStore" value="Yes">
+                <label for="convenientStore">Yes</label>
+            </div>
+            <div class="radio radio-inline">
+                <input type="radio" id="noConvenientStore" ng-model="property.gas.convenientStore" value="No">
+                <label for="noConvenientStore">No</label>
+            </div>
+        </div>
+
+        <div class="row" ng-show="property.gas.convenientStore == 'Yes'">
+            <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                <label>Convenient Store Brand</label>
+                <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.convenientStoreBrand">
+            </div>
+
+            <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                <label>Store Inventory Cost</label>
+                <input type="text" class="form-control form-control-md" placeholder="$" ng-model="property.gas.storeInventoryCost">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+            <label>Car Wash</label><br/>
+            <div class="radio radio-inline">
+                <input type="radio" id="carWash" ng-model="property.gas.carWash" value="Yes">
+                <label for="carWash">Yes</label>
+            </div>
+            <div class="radio radio-inline">
+                <input type="radio" id="noCarWash" ng-model="property.gas.carWash" value="No">
+                <label for="noCarWash">No</label>
+            </div>
+        </div>
+
+        <div class="row" ng-show="property.gas.carWash == 'Yes'">
+            <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                <label>Car Wash Equipment Cost</label>
+                <input type="text" class="form-control form-control-md" placeholder="$" ng-model="property.gas.equipmentCost">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+            <label>Auto Repair & Maintenance Shop</label><br/>
+            <div class="radio radio-inline">
+                <input type="radio" id="autoRepairShop" ng-model="property.gas.autoRepairShop" value="Yes">
+                <label for="autoRepairShop">Yes</label>
+            </div>
+            <div class="radio radio-inline">
+                <input type="radio" id="noAutoRepairShop" ng-model="property.gas.autoRepairShop" value="No">
+                <label for="noAutoRepairShop">No</label>
+            </div>
+        </div>
+
+        <div class="row" ng-show="property.gas.autoRepairShop == 'Yes'">
+            <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                <label>Approx Cost</label>
+                <input type="text" class="form-control form-control-md" placeholder="$" ng-model="property.gas.autoRepairShopCost">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Open Hours</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.openHours">
+    </div>
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Number of Restrooms</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.numberOfRestrooms">
+    </div>
+    <!--Expenses-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideExpenses = ! hideExpenses">
+            <label ng-class="{'details-not-expanded': hideExpenses, 'details-expanded': !hideExpenses}" >Expense Details</label>
+            <img ng-show="!hideExpenses" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideExpenses" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideExpenses">
+            <div class="row">
+                <div ng-repeat="expense in expensesList track by $index" id="expense{{index}}"
+                     class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>{{expense.label}}</label>
+                    <input type="text" name="{{expense.model}}" class="form-control form-control-md"
+                           placeholder="{{expense.placeholder}}" id="{{expense.model}}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

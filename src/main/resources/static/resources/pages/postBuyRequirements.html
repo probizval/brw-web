@@ -13,7 +13,7 @@
                   <h3 class="subheadline">Information about the Business you wanted to Buy</h3>
                   <div class="row form-group">
                     <div class="col-md-6 col-lg-6 col-xl-6">
-                        <label for="title">Business Categories*</label>
+                        <label>Business Categories*</label>
                         <select class="form-control form-control-md" name="businessCategory" ng-model="businessCategory"
                           ng-options="businessCategory.name for businessCategory in businessCategories"
                           id="businessCategory" ng-change="getBusinessType()" required>
@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="col-md-6 col-lg-6 col-xl-6" ng-show="businessCategory.name !== 'Other'">
-                        <label for="title">Business Type*</label>
+                        <label>Business Type*</label>
                         <select class="form-control form-control-md" name="businessType" ng-model="businessType"
                           ng-options="businessType for businessType in businessTypes" id="businessType" required>
                             <option style="color:#868e96;" value="">-- Choose Business Type --</option>
