@@ -10,10 +10,12 @@ import org.springframework.stereotype.Component;
 
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
+import com.brw.dao.CoinLaundryDAO;
 import com.brw.dao.GasStationDAO;
 import com.brw.dao.PropertyDetailsDAO;
 import com.brw.dao.PropertyImagesDAO;
 import com.brw.dao.RestaurentDAO;
+import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.dto.GasStationDetailsDTO;
 import com.brw.dto.PropertyDetailsDTO;
@@ -22,6 +24,7 @@ import com.brw.dto.PropertyListDTO;
 import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDTO;
 import com.brw.dto.RestaurantDetailsDTO;
+import com.brw.entities.CoinLaundry;
 import com.brw.entities.GasStation;
 import com.brw.entities.PropertyDetails;
 import com.brw.entities.PropertyImages;
@@ -42,6 +45,9 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	
 	@Autowired
 	private PropertyImagesDAO propertImagesDAO;
+	
+	@Autowired
+	private CoinLaundryDAO coinLaundryDAO;
 	
 	@Override
 	public PropertyListDTO getAllPropertyList(FilterDTO filter) {
@@ -371,6 +377,131 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		restaurantDetailsDTO.setPropertyMetaData(property);
 		
 		return restaurantDetailsDTO;
+	}
+
+	@Override
+	public CoinLaundryDetailsDTO getCoinLaundryPropertyDetails(int id) throws PropertyDetailsException {
+		// TODO Auto-generated method stub
+				PropertyDetails propertyDetails = propertyDetailsDAO.findById(id).get();		
+				if( String.valueOf(propertyDetails.getPropertyId()) == null) {
+					throw new PropertyDetailsException("Record not found");
+				}
+				
+				CoinLaundry coinLaundry = coinLaundryDAO.findById(propertyDetails.getPropertyId()).get();
+				CoinLaundryDetailsDTO coinLaundryDetailsDTO = new CoinLaundryDetailsDTO();
+				coinLaundryDetailsDTO.setId(coinLaundry.getId());
+				coinLaundryDetailsDTO.setNumberOfWashers(coinLaundry.getNumberOfWashers());
+				coinLaundryDetailsDTO.setNumberOfDryers(coinLaundry.getNumberOfDryers());
+				coinLaundryDetailsDTO.setCostOfEquip(coinLaundry.getCostOfEquip());
+				coinLaundryDetailsDTO.setFeatures(coinLaundry.getFeatures());
+				coinLaundryDetailsDTO.setRestrooms(coinLaundry.getRestrooms());
+				coinLaundryDetailsDTO.setSupplies(coinLaundry.getSupplies());
+				coinLaundryDetailsDTO.setCoinDispensers(coinLaundry.getCoinDispensers());
+				coinLaundryDetailsDTO.setSeatingCapacity(coinLaundry.getSeatingCapacity());
+				coinLaundryDetailsDTO.setTotalSqft(coinLaundry.getTotalSqft());
+				coinLaundryDetailsDTO.setCounterSpace(coinLaundry.getCounterSpace());
+				coinLaundryDetailsDTO.setCarts(coinLaundry.getCarts());
+				coinLaundryDetailsDTO.setWaterFactor(coinLaundry.getWaterFactor());
+				coinLaundryDetailsDTO.setUtilities(coinLaundry.getUtilities());
+				coinLaundryDetailsDTO.setDemographicsPopulation(coinLaundry.getDemographicsPopulation());
+				coinLaundryDetailsDTO.setMaintenanceContracts(coinLaundry.getMaintenanceContracts());
+				coinLaundryDetailsDTO.setMachinManufactures(coinLaundry.getMachinManufactures());
+				coinLaundryDetailsDTO.setMachineEfficiences(coinLaundry.getMachineEfficiences());
+				coinLaundryDetailsDTO.setMachineLifespan(coinLaundry.getMachineLifespan());
+				coinLaundryDetailsDTO.setAssociationWithOthers(coinLaundry.getAssociationWithOthers());
+				coinLaundryDetailsDTO.setPropertyMetaData(propertyDetails);
+				
+				
+				List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
+				coinLaundryDetailsDTO.setPropertyImages(propertyImages);
+				
+				return coinLaundryDetailsDTO;
+	}
+
+	@Override
+	public CoinLaundryDetailsDTO saveCoinLaundryPropertyDetail(CoinLaundryDetailsDTO coinLaundryDetailsDTO)
+			throws PropertyDetailsException {
+
+		
+		CoinLaundry coinLaundry = new CoinLaundry();
+		coinLaundry.setNumberOfWashers(coinLaundryDetailsDTO.getNumberOfDryers());
+		coinLaundry.setNumberOfDryers(coinLaundryDetailsDTO.getNumberOfDryers());
+		coinLaundry.setCostOfEquip(coinLaundryDetailsDTO.getCostOfEquip());
+		coinLaundry.setFeatures(coinLaundryDetailsDTO.getFeatures());
+		coinLaundry.setRestrooms(coinLaundryDetailsDTO.getRestrooms());
+		coinLaundry.setSupplies(coinLaundryDetailsDTO.getSupplies());
+		coinLaundry.setCoinDispensers(coinLaundryDetailsDTO.getCoinDispensers());
+		coinLaundry.setSeatingCapacity(coinLaundryDetailsDTO.getSeatingCapacity());
+		coinLaundry.setTotalSqft(coinLaundryDetailsDTO.getTotalSqft());
+		coinLaundry.setCounterSpace(coinLaundryDetailsDTO.getCounterSpace());
+		coinLaundry.setCarts(coinLaundryDetailsDTO.getCarts());
+		coinLaundry.setWaterFactor(coinLaundryDetailsDTO.getWaterFactor());
+		coinLaundry.setUtilities(coinLaundryDetailsDTO.getUtilities());
+		coinLaundry.setDemographicsPopulation(coinLaundryDetailsDTO.getDemographicsPopulation());
+		coinLaundry.setMaintenanceContracts(coinLaundryDetailsDTO.getMaintenanceContracts());
+		coinLaundry.setMachinManufactures(coinLaundryDetailsDTO.getMachinManufactures());
+		coinLaundry.setMachineEfficiences(coinLaundryDetailsDTO.getMachineEfficiences());
+		coinLaundry.setMachineLifespan(coinLaundryDetailsDTO.getMachineLifespan());
+		coinLaundry.setAssociationWithOthers(coinLaundryDetailsDTO.getAssociationWithOthers());
+		
+		
+		List<PropertyDetails> propertyList = (List<PropertyDetails>) propertyDetailsDAO.findByPropertyName(coinLaundryDetailsDTO.getPropertyMetaData().getPropertyName());
+		PropertyDetails property = null;
+		
+		PropertyDetails propertyDetails = coinLaundryDetailsDTO.getPropertyMetaData();
+		
+		if(!propertyList.isEmpty()) {
+			property = propertyList.get(0);
+			throw new PropertyDetailsException("Duplicate record");
+		} else {			
+			coinLaundry = coinLaundryDAO.save(coinLaundry);
+			propertyDetails.setPropertyId(coinLaundry.getId());
+			propertyDetails.setBusinessTypeCode("b_type_7");
+			propertyDetails.setPropertyCode("b_type_7");
+			property = propertyDetailsDAO.save(propertyDetails);
+		}
+		coinLaundryDetailsDTO.setId(coinLaundry.getId());
+		coinLaundryDetailsDTO.setPropertyMetaData(property);
+		
+		return coinLaundryDetailsDTO;
+	}
+
+	@Override
+	public CoinLaundryDetailsDTO updateCoinLaundryPropertyDetail(CoinLaundryDetailsDTO coinLaundryDetailsDTO)
+			throws PropertyDetailsException {
+
+		CoinLaundry coinLaundry = new CoinLaundry();
+		coinLaundry.setId(coinLaundryDetailsDTO.getId());
+		coinLaundry.setNumberOfWashers(coinLaundryDetailsDTO.getNumberOfDryers());
+		coinLaundry.setNumberOfDryers(coinLaundryDetailsDTO.getNumberOfDryers());
+		coinLaundry.setCostOfEquip(coinLaundryDetailsDTO.getCostOfEquip());
+		coinLaundry.setFeatures(coinLaundryDetailsDTO.getFeatures());
+		coinLaundry.setRestrooms(coinLaundryDetailsDTO.getRestrooms());
+		coinLaundry.setSupplies(coinLaundryDetailsDTO.getSupplies());
+		coinLaundry.setCoinDispensers(coinLaundryDetailsDTO.getCoinDispensers());
+		coinLaundry.setSeatingCapacity(coinLaundryDetailsDTO.getSeatingCapacity());
+		coinLaundry.setTotalSqft(coinLaundryDetailsDTO.getTotalSqft());
+		coinLaundry.setCounterSpace(coinLaundryDetailsDTO.getCounterSpace());
+		coinLaundry.setCarts(coinLaundryDetailsDTO.getCarts());
+		coinLaundry.setWaterFactor(coinLaundryDetailsDTO.getWaterFactor());
+		coinLaundry.setUtilities(coinLaundryDetailsDTO.getUtilities());
+		coinLaundry.setDemographicsPopulation(coinLaundryDetailsDTO.getDemographicsPopulation());
+		coinLaundry.setMaintenanceContracts(coinLaundryDetailsDTO.getMaintenanceContracts());
+		coinLaundry.setMachinManufactures(coinLaundryDetailsDTO.getMachinManufactures());
+		coinLaundry.setMachineEfficiences(coinLaundryDetailsDTO.getMachineEfficiences());
+		coinLaundry.setMachineLifespan(coinLaundryDetailsDTO.getMachineLifespan());
+		coinLaundry.setAssociationWithOthers(coinLaundryDetailsDTO.getAssociationWithOthers());
+		
+		PropertyDetails property = null;
+		
+		PropertyDetails propertyDetails = coinLaundryDetailsDTO.getPropertyMetaData();
+					
+		coinLaundry = coinLaundryDAO.save(coinLaundry);
+		property = propertyDetailsDAO.save(propertyDetails);
+		
+		coinLaundryDetailsDTO.setPropertyMetaData(property);
+		
+		return coinLaundryDetailsDTO;
 	}
 	
 }

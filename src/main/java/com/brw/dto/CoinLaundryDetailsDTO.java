@@ -1,84 +1,54 @@
-package com.brw.entities;
+package com.brw.dto;
 
-import java.io.Serializable;
+import java.util.List;
+import com.brw.entities.PropertyDetails;
+import com.brw.entities.PropertyImages;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "rw_coin_laundry")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class CoinLaundry implements Serializable {
-
-	private static final long serialVersionUID = 6997167784266760272L;
+public class CoinLaundryDetailsDTO {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "no_of_washers")
 	private String numberOfWashers;
 	
-	@Column(name = "no_of_dryers")
 	private String numberOfDryers;
 	
-	@Column(name = "cost_of_equip")
 	private String costOfEquip;
 	
-	@Column(name = "features")
 	private String features;
 	
-	@Column(name = "restrooms")
 	private String restrooms;
 	
-	@Column(name = "supplies")
 	private String supplies;
 	
-	@Column(name = "coin_dispensers")
 	private String coinDispensers;
 	
-	@Column(name = "seating_capacity")
 	private String seatingCapacity;
 	
-	@Column(name = "total_sqft")
 	private String totalSqft;
 	
-	@Column(name = "counter_space")
 	private String counterSpace;
 	
-	@Column(name = "carts")
 	private String carts;
 	
-	@Column(name = "water_factor")
 	private String waterFactor;
 	
-	@Column(name = "utilities")
 	private String utilities;
 	
-	@Column(name = "demographics_population")
 	private String demographicsPopulation;
 	
-	@Column(name = "maintenance_contracts")
 	private String maintenanceContracts;
 	
-	@Column(name = "machin_manufactures")
 	private String machinManufactures;
 	
-	@Column(name = "machine_efficiences")
 	private String machineEfficiences;
 	
-	@Column(name = "machine_lifespan")
 	private String machineLifespan;
 	
-	@Column(name = "association_with_others")
 	private String associationWithOthers;
+	
+    private PropertyDetails propertyMetaData;
+	
+	private List<PropertyImages> propertyImages;
 
 	public int getId() {
 		return id;
@@ -238,5 +208,23 @@ public class CoinLaundry implements Serializable {
 
 	public void setAssociationWithOthers(String associationWithOthers) {
 		this.associationWithOthers = associationWithOthers;
-	}	
+	}
+
+	public PropertyDetails getPropertyMetaData() {
+		return propertyMetaData;
+	}
+
+	public void setPropertyMetaData(PropertyDetails propertyMetaData) {
+		this.propertyMetaData = propertyMetaData;
+	}
+
+	public List<PropertyImages> getPropertyImages() {
+		return propertyImages;
+	}
+
+	public void setPropertyImages(List<PropertyImages> propertyImages) {
+		this.propertyImages = propertyImages;
+	}
+	
+	
 }

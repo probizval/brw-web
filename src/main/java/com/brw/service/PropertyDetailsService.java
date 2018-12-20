@@ -3,6 +3,7 @@ package com.brw.service;
 import java.util.List;
 
 import com.brw.dao.RestaurentDAO;
+import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.dto.GasStationDetailsDTO;
 import com.brw.dto.PropertyDetailsDTO;
@@ -23,4 +24,7 @@ public interface PropertyDetailsService {
 	public RestaurantDetailsDTO getRestaurantPropertyDetails(int id) throws PropertyDetailsException;
 	public RestaurantDetailsDTO saveRestaurantPropertyDetail(RestaurantDetailsDTO restaurantDetailsDTO) throws PropertyDetailsException;
 	public RestaurantDetailsDTO updateRestaurantPropertyDetail(RestaurantDetailsDTO restaurantDetailsDTO) throws PropertyDetailsException;
+	public CoinLaundryDetailsDTO getCoinLaundryPropertyDetails(int id) throws PropertyDetailsException;
+	public CoinLaundryDetailsDTO saveCoinLaundryPropertyDetail(CoinLaundryDetailsDTO coinLaundryDetailsDTO) throws PropertyDetailsException;
+	public CoinLaundryDetailsDTO updateCoinLaundryPropertyDetail(CoinLaundryDetailsDTO coinLaundryDetailsDTO) throws PropertyDetailsException;
 }
