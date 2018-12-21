@@ -28,6 +28,7 @@ import com.brw.dto.PropertyListDTO;
 import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.exceptions.PropertyDetailsException;
+import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.service.PropertyDetailsService;
 
@@ -115,6 +116,14 @@ public class PropertyDetailsController implements ErrorController {
 				return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
 			}
 			return ApiResponse.withData(restaurantDetailsDTO);
+		}  else if (propertyMetaDataDTO.getPropertyMetaData().getBusinessType().equalsIgnoreCase("Laundry")) {
+			CoinLaundryDetailsDTO coinLaundryDetailsDTO = null;
+			try {
+				coinLaundryDetailsDTO = propertyDetailsService.getCoinLaundryPropertyDetails(id);
+			} catch (PropertyDetailsException e) {
+				return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+			}
+			return ApiResponse.withData(coinLaundryDetailsDTO);
 		} else {
 			return ApiResponse.withData(propertyMetaDataDTO);
 		}
@@ -165,6 +174,30 @@ public class PropertyDetailsController implements ErrorController {
 	public ApiResponse<?> updateRestaurantProperty(@RequestBody RestaurantDetailsDTO restaurantDetailsDTO) {
 		try {
 			RestaurantDetailsDTO restDTO = propertyDetailsService.updateRestaurantPropertyDetail(restaurantDetailsDTO);
+			return ApiResponse.withData(restDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PostMapping(value = "property/laundry")
+	public ApiResponse<?> createLaundryProperty(@RequestBody CoinLaundryDetailsDTO coinLaundryDetailsDTO) {
+		try {
+			CoinLaundryDetailsDTO restDTO = propertyDetailsService.saveCoinLaundryPropertyDetail(coinLaundryDetailsDTO);
+			return ApiResponse.withData(restDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PutMapping(value = "property/laundry")
+	public ApiResponse<?> updateLaundryProperty(@RequestBody CoinLaundryDetailsDTO coinLaundryDetailsDTO) {
+		try {
+			CoinLaundryDetailsDTO restDTO = propertyDetailsService.updateCoinLaundryPropertyDetail(coinLaundryDetailsDTO);
 			return ApiResponse.withData(restDTO);
 		} catch (InternalServerError e) {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);

@@ -451,7 +451,7 @@
 					});
 					markers.push(marker);
 					// add an event listener for this marker
-					bindInfoWindow(marker, map, "<p> <a href=\"#prop" + i + "\"><img src=\"" + arrDestinations[i].imageUrl + "\" style=\"width:40px;height:40px\" class=\"img-fluid\" alt=\"\"> " + arrDestinations[i].propertyName + "</p>");
+					bindInfoWindow(marker, map, "<p> <a href=\"#propertyDetails/" + arrDestinations[i].id + "\"><img src=\"" + arrDestinations[i].imageUrl + "\" style=\"width:40px;height:40px\" class=\"img-fluid\" alt=\"\"> " + arrDestinations[i].propertyName + "</p>");
 				}
 			}
 			// Sets the map on all markers in the array.

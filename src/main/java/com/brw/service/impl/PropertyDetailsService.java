@@ -10,10 +10,12 @@ import org.springframework.stereotype.Component;
 
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
+import com.brw.dao.CoinLaundryDAO;
 import com.brw.dao.GasStationDAO;
 import com.brw.dao.PropertyDetailsDAO;
 import com.brw.dao.PropertyImagesDAO;
 import com.brw.dao.RestaurentDAO;
+import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.dto.GasStationDetailsDTO;
 import com.brw.dto.PropertyDetailsDTO;
@@ -22,6 +24,7 @@ import com.brw.dto.PropertyListDTO;
 import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDTO;
 import com.brw.dto.RestaurantDetailsDTO;
+import com.brw.entities.CoinLaundry;
 import com.brw.entities.GasStation;
 import com.brw.entities.PropertyDetails;
 import com.brw.entities.PropertyImages;
@@ -42,6 +45,9 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	
 	@Autowired
 	private PropertyImagesDAO propertImagesDAO;
+	
+	@Autowired
+	private CoinLaundryDAO coinLaundryDAO;
 	
 	@Override
 	public PropertyListDTO getAllPropertyList(FilterDTO filter) {
@@ -210,7 +216,7 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 			gasStation = gasStationDAO.save(gasStationDetails);
 			propertyDetails.setPropertyId(gasStation.getId());
 			propertyDetails.setBusinessTypeCode("b_type_2");
-			propertyDetails.setPropertyCode("b_type_2");
+			propertyDetails.setPropertyCode(null);
 			property = propertyDetailsDAO.save(propertyDetails);
 		}
 		
@@ -252,6 +258,52 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		restaurantDetailsDTO.setId(restaurant.getId());
 		restaurantDetailsDTO.setType(restaurant.getType());
 		restaurantDetailsDTO.setDescription(restaurant.getDescription());
+		restaurantDetailsDTO.setIndoorSeatingCapacity(restaurant.getIndoorSeatingCapacity());
+		restaurantDetailsDTO.setOutdoorSeatingCapacity(restaurant.getOutdoorSeatingCapacity());
+		restaurantDetailsDTO.setKitchenHoodSize(restaurant.getKitchenHoodSize());
+		restaurantDetailsDTO.setKitchenSqft(restaurant.getKitchenSqft());
+		restaurantDetailsDTO.setAvailableAppliances(restaurant.getAvailableAppliances());
+		restaurantDetailsDTO.setDishWasher(restaurant.getDishWasher());
+		restaurantDetailsDTO.setOven(restaurant.getOven());
+		restaurantDetailsDTO.setCookingRange(restaurant.getCookingRange());
+		restaurantDetailsDTO.setFryers(restaurant.getFryers());
+		restaurantDetailsDTO.setTotalCostUtensils(restaurant.getTotalCostUtensils());
+		restaurantDetailsDTO.setInteriorSqft(restaurant.getInteriorSqft());
+		restaurantDetailsDTO.setInteriorSeatingArrangement(restaurant.getInteriorSeatingArrangement());
+		restaurantDetailsDTO.setInteriorCost(restaurant.getInteriorCost());
+		restaurantDetailsDTO.setInteriorFeatures(restaurant.getInteriorFeatures());
+		restaurantDetailsDTO.setInteriorElectronics(restaurant.getInteriorElectronics());
+		restaurantDetailsDTO.setInteriorRestrooms(restaurant.getInteriorRestrooms());
+		restaurantDetailsDTO.setInteriorRestroomsADA(restaurant.getInteriorRestroomsADA());
+		restaurantDetailsDTO.setBarType(restaurant.getBarType());
+		restaurantDetailsDTO.setBarSeatingCapacity(restaurant.getBarSeatingCapacity());
+		restaurantDetailsDTO.setLastRenovationDate(restaurant.getLastRenovationDate());
+		restaurantDetailsDTO.setCondition(restaurant.getCondition());
+		restaurantDetailsDTO.setWaitingArea(restaurant.getWaitingArea());
+		restaurantDetailsDTO.setDryStorage(restaurant.getDryStorage());
+		restaurantDetailsDTO.setExteriorType(restaurant.getExteriorType());
+		restaurantDetailsDTO.setParking(restaurant.getParking());
+		restaurantDetailsDTO.setSecurity(restaurant.getSecurity());
+		restaurantDetailsDTO.setSurroundingBusiness(restaurant.getSurroundingBusiness());
+		restaurantDetailsDTO.setMonthlyRent(restaurant.getMonthlyRent());
+		restaurantDetailsDTO.setNnnExpense(restaurant.getNnnExpense());
+		restaurantDetailsDTO.setGarbageExpense(restaurant.getGarbageExpense());
+		restaurantDetailsDTO.setUtilitiesExpense(restaurant.getUtilitiesExpense());
+		restaurantDetailsDTO.setResidentialArea(restaurant.getResidentialArea());
+		restaurantDetailsDTO.setWikiDemoLink(restaurant.getWikiDemoLink());
+		restaurantDetailsDTO.setWalkscore(restaurant.getWalkscore());
+		restaurantDetailsDTO.setAvgAge(restaurant.getAvgAge());
+		restaurantDetailsDTO.setAvgIncome(restaurant.getAvgIncome());
+		restaurantDetailsDTO.setCrimeIndicator(restaurant.getCrimeIndicator());
+		restaurantDetailsDTO.setAvgRevenueInResto(restaurant.getAvgRevenueInResto());
+		restaurantDetailsDTO.setAvgRevenueToGo(restaurant.getAvgRevenueToGo());
+		restaurantDetailsDTO.setAvgRevenueCatering(restaurant.getAvgRevenueCatering());
+		restaurantDetailsDTO.setAvgTevenueLiquer(restaurant.getAvgTevenueLiquer());
+		restaurantDetailsDTO.setTotal_emp(restaurant.getTotal_emp());
+		restaurantDetailsDTO.setCertified_emp(restaurant.getCertified_emp());
+		restaurantDetailsDTO.setFulltime_emp(restaurant.getFulltime_emp());
+		restaurantDetailsDTO.setParttiem_emp(restaurant.getParttime_emp());
+		
 		restaurantDetailsDTO.setPropertyMetaData(propertyDetails);
 		
 		List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
@@ -267,6 +319,53 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		Restaurant restaurant = new Restaurant();
 		restaurant.setType(restaurantDetailsDTO.getType());
 		restaurant.setDescription(restaurantDetailsDTO.getDescription());
+		restaurant.setType(restaurantDetailsDTO.getType());
+		restaurant.setDescription(restaurantDetailsDTO.getDescription());
+		restaurant.setIndoorSeatingCapacity(restaurantDetailsDTO.getIndoorSeatingCapacity());
+		restaurant.setOutdoorSeatingCapacity(restaurantDetailsDTO.getOutdoorSeatingCapacity());
+		restaurant.setKitchenHoodSize(restaurantDetailsDTO.getKitchenHoodSize());
+		restaurant.setKitchenSqft(restaurantDetailsDTO.getKitchenSqft());
+		restaurant.setAvailableAppliances(restaurantDetailsDTO.getAvailableAppliances());
+		restaurant.setDishWasher(restaurantDetailsDTO.getDishWasher());
+		restaurant.setOven(restaurantDetailsDTO.getOven());
+		restaurant.setCookingRange(restaurantDetailsDTO.getCookingRange());
+		restaurant.setFryers(restaurantDetailsDTO.getFryers());
+		restaurant.setTotalCostUtensils(restaurantDetailsDTO.getTotalCostUtensils());
+		restaurant.setInteriorSqft(restaurantDetailsDTO.getInteriorSqft());
+		restaurant.setInteriorSeatingArrangement(restaurantDetailsDTO.getInteriorSeatingArrangement());
+		restaurant.setInteriorCost(restaurantDetailsDTO.getInteriorCost());
+		restaurant.setInteriorFeatures(restaurantDetailsDTO.getInteriorFeatures());
+		restaurant.setInteriorElectronics(restaurantDetailsDTO.getInteriorElectronics());
+		restaurant.setInteriorRestrooms(restaurantDetailsDTO.getInteriorRestrooms());
+		restaurant.setInteriorRestroomsADA(restaurantDetailsDTO.getInteriorRestroomsADA());
+		restaurant.setBarType(restaurantDetailsDTO.getBarType());
+		restaurant.setBarSeatingCapacity(restaurantDetailsDTO.getBarSeatingCapacity());
+		restaurant.setLastRenovationDate(restaurantDetailsDTO.getLastRenovationDate());
+		restaurant.setCondition(restaurantDetailsDTO.getCondition());
+		restaurant.setWaitingArea(restaurantDetailsDTO.getWaitingArea());
+		restaurant.setDryStorage(restaurantDetailsDTO.getDryStorage());
+		restaurant.setExteriorType(restaurantDetailsDTO.getExteriorType());
+		restaurant.setParking(restaurantDetailsDTO.getParking());
+		restaurant.setSecurity(restaurantDetailsDTO.getSecurity());
+		restaurant.setSurroundingBusiness(restaurantDetailsDTO.getSurroundingBusiness());
+		restaurant.setMonthlyRent(restaurantDetailsDTO.getMonthlyRent());
+		restaurant.setNnnExpense(restaurantDetailsDTO.getNnnExpense());
+		restaurant.setGarbageExpense(restaurantDetailsDTO.getGarbageExpense());
+		restaurant.setUtilitiesExpense(restaurantDetailsDTO.getUtilitiesExpense());
+		restaurant.setResidentialArea(restaurantDetailsDTO.getResidentialArea());
+		restaurant.setWikiDemoLink(restaurantDetailsDTO.getWikiDemoLink());
+		restaurant.setWalkscore(restaurantDetailsDTO.getWalkscore());
+		restaurant.setAvgAge(restaurantDetailsDTO.getAvgAge());
+		restaurant.setAvgIncome(restaurantDetailsDTO.getAvgIncome());
+		restaurant.setCrimeIndicator(restaurantDetailsDTO.getCrimeIndicator());
+		restaurant.setAvgRevenueInResto(restaurantDetailsDTO.getAvgRevenueInResto());
+		restaurant.setAvgRevenueToGo(restaurantDetailsDTO.getAvgRevenueToGo());
+		restaurant.setAvgRevenueCatering(restaurantDetailsDTO.getAvgRevenueCatering());
+		restaurant.setAvgTevenueLiquer(restaurantDetailsDTO.getAvgTevenueLiquer());
+		restaurant.setTotal_emp(restaurantDetailsDTO.getTotal_emp());
+		restaurant.setCertified_emp(restaurantDetailsDTO.getCertified_emp());
+		restaurant.setFulltime_emp(restaurantDetailsDTO.getFulltime_emp());
+		restaurant.setParttime_emp(restaurantDetailsDTO.getParttiem_emp());
 		
 		List<PropertyDetails> propertyList = (List<PropertyDetails>) propertyDetailsDAO.findByPropertyName(restaurantDetailsDTO.getPropertyMetaData().getPropertyName());
 		PropertyDetails property = null;
@@ -280,7 +379,7 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 			restaurant = restaurentDAO.save(restaurant);
 			propertyDetails.setPropertyId(restaurant.getId());
 			propertyDetails.setBusinessTypeCode("b_type_1");
-			propertyDetails.setPropertyCode("b_type_1");
+			propertyDetails.setPropertyCode(null);
 			property = propertyDetailsDAO.save(propertyDetails);
 		}
 		restaurantDetailsDTO.setId(restaurant.getId());
@@ -360,6 +459,53 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		restaurant.setId(restaurantDetailsDTO.getId());
 		restaurant.setType(restaurantDetailsDTO.getType());
 		restaurant.setDescription(restaurantDetailsDTO.getDescription());
+		restaurant.setType(restaurantDetailsDTO.getType());
+		restaurant.setDescription(restaurantDetailsDTO.getDescription());
+		restaurant.setIndoorSeatingCapacity(restaurantDetailsDTO.getIndoorSeatingCapacity());
+		restaurant.setOutdoorSeatingCapacity(restaurantDetailsDTO.getOutdoorSeatingCapacity());
+		restaurant.setKitchenHoodSize(restaurantDetailsDTO.getKitchenHoodSize());
+		restaurant.setKitchenSqft(restaurantDetailsDTO.getKitchenSqft());
+		restaurant.setAvailableAppliances(restaurantDetailsDTO.getAvailableAppliances());
+		restaurant.setDishWasher(restaurantDetailsDTO.getDishWasher());
+		restaurant.setOven(restaurantDetailsDTO.getOven());
+		restaurant.setCookingRange(restaurantDetailsDTO.getCookingRange());
+		restaurant.setFryers(restaurantDetailsDTO.getFryers());
+		restaurant.setTotalCostUtensils(restaurantDetailsDTO.getTotalCostUtensils());
+		restaurant.setInteriorSqft(restaurantDetailsDTO.getInteriorSqft());
+		restaurant.setInteriorSeatingArrangement(restaurantDetailsDTO.getInteriorSeatingArrangement());
+		restaurant.setInteriorCost(restaurantDetailsDTO.getInteriorCost());
+		restaurant.setInteriorFeatures(restaurantDetailsDTO.getInteriorFeatures());
+		restaurant.setInteriorElectronics(restaurantDetailsDTO.getInteriorElectronics());
+		restaurant.setInteriorRestrooms(restaurantDetailsDTO.getInteriorRestrooms());
+		restaurant.setInteriorRestroomsADA(restaurantDetailsDTO.getInteriorRestroomsADA());
+		restaurant.setBarType(restaurantDetailsDTO.getBarType());
+		restaurant.setBarSeatingCapacity(restaurantDetailsDTO.getBarSeatingCapacity());
+		restaurant.setLastRenovationDate(restaurantDetailsDTO.getLastRenovationDate());
+		restaurant.setCondition(restaurantDetailsDTO.getCondition());
+		restaurant.setWaitingArea(restaurantDetailsDTO.getWaitingArea());
+		restaurant.setDryStorage(restaurantDetailsDTO.getDryStorage());
+		restaurant.setExteriorType(restaurantDetailsDTO.getExteriorType());
+		restaurant.setParking(restaurantDetailsDTO.getParking());
+		restaurant.setSecurity(restaurantDetailsDTO.getSecurity());
+		restaurant.setSurroundingBusiness(restaurantDetailsDTO.getSurroundingBusiness());
+		restaurant.setMonthlyRent(restaurantDetailsDTO.getMonthlyRent());
+		restaurant.setNnnExpense(restaurantDetailsDTO.getNnnExpense());
+		restaurant.setGarbageExpense(restaurantDetailsDTO.getGarbageExpense());
+		restaurant.setUtilitiesExpense(restaurantDetailsDTO.getUtilitiesExpense());
+		restaurant.setResidentialArea(restaurantDetailsDTO.getResidentialArea());
+		restaurant.setWikiDemoLink(restaurantDetailsDTO.getWikiDemoLink());
+		restaurant.setWalkscore(restaurantDetailsDTO.getWalkscore());
+		restaurant.setAvgAge(restaurantDetailsDTO.getAvgAge());
+		restaurant.setAvgIncome(restaurantDetailsDTO.getAvgIncome());
+		restaurant.setCrimeIndicator(restaurantDetailsDTO.getCrimeIndicator());
+		restaurant.setAvgRevenueInResto(restaurantDetailsDTO.getAvgRevenueInResto());
+		restaurant.setAvgRevenueToGo(restaurantDetailsDTO.getAvgRevenueToGo());
+		restaurant.setAvgRevenueCatering(restaurantDetailsDTO.getAvgRevenueCatering());
+		restaurant.setAvgTevenueLiquer(restaurantDetailsDTO.getAvgTevenueLiquer());
+		restaurant.setTotal_emp(restaurantDetailsDTO.getTotal_emp());
+		restaurant.setCertified_emp(restaurantDetailsDTO.getCertified_emp());
+		restaurant.setFulltime_emp(restaurantDetailsDTO.getFulltime_emp());
+		restaurant.setParttime_emp(restaurantDetailsDTO.getParttiem_emp());
 		
 		PropertyDetails property = null;
 		
@@ -371,6 +517,131 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		restaurantDetailsDTO.setPropertyMetaData(property);
 		
 		return restaurantDetailsDTO;
+	}
+
+	@Override
+	public CoinLaundryDetailsDTO getCoinLaundryPropertyDetails(int id) throws PropertyDetailsException {
+		// TODO Auto-generated method stub
+				PropertyDetails propertyDetails = propertyDetailsDAO.findById(id).get();		
+				if( String.valueOf(propertyDetails.getPropertyId()) == null) {
+					throw new PropertyDetailsException("Record not found");
+				}
+				
+				CoinLaundry coinLaundry = coinLaundryDAO.findById(propertyDetails.getPropertyId()).get();
+				CoinLaundryDetailsDTO coinLaundryDetailsDTO = new CoinLaundryDetailsDTO();
+				coinLaundryDetailsDTO.setId(coinLaundry.getId());
+				coinLaundryDetailsDTO.setNumberOfWashers(coinLaundry.getNumberOfWashers());
+				coinLaundryDetailsDTO.setNumberOfDryers(coinLaundry.getNumberOfDryers());
+				coinLaundryDetailsDTO.setCostOfEquip(coinLaundry.getCostOfEquip());
+				coinLaundryDetailsDTO.setFeatures(coinLaundry.getFeatures());
+				coinLaundryDetailsDTO.setRestrooms(coinLaundry.getRestrooms());
+				coinLaundryDetailsDTO.setSupplies(coinLaundry.getSupplies());
+				coinLaundryDetailsDTO.setCoinDispensers(coinLaundry.getCoinDispensers());
+				coinLaundryDetailsDTO.setSeatingCapacity(coinLaundry.getSeatingCapacity());
+				coinLaundryDetailsDTO.setTotalSqft(coinLaundry.getTotalSqft());
+				coinLaundryDetailsDTO.setCounterSpace(coinLaundry.getCounterSpace());
+				coinLaundryDetailsDTO.setCarts(coinLaundry.getCarts());
+				coinLaundryDetailsDTO.setWaterFactor(coinLaundry.getWaterFactor());
+				coinLaundryDetailsDTO.setUtilities(coinLaundry.getUtilities());
+				coinLaundryDetailsDTO.setDemographicsPopulation(coinLaundry.getDemographicsPopulation());
+				coinLaundryDetailsDTO.setMaintenanceContracts(coinLaundry.getMaintenanceContracts());
+				coinLaundryDetailsDTO.setMachinManufactures(coinLaundry.getMachinManufactures());
+				coinLaundryDetailsDTO.setMachineEfficiences(coinLaundry.getMachineEfficiences());
+				coinLaundryDetailsDTO.setMachineLifespan(coinLaundry.getMachineLifespan());
+				coinLaundryDetailsDTO.setAssociationWithOthers(coinLaundry.getAssociationWithOthers());
+				coinLaundryDetailsDTO.setPropertyMetaData(propertyDetails);
+				
+				
+				List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
+				coinLaundryDetailsDTO.setPropertyImages(propertyImages);
+				
+				return coinLaundryDetailsDTO;
+	}
+
+	@Override
+	public CoinLaundryDetailsDTO saveCoinLaundryPropertyDetail(CoinLaundryDetailsDTO coinLaundryDetailsDTO)
+			throws PropertyDetailsException {
+
+		
+		CoinLaundry coinLaundry = new CoinLaundry();
+		coinLaundry.setNumberOfWashers(coinLaundryDetailsDTO.getNumberOfDryers());
+		coinLaundry.setNumberOfDryers(coinLaundryDetailsDTO.getNumberOfDryers());
+		coinLaundry.setCostOfEquip(coinLaundryDetailsDTO.getCostOfEquip());
+		coinLaundry.setFeatures(coinLaundryDetailsDTO.getFeatures());
+		coinLaundry.setRestrooms(coinLaundryDetailsDTO.getRestrooms());
+		coinLaundry.setSupplies(coinLaundryDetailsDTO.getSupplies());
+		coinLaundry.setCoinDispensers(coinLaundryDetailsDTO.getCoinDispensers());
+		coinLaundry.setSeatingCapacity(coinLaundryDetailsDTO.getSeatingCapacity());
+		coinLaundry.setTotalSqft(coinLaundryDetailsDTO.getTotalSqft());
+		coinLaundry.setCounterSpace(coinLaundryDetailsDTO.getCounterSpace());
+		coinLaundry.setCarts(coinLaundryDetailsDTO.getCarts());
+		coinLaundry.setWaterFactor(coinLaundryDetailsDTO.getWaterFactor());
+		coinLaundry.setUtilities(coinLaundryDetailsDTO.getUtilities());
+		coinLaundry.setDemographicsPopulation(coinLaundryDetailsDTO.getDemographicsPopulation());
+		coinLaundry.setMaintenanceContracts(coinLaundryDetailsDTO.getMaintenanceContracts());
+		coinLaundry.setMachinManufactures(coinLaundryDetailsDTO.getMachinManufactures());
+		coinLaundry.setMachineEfficiences(coinLaundryDetailsDTO.getMachineEfficiences());
+		coinLaundry.setMachineLifespan(coinLaundryDetailsDTO.getMachineLifespan());
+		coinLaundry.setAssociationWithOthers(coinLaundryDetailsDTO.getAssociationWithOthers());
+		
+		
+		List<PropertyDetails> propertyList = (List<PropertyDetails>) propertyDetailsDAO.findByPropertyName(coinLaundryDetailsDTO.getPropertyMetaData().getPropertyName());
+		PropertyDetails property = null;
+		
+		PropertyDetails propertyDetails = coinLaundryDetailsDTO.getPropertyMetaData();
+		
+		if(!propertyList.isEmpty()) {
+			property = propertyList.get(0);
+			throw new PropertyDetailsException("Duplicate record");
+		} else {			
+			coinLaundry = coinLaundryDAO.save(coinLaundry);
+			propertyDetails.setPropertyId(coinLaundry.getId());
+			propertyDetails.setBusinessTypeCode("b_type_7");
+			propertyDetails.setPropertyCode(null);
+			property = propertyDetailsDAO.save(propertyDetails);
+		}
+		coinLaundryDetailsDTO.setId(coinLaundry.getId());
+		coinLaundryDetailsDTO.setPropertyMetaData(property);
+		
+		return coinLaundryDetailsDTO;
+	}
+
+	@Override
+	public CoinLaundryDetailsDTO updateCoinLaundryPropertyDetail(CoinLaundryDetailsDTO coinLaundryDetailsDTO)
+			throws PropertyDetailsException {
+
+		CoinLaundry coinLaundry = new CoinLaundry();
+		coinLaundry.setId(coinLaundryDetailsDTO.getId());
+		coinLaundry.setNumberOfWashers(coinLaundryDetailsDTO.getNumberOfDryers());
+		coinLaundry.setNumberOfDryers(coinLaundryDetailsDTO.getNumberOfDryers());
+		coinLaundry.setCostOfEquip(coinLaundryDetailsDTO.getCostOfEquip());
+		coinLaundry.setFeatures(coinLaundryDetailsDTO.getFeatures());
+		coinLaundry.setRestrooms(coinLaundryDetailsDTO.getRestrooms());
+		coinLaundry.setSupplies(coinLaundryDetailsDTO.getSupplies());
+		coinLaundry.setCoinDispensers(coinLaundryDetailsDTO.getCoinDispensers());
+		coinLaundry.setSeatingCapacity(coinLaundryDetailsDTO.getSeatingCapacity());
+		coinLaundry.setTotalSqft(coinLaundryDetailsDTO.getTotalSqft());
+		coinLaundry.setCounterSpace(coinLaundryDetailsDTO.getCounterSpace());
+		coinLaundry.setCarts(coinLaundryDetailsDTO.getCarts());
+		coinLaundry.setWaterFactor(coinLaundryDetailsDTO.getWaterFactor());
+		coinLaundry.setUtilities(coinLaundryDetailsDTO.getUtilities());
+		coinLaundry.setDemographicsPopulation(coinLaundryDetailsDTO.getDemographicsPopulation());
+		coinLaundry.setMaintenanceContracts(coinLaundryDetailsDTO.getMaintenanceContracts());
+		coinLaundry.setMachinManufactures(coinLaundryDetailsDTO.getMachinManufactures());
+		coinLaundry.setMachineEfficiences(coinLaundryDetailsDTO.getMachineEfficiences());
+		coinLaundry.setMachineLifespan(coinLaundryDetailsDTO.getMachineLifespan());
+		coinLaundry.setAssociationWithOthers(coinLaundryDetailsDTO.getAssociationWithOthers());
+		
+		PropertyDetails property = null;
+		
+		PropertyDetails propertyDetails = coinLaundryDetailsDTO.getPropertyMetaData();
+					
+		coinLaundry = coinLaundryDAO.save(coinLaundry);
+		property = propertyDetailsDAO.save(propertyDetails);
+		
+		coinLaundryDetailsDTO.setPropertyMetaData(property);
+		
+		return coinLaundryDetailsDTO;
 	}
 	
 }

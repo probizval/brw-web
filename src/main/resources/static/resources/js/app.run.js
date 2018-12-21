@@ -14,10 +14,27 @@
     authService.handleAuthentication();
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams) { 
     	var requireLogin = toState.requireLogin;
-    	if(requireLogin && !localStorage.getItem('access_token')) {
+    	var decodedToken = !localStorage.getItem('access_token') || parseJwt(localStorage.getItem('access_token'));
+    	if(requireLogin && decodedToken) {
     		authService.login();
     	}   
     });
   }
+  
+  function parseJwt (token) {
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace('-', '+').replace('_', '/');
+      var isExpiredToken = false;
+      var seconds = 1000;
+      var d = new Date();
+      var t= d.getTime();
+      var decoded = JSON.parse(window.atob(base64));
+      
+      if (decoded.exp < Math.round(t / seconds)) {
+    	  // code...
+    	  isExpiredToken = true;
+    	}
+      return isExpiredToken;
+  };
 
 })();
