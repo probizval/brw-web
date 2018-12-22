@@ -1,0 +1,282 @@
+<h3 class="subheadline">Restaurants</h3>
+<div class="row form-group">
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <label>Cuisine Type</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.rest.cuisineType">
+    </div>
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <label>Description</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.rest.description">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideKitchen = ! hideKitchen">
+            <label ng-class="{'details-not-expanded': hideKitchen, 'details-expanded': !hideKitchen}" >Kitchen Details</label>
+            <img ng-show="!hideKitchen" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideKitchen" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideKitchen">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Hood Size</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.kitchenHoodSize"
+                           name="kitchenHoodSize" id="kitchenHoodSize" placeholder="Sq. Ft.">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Kitchen Size</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.kitchenSqft"
+                           name="kitchenSqft" id="kitchenSqft" placeholder="Sq. Ft.">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Dish Capacity</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.dishCapacity"
+                           name="dishCapacity" id="dishCapacity" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Ovens</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.numberOfOvens"
+                           name="numberOfOvens" id="numberOfOvens" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Cooking Range</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.numberOfCookingRange"
+                           name="numberOfCookingRange" id="numberOfCookingRange" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Exhaust Type</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.exhaustType"
+                           name="exhaustType" id="exhaustType" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Dry Storage</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.dryStorage"
+                           name="dryStorage" id="dryStorage" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Total cost of Utensils</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.totalCostUtensils"
+                           name="totalCostUtensils" id="totalCostUtensils" placeholder="">
+                </div>
+            </div>
+
+            <label>Appliances</label>
+            <div class="row form-group">
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                    <div class="checkbox checkbox-inline">
+                        <input type="checkbox" name="dishwasher" id="dishwasher" ng-model="property.rest.dishwasher"
+                               ng-checked="true">
+                        <label for="dishwasher">Dishwasher</label>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                    <div class="checkbox checkbox-inline">
+                        <input type="checkbox" name="oven" id="oven" ng-model="property.rest.oven"
+                               ng-checked="true">
+                        <label for="oven">Range/Oven</label>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                    <div class="checkbox checkbox-inline">
+                        <input type="checkbox" name="walkInFreezer" id="walkInFreezer" ng-model="property.rest.walkInFreezer"
+                               ng-checked="true">
+                        <label for="walkInFreezer">Walk in Freezer</label>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                    <div class="checkbox checkbox-inline">
+                        <input type="checkbox" name="refrigerator" id="refrigerator" ng-model="property.rest.refrigerator"
+                               ng-checked="true">
+                        <label for="refrigerator">Refrigerator</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Interior-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideInterior = ! hideInterior">
+            <label ng-class="{'details-not-expanded': hideInterior, 'details-expanded': !hideInterior}" >Interior Details</label>
+            <img ng-show="!hideInterior" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideInterior" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideInterior">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Interior Area</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.interiorSqft"
+                           name="interiorSqft" id="interiorSqft" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Indoor Seating Capacity</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.indoorSeatingCapacity"
+                           name="indoorSeatingCapacity" id="indoorSeatingCapacity" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Approx Furniture Cost</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.furnitureCost"
+                           name="furnitureCost" id="furnitureCost" placeholder="">
+                </div>
+
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Last Renovation Date</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.lastRenovationDate"
+                           name="lastRenovationDate" id="lastRenovationDate" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Waiting Area Capacity</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.waitingArea"
+                           name="waitingArea" id="waitingArea" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Interior Cost</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.interiorCost"
+                           name="interiorCost" id="interiorCost" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Interior Features</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.interiorFeatures"
+                           name="interiorFeatures" id="interiorFeatures" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Seating Arrangement</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.interiorSeatingArrangement"
+                           name="interiorSeatingArrangement" id="interiorSeatingArrangement" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Bar Type</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.barType"
+                           name="barType" id="barType" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Bar Seating Capacity</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.barSeatingCapacity"
+                           name="barSeatingCapacity" id="barSeatingCapacity" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Restrooms</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.interiorRestrooms"
+                           name="interiorRestrooms" id="interiorRestrooms" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Restroom ADA Compliant</label>
+                    <div class="radio radio-inline">
+                        <input type="radio" id="interiorRestroomsADA" ng-model="property.rest.interiorRestroomsADA" value="Yes">
+                        <label for="interiorRestroomsADA">Yes</label>
+                    </div>
+                    <div class="radio radio-inline">
+                        <input type="radio" id="noInteriorRestroomsADA" ng-model="property.rest.interiorRestroomsADA" value="No">
+                        <label for="noInteriorRestroomsADA">No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Expenses-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideExpenses = ! hideExpenses">
+            <label ng-class="{'details-not-expanded': hideExpenses, 'details-expanded': !hideExpenses}" >Expense Details</label>
+            <img ng-show="!hideExpenses" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideExpenses" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideExpenses">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Rent</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.monthlyRent"
+                           name="monthlyRent" id="monthlyRent" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>NNN</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.nnnExpense"
+                           name="nnnExpense" id="nnnExpense" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Garbage</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.garbageExpense"
+                           name="garbageExpense" id="garbageExpense" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Utilities</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.utilitiesExpense"
+                           name="utilitiesExpense" id="utilitiesExpense" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Revenue-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideRevenue = ! hideRevenue">
+            <label ng-class="{'details-not-expanded': hideRevenue, 'details-expanded': !hideRevenue}" >Revenue Details</label>
+            <img ng-show="!hideRevenue" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideRevenue" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideRevenue">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Average Revenue in Restaurant</label>
+                    <input type="text" class="form-control form-control-md" ng-mode="property.rest.avgRevenueInResto"
+                           name="avgRevenueInResto" id="avgRevenueInResto" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Average Revenue in Catering</label>
+                    <input type="text" class="form-control form-control-md" ng-mode="property.rest.avgRevenueCatering"
+                           name="avgRevenueCatering" id="avgRevenueCatering" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Average Revenue in To Go</label>
+                    <input type="text" class="form-control form-control-md" ng-mode="property.rest.avgRevenueToGo"
+                           name="avgRevenueToGo" id="avgRevenueToGo" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Average Revenue in Liquor</label>
+                    <input type="text" class="form-control form-control-md" ng-mode="property.rest.avgRevenueLiquer"
+                           name="avgRevenueLiquer" id="avgRevenueLiquer" placeholder="">
+                </div>
+
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Average Income</label>
+                    <input type="text" class="form-control form-control-md" ng-mode="property.rest.avgIncome"
+                           name="avgIncome" id="avgIncome" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Employees-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideEmployees = ! hideEmployees">
+            <label ng-class="{'details-not-expanded': hideEmployees, 'details-expanded': !hideEmployees}" >Employees Details</label>
+            <img ng-show="!hideEmployees" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideEmployees" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideEmployees">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Full Time Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-mode="property.rest.fulltime_emp"
+                           name="fulltime_emp" id="fulltime_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Part Time Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-mode="property.rest.parttiem_emp"
+                           name="parttiem_emp" id="parttiem_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Certified Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-mode="property.rest.certified_emp"
+                           name="certified_emp" id="certified_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Total Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-mode="property.rest.total_emp"
+                           name="total_emp" id="total_emp" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

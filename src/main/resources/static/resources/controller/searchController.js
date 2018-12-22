@@ -421,17 +421,18 @@
             arrDestinations = res.data.propertyList;
 						addMarker(arrDestinations);
 						showMarkers();
+            $scope.searchList = arrDestinations;
 						// console.log("res ", res.status);
 					})
 					.error(function (error) {
 						$scope.status = 'Unable to load store data: ' + error.message;
 						console.log("res ", $scope.status);
 					});
-				setTimeout(function(){
-					$scope.$apply(function(){
-						$scope.searchList = arrDestinations;
-					})
-				}, 100);
+				// setTimeout(function(){
+				// 	$scope.$apply(function(){
+         //    $scope.searchList = arrDestinations;
+         //  })
+				// }, 100);
 				// var bounds1 =  map.getBounds();
 				// var ne = bounds1.getNorthEast();
 				// var sw = bounds1.getSouthWest();
