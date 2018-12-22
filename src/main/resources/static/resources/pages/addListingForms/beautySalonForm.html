@@ -112,7 +112,19 @@
                     <input type="text" class="form-control form-control-md" model="property.beautySalon.waitingAreaCapacity"
                            name="waitingAreaCapacity" id="waitingAreaCapacity" placeholder="" >
                 </div>
+            </div>
+        </div>
+    </div>
 
+    <!--Equipment Details-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideEquipmentDetails = ! hideEquipmentDetails">
+            <label ng-class="{'details-not-expanded': hideEquipmentDetails, 'details-expanded': !hideEquipmentDetails}" >Equipment Details</label>
+            <img ng-show="!hideEquipmentDetails" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideEquipmentDetails" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideMachineDetails">
+            <div class="row">
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Number of Manicure Tables</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.manicureTables"
@@ -129,14 +141,14 @@
                            name="pedicureSpa"  id="pedicureSpa" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Pedicure Spa Chairs</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.spaChairs"
-                           name="spaChairs"  id="spaChairs" placeholder="">
-                </div>
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Portable Trolleys</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.trolleys"
                            name="trolleys"  id="trolleys" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Pedicure Spa Chairs</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.spaChairs"
+                           name="spaChairs"  id="spaChairs" placeholder="">
                 </div>
             </div>
         </div>
