@@ -2503,6 +2503,9 @@ input[type="radio"], input[type="checkbox"] {
 
 .super-group-content {
 	padding: 10px 15px 10px;
+    break-inside: avoid;
+    overflow: hidden;
+    column-count: 2;
 }
 
 .ul-style {
@@ -2516,13 +2519,12 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 .no-break-inside {
-	break-inside: avoid;
-	overflow: hidden;
-	column-count: 2;
+
 	line-height: 1;
 }
 
 .details-group-title {
+    margin-top: 5px;
 	margin-bottom: 5px;
 	color: #333;
 	font-weight: 600;

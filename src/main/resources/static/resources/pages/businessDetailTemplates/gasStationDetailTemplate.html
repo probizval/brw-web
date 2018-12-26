@@ -1,0 +1,297 @@
+<div class="business-specific-details-container">
+	<div class="super-group-title">Gas Station Features</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.brand">
+					<span class="entryItemContent">Brand:
+						<span>{{propDetails.brand}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.fuelType">
+					<span class="entryItemContent">Fuel Type:
+						<span>{{propDetails.fuelType}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.gasolineCapacity">
+					<span class="entryItemContent">Gasoline Tank Capacity:
+						<span>{{propDetails.gasolineCapacity}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.diselCapacity">
+					<span class="entryItemContent">Diesel Tank Capacity:
+						<span>{{propDetails.diselCapacity}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.typeOfService">
+					<span class="entryItemContent">Type of Service:
+						<span>{{propDetails.typeOfService}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.numberOfPumps">
+					<span class="entryItemContent">Number of Pumps:
+						<span>{{propDetails.numberOfPumps}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.timings">
+					<span class="entryItemContent">Open Hours:
+						<span>{{propDetails.timings}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.numberOfParking">
+					<span class="entryItemContent">Number of Parking:
+						<span>{{propDetails.numberOfParking}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.frannchise">
+					<span class="entryItemContent">Franchise:
+						<span>{{propDetails.frannchise}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.restroom">
+					<span class="entryItemContent">Number of Restrooms:
+						<span>{{propDetails.restroom}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.fireEquip">
+					<span class="entryItemContent">Fire Equipment:
+						<span>{{propDetails.fireEquip}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.fireCapacity">
+					<span class="entryItemContent">Fire Safety Capacity:
+						<span>{{propDetails.fireCapacity}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="business-specific-details-container" ng-if="propDetails.storeBrand">
+	<div class="super-group-title">Convenient Store/Food Court Features</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.storeBrand">
+					<span class="entryItemContent">Store Brand:
+						<span>{{propDetails.storeBrand}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.liquorStore">
+					<span class="entryItemContent">Liquor Store:
+						<span>{{propDetails.liquorStore}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.storeApproxInventoryCost">
+					<span class="entryItemContent">Store approx Inventory Cost:
+						$<span>{{propDetails.storeApproxInventoryCost}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.atm">
+					<span class="entryItemContent">ATM:
+						<span>{{propDetails.atm}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.foodCourtSeatingCapacity">
+					<span class="entryItemContent">Food Court Seating Capacity:
+						<span>{{propDetails.foodCourtSeatingCapacity}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.foodCourtCost">
+					<span class="entryItemContent">Food Court Cost:
+						$<span>{{propDetails.foodCourtCost}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="business-specific-details-container" ng-if="propDetails.carWash">
+	<div class="super-group-title">Car Wash Features</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.carWashEquipCost">
+					<span class="entryItemContent">Car wash Equipment Cost:
+						$<span>{{propDetails.carWashEquipCost}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="business-specific-details-container" ng-if="propDetails.autoSupplyRepairMaintShop">
+	<div class="super-group-title">Auto Repair & Maintenance Shop</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.autoSupplyRepairMaintShopCost">
+					<span class="entryItemContent">Approx Cost:
+						$<span>{{propDetails.autoSupplyRepairMaintShopCost}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="business-specific-details-container">
+	<div class="super-group-title">Expenses Details</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.monthlyRent">
+					<span class="entryItemContent">Monthly Rent:
+						<span>{{propDetails.monthlyRent}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.nnnExpense">
+					<span class="entryItemContent">NNN Expense:
+						<span>{{propDetails.nnnExpense}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.garbageExpense">
+					<span class="entryItemContent">Garbage Expense:
+						<span>{{propDetails.garbageExpense}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.utilitiesExpense">
+					<span class="entryItemContent">Utilities Expense:
+						<span>{{propDetails.utilitiesExpense}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="business-specific-details-container">
+	<div class="super-group-title">Surroundings Information</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.security">
+					<span class="entryItemContent">Security::
+						<span>{{propDetails.security}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.surroundingBusiness">
+					<span class="entryItemContent">Surrounding Business:
+						<span>{{propDetails.surroundingBusiness}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.residentialArea">
+					<span class="entryItemContent">Residential Area:
+						<span>{{propDetails.residentialArea}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.walkScore">
+					<span class="entryItemContent">Walk Score:
+						<span>{{propDetails.walkScore}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.crimeIndicator">
+					<span class="entryItemContent">Crime Indicator:
+						<span>{{propDetails.crimeIndicator}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="business-specific-details-container">
+	<div class="super-group-title">Miscellaneous Information</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.structureAge">
+					<span class="entryItemContent">Structure Age::
+						<span>{{propDetails.structureAge}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.truckParking">
+					<span class="entryItemContent">Truck Trailer Parking::
+						<span>{{propDetails.truckParking}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.signageSize">
+					<span class="entryItemContent">Signage Size:
+						<span>{{propDetails.signageSize}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.signageHighVisibility">
+					<span class="entryItemContent">Signage High Visibility:
+						<span>{{propDetails.signageHighVisibility}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+<!-- <div class="item-features">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="row">
+            <div class="col-md-4 col-lg-4 col-xl-4" ng-if="propDetails.lotSize">
+                <h6>Lot Size</h6>
+                <span style="text-align: center;">{{propDetails.lotSize}}</span>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <h6>Brand</h6>
+                <span style="text-align: center;">Chevron</span>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <h6>Fuel Type</h6>
+                <span style="text-align: center;">Gasoline and Diesel</span>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <h6>Number of pumps</h6>
+                <span style="text-align: center;">8</span>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <h6>Gas Tank Capacity</h6>
+                <span style="text-align: center;">25,000 Gallon</span>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <h6>Diesel Tank Capcity</h6>
+                <span style="text-align: center;">5,000 Gallon</span>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <h6>Convenience store</h6>
+                <span style="text-align: center;">Yes</span>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <h6>Store Brand</h6>
+                <span style="text-align: center;">Extramile</span>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <h6>Approx Inventory cost</h6>
+                <span style="text-align: center;">$30,000</span>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <h6>Car wash</h6>
+                <span style="text-align: center;">Yes</span>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <h6>Car wash equipment</h6>
+                <span style="text-align: center;">$10,000</span>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <h6>Restrooms</h6>
+                <span style="text-align: center;">4</span>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <h6>Timings</h6>
+                <span style="text-align: center;">24 Hours</span>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <h6>Parking</h6>
+                <span style="text-align: center;">10</span>
+            </div>
+        </div>
+    </div>
+</div>
+ -->
