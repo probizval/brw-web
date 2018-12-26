@@ -1,0 +1,142 @@
+<!--Dry Cleaners-->
+<h3 class="subheadline" >Dry Cleaners</h3>
+<div class="row form-group">
+    <!--Equipment details-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <label>Equipment details</label><br/>
+        <div class="row form-group">
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <div class="checkbox checkbox-inline">
+                    <input type="checkbox" ng-model="property.dryCleaners.dryCleaningMachine"
+                           name="dryCleaningMachine" id="dryCleaningMachine" ng-checked="true">
+                    <label for="dryCleaningMachine">Dry Cleaning</label>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <div class="checkbox checkbox-inline">
+                    <input type="checkbox" ng-model="property.dryCleaners.laundryMachine"
+                           name="laundryMachine" id="laundryMachine" ng-checked="true">
+                    <label for="laundryMachine">Laundry Machine</label>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <div class="checkbox checkbox-inline">
+                    <input type="checkbox" ng-model="property.dryCleaners.pressingMachine"
+                           name="pressingMachine" id="pressingMachine" ng-checked="true">
+                    <label for="pressingMachine">Pressing Machine</label>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <div class="checkbox checkbox-inline">
+                    <input type="checkbox" ng-model="property.dryCleaners.dryer"
+                           name="dryer" id="dryer" ng-checked="true">
+                    <label for="dryer">Dryer Machine</label>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <div class="checkbox checkbox-inline">
+                    <input type="checkbox" ng-model="property.dryCleaners.shirtMachine"
+                           name="shirtMachine" id="shirtMachine" ng-checked="true">
+                    <label for="shirtMachine">Shirt Machine</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Type Of Service-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <label>Type Of Service</label><br/>
+        <div class="row form-group">
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <div class="checkbox checkbox-inline">
+                    <input type="checkbox" ng-model="property.dryCleaners.fullService"
+                           name="fullService" id="fullService" ng-checked="true">
+                    <label for="fullService">Full Service</label>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <div class="checkbox checkbox-inline">
+                    <input type="checkbox" ng-model="property.dryCleaners.sameDayService"
+                           name="sameDayService" id="sameDayService" ng-checked="true">
+                    <label for="sameDayService">Same Day</label>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <div class="checkbox checkbox-inline">
+                    <input type="checkbox" ng-model="property.dryCleaners.pickUpDrop"
+                           name="pickUpDrop" id="pickUpDrop" ng-checked="true">
+                    <label for="pickUpDrop">Pick up/Drop</label>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <div class="checkbox checkbox-inline">
+                    <input type="checkbox" ng-model="property.dryCleaners.alteration"
+                           name="alteration" id="alteration" ng-checked="true">
+                    <label for="alteration">Alteration</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Open Hours</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.openHours">
+    </div>
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Number of Restrooms</label>
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.numberOfRestrooms">
+    </div>
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+            <label>Agency Association</label><br/>
+            <div class="radio radio-inline">
+                <input type="radio" id="agencyAssociation" ng-model="property.dryCleaners.agencyAssociation" value="Yes">
+                <label for="agencyAssociation">Yes</label>
+            </div>
+            <div class="radio radio-inline">
+                <input type="radio" id="noAgencyAssociation" ng-model="property.dryCleaners.agencyAssociation" value="No">
+                <label for="noAgencyAssociation">No</label>
+            </div>
+        </div>
+
+        <div class="form-group" ng-show="property.dryCleaners.agencyAssociation == 'Yes'">
+            <label>List Associated Agencies Name</label>
+            <textarea class="form-control form-control-md text-editor" ng-model="property.dryCleaners.agencyDesc" placeholder=""></textarea>
+        </div>
+    </div>
+
+    <!--Expenses-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideExpenses = ! hideExpenses">
+            <label ng-class="{'details-not-expanded': hideExpenses, 'details-expanded': !hideExpenses}" >Expense Details</label>
+            <img ng-show="!hideExpenses" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideExpenses" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideExpenses">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Rent</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.rent"
+                           name="rent" id="rent" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>NNN</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.nnn"
+                           name="nnn" id="nnn" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Garbage</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.garbage"
+                           name="garbage" id="garbage" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Utilities</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.utilities"
+                           name="utilities" id="utilities" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

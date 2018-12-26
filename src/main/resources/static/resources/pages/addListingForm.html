@@ -9,17 +9,17 @@
               <!--Basic Details-->
               <h3 class="subheadline">Basic Details</h3>
               <div class="form-group">
-                <label for="title">Business Title*</label>
-                <input type="text" class="form-control form-control-md" id="title" ng-model="business.businessTitle"
-                       name="businessTitle" placeholder="Business Title" autofocus required>
-                <div class="errors" ng-show="submitted || addListingForm.businessTitle.$touched">
-                    <div style="color:red" ng-show="addListingForm.businessTitle.$error.required">Business Title is required.</div>
+                <label for="propertyName">Business Title*</label>
+                <input type="text" class="form-control form-control-md" id="propertyName" ng-model="propertyMetaData.propertyName"
+                       name="propertyName" placeholder="Business Title" autofocus required>
+                <div class="errors" ng-show="submitted || addListingForm.propertyName.$touched">
+                    <div style="color:red" ng-show="addListingForm.propertyName.$error.required">Business Title is required.</div>
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-6 col-lg-6 col-xl-6">
-                  <label for="title">Set Asking Price*</label>
-                  <input type="text" class="form-control form-control-md" id="askingPrice" ng-model="business.askingPrice"
+                  <label for="askingPrice">Set Asking Price*</label>
+                  <input type="text" class="form-control form-control-md" id="askingPrice" ng-model="propertyMetaData.askingPrice"
                          name="askingPrice" placeholder="$" required>
                   <div class="errors" ng-show="submitted || addListingForm.askingPrice.$touched">
                       <div style="color:red" ng-show="addListingForm.askingPrice.$error.required">Asking Price is required.</div>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-6">
                   <label for="type">Business Type*</label>
-                  <select id="type" name="businessType" ng-model="businessType"  ng-options="type.name for type in types"
+                  <select id="type" name="businessType" ng-model="propertyMetaData.businessType"  ng-options="type.name for type in types"
                           class="form-control form-control-md" required>
                       <option default selected style="color:#868e96;" value="">-- Choose Business Type --</option>
                   </select>
@@ -35,7 +35,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="title">Business Images</label>
+                <label>Business Images</label>
                 <!--<input type="text" class="form-control form-control-md" id="img" ng-model="business.image_url" placeholder="Business Image">-->
                 <div class="add-listing-photo-container">
                   <div class="row col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -65,7 +65,7 @@
               <div class="row form-group">
                 <div class="col-md-6 col-lg-6 col-xl-6">
                     <label>Location*</label>
-                    <input type="text" class="form-control form-control-md" name="location" ng-model="business.location"
+                    <input type="text" class="form-control form-control-md" name="location" ng-model="propertyMetaData.location"
                            id="autocomplete" placeholder="Enter Business Location" required>
                     <div class="errors" ng-show="submitted || addListingForm.location.$touched">
                         <div style="color:red" ng-show="addListingForm.location.$error.required">Location is required.</div>
@@ -73,27 +73,27 @@
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-6">
                     <label>Address</label>
-                    <input type="text" class="form-control form-control-md" ng-model="business.address" id="address" placeholder="">
+                    <input type="text" class="form-control form-control-md" ng-model="propertyMetaData.propertyAddress" id="address" placeholder="">
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-6 col-lg-6 col-xl-6">
                     <label>City</label>
-                    <input type="text" class="form-control form-control-md" ng-model="business.city" placeholder="" id="locality">
+                    <input type="text" class="form-control form-control-md" ng-model="propertyMetaData.city" placeholder="" id="locality">
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-6">
                     <label>State</label>
-                    <input type="text" class="form-control form-control-md" ng-model="business.state" placeholder="" id="administrative_area_level_1">
+                    <input type="text" class="form-control form-control-md" ng-model="propertyMetaData.state" placeholder="" id="administrative_area_level_1">
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-6 col-lg-6 col-xl-6">
                     <label>Country</label>
-                    <input type="text" class="form-control form-control-md" ng-model="business.country" placeholder="" id="country">
+                    <input type="text" class="form-control form-control-md" ng-model="propertyMetaData.country" placeholder="" id="country">
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-6">
                     <label>Zipcode</label>
-                    <input type="text" class="form-control form-control-md" ng-model="business.zipcode" placeholder="" id="postal_code">
+                    <input type="text" class="form-control form-control-md" ng-model="propertyMetaData.zipCode" placeholder="" id="postal_code">
                 </div>
               </div>
 
@@ -102,12 +102,12 @@
               <h3 class="subheadline">General Business Information</h3>
               <div class="row form-group">
                 <div class="col-md-6 col-lg-6 col-xl-6">
-                    <label>Number of employees</label>
-                    <input type="text" class="form-control form-control-md" ng-model="business.numberOfEmployees" placeholder="">
+                    <label>Area Sq/ft</label>
+                    <input type="text" class="form-control form-control-md" placeholder="" ng-model="propertyMetaData.lotSize">
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-6">
                     <label>Year Established</label>
-                    <select class="form-control form-control-md" name="yearEstablished" ng-model="yearEstablished"
+                    <select class="form-control form-control-md" name="yearEstablished" ng-model="propertyMetaData.yearEstablished"
                             id="yearEstablished" ng-options="yearEstablished.year for yearEstablished in yearEstablishedList">
                       <option default selected style="color:#868e96;" value="">2018</option>
                     </select>
@@ -116,23 +116,23 @@
               <div class="row form-group">
                 <div class="col-md-6 col-lg-6 col-xl-6">
                     <label>MLS No.</label>
-                    <input type="text" class="form-control form-control-md" placeholder="" ng-model="business.mlsNumber">
+                    <input type="text" class="form-control form-control-md" placeholder="" ng-model="propertyMetaData.mlsNumber">
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-6">
                     <label>Business Website</label>
-                    <input type="text" class="form-control form-control-md" placeholder="https://" ng-model="business.businessWebsite">
+                    <input type="text" class="form-control form-control-md" placeholder="https://" ng-model="propertyMetaData.businessWebsite">
                 </div>
               </div>
-              <div class="row form-group">
-                <div class="col-md-6 col-lg-6 col-xl-6">
-                    <label>Area Sq/ft</label>
-                    <input type="text" class="form-control form-control-md" placeholder="" ng-model="business.sqFt">
-                </div>
-                <div class="col-md-6 col-lg-6 col-xl-6">
-                    <label>Number of Parking</label>
-                    <input type="text" class="form-control form-control-md" placeholder="" ng-model="business.numberOfParking">
-                </div>
-              </div>
+              <!--<div class="row form-group">-->
+                <!--<div class="col-md-6 col-lg-6 col-xl-6">-->
+                    <!--<label>Number of employees</label>-->
+                    <!--<input type="text" class="form-control form-control-md" ng-model="business.numberOfEmployees" placeholder="">-->
+                <!--</div>-->
+                <!--<div class="col-md-6 col-lg-6 col-xl-6">-->
+                    <!--<label>Number of Parking</label>-->
+                    <!--<input type="text" class="form-control form-control-md" placeholder="" ng-model="business.numberOfParking">-->
+                <!--</div>-->
+              <!--</div>-->
               <!--<div class="form-group">-->
                 <!--<label>For Sell/Lease?</label>-->
                 <!--<div>-->
@@ -150,38 +150,37 @@
                 <div class="col-md-6 col-lg-6 col-xl-6">
                   <label>Business Premise Ownership?</label><br/>
                   <div class="radio radio-inline">
-                    <input type="radio" name="type" id="businessPremiseLeased" ng-model="business.businessPremise" value="Leased">
+                    <input type="radio" name="type" id="businessPremiseLeased" ng-model="propertyMetaData.businessPremise" value="Leased">
                     <label for="businessPremiseLeased">Leased</label>
                   </div>
                   <div class="radio radio-inline">
-                    <input type="radio" name="type" id="businessPremiseOwned" ng-model="business.businessPremise" value="Owned">
+                    <input type="radio" name="type" id="businessPremiseOwned" ng-model="propertyMetaData.businessPremise" value="Owned">
                     <label for="businessPremiseOwned">Owned</label>
                   </div>
                 </div>
-                <div class="col-md-6 col-lg-6 col-xl-6" ng-show="business.businessPremise == 'Leased'">
+                <div class="col-md-6 col-lg-6 col-xl-6" ng-show="propertyMetaData.businessPremise == 'Leased'">
                   <label>Lease Terms and Details</label>
-                  <textarea class="form-control form-control-sm text-editor" ng-model="business.leaseTerms" placeholder=""></textarea>
+                  <textarea class="form-control form-control-sm text-editor" ng-model="propertyMetaData.leaseTerms" placeholder=""></textarea>
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-6 col-lg-6 col-xl-6">
                   <label>Business Description</label>
-                  <textarea class="form-control form-control-md text-editor" ng-model="business.businessDescription" placeholder=""></textarea>
+                  <textarea class="form-control form-control-md text-editor" ng-model="propertyMetaData.businessDescription" placeholder=""></textarea>
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-6">
                   <label>Reason for Sell</label>
-                  <textarea class="form-control form-control-md text-editor" ng-model="business.reasonForSell" placeholder=""></textarea>
+                  <textarea class="form-control form-control-md text-editor" ng-model="propertyMetaData.reasonForSell" placeholder=""></textarea>
                 </div>
               </div>
 
               <!--Business Specific Attributes-->
-              <!--Restaurant-->
-              <div ng-if="businessType.name === 'Restaurants and Food'" ng-include="'resources/pages/restaurantForm.html'"></div>
-              <div ng-if="businessType.name === 'Gas Station'" ng-include="'resources/pages/gasStationForm.html'"></div>
-              <div ng-if="businessType.name === 'Laundry'" ng-include="'resources/pages/coinLaundryForm.html'"></div>
-              <div ng-if="businessType.name === 'Dry Cleaners'" ng-include="'resources/pages/dryCleanersForm.html'"></div>
-              <div ng-if="businessType.name === 'Liquor Store'" ng-include="'resources/pages/liquorStoreForm.html'"></div>
-              <div ng-if="businessType.name === 'Beauty Salon/Spa/Nail'" ng-include="'resources/pages/beautySalonForm.html'"></div>
+              <div ng-if="propertyMetaData.businessType.name === 'Restaurants and Food'" ng-include="'resources/pages/addListingForms/restaurantForm.html'"></div>
+              <div ng-if="propertyMetaData.businessType.name === 'Gas Station'" ng-include="'resources/pages/addListingForms/gasStationForm.html'"></div>
+              <div ng-if="propertyMetaData.businessType.name === 'Laundry'" ng-include="'resources/pages/addListingForms/coinLaundryForm.html'"></div>
+              <div ng-if="propertyMetaData.businessType.name === 'Dry Cleaners'" ng-include="'resources/pages/addListingForms/dryCleanersForm.html'"></div>
+              <div ng-if="propertyMetaData.businessType.name === 'Liquor Store'" ng-include="'resources/pages/addListingForms/liquorStoreForm.html'"></div>
+              <div ng-if="propertyMetaData.businessType.name === 'Beauty Salon/Spa/Nail'" ng-include="'resources/pages/addListingForms/beautySalonForm.html'"></div>
               <!--<div ng-if="business.type.name === 'Bar'" ng-include="'resources/pages/BarForm.html'"></div>-->
 
               <!-- <div class="form-group">
@@ -240,7 +239,7 @@
               <div class="row form-group">
                 <div class="col-md-6 col-lg-6 col-xl-6">
                   <label>Phone Number*</label>
-                  <input type="text" class="form-control form-control-md" name="phoneNumber" ng-model="contact.phoneNumber"
+                  <input type="text" class="form-control form-control-md" name="phoneNumber" ng-model="propertyMetaData.phoneNumber"
                          id="phoneNumber" placeholder="" ng-pattern="/^(\d{10})$/" required>
                   <div class="errors" ng-show="submitted || addListingForm.phoneNumber.$touched">
                     <div style="color:red" ng-show="addListingForm.phoneNumber.$error.required">Phone Number is required.</div>
@@ -249,7 +248,7 @@
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-6">
                   <label>Email Address*</label>
-                  <input type="email" class="form-control form-control-md" name="emailAddress" ng-model="contact.emailAddress"
+                  <input type="email" class="form-control form-control-md" name="emailAddress" ng-model="propertyMetaData.emailAddress"
                          id="emailAddress" placeholder="" required>
                   <div class="errors" ng-show="submitted || addListingForm.emailAddress.$touched">
                     <div style="color:red" ng-show="addListingForm.emailAddress.$error.required">E-mail is required.</div>

@@ -53,120 +53,44 @@
                     </div>
                   </div>
                 </div>
-            <div>
-                <div ng-if="imageArray.length === 0">
-                  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                    <a href="img1" itemprop="contentUrl" data-size="2000x1414">
-                      <img src="{{propDetails.propertyMetaData.imageUrl}}" class="img-fluid swiper-lazy" style="height:450px; width:610px;" alt="Drawing Room">
-                    </a>
-                  </figure>
-                </div>
-
-                <!--<ul class="item-features">-->
-                  <!--<li><span>{{propDetails.lot_size}}</span> sq ft </li>-->
-                  <!--<li><span>3</span> Rooms </li>-->
-                  <!--<li><span>1</span> Bedrooms </li>-->
-                  <!--<li><span>2</span> Bathrooms </li>-->
-                <!--</ul>-->
-                <h3 class="headline">Business Details</h3>
-                <div class="item-features">
-                  <div class="col-md-12 col-lg-12 col-xl-12">
-                    <div class="row">
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Lot Size</h6>
-                        <span style="text-align: center;">{{propDetails.lotSize}}</span>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Brand</h6>
-                        <span style="text-align: center;">Chevron</span>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Fuel Type</h6>
-                        <span style="text-align: center;">Gasoline and Diesel</span>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Number of pumps</h6>
-                        <span style="text-align: center;">8</span>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Gas Tank Capacity</h6>
-                        <span style="text-align: center;">25,000 Gallon</span>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Diesel Tank Capcity</h6>
-                        <span style="text-align: center;">5,000 Gallon</span>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Convenience store</h6>
-                        <span style="text-align: center;">Yes</span>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Store Brand</h6>
-                        <span style="text-align: center;">Extramile</span>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Approx Inventory cost</h6>
-                        <span style="text-align: center;">$30,000</span>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Car wash</h6>
-                        <span style="text-align: center;">Yes</span>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Car wash equipment</h6>
-                        <span style="text-align: center;">$10,000</span>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Restrooms</h6>
-                        <span style="text-align: center;">4</span>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Timings</h6>
-                        <span style="text-align: center;">24 Hours</span>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-xl-4">
-                        <h6>Parking</h6>
-                        <span style="text-align: center;">10</span>
-                      </div>
-                    </div>
+                <div>
+                  <div ng-if="imageArray.length === 0">
+                    <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                      <a href="img1" itemprop="contentUrl" data-size="2000x1414">
+                        <img src="{{propDetails.propertyMetaData.imageUrl}}" class="img-fluid swiper-lazy" style="height:450px; width:610px;" alt="Drawing Room">
+                      </a>
+                    </figure>
                   </div>
-
+                <!--<div class="item-description" ng-if="propDetails.description">-->                  
+				<div class="item-description">
+                    <h3 class="headline">Business description</h3>
+                      <p>{{propertyDetails.description}}</p>
+                    <p>
+                        Well established, profitable Chevron branded gas station and C-Store in Alameda County in the Fremont City, Central California. Located on a busy Highway that serves not only local patrons but travelers and the working population as well. Not only is it successful as it is, it has a tremendous upside.
+                    </p>
+                    <p>
+                        The Convenience Store is setup to have a Deli in it and has room to expand. It has a drive through car wash and two large propane tanks. There are three tanks with a total volume of 30,000 gallons, four MPD’s with 12 gas nozzles and 2 diesel nozzles. Offering includes the business and real estate.
+                    </p>
+                  </div>
+                  <h3 class="headline">Business Features</h3>				        
+				  <div class="item-features" ng-if="businessCommonFeatures">
+					<div class="row">
+			        	<div class="col-md-4 col-lg-4 col-xl-4" ng-repeat="feature in businessCommonFeatures track by feature.id">
+				        	<div ng-if="feature.model">
+				                <h6>{{feature.label}}</h6>
+				                <span style="text-align: center;">{{feature.model}}</span>
+				            </div>
+			        	</div>
+				    </div>
+				  </div>
+                  <h3 class="headline">Business Details</h3>
+                  <div ng-if="propDetails.propertyMetaData.businessType === 'Restaurants and Food'" ng-include="'resources/pages/businessDetailTemplates/restaurantDetailTemplate.html'"></div>
+                  <div ng-if="propDetails.propertyMetaData.businessType === 'Gas Station'" ng-include="'resources/pages/businessDetailTemplates/gasStationDetailTemplate.html'"></div>
+                  <!--<div ng-if="propDetails.propertyMetaData.businessType === 'Laundry'" ng-include="'resources/pages/businessDetailTemplates/coinLaundryDetailTemplate.html'"></div>-->
+                  <!--<div ng-if="propDetails.propertyMetaData.businessType === 'Dry Cleaners'" ng-include="'resources/pages/businessDetailTemplates/dryCleanersDetailTemplate.html'"></div>-->
+                  <!--<div ng-if="propDetails.propertyMetaData.businessType === 'Liquor Store'" ng-include="'resources/pages/businessDetailTemplates/liquorStoreDetailTemplate.html'"></div>-->
+                  <!--<div ng-if="propDetails.propertyMetaData.businessType === 'Beauty Salon/Spa/Nail'" ng-include="'resources/pages/businessDetailTemplates/beautySalonDetailTemplate.html'"></div>-->
                 </div>
-                <div class="item-description">
-                  <h3 class="headline">Business description</h3>
-                  <p>
-                    Well established, profitable Chevron branded gas station and C-Store in Alameda County in the Fremont City, Central California. Located on a busy Highway that serves not only local patrons but travelers and the working population as well. Not only is it successful as it is, it has a tremendous upside.
-                  </p>
-                  <p>
-                    The Convenience Store is setup to have a Deli in it and has room to expand. It has a drive through car wash and two large propane tanks. There are three tanks with a total volume of 30,000 gallons, four MPD’s with 12 gas nozzles and 2 diesel nozzles. Offering includes the business and real estate.
-                  </p>
-                  <!--<p><strong>Hall</strong> <strong>entrance</strong> UPVC double glazed door to the front, laminate flooring, storage cupboard, loft access and under floor heating.</p>-->
-                  <!--<p><strong>Lounge/diner/kitchen</strong> <strong>24' 6" x 16' 0" (7.47m x 4.88m)</strong> Spacious L shape open plan living, UPVC double glazed window and bi-folding doors to the rear, laminate flooring, television and telephone connection points, power sockets and under floor heating.</p>-->
-                  <!--<p>Fitted kitchen with wall and base cupboards, integrated Bosch electric hob and oven, cooker hood, lamona inset sink and drainer, mosaic style splash back tiling, integrated Bosch washing machine and dishwasher, integrated Bosch fridge freezer and power sockets.</p>-->
-                  <!--<p><strong>Bedroom</strong> <strong>one</strong> <strong>10' 08" x 10' 04" (3.25m x 3.15m)</strong> UPVC double glazed window to the front, television connection point, power sockets and under floor heating.</p>-->
-                  <!--<p><strong>Bedroom</strong> <strong>two</strong> <strong>9' 05" x 9' 0" (2.87m x 2.74m)</strong> UPVC double glazed window to the front, television connection point, power sockets and under floor heating.</p>-->
-                  <!--<p><strong>Bathroom</strong> <strong>8' 08" x 6' 08" (2.64m x 2.03m)</strong> UPVC double glazed window to the side, tiled flooring, L shaped bath with fitted shower over head, wash hand basin, WC, extractor fan, tiled surrounds and under floor heating.</p>-->
-                  <!--<p><strong>Outside</strong> <strong>areas</strong> Front - large driveway with space for multiple vehicles.</p>-->
-                  <!--<p>Rear - Large fully enclosed garden laid to lawn with patio around the property and side access.</p>-->
-                </div>
-                <h3 class="headline">Other Business Details</h3>
-                <ul class="checked_list feature-list">
-                  <li><strong>Structure Age:</strong> 10 Years</li>
-                  <li><strong>Truck Trailer Parking:</strong> Yes </li>
-                  <li><strong>Auto Repair & Maintenance Shop:</strong> Yes</li>
-                  <li><strong>ATM:</strong> Yes</li>
-                  <!--<li><strong>Sewer:</strong> Public/City</li>-->
-                  <!--<li><strong>Water:</strong> City</li>-->
-                </ul>
-                <!--<h3 class="headline">Business Features</h3>-->
-                <!--<ul class="checked_list feature-list">-->
-                  <!--<li>Alarm</li>-->
-                  <!--<li>Gym</li>-->
-                  <!--<li>Internet</li>-->
-                  <!--<li>Swimming Pool</li>-->
-                  <!--<li>Window Covering</li>-->
-                <!--</ul>-->
-              </div>
             </div>
           </div>
           <div class="col-md-5 col-lg-5">

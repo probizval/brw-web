@@ -31,137 +31,49 @@
           {id: 15, year: 1930}
         ];
 
-        $scope.kitchenInputList = [
-          {id:1, label: "Hood Size", model: "business.kitchen.hoodSize", placeholder: "Sq. Ft.", tooltip: "Hood Size"},
-          {id:2, label: "Kitchen Size", model: "business.kitchen.kitchenSize", placeholder: "", tooltip: ""},
-          {id:3, label:"Dish Capacity", model:"business.kitchen.dishCapacity", placeholder:"", tooltip: ""},
-          {id:4, label:"Number of Ovens", model:"business.kitchen.numberOfOvens", placeholder:"", tooltip: ""},
-          {id:5, label:"Number of Cooking Range", model:"business.kitchen.numberOfCookingRange", placeholder:"", tooltip: ""},
-          {id:6, label:"Exhaust Type", model:"business.kitchen.exhaustType", placeholder:"", tooltip: ""},
-          {id:7, label:"Dry Storage", model:"business.kitchen.dryStorage", placeholder:"Sq. Ft.", tooltip: ""}
-        ];
+      // $scope.property = {
+      //           "propertyTitle": "",
+      //           "image_url": "",
+      //           "display_phone": 0,
+      //           "propertyDescription": "",
+      //           "bedrooms": "",
+      //           "bathrooms": "",
+      //           "price": 0,
+      //           "address": "",
+      //           "city": "",
+      //           "state": "",
+      //           "country": "",
+      //           "zipcode": 0,
+      //           "lat": 0,
+      //           "lng": 0,
+      //           "userName": "",
+      //           "rentSale": "Buy",
+      //           "sqFt": 0,
+      //           "pricePerSqFt": 0,
+      //           "mlsNumber": 0,
+      //           "type": "",
+      //           "rest": {
+      //               "cuisineType": "Indo",
+      //               "desc": "Indo Restaurant"
+      //           },
+      //           "gas": {
+      //               "brand": "Shell",
+      //               "fuelType": ""
+      //           },
+      //           "uploaded_image_aws_urls": []
+      //   };
 
-        $scope.kitchenAppliancesList = [
-          {id:1, label: "Dishwasher", model: "business.Kitchen.Dishwasher", placeholder: "", checked: "true"},
-          {id:2, label: "Range/Oven", model: "business.Kitchen.rangeOven", placeholder: "", checked: "true"},
-          {id:3, label: "Walk in Freezer", model: "business.Kitchen.walkInFreezer", placeholder: "", checked: "true"},
-          {id:4, label: "Refrigerator", model: "business.Kitchen.refrigerator", placeholder: "", checked: "true"}
-        ];
-
-        $scope.interiorInputList = [
-          {id:1, label: "Interior Area", model: "business.interior.interiorArea", placeholder: "Sq. Ft.", tooltip: "Interior Area"},
-          {id:2, label: "Seating Capacity", model: "business.interior.seatingCapacity", placeholder: "", tooltip: ""},
-          {id:3, label: "Approx Furniture cost", model: "business.interior.furnitureCost", placeholder: "", tooltip: ""},
-          {id:4, label:"Number of Restroom", model:"business.interior.numberOfRestroom", placeholder:"", tooltip: ""},
-          {id:5, label:"Last Renovated Date", model:'business.interior.lastRenovatedDate', placeholder:"", tooltip: ""},
-          {id:6, label:"Waiting Area Capacity", model:'business.interior.waitingAreaCapacity', placeholder:"", tooltip: ""}
-        ];
-
-        $scope.expensesList = [
-          {id:1, label:"Rent", model:"business.expenses.rent", placeholder:"$", tooltip:""},
-          {id:2, label:"NNN", model:"business.expenses.nnn", placeholder:"$", tooltip:""},
-          {id:3, label:"Garbage", model:"business.expenses.garbage", placeholder:"$", tooltip:""},
-          {id:4, label:"Utilities", model:"business.expenses.utilities", placeholder:"$", tooltip:""},
-        ];
-
-        $scope.revenuePerMonthList = [
-          {id:1, label:"In Restaurant", model:"business.revenue.restaurant", placeholder:"$", tooltip:""},
-          {id:2, label:"To Go", model:"business.revenue.toGo", placeholder:"$", tooltip:""},
-          {id:3, label:"Catering", model:"business.revenue.catering", placeholder:"$", tooltip:""}
-        ];
-
-        $scope.employeesList = [
-          {id:1, label:"Number of Full Time Employees", model:"business.employee.fullTimeEmployees", placeholder:"", tooltip:""},
-          {id:2, label:"Number of Part Time Employees", model:"business.employee.partTimeEmployees", placeholder:"", tooltip:""},
-          {id:3, label:"Number of Certified Employees", model:"business.employee.certifiedEmployees", placeholder:"", tooltip:""}
-        ];
-
-        $scope.laundryMachineDetailsList = [
-          {id:1, label:"Maintenance Contract", model:"business.laundry.maintenanceContract", placeholder:"", tooltip:""},
-          {id:2, label:"Machine Manufacturers", model:"business.laundry.machineManufacturers", placeholder:"", tooltip:""},
-          {id:3, label:"Machine Efficiencies", model:"business.laundry.machineEfficiencies", placeholder:"", tooltip:""},
-          {id:4, label:"Machine Lifespan", model:"business.laundry.machineLifeSpan", placeholder:"", tooltip:""}
-        ];
-
-      $scope.dryCleanersEquipmentsList = [
-        {id:1, label: "Dry Cleaning", model: "business.dryCleaners.dryCleaningMachine", placeholder: "", checked: "true"},
-        {id:2, label: "Laundry Machine", model: "business.dryCleaners.laundryMachine", placeholder: "", checked: "true"},
-        {id:3, label: "Pressing Machine", model: "business.dryCleaners.pressingMachine", placeholder: "", checked: "true"},
-        {id:4, label: "Dryer Machine", model: "business.dryCleaners.dryer", placeholder: "", checked: "true"},
-        {id:4, label: "Shirt Machine", model: "business.dryCleaners.shirtMachine", placeholder: "", checked: "true"}
-      ];
-
-      $scope.dryCleanersTypeOfServiceList = [
-        {id:1, label: "Full Service", model: "business.dryCleaners.fullService", placeholder: "", checked: "true"},
-        {id:2, label: "Same Day", model: "business.dryCleaners.sameDayService", placeholder: "", checked: "true"},
-        {id:3, label: "Pick up/Drop", model: "business.dryCleaners.pickUpDrop", placeholder: "", checked: "true"},
-        {id:4, label: "Alteration", model: "business.dryCleaners.alteration", placeholder: "", checked: "true"},
-      ];
-
-      $scope.liquorStoreInteriorInputList = [
-        {id:1, label: "Number of Cabinets", model: "business.liquorStoreInterior.numberOfCabinets", placeholder: "", tooltip: "Interior Area"},
-        {id:2, label: "Number of vending Machines", model: "business.liquorStoreInterior.numberOfVendingMachines", placeholder: "", tooltip: ""},
-      ];
-
-      $scope.beautySalonServiceList = [
-        {id:1, label: "Nail Care", model: "business.beautySalon.nailCare", placeholder: "", checked: "true"},
-        {id:2, label: "Skin Care", model: "business.beautySalon.skinCare", placeholder: "", checked: "true"},
-        {id:3, label: "Lash Extension", model: "business.beautySalon.lashExtension", placeholder: "", checked: "true"},
-        {id:4, label: "Massage", model: "business.beautySalon.massage", placeholder: "", checked: "true"},
-        {id:4, label: "Body Treatments", model: "business.beautySalon.bodyTreatments", placeholder: "", checked: "true"},
-      ];
-      $scope.beautySalonEquipmentsList = [
-        {id:1, label: "Number of Manicure Tables", model: "business.beautySalon.manicureTables", placeholder: ""},
-        {id:2, label: "Number of Nail Dryers", model: "business.beautySalon.nailDryers", placeholder: ""},
-        {id:3, label: "Number of Portable Pedicure Spa", model: "business.beautySalon.pedicureSpa", placeholder: ""},
-        {id:4, label: "Pedicure Spa Chairs", model: "business.beautySalon.spaChairs", placeholder: ""},
-        {id:4, label: "Portable Trolleys", model: "business.beautySalon.trolleys", placeholder: ""}
-      ];
-
-      $scope.property = {
-                "propertyTitle": "",
-                "image_url": "",
-                "display_phone": 0,
-                "propertyDescription": "",
-                "bedrooms": "",
-                "bathrooms": "",
-                "price": 0,
-                "address": "",
-                "city": "",
-                "state": "",
-                "country": "",
-                "zipcode": 0,
-                "lat": 0,
-                "lng": 0,
-                "userName": "",
-                "rentSale": "Buy",
-                "sqFt": 0,
-                "pricePerSqFt": 0,
-                "mlsNumber": 0,
-                "type": "",
-                "rest": {
-                    "cuisineType": "Indo",
-                    "desc": "Indo Restaurant"
-                },
-                "gas": {
-                    "brand": "Shell",
-                    "fuelType": ""
-                },
-                "uploaded_image_aws_urls": []
+        $scope.propertyMetaData = {};
+        $scope.propertyImages = [];
+        $scope.property = {
+          'res':          {},
+          'gas':          {},
+          'beautySalon':  {},
+          'laundry':      {},
+          'dryCleaners':  {},
+          'liquorStore':  {}
         };
         
-        
-        
-        $scope.bedrooms = [
-                         {numberofbeds:'0'},
-                         {numberofbeds:'1'},
-                         {numberofbeds:'2'}
-                       ];
-        $scope.bathrooms = [
-                         {numberofbathrooms:'0'},
-                         {numberofbathrooms:'1'},
-                         {numberofbathrooms:'2'}
-                       ];
         $scope.types = [
                          {name:'Restaurants and Food', code:'b_type_1'},
                          {name:'Gas Station', code:'b_type_2'},
@@ -173,9 +85,7 @@
                          {name:'Cafe', code:'b_type_8'},
                          {name:'Dry Cleaners', code:'b_type_9'}
         ];
-        $scope.property.type = $scope.types[0];
-
-        
+        // $scope.property.type = $scope.types[0];
         
         $scope.saveBusiness = function(addListingForm) {
             if (addListingForm.$invalid) {
@@ -189,19 +99,28 @@
                 return false
               }
             }
-            $scope.property.lng = document.getElementById("lng").value;
-            $scope.property.lat = document.getElementById("lat").value;
-            $scope.property.city = document.getElementById("locality").value;
-            $scope.property.zipcode = document.getElementById("postal_code").value;
-            $scope.property.state = document.getElementById("administrative_area_level_1").value;
-            $scope.property.country = document.getElementById("country").value;
-            $scope.property.address = document.getElementById("address").value;
-            $scope.property.userName = localStorage.getItem('userName');
-            $scope.uploadPhotoOnAWS();
 
-            console.log($scope.property);
-            $scope.property.userProfile = JSON.parse(localStorage.getItem('userprofile'));
-            propertyService.savePropertyDetails($scope.property)
+
+            $scope.uploadPhotoOnAWS();
+            $scope.propertyMetaData.longitude = document.getElementById("lng").value;
+            $scope.propertyMetaData.latitude = document.getElementById("lat").value;
+            $scope.propertyMetaData.city = document.getElementById("locality").value;
+            $scope.propertyMetaData.zipCode = document.getElementById("postal_code").value;
+            $scope.propertyMetaData.state = document.getElementById("administrative_area_level_1").value;
+            $scope.propertyMetaData.country = document.getElementById("country").value;
+            $scope.propertyMetaData.propertyAdderess = document.getElementById("address").value;
+            $scope.propertyMetaData.businessType = document.getElementById("type").value;
+            $scope.propertyMetaData.imageUrl = "https://s3-us-west-1.amazonaws.com/proswift/2.jpg";
+            var typeOfBusiness = "gasstation";
+            $scope.business = angular.extend($scope.property.res, $scope.property.gas, $scope.property.beautySalon,
+              $scope.property.laundry, $scope.property.dryCleaners, $scope.property.liquorStore);
+            $scope.business.propertyImages = $scope.propertyImages;
+            $scope.business.propertyMeta = $scope.propertyMetaData;
+
+            console.log($scope.propertyImages, $scope.propertyMetaData, $scope.business);
+            // $scope.property.userProfile = JSON.parse(localStorage.getItem('userprofile'));
+//            businessFactory.setData($scope.property);
+            propertyService.savePropertyDetails(typeOfBusiness, $scope.business)
             .success(function(res) {
                  console.log("res "+ res);
                  console.log("res "+ res.status);
@@ -354,7 +273,7 @@
             if (data) {
               //displays the image location on amazon s3 bucket
               console.log(data.Location);
-              $scope.property.uploaded_image_aws_urls.push(data.Location);
+              $scope.propertyImages.push(data.Location);
             }
           });
           // bucket.putObject(params, function(err, data) {
