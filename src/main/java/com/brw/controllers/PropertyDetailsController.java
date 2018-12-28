@@ -23,10 +23,12 @@ import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
 import com.brw.dao.PropertyDetailsDAO;
 import com.brw.dto.GasStationDetailsDTO;
+import com.brw.dto.LiquorStoreDTO;
 import com.brw.dto.PropertyDetailsDTO;
 import com.brw.dto.PropertyListDTO;
 import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDetailsDTO;
+import com.brw.dto.SalonStoreDTO;
 import com.brw.exceptions.PropertyDetailsException;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
@@ -124,6 +126,22 @@ public class PropertyDetailsController implements ErrorController {
 				return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
 			}
 			return ApiResponse.withData(coinLaundryDetailsDTO);
+		} else if (propertyMetaDataDTO.getPropertyMetaData().getBusinessType().equalsIgnoreCase("Liquor Store")) {
+			LiquorStoreDTO  liquorStoreDTO = null;
+			try {
+				liquorStoreDTO = propertyDetailsService.getLiquerStorePropertyDetails(id);
+			} catch (PropertyDetailsException e) {
+				return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+			}
+			return ApiResponse.withData(liquorStoreDTO);
+		} else if (propertyMetaDataDTO.getPropertyMetaData().getBusinessType().equalsIgnoreCase("Beauty Salon/Spa/Nail")) {
+			SalonStoreDTO  salonStoreDTO = null;
+			try {
+				salonStoreDTO = propertyDetailsService.getSalonStorePropertyDetails(id);
+			} catch (PropertyDetailsException e) {
+				return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+			}
+			return ApiResponse.withData(salonStoreDTO);
 		} else {
 			return ApiResponse.withData(propertyMetaDataDTO);
 		}
@@ -199,6 +217,54 @@ public class PropertyDetailsController implements ErrorController {
 		try {
 			CoinLaundryDetailsDTO restDTO = propertyDetailsService.updateCoinLaundryPropertyDetail(coinLaundryDetailsDTO);
 			return ApiResponse.withData(restDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PostMapping(value = "property/liquorstore")
+	public ApiResponse<?> createLiquorStoreProperty(@RequestBody LiquorStoreDTO liquorStoreDTO) {
+		try {
+			LiquorStoreDTO liquorDTO = propertyDetailsService.saveLiquerStorePropertyDetail(liquorStoreDTO);
+			return ApiResponse.withData(liquorDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PutMapping(value = "property/liquorstore")
+	public ApiResponse<?> updateLiquorStoreProperty(@RequestBody LiquorStoreDTO liquorStoreDTO) {
+		try {
+			LiquorStoreDTO liquorDTO = propertyDetailsService.updateLiquerStorePropertyDetail(liquorStoreDTO);
+			return ApiResponse.withData(liquorDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PostMapping(value = "property/salonstore")
+	public ApiResponse<?> createSalonStoreProperty(@RequestBody SalonStoreDTO salonStoreDTO) {
+		try {
+			SalonStoreDTO salonDTO = propertyDetailsService.saveSalonStorePropertyDetail(salonStoreDTO);
+			return ApiResponse.withData(salonDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PutMapping(value = "property/salonstore")
+	public ApiResponse<?> updateSalonStoreProperty(@RequestBody SalonStoreDTO salonStoreDTO) {
+		try {
+			SalonStoreDTO salonDTO = propertyDetailsService.updateSalonStorePropertyDetail(salonStoreDTO);
+			return ApiResponse.withData(salonDTO);
 		} catch (InternalServerError e) {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
 		} catch (PropertyDetailsException e) {

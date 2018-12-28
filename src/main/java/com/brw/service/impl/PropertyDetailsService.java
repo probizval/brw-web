@@ -12,23 +12,29 @@ import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
 import com.brw.dao.CoinLaundryDAO;
 import com.brw.dao.GasStationDAO;
+import com.brw.dao.LiquorStoreDAO;
 import com.brw.dao.PropertyDetailsDAO;
 import com.brw.dao.PropertyImagesDAO;
 import com.brw.dao.RestaurentDAO;
+import com.brw.dao.SalonStoreDAO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.dto.GasStationDetailsDTO;
+import com.brw.dto.LiquorStoreDTO;
 import com.brw.dto.PropertyDetailsDTO;
 import com.brw.dto.PropertyImagesDTO;
 import com.brw.dto.PropertyListDTO;
 import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDTO;
 import com.brw.dto.RestaurantDetailsDTO;
+import com.brw.dto.SalonStoreDTO;
 import com.brw.entities.CoinLaundry;
 import com.brw.entities.GasStation;
+import com.brw.entities.LiquorStore;
 import com.brw.entities.PropertyDetails;
 import com.brw.entities.PropertyImages;
 import com.brw.entities.Restaurant;
+import com.brw.entities.SalonStore;
 import com.brw.exceptions.PropertyDetailsException;
 
 @Component
@@ -48,6 +54,12 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	
 	@Autowired
 	private CoinLaundryDAO coinLaundryDAO;
+	
+	@Autowired
+	private LiquorStoreDAO liquorStoreDAO;
+	
+	@Autowired
+	private SalonStoreDAO salonStoreDAO;
 	
 	@Override
 	public PropertyListDTO getAllPropertyList(FilterDTO filter) {
@@ -642,6 +654,293 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		coinLaundryDetailsDTO.setPropertyMetaData(property);
 		
 		return coinLaundryDetailsDTO;
+	}
+	
+	@Override
+	public LiquorStoreDTO getLiquerStorePropertyDetails(int id) throws PropertyDetailsException {
+		// TODO Auto-generated method stub
+				PropertyDetails propertyDetails = propertyDetailsDAO.findById(id).get();		
+				if( String.valueOf(propertyDetails.getPropertyId()) == null) {
+					throw new PropertyDetailsException("Record not found");
+				}
+				
+				LiquorStore liquorStore = liquorStoreDAO.findById(propertyDetails.getPropertyId()).get();
+				
+				LiquorStoreDTO liquorStoreDTO = new LiquorStoreDTO();
+				
+				liquorStoreDTO.setId(liquorStore.getId());
+				liquorStoreDTO.setApprInventoryCost(liquorStore.getApprInventoryCost());
+				liquorStoreDTO.setAtmMachine(liquorStore.getAtmMachine());
+				liquorStoreDTO.setStorageSqft(liquorStore.getStorageSqft());
+				liquorStoreDTO.setDrinksCabinets(liquorStore.getDrinksCabinets());
+				liquorStoreDTO.setVendingMachine(liquorStore.getVendingMachine());
+				liquorStoreDTO.setGoodsCabinets(liquorStore.getGoodsCabinets());
+				liquorStoreDTO.setResidentialArea(liquorStore.getResidentialArea());
+				liquorStoreDTO.setDemographicLink(liquorStore.getDemographicLink());
+				liquorStoreDTO.setWalkscore(liquorStore.getWalkscore());
+				liquorStoreDTO.setAvgAge(liquorStore.getAvgAge());
+				liquorStoreDTO.setAvgIncome(liquorStore.getAvgIncome());
+				liquorStoreDTO.setCrimeIndcator(liquorStore.getCrimeIndcator());
+				liquorStoreDTO.setAssociatedBusiness(liquorStore.getAssociatedBusiness());
+				liquorStoreDTO.setConvenienceStore(liquorStore.getConvenienceStore());
+				liquorStoreDTO.setFreshGoodsMarket(liquorStore.getFreshGoodsMarket());
+				liquorStoreDTO.setAnchorBusiness(liquorStore.getAnchorBusiness());
+				liquorStoreDTO.setShoppingComplexTrafficScore(liquorStore.getShoppingComplexTrafficScore());
+				
+				liquorStoreDTO.setPropertyMetaData(propertyDetails);
+				
+				
+				List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
+				liquorStoreDTO.setPropertyImages(propertyImages);
+				
+				return liquorStoreDTO;
+	}
+
+	@Override
+	public LiquorStoreDTO saveLiquerStorePropertyDetail(LiquorStoreDTO liquorStoreDTO)
+			throws PropertyDetailsException {
+		LiquorStore liquorStore = new LiquorStore();
+		liquorStore.setApprInventoryCost(liquorStoreDTO.getApprInventoryCost());
+		liquorStore.setAtmMachine(liquorStoreDTO.getAtmMachine());
+		liquorStore.setStorageSqft(liquorStoreDTO.getStorageSqft());
+		liquorStore.setDrinksCabinets(liquorStoreDTO.getDrinksCabinets());
+		liquorStore.setVendingMachine(liquorStoreDTO.getVendingMachine());
+		liquorStore.setGoodsCabinets(liquorStoreDTO.getGoodsCabinets());
+		liquorStore.setResidentialArea(liquorStoreDTO.getResidentialArea());
+		liquorStore.setDemographicLink(liquorStoreDTO.getDemographicLink());
+		liquorStore.setWalkscore(liquorStoreDTO.getWalkscore());
+		liquorStore.setAvgAge(liquorStoreDTO.getAvgAge());
+		liquorStore.setAvgIncome(liquorStoreDTO.getAvgIncome());
+		liquorStore.setCrimeIndcator(liquorStoreDTO.getCrimeIndcator());
+		liquorStore.setAssociatedBusiness(liquorStoreDTO.getAssociatedBusiness());
+		liquorStore.setConvenienceStore(liquorStoreDTO.getConvenienceStore());
+		liquorStore.setFreshGoodsMarket(liquorStoreDTO.getFreshGoodsMarket());
+		liquorStore.setAnchorBusiness(liquorStoreDTO.getAnchorBusiness());
+		liquorStore.setShoppingComplexTrafficScore(liquorStoreDTO.getShoppingComplexTrafficScore());
+		
+		
+		List<PropertyDetails> propertyList = (List<PropertyDetails>) propertyDetailsDAO.findByPropertyName(liquorStoreDTO.getPropertyMetaData().getPropertyName());
+		PropertyDetails property = null;
+		
+		PropertyDetails propertyDetails = liquorStoreDTO.getPropertyMetaData();
+		
+		if(!propertyList.isEmpty()) {
+			property = propertyList.get(0);
+			throw new PropertyDetailsException("Duplicate record");
+		} else {			
+			liquorStore = liquorStoreDAO.save(liquorStore);
+			propertyDetails.setPropertyId(liquorStore.getId());
+			propertyDetails.setBusinessTypeCode("b_type_3");
+			propertyDetails.setPropertyCode(null);
+			property = propertyDetailsDAO.save(propertyDetails);
+		}
+		liquorStoreDTO.setId(liquorStore.getId());
+		liquorStoreDTO.setPropertyMetaData(property);
+		
+		return liquorStoreDTO;
+	}
+
+	@Override
+	public LiquorStoreDTO updateLiquerStorePropertyDetail(LiquorStoreDTO liquorStoreDTO)
+			throws PropertyDetailsException {
+		
+		LiquorStore liquorStore = new LiquorStore();
+		liquorStore.setId(liquorStoreDTO.getId());
+		liquorStore.setApprInventoryCost(liquorStoreDTO.getApprInventoryCost());
+		liquorStore.setAtmMachine(liquorStoreDTO.getAtmMachine());
+		liquorStore.setStorageSqft(liquorStoreDTO.getStorageSqft());
+		liquorStore.setDrinksCabinets(liquorStoreDTO.getDrinksCabinets());
+		liquorStore.setVendingMachine(liquorStoreDTO.getVendingMachine());
+		liquorStore.setGoodsCabinets(liquorStoreDTO.getGoodsCabinets());
+		liquorStore.setResidentialArea(liquorStoreDTO.getResidentialArea());
+		liquorStore.setDemographicLink(liquorStoreDTO.getDemographicLink());
+		liquorStore.setWalkscore(liquorStoreDTO.getWalkscore());
+		liquorStore.setAvgAge(liquorStoreDTO.getAvgAge());
+		liquorStore.setAvgIncome(liquorStoreDTO.getAvgIncome());
+		liquorStore.setCrimeIndcator(liquorStoreDTO.getCrimeIndcator());
+		liquorStore.setAssociatedBusiness(liquorStoreDTO.getAssociatedBusiness());
+		liquorStore.setConvenienceStore(liquorStoreDTO.getConvenienceStore());
+		liquorStore.setFreshGoodsMarket(liquorStoreDTO.getFreshGoodsMarket());
+		liquorStore.setAnchorBusiness(liquorStoreDTO.getAnchorBusiness());
+		liquorStore.setShoppingComplexTrafficScore(liquorStoreDTO.getShoppingComplexTrafficScore());
+		
+		
+		PropertyDetails property = null;
+		
+		PropertyDetails propertyDetails = liquorStoreDTO.getPropertyMetaData();
+					
+		liquorStore = liquorStoreDAO.save(liquorStore);
+		
+		property = propertyDetailsDAO.save(propertyDetails);
+		
+		liquorStoreDTO.setPropertyMetaData(property);
+		
+		return liquorStoreDTO;
+	}
+
+	@Override
+	public SalonStoreDTO getSalonStorePropertyDetails(int id) throws PropertyDetailsException {
+		PropertyDetails propertyDetails = propertyDetailsDAO.findById(id).get();		
+		if( String.valueOf(propertyDetails.getPropertyId()) == null) {
+			throw new PropertyDetailsException("Record not found");
+		}
+		
+		SalonStore salonStore = salonStoreDAO.findById(propertyDetails.getPropertyId()).get();
+		
+		SalonStoreDTO salonStoreDTO = new SalonStoreDTO();
+		salonStoreDTO.setId(salonStore.getId());
+		salonStoreDTO.setNailCare(salonStore.getNailCare());
+		salonStoreDTO.setSkinCare(salonStore.getSkinCare());
+		salonStoreDTO.setLashExtension(salonStore.getLashExtension());
+		salonStoreDTO.setMassage(salonStore.getMassage());
+		salonStoreDTO.setBodyTreatments(salonStore.getBodyTreatments());
+		salonStoreDTO.setLocationOfspa(salonStore.getLocationOfspa());
+		salonStoreDTO.setWalkscore(salonStore.getWalkscore());
+		salonStoreDTO.setAvgAge(salonStore.getAvgAge());
+		salonStoreDTO.setAvgIncome(salonStore.getAvgIncome());
+		salonStoreDTO.setInteriorSqft(salonStore.getInteriorSqft());
+		salonStoreDTO.setManicureTables(salonStore.getManicureTables());
+		salonStoreDTO.setNailDryers(salonStore.getNailDryers());
+		salonStoreDTO.setPortablePedicureSpa(salonStore.getPortablePedicureSpa());
+		salonStoreDTO.setNailSalonTrolleys(salonStore.getNailSalonTrolleys());
+		salonStoreDTO.setPedicureSpaChairs(salonStore.getPedicureSpaChairs());
+		salonStoreDTO.setInteriorFeatures(salonStore.getInteriorFeatures());
+		salonStoreDTO.setRestrooms(salonStore.getRestrooms());
+		salonStoreDTO.setWaitingArea(salonStore.getWaitingArea());
+		salonStoreDTO.setReceptionArea(salonStore.getReceptionArea());
+		salonStoreDTO.setCapacity(salonStore.getCapacity());
+		salonStoreDTO.setLastRenovation(salonStore.getLastRenovation());
+		salonStoreDTO.setStaffRooms(salonStore.getStaffRooms());
+		salonStoreDTO.setExteriorSignage(salonStore.getExteriorSignage());
+		salonStoreDTO.setAnchorBusiness(salonStore.getAnchorBusiness());
+		salonStoreDTO.setTypeOfBuilding(salonStore.getTypeOfBuilding());
+		salonStoreDTO.setParking(salonStore.getParking());
+		salonStoreDTO.setRent(salonStore.getRent());
+		salonStoreDTO.setWater(salonStore.getWater());
+		salonStoreDTO.setElectricity(salonStore.getElectricity());
+		salonStoreDTO.setGarbage(salonStore.getGarbage());
+		salonStoreDTO.setEmployee(salonStore.getEmployee());
+		
+		
+		
+		salonStoreDTO.setPropertyMetaData(propertyDetails);
+		
+		
+		List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
+		salonStoreDTO.setPropertyImages(propertyImages);
+		
+		return salonStoreDTO;
+	}
+
+	@Override
+	public SalonStoreDTO saveSalonStorePropertyDetail(SalonStoreDTO salonStoreDTO) throws PropertyDetailsException {
+		SalonStore salonStore = new SalonStore();
+		salonStore.setNailCare(salonStoreDTO.getNailCare());
+		salonStore.setSkinCare(salonStoreDTO.getSkinCare());
+		salonStore.setLashExtension(salonStoreDTO.getLashExtension());
+		salonStore.setMassage(salonStoreDTO.getMassage());
+		salonStore.setBodyTreatments(salonStoreDTO.getBodyTreatments());
+		salonStore.setLocationOfspa(salonStoreDTO.getLocationOfspa());
+		salonStore.setWalkscore(salonStoreDTO.getWalkscore());
+		salonStore.setAvgAge(salonStoreDTO.getAvgAge());
+		salonStore.setAvgIncome(salonStoreDTO.getAvgIncome());
+		salonStore.setInteriorSqft(salonStoreDTO.getInteriorSqft());
+		salonStore.setManicureTables(salonStoreDTO.getManicureTables());
+		salonStore.setNailDryers(salonStoreDTO.getNailDryers());
+		salonStore.setPortablePedicureSpa(salonStoreDTO.getPortablePedicureSpa());
+		salonStore.setNailSalonTrolleys(salonStoreDTO.getNailSalonTrolleys());
+		salonStore.setPedicureSpaChairs(salonStoreDTO.getPedicureSpaChairs());
+		salonStore.setInteriorFeatures(salonStoreDTO.getInteriorFeatures());
+		salonStore.setRestrooms(salonStoreDTO.getRestrooms());
+		salonStore.setWaitingArea(salonStoreDTO.getWaitingArea());
+		salonStore.setReceptionArea(salonStoreDTO.getReceptionArea());
+		salonStore.setCapacity(salonStoreDTO.getCapacity());
+		salonStore.setLastRenovation(salonStoreDTO.getLastRenovation());
+		salonStore.setStaffRooms(salonStoreDTO.getStaffRooms());
+		salonStore.setExteriorSignage(salonStoreDTO.getExteriorSignage());
+		salonStore.setAnchorBusiness(salonStoreDTO.getAnchorBusiness());
+		salonStore.setTypeOfBuilding(salonStoreDTO.getTypeOfBuilding());
+		salonStore.setParking(salonStoreDTO.getParking());
+		salonStore.setRent(salonStoreDTO.getRent());
+		salonStore.setWater(salonStoreDTO.getWater());
+		salonStore.setElectricity(salonStoreDTO.getElectricity());
+		salonStore.setGarbage(salonStoreDTO.getGarbage());
+		salonStore.setEmployee(salonStoreDTO.getEmployee());
+		
+		
+		
+		List<PropertyDetails> propertyList = (List<PropertyDetails>) propertyDetailsDAO.findByPropertyName(salonStoreDTO.getPropertyMetaData().getPropertyName());
+		PropertyDetails property = null;
+		
+		PropertyDetails propertyDetails = salonStoreDTO.getPropertyMetaData();
+		
+		if(!propertyList.isEmpty()) {
+			property = propertyList.get(0);
+			throw new PropertyDetailsException("Duplicate record");
+		} else {			
+			salonStore = salonStoreDAO.save(salonStore);
+			propertyDetails.setPropertyId(salonStore.getId());
+			propertyDetails.setBusinessTypeCode("b_type_3");
+			propertyDetails.setPropertyCode(null);
+			property = propertyDetailsDAO.save(propertyDetails);
+		}
+		salonStoreDTO.setId(salonStore.getId());
+		salonStoreDTO.setPropertyMetaData(property);
+		
+		return salonStoreDTO;
+	}
+
+	@Override
+	public SalonStoreDTO updateSalonStorePropertyDetail(SalonStoreDTO salonStoreDTO) throws PropertyDetailsException {
+		
+		SalonStore salonStore = new SalonStore();
+		salonStore.setId(salonStoreDTO.getId());
+		salonStore.setNailCare(salonStoreDTO.getNailCare());
+		salonStore.setSkinCare(salonStoreDTO.getSkinCare());
+		salonStore.setLashExtension(salonStoreDTO.getLashExtension());
+		salonStore.setMassage(salonStoreDTO.getMassage());
+		salonStore.setBodyTreatments(salonStoreDTO.getBodyTreatments());
+		salonStore.setLocationOfspa(salonStoreDTO.getLocationOfspa());
+		salonStore.setWalkscore(salonStoreDTO.getWalkscore());
+		salonStore.setAvgAge(salonStoreDTO.getAvgAge());
+		salonStore.setAvgIncome(salonStoreDTO.getAvgIncome());
+		salonStore.setInteriorSqft(salonStoreDTO.getInteriorSqft());
+		salonStore.setManicureTables(salonStoreDTO.getManicureTables());
+		salonStore.setNailDryers(salonStoreDTO.getNailDryers());
+		salonStore.setPortablePedicureSpa(salonStoreDTO.getPortablePedicureSpa());
+		salonStore.setNailSalonTrolleys(salonStoreDTO.getNailSalonTrolleys());
+		salonStore.setPedicureSpaChairs(salonStoreDTO.getPedicureSpaChairs());
+		salonStore.setInteriorFeatures(salonStoreDTO.getInteriorFeatures());
+		salonStore.setRestrooms(salonStoreDTO.getRestrooms());
+		salonStore.setWaitingArea(salonStoreDTO.getWaitingArea());
+		salonStore.setReceptionArea(salonStoreDTO.getReceptionArea());
+		salonStore.setCapacity(salonStoreDTO.getCapacity());
+		salonStore.setLastRenovation(salonStoreDTO.getLastRenovation());
+		salonStore.setStaffRooms(salonStoreDTO.getStaffRooms());
+		salonStore.setExteriorSignage(salonStoreDTO.getExteriorSignage());
+		salonStore.setAnchorBusiness(salonStoreDTO.getAnchorBusiness());
+		salonStore.setTypeOfBuilding(salonStoreDTO.getTypeOfBuilding());
+		salonStore.setParking(salonStoreDTO.getParking());
+		salonStore.setRent(salonStoreDTO.getRent());
+		salonStore.setWater(salonStoreDTO.getWater());
+		salonStore.setElectricity(salonStoreDTO.getElectricity());
+		salonStore.setGarbage(salonStoreDTO.getGarbage());
+		salonStore.setEmployee(salonStoreDTO.getEmployee());
+		
+		
+		
+		
+		PropertyDetails property = null;
+		
+		PropertyDetails propertyDetails = salonStoreDTO.getPropertyMetaData();
+					
+		salonStore = salonStoreDAO.save(salonStore);
+		
+		property = propertyDetailsDAO.save(propertyDetails);
+		
+		salonStoreDTO.setPropertyMetaData(property);
+		
+		return salonStoreDTO;
 	}
 	
 }
