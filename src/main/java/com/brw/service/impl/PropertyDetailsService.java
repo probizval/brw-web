@@ -12,12 +12,14 @@ import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
 import com.brw.dao.CoinLaundryDAO;
 import com.brw.dao.GasStationDAO;
+import com.brw.dao.LiquorStoreDAO;
 import com.brw.dao.PropertyDetailsDAO;
 import com.brw.dao.PropertyImagesDAO;
 import com.brw.dao.RestaurentDAO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.dto.GasStationDetailsDTO;
+import com.brw.dto.LiquorStoreDTO;
 import com.brw.dto.PropertyDetailsDTO;
 import com.brw.dto.PropertyImagesDTO;
 import com.brw.dto.PropertyListDTO;
@@ -26,6 +28,7 @@ import com.brw.dto.RestaurantDTO;
 import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.entities.CoinLaundry;
 import com.brw.entities.GasStation;
+import com.brw.entities.LiquorStore;
 import com.brw.entities.PropertyDetails;
 import com.brw.entities.PropertyImages;
 import com.brw.entities.Restaurant;
@@ -48,6 +51,9 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	
 	@Autowired
 	private CoinLaundryDAO coinLaundryDAO;
+	
+	@Autowired
+	private LiquorStoreDAO liquorStoreDAO;
 	
 	@Override
 	public PropertyListDTO getAllPropertyList(FilterDTO filter) {
@@ -642,6 +648,128 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		coinLaundryDetailsDTO.setPropertyMetaData(property);
 		
 		return coinLaundryDetailsDTO;
+	}
+	
+	@Override
+	public LiquorStoreDTO getLiquerStorePropertyDetails(int id) throws PropertyDetailsException {
+		// TODO Auto-generated method stub
+				PropertyDetails propertyDetails = propertyDetailsDAO.findById(id).get();		
+				if( String.valueOf(propertyDetails.getPropertyId()) == null) {
+					throw new PropertyDetailsException("Record not found");
+				}
+				
+				LiquorStore liquorStore = liquorStoreDAO.findById(propertyDetails.getPropertyId()).get();
+				
+				LiquorStoreDTO liquorStoreDTO = new LiquorStoreDTO();
+				
+				liquorStoreDTO.setId(liquorStore.getId());
+				liquorStoreDTO.setApprInventoryCost(liquorStore.getApprInventoryCost());
+				liquorStoreDTO.setAtmMachine(liquorStore.getAtmMachine());
+				liquorStoreDTO.setStorageSqft(liquorStore.getStorageSqft());
+				liquorStoreDTO.setDrinksCabinets(liquorStore.getDrinksCabinets());
+				liquorStoreDTO.setVendingMachine(liquorStore.getVendingMachine());
+				liquorStoreDTO.setGoodsCabinets(liquorStore.getGoodsCabinets());
+				liquorStoreDTO.setResidentialArea(liquorStore.getResidentialArea());
+				liquorStoreDTO.setDemographicLink(liquorStore.getDemographicLink());
+				liquorStoreDTO.setWalkscore(liquorStore.getWalkscore());
+				liquorStoreDTO.setAvgAge(liquorStore.getAvgAge());
+				liquorStoreDTO.setAvgIncome(liquorStore.getAvgIncome());
+				liquorStoreDTO.setCrimeIndcator(liquorStore.getCrimeIndcator());
+				liquorStoreDTO.setAssociatedBusiness(liquorStore.getAssociatedBusiness());
+				liquorStoreDTO.setConvenienceStore(liquorStore.getConvenienceStore());
+				liquorStoreDTO.setFreshGoodsMarket(liquorStore.getFreshGoodsMarket());
+				liquorStoreDTO.setAnchorBusiness(liquorStore.getAnchorBusiness());
+				liquorStoreDTO.setShoppingComplexTrafficScore(liquorStore.getShoppingComplexTrafficScore());
+				
+				liquorStoreDTO.setPropertyMetaData(propertyDetails);
+				
+				
+				List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
+				liquorStoreDTO.setPropertyImages(propertyImages);
+				
+				return liquorStoreDTO;
+	}
+
+	@Override
+	public LiquorStoreDTO saveLiquerStorePropertyDetail(LiquorStoreDTO liquorStoreDTO)
+			throws PropertyDetailsException {
+		LiquorStore liquorStore = new LiquorStore();
+		liquorStore.setApprInventoryCost(liquorStoreDTO.getApprInventoryCost());
+		liquorStore.setAtmMachine(liquorStoreDTO.getAtmMachine());
+		liquorStore.setStorageSqft(liquorStoreDTO.getStorageSqft());
+		liquorStore.setDrinksCabinets(liquorStoreDTO.getDrinksCabinets());
+		liquorStore.setVendingMachine(liquorStoreDTO.getVendingMachine());
+		liquorStore.setGoodsCabinets(liquorStoreDTO.getGoodsCabinets());
+		liquorStore.setResidentialArea(liquorStoreDTO.getResidentialArea());
+		liquorStore.setDemographicLink(liquorStoreDTO.getDemographicLink());
+		liquorStore.setWalkscore(liquorStoreDTO.getWalkscore());
+		liquorStore.setAvgAge(liquorStoreDTO.getAvgAge());
+		liquorStore.setAvgIncome(liquorStoreDTO.getAvgIncome());
+		liquorStore.setCrimeIndcator(liquorStoreDTO.getCrimeIndcator());
+		liquorStore.setAssociatedBusiness(liquorStoreDTO.getAssociatedBusiness());
+		liquorStore.setConvenienceStore(liquorStoreDTO.getConvenienceStore());
+		liquorStore.setFreshGoodsMarket(liquorStoreDTO.getFreshGoodsMarket());
+		liquorStore.setAnchorBusiness(liquorStoreDTO.getAnchorBusiness());
+		liquorStore.setShoppingComplexTrafficScore(liquorStoreDTO.getShoppingComplexTrafficScore());
+		
+		
+		List<PropertyDetails> propertyList = (List<PropertyDetails>) propertyDetailsDAO.findByPropertyName(liquorStoreDTO.getPropertyMetaData().getPropertyName());
+		PropertyDetails property = null;
+		
+		PropertyDetails propertyDetails = liquorStoreDTO.getPropertyMetaData();
+		
+		if(!propertyList.isEmpty()) {
+			property = propertyList.get(0);
+			throw new PropertyDetailsException("Duplicate record");
+		} else {			
+			liquorStore = liquorStoreDAO.save(liquorStore);
+			propertyDetails.setPropertyId(liquorStore.getId());
+			propertyDetails.setBusinessTypeCode("b_type_3");
+			propertyDetails.setPropertyCode(null);
+			property = propertyDetailsDAO.save(propertyDetails);
+		}
+		liquorStoreDTO.setId(liquorStore.getId());
+		liquorStoreDTO.setPropertyMetaData(property);
+		
+		return liquorStoreDTO;
+	}
+
+	@Override
+	public LiquorStoreDTO updateLiquerStorePropertyDetail(LiquorStoreDTO liquorStoreDTO)
+			throws PropertyDetailsException {
+		
+		LiquorStore liquorStore = new LiquorStore();
+		liquorStore.setId(liquorStoreDTO.getId());
+		liquorStore.setApprInventoryCost(liquorStoreDTO.getApprInventoryCost());
+		liquorStore.setAtmMachine(liquorStoreDTO.getAtmMachine());
+		liquorStore.setStorageSqft(liquorStoreDTO.getStorageSqft());
+		liquorStore.setDrinksCabinets(liquorStoreDTO.getDrinksCabinets());
+		liquorStore.setVendingMachine(liquorStoreDTO.getVendingMachine());
+		liquorStore.setGoodsCabinets(liquorStoreDTO.getGoodsCabinets());
+		liquorStore.setResidentialArea(liquorStoreDTO.getResidentialArea());
+		liquorStore.setDemographicLink(liquorStoreDTO.getDemographicLink());
+		liquorStore.setWalkscore(liquorStoreDTO.getWalkscore());
+		liquorStore.setAvgAge(liquorStoreDTO.getAvgAge());
+		liquorStore.setAvgIncome(liquorStoreDTO.getAvgIncome());
+		liquorStore.setCrimeIndcator(liquorStoreDTO.getCrimeIndcator());
+		liquorStore.setAssociatedBusiness(liquorStoreDTO.getAssociatedBusiness());
+		liquorStore.setConvenienceStore(liquorStoreDTO.getConvenienceStore());
+		liquorStore.setFreshGoodsMarket(liquorStoreDTO.getFreshGoodsMarket());
+		liquorStore.setAnchorBusiness(liquorStoreDTO.getAnchorBusiness());
+		liquorStore.setShoppingComplexTrafficScore(liquorStoreDTO.getShoppingComplexTrafficScore());
+		
+		
+		PropertyDetails property = null;
+		
+		PropertyDetails propertyDetails = liquorStoreDTO.getPropertyMetaData();
+					
+		liquorStore = liquorStoreDAO.save(liquorStore);
+		
+		property = propertyDetailsDAO.save(propertyDetails);
+		
+		liquorStoreDTO.setPropertyMetaData(property);
+		
+		return liquorStoreDTO;
 	}
 	
 }

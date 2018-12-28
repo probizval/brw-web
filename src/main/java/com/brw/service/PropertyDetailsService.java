@@ -6,6 +6,7 @@ import com.brw.dao.RestaurentDAO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.dto.GasStationDetailsDTO;
+import com.brw.dto.LiquorStoreDTO;
 import com.brw.dto.PropertyDetailsDTO;
 import com.brw.dto.PropertyListDTO;
 import com.brw.dto.PropertyMetaDataDTO;
@@ -27,4 +28,8 @@ public interface PropertyDetailsService {
 	public CoinLaundryDetailsDTO getCoinLaundryPropertyDetails(int id) throws PropertyDetailsException;
 	public CoinLaundryDetailsDTO saveCoinLaundryPropertyDetail(CoinLaundryDetailsDTO coinLaundryDetailsDTO) throws PropertyDetailsException;
 	public CoinLaundryDetailsDTO updateCoinLaundryPropertyDetail(CoinLaundryDetailsDTO coinLaundryDetailsDTO) throws PropertyDetailsException;
+	
+	public LiquorStoreDTO getLiquerStorePropertyDetails(int id) throws PropertyDetailsException;
+	public LiquorStoreDTO saveLiquerStorePropertyDetail(LiquorStoreDTO liquorStoreDTO) throws PropertyDetailsException;
+	public LiquorStoreDTO updateLiquerStorePropertyDetail(LiquorStoreDTO liquorStoreDTO) throws PropertyDetailsException;
 }

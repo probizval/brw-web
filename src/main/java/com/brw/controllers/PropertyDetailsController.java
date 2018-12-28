@@ -23,6 +23,7 @@ import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
 import com.brw.dao.PropertyDetailsDAO;
 import com.brw.dto.GasStationDetailsDTO;
+import com.brw.dto.LiquorStoreDTO;
 import com.brw.dto.PropertyDetailsDTO;
 import com.brw.dto.PropertyListDTO;
 import com.brw.dto.PropertyMetaDataDTO;
@@ -124,6 +125,14 @@ public class PropertyDetailsController implements ErrorController {
 				return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
 			}
 			return ApiResponse.withData(coinLaundryDetailsDTO);
+		} else if (propertyMetaDataDTO.getPropertyMetaData().getBusinessType().equalsIgnoreCase("Liquor Store")) {
+			LiquorStoreDTO  liquorStoreDTO = null;
+			try {
+				liquorStoreDTO = propertyDetailsService.getLiquerStorePropertyDetails(id);
+			} catch (PropertyDetailsException e) {
+				return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+			}
+			return ApiResponse.withData(liquorStoreDTO);
 		} else {
 			return ApiResponse.withData(propertyMetaDataDTO);
 		}
@@ -199,6 +208,30 @@ public class PropertyDetailsController implements ErrorController {
 		try {
 			CoinLaundryDetailsDTO restDTO = propertyDetailsService.updateCoinLaundryPropertyDetail(coinLaundryDetailsDTO);
 			return ApiResponse.withData(restDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PostMapping(value = "property/liquorstore")
+	public ApiResponse<?> createLiquorStoreProperty(@RequestBody LiquorStoreDTO liquorStoreDTO) {
+		try {
+			LiquorStoreDTO liquorDTO = propertyDetailsService.saveLiquerStorePropertyDetail(liquorStoreDTO);
+			return ApiResponse.withData(liquorDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PutMapping(value = "property/liquorstore")
+	public ApiResponse<?> updateLiquorStoreProperty(@RequestBody LiquorStoreDTO liquorStoreDTO) {
+		try {
+			LiquorStoreDTO liquorDTO = propertyDetailsService.updateLiquerStorePropertyDetail(liquorStoreDTO);
+			return ApiResponse.withData(liquorDTO);
 		} catch (InternalServerError e) {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
 		} catch (PropertyDetailsException e) {
