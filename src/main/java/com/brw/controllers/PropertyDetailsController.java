@@ -30,6 +30,7 @@ import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.dto.SalonStoreDTO;
 import com.brw.exceptions.PropertyDetailsException;
+import com.brw.dto.AutoServiceDTO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.service.PropertyDetailsService;
@@ -142,6 +143,14 @@ public class PropertyDetailsController implements ErrorController {
 				return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
 			}
 			return ApiResponse.withData(salonStoreDTO);
+		} else if (propertyMetaDataDTO.getPropertyMetaData().getBusinessType().equalsIgnoreCase("Auto Service Shop")) {
+			AutoServiceDTO  autoServiceDTO = null;
+			try {
+				autoServiceDTO = propertyDetailsService.getAutoServicePropertyDetails(id);
+			} catch (PropertyDetailsException e) {
+				return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+			}
+			return ApiResponse.withData(autoServiceDTO);
 		} else {
 			return ApiResponse.withData(propertyMetaDataDTO);
 		}
@@ -265,6 +274,30 @@ public class PropertyDetailsController implements ErrorController {
 		try {
 			SalonStoreDTO salonDTO = propertyDetailsService.updateSalonStorePropertyDetail(salonStoreDTO);
 			return ApiResponse.withData(salonDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PostMapping(value = "property/autoservice")
+	public ApiResponse<?> createAutoServiceProperty(@RequestBody AutoServiceDTO autoServiceDTO) {
+		try {
+			AutoServiceDTO autoDTO = propertyDetailsService.saveAutoServicePropertyDetail(autoServiceDTO);
+			return ApiResponse.withData(autoDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PutMapping(value = "property/salonstore")
+	public ApiResponse<?> updateAutoServiceProperty(@RequestBody AutoServiceDTO autoServiceDTO) {
+		try {
+			AutoServiceDTO autoDTO = propertyDetailsService.updateAutoServicePropertyDetail(autoServiceDTO);
+			return ApiResponse.withData(autoDTO);
 		} catch (InternalServerError e) {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
 		} catch (PropertyDetailsException e) {
