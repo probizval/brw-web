@@ -60,6 +60,7 @@
       localStorage.setItem('id_token', authResult.idToken);
       localStorage.setItem('expires_at', expiresAt);
       localStorage.setItem('userName', authResult.idTokenPayload.name);
+      sessionStorage.setItem('usermetadata',  JSON.stringify(authResult.idTokenPayload));
       location.reload();
     }
     
@@ -69,6 +70,7 @@
       localStorage.removeItem('id_token');
       localStorage.removeItem('expires_at');
       localStorage.removeItem('userName');
+      sessionStorage.removeItem('usermetadata');
       location.reload();
     }
     
