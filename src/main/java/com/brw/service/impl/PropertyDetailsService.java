@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
+import com.brw.dao.AutoServiceDAO;
 import com.brw.dao.CoinLaundryDAO;
 import com.brw.dao.GasStationDAO;
 import com.brw.dao.LiquorStoreDAO;
@@ -17,6 +18,7 @@ import com.brw.dao.PropertyDetailsDAO;
 import com.brw.dao.PropertyImagesDAO;
 import com.brw.dao.RestaurentDAO;
 import com.brw.dao.SalonStoreDAO;
+import com.brw.dto.AutoServiceDTO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.dto.GasStationDetailsDTO;
@@ -28,6 +30,7 @@ import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDTO;
 import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.dto.SalonStoreDTO;
+import com.brw.entities.AutoService;
 import com.brw.entities.CoinLaundry;
 import com.brw.entities.GasStation;
 import com.brw.entities.LiquorStore;
@@ -60,6 +63,9 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	
 	@Autowired
 	private SalonStoreDAO salonStoreDAO;
+	
+	@Autowired
+	private AutoServiceDAO autoServiceDAO;
 	
 	@Override
 	public PropertyListDTO getAllPropertyList(FilterDTO filter) {
@@ -941,6 +947,128 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		salonStoreDTO.setPropertyMetaData(property);
 		
 		return salonStoreDTO;
+	}
+
+	@Override
+	public AutoServiceDTO getAutoServicePropertyDetails(int id) throws PropertyDetailsException {
+		PropertyDetails propertyDetails = propertyDetailsDAO.findById(id).get();		
+		if( String.valueOf(propertyDetails.getPropertyId()) == null) {
+			throw new PropertyDetailsException("Record not found");
+		}
+		
+		AutoService autoService = autoServiceDAO.findById(propertyDetails.getPropertyId()).get();
+		
+		AutoServiceDTO autoServiceDTO = new AutoServiceDTO();
+		
+		autoServiceDTO.setId(autoService.getId());
+		autoServiceDTO.setParkingSpace(autoService.getParkingSpace());
+		autoServiceDTO.setEquipmentPneumaticPlatform(autoService.getEquipmentPneumaticPlatform());
+		autoServiceDTO.setEquipmentCrane(autoService.getEquipmentCrane());
+		autoServiceDTO.setEquipmentOilStorage(autoService.getEquipmentOilStorage());
+		autoServiceDTO.setEquipmentApprCost(autoService.getEquipmentApprCost());
+		autoServiceDTO.setEquipmentStorage(autoService.getEquipmentStorage());
+		autoServiceDTO.setEquipmentOthers(autoService.getEquipmentOthers());
+		autoServiceDTO.setEquipmentPressureWash(autoService.getEquipmentPressureWash());
+		autoServiceDTO.setWaitingAreaApprCost(autoService.getEquipmentApprCost());
+		autoServiceDTO.setWaitingAreaSqft(autoService.getWaitingAreaSqft());
+		autoServiceDTO.setAvgMonthlyNewCustomers(autoService.getAvgMonthlyNewCustomers());
+		autoServiceDTO.setAvgMonthlyRepeatCustomers(autoService.getAvgMonthlyRepeatCustomers());
+		autoServiceDTO.setAvgMonthlyMaintanceContracts(autoService.getAvgMonthlyMaintanceContracts());
+		autoServiceDTO.setTotalCertifiedEmployees(autoService.getTotalCertifiedEmployees());
+		autoServiceDTO.setTotalFullTimeEmployees(autoService.getTotalFullTimeEmployees());
+		autoServiceDTO.setTotalNumberOfEmployees(autoService.getTotalNumberOfEmployees());
+		autoServiceDTO.setTotalPartTimeEmployees(autoService.getTotalPartTimeEmployees());
+		
+		
+		autoServiceDTO.setPropertyMetaData(propertyDetails);
+		
+		
+		List<PropertyImages> propertyImages = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
+		autoServiceDTO.setPropertyImages(propertyImages);
+		
+		return autoServiceDTO;
+	}
+
+	@Override
+	public AutoServiceDTO saveAutoServicePropertyDetail(AutoServiceDTO autoServiceDTO) throws PropertyDetailsException {
+		// TODO Auto-generated method stub
+		AutoService autoService = new AutoService();
+		
+		
+		autoService.setParkingSpace(autoServiceDTO.getParkingSpace());
+		autoService.setEquipmentPneumaticPlatform(autoServiceDTO.getEquipmentPneumaticPlatform());
+		autoService.setEquipmentCrane(autoServiceDTO.getEquipmentCrane());
+		autoService.setEquipmentOilStorage(autoServiceDTO.getEquipmentOilStorage());
+		autoService.setEquipmentApprCost(autoServiceDTO.getEquipmentApprCost());
+		autoService.setEquipmentStorage(autoServiceDTO.getEquipmentStorage());
+		autoService.setEquipmentOthers(autoServiceDTO.getEquipmentOthers());
+		autoService.setEquipmentPressureWash(autoServiceDTO.getEquipmentPressureWash());
+		autoService.setWaitingAreaApprCost(autoServiceDTO.getEquipmentApprCost());
+		autoService.setWaitingAreaSqft(autoServiceDTO.getWaitingAreaSqft());
+		autoService.setAvgMonthlyNewCustomers(autoServiceDTO.getAvgMonthlyNewCustomers());
+		autoService.setAvgMonthlyRepeatCustomers(autoServiceDTO.getAvgMonthlyRepeatCustomers());
+		autoService.setAvgMonthlyMaintanceContracts(autoServiceDTO.getAvgMonthlyMaintanceContracts());
+		autoService.setTotalCertifiedEmployees(autoServiceDTO.getTotalCertifiedEmployees());
+		autoService.setTotalFullTimeEmployees(autoServiceDTO.getTotalFullTimeEmployees());
+		autoService.setTotalNumberOfEmployees(autoServiceDTO.getTotalNumberOfEmployees());
+		autoService.setTotalPartTimeEmployees(autoServiceDTO.getTotalPartTimeEmployees());
+		
+		List<PropertyDetails> propertyList = (List<PropertyDetails>) propertyDetailsDAO.findByPropertyName(autoServiceDTO.getPropertyMetaData().getPropertyName());
+		PropertyDetails property = null;
+		
+		PropertyDetails propertyDetails = autoServiceDTO.getPropertyMetaData();
+		
+		if(!propertyList.isEmpty()) {
+			property = propertyList.get(0);
+			throw new PropertyDetailsException("Duplicate record");
+		} else {			
+			autoService = autoServiceDAO.save(autoService);
+			propertyDetails.setPropertyId(autoService.getId());
+			propertyDetails.setBusinessTypeCode("b_type_3");
+			propertyDetails.setPropertyCode(null);
+			property = propertyDetailsDAO.save(propertyDetails);
+		}
+		autoServiceDTO.setId(autoService.getId());
+		autoServiceDTO.setPropertyMetaData(property);
+		
+		return autoServiceDTO;
+		
+	}
+
+	@Override
+	public AutoServiceDTO updateAutoServicePropertyDetail(AutoServiceDTO autoServiceDTO) throws PropertyDetailsException {
+		AutoService autoService = new AutoService();
+		
+		autoService.setId(autoServiceDTO.getId());
+		autoService.setParkingSpace(autoServiceDTO.getParkingSpace());
+		autoService.setEquipmentPneumaticPlatform(autoServiceDTO.getEquipmentPneumaticPlatform());
+		autoService.setEquipmentCrane(autoServiceDTO.getEquipmentCrane());
+		autoService.setEquipmentOilStorage(autoServiceDTO.getEquipmentOilStorage());
+		autoService.setEquipmentApprCost(autoServiceDTO.getEquipmentApprCost());
+		autoService.setEquipmentStorage(autoServiceDTO.getEquipmentStorage());
+		autoService.setEquipmentOthers(autoServiceDTO.getEquipmentOthers());
+		autoService.setEquipmentPressureWash(autoServiceDTO.getEquipmentPressureWash());
+		autoService.setWaitingAreaApprCost(autoServiceDTO.getEquipmentApprCost());
+		autoService.setWaitingAreaSqft(autoServiceDTO.getWaitingAreaSqft());
+		autoService.setAvgMonthlyNewCustomers(autoServiceDTO.getAvgMonthlyNewCustomers());
+		autoService.setAvgMonthlyRepeatCustomers(autoServiceDTO.getAvgMonthlyRepeatCustomers());
+		autoService.setAvgMonthlyMaintanceContracts(autoServiceDTO.getAvgMonthlyMaintanceContracts());
+		autoService.setTotalCertifiedEmployees(autoServiceDTO.getTotalCertifiedEmployees());
+		autoService.setTotalFullTimeEmployees(autoServiceDTO.getTotalFullTimeEmployees());
+		autoService.setTotalNumberOfEmployees(autoServiceDTO.getTotalNumberOfEmployees());
+		autoService.setTotalPartTimeEmployees(autoServiceDTO.getTotalPartTimeEmployees());
+		
+		PropertyDetails property = null;
+		
+		PropertyDetails propertyDetails = autoServiceDTO.getPropertyMetaData();
+					
+		autoService = autoServiceDAO.save(autoService);
+		
+		property = propertyDetailsDAO.save(propertyDetails);
+		
+		autoServiceDTO.setPropertyMetaData(property);
+		
+		return autoServiceDTO;
 	}
 	
 }
