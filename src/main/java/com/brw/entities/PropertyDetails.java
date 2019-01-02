@@ -76,12 +76,19 @@ public class PropertyDetails implements Serializable {
 	@Column(name = "zoning_category")
 	private String zoningCategory;
 	
-	
-	
-	
+	@Column(name = "user_id")
+	private int userId;
 	
 	
 
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	public String getPropertyCode() {
 		return propertyCode;

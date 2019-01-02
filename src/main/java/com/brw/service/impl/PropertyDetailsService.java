@@ -96,6 +96,36 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		propertyListDTO.setPropertyList(propertyDetailsDTOList);
 		return propertyListDTO;
 	}
+	
+	@Override
+	public PropertyListDTO getAllPropertyListByUser(int UserID) {
+		// TODO Auto-generated method stub
+		List<PropertyDetails> propertyList = (List<PropertyDetails>) propertyDetailsDAO.findAllByUserId(UserID);
+		List<PropertyDetailsDTO> propertyDetailsDTOList = new ArrayList<PropertyDetailsDTO>();
+		PropertyListDTO propertyListDTO = new PropertyListDTO();
+		
+		for (PropertyDetails propertyDetails: propertyList) {
+			PropertyDetailsDTO propertyDetailsDTO = new PropertyDetailsDTO();
+			propertyDetailsDTO.setId(propertyDetails.getId());
+			propertyDetailsDTO.setPropertyName(propertyDetails.getPropertyName());		
+			propertyDetailsDTO.setPropertyType(propertyDetails.getPropertyType());
+			propertyDetailsDTO.setBusinessType(propertyDetails.getBusinessType());
+			propertyDetailsDTO.setCity(propertyDetails.getCity());
+			propertyDetailsDTO.setCurrentOwner(propertyDetails.getCurrentOwner());
+			propertyDetailsDTO.setEstatedEstimatedValue(propertyDetails.getEstatesEstimatedValue());
+			propertyDetailsDTO.setImageUrl(propertyDetails.getImageUrl());
+			propertyDetailsDTO.setLatitude(propertyDetails.getLatitude());
+			propertyDetailsDTO.setLongitude(propertyDetails.getLongitude());
+			propertyDetailsDTO.setLotSize(propertyDetails.getLotSize());
+			propertyDetailsDTO.setPropertyAddress(propertyDetails.getPropertyAddress());
+			propertyDetailsDTO.setState(propertyDetails.getState());
+			propertyDetailsDTO.setZipCode(propertyDetails.getZipCode());
+			
+			propertyDetailsDTOList.add(propertyDetailsDTO);
+		}
+		propertyListDTO.setPropertyList(propertyDetailsDTOList);
+		return propertyListDTO;
+	}
 
 	@Override
 	public PropertyMetaDataDTO getPropertyDetails(int id) throws PropertyDetailsException {

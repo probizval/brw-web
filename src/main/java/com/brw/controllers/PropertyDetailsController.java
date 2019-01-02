@@ -293,7 +293,7 @@ public class PropertyDetailsController implements ErrorController {
 		}
 	}
 	
-	@PutMapping(value = "property/salonstore")
+	@PutMapping(value = "property/autoservice")
 	public ApiResponse<?> updateAutoServiceProperty(@RequestBody AutoServiceDTO autoServiceDTO) {
 		try {
 			AutoServiceDTO autoDTO = propertyDetailsService.updateAutoServicePropertyDetail(autoServiceDTO);
