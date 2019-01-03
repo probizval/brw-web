@@ -77,7 +77,7 @@ public class PropertyDetails implements Serializable {
 	private String zoningCategory;
 	
 	@Column(name = "user_id")
-	private int userId;
+	private Integer userId;
 	
 	
 
@@ -86,7 +86,7 @@ public class PropertyDetails implements Serializable {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
