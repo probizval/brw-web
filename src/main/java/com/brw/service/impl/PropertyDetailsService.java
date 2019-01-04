@@ -6,6 +6,9 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.brw.common.constants.ErrorCodes;
@@ -98,9 +101,10 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	}
 	
 	@Override
-	public PropertyListDTO getAllPropertyListByUser(int UserID) {
+	public PropertyListDTO getAllPropertyListByUser(int UserID, int pageNumber) {
 		// TODO Auto-generated method stub
-		List<PropertyDetails> propertyList = (List<PropertyDetails>) propertyDetailsDAO.findAllByUserId(UserID);
+		Pageable pageable = PageRequest.of(pageNumber, 6);
+		Page<PropertyDetails> propertyList = (Page<PropertyDetails>) propertyDetailsDAO.findAllByUserId(pageable, UserID);
 		List<PropertyDetailsDTO> propertyDetailsDTOList = new ArrayList<PropertyDetailsDTO>();
 		PropertyListDTO propertyListDTO = new PropertyListDTO();
 		
@@ -124,6 +128,9 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 			propertyDetailsDTOList.add(propertyDetailsDTO);
 		}
 		propertyListDTO.setPropertyList(propertyDetailsDTOList);
+		propertyListDTO.setPageNumber(pageNumber);
+		propertyListDTO.setPageSize(6);
+		propertyListDTO.setTotalCount(propertyList.getTotalElements());
 		return propertyListDTO;
 	}
 

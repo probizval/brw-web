@@ -2,6 +2,8 @@ package com.brw.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -19,4 +21,5 @@ public interface PropertyDetailsDAO extends PagingAndSortingRepository<PropertyD
 	List<PropertyDetails> getProperties(@Param ("latitude") Double latitude,@Param ("longitude") Double longitude,@Param ("zipCode") Integer zipCode);
 	
 	List<PropertyDetails> findAllByUserId(@Param ("userId") int userId);
+	Page<PropertyDetails> findAllByUserId(Pageable pageable, @Param ("userId") int userId);
 }

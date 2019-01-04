@@ -79,9 +79,6 @@ public class PropertyDetails implements Serializable {
 	@Column(name = "user_id")
 	private Integer userId;
 	
-	
-
-
 	public int getUserId() {
 		return userId;
 	}

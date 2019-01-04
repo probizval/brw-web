@@ -146,3 +146,6 @@ ALTER TABLE `rw_user_profile` CHANGE `user_type` `user_type` VARCHAR(10) CHARACT
 
 ALTER TABLE `rw_property_details` ADD `user_id` INT NULL AFTER `updatedOn`;
 
+UPDATE rw_property_details SET user_id = 2;
+
+

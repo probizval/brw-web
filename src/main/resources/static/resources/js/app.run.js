@@ -6,9 +6,9 @@
     .module('myApp')
     .run(run);
 
-  run.$inject = ['authService', '$rootScope'];
+  run.$inject = ['authService', '$rootScope', 'propertyService'];
     
-  function run(authService, $rootScope) {
+  function run(authService, $rootScope, propertyService) {
     // Handle the authentication
     // result in the hash
     authService.handleAuthentication();
@@ -17,7 +17,16 @@
     	var decodedToken = !localStorage.getItem('access_token') || parseJwt(localStorage.getItem('access_token'));
     	if(requireLogin && decodedToken) {
     		authService.login();
-    	}   
+    	}else {
+    		let usermetadata = JSON.parse(sessionStorage.getItem('usermetadata'));
+    		usermetadata && propertyService.getProfile({'emailId':usermetadata.email,'firstName':usermetadata.given_name || '','lastName': usermetadata.family_name || '' })
+    		.success(function(res) {
+                sessionStorage.setItem("profile",JSON.stringify(res));
+           })
+           .error(function (error) {
+               $scope.status = 'Unable to load user profile: ' + error.message;
+           });
+    	}
     });
   }
   

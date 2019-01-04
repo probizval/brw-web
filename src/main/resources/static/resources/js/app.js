@@ -128,7 +128,7 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
 		            reload: true,
 		            resolve: {
 		            	propList: function(propertyService) {
-		            		 return propertyService.getPropertyListByUser();
+		            		 return propertyService.getPropertyListByUser(0);
 		            	}
 		            }
 		        })
