@@ -61,10 +61,10 @@ public class UserProfileController implements ErrorController {
 		}
 	}
 	
-	@RequestMapping(value = "userprofile/propertyList/{userId}", method = RequestMethod.GET, produces = "application/json")
-	public ApiResponse<?> getAllProperties(@PathVariable int userId) {
-		PropertyListDTO properties = propertyDetailsService.getAllPropertyListByUser(userId);
-		return ApiResponse.withData(properties);
+	@RequestMapping(value = "userprofile/propertyList/{userId}/{pageNumber}", method = RequestMethod.GET, produces = "application/json")
+	public ApiResponse<?> getAllProperties(@PathVariable int userId, @PathVariable int pageNumber) {
+		PropertyListDTO properties = propertyDetailsService.getAllPropertyListByUser(userId, pageNumber);
+		return ApiResponse.withPaginatedData(properties, properties.getTotalCount(), properties.getPageNumber(), properties.getPageSize());
 	}
 
 }

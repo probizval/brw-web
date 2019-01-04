@@ -71,6 +71,7 @@
       localStorage.removeItem('expires_at');
       localStorage.removeItem('userName');
       sessionStorage.removeItem('usermetadata');
+      sessionStorage.removeItem('profile');
       location.reload();
     }
     

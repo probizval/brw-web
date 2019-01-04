@@ -18,7 +18,7 @@ import com.brw.exceptions.PropertyDetailsException;
 
 public interface PropertyDetailsService {
 	public PropertyListDTO getAllPropertyList(FilterDTO filter);
-	public PropertyListDTO getAllPropertyListByUser(int userId);
+	public PropertyListDTO getAllPropertyListByUser(int userId, int pageNumber);
 	
 	public PropertyMetaDataDTO getPropertyDetails(int id) throws PropertyDetailsException;
 	public PropertyDetailsDTO savePropertyDetail(PropertyDetailsDTO propertyDetailsDTO);

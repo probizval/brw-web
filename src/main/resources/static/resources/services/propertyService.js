@@ -68,10 +68,11 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
    //          return 'Unable to load store data: ' + error.message;
    //      });
    //  };
-   propertyDataOp.getPropertyListByUser = function () {
+   propertyDataOp.getPropertyListByUser = function (pageNumber) {
         var obj = JSON.parse(localStorage.getItem('userprofile'));
-        return $http.get('/getPropertyListByUser/'+obj.id).success(function(res) {
-            return  JSON.stringify(res);
+        var userid = JSON.parse(sessionStorage.getItem('profile'));
+        return $http.get('/api/v1/userprofile/propertyList/'+userid.id+'/'+pageNumber).success(function(res) {
+            return  JSON.stringify(res.data);
         })
         .error(function (error) {
             return 'Unable to load store data: ' + error.message;
@@ -97,6 +98,17 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
 
         console.log("save profile ", obj);
         return $http.post('/createProfile', obj).success(function(res) {
+            return  JSON.stringify(res);
+        })
+        .error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+    
+    propertyDataOp.getProfile = function (obj) {
+
+        console.log("get profile ", obj);
+        return $http.post('/api/v1/userprofile', obj).success(function(res) {
             return  JSON.stringify(res);
         })
         .error(function (error) {
