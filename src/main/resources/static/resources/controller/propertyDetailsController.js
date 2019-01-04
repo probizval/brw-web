@@ -6,9 +6,11 @@
     .module('myApp')
     .controller('propertyDetailsController', propertyDetailsController);
 
-    propertyDetailsController.$inject = ['$rootScope', '$scope', '$state', 'propDetails', 'propertyService'];
+    propertyDetailsController.$inject = ['$rootScope', '$scope', '$state', 'propDetails', 'propertyService', 'similarProps'];
 
-    function propertyDetailsController($rootScope, $scope, $state, propDetails, propertyService) {
+    function propertyDetailsController($rootScope, $scope, $state, propDetails, propertyService, similarProps) {
+        console.log("here-----", propDetails.data.data, similarProps.data.data.propertyList);
+        $scope.similarPropertyList = similarProps.data.data.propertyList;
         $scope.propDetails = propDetails.data.data;
         $scope.imageArray = propDetails.data.data.propertyImages || [];
         $scope.businessCommonFeatures =  [
@@ -45,10 +47,28 @@
                   swiper: galleryThumbs
                 }
               });
-              galleryTop.params.control = galleryThumbs;
-              galleryThumbs.params.control = galleryTop;
-		}, 100);
-        
+              // galleryTop.params.control = galleryThumbs;
+              // galleryThumbs.params.control = galleryTop;
+		    }, 100);
+
+        setTimeout(function() {
+          var swiper = new Swiper('.swiper-container-per-group', {
+            slidesPerView: 4,
+            spaceBetween: 10,
+            slidesPerGroup: 4,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+            },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+          });
+        },100);
+
     }
 
 })();

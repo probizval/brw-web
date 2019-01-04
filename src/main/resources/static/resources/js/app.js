@@ -78,7 +78,13 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
                 propImages: function(propertyService, propDetails) {
                 		//return propertyService.getImagesByPropertyCode(propDetails.data[0].property_code)
                 	return [];//Need to add service
-								}
+								},
+								similarProps: function(propertyService) {
+									//return propertyService.getPropertyList($stateParams.type);
+									console.log("similiarProps address", localStorage.getItem('searchAddress'));
+									var obj = (localStorage.getItem('searchAddress')) || {};
+									return propertyService.getPropertyList(obj);
+  							}
             }
         })
 				.state('myProfile', {
