@@ -66,7 +66,7 @@
         $scope.propertyMetaData = {};
         $scope.propertyImages = [];
         $scope.property = {
-          'res':          {},
+          'rest':          {},
           'gas':          {},
           'beautySalon':  {},
           'laundry':      {},
@@ -75,15 +75,15 @@
         };
         
         $scope.types = [
-                         {name:'Restaurants and Food', code:'b_type_1'},
-                         {name:'Gas Station', code:'b_type_2'},
-                         {name:'Liquor Store', code:'b_type_3'},
-                         {name:'Beauty Salon/Spa/Nail', code:'b_type_4'},
-                         {name:'Convenience store', code:'b_type_5'},
-                         {name:'Auto Service Shop', code:'b_type_6'},
-                         {name:'Laundry', code:'b_type_7'},
-                         {name:'Cafe', code:'b_type_8'},
-                         {name:'Dry Cleaners', code:'b_type_9'}
+                         {name:'Restaurants and Food', code:'b_type_1', apiName: "restaurant"},
+                         {name:'Gas Station', code:'b_type_2', apiName: "gasstation"},
+                         {name:'Liquor Store', code:'b_type_3', apiName: "liquorstore"},
+                         {name:'Beauty Salon/Spa/Nail', code:'b_type_4', apiName: "salonstore"},
+                         {name:'Convenience store', code:'b_type_5', apiName: "conveniencestore"},
+                         {name:'Auto Service Shop', code:'b_type_6', apiName: "autoservice"},
+                         {name:'Laundry', code:'b_type_7', apiName: "laundry"},
+                         {name:'Cafe', code:'b_type_8', apiName: "cafe"},
+                         {name:'Dry Cleaners', code:'b_type_9', apiName: "drycleaners"}
         ];
         // $scope.property.type = $scope.types[0];
         
@@ -102,28 +102,34 @@
 
 
             $scope.uploadPhotoOnAWS();
+            var apiName = $scope.propertyMetaData.businessType.apiName;
             $scope.propertyMetaData.longitude = document.getElementById("lng").value;
             $scope.propertyMetaData.latitude = document.getElementById("lat").value;
             $scope.propertyMetaData.city = document.getElementById("locality").value;
             $scope.propertyMetaData.zipCode = document.getElementById("postal_code").value;
             $scope.propertyMetaData.state = document.getElementById("administrative_area_level_1").value;
             $scope.propertyMetaData.country = document.getElementById("country").value;
-            $scope.propertyMetaData.propertyAdderess = document.getElementById("address").value;
-            $scope.propertyMetaData.businessType = document.getElementById("type").value;
+            $scope.propertyMetaData.propertyAddress = document.getElementById("address").value;
+            $scope.propertyMetaData.location = document.getElementById("autocomplete").value;
+            $scope.propertyMetaData.businessType = $scope.propertyMetaData.businessType.name;
             $scope.propertyMetaData.imageUrl = "https://s3-us-west-1.amazonaws.com/proswift/2.jpg";
-            var typeOfBusiness = "gasstation";
-            $scope.business = angular.extend($scope.property.res, $scope.property.gas, $scope.property.beautySalon,
+
+
+            $scope.business = angular.extend($scope.property.rest, $scope.property.gas, $scope.property.beautySalon,
               $scope.property.laundry, $scope.property.dryCleaners, $scope.property.liquorStore);
             $scope.business.propertyImages = $scope.propertyImages;
-            $scope.business.propertyMeta = $scope.propertyMetaData;
-
+            $scope.business.propertyMetaData = $scope.propertyMetaData;
             console.log($scope.propertyImages, $scope.propertyMetaData, $scope.business);
-            // $scope.property.userProfile = JSON.parse(localStorage.getItem('userprofile'));
-//            businessFactory.setData($scope.property);
-            propertyService.savePropertyDetails(typeOfBusiness, $scope.business)
+
+            //TODO need to get userid
+            $scope.property.userProfile = JSON.parse(localStorage.getItem('userprofile'));
+            $scope.propertyMetaData.userId = 4;
+            console.log("user profile", $scope.property.userProfile);
+
+            propertyService.savePropertyDetails(apiName, $scope.business)
             .success(function(res) {
-                 console.log("res "+ res);
-                 console.log("res "+ res.status);
+                 console.log("res ", res);
+                 console.log("res ", res.status);
                  //$state.go("property.confirmation", {status: res.status});
                  $state.go("property.confirmation");
             })

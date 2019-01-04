@@ -10,20 +10,26 @@
         </div>
         <div ng-show="!hideInterior">
             <div class="row">
+
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Number of Drinks Cabinets</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.numberOfDrinksCabinets"
-                           name="numberOfDrinksCabinets" id="numberOfDrinksCabinets" placeholder="">
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.drinksCabinets"
+                           name="drinksCabinets" id="drinksCabinets" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Number of Goods Cabinets</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.numberOfGoodsCabinets"
-                           name="numberOfGoodsCabinets" id="numberOfGoodsCabinets" placeholder="">
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.goodsCabinets"
+                           name="goodsCabinets" id="goodsCabinets" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Fresh Goods Market</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.freshGoodsMarket"
+                           name="freshGoodsMarket" id="freshGoodsMarket" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Number of vending Machines</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.numberOfVendingMachines"
-                           name="numberOfVendingMachines" id="numberOfVendingMachines" placeholder="">
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.vendingMachine"
+                           name="vendingMachine" id="vendingMachine" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Number of Restrooms</label>
@@ -32,17 +38,27 @@
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Approx Inventory Cost</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.storeInventoryCost"
-                           name="storeInventoryCost" id="storeInventoryCost" placeholder="$">
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.apprInventoryCost"
+                           name="apprInventoryCost" id="apprInventoryCost" placeholder="$">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Associated Business</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.associatedBusiness"
+                           name="associatedBusiness" id="associatedBusiness" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Storage Area</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.storageSqft"
+                           name="storageSqft" id="storageSqft" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>ATM Machine</label><br/>
                     <div class="radio radio-inline">
-                        <input type="radio" id="atm" ng-model="property.liquorStore.atm" value="Yes">
+                        <input type="radio" id="atm" ng-model="property.liquorStore.atmMachine" value="Yes">
                         <label for="atm">Yes</label>
                     </div>
                     <div class="radio radio-inline">
-                        <input type="radio" id="noAtm" ng-model="property.liquorStore.atm" value="No">
+                        <input type="radio" id="noAtm" ng-model="property.liquorStore.atmMachine" value="No">
                         <label for="noAtm">No</label>
                     </div>
                 </div>
@@ -83,6 +99,63 @@
             </div>
         </div>
     </div>
+
+    <!--Revenue-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideRevenue = ! hideRevenue">
+            <label ng-class="{'details-not-expanded': hideRevenue, 'details-expanded': !hideRevenue}" >Revenue Details</label>
+            <img ng-show="!hideRevenue" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideRevenue" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideRevenue">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Average Income</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.rest.avgIncome"
+                           name="avgIncome" id="avgIncome" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Surroundings Information-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideSurroundings = ! hideSurroundings">
+            <label ng-class="{'details-not-expanded': hideSurroundings, 'details-expanded': !hideSurroundings}" >Surroundings Information</label>
+            <img ng-show="!hideSurroundings" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideSurroundings" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideSurroundings">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Crime Indicator</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.crimeIndicator"
+                           name="crimeIndicator" id="crimeIndicator" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Residential Area</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.residentialArea"
+                           name="residentialArea" id="residentialArea" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Walk Score</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.walkscore"
+                           name="walkscore" id="walkscore" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Demographic Link</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.demographicLink"
+                           name="demographicLink" id="demographicLink" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Shopping Complex Traffic Score</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.shoppingComplexTrafficScore"
+                           name="shoppingComplexTrafficScore" id="shoppingComplexTrafficScore" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="form-group col-md-6 col-lg-6 col-xl-6">
         <label>Open Hours</label>
         <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.liquorStore.openHours">

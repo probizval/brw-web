@@ -3,9 +3,9 @@
 	<div class="super-group-content">
 		<ul class="ul-style">
 			<div class="no-break-inside">
-				<li class="entry-item" ng-if="propDetails.cuisineType">
+				<li class="entry-item" ng-if="propDetails.type">
 					<span class="entryItemContent">Cuisine Type:
-						<span>{{propDetails.cuisineType}}</span>
+						<span>{{propDetails.type}}</span>
 					</span>
 				</li>
 				<li class="entry-item" ng-if="propDetails.description">
@@ -134,9 +134,10 @@
 						</span>
 					</li>
 
-					<div class="details-group-title" ng-if="propDetails.dishwasher || propDetails.oven || propDetails.walkInFreezer ||
-						propDetails.refrigerator || propDetails.dishCapacity || propDetails.numberOfOvens || propDetails.numberOfCookingRange ||
-						propDetails.exhaustType || propDetails.dryStorage ||">
+					<div class="details-group-title">
+						<!--ng-if="propDetails.dishwasher || propDetails.oven || propDetails.walkInFreezer ||-->
+						<!--propDetails.refrigerator || propDetails.dishCapacity || propDetails.numberOfOvens || propDetails.numberOfCookingRange ||-->
+						<!--propDetails.exhaustType || propDetails.dryStorage ||"-->
 						Appliances Information
 					</div>
 					<li class="entry-item" ng-if="propDetails.dishwasher">
@@ -301,7 +302,7 @@
 		<ul class="ul-style">
 			<div class="no-break-inside">
 				<li class="entry-item" ng-if="propDetails.security">
-					<span class="entryItemContent">Security::
+					<span class="entryItemContent">Security:
 						<span>{{propDetails.security}}</span>
 					</span>
 				</li>

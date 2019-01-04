@@ -43,8 +43,8 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
         });
     };
 
-    propertyDataOp.savePropertyDetails =  function (obj) {
-        return $http.post('/savePropertyDetails', obj).success(function(res) {
+    propertyDataOp.savePropertyDetails =  function (typeOfBusiness, obj) {
+        return $http.post('/api/v1/property/'+typeOfBusiness, obj).success(function(res) {
             return  JSON.stringify(res);
         })
         .error(function (error) {
