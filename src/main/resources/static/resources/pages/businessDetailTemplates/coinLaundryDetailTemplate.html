@@ -1,0 +1,255 @@
+<div class="business-specific-details-container">
+	<div class="super-group-title">Interior Features</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.features">
+					<span class="entryItemContent">Features:
+						<span>{{propDetails.features}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.supplies">
+					<span class="entryItemContent">Supplies:
+						<span>{{propDetails.supplies}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.associationWithOthers">
+					<span class="entryItemContent">Association with Others:
+						<span>{{propDetails.associationWithOthers}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.demographicsPopulation">
+					<span class="entryItemContent">Demographics population:
+						<span>{{propDetails.demographicsPopulation}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.counterSpace">
+					<span class="entryItemContent">Counter Space:
+						<span>{{propDetails.counterSpace}} Sq. Ft.</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.seatingCapacity">
+					<span class="entryItemContent">Seating Capacity:
+						<span>{{propDetails.seatingCapacity}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.carts">
+					<span class="entryItemContent">Carts:
+						<span>${{propDetails.carts}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.restrooms">
+					<span class="entryItemContent">Number of Restrooms:
+						<span>{{propDetails.restrooms}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.waterFactor">
+					<span class="entryItemContent">Water Factor:
+						<span>{{propDetails.waterFactor}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="business-specific-details-container">
+	<div class="super-group-title">Equipments Detail</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.numberOfWashers">
+					<span class="entryItemContent">Number of Washers:
+						<span>{{propDetails.numberOfWashers}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.numberOfDryers">
+					<span class="entryItemContent">Number of Dryers:
+						<span>{{propDetails.numberOfDryers}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.coinDispensers">
+					<span class="entryItemContent">Coin Dispenser:
+						<span>{{propDetails.coinDispensers}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.maintenanceContracts">
+					<span class="entryItemContent">Machine Contracts:
+						<span>{{propDetails.maintenanceContracts}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.machinManufactures">
+					<span class="entryItemContent">Machine Manufacturers:
+						<span>{{propDetails.machinManufactures}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.machineEfficiences">
+					<span class="entryItemContent">Machine Efficiencies:
+						<span>{{propDetails.machineEfficiences}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.machineLifespan">
+					<span class="entryItemContent">Machine Lifespan:
+						<span>{{propDetails.machineLifespan}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.costOfEquip">
+					<span class="entryItemContent">Approx cost of Equipments:
+						<span>${{propDetails.costOfEquip}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+
+<div class="business-specific-details-container">
+	<div class="super-group-title">Expenses Detail</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.monthlyRent">
+					<span class="entryItemContent">Monthly Rent:
+						<span>${{propDetails.monthlyRent}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.nnnExpense">
+					<span class="entryItemContent">NNN Expense:
+						<span>${{propDetails.nnnExpense}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.garbageExpense">
+					<span class="entryItemContent">Garbage Expense:
+						<span>${{propDetails.garbageExpense}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.utilitiesExpense">
+					<span class="entryItemContent">Utilities Expense:
+						<span>${{propDetails.utilitiesExpense}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="business-specific-details-container">
+	<div class="super-group-title">Revenues Detail</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.avgRevenue">
+					<span class="entryItemContent">Average Revenue:
+						<span>${{propDetails.avgRevenue}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.avgIncome">
+					<span class="entryItemContent">Average Income:
+						<span>${{propDetails.avgIncome}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="business-specific-details-container">
+	<div class="super-group-title">Employees Detail</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.fulltime_emp">
+					<span class="entryItemContent">Number of Full Time Employees:
+						<span>{{propDetails.fulltime_emp}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.parttiem_emp">
+					<span class="entryItemContent">Number of Part Time Employees:
+						<span>{{propDetails.parttiem_emp}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.certified_emp">
+					<span class="entryItemContent">Number of Certified Employees:
+						<span>{{propDetails.certified_emp}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.total_emp">
+					<span class="entryItemContent">Total Employees:
+						<span>{{propDetails.total_emp}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="business-specific-details-container">
+	<div class="super-group-title">Surroundings Information</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.crimeIndicator">
+					<span class="entryItemContent">Crime Indicator:
+						<span>{{propDetails.crimeIndicator}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.residentialArea">
+					<span class="entryItemContent">Residential Area:
+						<span>{{propDetails.residentialArea}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.security">
+					<span class="entryItemContent">Security::
+						<span>{{propDetails.security}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.surroundingBusiness">
+					<span class="entryItemContent">Surrounding Business:
+						<span>{{propDetails.surroundingBusiness}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.walkScore">
+					<span class="entryItemContent">Walk Score:
+						<span>{{propDetails.walkScore}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.wikiDemoLink">
+					<span class="entryItemContent">Wiki Demographic Link:
+						<span>{{propDetails.wikiDemoLink}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.shoppingComplexTrafficScore">
+					<span class="entryItemContent">Shopping Complex Traffic Score:
+						<span>{{propDetails.shoppingComplexTrafficScore}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="business-specific-details-container">
+	<div class="super-group-title">Miscellaneous Information</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.structureAge">
+					<span class="entryItemContent">Structure Age::
+						<span>{{propDetails.structureAge}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.signageSize">
+					<span class="entryItemContent">Signage Size:
+						<span>{{propDetails.signageSize}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.signageHighVisibility">
+					<span class="entryItemContent">Signage High Visibility:
+						<span>{{propDetails.signageHighVisibility}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>

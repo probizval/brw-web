@@ -15,12 +15,12 @@
 				</li>
 				<li class="entry-item" ng-if="propDetails.gasolineCapacity">
 					<span class="entryItemContent">Gasoline Tank Capacity:
-						<span>{{propDetails.gasolineCapacity}}</span>
+						<span>{{propDetails.gasolineCapacity}} Liters</span>
 					</span>
 				</li>
 				<li class="entry-item" ng-if="propDetails.diselCapacity">
 					<span class="entryItemContent">Diesel Tank Capacity:
-						<span>{{propDetails.diselCapacity}}</span>
+						<span>{{propDetails.diselCapacity}} Liters</span>
 					</span>
 				</li>
 				<li class="entry-item" ng-if="propDetails.typeOfService">
@@ -85,7 +85,7 @@
 				</li>
 				<li class="entry-item" ng-if="propDetails.storeApproxInventoryCost">
 					<span class="entryItemContent">Store approx Inventory Cost:
-						$<span>{{propDetails.storeApproxInventoryCost}}</span>
+						<span>${{propDetails.storeApproxInventoryCost}}</span>
 					</span>
 				</li>
 				<li class="entry-item" ng-if="propDetails.atm">
@@ -100,7 +100,7 @@
 				</li>
 				<li class="entry-item" ng-if="propDetails.foodCourtCost">
 					<span class="entryItemContent">Food Court Cost:
-						$<span>{{propDetails.foodCourtCost}}</span>
+						<span>${{propDetails.foodCourtCost}}</span>
 					</span>
 				</li>
 			</div>
@@ -108,14 +108,14 @@
 	</div>
 </div>
 
-<div class="business-specific-details-container" ng-if="propDetails.carWash">
+<div class="business-specific-details-container" ng-if="propDetails.carWashEquipCost">
 	<div class="super-group-title">Car Wash Features</div>
 	<div class="super-group-content">
 		<ul class="ul-style">
 			<div class="no-break-inside">
 				<li class="entry-item" ng-if="propDetails.carWashEquipCost">
 					<span class="entryItemContent">Car wash Equipment Cost:
-						$<span>{{propDetails.carWashEquipCost}}</span>
+						<span>${{propDetails.carWashEquipCost}}</span>
 					</span>
 				</li>
 			</div>
@@ -130,7 +130,7 @@
 			<div class="no-break-inside">
 				<li class="entry-item" ng-if="propDetails.autoSupplyRepairMaintShopCost">
 					<span class="entryItemContent">Approx Cost:
-						$<span>{{propDetails.autoSupplyRepairMaintShopCost}}</span>
+						<span>${{propDetails.autoSupplyRepairMaintShopCost}}</span>
 					</span>
 				</li>
 			</div>
@@ -139,28 +139,78 @@
 </div>
 
 <div class="business-specific-details-container">
-	<div class="super-group-title">Expenses Details</div>
+	<div class="super-group-title">Expenses Detail</div>
 	<div class="super-group-content">
 		<ul class="ul-style">
 			<div class="no-break-inside">
 				<li class="entry-item" ng-if="propDetails.monthlyRent">
 					<span class="entryItemContent">Monthly Rent:
-						<span>{{propDetails.monthlyRent}}</span>
+						<span>${{propDetails.monthlyRent}}</span>
 					</span>
 				</li>
 				<li class="entry-item" ng-if="propDetails.nnnExpense">
 					<span class="entryItemContent">NNN Expense:
-						<span>{{propDetails.nnnExpense}}</span>
+						<span>${{propDetails.nnnExpense}}</span>
 					</span>
 				</li>
 				<li class="entry-item" ng-if="propDetails.garbageExpense">
 					<span class="entryItemContent">Garbage Expense:
-						<span>{{propDetails.garbageExpense}}</span>
+						<span>${{propDetails.garbageExpense}}</span>
 					</span>
 				</li>
 				<li class="entry-item" ng-if="propDetails.utilitiesExpense">
 					<span class="entryItemContent">Utilities Expense:
-						<span>{{propDetails.utilitiesExpense}}</span>
+						<span>${{propDetails.utilitiesExpense}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="business-specific-details-container">
+	<div class="super-group-title">Revenues Detail</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.avgRevenue">
+					<span class="entryItemContent">Average Revenue:
+						<span>${{propDetails.avgRevenue}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.avgIncome">
+					<span class="entryItemContent">Average Income:
+						<span>${{propDetails.avgIncome}}</span>
+					</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="business-specific-details-container">
+	<div class="super-group-title">Employees Detail</div>
+	<div class="super-group-content">
+		<ul class="ul-style">
+			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.fulltime_emp">
+					<span class="entryItemContent">Number of Full Time Employees:
+						<span>{{propDetails.fulltime_emp}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.parttiem_emp">
+					<span class="entryItemContent">Number of Part Time Employees:
+						<span>{{propDetails.parttiem_emp}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.certified_emp">
+					<span class="entryItemContent">Number of Certified Employees:
+						<span>{{propDetails.certified_emp}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.total_emp">
+					<span class="entryItemContent">Total Employees:
+						<span>{{propDetails.total_emp}}</span>
 					</span>
 				</li>
 			</div>
@@ -173,6 +223,16 @@
 	<div class="super-group-content">
 		<ul class="ul-style">
 			<div class="no-break-inside">
+				<li class="entry-item" ng-if="propDetails.crimeIndicator">
+					<span class="entryItemContent">Crime Indicator:
+						<span>{{propDetails.crimeIndicator}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.residentialArea">
+					<span class="entryItemContent">Residential Area:
+						<span>{{propDetails.residentialArea}}</span>
+					</span>
+				</li>
 				<li class="entry-item" ng-if="propDetails.security">
 					<span class="entryItemContent">Security::
 						<span>{{propDetails.security}}</span>
@@ -183,19 +243,19 @@
 						<span>{{propDetails.surroundingBusiness}}</span>
 					</span>
 				</li>
-				<li class="entry-item" ng-if="propDetails.residentialArea">
-					<span class="entryItemContent">Residential Area:
-						<span>{{propDetails.residentialArea}}</span>
-					</span>
-				</li>
 				<li class="entry-item" ng-if="propDetails.walkScore">
 					<span class="entryItemContent">Walk Score:
 						<span>{{propDetails.walkScore}}</span>
 					</span>
 				</li>
-				<li class="entry-item" ng-if="propDetails.crimeIndicator">
-					<span class="entryItemContent">Crime Indicator:
-						<span>{{propDetails.crimeIndicator}}</span>
+				<li class="entry-item" ng-if="propDetails.wikiDemoLink">
+					<span class="entryItemContent">Wiki Demographic Link:
+						<span>{{propDetails.wikiDemoLink}}</span>
+					</span>
+				</li>
+				<li class="entry-item" ng-if="propDetails.shoppingComplexTrafficScore">
+					<span class="entryItemContent">Shopping Complex Traffic Score:
+						<span>{{propDetails.shoppingComplexTrafficScore}}</span>
 					</span>
 				</li>
 			</div>

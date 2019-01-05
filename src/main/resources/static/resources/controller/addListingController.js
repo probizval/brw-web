@@ -122,9 +122,8 @@
             console.log($scope.propertyImages, $scope.propertyMetaData, $scope.business);
 
             //TODO need to get userid
-            $scope.property.userProfile = JSON.parse(localStorage.getItem('userprofile'));
-            $scope.propertyMetaData.userId = 4;
-            console.log("user profile", $scope.property.userProfile);
+            var userProfile = JSON.parse(sessionStorage.getItem('profile'));
+            $scope.propertyMetaData.userId = userProfile.id;
 
             propertyService.savePropertyDetails(apiName, $scope.business)
             .success(function(res) {

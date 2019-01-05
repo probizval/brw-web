@@ -14,6 +14,11 @@
         <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.laundry.openHours">
     </div>
     <div class="form-group col-md-6 col-lg-6 col-xl-6">
+        <label>Association with Others</label>
+        <input type="text"  class="form-control form-control-md" ng-model="property.laundry.associationWithOthers"
+               name="associationWithOthers" id="associationWithOthers" placeholder="" >
+    </div>
+    <div class="form-group col-md-6 col-lg-6 col-xl-6">
         <label>Demographics Population</label>
         <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.laundry.demographicsPopulation">
     </div>
@@ -29,7 +34,7 @@
             <div class="row">
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Counter Space</label>
-                    <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.laundry.counterSpace">
+                    <input type="text" class="form-control form-control-md" placeholder="Sq. Ft." ng-model="property.laundry.counterSpace">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Seating Capacity</label>
@@ -41,7 +46,7 @@
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Number of Restrooms</label>
-                    <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.numberOfRestrooms">
+                    <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.laundry.restrooms">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Water Factor</label>
@@ -51,43 +56,10 @@
         </div>
     </div>
 
-    <!--Expenses-->
-    <div class="col-md-6 col-lg-6 col-xl-6">
-        <div ng-click="hideExpenses = ! hideExpenses">
-            <label ng-class="{'details-not-expanded': hideExpenses, 'details-expanded': !hideExpenses}" >Expense Details</label>
-            <img ng-show="!hideExpenses" ng-src="../../img/icon/downArrow.png" style="float: right"/>
-            <img ng-show="hideExpenses" ng-src="../../img/icon/upArrow.png" style="float: right"/>
-        </div>
-        <div ng-show="!hideExpenses">
-            <div class="row">
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Rent</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.rent"
-                           name="rent" id="rent" placeholder="">
-                </div>
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>NNN</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.nnn"
-                           name="nnn" id="nnn" placeholder="">
-                </div>
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Garbage</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.garbage"
-                           name="garbage" id="garbage" placeholder="">
-                </div>
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Utilities</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.utilities"
-                           name="utilities" id="utilities" placeholder="">
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!--Equipment Details-->
     <div class="col-md-6 col-lg-6 col-xl-6">
         <div ng-click="hideEquipmentDetails = ! hideEquipmentDetails">
-            <label ng-class="{'details-not-expanded': hideEquipmentDetails, 'details-expanded': !hideEquipmentDetails}" >Equipment Details</label>
+            <label ng-class="{'details-not-expanded': hideEquipmentDetails, 'details-expanded': !hideEquipmentDetails}" >Equipments Detail</label>
             <img ng-show="!hideEquipmentDetails" ng-src="../../img/icon/downArrow.png" style="float: right"/>
             <img ng-show="hideEquipmentDetails" ng-src="../../img/icon/upArrow.png" style="float: right"/>
         </div>
@@ -104,11 +76,11 @@
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Coin Dispenser</label><br/>
                     <div class="radio radio-inline">
-                        <input type="radio" id="coinDispenser" ng-model="property.laundry.coinDispenser" value="Yes">
+                        <input type="radio" id="coinDispenser" ng-model="property.laundry.coinDispensers" value="Yes">
                         <label for="coinDispenser">Yes</label>
                     </div>
                     <div class="radio radio-inline">
-                        <input type="radio" id="noCoinDispenser" ng-model="property.laundry.coinDispenser" value="No">
+                        <input type="radio" id="noCoinDispenser" ng-model="property.laundry.coinDispensers" value="No">
                         <label for="noCoinDispenser">No</label>
                     </div>
                 </div>
@@ -119,26 +91,162 @@
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Machine Manufacturers</label>
-                    <input type="text"  class="form-control form-control-md" ng-model="property.laundry.machineManufacturers"
-                           name="machineManufacturers" id="machineManufacturers" placeholder="" >
+                    <input type="text"  class="form-control form-control-md" ng-model="property.laundry.machinManufactures"
+                           name="machinManufactures" id="machinManufactures" placeholder="" >
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Machine Efficiencies</label>
-                    <input type="text"  class="form-control form-control-md" ng-model="property.laundry.machineEfficiencies"
-                           name="machineEfficiencies" id="machineEfficiencies" placeholder="" >
+                    <input type="text"  class="form-control form-control-md" ng-model="property.laundry.machineEfficiences"
+                           name="machineEfficiences" id="machineEfficiences" placeholder="" >
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Machine Lifespan</label>
-                    <input type="text"  class="form-control form-control-md" ng-model="property.laundry.machineLifeSpan"
-                           name="machineLifeSpan" id="machineLifeSpan" placeholder="" >
+                    <input type="text"  class="form-control form-control-md" ng-model="property.laundry.machineLifespan"
+                           name="machineLifespan" id="machineLifespan" placeholder="" >
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Association with Others</label>
-                    <input type="text"  class="form-control form-control-md" ng-model="property.laundry.associationWithOthers"
-                           name="associationWithOthers" id="associationWithOthers" placeholder="" >
+                    <label>Approx cost of Equipments</label>
+                    <input type="text"  class="form-control form-control-md" ng-model="property.laundry.costOfEquip"
+                           name="costOfEquip" id="costOfEquip" placeholder="$" >
                 </div>
             </div>
         </div>
     </div>
 
+    <!--Expenses-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideExpenses = ! hideExpenses">
+            <label ng-class="{'details-not-expanded': hideExpenses, 'details-expanded': !hideExpenses}" >Expenses Detail</label>
+            <img ng-show="!hideExpenses" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideExpenses" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideExpenses">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Rent</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.rent"
+                           name="rent" id="rent" placeholder="$">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>NNN</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.nnn"
+                           name="nnn" id="nnn" placeholder="$">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Garbage</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.garbage"
+                           name="garbage" id="garbage" placeholder="$">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Utilities</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.utilities"
+                           name="utilities" id="utilities" placeholder="$">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Revenue-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideRevenue = ! hideRevenue">
+            <label ng-class="{'details-not-expanded': hideRevenue, 'details-expanded': !hideRevenue}" >Revenues Detail</label>
+            <img ng-show="!hideRevenue" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideRevenue" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideRevenue">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Average Income</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.avgIncome"
+                           name="avgIncome" id="avgIncome" placeholder="$">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Average Revenue</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.avgRevenue"
+                           name="avgRevenue" id="avgRevenue" placeholder="$">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Employees-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideEmployees = ! hideEmployees">
+            <label ng-class="{'details-not-expanded': hideEmployees, 'details-expanded': !hideEmployees}" >Employees Detail</label>
+            <img ng-show="!hideEmployees" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideEmployees" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideEmployees">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Full Time Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.fulltime_emp"
+                           name="fulltime_emp" id="fulltime_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Part Time Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.parttiem_emp"
+                           name="parttiem_emp" id="parttiem_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Certified Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.certified_emp"
+                           name="certified_emp" id="certified_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Total Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.total_emp"
+                           name="total_emp" id="total_emp" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Surroundings Information-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideSurroundings = ! hideSurroundings">
+            <label ng-class="{'details-not-expanded': hideSurroundings, 'details-expanded': !hideSurroundings}" >Surroundings Information</label>
+            <img ng-show="!hideSurroundings" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideSurroundings" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideSurroundings">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Crime Indicator</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.crimeIndicator"
+                           name="crimeIndicator" id="crimeIndicator" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Residential Area</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.residentialArea"
+                           name="residentialArea" id="residentialArea" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Security</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.security"
+                           name="security" id="security" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Surrounding Businesses</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.surroundingBusiness"
+                           name="surroundingBusiness" id="surroundingBusiness" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Walk Score</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.walkscore"
+                           name="walkscore" id="walkscore" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Wiki Demographic Link</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.demographicLink"
+                           name="demographicLink" id="demographicLink" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Shopping Complex Traffic Score</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.laundry.shoppingComplexTrafficScore"
+                           name="shoppingComplexTrafficScore" id="shoppingComplexTrafficScore" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

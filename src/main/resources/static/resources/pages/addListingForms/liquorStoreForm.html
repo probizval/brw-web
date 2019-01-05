@@ -27,6 +27,11 @@
                            name="freshGoodsMarket" id="freshGoodsMarket" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Convenience Store</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.convenienceStore"
+                           name="convenienceStore" id="convenienceStore" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Number of vending Machines</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.vendingMachine"
                            name="vendingMachine" id="vendingMachine" placeholder="">
@@ -49,7 +54,7 @@
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Storage Area</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.storageSqft"
-                           name="storageSqft" id="storageSqft" placeholder="">
+                           name="storageSqft" id="storageSqft" placeholder="Sq. Ft.">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>ATM Machine</label><br/>
@@ -70,7 +75,7 @@
     <!--Expenses-->
     <div class="col-md-6 col-lg-6 col-xl-6">
         <div ng-click="hideExpenses = ! hideExpenses">
-            <label ng-class="{'details-not-expanded': hideExpenses, 'details-expanded': !hideExpenses}" >Expense Details</label>
+            <label ng-class="{'details-not-expanded': hideExpenses, 'details-expanded': !hideExpenses}" >Expenses Detail</label>
             <img ng-show="!hideExpenses" ng-src="../../img/icon/downArrow.png" style="float: right"/>
             <img ng-show="hideExpenses" ng-src="../../img/icon/upArrow.png" style="float: right"/>
         </div>
@@ -79,22 +84,22 @@
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Rent</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.rent"
-                           name="rent" id="rent" placeholder="">
+                           name="rent" id="rent" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>NNN</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.nnn"
-                           name="nnn" id="nnn" placeholder="">
+                           name="nnn" id="nnn" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Garbage</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.garbage"
-                           name="garbage" id="garbage" placeholder="">
+                           name="garbage" id="garbage" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Utilities</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.utilities"
-                           name="utilities" id="utilities" placeholder="">
+                           name="utilities" id="utilities" placeholder="$">
                 </div>
             </div>
         </div>
@@ -103,7 +108,7 @@
     <!--Revenue-->
     <div class="col-md-6 col-lg-6 col-xl-6">
         <div ng-click="hideRevenue = ! hideRevenue">
-            <label ng-class="{'details-not-expanded': hideRevenue, 'details-expanded': !hideRevenue}" >Revenue Details</label>
+            <label ng-class="{'details-not-expanded': hideRevenue, 'details-expanded': !hideRevenue}" >Revenues Detail</label>
             <img ng-show="!hideRevenue" ng-src="../../img/icon/downArrow.png" style="float: right"/>
             <img ng-show="hideRevenue" ng-src="../../img/icon/upArrow.png" style="float: right"/>
         </div>
@@ -111,8 +116,46 @@
             <div class="row">
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Average Income</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.rest.avgIncome"
-                           name="avgIncome" id="avgIncome" placeholder="">
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.avgIncome"
+                           name="avgIncome" id="avgIncome" placeholder="$">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Average Revenue</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.avgRevenue"
+                           name="avgRevenue" id="avgRevenue" placeholder="$">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Employees-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideEmployees = ! hideEmployees">
+            <label ng-class="{'details-not-expanded': hideEmployees, 'details-expanded': !hideEmployees}" >Employees Detail</label>
+            <img ng-show="!hideEmployees" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideEmployees" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideEmployees">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Full Time Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.fulltime_emp"
+                           name="fulltime_emp" id="fulltime_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Part Time Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.parttiem_emp"
+                           name="parttiem_emp" id="parttiem_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Certified Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.certified_emp"
+                           name="certified_emp" id="certified_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Total Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.total_emp"
+                           name="total_emp" id="total_emp" placeholder="">
                 </div>
             </div>
         </div>
@@ -138,12 +181,22 @@
                            name="residentialArea" id="residentialArea" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Security</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.security"
+                           name="security" id="security" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Surrounding Businesses</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.surroundingBusiness"
+                           name="surroundingBusiness" id="surroundingBusiness" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Walk Score</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.walkscore"
                            name="walkscore" id="walkscore" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Demographic Link</label>
+                    <label>Wiki Demographic Link</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.demographicLink"
                            name="demographicLink" id="demographicLink" placeholder="">
                 </div>

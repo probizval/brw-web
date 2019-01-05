@@ -6,120 +6,44 @@
         <div class="row form-group">
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <div class="checkbox checkbox-inline">
-                    <input type="checkbox" ng-model="property.beautySalon.nailCare" name="nailCare" id="nailCare" ng-checked="true">
+                    <input type="checkbox" ng-model="property.beautySalon.nailCare" name="nailCare" id="nailCare"
+                           ng-init="property.beautySalon.nailCare='True'" ng-false-value="False" ng-true-value="True">
                     <label for="nailCare">Nail Care</label>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <div class="checkbox checkbox-inline">
-                    <input type="checkbox" ng-model="property.beautySalon.skinCare" name="skinCare" id="skinCare" ng-checked="true">
+                    <input type="checkbox" ng-model="property.beautySalon.skinCare" name="skinCare" id="skinCare"
+                           ng-init="property.beautySalon.skinCare='True'" ng-false-value="False" ng-true-value="True">
                     <label for="skinCare">Skin Care</label>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <div class="checkbox checkbox-inline">
-                    <input type="checkbox" ng-model="property.beautySalon.lashExtension" name="lashExtension" id="lashExtension" ng-checked="true">
+                    <input type="checkbox" ng-model="property.beautySalon.lashExtension" name="lashExtension" id="lashExtension"
+                           ng-init="property.beautySalon.lashExtension='True'" ng-false-value="False" ng-true-value="True">
                     <label for="lashExtension">Lash Extension</label>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <div class="checkbox checkbox-inline">
-                    <input type="checkbox" ng-model="property.beautySalon.massage" name="massage" id="massage" ng-checked="true">
+                    <input type="checkbox" ng-model="property.beautySalon.massage" name="massage" id="massage"
+                           ng-init="property.beautySalon.massage='True'" ng-false-value="False" ng-true-value="True">
                     <label for="massage">Massage</label>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <div class="checkbox checkbox-inline">
-                    <input type="checkbox" ng-model="property.beautySalon.bodyTreatments" name="bodyTreatments" id="bodyTreatments" ng-checked="true">
+                    <input type="checkbox" ng-model="property.beautySalon.bodyTreatments" name="bodyTreatments" id="bodyTreatments"
+                           ng-init="property.beautySalon.bodyTreatments='True'" ng-false-value="False" ng-true-value="True">
                     <label for="bodyTreatments">Body Treatments</label>
                 </div>
             </div>
         </div>
 
-        <!--Expenses-->
-        <div ng-click="hideExpenses = ! hideExpenses">
-            <label ng-class="{'details-not-expanded': hideExpenses, 'details-expanded': !hideExpenses}" >Expense Details</label>
-            <img ng-show="!hideExpenses" ng-src="../../img/icon/downArrow.png" style="float: right"/>
-            <img ng-show="hideExpenses" ng-src="../../img/icon/upArrow.png" style="float: right"/>
-        </div>
-        <div ng-show="!hideExpenses">
-            <div class="row">
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Rent</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.rent"
-                           name="rent" id="rent" placeholder="">
-                </div>
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>NNN</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.nnn"
-                           name="nnn" id="nnn" placeholder="">
-                </div>
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Garbage</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.garbage"
-                           name="garbage" id="garbage" placeholder="">
-                </div>
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Utilities</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.utilities"
-                           name="utilities" id="utilities" placeholder="">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Interior-->
-    <div class="col-md-6 col-lg-6 col-xl-6">
-        <div ng-click="hideInterior = ! hideInterior">
-            <label ng-class="{'details-not-expanded': hideInterior, 'details-expanded': !hideInterior}" >Interior Details</label>
-            <img ng-show="!hideInterior" ng-src="../../img/icon/downArrow.png" style="float: right"/>
-            <img ng-show="hideInterior" ng-src="../../img/icon/upArrow.png" style="float: right"/>
-        </div>
-        <div ng-show="!hideInterior">
-            <div class="row">
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Interior Area</label>
-                    <input type="text" class="form-control form-control-md" model="property.beautySalon.interiorSqft"
-                           name="interiorSqft" id="interiorSqft" placeholder="Sq. Ft." >
-                </div>
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Seating Capacity</label>
-                    <input type="text" class="form-control form-control-md" model="property.beautySalon.capacity"
-                           name="capacity" id="capacity" placeholder="" >
-                </div>
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Approx Furniture cost</label>
-                    <input type="text" class="form-control form-control-md" model="property.beautySalon.furnitureCost"
-                           name="furnitureCost" id="furnitureCost" placeholder="" >
-                </div>
-                <div class="col-md-6 col-lg-6 col-xl-6">
-                    <label>Open Hours</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.openHours"
-                           name="openHours" id="openHours" placeholder="" >
-                </div>
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Number of Restroom</label>
-                    <input type="text" class="form-control form-control-md" model="property.beautySalon.restrooms"
-                           name="restrooms" id="restrooms" placeholder="" >
-                </div>
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Last Renovated Date</label>
-                    <input type="text" class="form-control form-control-md" model="property.beautySalon.lastRenovation"
-                           name="lastRenovation" id="lastRenovation" placeholder="" >
-                </div>
-                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                    <label>Waiting Area Capacity</label>
-                    <input type="text" class="form-control form-control-md" model="property.beautySalon.waitingArea"
-                           name="waitingArea" id="waitingArea" placeholder="" >
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Equipment Details-->
-    <div class="col-md-6 col-lg-6 col-xl-6">
+        <!--Equipments Detail-->
         <div ng-click="hideEquipmentDetails = ! hideEquipmentDetails">
-            <label ng-class="{'details-not-expanded': hideEquipmentDetails, 'details-expanded': !hideEquipmentDetails}" >Equipment Details</label>
+            <label ng-class="{'details-not-expanded': hideEquipmentDetails, 'details-expanded': !hideEquipmentDetails}" >Equipments Detail</label>
             <img ng-show="!hideEquipmentDetails" ng-src="../../img/icon/downArrow.png" style="float: right"/>
             <img ng-show="hideEquipmentDetails" ng-src="../../img/icon/upArrow.png" style="float: right"/>
         </div>
@@ -152,5 +76,207 @@
                 </div>
             </div>
         </div>
+
     </div>
+
+    <!--Interior Details-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideInterior = ! hideInterior">
+            <label ng-class="{'details-not-expanded': hideInterior, 'details-expanded': !hideInterior}" >Interior Details</label>
+            <img ng-show="!hideInterior" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideInterior" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideInterior">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Interior Features</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.interiorFeatures"
+                           name="interiorFeatures" id="interiorFeatures" placeholder="" >
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Interior Area</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.interiorSqft"
+                           name="interiorSqft" id="interiorSqft" placeholder="Sq. Ft." >
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Seating Capacity</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.capacity"
+                           name="capacity" id="capacity" placeholder="" >
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Electricity</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.electricity"
+                           name="electricity" id="electricity" placeholder="" >
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Approx Furniture cost</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.furnitureCost"
+                           name="furnitureCost" id="furnitureCost" placeholder="$" >
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                    <label>Open Hours</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.openHours"
+                           name="openHours" id="openHours" placeholder="" >
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Restroom</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.restrooms"
+                           name="restrooms" id="restrooms" placeholder="" >
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Last Renovated Date</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.lastRenovation"
+                           name="lastRenovation" id="lastRenovation" placeholder="yyyy-mm-dd" >
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Waiting Area Capacity</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.waitingArea"
+                           name="waitingArea" id="waitingArea" placeholder="" >
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Anchor Business</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.anchorBusiness"
+                           name="anchorBusiness" id="anchorBusiness" placeholder="" >
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Expenses-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideExpenses = ! hideExpenses">
+            <label ng-class="{'details-not-expanded': hideExpenses, 'details-expanded': !hideExpenses}" >Expenses Detail</label>
+            <img ng-show="!hideExpenses" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideExpenses" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideExpenses">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Rent</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.rent"
+                           name="rent" id="rent" placeholder="$">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>NNN</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.nnn"
+                           name="nnn" id="nnn" placeholder="$">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Garbage</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.garbage"
+                           name="garbage" id="garbage" placeholder="$">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Utilities</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.utilities"
+                           name="utilities" id="utilities" placeholder="$">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Revenue-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideRevenue = ! hideRevenue">
+            <label ng-class="{'details-not-expanded': hideRevenue, 'details-expanded': !hideRevenue}" >Revenues Detail</label>
+            <img ng-show="!hideRevenue" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideRevenue" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideRevenue">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Average Income</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.avgIncome"
+                           name="avgIncome" id="avgIncome" placeholder="$">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Average Revenue</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.avgRevenue"
+                           name="avgRevenue" id="avgRevenue" placeholder="$">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Employees-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideEmployees = ! hideEmployees">
+            <label ng-class="{'details-not-expanded': hideEmployees, 'details-expanded': !hideEmployees}" >Employees Detail</label>
+            <img ng-show="!hideEmployees" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideEmployees" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideEmployees">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Full Time Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.fulltime_emp"
+                           name="fulltime_emp" id="fulltime_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Part Time Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.parttiem_emp"
+                           name="parttiem_emp" id="parttiem_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Certified Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.certified_emp"
+                           name="certified_emp" id="certified_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Total Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.total_emp"
+                           name="total_emp" id="total_emp" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Surroundings Information-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideSurroundings = ! hideSurroundings">
+            <label ng-class="{'details-not-expanded': hideSurroundings, 'details-expanded': !hideSurroundings}" >Surroundings Information</label>
+            <img ng-show="!hideSurroundings" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideSurroundings" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideSurroundings">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Crime Indicator</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.crimeIndicator"
+                           name="crimeIndicator" id="crimeIndicator" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Residential Area</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.residentialArea"
+                           name="residentialArea" id="residentialArea" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Security</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.security"
+                           name="security" id="security" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Surrounding Businesses</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.surroundingBusiness"
+                           name="surroundingBusiness" id="surroundingBusiness" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Walk Score</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.walkscore"
+                           name="walkscore" id="walkscore" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Wiki Demographic Link</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.demographicLink"
+                           name="demographicLink" id="demographicLink" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Shopping Complex Traffic Score</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.beautySalon.shoppingComplexTrafficScore"
+                           name="shoppingComplexTrafficScore" id="shoppingComplexTrafficScore" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
