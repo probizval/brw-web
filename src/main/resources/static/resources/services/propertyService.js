@@ -7,12 +7,13 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
 
     propertyDataOp.getPropertyList = function (type) {
     	type = JSON.parse(type);
-    	
+    	var userid = JSON.parse(sessionStorage.getItem('profile'));
       console.log("--------getBuyPropertylist" + "Bearer "+localStorage.getItem('id_token') );
         return $http.post('/api/v1/propertyList', {
                           "latitude": type.latitude,
                           "longitude": type.longitude,
-                          "zipCode": type.postal_code || null
+                          "zipCode": type.postal_code || null,
+                          "userId": 2
                         }).success(function(res) {
           // console.log("getBuyPropertylist", JSON.stringify(res));
           return res.data;
@@ -78,6 +79,26 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
             return 'Unable to load store data: ' + error.message;
         });
     };
+    propertyDataOp.getBookMarkedPropertyListByUser = function (pageNumber) {
+        var obj = JSON.parse(localStorage.getItem('userprofile'));
+        var userid = JSON.parse(sessionStorage.getItem('profile'));
+        return $http.get('/api/v1/userprofile/bookmarksPropertyList/'+userid.id+'/'+pageNumber).success(function(res) {
+            return  JSON.stringify(res.data);
+        })
+        .error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+    
+    propertyDataOp.bookMarkedProperty = function (obj) {
+        return $http.post('/api/v1/property/bookmarks', obj).success(function(res) {
+            return  JSON.stringify(res.data);
+        })
+        .error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+    
     propertyDataOp.updatePropertyDetails = function (obj) {
     	return $http.post('/updatePropertyDetails', obj).success(function(res) {
 			return  JSON.stringify(res);
