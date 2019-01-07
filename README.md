@@ -148,4 +148,8 @@ ALTER TABLE `rw_property_details` ADD `user_id` INT NULL AFTER `updatedOn`;
 
 UPDATE rw_property_details SET user_id = 2;
 
+CREATE TABLE `devbusinessdatabase2`.`rw_user_bookmarked_listing` ( `id` INT NOT NULL AUTO_INCREMENT , `user_id` INT NOT NULL , `property_details_id` INT NOT NULL , PRIMARY KEY (`id`));
+
+
+
 

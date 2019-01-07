@@ -44,7 +44,7 @@
                         <div class="item-image">
                             <a class="item-image" href="#propertyDetails/{{prop.id}}">
                                 <img src="{{prop.imageUrl}}" style="width:400px;height:240px" class="img-fluid" alt="">
-                                <a href="#" class="save-item"><i class="fa fa-star"></i></a>
+                                <a class="save-item" ng-click="bookMarked(prop.id, index)"><i class="fa fa-star"></i></a>
                             </a>
 
                             <a href="#propertyDetails/{{prop.id}}" class="item-meta">

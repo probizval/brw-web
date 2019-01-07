@@ -204,8 +204,20 @@
 				//TODO call search business api with keywords filter
 			};
 
-    	$scope.applyFilters = function () {
+    	    $scope.applyFilters = function () {
 				console.log('Apply Filters');
+			};
+			
+			$scope.bookMarked = function (propID, index) {
+				console.log("Book marked "+propID);
+				var userid = JSON.parse(sessionStorage.getItem('profile'));
+				userid && propertyService.bookMarkedProperty({"userId":userid.id,"propertyDetailsId":propID})
+		  		.success(function(res) {
+		  			$scope.propList[index].isBookMarked = true;
+		         })
+		         .error(function (error) {
+		             $scope.status = 'Unable to load property list: ' + error.message;
+		         });
 			};
 
       var postal_code = '', latitude = '', longitude = '';

@@ -39,6 +39,17 @@ public class PropertyDetailsDTO {
 	
 	private Integer userId;
 	
+	private Boolean isBookMarked;
+	
+	
+	public Boolean getIsBookMarked() {
+		return isBookMarked;
+	}
+
+	public void setIsBookMarked(Boolean isBookMarked) {
+		this.isBookMarked = isBookMarked;
+	}
+
 	public Integer getUserId() {
 		return userId;
 	}

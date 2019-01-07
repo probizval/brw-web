@@ -21,5 +21,10 @@ public interface PropertyDetailsDAO extends PagingAndSortingRepository<PropertyD
 	List<PropertyDetails> getProperties(@Param ("latitude") Double latitude,@Param ("longitude") Double longitude,@Param ("zipCode") Integer zipCode);
 	
 	List<PropertyDetails> findAllByUserId(@Param ("userId") int userId);
+	
+	
 	Page<PropertyDetails> findAllByUserId(Pageable pageable, @Param ("userId") int userId);
+	
+	@Query(nativeQuery=true, value="Select propdetails.* from rw_user_bookmarked_listing as bookmarks INNER JOIN RW_Property_Details as propdetails ON bookmarks.property_details_id = propdetails.id and bookmarks.user_id=:userId")
+	Page<PropertyDetails> findBookmarkPropByUserId(Pageable pageable, @Param ("userId") int userId);
 }
