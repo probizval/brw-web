@@ -2434,6 +2434,7 @@ input[type="radio"], input[type="checkbox"] {
   padding: 10px 0;
 }
 .gallery-thumbs .swiper-slide {
+  width: 25%;
   height: 100%;
   opacity: 0.4;
 }
@@ -2441,6 +2442,25 @@ input[type="radio"], input[type="checkbox"] {
   opacity: 1;
 }
 
+.similar-listing-container {
+  height: 250px;
+}
+.swiper-container-per-group {
+  width: 100%;
+  height: 100%;
+}
+.swiper-slide {
+  background: #fff;
+  /* Center slide text vertically */
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
 /* 18. Add Listing Page
 ------------------------------------------------------------------*/
 .add-listing-photo-container {

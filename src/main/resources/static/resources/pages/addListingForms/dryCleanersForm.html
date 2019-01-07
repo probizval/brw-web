@@ -108,7 +108,7 @@
     <!--Expenses-->
     <div class="col-md-6 col-lg-6 col-xl-6">
         <div ng-click="hideExpenses = ! hideExpenses">
-            <label ng-class="{'details-not-expanded': hideExpenses, 'details-expanded': !hideExpenses}" >Expense Details</label>
+            <label ng-class="{'details-not-expanded': hideExpenses, 'details-expanded': !hideExpenses}" >Expenses Detail</label>
             <img ng-show="!hideExpenses" ng-src="../../img/icon/downArrow.png" style="float: right"/>
             <img ng-show="hideExpenses" ng-src="../../img/icon/upArrow.png" style="float: right"/>
         </div>
@@ -117,22 +117,22 @@
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Rent</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.rent"
-                           name="rent" id="rent" placeholder="">
+                           name="rent" id="rent" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>NNN</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.nnn"
-                           name="nnn" id="nnn" placeholder="">
+                           name="nnn" id="nnn" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Garbage</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.garbage"
-                           name="garbage" id="garbage" placeholder="">
+                           name="garbage" id="garbage" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Utilities</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.utilities"
-                           name="utilities" id="utilities" placeholder="">
+                           name="utilities" id="utilities" placeholder="$">
                 </div>
             </div>
         </div>

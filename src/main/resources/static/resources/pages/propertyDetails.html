@@ -35,7 +35,7 @@
             <div>
                 <div class="item-gallery">
                   <div class="swiper-container gallery-top" data-pswp-uid="1">
-                    <div class="swiper-wrapper">
+                    <div class="swiper-wrapper" lazyload>
                         <div class="swiper-slide" ng-repeat="image_prop in imageArray track by $index" id="image_prop{{index}}">
                           <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                               <img src="{{image_prop.imageUrl}}" class="img-fluid swiper-lazy" style="height:450px; width:635px;" alt="Drawing Room">
@@ -47,7 +47,9 @@
                   </div>
                   <div class="swiper-container gallery-thumbs">
                     <div class="swiper-wrapper">
-                      <div class="swiper-slide" style="width:60px;height:50px;" ng-repeat="prop in imageArray track by $index" id="prop{{index}}">
+                      <div class="swiper-slide" style="width:60px;height:50px;" ng-repeat="prop in imageArray">
+                        <!--<div class="swiper-slide" ng-style="{'background-image':'url({{prop_image.imageUrl}})'}" style="width:60px;height:50px"></div>-->
+                        <!--<div class="swiper-slide" style="background-image:url(https://picsum.photos/200/300/?random);width:60px;height:50px;"></div>-->
                         <img style="width:60px;height:50px;" src="{{prop.imageUrl}}" alt="">
                       </div>
                     </div>
@@ -86,10 +88,10 @@
                   <h3 class="headline">Business Details</h3>
                   <div ng-if="propDetails.propertyMetaData.businessType === 'Restaurants and Food'" ng-include="'resources/pages/businessDetailTemplates/restaurantDetailTemplate.html'"></div>
                   <div ng-if="propDetails.propertyMetaData.businessType === 'Gas Station'" ng-include="'resources/pages/businessDetailTemplates/gasStationDetailTemplate.html'"></div>
-                  <!--<div ng-if="propDetails.propertyMetaData.businessType === 'Laundry'" ng-include="'resources/pages/businessDetailTemplates/coinLaundryDetailTemplate.html'"></div>-->
+                  <div ng-if="propDetails.propertyMetaData.businessType === 'Laundry'" ng-include="'resources/pages/businessDetailTemplates/coinLaundryDetailTemplate.html'"></div>
                   <!--<div ng-if="propDetails.propertyMetaData.businessType === 'Dry Cleaners'" ng-include="'resources/pages/businessDetailTemplates/dryCleanersDetailTemplate.html'"></div>-->
-                  <!--<div ng-if="propDetails.propertyMetaData.businessType === 'Liquor Store'" ng-include="'resources/pages/businessDetailTemplates/liquorStoreDetailTemplate.html'"></div>-->
-                  <!--<div ng-if="propDetails.propertyMetaData.businessType === 'Beauty Salon/Spa/Nail'" ng-include="'resources/pages/businessDetailTemplates/beautySalonDetailTemplate.html'"></div>-->
+                  <div ng-if="propDetails.propertyMetaData.businessType === 'Liquor Store'" ng-include="'resources/pages/businessDetailTemplates/liquorStoreDetailTemplate.html'"></div>
+                  <div ng-if="propDetails.propertyMetaData.businessType === 'Beauty Salon/Spa/Nail'" ng-include="'resources/pages/businessDetailTemplates/beautySalonDetailTemplate.html'"></div>
                 </div>
             </div>
           </div>
@@ -151,6 +153,41 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="container col col-md-12 col-lg-12 col-xl-12">
+<h3 class="subheadline">Similar Listings</h3>
+<div class="similar-listing-container">
+    <div class="swiper-container-per-group">
+      <div class="swiper-wrapper item-listing">
+        <div class="swiper-slide item" ng-repeat="property in similarPropertyList">
+          <div class="item-image">
+            <a class="item-image" href="#propertyDetails/{{property.id}}">
+              <img src="{{property.imageUrl}}" style="width:400px;height:240px" class="img-fluid" alt="">
+              <!--<a href="#" class="save-item"><i class="fa fa-star"></i></a>-->
+            </a>
+
+            <a href="#propertyDetails/{{property.id}}" class="item-meta">
+              <span class="item-badge-left item-address">For Sale{{property.propertyAvailableFor}}</span>
+              <span class="item-badge-right item-address">{{property.businessType}}</span>
+              <br/>
+              <span class="item-price" ng-if="property.estatedEstimatedValue">{{ property.estatedEstimatedValue | currency : "$" : false }}</span> &nbsp;&nbsp;
+              <span class="item-badge-right item-price" ng-if="property.lotSize">{{property.lotSize}} sq ft.</span>
+
+              <span class="item-address" ng-if="property.property_name">{{property.propertyName}}</span>
+
+              <span class="item-address">{{ property.propertyAddress }}, {{property.city}}, {{property.state}} {{property.zipCode}}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Arrows -->
+      <div class="swiper-button-next swiper-button-white"></div>
+      <div class="swiper-button-prev swiper-button-white"></div>
+    </div>
+</div>
 </div>
 
 <!-- Lead Form Modal -->
