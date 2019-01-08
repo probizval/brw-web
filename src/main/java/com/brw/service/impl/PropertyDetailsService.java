@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
 import com.brw.dao.AutoServiceDAO;
+import com.brw.dao.BookMarksDAO;
 import com.brw.dao.CoinLaundryDAO;
 import com.brw.dao.GasStationDAO;
 import com.brw.dao.LiquorStoreDAO;
@@ -22,6 +23,7 @@ import com.brw.dao.PropertyImagesDAO;
 import com.brw.dao.RestaurentDAO;
 import com.brw.dao.SalonStoreDAO;
 import com.brw.dto.AutoServiceDTO;
+import com.brw.dto.BookMarksDTO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.dto.GasStationDetailsDTO;
@@ -34,6 +36,7 @@ import com.brw.dto.RestaurantDTO;
 import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.dto.SalonStoreDTO;
 import com.brw.entities.AutoService;
+import com.brw.entities.BookMarks;
 import com.brw.entities.CoinLaundry;
 import com.brw.entities.GasStation;
 import com.brw.entities.LiquorStore;
@@ -70,6 +73,9 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	@Autowired
 	private AutoServiceDAO autoServiceDAO;
 	
+	@Autowired
+	private BookMarksDAO bookMarksDAO;
+	
 	@Override
 	public PropertyListDTO getAllPropertyList(FilterDTO filter) {
 		// TODO Auto-generated method stub
@@ -93,7 +99,13 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 			propertyDetailsDTO.setPropertyAddress(propertyDetails.getPropertyAddress());
 			propertyDetailsDTO.setState(propertyDetails.getState());
 			propertyDetailsDTO.setZipCode(propertyDetails.getZipCode());
-			
+			try {
+				if(filter.getUserId() != null)
+					propertyDetailsDTO.setIsBookMarked(this.getBookMarksDetails(filter.getUserId(), propertyDetails.getId()));
+			} catch (PropertyDetailsException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			propertyDetailsDTOList.add(propertyDetailsDTO);
 		}
 		propertyListDTO.setPropertyList(propertyDetailsDTOList);
@@ -1106,6 +1118,75 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		autoServiceDTO.setPropertyMetaData(property);
 		
 		return autoServiceDTO;
+	}
+
+	@Override
+	public Boolean getBookMarksDetails(int userId, int propertyDetailsId) throws PropertyDetailsException {
+		// TODO Auto-generated method stub
+		List<BookMarks> bookMarksList = bookMarksDAO.findByUserIdAndPropertyDetailsId(userId, propertyDetailsId);
+		
+		if(bookMarksList.isEmpty()) {
+			return false;
+		}
+		
+		return true;
+	}
+
+	@Override
+	public BookMarksDTO saveBookMarksDetail(BookMarksDTO bookMarksDTO) throws PropertyDetailsException {
+		// TODO Auto-generated method stub
+		
+		BookMarks bookMarks = new BookMarks();
+		bookMarks.setUserId(bookMarksDTO.getUserId());
+		bookMarks.setPropertyDetailsId(bookMarksDTO.getPropertyDetailsId());
+		
+		bookMarks = bookMarksDAO.save(bookMarks);		
+		bookMarksDTO.setId(bookMarks.getId());
+		return bookMarksDTO;
+	}
+
+	@Override
+	public Boolean deleteBookMarksDetail(BookMarksDTO bookMarksDTO) throws PropertyDetailsException {
+		// TODO Auto-generated method stub
+		List<BookMarks> bookMarks =  bookMarksDAO.findByUserIdAndPropertyDetailsId(bookMarksDTO.getUserId(), bookMarksDTO.getPropertyDetailsId());
+		
+		bookMarksDAO.delete(bookMarks.get(0));	
+		
+		return true;
+	}
+	
+	@Override
+	public PropertyListDTO getBookMarkPropertyListByUser(int UserID, int pageNumber) {
+		// TODO Auto-generated method stub
+		Pageable pageable = PageRequest.of(pageNumber, 6);
+		Page<PropertyDetails> propertyList = (Page<PropertyDetails>) propertyDetailsDAO.findBookmarkPropByUserId(pageable, UserID);
+		List<PropertyDetailsDTO> propertyDetailsDTOList = new ArrayList<PropertyDetailsDTO>();
+		PropertyListDTO propertyListDTO = new PropertyListDTO();
+		
+		for (PropertyDetails propertyDetails: propertyList) {
+			PropertyDetailsDTO propertyDetailsDTO = new PropertyDetailsDTO();
+			propertyDetailsDTO.setId(propertyDetails.getId());
+			propertyDetailsDTO.setPropertyName(propertyDetails.getPropertyName());		
+			propertyDetailsDTO.setPropertyType(propertyDetails.getPropertyType());
+			propertyDetailsDTO.setBusinessType(propertyDetails.getBusinessType());
+			propertyDetailsDTO.setCity(propertyDetails.getCity());
+			propertyDetailsDTO.setCurrentOwner(propertyDetails.getCurrentOwner());
+			propertyDetailsDTO.setEstatedEstimatedValue(propertyDetails.getEstatesEstimatedValue());
+			propertyDetailsDTO.setImageUrl(propertyDetails.getImageUrl());
+			propertyDetailsDTO.setLatitude(propertyDetails.getLatitude());
+			propertyDetailsDTO.setLongitude(propertyDetails.getLongitude());
+			propertyDetailsDTO.setLotSize(propertyDetails.getLotSize());
+			propertyDetailsDTO.setPropertyAddress(propertyDetails.getPropertyAddress());
+			propertyDetailsDTO.setState(propertyDetails.getState());
+			propertyDetailsDTO.setZipCode(propertyDetails.getZipCode());
+			propertyDetailsDTO.setIsBookMarked(true);
+			propertyDetailsDTOList.add(propertyDetailsDTO);
+		}
+		propertyListDTO.setPropertyList(propertyDetailsDTOList);
+		propertyListDTO.setPageNumber(pageNumber);
+		propertyListDTO.setPageSize(6);
+		propertyListDTO.setTotalCount(propertyList.getTotalElements());
+		return propertyListDTO;
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.brw.dao.RestaurentDAO;
 import com.brw.dto.AutoServiceDTO;
+import com.brw.dto.BookMarksDTO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.dto.GasStationDetailsDTO;
@@ -47,5 +48,10 @@ public interface PropertyDetailsService {
 	public AutoServiceDTO getAutoServicePropertyDetails(int id) throws PropertyDetailsException;
 	public AutoServiceDTO saveAutoServicePropertyDetail(AutoServiceDTO autoServiceDTO) throws PropertyDetailsException;
 	public AutoServiceDTO updateAutoServicePropertyDetail(AutoServiceDTO autoServiceDTO) throws PropertyDetailsException;
+	
+	public Boolean getBookMarksDetails(int userId, int propertyDetailsId) throws PropertyDetailsException;
+	public BookMarksDTO saveBookMarksDetail(BookMarksDTO bookMarksDTO) throws PropertyDetailsException;
+	public Boolean deleteBookMarksDetail(BookMarksDTO bookMarksDTO) throws PropertyDetailsException;
+	public PropertyListDTO getBookMarkPropertyListByUser(int UserID, int pageNumber);
 
 }

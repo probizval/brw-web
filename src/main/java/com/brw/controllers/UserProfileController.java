@@ -66,5 +66,11 @@ public class UserProfileController implements ErrorController {
 		PropertyListDTO properties = propertyDetailsService.getAllPropertyListByUser(userId, pageNumber);
 		return ApiResponse.withPaginatedData(properties, properties.getTotalCount(), properties.getPageNumber(), properties.getPageSize());
 	}
+	
+	@RequestMapping(value = "userprofile/bookmarksPropertyList/{userId}/{pageNumber}", method = RequestMethod.GET, produces = "application/json")
+	public ApiResponse<?> getBookMarksProperties(@PathVariable int userId, @PathVariable int pageNumber) {
+		PropertyListDTO properties = propertyDetailsService.getBookMarkPropertyListByUser(userId, pageNumber);
+		return ApiResponse.withPaginatedData(properties, properties.getTotalCount(), properties.getPageNumber(), properties.getPageSize());
+	}
 
 }

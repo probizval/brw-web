@@ -125,7 +125,12 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
 		            url: '/bookmarkedListing',
 		            templateUrl: 'resources/pages/bookmarkedListing.html',
 		            controller: 'bookmarkedListingController',
-		            reload: true
+		            reload: true,
+		            resolve: {
+		            	propList: function(propertyService) {
+		            		 return propertyService.getBookMarkedPropertyListByUser(0);
+		            	}
+		            }
 		        })
 		        .state('property.myListing', {
 		            url: '/myListing',

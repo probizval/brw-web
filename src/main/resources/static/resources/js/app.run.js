@@ -19,7 +19,7 @@
     		authService.login();
     	}else {
     		let usermetadata = JSON.parse(sessionStorage.getItem('usermetadata'));
-    		usermetadata && propertyService.getProfile({'emailId':usermetadata.email,'firstName':usermetadata.given_name || '','lastName': usermetadata.family_name || '' })
+    		!sessionStorage.getItem("profile") && usermetadata && propertyService.getProfile({'emailId':usermetadata.email,'firstName':usermetadata.given_name || '','lastName': usermetadata.family_name || '' })
     		.success(function(res) {
                 sessionStorage.setItem("profile",JSON.stringify(res));
            })

@@ -11,6 +11,7 @@
   myProfileController.$inject = ['$scope', 'fileReader', 'authService'];
     function myProfileController($scope, fileReader, authService) {
       $scope.imageSrc = "";
+      
       $scope.uploadPicture = function (profile) {
         console.log("uploadPicture", profile);
         profile.picture = $scope.imageSrc;
@@ -20,6 +21,9 @@
       };
       $scope.cancelUpload = function () {
         $scope.imageSrc = "";
+      };
+      $scope.updateProfile = function() {
+    	  console.log("update profile"+$scope.profile);
       };
       console.log('In myProfileController', fileReader);
     }

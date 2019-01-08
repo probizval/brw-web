@@ -9,6 +9,7 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,6 +32,7 @@ import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.dto.SalonStoreDTO;
 import com.brw.exceptions.PropertyDetailsException;
 import com.brw.dto.AutoServiceDTO;
+import com.brw.dto.BookMarksDTO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.service.PropertyDetailsService;
@@ -304,4 +306,30 @@ public class PropertyDetailsController implements ErrorController {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 	}
+	
+	@PostMapping(value = "property/bookmarks")
+	public ApiResponse<?> saveBookMarks(@RequestBody BookMarksDTO bookMarksDTO) {
+		try {
+			BookMarksDTO bookmarkedDTO = propertyDetailsService.saveBookMarksDetail(bookMarksDTO);
+			return ApiResponse.withData(bookmarkedDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@DeleteMapping(value = "property/bookmarks")
+	public ApiResponse<?> deleteBookMarks(@RequestBody BookMarksDTO bookMarksDTO) {
+		try {
+			Boolean bookmarkedDTO = propertyDetailsService.deleteBookMarksDetail(bookMarksDTO);
+			return ApiResponse.withData(bookmarkedDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
+		} catch (PropertyDetailsException e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	
 }
