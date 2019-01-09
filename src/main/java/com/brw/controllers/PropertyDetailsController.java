@@ -319,7 +319,7 @@ public class PropertyDetailsController implements ErrorController {
 		}
 	}
 	
-	@DeleteMapping(value = "property/bookmarks")
+	@PostMapping(value = "property/removebookmarks")
 	public ApiResponse<?> deleteBookMarks(@RequestBody BookMarksDTO bookMarksDTO) {
 		try {
 			Boolean bookmarkedDTO = propertyDetailsService.deleteBookMarksDetail(bookMarksDTO);

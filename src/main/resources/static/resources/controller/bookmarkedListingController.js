@@ -20,6 +20,21 @@
              $scope.status = 'Unable to load property list: ' + error.message;
          });
       }
+      
+      $scope.bookMarked = function (obj, index, pagenumber) {
+			console.log("Book marked "+obj.id);
+			var userid = JSON.parse(sessionStorage.getItem('profile'));
+			if(userid) {
+			obj.isBookMarked && propertyService.removeBookMarkedProperty({"userId":userid.id,"propertyDetailsId":obj.id})
+	  		.success(function(res) {
+	  			$scope.next(pagenumber);
+	         })
+	         .error(function (error) {
+	             $scope.status = 'Unable to load property list: ' + error.message;
+	         });
+			}
+		};
+		
     }    
 
 })();
