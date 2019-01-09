@@ -13,7 +13,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
                           "latitude": type.latitude,
                           "longitude": type.longitude,
                           "zipCode": type.postal_code || null,
-                          "userId": 2
+                          "userId": userid || null
                         }).success(function(res) {
           // console.log("getBuyPropertylist", JSON.stringify(res));
           return res.data;
