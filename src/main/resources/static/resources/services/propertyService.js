@@ -98,7 +98,14 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
             return 'Unable to load store data: ' + error.message;
         });
     };
-    
+    propertyDataOp.removeBookMarkedProperty = function (obj) {
+        return $http.post('/api/v1/property/removebookmarks', obj).success(function(res) {
+            return  JSON.stringify(res.data);
+        })
+        .error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
     propertyDataOp.updatePropertyDetails = function (obj) {
     	return $http.post('/updatePropertyDetails', obj).success(function(res) {
 			return  JSON.stringify(res);

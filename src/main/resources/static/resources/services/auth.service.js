@@ -6,9 +6,9 @@
     .module('myApp')
     .service('authService', authService);
 
-  authService.$inject = ['$state', 'angularAuth0', '$timeout'];
+  authService.$inject = ['$state', 'angularAuth0', '$timeout', '$location'];
 
-  function authService($state, angularAuth0, $timeout) {
+  function authService($state, angularAuth0, $timeout, $location) {
 
     var userProfile;
 
@@ -20,7 +20,10 @@
       angularAuth0.parseHash(function(err, authResult) {
         if (authResult && authResult.idToken) {
           setSession(authResult);
-          $state.go('home',null, {'reload':true});
+          //$state.go('propertyDetails',{id:3}, {'reload':false});
+          var redirect_location = sessionStorage.getItem("redirect_location");
+          sessionStorage.removeItem('redirect_location');
+          $location.path(redirect_location);
         } else if (err) {
           $timeout(function() {
             $state.go('home',null, {'reload':true});
@@ -61,7 +64,7 @@
       localStorage.setItem('expires_at', expiresAt);
       localStorage.setItem('userName', authResult.idTokenPayload.name);
       sessionStorage.setItem('usermetadata',  JSON.stringify(authResult.idTokenPayload));
-      location.reload();
+      //location.reload();
     }
     
     function logout() {

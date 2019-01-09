@@ -208,16 +208,25 @@
 				console.log('Apply Filters');
 			};
 			
-			$scope.bookMarked = function (propID, index) {
-				console.log("Book marked "+propID);
+			$scope.bookMarked = function (obj, index) {
+				console.log("Book marked "+obj.id);
 				var userid = JSON.parse(sessionStorage.getItem('profile'));
-				userid && propertyService.bookMarkedProperty({"userId":userid.id,"propertyDetailsId":propID})
+				if(userid) {
+					!obj.isBookMarked && propertyService.bookMarkedProperty({"userId":userid.id,"propertyDetailsId":obj.id})
 		  		.success(function(res) {
-		  			$scope.propList[index].isBookMarked = true;
+		  			$scope.searchList[index].isBookMarked = true;
 		         })
 		         .error(function (error) {
 		             $scope.status = 'Unable to load property list: ' + error.message;
 		         });
+				obj.isBookMarked && propertyService.removeBookMarkedProperty({"userId":userid.id,"propertyDetailsId":obj.id})
+		  		.success(function(res) {
+		  			$scope.searchList[index].isBookMarked = false;
+		         })
+		         .error(function (error) {
+		             $scope.status = 'Unable to load property list: ' + error.message;
+		         });
+				}
 			};
 
       var postal_code = '', latitude = '', longitude = '';

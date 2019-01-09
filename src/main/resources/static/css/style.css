@@ -2563,3 +2563,8 @@ input[type="radio"], input[type="checkbox"] {
 	color: #333;
 }
 
+.item-listing .item .save-item.save-item-active {
+    background-color: #FFF !important;
+    color: #999 !important;
+}
+

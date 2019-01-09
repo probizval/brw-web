@@ -6,9 +6,29 @@
     .module('myApp')
     .controller('propertyDetailsController', propertyDetailsController);
 
-    propertyDetailsController.$inject = ['$rootScope', '$scope', '$state', 'propDetails', 'propertyService', 'similarProps'];
+    propertyDetailsController.$inject = ['$rootScope', '$scope', '$state', 'propDetails', 'propertyService', 'similarProps', 'authService'];
 
-    function propertyDetailsController($rootScope, $scope, $state, propDetails, propertyService, similarProps) {
+    function propertyDetailsController($rootScope, $scope, $state, propDetails, propertyService, similarProps, authService) {
+    	$rootScope.authService = authService;
+        $rootScope.isAuthenticated = authService.isAuthenticated();
+
+        if (authService.getCachedProfile()) {
+        	$rootScope.profile = authService.getCachedProfile();
+        } else {
+          authService.getProfile(function(err, profile) {
+        	  $rootScope.profile = profile;
+            propertyService.saveProfile(profile).success(function(res) {
+                 console.log("In propertyDetailsController saveProfile "+ res);
+                 if(res) {
+                    localStorage.setItem('userprofile',JSON.stringify(res[0]));
+                 }
+            })
+            .error(function (error) {
+                $scope.status = 'Unable to get profile: ' + error.message;
+            });
+            $scope.$apply();
+          });
+        }
         console.log("here-----", propDetails.data.data, similarProps.data.data.propertyList);
         $scope.similarPropertyList = similarProps.data.data.propertyList;
         $scope.propDetails = propDetails.data.data;
