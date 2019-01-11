@@ -9,12 +9,12 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     	type = JSON.parse(type);
     	var userid = JSON.parse(sessionStorage.getItem('profile'));
       console.log("--------getBuyPropertylist" + "Bearer "+localStorage.getItem('id_token') );
-        return $http.post('/api/v1/propertyList', {
+        return $http.post('/api/v1/propertyList', /*{
                           "latitude": type.latitude,
                           "longitude": type.longitude,
                           "zipCode": type.postal_code || null,
-                          "userId": userid || null
-                        }).success(function(res) {
+                          "userId": (userid && userid.id ) || null
+                        }*/ type).success(function(res) {
           // console.log("getBuyPropertylist", JSON.stringify(res));
           return res.data;
         })

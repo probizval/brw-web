@@ -11,13 +11,14 @@
                       <div class="row">
                           <div class="col-md-12 col-lg-12 col-xl-12">
                           <select class="form-control form-control-sm" name="businessType" ng-model="businessType"
-                                  id="businessType" ng-change="filterByBusinessType()">
+                                  id="businessType" ng-change="filterByBusinessType(businessType)">
                                   <option value="">Business Type</option>
-                                  <option value="Restaurant">Restaurant</option>
-                                  <option value="Gas station">Gas station</option>
-                                  <option value="Grocery store">Grocery store</option>
-                                  <option value="Liquor store">Liquor store</option>
-                                  <option value="Motels">Motels</option>
+                                  <option value="Restaurants and Food">Restaurant</option>
+                                  <option value="Gas Station">Gas Station</option>
+                                  <option value="Beauty Salon/Spa/Nail">Beauty Salon/Spa/Nail</option>
+                                  <option value="Liquor Store">Liquor Store</option>
+                                  <option value="Cafe">Cafe</option>
+                                  <option value="Auto Service Shop">Auto Service</option>
                               </select>
                           </div>
                       </div>
@@ -26,7 +27,7 @@
                       <div class="row">
                           <div class="col-md-12 col-lg-12 col-xl-12">
                               <select class="form-control form-control-sm" name="listingType" ng-model="listingType"
-                                      id="listingType" ng-change="filterByListingType()">
+                                      id="listingType" ng-change="filterByListingType(listingType)">
                                   <option value="">Listing Type</option>
                                   <option value="For Sale By Agent">For Sale by Agent</option>
                                   <option value="For Sale By Owner">For Sale by Owner</option>
@@ -41,7 +42,7 @@
                   <div class="col-md-1 col-lg-1 col-xl-1">
                       <div class="row">
                           <div class="col-md-12 col-lg-12 col-xl-12">
-                              <select class="form-control form-control-sm" name="minPrice" ng-model="minPrice" ng-change="filterByMinPrice()"
+                              <select class="form-control form-control-sm" name="minPrice" ng-model="minPrice.actualPrice" ng-change="filterByMinPrice(minPrice.actualPrice)"
                                       ng-options="minPrice.price for minPrice in minPriceList">
                                   <option default selected style="color:#868e96;" value="">No Min</option>
                               </select>
@@ -52,7 +53,7 @@
                   <div class="col-md-1 col-lg-1 col-xl-1">
                       <div class="row">
                           <div class="col-md-12 col-lg-12 col-xl-12">
-                              <select class="form-control form-control-sm" name="maxPrice" ng-model="maxPrice" ng-change="filterByMaxPrice()"
+                              <select class="form-control form-control-sm" name="maxPrice" ng-model="maxPrice.actualPrice" ng-change="filterByMaxPrice(maxPrice.actualPrice)"
                                 id="maxPrice" ng-options="maxPrice.price for maxPrice in maxPriceList">
                                   <option default selected style="color:#868e96;" value="">No Max</option>
                               </select>
@@ -85,14 +86,14 @@
                                     <div class="row" >
                                         <label class="col-md-2 col-lg-2 col-xl-2" style="margin-top: 5px;margin-left: 30px;">Square Feet</label>
                                         <div class="col-md-3 col-lg-3 col-xl-3">
-                                                  <select class="form-control form-control-sm" name="minSqFeet" ng-model="minSqFeet" ng-change="filterByMinSqFeet()"
+                                                  <select class="form-control form-control-sm" name="minSqFeet" ng-model="filter.minSqFeet" ng-change="filterByMinSqFeet()"
                                                           id="minSqFeet" ng-options="minSqFeet.size for minSqFeet in minSqFeetList">
                                                       <option default selected style="color:#868e96;" value="">No Min</option>
                                                   </select>
                                         </div>
                                         <label class="col-md-1 col-lg-1 col-xl-1" style="margin-top: 5px;margin-left: 15px;"> to </label>
                                         <div class="col-md-3 col-lg-3 col-xl-3">
-                                                  <select class="form-control form-control-sm" name="maxSqFeet" ng-model="maxSqFeet" ng-change="filterByMaxSqFeet()"
+                                                  <select class="form-control form-control-sm" name="maxSqFeet" ng-model="filter.maxSqFeet" ng-change="filterByMaxSqFeet()"
                                                           id="maxSqFeet" ng-options="maxSqFeet.size for maxSqFeet in maxSqFeetList">
                                                       <option default selected style="color:#868e96;" value="">No Max</option>
                                                   </select>
@@ -102,14 +103,14 @@
                                     <div class="row">
                                         <label class="col-md-2 col-lg-2 col-xl-2" style="margin-top: 5px;margin-left: 30px;">Lot Size</label>
                                         <div class="col-md-3 col-lg-3 col-xl-3">
-                                                <select class="form-control form-control-sm" name="minLotSize" ng-model="minLotSize" ng-change="filterByMinLotSize()"
+                                                <select class="form-control form-control-sm" name="minLotSize" ng-model="filter.minLotSize" ng-change="filterByMinLotSize()"
                                                         id="minLotSize" ng-options="minLotSize.size for minLotSize in minLotSizeList">
                                                     <option default selected style="color:#868e96;" value="">No Min</option>
                                                 </select>
                                         </div>
                                         <label class="col-md-1 col-lg-1 col-xl-1" style="margin-top: 5px;margin-left: 15px;"> to </label>
                                         <div class="col-md-3 col-lg-3 col-xl-3">
-                                                <select class="form-control form-control-sm" name="maxLotSize" ng-model="maxLotSize" ng-change="filterByMaxLotSize()"
+                                                <select class="form-control form-control-sm" name="maxLotSize" ng-model="filter.maxLotSize" ng-change="filterByMaxLotSize()"
                                                         id="maxLotSize" ng-options="maxLotSize.size for maxLotSize in maxLotSizeList">
                                                     <option default selected style="color:#868e96;" value="">No Max</option>
                                                 </select>
@@ -119,14 +120,14 @@
                                   <div class="row">
                                       <label class="col-md-2 col-lg-2 col-xl-2" style="margin-top: 5px;margin-left: 30px;">Year Built</label>
                                       <div class="col-md-3 col-lg-3 col-xl-3">
-                                          <select class="form-control form-control-sm" name="minYearBuilt" ng-model="minYearBuilt" ng-change="filterByMinYearBuilt()"
+                                          <select class="form-control form-control-sm" name="minYearBuilt" ng-model="filter.minYearBuilt" ng-change="filterByMinYearBuilt()"
                                                   id="minYearBuilt" ng-options="minYearBuilt.year for minYearBuilt in minYearBuiltList">
                                               <option default selected style="color:#868e96;" value="">No Min</option>
                                           </select>
                                       </div>
                                       <label class="col-md-1 col-lg-1 col-xl-1" style="margin-top: 5px;margin-left: 15px;"> to </label>
                                       <div class="col-md-3 col-lg-3 col-xl-3">
-                                          <select class="form-control form-control-sm" name="maxYearBuilt" ng-model="maxYearBuilt" ng-change="filterByMaxYearBuilt()"
+                                          <select class="form-control form-control-sm" name="maxYearBuilt" ng-model="filter.maxYearBuilt" ng-change="filterByMaxYearBuilt()"
                                                   id="maxYearBuilt" ng-options="maxYearBuilt.year for maxYearBuilt in maxYearBuiltList">
                                               <option default selected style="color:#868e96;" value="">No Max</option>
                                           </select>
@@ -136,7 +137,7 @@
                                   <div class="row">
                                       <label class="col-md-3 col-lg-3 col-xl-3" style="margin-top: 5px;margin-left: 30px;">Max HOA Fees</label>&nbsp;&nbsp;&nbsp;
                                       <div class="col-md-6 col-lg-6 col-xl-6">
-                                          <select class="form-control form-control-sm" name="maxHoaFees" ng-model="maxHoaFees" ng-change="filterByMaxHoaFees()"
+                                          <select class="form-control form-control-sm" name="maxHoaFees" ng-model="filter.maxHoaFees" ng-change="filterByMaxHoaFees()"
                                                   id="maxHoaFees" ng-options="maxHoaFees.price for maxHoaFees in maxHoaFeesList">
                                               <option default selected style="color:#868e96;" value="">Any</option>
                                           </select>
@@ -146,7 +147,7 @@
                                   <div class="row">
                                       <label class="col-md-3 col-lg-3 col-xl-3" style="margin-top: 5px;margin-left: 30px;">Time on BizRealWorth</label>&nbsp;&nbsp;&nbsp;
                                       <div class="col-md-6 col-lg-6 col-xl-6">
-                                          <select class="form-control form-control-sm" name="timeListed" ng-model="timeListed" ng-change="filterByTimeListed()"
+                                          <select class="form-control form-control-sm" name="timeListed" ng-model="filter.timeListed" ng-change="filterByTimeListed()"
                                                   id="timeListed" ng-options="timeListed.time for timeListed in timeListedList">
                                               <option default selected style="color:#868e96;" value="">Any</option>
                                           </select>
@@ -156,7 +157,7 @@
                                   <div class="row">
                                       <label class="col-md-3 col-lg-3 col-xl-3" style="margin-top: 5px;margin-left: 30px;">Keywords</label>&nbsp;&nbsp;&nbsp;
                                       <div class="col-md-6 col-lg-6 col-xl-6">
-                                          <input type=text class="form-control form-control-sm" id="keywords" name="keywords" ng-model="keywords"
+                                          <input type=text class="form-control form-control-sm" id="keywords" name="keywords" ng-model="filter.keywords"
                                                  ng-change="filterByKeywords()" placeholder="eg. Italian Restaurant">&nbsp
                                       </div>
                                   </div>
@@ -166,7 +167,7 @@
                               <!-- Modal footer -->
                               <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                  <button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="applyFilters()">Apply Filter</button>
+                                  <button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="applyFilters(filter)">Apply Filter</button>
                               </div>
                           </div>
                       </div>

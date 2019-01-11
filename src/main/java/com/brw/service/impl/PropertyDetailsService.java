@@ -79,7 +79,7 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	@Override
 	public PropertyListDTO getAllPropertyList(FilterDTO filter) {
 		// TODO Auto-generated method stub
-		List<PropertyDetails> propertyList = (List<PropertyDetails>) propertyDetailsDAO.getProperties(filter.getLatitude(), filter.getLongitude(), filter.getZipCode());
+		List<PropertyDetails> propertyList = (List<PropertyDetails>) propertyDetailsDAO.getProperties(filter.getLatitude(), filter.getLongitude(), filter.getZipCode(), filter.getBusinessType(), filter.getMinPrice(), filter.getMaxPrice());
 		List<PropertyDetailsDTO> propertyDetailsDTOList = new ArrayList<PropertyDetailsDTO>();
 		PropertyListDTO propertyListDTO = new PropertyListDTO();
 		
@@ -308,6 +308,17 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		gasStationDTO.setFireCapacity(gasStation.getFireCapacity());
 		gasStationDTO.setAutoSupplyRepairMaintShop(gasStation.getAutoSupplyRepairMaintShop());
 		
+		List<PropertyImages> propertyImagesList = gasStationDetailsDTO.getPropertyImages();
+		
+		for (PropertyImages propertyImages: propertyImagesList) {
+			propertyImages.setPropertyDetailsId(property.getId());
+		}
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertyImagesList = (List<PropertyImages>) propertImagesDAO.saveAll(propertyImagesList);
+			gasStationDTO.setPropertyImages(propertyImagesList);		
+		}
+		
 		gasStationDTO.setPropertyMetaData(property);
 		
 		return gasStationDTO;
@@ -449,6 +460,16 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 			propertyDetails.setPropertyCode(null);
 			property = propertyDetailsDAO.save(propertyDetails);
 		}
+		List<PropertyImages> propertyImagesList = restaurantDetailsDTO.getPropertyImages();
+		
+		for (PropertyImages propertyImages: propertyImagesList) {
+			propertyImages.setPropertyDetailsId(property.getId());
+		}
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertyImagesList = (List<PropertyImages>) propertImagesDAO.saveAll(propertyImagesList);
+			restaurantDetailsDTO.setPropertyImages(propertyImagesList);		
+		}
 		restaurantDetailsDTO.setId(restaurant.getId());
 		restaurantDetailsDTO.setPropertyMetaData(property);
 		
@@ -513,7 +534,21 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		gasStationDTO.setFireEquip(gasStationDetails.getFireEquip());
 		gasStationDTO.setFireCapacity(gasStationDetails.getFireCapacity());
 		gasStationDTO.setAutoSupplyRepairMaintShop(gasStationDetails.getAutoSupplyRepairMaintShop());
+		List<PropertyImages> propertyImagesList = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
 		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertImagesDAO.deleteAll(propertyImagesList);
+		}
+		propertyImagesList = gasStationDetailsDTO.getPropertyImages();
+		
+		for (PropertyImages propertyImages: propertyImagesList) {
+			propertyImages.setPropertyDetailsId(propertyDetails.getId());
+		}
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertyImagesList = (List<PropertyImages>) propertImagesDAO.saveAll(propertyImagesList);
+			gasStationDTO.setPropertyImages(propertyImagesList);		
+		}
 		gasStationDTO.setPropertyMetaData(propertyDetails);
 		
 		return gasStationDTO;
@@ -580,6 +615,21 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 					
 		restaurant = restaurentDAO.save(restaurant);
 		property = propertyDetailsDAO.save(propertyDetails);
+		
+		List<PropertyImages> propertyImagesList = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertImagesDAO.deleteAll(propertyImagesList);
+		}
+		propertyImagesList = restaurantDetailsDTO.getPropertyImages();
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			for (PropertyImages propertyImages: propertyImagesList) {
+				propertyImages.setPropertyDetailsId(property.getId());
+			}
+			propertyImagesList = (List<PropertyImages>) propertImagesDAO.saveAll(propertyImagesList);
+			restaurantDetailsDTO.setPropertyImages(propertyImagesList);		
+		}
 		
 		restaurantDetailsDTO.setPropertyMetaData(property);
 		
@@ -667,6 +717,17 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 			propertyDetails.setPropertyCode(null);
 			property = propertyDetailsDAO.save(propertyDetails);
 		}
+		
+		List<PropertyImages> propertyImagesList = coinLaundryDetailsDTO.getPropertyImages();
+		
+		for (PropertyImages propertyImages: propertyImagesList) {
+			propertyImages.setPropertyDetailsId(property.getId());
+		}
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertyImagesList = (List<PropertyImages>) propertImagesDAO.saveAll(propertyImagesList);
+			coinLaundryDetailsDTO.setPropertyImages(propertyImagesList);		
+		}
 		coinLaundryDetailsDTO.setId(coinLaundry.getId());
 		coinLaundryDetailsDTO.setPropertyMetaData(property);
 		
@@ -705,6 +766,22 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 					
 		coinLaundry = coinLaundryDAO.save(coinLaundry);
 		property = propertyDetailsDAO.save(propertyDetails);
+		
+		List<PropertyImages> propertyImagesList = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertImagesDAO.deleteAll(propertyImagesList);
+		}
+		propertyImagesList = coinLaundryDetailsDTO.getPropertyImages();
+		
+		for (PropertyImages propertyImages: propertyImagesList) {
+			propertyImages.setPropertyDetailsId(property.getId());
+		}
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertyImagesList = (List<PropertyImages>) propertImagesDAO.saveAll(propertyImagesList);
+			coinLaundryDetailsDTO.setPropertyImages(propertyImagesList);		
+		}
 		
 		coinLaundryDetailsDTO.setPropertyMetaData(property);
 		
@@ -789,6 +866,16 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 			propertyDetails.setPropertyCode(null);
 			property = propertyDetailsDAO.save(propertyDetails);
 		}
+		List<PropertyImages> propertyImagesList = liquorStoreDTO.getPropertyImages();
+		
+		for (PropertyImages propertyImages: propertyImagesList) {
+			propertyImages.setPropertyDetailsId(property.getId());
+		}
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertyImagesList = (List<PropertyImages>) propertImagesDAO.saveAll(propertyImagesList);
+			liquorStoreDTO.setPropertyImages(propertyImagesList);		
+		}
 		liquorStoreDTO.setId(liquorStore.getId());
 		liquorStoreDTO.setPropertyMetaData(property);
 		
@@ -827,6 +914,22 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		liquorStore = liquorStoreDAO.save(liquorStore);
 		
 		property = propertyDetailsDAO.save(propertyDetails);
+
+		List<PropertyImages> propertyImagesList = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertImagesDAO.deleteAll(propertyImagesList);
+		}
+		propertyImagesList = liquorStoreDTO.getPropertyImages();
+		
+		for (PropertyImages propertyImages: propertyImagesList) {
+			propertyImages.setPropertyDetailsId(property.getId());
+		}
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertyImagesList = (List<PropertyImages>) propertImagesDAO.saveAll(propertyImagesList);
+			liquorStoreDTO.setPropertyImages(propertyImagesList);		
+		}
 		
 		liquorStoreDTO.setPropertyMetaData(property);
 		
@@ -939,6 +1042,16 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 			propertyDetails.setPropertyCode(null);
 			property = propertyDetailsDAO.save(propertyDetails);
 		}
+		List<PropertyImages> propertyImagesList = salonStoreDTO.getPropertyImages();
+		
+		for (PropertyImages propertyImages: propertyImagesList) {
+			propertyImages.setPropertyDetailsId(property.getId());
+		}
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertyImagesList = (List<PropertyImages>) propertImagesDAO.saveAll(propertyImagesList);
+			salonStoreDTO.setPropertyImages(propertyImagesList);		
+		}
 		salonStoreDTO.setId(salonStore.getId());
 		salonStoreDTO.setPropertyMetaData(property);
 		
@@ -992,6 +1105,22 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		salonStore = salonStoreDAO.save(salonStore);
 		
 		property = propertyDetailsDAO.save(propertyDetails);
+		
+		List<PropertyImages> propertyImagesList = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertImagesDAO.deleteAll(propertyImagesList);
+		}
+		propertyImagesList = salonStoreDTO.getPropertyImages();
+		
+		for (PropertyImages propertyImages: propertyImagesList) {
+			propertyImages.setPropertyDetailsId(property.getId());
+		}
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertyImagesList = (List<PropertyImages>) propertImagesDAO.saveAll(propertyImagesList);
+			salonStoreDTO.setPropertyImages(propertyImagesList);		
+		}
 		
 		salonStoreDTO.setPropertyMetaData(property);
 		
@@ -1077,6 +1206,16 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 			propertyDetails.setPropertyCode(null);
 			property = propertyDetailsDAO.save(propertyDetails);
 		}
+		List<PropertyImages> propertyImagesList = autoServiceDTO.getPropertyImages();
+		
+		for (PropertyImages propertyImages: propertyImagesList) {
+			propertyImages.setPropertyDetailsId(property.getId());
+		}
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertyImagesList = (List<PropertyImages>) propertImagesDAO.saveAll(propertyImagesList);
+			autoServiceDTO.setPropertyImages(propertyImagesList);		
+		}
 		autoServiceDTO.setId(autoService.getId());
 		autoServiceDTO.setPropertyMetaData(property);
 		
@@ -1114,6 +1253,24 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		autoService = autoServiceDAO.save(autoService);
 		
 		property = propertyDetailsDAO.save(propertyDetails);
+		
+		
+		
+		List<PropertyImages> propertyImagesList = propertImagesDAO.findByPropertyDetailsId(propertyDetails.getId());
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertImagesDAO.deleteAll(propertyImagesList);
+		}
+		propertyImagesList = autoServiceDTO.getPropertyImages();
+		
+		for (PropertyImages propertyImages: propertyImagesList) {
+			propertyImages.setPropertyDetailsId(property.getId());
+		}
+		
+		if(propertyImagesList != null && !propertyImagesList.isEmpty()) {
+			propertyImagesList = (List<PropertyImages>) propertImagesDAO.saveAll(propertyImagesList);
+			autoServiceDTO.setPropertyImages(propertyImagesList);		
+		}
 		
 		autoServiceDTO.setPropertyMetaData(property);
 		

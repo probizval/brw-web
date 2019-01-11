@@ -17,8 +17,8 @@ public interface PropertyDetailsDAO extends PagingAndSortingRepository<PropertyD
 	
 	List<PropertyDetails> findByPropertyName(@Param ("propertyName") String propertyName);
 	
-	@Query(nativeQuery=true, value="SELECT property_code,business_type_code,zip_code,id,img_url,property_id, property_type, latitude, longitude, listedOn, property_name, property_address, business_type, city,user_id, state, zip_code, lot_size,zoning_category,current_owner_name, estated_estimated_value,  ( 3959 * acos( cos( radians(:latitude) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(:longitude) ) + sin( radians(:latitude) ) * sin( radians( latitude ) ) ) ) AS distance FROM RW_Property_Details where (:zipCode is null or zip_code = :zipCode) HAVING distance < 1;")
-	List<PropertyDetails> getProperties(@Param ("latitude") Double latitude,@Param ("longitude") Double longitude,@Param ("zipCode") Integer zipCode);
+	@Query(nativeQuery=true, value="SELECT property_code,business_type_code,zip_code,id,img_url,property_id, property_type, latitude, longitude, listedOn, property_name, property_address, business_type, city,user_id, state, zip_code, lot_size,zoning_category,current_owner_name, estated_estimated_value,  ( 3959 * acos( cos( radians(:latitude) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(:longitude) ) + sin( radians(:latitude) ) * sin( radians( latitude ) ) ) ) AS distance FROM RW_Property_Details where (:zipCode is null or zip_code = :zipCode ) AND (:businessType is null or business_type = :businessType) AND (:minPrice is null or estated_estimated_value >= :minPrice)  AND (:maxPrice is null or estated_estimated_value <= :maxPrice) HAVING distance < 1;")
+	List<PropertyDetails> getProperties(@Param ("latitude") Double latitude,@Param ("longitude") Double longitude,@Param ("zipCode") Integer zipCode, @Param ("businessType") String businessType, @Param ("minPrice") Double minPrice, @Param ("maxPrice") Double maxPrice);
 	
 	List<PropertyDetails> findAllByUserId(@Param ("userId") int userId);
 	

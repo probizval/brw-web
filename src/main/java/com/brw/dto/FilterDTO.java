@@ -17,6 +17,36 @@ public class FilterDTO implements Serializable {
 	
 	private Integer userId;
 	
+	private String businessType;
+	
+	private Double minPrice;
+	
+	private Double maxPrice;
+
+	
+	public Double getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(Double maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+
+	public Double getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(Double minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public String getBusinessType() {
+		return businessType;
+	}
+
+	public void setBusinessType(String businessType) {
+		this.businessType = businessType;
+	}
 
 	public Integer getUserId() {
 		return userId;
