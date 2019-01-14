@@ -9,34 +9,34 @@
     searchController.$inject = ['$rootScope', '$scope', '$state', 'propertyService', 'propList'];
 
 		var allPriceList = [
-				{id: 1, price: "$50k"},
-				{id: 2, price: "$75k"},
-				{id: 3, price: "$100k"},
-				{id: 4, price: "$125k"},
-				{id: 5, price: "$150k"},
-				{id: 6, price: "$175k"},
-				{id: 7, price: "$200k"},
-				{id: 8, price: "$225k"},
-				{id: 9, price: "$250k"},
-				{id: 10, price: "$275k"},
-				{id: 11, price: "$300k"},
-				{id: 12, price: "$325k"},
-				{id: 13, price: "$350k"},
-				{id: 14, price: "$375k"},
-				{id: 15, price: "$400k"},
-				{id: 16, price: "$425k"},
-				{id: 17, price: "$450k"},
-				{id: 18, price: "$475k"},
-				{id: 19, price: "$500k"},
-				{id: 20, price: "$600k"},
-				{id: 21, price: "$700k"},
-				{id: 22, price: "$800k"},
-				{id: 23, price: "$900k"},
-				{id: 24, price: "$1M"},
-				{id: 25, price: "$2M"},
-				{id: 26, price: "$3M"},
-				{id: 27, price: "$4M"},
-				{id: 28, price: "$5M"}];
+				{id: 1, price: "$50k", actualPrice: 50000},
+				{id: 2, price: "$75k", actualPrice: 75000},
+				{id: 3, price: "$100k", actualPrice: 100000},
+				{id: 4, price: "$125k", actualPrice: 125000},
+				{id: 5, price: "$150k", actualPrice: 150000},
+				{id: 6, price: "$175k", actualPrice: 175000},
+				{id: 7, price: "$200k", actualPrice: 200000},
+				{id: 8, price: "$225k", actualPrice: 225000},
+				{id: 9, price: "$250k", actualPrice: 250000},
+				{id: 10, price: "$275k", actualPrice: 275000},
+				{id: 11, price: "$300k", actualPrice: 300000},
+				{id: 12, price: "$325k", actualPrice: 325000},
+				{id: 13, price: "$350k", actualPrice: 350000},
+				{id: 14, price: "$375k", actualPrice: 375000},
+				{id: 15, price: "$400k", actualPrice: 400000},
+				{id: 16, price: "$425k", actualPrice: 425000},
+				{id: 17, price: "$450k", actualPrice: 450000},
+				{id: 18, price: "$475k", actualPrice: 475000},
+				{id: 19, price: "$500k", actualPrice: 500000},
+				{id: 20, price: "$600k", actualPrice: 600000},
+				{id: 21, price: "$700k", actualPrice: 700000},
+				{id: 22, price: "$800k", actualPrice: 800000},
+				{id: 23, price: "$900k", actualPrice: 900000},
+				{id: 24, price: "$1M", actualPrice: 1000000},
+				{id: 25, price: "$2M", actualPrice: 2000000},
+				{id: 26, price: "$3M", actualPrice: 3000000},
+				{id: 27, price: "$4M", actualPrice: 4000000},
+				{id: 28, price: "$5M", actualPrice: 5000000}];
 
 			var allSqFeet = [
 				{id: 1, size: 500},
@@ -123,22 +123,36 @@
 			$scope.maxHoaFeesList = allMaxHoaFeesList;
 			$scope.timeListedList = allTimeListedList;
 
-      $scope.filterByMinPrice = function(){
-				var key = allPriceList.indexOf($scope.$$childTail.minPrice);
-				$scope.maxPriceList = allPriceList.slice(key + 1);
-        console.log("filterByMinPrice", $scope);
-        //TODO call search business api with price range filter
+      $scope.filterByMinPrice = function(price){
+    	  //var key = allPriceList.indexOf($scope.$$childTail.minPrice);
+    	  $scope.maxPriceList = allPriceList.slice(price.id + 1);
+
+        //console.log("filterByMinPrice" + price.actualPrice);
+		var searchAddress = JSON.parse(localStorage.getItem('searchAddress'));
+		searchAddress['minPrice'] = price && price.actualPrice || null;
+		localStorage.setItem('searchAddress', JSON.stringify(searchAddress));				
+		updateSearchResult(searchAddress);
+		
       };
 
-      $scope.filterByMaxPrice = function(){
-          var key = allPriceList.indexOf($scope.$$childTail.maxPrice);
-          $scope.minPriceList = allPriceList.slice(0, key);
-          console.log("filterByMaxPrice", $scope);
-        	//TODO call search business api with price range filter
+      $scope.filterByMaxPrice = function(price){
+    	  //var key = allPriceList.indexOf($scope.$$childTail.maxPrice);
+    	  $scope.minPriceList = allPriceList.slice(0, price.id - 1);
+    	  //console.log("filterByMaxPrice", $scope);
+
+    	  var searchAddress = JSON.parse(localStorage.getItem('searchAddress'));
+  		searchAddress['maxPrice'] = price && price.actualPrice || null;
+  		localStorage.setItem('searchAddress', JSON.stringify(searchAddress));				
+  		updateSearchResult(searchAddress);
       };
 
-			$scope.filterByBusinessType = function () {
-				console.log("filterByBusinessType", $scope.$$childTail.businessType);
+			$scope.filterByBusinessType = function (businessType) {
+				 console.log("filterByBusinessType", $scope.$$childTail.businessType);
+				console.log("filterByBusinessType", businessType);
+				var searchAddress = JSON.parse(localStorage.getItem('searchAddress'));
+				searchAddress['businessType'] = businessType || null;
+				localStorage.setItem('searchAddress', JSON.stringify(searchAddress));				
+				updateSearchResult(searchAddress);
         //TODO call search business api with businessType filter
       };
 
@@ -204,8 +218,8 @@
 				//TODO call search business api with keywords filter
 			};
 
-    	    $scope.applyFilters = function () {
-				console.log('Apply Filters');
+    	    $scope.applyFilters = function (filter) {
+				console.log('Apply Filters'+filter);
 			};
 			
 			$scope.bookMarked = function (obj, index) {
@@ -436,7 +450,7 @@
         // addMarker(arrDestinations);
         // showMarkers();
 
-				propertyService.getPropertyList(JSON.stringify(searchAddress))
+				/*propertyService.getPropertyList(JSON.stringify(searchAddress))
 					.success(function(res) {
             console.log("res ", res, res.length);
             arrDestinations = res.data.propertyList;
@@ -448,7 +462,8 @@
 					.error(function (error) {
 						$scope.status = 'Unable to load store data: ' + error.message;
 						console.log("res ", $scope.status);
-					});
+					});*/
+				updateSearchResult(searchAddress);
 				// setTimeout(function(){
 				// 	$scope.$apply(function(){
          //    $scope.searchList = arrDestinations;
@@ -460,6 +475,24 @@
 				// console.log("ne, sw", ne.lat(), ne.lng(), sw.lat(), sw.lng());
 				// arrDestinations = [{title: 'test', lat:37.55621007689943, lon:-121.9509967554608}];
 
+			}
+			
+			function updateSearchResult(filter) {
+				var arrDestinations = [];
+				localStorage.setItem('searchAddress', JSON.stringify(filter));
+				propertyService.getPropertyList(JSON.stringify(filter))
+				.success(function(res) {
+        console.log("res ", res, res.length);
+        arrDestinations = res.data.propertyList;
+					addMarker(arrDestinations);
+					showMarkers();
+        $scope.searchList = arrDestinations;
+					// console.log("res ", res.status);
+				})
+				.error(function (error) {
+					$scope.status = 'Unable to load store data: ' + error.message;
+					console.log("res ", $scope.status);
+				});
 			}
 
 			function addMarker(arrDestinations) {
