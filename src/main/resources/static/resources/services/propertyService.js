@@ -2,14 +2,14 @@
 var propertyService = angular.module('propertyService', [])
 propertyService.factory('propertyService', ['$http', 'authService', function ($http, authService) {
 
-    var urlBase = '/MyCarts/category';
+    var urlBase = window.location.origin + window.location.pathname + 'api/v1/';
     var propertyDataOp = {};
 
     propertyDataOp.getPropertyList = function (type) {
     	type = JSON.parse(type);
     	var userid = JSON.parse(sessionStorage.getItem('profile'));
       console.log("--------getBuyPropertylist" + "Bearer "+localStorage.getItem('id_token') );
-        return $http.post('/api/v1/propertyList', /*{
+        return $http.post(urlBase + 'propertyList', /*{
                           "latitude": type.latitude,
                           "longitude": type.longitude,
                           "zipCode": type.postal_code || null,
@@ -26,7 +26,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     
 
     propertyDataOp.getPropertyDetails =  function (id) {
-        return $http.get('/api/v1/propertydetails/'+id).success(function(res) {
+        return $http.get(urlBase + 'propertydetails/'+id).success(function(res) {
             return  res.data;
         })
         .error(function (error) {
@@ -45,7 +45,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     };
 
     propertyDataOp.savePropertyDetails =  function (typeOfBusiness, obj) {
-        return $http.post('/api/v1/property/'+typeOfBusiness, obj).success(function(res) {
+        return $http.post(urlBase + 'property/'+typeOfBusiness, obj).success(function(res) {
             return  JSON.stringify(res);
         })
         .error(function (error) {
@@ -72,7 +72,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
    propertyDataOp.getPropertyListByUser = function (pageNumber) {
         var obj = JSON.parse(localStorage.getItem('userprofile'));
         var userid = JSON.parse(sessionStorage.getItem('profile'));
-        return $http.get('/api/v1/userprofile/propertyList/'+userid.id+'/'+pageNumber).success(function(res) {
+        return $http.get(urlBase + 'userprofile/propertyList/'+userid.id+'/'+pageNumber).success(function(res) {
             return  JSON.stringify(res.data);
         })
         .error(function (error) {
@@ -82,7 +82,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     propertyDataOp.getBookMarkedPropertyListByUser = function (pageNumber) {
         var obj = JSON.parse(localStorage.getItem('userprofile'));
         var userid = JSON.parse(sessionStorage.getItem('profile'));
-        return $http.get('/api/v1/userprofile/bookmarksPropertyList/'+userid.id+'/'+pageNumber).success(function(res) {
+        return $http.get(urlBase + 'userprofile/bookmarksPropertyList/'+userid.id+'/'+pageNumber).success(function(res) {
             return  JSON.stringify(res.data);
         })
         .error(function (error) {
@@ -91,7 +91,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     };
     
     propertyDataOp.bookMarkedProperty = function (obj) {
-        return $http.post('/api/v1/property/bookmarks', obj).success(function(res) {
+        return $http.post(urlBase + 'property/bookmarks', obj).success(function(res) {
             return  JSON.stringify(res.data);
         })
         .error(function (error) {
@@ -99,7 +99,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
         });
     };
     propertyDataOp.removeBookMarkedProperty = function (obj) {
-        return $http.post('/api/v1/property/removebookmarks', obj).success(function(res) {
+        return $http.post(urlBase + 'property/removebookmarks', obj).success(function(res) {
             return  JSON.stringify(res.data);
         })
         .error(function (error) {
@@ -136,7 +136,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     propertyDataOp.getProfile = function (obj) {
 
         console.log("get profile ", obj);
-        return $http.post('/api/v1/userprofile', obj).success(function(res) {
+        return $http.post(urlBase + 'userprofile', obj).success(function(res) {
             return  JSON.stringify(res);
         })
         .error(function (error) {

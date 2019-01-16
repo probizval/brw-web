@@ -15,6 +15,7 @@ import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
 import com.brw.dao.AutoServiceDAO;
 import com.brw.dao.BookMarksDAO;
+import com.brw.dao.BusinessRequirementDAO;
 import com.brw.dao.CoinLaundryDAO;
 import com.brw.dao.GasStationDAO;
 import com.brw.dao.LiquorStoreDAO;
@@ -24,6 +25,7 @@ import com.brw.dao.RestaurentDAO;
 import com.brw.dao.SalonStoreDAO;
 import com.brw.dto.AutoServiceDTO;
 import com.brw.dto.BookMarksDTO;
+import com.brw.dto.BusinessRequirementDTO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.dto.GasStationDetailsDTO;
@@ -37,6 +39,7 @@ import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.dto.SalonStoreDTO;
 import com.brw.entities.AutoService;
 import com.brw.entities.BookMarks;
+import com.brw.entities.BusinessRequirement;
 import com.brw.entities.CoinLaundry;
 import com.brw.entities.GasStation;
 import com.brw.entities.LiquorStore;
@@ -75,6 +78,9 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	
 	@Autowired
 	private BookMarksDAO bookMarksDAO;
+	
+	@Autowired 
+	private BusinessRequirementDAO businessRequirementDAO;
 	
 	@Override
 	public PropertyListDTO getAllPropertyList(FilterDTO filter) {
@@ -1344,6 +1350,45 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		propertyListDTO.setPageSize(6);
 		propertyListDTO.setTotalCount(propertyList.getTotalElements());
 		return propertyListDTO;
+	}
+
+	@Override
+	public BusinessRequirementDTO saveBusinessRequirement(BusinessRequirementDTO businessRequirementDTO) {
+		
+		BusinessRequirement businessRequirement = new BusinessRequirement();
+		
+		businessRequirement.setUserId(businessRequirementDTO.getUserId());
+		businessRequirement.setBusinessCategory(businessRequirementDTO.getBusinessCategory());
+		businessRequirement.setBusinessType(businessRequirementDTO.getBusinessType());
+		businessRequirement.setOtherBusinessCategory(businessRequirementDTO.getOtherBusinessCategory());
+		businessRequirement.setOtherBusinessType(businessRequirementDTO.getOtherBusinessType());
+		businessRequirement.setRadius(businessRequirementDTO.getRadius());
+		businessRequirement.setMinPrice(businessRequirementDTO.getMinPrice());
+		businessRequirement.setMaxPrice(businessRequirementDTO.getMaxPrice());
+		businessRequirement.setMinLotSize(businessRequirementDTO.getMinLotSize());
+		businessRequirement.setMaxLotSize(businessRequirementDTO.getMaxLotSize());
+		businessRequirement.setBusinessLocation(businessRequirementDTO.getBusinessLocation());
+		businessRequirement.setBusinessDescription(businessRequirementDTO.getBusinessDescription());
+		businessRequirement.setAddress(businessRequirementDTO.getAddress());
+		businessRequirement.setCity(businessRequirementDTO.getCity());
+		businessRequirement.setState(businessRequirementDTO.getState());
+		businessRequirement.setCountry(businessRequirementDTO.getCountry());
+		businessRequirement.setZip_code(businessRequirementDTO.getZip_code());
+		businessRequirement.setLatitude(businessRequirementDTO.getLatitude());
+		businessRequirement.setLongitude(businessRequirementDTO.getLongitude());
+		businessRequirement.setFirstName(businessRequirementDTO.getFirstName());
+		businessRequirement.setLastName(businessRequirementDTO.getLastName());
+		businessRequirement.setEmailAdress(businessRequirementDTO.getEmailAdress());
+		businessRequirement.setContactNumber(businessRequirementDTO.getContactNumber());
+		businessRequirement.setModeOfContact(businessRequirementDTO.getModeOfContact());
+		businessRequirement.setIsConnectWithLocalAgents(businessRequirementDTO.getIsConnectWithLocalAgents());
+		businessRequirement.setIsSendMatchedBusinessEmail(businessRequirementDTO.getIsSendMatchedBusinessEmail());
+		
+		businessRequirement = businessRequirementDAO.save(businessRequirement);
+		
+		businessRequirementDTO.setId(businessRequirement.getId());
+		
+		return businessRequirementDTO;
 	}
 	
 }
