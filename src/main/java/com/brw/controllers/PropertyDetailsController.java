@@ -33,6 +33,7 @@ import com.brw.dto.SalonStoreDTO;
 import com.brw.exceptions.PropertyDetailsException;
 import com.brw.dto.AutoServiceDTO;
 import com.brw.dto.BookMarksDTO;
+import com.brw.dto.BusinessRequirementDTO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
 import com.brw.service.PropertyDetailsService;
@@ -328,6 +329,16 @@ public class PropertyDetailsController implements ErrorController {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
 		} catch (PropertyDetailsException e) {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@PostMapping(value = "property/businessrequirement")
+	public ApiResponse<?> saveBusinessRequirement(@RequestBody BusinessRequirementDTO businessRequirementDTO) {
+		try {
+			businessRequirementDTO = propertyDetailsService.saveBusinessRequirement(businessRequirementDTO);
+			return ApiResponse.withData(businessRequirementDTO);
+		} catch (InternalServerError e) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
