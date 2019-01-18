@@ -299,7 +299,7 @@ CREATE TABLE `rw_gas_station` (
   `timings` varchar(50) DEFAULT NULL,
   `type_of_service` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -339,7 +339,7 @@ CREATE TABLE `rw_liquer_store` (
   `anchor_business` varchar(100) DEFAULT NULL,
   `shopping_complex_traffic_score` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -393,7 +393,7 @@ CREATE TABLE `rw_nail_care_store` (
   `garbage` varchar(50) DEFAULT NULL,
   `employee` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -471,7 +471,7 @@ CREATE TABLE `rw_property_details` (
   `yelp_rating` double DEFAULT NULL,
   `zoning_category` varchar(60) DEFAULT NULL,
   `zoning_description` varchar(200) DEFAULT NULL,
-  `property_available_for` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `property_available_for` varchar(10) DEFAULT NULL,
   `listedOn` date DEFAULT NULL,
   `updatedOn` date DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,

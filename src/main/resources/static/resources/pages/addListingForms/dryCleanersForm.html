@@ -116,27 +116,130 @@
             <div class="row">
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Rent</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.rent"
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.monthlyRent"
                            name="rent" id="rent" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>NNN</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.nnn"
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.nnnExpense"
                            name="nnn" id="nnn" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Garbage</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.garbage"
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.garbageExpense"
                            name="garbage" id="garbage" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Utilities</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.utilities"
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.utilitiesExpense"
                            name="utilities" id="utilities" placeholder="$">
                 </div>
             </div>
         </div>
     </div>
 
+    <!--Revenue-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideRevenue = ! hideRevenue">
+            <label ng-class="{'details-not-expanded': hideRevenue, 'details-expanded': !hideRevenue}" >Revenues Detail</label>
+            <img ng-show="!hideRevenue" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideRevenue" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideRevenue">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Average Income</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.avgIncome"
+                           name="avgIncome" id="avgIncome" placeholder="$">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Average Revenue</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.avgRevenue"
+                           name="avgRevenue" id="avgRevenue" placeholder="$">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Employees-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideEmployees = ! hideEmployees">
+            <label ng-class="{'details-not-expanded': hideEmployees, 'details-expanded': !hideEmployees}" >Employees Detail</label>
+            <img ng-show="!hideEmployees" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideEmployees" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideEmployees">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Full Time Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.fulltime_emp"
+                           name="fulltime_emp" id="fulltime_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Part Time Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.parttiem_emp"
+                           name="parttiem_emp" id="parttiem_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Number of Certified Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.certified_emp"
+                           name="certified_emp" id="certified_emp" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Total Employees</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.total_emp"
+                           name="total_emp" id="total_emp" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Surroundings Information-->
+    <div class="col-md-6 col-lg-6 col-xl-6">
+        <div ng-click="hideSurroundings = ! hideSurroundings">
+            <label ng-class="{'details-not-expanded': hideSurroundings, 'details-expanded': !hideSurroundings}" >Surroundings Information</label>
+            <img ng-show="!hideSurroundings" ng-src="../../img/icon/downArrow.png" style="float: right"/>
+            <img ng-show="hideSurroundings" ng-src="../../img/icon/upArrow.png" style="float: right"/>
+        </div>
+        <div ng-show="!hideSurroundings">
+            <div class="row">
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Crime Indicator</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.crimeIndicator"
+                           name="crimeIndicator" id="crimeIndicator" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Residential Area</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.residentialArea"
+                           name="residentialArea" id="residentialArea" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Security</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.security"
+                           name="security" id="security" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Surrounding Businesses</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.surroundingBusiness"
+                           name="surroundingBusiness" id="surroundingBusiness" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Walk Score</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.walkscore"
+                           name="walkscore" id="walkscore" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Wiki Demographic Link</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.demographicLink"
+                           name="demographicLink" id="demographicLink" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Shopping Complex Traffic Score</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.dryCleaners.shoppingComplexTrafficScore"
+                           name="shoppingComplexTrafficScore" id="shoppingComplexTrafficScore" placeholder="">
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

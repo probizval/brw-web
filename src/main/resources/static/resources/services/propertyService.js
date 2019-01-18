@@ -106,13 +106,13 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
             return 'Unable to load store data: ' + error.message;
         });
     };
-    propertyDataOp.updatePropertyDetails = function (obj) {
-    	return $http.post('/updatePropertyDetails', obj).success(function(res) {
-			return  JSON.stringify(res);
-        })
-        .error(function (error) {
-            return 'Unable to load store data: ' + error.message;
-        });
+    propertyDataOp.updatePropertyDetails =  function (typeOfBusiness, obj) {
+      return $http.put(urlBase + 'property/'+typeOfBusiness, obj).success(function(res) {
+          return  JSON.stringify(res);
+      })
+      .error(function (error) {
+          return 'Unable to load store data: ' + error.message;
+      });
     };
     // propertyDataOp.updatePropertyDetails = function (obj) {
     //     return $http.post('/updatePropertyListByUser', obj).success(function(res) {

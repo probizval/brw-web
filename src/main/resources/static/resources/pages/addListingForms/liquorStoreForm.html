@@ -52,6 +52,11 @@
                            name="associatedBusiness" id="associatedBusiness" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                    <label>Anchor Business</label>
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.anchorBusiness"
+                           name="associatedBusiness" id="anchorBusiness" placeholder="">
+                </div>
+                <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Storage Area</label>
                     <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.storageSqft"
                            name="storageSqft" id="storageSqft" placeholder="Sq. Ft.">
@@ -83,22 +88,22 @@
             <div class="row">
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Rent</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.rent"
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.monthlyRent"
                            name="rent" id="rent" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>NNN</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.nnn"
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.nnnExpense"
                            name="nnn" id="nnn" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Garbage</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.garbage"
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.garbageExpense"
                            name="garbage" id="garbage" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Utilities</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.utilities"
+                    <input type="text" class="form-control form-control-md" ng-model="property.liquorStore.utilitiesExpense"
                            name="utilities" id="utilities" placeholder="$">
                 </div>
             </div>
