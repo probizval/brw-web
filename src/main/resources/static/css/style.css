@@ -2568,3 +2568,19 @@ input[type="radio"], input[type="checkbox"] {
     color: #999 !important;
 }
 
+/* 19. Edit Business
+------------------------------------------------------------------*/
+.edit-label {
+  font-size: 18px;
+  color: #0000ff;
+  /*text-decoration: underline;*/
+  font-weight: 500;
+  float: right;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+.item-description {
+  font-size: 14px;
+  line-height: 25px;
+  margin-bottom: 10px;
+}

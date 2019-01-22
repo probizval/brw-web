@@ -146,7 +146,7 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
 		        })
 		        .state('property.editProperty', {
 		        	 url: '/editProperty/:id',
-		             templateUrl: 'resources/pages/editListing.html',
+		             templateUrl: 'resources/pages/editListingForm.html',
 		             controller: 'editPropertyDetailsController',
 		             reload: true,
 		             resolve: {

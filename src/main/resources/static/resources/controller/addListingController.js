@@ -223,10 +223,6 @@
                 
          }
 
-         $scope.change = function() {
-            console.log($scope.property.type.name);
-        };
-
       $scope.imagesAsDataURL = [];
 
       $scope.imageUpload = function(event){

@@ -1,0 +1,199 @@
+
+<div class="container">
+    <div class="row ">
+        <div class="col col-md-12 col-lg-12 col-xl-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Property for sale</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{propDetails.propertyMetaData.propertyName}}</li>
+            </ol>
+            <div class="page-header bordered">
+                <div class="row">
+                    <div class="col-md-10"> <a href="#" class="btn-return" title="Back"><i class="fa fa-angle-left"></i></a>
+                        <h1>{{propDetails.propertyMetaData.propertyName}} ({{propDetails.propertyMetaData.businessType}}) <small><i class="fa fa-map-marker"></i> {{propDetails.propertyMetaData.propertyAddress}} {{propDetails.propertyMetaData.city}} {{propDetails.propertyMetaData.state}}</small></h1>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="btn-group btn-group-justified" role="group">
+                            <button class="btn btn-light" data-toggle="tooltip" title="Save to favorites"><i class="fa fa-star" aria-hidden="true"></i></button>
+                            <button class="btn btn-light" data-toggle="tooltip" title="Print this page"><i class="fa fa-print" aria-hidden="true"></i></button>
+                            <button class="btn btn-light" data-toggle="modal" data-target="#email-to-friend"><span data-toggle="tooltip" title="Email to Friend"><i class="fa fa-envelope-o" aria-hidden="true"></i></span></button>
+                            <button class="btn btn-light" data-toggle="modal" data-target="#report-listing"><span data-toggle="tooltip" title="Report Listing"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></span></button>
+                        </div>
+                        <!--<div class="price">${{propDetails.price}} <small>${{propDetails.pricePerSqft}}/sq ft</small></div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-md-center has-sidebar">
+    <div class="col col-md-12 col-lg-12 col-xl-12">
+        <div>
+            <div class="form-group">
+                <h3 class="headline">Business Images</h3>
+                <!--<input type="text" class="form-control form-control-md" id="img" ng-model="business.image_url" placeholder="Business Image">-->
+                <div class="add-listing-photo-container" style="max-height: 400px;overflow: auto;">
+                    <div class="row col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div ng-class="{'col-sm-12 col-md-12 col-lg-12 col-xl-12': imageArray.length === 0,
+                            'col-sm-4 col-md-4 col-lg-4 col-xl-4': imageArray.length !== 0}" style="align-items: center; width:200px;">
+                            <br/>
+                            <input type='file' accept="image/*" id="business_image" style="display:none;" onchange="angular.element(this).scope().imageUpload(event)" multiple>
+                            <div style="text-align: center">
+                                <label class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="font-size: 15px; color: #868e96; font-weight: bold; text-align: center;">Drop photos here to Upload</label>
+                                <label for="business_image" class="btn btn-primary"> Add New Photo</label>
+                            </div>
+                            <!--<button type="button" name="button" class="btn btn-primary" ng-click="uploadPhotoOnAWS()">AWS Upload</button>-->
+                        </div>
+                        <div ng-repeat="image in imagesAsDataURL" class="gallery-images col-md-4 col-lg-4 col-xl-4">
+                            <img class="thumb" ng-src="{{image}}">
+                            <button type="button" class="close-image" ng-click="removePhoto(image)">
+                                <img ng-src="../../img/icon/close.png" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="row form-group">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="border-bottom: 1px solid #eaeaea;"
+                         ng-click="editBusinessDescription = ! editBusinessDescription">
+                        <h3 style="font-size: 22px;float: left;">Business description</h3>
+                        <div class="edit-label">
+                            <a href="" ng-show="!editBusinessDescription" >Edit</a>
+                            <a href="" ng-show="editBusinessDescription"
+                               ng-click="updateBusinessDesc()">Save</a>
+                            <a href="" ng-show="editBusinessDescription"
+                               ng-click="cancelUpdateBusinessDesc(oldBusinessDescription)">Cancel</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" ng-show="!editBusinessDescription">
+                        <br/>
+                        <p>{{propDetails.description}}</p>
+                        <p>Not Edited</p>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" ng-show="editBusinessDescription">
+                        <br/>
+                        <textarea class="form-control form-control-md text-editor" ng-model="propDetails.description"
+                                  ng-init="oldBusinessDescription=propDetails.description" placeholder=""></textarea>
+                    </div>
+                </div>
+
+                <!--<div class="row form-group">-->
+                    <!--<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="border-bottom: 1px solid #eaeaea;"-->
+                         <!--ng-click="editBusinessDescription = ! editBusinessDescription">-->
+                        <!--<h3 style="font-size: 22px;float: left;">Business description</h3>-->
+                        <!--<div class="edit-label">-->
+                            <!--<a href="" ng-show="!editBusinessDescription">Edit</a>-->
+                            <!--<a href="" ng-show="editBusinessDescription">Save</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" ng-show="!editBusinessDescription">-->
+                        <!--<div>-->
+                            <!--<br/>-->
+                            <!--<p>{{propDetails.description}}</p>-->
+                            <!--<p>-->
+                                <!--Well established, profitable Chevron branded gas station and C-Store in Alameda County in the Fremont City, Central California. Located on a busy Highway that serves not only local patrons but travelers and the working population as well. Not only is it successful as it is, it has a tremendous upside.-->
+                            <!--</p>-->
+                            <!--<p>-->
+                                <!--The Convenience Store is setup to have a Deli in it and has room to expand. It has a drive through car wash and two large propane tanks. There are three tanks with a total volume of 30,000 gallons, four MPD’s with 12 gas nozzles and 2 diesel nozzles. Offering includes the business and real estate.-->
+                            <!--</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" ng-show="editBusinessDescription">-->
+                        <!--<br/>-->
+                        <!--<textarea class="form-control form-control-md text-editor" ng-model="propDetails.description" placeholder=""></textarea>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--{id:1, label: "Lot Size", model: $scope.propDetails.propertyMetaData.lotSize + " Sq. Ft.", tooltip: "Lot Size"},-->
+                <!--{id:2, label: "Buisness Type", model: $scope.propDetails.propertyMetaData.businessType, tooltip: "Business Type"},-->
+                <!--{id:3, label: "Year Built", model: $scope.propDetails.propertyMetaData.yearBuilt, tooltip: "Year built"},-->
+                <!--{id:4, label: "Price/sqft", model: $scope.propDetails.propertyMetaData.pricePerSqft, tooltip: "Price per square feet"},-->
+                <!--{id:5, label: "Days on BRW", model: $scope.propDetails.propertyMetaData.daysOnBrw, tooltip: "Days on BRW"},-->
+                <div class="row form-group">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="border-bottom: 1px solid #eaeaea;"
+                         ng-click="editBusinessFeatures = ! editBusinessFeatures">
+                        <h3 style="font-size: 22px;float: left;">Business Features</h3>
+                        <div class="edit-label">
+                            <a href="" ng-show="!editBusinessFeatures">Edit</a>
+                            <a href="" ng-show="editBusinessFeatures"
+                               ng-click="updateBusinessFeatures()">Save</a>
+                            <a href="" ng-show="editBusinessFeatures"
+                               ng-click="cancelUpdateBusinessFeatures(oldLotSize, oldYearBuilt)">Cancel</a>
+                        </div>
+                    </div>
+                    <div class="item-features col-sm-12 col-md-12 col-lg-12 col-xl-12" style="margin-bottom: 0;" ng-show="!editBusinessFeatures">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4 col-xl-4" ng-if="propDetails.propertyMetaData.lotSize">
+                                <h6>Lot Size</h6>
+                                <span style="text-align: center;">{{propDetails.propertyMetaData.lotSize}} Sq. Ft.</span>
+                            </div>
+                            <div class="col-md-4 col-lg-4 col-xl-4" ng-if="propDetails.propertyMetaData.businessType">
+                                <h6>Business Type</h6>
+                                <span style="text-align: center;">{{propDetails.propertyMetaData.businessType}}</span>
+                            </div>
+                            <div class="col-md-4 col-lg-4 col-xl-4" ng-if="propDetails.propertyMetaData.yearBuilt">
+                                <h6>Year Built</h6>
+                                <span style="text-align: center;">{{propDetails.propertyMetaData.yearBuilt}}</span>
+                            </div>
+                            <div class="col-md-4 col-lg-4 col-xl-4" ng-if="propDetails.propertyMetaData.listedOnBRW">
+                                <h6>Days on BRW</h6>
+                                <span style="text-align: center;">{{propDetails.propertyMetaData.listedOnBRW}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-features col-sm-12 col-md-12 col-lg-12 col-xl-12" ng-show="editBusinessFeatures">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4 col-xl-4">
+                                <h6>Lot Size</h6>
+                                <input type="text" class="form-control form-control-md" placeholder="Sq. Ft."
+                                       ng-model="propDetails.propertyMetaData.lotSize"
+                                       ng-init="oldLotSize=propDetails.propertyMetaData.lotSize">
+                            </div>
+                            <!--<div class="col-md-4 col-lg-4 col-xl-4" ng-if="propDetails.propertyMetaData.businessType">-->
+                                <!--<label>Business Type</label>-->
+                                <!--<select id="businessType" name="businessType" ng-model="propDetails.propertyMetaData.businessType"  ng-options="type.name for type in types"-->
+                                        <!--class="form-control form-control-md" required>-->
+                                    <!--<option default selected style="color:#868e96;" value="">&#45;&#45; Choose Business Type &#45;&#45;</option>-->
+                                <!--</select>-->
+                                <!--<span style="color:red" ng-show="submitted && editListingForm.businessType.$error.required">Business Type is required.</span>-->
+                            <!--</div>-->
+                            <div class="col-md-4 col-lg-4 col-xl-4" ng-if="propDetails.propertyMetaData.businessType">
+                                <h6>Business Type</h6>
+                                <span style="text-align: center;">{{propDetails.propertyMetaData.businessType}}</span>
+                            </div>
+                            <div class="col-md-4 col-lg-4 col-xl-4" ng-if="propDetails.propertyMetaData.yearBuilt">
+                                <h6>Year Built</h6>
+                                <input type="text" class="form-control form-control-md" placeholder=""
+                                       ng-model="propDetails.propertyMetaData.yearBuilt"
+                                       ng-init="oldYearBuilt=propDetails.propertyMetaData.yearBuilt">
+                            </div>
+                            <div class="col-md-4 col-lg-4 col-xl-4" ng-if="propDetails.propertyMetaData.yearBuilt">
+                                <h6>Days on BRW</h6>
+                                <span style="text-align: center;">{{propDetails.propertyMetaData.listedOnBRW}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <!--<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="border-bottom: 1px solid #eaeaea;"-->
+                         <!--ng-click="editBusinessDetails = ! editBusinessDetails">-->
+                        <!--<h3 style="font-size: 22px;float: left;">Business Details</h3>-->
+                        <!--<div class="edit-label">-->
+                            <!--<a href="" ng-show="!editBusinessDetails">Edit</a>-->
+                            <!--<a href="" ng-show="editBusinessDetails">Save</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <h3 style="font-size: 22px;float: left;">Business Details</h3>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" ng-if="propDetails.propertyMetaData.businessType === 'Restaurants and Food'"
+                         ng-include="'resources/pages/editingListingForms/restaurantEditForm.html'">
+                    </div>
+                    <div ng-if="propDetails.propertyMetaData.businessType === 'Gas Station'" ng-include="'resources/pages/businessDetailTemplates/gasStationDetailTemplate.html'"></div>
+                    <div ng-if="propDetails.propertyMetaData.businessType === 'Laundry'" ng-include="'resources/pages/businessDetailTemplates/coinLaundryDetailTemplate.html'"></div>
+                    <!--<div ng-if="propDetails.propertyMetaData.businessType === 'Dry Cleaners'" ng-include="'resources/pages/businessDetailTemplates/dryCleanersDetailTemplate.html'"></div>-->
+                    <div ng-if="propDetails.propertyMetaData.businessType === 'Liquor Store'" ng-include="'resources/pages/businessDetailTemplates/liquorStoreDetailTemplate.html'"></div>
+                    <div ng-if="propDetails.propertyMetaData.businessType === 'Beauty Salon/Spa/Nail'" ng-include="'resources/pages/businessDetailTemplates/beautySalonDetailTemplate.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
