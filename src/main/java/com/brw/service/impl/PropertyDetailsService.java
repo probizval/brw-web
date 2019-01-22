@@ -1373,7 +1373,7 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 		businessRequirement.setCity(businessRequirementDTO.getCity());
 		businessRequirement.setState(businessRequirementDTO.getState());
 		businessRequirement.setCountry(businessRequirementDTO.getCountry());
-		businessRequirement.setZip_code(businessRequirementDTO.getZip_code());
+		businessRequirement.setZipCode(businessRequirementDTO.getZipCode());
 		businessRequirement.setLatitude(businessRequirementDTO.getLatitude());
 		businessRequirement.setLongitude(businessRequirementDTO.getLongitude());
 		businessRequirement.setFirstName(businessRequirementDTO.getFirstName());

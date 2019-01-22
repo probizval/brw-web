@@ -63,7 +63,8 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
 					url: '/postBuy',
 					templateUrl: 'resources/pages/postBuyRequirements.html',
 					controller: 'postBuyRequirementsController',
-					reload: true
+					reload: true,
+					requireLogin: true
 				})
 				.state('propertyDetails', {
             url: '/propertyDetails/:id',
@@ -194,6 +195,11 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
             url: '/businessBuyGuidance',
             templateUrl: 'resources/pages/businessBuyGuidance.html'
         })
+        .state('postbuyconfirmation', {
+		            url: '/postbuyconfirmation',
+		            templateUrl: 'resources/pages/postbuyconfirmation.html',
+		            requireLogin: true
+		        })
         ;
 
  // Initialization for the angular-auth0 library

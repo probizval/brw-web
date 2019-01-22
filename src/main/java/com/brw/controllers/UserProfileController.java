@@ -40,7 +40,7 @@ public class UserProfileController implements ErrorController {
 	}
 	
 	@PostMapping(value = "userprofile")
-	public ResponseEntity<UserProfileDTO> createProperty(@RequestBody UserProfileDTO userProfileDTO) {
+	public ResponseEntity<UserProfileDTO> getProfile(@RequestBody UserProfileDTO userProfileDTO) {
 		try {
 			UserProfileDTO userDTO = userProfileService.getUserProfile(userProfileDTO);
 			return new ResponseEntity<>(userDTO, HttpStatus.OK);
@@ -51,7 +51,7 @@ public class UserProfileController implements ErrorController {
 	}
 	
 	@PutMapping(value = "userprofile")
-	public ResponseEntity<UserProfileDTO> updateProperty(@RequestBody UserProfileDTO userProfileDTO) {
+	public ResponseEntity<UserProfileDTO> updateProfile(@RequestBody UserProfileDTO userProfileDTO) {
 		try {
 			UserProfileDTO userDTO = userProfileService.updateUserProfile(userProfileDTO);
 			return new ResponseEntity<>(userDTO, HttpStatus.OK);

@@ -35,25 +35,62 @@
       };
 
     	$scope.business = {
+    	  "userId": 1,
           "businessCategory": "",
           "otherBusinessCategory":  "",
           "otherBusinessType":  "",
           "businessType": "",
           "businessLocation": "",
-    			"address": "",
-    			"city": "",
-    			"state": "",
-    			"country": "",
-    			"zipCode": 0,
-    			"lat": 0,
-    			"lng": 0,
+		  "address": "",
+		  "city": "",
+		  "state": "",
+		  "country": "",
+		  "zipCode": 0,
+		  "latitude": 0,
+		  "longitude": 0,
           "radius": 0,
           "minPrice": 0,
           "maxPrice": 0,
           "minLotSize": 0,
           "maxLotSize": 0,
           "businessDescription": "",
+          "firstName": "",
+          "lastName": "",
+          "contactNumber":  0,
+          "emailAdress": "",
+          "modeOfContact":  "E-mail",
+          "isConnectWithLocalAgents": true,
+          "isSendMatchedBusinessesEmail": true
     	};
+    	
+    	/*{
+            "userId": 1,
+            "businessCategory": "Automotive",
+            "businessType": "Auto",
+            "otherBusinessCategory": null,
+            "otherBusinessType": null,
+            "radius": 20,
+            "minPrice": 0,
+            "maxPrice": 0,
+            "minLotSize": 0,
+            "maxLotSize": 0,
+            "businessDescription": null,
+            "businessLocation": "Fremont",
+            "address": null,
+            "city": null,
+            "state": null,
+            "country": null,
+            "zip_code": 0,
+            "latitude": null,
+            "longitude": null,
+            "firstName": "Abhi",
+            "lastName": null,
+            "emailAdress": "gmail",
+            "contactNumber": "54655",
+            "modeOfContact": "call",
+            "isConnectWithLocalAgents": null,
+            "isSendMatchedBusinessEmail": null
+        }*/
 
       $scope.contactInformation = {
         "firstName": "",
@@ -62,13 +99,13 @@
         "emailAddress": "",
         "modeOfContact":  "E-mail",
         "connectWithLocalAgents": true,
-        "sendMatchedBusinessesEmail": true,
+        "sendMatchedBusinessesEmail": true
       };
 
      $scope.radius = 25;
      $scope.modeOfContact = "E-mail";
-     $scope.connectWithLocalAgents = true;
-     $scope.sendMatchedBusinessesEmail = true;
+     $scope.isConnectWithLocalAgents = true;
+     $scope.isSendMatchedBusinessesEmail = true;
 
      $scope.initialize = function() {
     		// This example displays an address form, using the autocomplete feature
@@ -85,6 +122,14 @@
     	        country: 'short_name',
     	        postal_code: 'short_name'
     	      };
+    	      
+    	      var profile = sessionStorage.getItem("profile");
+    	      profile = JSON.parse(profile);
+    	      $scope.business.firstName = profile.firstName || '';
+    	      $scope.business.lastName = profile.lastName || '';
+    	      $scope.business.emailAdress = profile.emailId || '';
+    	      $scope.business.contactNumber = profile.contactNumber || '';
+    	      $scope.business.userId = profile.id || 1;
 
     	        // Create the autocomplete object, restricting the search to geographical
     	        // location types.
@@ -179,7 +224,7 @@
               $scope.business.radius = $scope.radius;
             }
 
-            if (document.getElementById("minPrice").value) {
+            /*if (document.getElementById("minPrice").value) {
               $scope.business.minPrice = document.getElementById("minPrice").value;
             }
             if (document.getElementById("maxPrice").value) {
@@ -194,36 +239,37 @@
             if ($scope.businessDescription) {
               $scope.business.businessDescription = $scope.businessDescription;
             }
-            if ($scope.location) {
-                $scope.business.businessLocation = $scope.location
-            }
+            */
             if (document.getElementById("lng").value) {
-              $scope.business.lng = document.getElementById("lng").value;
+              $scope.business.longitude = document.getElementById("lng").value;
             }
             if (document.getElementById("lat").value){
-               $scope.business.lat = document.getElementById("lat").value;
+               $scope.business.latitude = document.getElementById("lat").value;
             }
 
             $scope.business.city = document.getElementById("locality").value;
             if (document.getElementById("zipCode").value) {
               $scope.business.zipCode = document.getElementById("zipCode").value;
             }
+            if ($scope.location) {
+                $scope.business.businessLocation = $scope.location
+            }
 
-            $scope.business.state = document.getElementById("administrative_area_level_1").value;
-            $scope.business.country = document.getElementById("country").value;
+           $scope.business.state = document.getElementById("administrative_area_level_1").value;
+           /* $scope.business.country = document.getElementById("country").value;
             $scope.business.address = document.getElementById("address").value;
             $scope.business.userName = localStorage.getItem('userName');
             $scope.business.userId = 10 //TODO need to map with userid
-            $scope.contactInformation.firstName = document.getElementById("firstName").value
-            $scope.contactInformation.lastName = document.getElementById("lastName").value
+            $scope.business.firstName = document.getElementById("firstName").value
+            $scope.business.lastName = document.getElementById("lastName").value
             if (document.getElementById("phoneNumber").value){
-              $scope.contactInformation.phoneNumber = document.getElementById("phoneNumber").value
+              $scope.business.contactNumber = document.getElementById("phoneNumber").value
             }
 
-            $scope.contactInformation.emailAddress = document.getElementById("emailAddress").value
-            $scope.contactInformation.modeOfContact = $scope.modeOfContact
-            $scope.contactInformation.connectWithLocalAgents = $scope.connectWithLocalAgents
-            $scope.contactInformation.sendMatchedBusinessesEmail = $scope.sendMatchedBusinessesEmail
+            $scope.business.emailAddress = document.getElementById("emailAddress").value*/
+            //$scope.business.modeOfContact = $scope.modeOfContact
+            //$scope.business.isConnectWithLocalAgents = $scope.isConnectWithLocalAgents
+            //$scope.business.isSendMatchedBusinessesEmail = $scope.isSendMatchedBusinessesEmail
 
             console.log($scope.business, $scope.contactInformation, $scope.business.userProfile);
             $scope.business.userProfile = JSON.parse(localStorage.getItem('userprofile'));
@@ -231,23 +277,12 @@
               .success(function(res) {
                      console.log("res "+ res);
                      console.log("res "+ res.status);
-                     //$state.go("property.confirmation", {status: res.status});
-                     // $state.go("property.confirmation");
+                     $state.go("postbuyconfirmation", {status: res.status});
+                     //$state.go("property.confirmation");
                 })
                 .error(function (error) {
                     $scope.status = 'Unable to load store data: ' + error.message;
-                });;
-            var saveObj = {'businessInformation': $scope.business, 'contactInformation': $scope.contactInformation}
-            propertyService.saveBuyBusinessRequirements(saveObj)
-              .success(function(res) {
-                     console.log("res ", res);
-                     console.log("res ", res.status);
-                     //$state.go("property.confirmation", {status: res.status});
-                     // $state.go("property.confirmation");
-                })
-                .error(function (error) {
-                    $scope.status = 'Unable to load store data: ' + error.message;
-                });;
+                });
           }
 
     	$scope.initialize();
