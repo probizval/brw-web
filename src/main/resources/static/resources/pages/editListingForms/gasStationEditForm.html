@@ -3,11 +3,11 @@
 <div class="row form-group">
     <div class="form-group col-md-6 col-lg-6 col-xl-6">
         <label>Gas Brand</label>
-        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.brand">
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="propDetails.brand">
     </div>
     <div class="form-group col-md-6 col-lg-6 col-xl-6">
         <label>Type Of Service</label>
-        <select class="form-control form-control-md" name="typeOfService" ng-model="property.gas.typeOfService"
+        <select class="form-control form-control-md" name="typeOfService" ng-model="propDetails.typeOfService"
                 id="typeOfService">
             <option value="Full Service">Full Service</option>
             <option value="Self Service">Self Service</option>
@@ -17,7 +17,7 @@
     <div class="col-md-6 col-lg-6 col-xl-6">
         <div class="form-group">
             <label>Fuel Type</label>
-            <select class="form-control form-control-md" name="fuelType" ng-model="property.gas.fuelType"
+            <select class="form-control form-control-md" name="fuelType" ng-model="propDetails.fuelType"
                     id="fuelType">
                 <option value="ALL">Both Gasoline and Diesel</option>
                 <option value="Gasoline">Gasoline</option>
@@ -26,39 +26,39 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 col-lg-6 col-xl-6"
-                 ng-if="property.gas.fuelType === 'ALL' || property.gas.fuelType === 'Gasoline'">
+                 ng-if="propDetails.fuelType === 'ALL' || propDetails.fuelType === 'Gasoline'">
                 <label>Gasoline Tank Capacity</label>
-                <input type="text" class="form-control form-control-md" placeholder="In Liters" ng-model="property.gas.gasolineCapacity">
+                <input type="text" class="form-control form-control-md" placeholder="In Liters" ng-model="propDetails.gasolineCapacity">
             </div>
             <div class="form-group col-md-6 col-lg-6 col-xl-6"
-                 ng-if="property.gas.fuelType === 'ALL' || property.gas.fuelType === 'Diesel'">
+                 ng-if="propDetails.fuelType === 'ALL' || propDetails.fuelType === 'Diesel'">
                 <label>Diesel Tank Capacity</label>
-                <input type="text" class="form-control form-control-md" placeholder="In Liters" ng-model="property.gas.diselCapacity">
+                <input type="text" class="form-control form-control-md" placeholder="In Liters" ng-model="propDetails.diselCapacity">
             </div>
         </div>
     </div>
 
     <div class="form-group col-md-6 col-lg-6 col-xl-6">
         <label>Open Hours</label>
-        <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.openHours">
+        <input type="text" class="form-control form-control-md" placeholder="" ng-model="propDetails.openHours">
     </div>
     <div class="col-md-6 col-lg-6 col-xl-6">
         <div class="row">
             <div class="form-group col-md-6 col-lg-6 col-xl-6">
                 <label>Number of Pumps</label>
-                <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.numberOfPumps">
+                <input type="text" class="form-control form-control-md" placeholder="" ng-model="propDetails.numberOfPumps">
             </div>
             <div class="form-group col-md-6 col-lg-6 col-xl-6">
                 <label>Number of Parking</label>
-                <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.numberOfParking">
+                <input type="text" class="form-control form-control-md" placeholder="" ng-model="propDetails.numberOfParking">
             </div>
             <div class="form-group col-md-6 col-lg-6 col-xl-6">
                 <label>Number of Restrooms</label>
-                <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.restroom">
+                <input type="text" class="form-control form-control-md" placeholder="" ng-model="propDetails.restroom">
             </div>
             <div class="form-group col-md-6 col-lg-6 col-xl-6">
                 <label>Franchise</label>
-                <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.frannchise">
+                <input type="text" class="form-control form-control-md" placeholder="" ng-model="propDetails.frannchise">
             </div>
         </div>
     </div>
@@ -66,11 +66,11 @@
         <div class="row">
             <div class="form-group col-md-6 col-lg-6 col-xl-6">
                 <label>Fire Safety Equipments</label>
-                <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.fireEquip">
+                <input type="text" class="form-control form-control-md" placeholder="" ng-model="propDetails.fireEquip">
             </div>
             <div class="form-group col-md-6 col-lg-6 col-xl-6">
                 <label>Fire Safety Capacity</label>
-                <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.fireCapacity">
+                <input type="text" class="form-control form-control-md" placeholder="" ng-model="propDetails.fireCapacity">
             </div>
         </div>
     </div>
@@ -79,67 +79,67 @@
             <div class="col-md-12 col-lg-12 col-xl-12">
                 <label>Convenient Store</label>
                 <div class="radio radio-inline">
-                    <input type="radio" id="convenientStore" ng-model="property.gas.convenientStore" value="Yes">
+                    <input type="radio" id="convenientStore" ng-model="propDetails.convenientStore" value="Yes">
                     <label for="convenientStore">Yes</label>
                 </div>
                 <div class="radio radio-inline">
-                    <input type="radio" id="noConvenientStore" ng-model="property.gas.convenientStore" value="No">
+                    <input type="radio" id="noConvenientStore" ng-model="propDetails.convenientStore" value="No">
                     <label for="noConvenientStore">No</label>
                 </div>
             </div>
 
-            <div class="row col-md-12 col-lg-12 col-xl-12" ng-show="property.gas.convenientStore == 'Yes'">
+            <div class="row col-md-12 col-lg-12 col-xl-12" ng-show="propDetails.convenientStore == 'Yes'">
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Convenient Store Brand</label>
-                    <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.storeBrand">
+                    <input type="text" class="form-control form-control-md" placeholder="" ng-model="propDetails.storeBrand">
                 </div>
 
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Store Inventory Cost</label>
-                    <input type="text" class="form-control form-control-md" placeholder="$" ng-model="property.gas.storeApproxInventoryCost">
+                    <input type="text" class="form-control form-control-md" placeholder="$" ng-model="propDetails.storeApproxInventoryCost">
                 </div>
             </div>
 
             <div class="col-md-12 col-lg-12 col-xl-12">
                 <label>Car Wash</label>
                 <div class="radio radio-inline">
-                    <input type="radio" id="carWash" ng-model="property.gas.carWash" value="Yes">
+                    <input type="radio" id="carWash" ng-model="propDetails.carWash" value="Yes">
                     <label for="carWash">Yes</label>
                 </div>
                 <div class="radio radio-inline">
-                    <input type="radio" id="noCarWash" ng-model="property.gas.carWash" value="No">
+                    <input type="radio" id="noCarWash" ng-model="propDetails.carWash" value="No">
                     <label for="noCarWash">No</label>
                 </div>
             </div>
-            <div class="form-group col-md-6 col-lg-6 col-xl-6" ng-show="property.gas.carWash == 'Yes'">
+            <div class="form-group col-md-6 col-lg-6 col-xl-6" ng-show="propDetails.carWash == 'Yes'">
                 <label>Car Wash Equipment Cost</label>
-                <input type="text" class="form-control form-control-md" placeholder="$" ng-model="property.gas.carWashEquipCost">
+                <input type="text" class="form-control form-control-md" placeholder="$" ng-model="propDetails.carWashEquipCost">
             </div>
 
             <div class="col-md-12 col-lg-12 col-xl-12">
                 <label>Auto Repair & Maintenance Shop</label>
                 <div class="radio radio-inline">
-                    <input type="radio" id="autoRepairShop" ng-model="property.gas.autoSupplyRepairMaintShop" value="Yes">
+                    <input type="radio" id="autoRepairShop" ng-model="propDetails.autoSupplyRepairMaintShop" value="Yes">
                     <label for="autoRepairShop">Yes</label>
                 </div>
                 <div class="radio radio-inline">
-                    <input type="radio" id="noAutoRepairShop" ng-model="property.gas.autoSupplyRepairMaintShop" value="No">
+                    <input type="radio" id="noAutoRepairShop" ng-model="propDetails.autoSupplyRepairMaintShop" value="No">
                     <label for="noAutoRepairShop">No</label>
                 </div>
             </div>
-            <div class="form-group col-md-6 col-lg-6 col-xl-6" ng-show="property.gas.autoSupplyRepairMaintShop == 'Yes'">
+            <div class="form-group col-md-6 col-lg-6 col-xl-6" ng-show="propDetails.autoSupplyRepairMaintShop == 'Yes'">
                 <label>Approx Cost</label>
-                <input type="text" class="form-control form-control-md" placeholder="$" ng-model="property.gas.autoSupplyRepairMaintShopCost">
+                <input type="text" class="form-control form-control-md" placeholder="$" ng-model="propDetails.autoSupplyRepairMaintShopCost">
             </div>
 
             <div class="col-md-12 col-lg-12 col-xl-12">
                 <label>ATM</label>
                 <div class="radio radio-inline">
-                    <input type="radio" id="atm" ng-model="property.gas.atm" value="Yes">
+                    <input type="radio" id="atm" ng-model="propDetails.atm" value="Yes">
                     <label for="atm">Yes</label>
                 </div>
                 <div class="radio radio-inline">
-                    <input type="radio" id="noAtm" ng-model="property.gas.atm" value="No">
+                    <input type="radio" id="noAtm" ng-model="propDetails.atm" value="No">
                     <label for="noAtm">No</label>
                 </div>
             </div>
@@ -147,22 +147,22 @@
             <div class="col-md-12 col-lg-12 col-xl-12">
                 <label>Food Court</label>
                 <div class="radio radio-inline">
-                    <input type="radio" id="foodCourt" ng-model="property.gas.foodCourt" value="Yes">
+                    <input type="radio" id="foodCourt" ng-model="propDetails.foodCourt" value="Yes">
                     <label for="foodCourt">Yes</label>
                 </div>
                 <div class="radio radio-inline">
-                    <input type="radio" id="noFoodCourt" ng-model="property.gas.foodCourt" value="No">
+                    <input type="radio" id="noFoodCourt" ng-model="propDetails.foodCourt" value="No">
                     <label for="noFoodCourt">No</label>
                 </div>
             </div>
-            <div class="row col-md-12 col-lg-12 col-xl-12" ng-show="property.gas.foodCourt == 'Yes'">
+            <div class="row col-md-12 col-lg-12 col-xl-12" ng-show="propDetails.foodCourt == 'Yes'">
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Food Court Cost</label>
-                    <input type="text" class="form-control form-control-md" placeholder="$" ng-model="property.gas.foodCourtCost">
+                    <input type="text" class="form-control form-control-md" placeholder="$" ng-model="propDetails.foodCourtCost">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Food Court Capacity</label>
-                    <input type="text" class="form-control form-control-md" placeholder="" ng-model="property.gas.foodCourtSeatingCapacity">
+                    <input type="text" class="form-control form-control-md" placeholder="" ng-model="propDetails.foodCourtSeatingCapacity">
                 </div>
             </div>
         </div>
@@ -179,22 +179,22 @@
             <div class="row">
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Rent</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.rent"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.rent"
                            name="rent" id="rent" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>NNN</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.nnn"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.nnn"
                            name="nnn" id="nnn" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Garbage</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.garbage"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.garbage"
                            name="garbage" id="garbage" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Utilities</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.utilities"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.utilities"
                            name="utilities" id="utilities" placeholder="$">
                 </div>
             </div>
@@ -212,12 +212,12 @@
             <div class="row">
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Average Income</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.avgIncome"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.avgIncome"
                            name="avgIncome" id="avgIncome" placeholder="$">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Average Revenue</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.avgRevenue"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.avgRevenue"
                            name="avgRevenue" id="avgRevenue" placeholder="$">
                 </div>
             </div>
@@ -235,22 +235,22 @@
             <div class="row">
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Number of Full Time Employees</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.fulltime_emp"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.fulltime_emp"
                            name="fulltime_emp" id="fulltime_emp" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Number of Part Time Employees</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.parttiem_emp"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.parttiem_emp"
                            name="parttiem_emp" id="parttiem_emp" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Number of Certified Employees</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.certified_emp"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.certified_emp"
                            name="certified_emp" id="certified_emp" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Total Employees</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.total_emp"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.total_emp"
                            name="total_emp" id="total_emp" placeholder="">
                 </div>
             </div>
@@ -268,37 +268,37 @@
             <div class="row">
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Crime Indicator</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.crimeIndicator"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.crimeIndicator"
                            name="crimeIndicator" id="crimeIndicator" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Residential Area</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.residentialArea"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.residentialArea"
                            name="residentialArea" id="residentialArea" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Security</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.security"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.security"
                            name="security" id="security" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Surrounding Businesses</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.surroundingBusiness"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.surroundingBusiness"
                            name="surroundingBusiness" id="surroundingBusiness" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Walk Score</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.walkscore"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.walkscore"
                            name="walkscore" id="walkscore" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Wiki Demographic Link</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.wikiDemoLink"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.wikiDemoLink"
                            name="wikiDemoLink" id="wikiDemoLink" placeholder="">
                 </div>
                 <div class="form-group col-md-6 col-lg-6 col-xl-6">
                     <label>Shopping Complex Traffic Score</label>
-                    <input type="text" class="form-control form-control-md" ng-model="property.gas.shoppingComplexTrafficScore"
+                    <input type="text" class="form-control form-control-md" ng-model="propDetails.shoppingComplexTrafficScore"
                            name="shoppingComplexTrafficScore" id="shoppingComplexTrafficScore" placeholder="">
                 </div>
             </div>
