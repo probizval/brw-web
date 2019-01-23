@@ -50,7 +50,7 @@ public class BusinessRequirement implements Serializable {
 	@Column(name = "min_lot_size")
 	private int minLotSize;
 	
-	@Column(name = "maz_lot_size")
+	@Column(name = "max_lot_size")
 	private int maxLotSize;
 	
 	@Column(name = "business_description")
@@ -72,7 +72,7 @@ public class BusinessRequirement implements Serializable {
 	private String country;
 	
 	@Column(name = "zip_code")
-	private int zip_code;
+	private int zipCode;
 	
 	@Column(name = "latitude")
 	private Double latitude;
@@ -237,12 +237,12 @@ public class BusinessRequirement implements Serializable {
 		this.country = country;
 	}
 
-	public int getZip_code() {
-		return zip_code;
+	public int getZipCode() {
+		return zipCode;
 	}
 
-	public void setZip_code(int zip_code) {
-		this.zip_code = zip_code;
+	public void setZipCode(int zipCode) {
+		this.zipCode = zipCode;
 	}
 
 	public Double getLatitude() {

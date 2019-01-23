@@ -54,7 +54,7 @@
                   <div class="row form-group">
                     <div class="col-md-6 col-lg-6 col-xl-6">
                         <label>Location*</label>
-                        <input type="text" class="form-control form-control-md" name="location" ng-model="location"
+                        <input type="text" class="form-control form-control-md" name="location" ng-model="business.location"
                           id="autocomplete" placeholder="Enter an address, city or zipcode" required>
                         <!-- <span style="color:red" ng-show="submitted && postBuyForm.location.$error.required">Location is required.</span> -->
                         <div class="errors" ng-show="submitted || postBuyForm.location.$touched">
@@ -118,18 +118,18 @@
                       <label> Price Range (Optional)</label> <br />
                       <div class="row col-md-12 col-lg-12 col-xl-12">
                         <label style="margin-bottom: 10px; margin-top: 10px;"> Min </label> &nbsp &nbsp
-                        <input type=text id="minPrice" class="col-lg-4 form-control form-control-md" ng-model="minPrice" placeholder="$">&nbsp &nbsp
+                        <input type=text id="minPrice" class="col-lg-4 form-control form-control-md" ng-model="business.minPrice" placeholder="$">&nbsp &nbsp
                         <label style="margin-bottom: 10px; margin-top: 10px;"> - Max </label> &nbsp &nbsp
-                        <input type=text id="maxPrice" class="col-lg-4 form-control form-control-md" ng-model="maxPrice" placeholder="$">&nbsp &nbsp
+                        <input type=text id="maxPrice" class="col-lg-4 form-control form-control-md" ng-model="business.maxPrice" placeholder="$">&nbsp &nbsp
                     </div>
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-6">
                       <label> Lot Size Range (Optional)</label> <br />
                       <div class="row col-md-12 col-lg-12 col-xl-12">
                         <label style="margin-bottom: 10px; margin-top: 10px;"> Min </label> &nbsp &nbsp
-                        <input type=text id="minLotSize" class="col-lg-4 form-control form-control-md" ng-model="minLotSize" placeholder="sq. ft">&nbsp &nbsp
+                        <input type=text id="minLotSize" class="col-lg-4 form-control form-control-md" ng-model="business.minLotSize" placeholder="sq. ft">&nbsp &nbsp
                         <label style="margin-bottom: 10px; margin-top: 10px;"> - Max </label> &nbsp &nbsp
-                        <input type=text id="maxLotSize" class="col-lg-4 form-control form-control-md" ng-model="maxLotSize" placeholder="sq. ft">&nbsp &nbsp
+                        <input type=text id="maxLotSize" class="col-lg-4 form-control form-control-md" ng-model="business.maxLotSize" placeholder="sq. ft">&nbsp &nbsp
                       </div>
                     </div>
                   </div>
@@ -143,7 +143,7 @@
 
                   <div class="form-group">
                     <label>Detailed description of the Business you want (Optional)</label>
-                    <textarea class="form-control form-control-md text-editor" ng-model="businessDescription" placeholder="10000 characters allowed"></textarea>
+                    <textarea class="form-control form-control-md text-editor" ng-model="business.businessDescription" placeholder="10000 characters allowed"></textarea>
                   </div>
                   <br />
 
@@ -151,7 +151,7 @@
                   <div class="row form-group">
                     <div class="col-md-6 col-lg-6 col-xl-6">
                         <label>First Name*</label>
-                        <input type="text" class="form-control form-control-md" name="firstName" ng-model="contact.firstName"
+                        <input type="text" class="form-control form-control-md" name="firstName" ng-model="business.firstName"
                            id="firstName" placeholder="" required>
                         <div ng-show="submitted || postBuyForm.firstName.$touched">
                           <div style="color:red" ng-show="postBuyForm.firstName.$error.required">First Name is required.</div>
@@ -159,7 +159,7 @@
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-6">
                         <label>Last Name*</label>
-                        <input type="text" class="form-control form-control-md" name="lastName" ng-model="contact.lastName"
+                        <input type="text" class="form-control form-control-md" name="lastName" ng-model="business.lastName"
                            id="lastName" placeholder="" required>
                         <div class="errors" ng-show="submitted || postBuyForm.lastName.$touched">
                            <div style="color:red" ng-show="postBuyForm.lastName.$error.required">Last name is required.</div>
@@ -170,16 +170,16 @@
                   <div class="row form-group">
                     <div class="col-md-6 col-lg-6 col-xl-6">
                         <label>Phone Number*</label>
-                        <input type="text" class="form-control form-control-md" name="phoneNumber" ng-model="contact.phoneNumber"
-                           id="phoneNumber" placeholder="" ng-pattern="/^(\d{10})$/" required>
+                        <input type="text" class="form-control form-control-md" name="contactNumber" ng-model="business.contactNumber"
+                           id="contactNumber" placeholder="" ng-pattern="/^(\d{10})$/" required>
                         <div class="errors" ng-show="submitted || postBuyForm.phoneNumber.$touched">
-                           <div style="color:red" ng-show="postBuyForm.phoneNumber.$error.required">Phone Number is required.</div>
-                           <div style="color:red" ng-show="postBuyForm.phoneNumber.$error.pattern">Phone Number is invalid.</div>
+                           <div style="color:red" ng-show="postBuyForm.contactNumber.$error.required">Phone Number is required.</div>
+                           <div style="color:red" ng-show="postBuyForm.contactNumber.$error.pattern">Phone Number is invalid.</div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-6">
                         <label>Email Address*</label>
-                        <input type="email" class="form-control form-control-md" name="emailAddress" ng-model="contact.emailAddress"
+                        <input type="email" class="form-control form-control-md" name="emailAddress" ng-model="business.emailAdress"
                            id="emailAddress" placeholder="" required>
                         <div class="errors" ng-show="submitted || postBuyForm.emailAddress.$touched">
                             <div style="color:red" ng-show="postBuyForm.emailAddress.$error.required">E-mail is required.</div>
@@ -189,20 +189,20 @@
                   </div>
                   <div class="row form-group col-md-12 col-lg-12 col-xl-12">
                     <label>Preference for mode of Contact*</label>&nbsp &nbsp &nbsp
-                    <input style="margin-top: 3px;" id="emailMode" type="radio" ng-model="modeOfContact" value="E-mail" ng-checked="true" /> &nbsp
+                    <input style="margin-top: 3px;" id="emailMode" type="radio" ng-model="business.modeOfContact" value="E-mail" ng-checked="true" /> &nbsp
                     <label for="emailMode">E-mail</label> &nbsp &nbsp &nbsp
-                    <input style="margin-top: 3px;" id="phoneMode" type="radio" ng-model="modeOfContact" value="Phone" /> &nbsp
+                    <input style="margin-top: 3px;" id="phoneMode" type="radio" ng-model="business.modeOfContact" value="Phone" /> &nbsp
                     <label for="phoneMode">Phone</label>
                   </div>
 
                   <div class="form-group">
                       <label class="checkbox-inline">
-                          <input type="checkbox" name="connectWithLocalAgents" ng-model="connectWithLocalAgents" ng-checked="true">
+                          <input type="checkbox" name="connectWithLocalAgents" ng-model="business.isConnectWithLocalAgents" ng-checked="true">
                             Is it OK if local Agents connect with you?
                       </label>
                       <br />
                       <label class="checkbox-inline">
-                          <input type="checkbox" name="sendMatchedBusinessesEmail" ng-model="sendMatchedBusinessesEmail" ng-checked="true">
+                          <input type="checkbox" name="sendMatchedBusinessesEmail" ng-model="business.isSendMatchedBusinessesEmail" ng-checked="true">
                             Do yo want us to send an email for matched businesses as per above requirements?
                       </label>
                   </div>
@@ -212,8 +212,8 @@
                     <input type="submit" value="Submit" class="btn btn-lg btn-primary" ng-click="saveBuyBusinessRequirements(postBuyForm)"/>
                   </div>
 
-                  <input type="text" class="form-control form-control-lg" ng-model="business.lat" id="lat" hidden="hidden">
-                  <input type="text" class="form-control form-control-lg" ng-model="business.lng" id="lng" hidden="hidden">
+                  <input type="text" class="form-control form-control-lg" ng-model="lat" id="lat" hidden="hidden">
+                  <input type="text" class="form-control form-control-lg" ng-model="lng" id="lng" hidden="hidden">
                 </form>
               </div>
             </div>

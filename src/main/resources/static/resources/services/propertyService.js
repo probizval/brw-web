@@ -2,7 +2,7 @@
 var propertyService = angular.module('propertyService', [])
 propertyService.factory('propertyService', ['$http', 'authService', function ($http, authService) {
 
-    var urlBase = window.location.origin + window.location.pathname + 'api/v1/';
+	var urlBase = window.location.origin + window.location.pathname + 'api/v1/';
     var propertyDataOp = {};
 
     propertyDataOp.getPropertyList = function (type) {
@@ -143,10 +143,21 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
             return 'Unable to load store data: ' + error.message;
         });
     };
+    
+    propertyDataOp.updateProfile = function (obj) {
+
+        console.log("update profile ", obj);
+        return $http.put(urlBase +'userprofile', obj).success(function(res) {
+            return  JSON.stringify(res);
+        })
+        .error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
 
     propertyDataOp.sendEmailWithBuyRequirements = function (obj) {
       console.log("------sendEmailWithBuyRequirements------", obj);
-      return $http.post('/sendEmailWithBuyRequirements', obj).success(function(res) {
+      return $http.post(urlBase + 'property/businessrequirement', obj).success(function(res) {
           return  JSON.stringify(res);
       })
       .error(function (error) {
