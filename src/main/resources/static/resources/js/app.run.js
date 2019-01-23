@@ -22,6 +22,25 @@
     		authService.login();
     	}else {
     		let usermetadata = JSON.parse(sessionStorage.getItem('usermetadata'));
+    		$rootScope.authService = authService;
+	        $rootScope.isAuthenticated = authService.isAuthenticated();
+
+	        if (authService.getCachedProfile()) {
+	        	$rootScope.profile = authService.getCachedProfile();
+	        } else {
+	          authService.getProfile(function(err, profile) {
+	        	  $rootScope.profile = profile;
+                propertyService.saveProfile(profile).success(function(res) {
+                     console.log("In homeController saveProfile "+ res);
+                     if(res) {
+                        localStorage.setItem('userprofile',JSON.stringify(res[0]));
+                     }
+                })
+                .error(function (error) {
+                    $scope.status = 'Unable to get profile: ' + error.message;
+                });
+	          });
+	        }
     		!sessionStorage.getItem("profile") && usermetadata && propertyService.getProfile({'emailId':usermetadata.email,'firstName':usermetadata.given_name || '','lastName': usermetadata.family_name || '' })
     		.success(function(res) {
                 sessionStorage.setItem("profile",JSON.stringify(res));
@@ -31,6 +50,7 @@
            });
     	}
     });
+    
   }
   
   function parseJwt (token) {
