@@ -92,7 +92,13 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
             url: '/myProfile',
             templateUrl: 'resources/pages/myProfile.html',
             controller: 'myProfileController',
-            reload: true
+            reload: true,
+            resolve: {
+            	profileDetails: function(propertyService) {
+            		let profile = JSON.parse(sessionStorage.getItem('profile'));
+            		 return propertyService.getProfile({"emailId":profile.emailId});
+            	}
+            }
         })
 
 				.state('accountSettings', {
@@ -198,6 +204,11 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
         .state('postbuyconfirmation', {
 		            url: '/postbuyconfirmation',
 		            templateUrl: 'resources/pages/postbuyconfirmation.html',
+		            requireLogin: true
+		        })
+		 .state('profileconfirmation', {
+		            url: '/profileconfirmation',
+		            templateUrl: 'resources/pages/profileconfirmation.html',
 		            requireLogin: true
 		        })
         ;

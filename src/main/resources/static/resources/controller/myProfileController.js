@@ -8,10 +8,10 @@
     .directive('ngFileSelect', ngFileSelect)
     .factory('fileReader', fileReader);
 
-  myProfileController.$inject = ['$scope', 'fileReader', 'authService'];
-    function myProfileController($scope, fileReader, authService) {
+  myProfileController.$inject = ['$scope', '$state', 'fileReader', 'authService','profileDetails', 'propertyService'];
+    function myProfileController($scope, $state, fileReader, authService, profileDetails, propertyService) {
       $scope.imageSrc = "";
-      //$scope.profile = $rootScope.profile;
+      $scope.profileDetails = profileDetails.data;
       
       $scope.uploadPicture = function (profile) {
         console.log("uploadPicture", profile);
@@ -24,12 +24,30 @@
         $scope.imageSrc = "";
       };
       $scope.updateProfile = function() {
-    	  console.log("update profile"+$scope.profile);
+    	  $scope.profileDetails.city = document.getElementById("locality").value;
+    	  $scope.profileDetails.address = document.getElementById("address").value;
+    	  $scope.profileDetails.location = document.getElementById("location").value;
+    	  $scope.profileDetails.state = document.getElementById("administrative_area_level_1").value;
+    	  $scope.profileDetails.country = document.getElementById("country").value;
+    	  $scope.profileDetails.zipcode = document.getElementById("postal_code").value;
+    	  
+    	  
+    	  console.log("update profile"+$scope.profileDetails);
+    	  propertyService.updateProfile($scope.profileDetails)
+          .success(function(res) {
+                 console.log("res "+ res);
+                 console.log("res "+ res.status);
+                 $state.go("profileconfirmation", {status: res.status});
+                 //$state.go("property.confirmation");
+            })
+            .error(function (error) {
+                $scope.status = 'Unable to load store data: ' + error.message;
+            });
       };
       console.log('In myProfileController', fileReader);
       
       var autocomplete = new google.maps.places.Autocomplete(
-	            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+	            /** @type {!HTMLInputElement} */(document.getElementById('location')),
 	            {types: ['geocode']});
 
 	        // When the user selects an address from the dropdown, populate the address
@@ -42,8 +60,29 @@
 
 	        var lat = place.geometry.location.lat();
 	        var lng = place.geometry.location.lng();
+	        var componentForm = {
+	    	        locality: 'long_name',
+	    	        administrative_area_level_1: 'short_name',
+	    	        country: 'long_name',
+	    	        postal_code: 'short_name'
+	    	      };
+	        
+	        /*for (var component in componentForm) {
+ 	    	   if(document.getElementById(component)) {
+ 	    		   document.getElementById(component).value = '';
+ 	    		   document.getElementById(component).disabled = false;
+ 	    	   }
+ 	        }*/
 
-
+	        for (var i = 0; i < place.address_components.length; i++) {
+  	          var addressType = place.address_components[i].types[0];
+  	          if (componentForm[addressType] && document.getElementById(addressType)) {
+  	            var val = place.address_components[i][componentForm[addressType]];
+  	            document.getElementById(addressType).value = val;
+  	          }
+  	        }
+	        document.getElementById("address").value  = place.formatted_address;
+	        
 	       
         console.log("-------place----", place);
 	      }

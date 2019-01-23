@@ -143,6 +143,17 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
             return 'Unable to load store data: ' + error.message;
         });
     };
+    
+    propertyDataOp.updateProfile = function (obj) {
+
+        console.log("update profile ", obj);
+        return $http.put(urlBase +'userprofile', obj).success(function(res) {
+            return  JSON.stringify(res);
+        })
+        .error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
 
     propertyDataOp.sendEmailWithBuyRequirements = function (obj) {
       console.log("------sendEmailWithBuyRequirements------", obj);
