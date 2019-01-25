@@ -35,7 +35,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     };
 
     propertyDataOp.getImagesByPropertyCode =  function (property_code) {
-      return $http.get('/getImagesByPropertyCode/'+property_code).success(function(res) {
+      return $http.get(urlBase + 'getImagesByPropertyCode/'+property_code).success(function(res) {
         // console.log("getImagesByPropertyCode", JSON.stringify(res) );
         return  JSON.stringify(res);
       })
@@ -125,7 +125,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     propertyDataOp.saveProfile = function (obj) {
 
         console.log("save profile ", obj);
-        return $http.post('/createProfile', obj).success(function(res) {
+        return $http.post(urlBase + 'createProfile', obj).success(function(res) {
             return  JSON.stringify(res);
         })
         .error(function (error) {
@@ -167,7 +167,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
 
     propertyDataOp.saveBuyBusinessRequirements = function (obj) {
       console.log("------saveBuyBusinessRequirements------", obj);
-    	return $http.post('/saveBuyBusinessRequirement', obj).success(function(res) {
+    	return $http.post(urlBase + 'saveBuyBusinessRequirement', obj).success(function(res) {
 			     return  JSON.stringify(res);
         })
         .error(function (error) {
@@ -177,7 +177,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     };
     propertyDataOp.getAgentsList = function (type) {
       console.log("--------getAgentsList");
-      return $http.get('/getAgentsList/'+type).success(function(res) {
+      return $http.get(urlBase + 'getAgentsList/'+type).success(function(res) {
         return  JSON.stringify(res);
       })
         .error(function (error) {
