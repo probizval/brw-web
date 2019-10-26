@@ -111,7 +111,17 @@
 		margin-top:10px;
  	}		
 }
-    </style>
+
+</style>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SR252ETTY4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SR252ETTY4');
+</script>
 
 </head>
 <body ng-app="myApp">
@@ -120,395 +130,6 @@
 
 <div ng-include="'resources/pages/header.html'"></div>
 <div ui-view="">
-
-<div class="home-search">
-<div class="main search-form v2">
-  <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="col-md-12 col-lg-10">
-        <div class="heading">
-          <h2>Find your Business</h2>
-          <h3>We will help you to find the best property in any city in the world.</h3>
-        </div>
-        <form action="property_listing.html">
-          <div class="row justify-content-md-center">
-            <div class="col-md-9 col-lg-8">
-            <div class="input-group input-group-lg">
-      <input type="text" id="autocomplete" class="form-control" ng-init="initialize" placeholder="Enter an address, city or zipcode">
-      <span class="input-group-btn">
-      <button class="btn btn-white" type="button"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
-        <button class="btn btn-primary" type="button">Search!</button>
-      </span>
-    </div>
-    <div class="search-in">
-<div class="radio-box">
-<input type="radio" name="searchin" value="rent" id="rent22">
-<label class="radio-inline" for="rent22">For Rent</label>
-</div>
-<div class="radio-box">
-<input type="radio" name="searchin" value="sell" id="sell22" checked>
-<label class="radio-inline" for="sell22" >For Sell</label>
-</div>
-<div class="radio-box">
-<input type="radio" name="searchin" value="buy" id="buy22">
-<label class="radio-inline" for="buy22" >For Buy</label>
-</div>
-
-    </div>
-    </div>
-          </div>
-          
-        </form>
-        
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<div id="content" class="pt0 pb0">
-  <!-- <div class="feature-box centered gray">
-    <div>
-      <div class="container">
-        <div class="row justify-content-md-center">
-          <div class="col col-lg-12 col-xl-10">
-            <div class="main-title"><span>Featured Properties</span></div>
-            <div class="main-title-description">Thinking abroad? You can now dream and discover international properties</div>
-            <div class="clearfix"></div>
-            <div class="mt50 mb50">
-              <div class="featured-gallery v2 item-listing grid">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="item item-lg">
-                    <div class="item-image" style="background-image:url(http://via.placeholder.com/440x310);"><a href="property_single.html">
-                      <div class="item-meta">
-                        <div class="item-info">
-                          <h3 class="item-title">3 bed semi-detached house</h3>
-                          <div class="item-location"><i class="fa fa-map-marker"></i> Kirkstone Road, Middlesbrough TS3</div>
-                        </div>
-                        <div class="item-price">$420,000 <small>$777 / sq m</small> </div>
-                      </div>
-                      <div class="item-badges">
-                        <div class="item-badge-right">For Sale</div>
-                      </div>
-                      </a> </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <div class="item item-md">
-                        <div class="item-image" style="background-image:url(http://via.placeholder.com/440x310);"><a href="property_single.html">
-                          <div class="item-meta">
-                            <div class="item-info">
-                              <h3 class="item-title">3 bed semi-detached house</h3>
-                              <div class="item-location"><i class="fa fa-map-marker"></i> Kirkstone Road, Middlesbrough TS3</div>
-                            </div>
-                            <div class="item-price">$420,000 <small>$777 / sq m</small> </div>
-                          </div>
-                          <div class="item-badges">
-                            <div class="item-badge-right">For Sale</div>
-                          </div>
-                          </a> </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="item item-sm">
-                        <div class="item-image" style="background-image:url(http://via.placeholder.com/440x310);"><a href="property_single.html">
-                          <div class="item-meta">
-                            <div class="item-info">
-                              <h3 class="item-title">3 bed semi-detached house</h3>
-                              <div class="item-location"><i class="fa fa-map-marker"></i> Kirkstone Road, Middlesbrough TS3</div>
-                            </div>
-                            <div class="item-price">$420,000 <small>$777 / sq m</small> </div>
-                          </div>
-                          <div class="item-badges">
-                            <div class="item-badge-right">For Sale</div>
-                          </div>
-                          </a> </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="item item-sm">
-                        <div class="item-image" style="background-image:url(http://via.placeholder.com/440x310);"><a href="property_single.html">
-                          <div class="item-meta">
-                            <div class="item-info">
-                              <h3 class="item-title">3 bed semi-detached house</h3>
-                              <div class="item-location"><i class="fa fa-map-marker"></i> Kirkstone Road, Middlesbrough TS3</div>
-                            </div>
-                            <div class="item-price">$420,000 <small>$777 / sq m</small> </div>
-                          </div>
-                          <div class="item-badges">
-                            <div class="item-badge-right">For Sale</div>
-                          </div>
-                          </a> </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </div>
-            </div>
-            <div class="text-center"><a href="#" class="btn btn-xlg btn-link">Explore More</a></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="feature-box centered">
-    <div>
-      <div class="container">
-        <div class="row justify-content-md-center">
-          <div class="col col-lg-12 col-xl-10">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="content-box">
-                  <div class="image"> <img src="http://via.placeholder.com/150x150" width="100" alt=""> </div>
-                  <h4>Lifestyle</h4>
-                  <div class="caption">Create your best-ever home with the latest trends in renovating, decorating and more.</div>
-                  <div class="button"><a href="#">FIND YOUR INSPIRATION</a></div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="content-box">
-                  <div class="image"> <img src="http://via.placeholder.com/150x150" width="100" alt=""> </div>
-                  <h4>International</h4>
-                  <div class="caption">Thinking abroad? You can now dream and discover international properties.</div>
-                  <div class="button"><a href="#">CHOOSE A COUNTRY</a></div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="content-box">
-                  <div class="image"> <img src="http://via.placeholder.com/150x150" width="100" alt=""> </div>
-                  <h4>Sell</h4>
-                  <div class="caption">Understand your local market, learn how to get the best price for your property and find agents in your area.</div>
-                  <div class="button"><a href="#">EXPLORE NOW</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="feature-box centered gray">
-    <div>
-      <div class="container">
-        <div class="row justify-content-md-center">
-          <div class="col col-lg-12 col-xl-10">
-            <div class="item-listing grid">
-            <div class="main-title"><span>Featured Properties</span></div>
-       		<div class="main-title-description">Thinking abroad? You can now dream and discover international properties</div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="item">
-                    <div class="item-image"><a href="property_single.html"><img src="http://via.placeholder.com/440x310" class="img-fluid" alt="">
-                      <div class="item-meta">
-                        <div class="item-price">$420,000 <small>$777 / sq m</small> </div>
-                      </div>
-                      <div class="item-badges">
-                        <div class="item-badge-left">Sponsored</div>
-                        <div class="item-badge-right">For Sale</div>
-                      </div>
-                      </a> <a href="#" class="save-item"><i class="fa fa-star"></i></a> </div>
-                    <div class="item-info">
-                      <h3 class="item-title">3 bed semi-detached house</h3>
-                      <div class="item-location"><i class="fa fa-map-marker"></i> Kirkstone Road, Middlesbrough TS3</div>
-                      <div class="item-details-i"> <span class="bedrooms" data-toggle="tooltip" title="3 Bedrooms">3 <i class="fa fa-bed"></i></span> <span class="bathrooms" data-toggle="tooltip" title="2 Bathrooms">2 <i class="fa fa-bath"></i></span> </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="item">
-                    <div class="item-image"><a href="property_single.html"><img src="http://via.placeholder.com/440x310" class="img-fluid" alt="">
-                      <div class="item-meta">
-                        <div class="item-price">$420,000 <small>$777 / sq m</small> </div>
-                      </div>
-                      <div class="item-badges">
-                        <div class="item-badge-left">Sponsored</div>
-                        <div class="item-badge-right">For Sale</div>
-                      </div>
-                      </a> <a href="#" class="save-item"><i class="fa fa-star"></i></a> </div>
-                    <div class="item-info">
-                      <h3 class="item-title">3 bed semi-detached house</h3>
-                      <div class="item-location"><i class="fa fa-map-marker"></i> Kirkstone Road, Middlesbrough TS3</div>
-                      <div class="item-details-i"> <span class="bedrooms" data-toggle="tooltip" title="3 Bedrooms">3 <i class="fa fa-bed"></i></span> <span class="bathrooms" data-toggle="tooltip" title="2 Bathrooms">2 <i class="fa fa-bath"></i></span> </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="item">
-                    <div class="item-image"><a href="property_single.html"><img src="http://via.placeholder.com/440x310" class="img-fluid" alt="">
-                      <div class="item-meta">
-                        <div class="item-price">$420,000 <small>$777 / sq m</small> </div>
-                      </div>
-                      <div class="item-badges">
-                        <div class="item-badge-left">Sponsored</div>
-                        <div class="item-badge-right">For Sale</div>
-                      </div>
-                      </a> <a href="#" class="save-item"><i class="fa fa-star"></i></a> </div>
-                    <div class="item-info">
-                      <h3 class="item-title">3 bed semi-detached house</h3>
-                      <div class="item-location"><i class="fa fa-map-marker"></i> Kirkstone Road, Middlesbrough TS3</div>
-                      <div class="item-details-i"> <span class="bedrooms" data-toggle="tooltip" title="3 Bedrooms">3 <i class="fa fa-bed"></i></span> <span class="bathrooms" data-toggle="tooltip" title="2 Bathrooms">2 <i class="fa fa-bath"></i></span> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="feature-box centered">
-    <div>
-      <div class="container">
-        <div class="row justify-content-md-center">
-          <div class="col col-lg-12 col-xl-10">
-            <div class="main-title"><span>What our clients say</span></div>
-            <div class="swiper-container testimonials">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <div class="item content-box centered">
-                    <div class="image"> <img class="rounded-circle" src="http://via.placeholder.com/300x300" width="180" alt=""> </div>
-                    <h4>Thank you for your quick and clear responses. They are much appreciated. This was a site that needed to go up fast and it has – customizations and all!</h4>
-                    <div class="caption">The Brown Family</div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="item content-box centered">
-                    <div class="image"> <img class="rounded-circle" src="http://via.placeholder.com/150x150" width="180" alt="">
-                      <h4>Thank you for your quick and clear responses. They are much appreciated. This was a site that needed to go up fast and it has – customizations and all!</h4>
-                      <div class="caption">The Brown Family</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="item content-box centered">
-                    <div class="image"> <img class="rounded-circle" src="http://via.placeholder.com/150x150" width="180" alt="">
-                      <h4>Thank you for your quick and clear responses. They are much appreciated. This was a site that needed to go up fast and it has – customizations and all!</h4>
-                      <div class="caption">The Brown Family</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Add Arrows -->
-             <!--  <div class="swiper-button-next"></div>
-              <div class="swiper-button-prev"></div>
-            </div>
-            <script>
-			var swiper = new Swiper('.swiper-container', {
-				loop: true,
-				centeredSlides: true,
-					autoplay: {
-					delay: 5000,
-					disableOnInteraction: false,
-				},
-				pagination: {
-					el: '.swiper-pagination',
-					clickable: true,
-				},
-				navigation: {
-					nextEl: '.swiper-button-next',
-					prevEl: '.swiper-button-prev',
-				},
-			});
-        	</script> 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>  -->
-  <div class="feature-box gray centered">
-    <div>
-      <div class="container">
-        <div class="row justify-content-md-center">
-          <div class="col col-lg-12 col-xl-10">
-            <div class="main-title"><span>New Listing</span></div>
-            <div class="main-title-description">Stay up to date with the latest happenings.</div>
-            <div class="item-listing grid mb50">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="item">
-                    <div class="item-image"> <a href="blog_single.html"><img src="img/1.jpg" class="img-fluid" alt="">
-                      <div class="item-meta">
-                        <div class="item-price"><small>$5 per sqft.</small> </div>
-                      </div>
-                      <!-- <div class="item-badges">
-                        <div class="item-badge-right">Legal</div>
-                      </div> -->
-                      </a> </div>
-                    <!-- <div class="item-info">
-                      <h3 class="item-title">Allianz invests 100m in Hines European Value Fund</h3>
-                      <div class="item-comments-count"><i class="fa fa-comment-o"></i> 3</div>
-                      <div class="item-author">By John Doe</div>
-                    </div>-->
-                  </div> 
-                </div>
-                <div class="col-md-4">
-                  <div class="item">
-                    <div class="item-image"> <a href="blog_single.html"><img src="img/2.jpg" class="img-fluid" alt="">
-                      <div class="item-meta">
-                        <div class="item-price"><small>$8 per sqft.</small> </div>
-                      </div>
-                      <!-- <div class="item-badges">
-                        <div class="item-badge-right">Development</div>
-                      </div> -->
-                      </a> </div>
-                    <!-- <div class="item-info">
-                      <h3 class="item-title">Skanska signs 43.2m construction deal in Sollentuna</h3>
-                      <div class="item-comments-count"><i class="fa fa-comment-o"></i> 3</div>
-                      <div class="item-author">By John Doe</div>
-                    </div> -->
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="item">
-                    <div class="item-image"> <a href="blog_single.html"><img src="img/3.jpg" class="img-fluid" alt="">
-                      <div class="item-meta">
-                        <div class="item-price"><small>$6 per sqft.</small> </div>
-                      </div>
-                      <!-- <div class="item-badges">
-                        <div class="item-badge-right category">Finance</div>
-                      </div> -->
-                      </a> </div>
-                    <!-- <div class="item-info">
-                      <h3 class="item-title">Baltic Horizon Fund plans next public offering of new units</h3>
-                      <div class="item-comments-count"><i class="fa fa-comment-o"></i> 3</div>
-                      <div class="item-author">By John Doe</div>
-                    </div> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="text-center"><a href="#"  style="color:#2c3191!important;" class="btn btn-xlg">View All</a></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- <div class="feature-box centered pb0">
-    <div>
-      <div class="container">
-        <div class="row justify-content-md-center">
-          <div class="col col-lg-10 col-xl-10">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="text-center mt50 mb50">
-                  <div class="main-title"><span>Connect with us from anywhere</span></div>
-                  <div class="main-title-description">Download the mobile app and enjoy the smoothest experience</div>
-                  <img src="img/store/apple.svg" width="120" alt=""> <img src="img/store/google.svg" width="120" alt=""> </div>
-              </div>
-              <div class="col-md-6"> <img src="http://via.placeholder.com/500x489" class="img-fluid" alt=""> </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-</div>
 </div>
 
 
@@ -532,10 +153,7 @@
           <div class="col-md-2 col-sm-4">
             <h5 subheadline>Company</h5>
             <ul class="list-unstyled">
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Team</a></li>
-              <!-- <li><a href="#">Security</a></li> -->
-              <li><a href="#">Plans</a></li>
+              <li><a href="">About Us</a></li>
             </ul>
           </div>
           <div class="col-md-2 col-sm-4">
@@ -544,12 +162,17 @@
               <li><a href="#">FAQs</a></li>
               <li><a href="#">Terms of Service</a></li>
               <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Contact Us</a></li>
+              <li><a href="resources/pages/contactUs.html">Contact Us</a></li>
             </ul>
           </div>
           <div class="col-md-4 col-sm-12">
             <h5 subheadline>Connect</h5>
-            <div class="social-sharebox"> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-google"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a></div>
+            <div class="social-sharebox">
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-google"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
             <!-- <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-pinterest"></i></a> -->
             <!-- <form>
               <h4>Subscribe Newsletter</h4>
@@ -565,83 +188,6 @@
     </div>
   </div>
 </footer>
-</div>
-<div class="modal fade" id="newlogin" tabindex="-1" role="dialog">
-    <div class="modal-dialog omb_login">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                        class="sr-only">Close</span></button>
-                <h4 class="modal-title"><i class="fa icon-info-circled-alt"></i> Login
-                </h4>
-            </div>
-            <div class="modal-body">
-            <div class="row omb_row-sm-offset-3 omb_socialButtons">
-    	    <div class="col-xs-5 col-sm-3">
-		        <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
-			        <i class="fa fa-facebook visible-xs"></i>
-			        <span class="hidden-xs">Facebook</span>
-		        </a>
-	        </div>
-        	<div class="col-xs-5 col-sm-3">
-		        <a href="#" id="authorize-button" style="display: none;" class="btn btn-lg btn-block omb_btn-google">
-			        <i class="fa fa-google-plus visible-xs"></i>
-			        <span class="hidden-xs">Google+</span>
-		        </a>
-		        <a href="#" id="signout-button" style="display: none;" class="btn btn-lg btn-block omb_btn-google">
-			        <i class="fa fa-google-plus visible-xs"></i>
-			        <span class="hidden-xs">Sign out</span>
-		        </a>
-	        </div>	
-		</div>
-
-		<div class="row omb_row-sm-offset-3 omb_loginOr">
-			<div class="col-xs-12 col-sm-6">
-				<hr class="omb_hrOr">
-				<span class="omb_spanOr">or</span>
-			</div>
-		</div>
-                <form role="form">
-                     <div class="form-group">
-                         <label for="sender-email" class="control-label">Username:</label>
-
-                         <div class="input-icon"><i class="icon-user fa"></i>
-                             <input id="sender-email" type="text" placeholder="Username"
-                                    class="form-control email">
-                         </div>
-                     </div>
-                     <div class="form-group">
-                         <label for="user-pass" class="control-label">Password:</label>
-
-                         <div class="input-icon"><i class="icon-lock fa"></i>
-                             <input type="password" class="form-control" placeholder="Password"
-                                    id="user-pass">
-                         </div>
-                     </div>
-                     <div class="form-group">
-                         <a href="account-home.html" class="btn btn-primary  btn-block">Submit</a>
-                     </div>
-                 </form>
-            </div>
-            <div class="modal-footer">
-                <div class="checkbox pull-left">
-                    <label> <input type="checkbox" value="1" name="remember" id="remember"> Keep me logged
-                        in</label>
-                </div>
-
-
-                <p class="text-center pull-right"><a href="forgot-password.html"> Lost your password? </a>
-                </p>
-
-                <div style=" clear:both"></div>
-            </div>
-            <div class="login-box-btm text-center">
-                        <p> Don't have an account? <br>
-                            <a href="#newsignup"  data-toggle="modal"><strong>Sign Up !</strong> </a></p>
-                            <p><div id="content"></div></p>
-                    </div>
-        </div>
-    </div>
 </div>
 </body>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvuspZieDAMlpAVAe2qwlvkk8oQU34dtg&callback=initialize"></script> -->
@@ -713,6 +259,8 @@
 <script src="resources/controller/editPropertyDetailsControllerInteractive.js"></script>
 <script src="resources/services/propertyService.js"></script>
 <script src="resources/services/auth.service.js"></script>
+<script src="resources/controller/contactUsController.js"></script>
+
 
 <!-- 
 <script type="text/javascript" src="https://cdn.auth0.com/js/lock/10.2/lock.min.js"></script>

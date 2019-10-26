@@ -206,12 +206,19 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
 		            templateUrl: 'resources/pages/postbuyconfirmation.html',
 		            requireLogin: true
 		        })
-		 .state('profileconfirmation', {
+		 		.state('profileconfirmation', {
 		            url: '/profileconfirmation',
 		            templateUrl: 'resources/pages/profileconfirmation.html',
 		            requireLogin: true
 		        })
-        ;
+
+				.state('contactUs', {
+							url: '/contactUs',
+							templateUrl: 'resources/pages/contactUs.html',
+							controller: 'contactUsController',
+							reload: true
+					})
+		;
 
  // Initialization for the angular-auth0 library
     angularAuth0Provider.init({

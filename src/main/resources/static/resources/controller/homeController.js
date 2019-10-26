@@ -108,7 +108,8 @@
          }
            $scope.search = function() {
             console.log("postal_code " + postal_code + " latitude " + latitude + " longitude "+ longitude);
-            var propertyFor = document.querySelector('input[name="searchin"]:checked').value;
+            // var propertyFor = document.querySelector('input[name="searchin"]:checked').value;
+            var propertyFor = "buy";
             localStorage.setItem('searchAddress',JSON.stringify({
                 type: propertyFor,
                 postal_code: postal_code,

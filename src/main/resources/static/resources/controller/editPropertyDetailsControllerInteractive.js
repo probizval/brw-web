@@ -148,13 +148,13 @@
         // console.log("-here-----", photo.name, photo.type);
         //amazon aws credentials
         AWS.config.update({
-          accessKeyId: 'AKIAIRYE5BJ3NCFM6L4Q',
-          secretAccessKey: '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'
+          accessKeyId: 'AKIAJJFDVJ7R234QR6ZA',
+          secretAccessKey: '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'
         });
         //amazon s3 region
-        AWS.config.region = 'us-west-1';
+        AWS.config.region = 'us-east-1';
         //amazon s3 bucket name
-        var bucket = new AWS.S3({params: {Bucket: 'proswift'}});
+        var bucket = new AWS.S3({params: {Bucket: 'bizrealworth-image'}});
         var params = { Key: photo.name, ContentType: photo.type, Body: photo};
         bucket.upload(params).on('httpUploadProgress', function (evt) {
           //logs the image uploading progress
