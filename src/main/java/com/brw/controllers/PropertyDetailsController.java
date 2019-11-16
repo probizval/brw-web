@@ -22,6 +22,7 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
+import com.brw.dao.BusinessDetailsDAO;
 import com.brw.dao.PropertyDetailsDAO;
 import com.brw.dto.GasStationDetailsDTO;
 import com.brw.dto.LiquorStoreDTO;
@@ -30,9 +31,11 @@ import com.brw.dto.PropertyListDTO;
 import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.dto.SalonStoreDTO;
+import com.brw.dto.SimpleSearchFilterDTO;
 import com.brw.exceptions.PropertyDetailsException;
 import com.brw.dto.AutoServiceDTO;
 import com.brw.dto.BookMarksDTO;
+import com.brw.dto.BusinessListDTO;
 import com.brw.dto.BusinessRequirementDTO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
@@ -53,9 +56,12 @@ public class PropertyDetailsController implements ErrorController {
 		// TODO Auto-generated method stub
 		return "/error";
 	}
-
+	
 	@RequestMapping(value = "propertyList", method = RequestMethod.POST, produces = "application/json")
 	public ApiResponse<?> getAllProperties(@RequestBody FilterDTO filter) {
+		
+		System.out.println("**** Inside PropertyDetailsController.getAllProperties()");
+
 		logger.info(" get all properties");
 		PropertyListDTO properties = propertyDetailsService.getAllPropertyList(filter);
 		return ApiResponse.withData(properties);
@@ -63,6 +69,8 @@ public class PropertyDetailsController implements ErrorController {
 
 	@RequestMapping(value = "property/{id}", method = RequestMethod.GET, produces = "application/json")
 	public ApiResponse<?> getPropertyDetails(@PathVariable int id) {
+		
+		System.out.println("**** Inside PropertyDetailsController.getPropertyDetails()");
 
 		PropertyMetaDataDTO propertyDetailsDTO = null;
 		try {

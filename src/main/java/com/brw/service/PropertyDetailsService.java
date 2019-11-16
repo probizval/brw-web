@@ -5,6 +5,7 @@ import java.util.List;
 import com.brw.dao.RestaurentDAO;
 import com.brw.dto.AutoServiceDTO;
 import com.brw.dto.BookMarksDTO;
+import com.brw.dto.BusinessListDTO;
 import com.brw.dto.BusinessRequirementDTO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
@@ -15,10 +16,14 @@ import com.brw.dto.PropertyListDTO;
 import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.dto.SalonStoreDTO;
+import com.brw.dto.SimpleSearchFilterDTO;
 import com.brw.exceptions.PropertyDetailsException;
 
 
 public interface PropertyDetailsService {
+	
+	public BusinessListDTO searchBusiness(SimpleSearchFilterDTO searchFilter);
+
 	public PropertyListDTO getAllPropertyList(FilterDTO filter);
 	public PropertyListDTO getAllPropertyListByUser(int userId, int pageNumber);
 	
@@ -56,5 +61,4 @@ public interface PropertyDetailsService {
 	public PropertyListDTO getBookMarkPropertyListByUser(int UserID, int pageNumber);
 	
 	public BusinessRequirementDTO saveBusinessRequirement(BusinessRequirementDTO businessRequirementDTO);
-
 }

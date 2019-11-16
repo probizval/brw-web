@@ -163,3 +163,301 @@ ALTER Table devbusinessdatabase_new.rw_liquer_store ADD number_of_parking varcha
 
 ALTER Table devbusinessdatabase_new.rw_nail_care_store CHANGE capacity seating_capacity varchar(50) null, ADD open_hours varchar(50) null after anchor_business, CHANGE rent monthly_rent varchar(50) null, DROP water, DROP electricity, ADD nnn_expense varchar(50) null after monthly_rent, CHANGE garbage gabarge_expense varchar(50) null after nnn_expense, ADD utilities_expense varchar(50) null after gabarge_expense, CHANGE employee certified_emp varchar(50) null after utilities_expense, ADD fulltime_emp varchar(50) null after certified_emp, ADD parttime_emp varchar(50) null after fulltime_emp, ADD total_emp varchar(50) null after parttime_emp, MODIFY avg_income varchar(50) after total_emp, ADD avg_revenue varchar(50) null after avg_income, ADD residential_area varchar(100) after avg_revenue, ADD wiki_demo_link varchar(50) null after residential_area, MODIFY walkscore varchar(50) null after wiki_demo_link, ADD crime_indicator varchar(50) null after walkscore, ADD security varchar(100) null after crime_indicator, ADD surrounding_business varchar(100) null after security, ADD shopping_complex_traffic_score varchar(50) after surrounding_business, ADD structure_age varchar(50) null, ADD signage_size varchar(50) null,  ADD signage_visibility varchar(50) null;
 
+
+
+
+
+
+CREATE TABLE `t_brw_business_master` ( 
+
+`id` INT(10) NOT NULL AUTO_INCREMENT,
+
+`comp_based_est` INT(10) NULL,
+
+`comp_based_low` INT(10) NULL,
+
+`comp_based_high` INT(10) NULL,
+
+`asset_based_est` INT(10) NULL,
+
+`asset_based_low` INT(10) NULL,
+
+`asset_based_high` INT(10) NULL,
+
+`equity_based_est` INT(10) NULL,
+
+`equity_based_low` INT(10) NULL,
+
+`equity_based_high` INT(10) NULL,
+
+`liquidity_based_est` INT(10) NULL,
+
+`liquidity_based_low` INT(10) NULL,
+
+`liquidity_based_high` INT(10) NULL,
+
+`last_est_date` DATE NULL,
+
+`last_infoupdate_date` DATE NULL,
+
+`for_sell_YN` VARCHAR(1) NULL,
+
+`for_sell_price` INT(10) NULL,
+
+`for_sell_date` DATE NULL,
+
+`name` VARCHAR(50) NOT NULL,
+
+`DBA_name` VARCHAR(50) NOT NULL,
+
+`image_url` VARCHAR(200) NOT NULL,
+
+`address_street1` VARCHAR(50) NOT NULL,
+
+`address_street2` VARCHAR(50) NULL,
+
+`address_street3` VARCHAR(50) NULL,
+
+`address_street4` VARCHAR(50) NULL,
+
+`address_city` VARCHAR(50) NOT NULL,
+
+`address_county` VARCHAR(50) NOT NULL,
+
+`address_state` VARCHAR(50) NOT NULL,
+
+`address_zip` VARCHAR(50) NOT NULL,
+
+`address_country` VARCHAR(50) NOT NULL,
+
+`address_latitude` DOUBLE NOT NULL,
+
+`address_longitude` DOUBLE NOT NULL,
+
+`phone` VARCHAR(10) NOT NULL,
+
+`email_address` VARCHAR(128) NOT NULL,
+
+`website` VARCHAR(128) NOT NULL,
+
+`type` VARCHAR(50) NOT NULL,
+
+`description` BLOB(10000) NULL,
+
+`NACIS_type` VARCHAR(50) NULL,
+
+`NACIS_description` VARCHAR(50) NULL,
+
+`franchise_YN` VARCHAR(1) NULL,
+
+`owner_claim_YN` VARCHAR(1) NULL,
+
+`owner1_first_name` VARCHAR(30) NULL,
+
+`owner1_last_name` VARCHAR(30) NULL,
+
+`owner1_address_street1` VARCHAR(50) NOT NULL,
+
+`owner1_address_street2` VARCHAR(50) NULL,
+
+`owner1_address_street3` VARCHAR(50) NULL,
+
+`owner1_address_street4` VARCHAR(50) NULL,
+
+`owner1_address_city` VARCHAR(50) NOT NULL,
+
+`owner1_address_county` VARCHAR(50) NOT NULL,
+
+`owner1_address_state` VARCHAR(50) NOT NULL,
+
+`owner1_address_zip` VARCHAR(50) NOT NULL,
+
+`owner1_address_country` VARCHAR(50) NOT NULL,
+
+`owner1_email_address` VARCHAR(128) NOT NULL,
+
+`owner1_phone1` VARCHAR(10) NOT NULL,
+
+`owner1_phone2` VARCHAR(20) NOT NULL,
+
+`owner2_first_name` VARCHAR(30) NULL,
+
+`owner2_last_name` VARCHAR(30) NULL,
+
+`total_indoor_sqft` INT(10) NULL,
+
+`total_outdoor_sqft` INT(10) NULL,
+
+`total_lot_sqft` INT(10) NULL,
+
+`total_parking_num` INT(10) NULL,
+
+`security_type` VARCHAR(10) NULL,
+
+`premise_owned_YN` VARCHAR(1) NULL,
+
+`premise_price` INT(10) NULL,
+
+`monthly_rent_expense` INT(10) NULL,
+
+`monthly_rawmaterial_expense` INT(10) NULL,
+
+`monthly_revenue` INT(10) NULL,
+
+`monthly_net_profit` INT(10) NULL,
+
+`monthly_emp_salary` INT(10) NULL,
+
+`monthly_inventorymaint_cost` INT(10) NULL,
+
+`total_equipment_cost` INT(10) NULL,
+
+`furniture_cost` INT(10) NULL,
+
+`furniture_year` VARCHAR(4) NULL,
+
+`interiordeco_cost` INT(10) NULL,
+
+`interiordeco_year` VARCHAR(4) NULL,
+
+`exteriordeco_cost` INT(10) NULL,
+
+`exteriordeco_year` VARCHAR(4) NULL,
+
+`restroom_num` INT(2) NULL,
+
+`ADArestroom_num` INT(2) NULL,
+
+`alcohol_lic_type` VARCHAR(10) NULL,
+
+`associated_biz_YN` VARCHAR(1) NULL,
+
+`associated_biz_id1` INT(10)  NULL,
+
+`associated_biz_id2` INT(10)  NULL,
+
+`associated_biz_id3` INT(10)  NULL,
+
+`associated_biz_id4` INT(10)  NULL,
+
+`associated_biz_id5` INT(10)  NULL,
+
+`ATM_YN` VARCHAR(1) NULL,
+
+`ATM_cost` INT(10) NULL,
+
+`firesafety_YN` VARCHAR(1) NULL,
+
+`firesafety_equip_type` VARCHAR(1) NULL,
+
+`firesafety_equip_cost` INT(10) NULL,
+
+`equip1_type` VARCHAR(1) NULL,
+
+`equip1_num` INT(3) NULL,
+
+`equip1_cost` INT(10) NULL,
+
+`equip1_update_year` VARCHAR(4) NULL,
+
+`equip2_type` VARCHAR(1) NULL,
+
+`equip2_num` INT(3) NULL,
+
+`equip2_cost` INT(10) NULL,
+
+`equip2_update_year` VARCHAR(4) NULL,
+
+`equip3_type` VARCHAR(1) NULL,
+
+`equip3_num` INT(3) NULL,
+
+`equip3_cost` INT(10) NULL,
+
+`equip3_update_year` VARCHAR(4) NULL,
+
+`equip4_type` VARCHAR(1) NULL,
+
+`equip4_num` INT(3) NULL,
+
+`equip4_cost` INT(10) NULL,
+
+`equip4_update_year` VARCHAR(4) NULL,
+
+`equip5_type` VARCHAR(1) NULL,
+
+`equip5_num` INT(3) NULL,
+
+`equip5_cost` INT(10) NULL,
+
+`equip5_update_year` VARCHAR(4) NULL,
+
+`area_crime_score` INT(3) NULL,
+
+`area_walk_score` INT(3) NULL,
+
+`social_media_score` INT(3) NULL,
+
+`proximity_attraction_score` INT(3) NULL,
+
+`area_transit_score` INT(3) NULL,
+
+`emp_FT_num` INT(4) NULL,
+
+`emp_PT_num` INT(4) NULL,
+
+`pop_1mile_rad` INT(10) NULL,
+
+`pop_3mile_rad` INT(10) NULL,
+
+`pop_5mile_rad` INT(10) NULL,
+
+`dailypeople_doorfront_num` INT(10) NULL,
+
+`dailycar_parklot_num` INT(10) NULL,
+
+`last_sell_price` INT(10) NULL,
+
+`last_sell_year` INT(4) NULL,
+
+`last_sell_month` INT(2) NULL,
+
+`resto_cuisine` VARCHAR(20) NULL,
+
+`indoor_seat_cap` INT(4) NULL,
+
+`outdoor_seat_cap` INT(4) NULL,
+
+`resto_hood_length` INT(2) NULL,
+
+`resto_kitchen_sqft` INT(4) NULL,
+
+`resto_kitchenreno_year` VARCHAR(4) NULL,
+
+`resto_bar_YN` INT(4) NULL,
+
+`resto_bar_sqft` INT(4) NULL,
+
+`resto_bar_seatcap` INT(2) NULL,
+
+`resto_bardeco_cost` INT(10) NULL,
+
+`resto_bardeco_year` VARCHAR(4) NULL,
+
+`resto_NNN_expense` INT(10) NULL,
+
+`gas_company` VARCHAR(30) NULL,
+
+`gas_fuel_type` VARCHAR(10) NULL,
+
+`gas_pump_type` VARCHAR(10) NULL,
+
+`gas_pump_num` INT(2) NULL,
+
+`gas_airwater_YN` VARCHAR(1) NULL,
+
+PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+
+

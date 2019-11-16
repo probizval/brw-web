@@ -230,6 +230,5 @@ public class PropertyDetails implements Serializable {
 	public void setPropertyName(String propertyName) {
 		this.propertyName = propertyName;
 	}
-
 	
 }

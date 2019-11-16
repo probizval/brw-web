@@ -15,6 +15,7 @@ import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
 import com.brw.dao.AutoServiceDAO;
 import com.brw.dao.BookMarksDAO;
+import com.brw.dao.BusinessDetailsDAO;
 import com.brw.dao.BusinessRequirementDAO;
 import com.brw.dao.CoinLaundryDAO;
 import com.brw.dao.GasStationDAO;
@@ -25,6 +26,8 @@ import com.brw.dao.RestaurentDAO;
 import com.brw.dao.SalonStoreDAO;
 import com.brw.dto.AutoServiceDTO;
 import com.brw.dto.BookMarksDTO;
+import com.brw.dto.BusinessDetailsDTO;
+import com.brw.dto.BusinessListDTO;
 import com.brw.dto.BusinessRequirementDTO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;
@@ -37,8 +40,10 @@ import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDTO;
 import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.dto.SalonStoreDTO;
+import com.brw.dto.SimpleSearchFilterDTO;
 import com.brw.entities.AutoService;
 import com.brw.entities.BookMarks;
+import com.brw.entities.BusinessDetails;
 import com.brw.entities.BusinessRequirement;
 import com.brw.entities.CoinLaundry;
 import com.brw.entities.GasStation;
@@ -52,6 +57,10 @@ import com.brw.exceptions.PropertyDetailsException;
 @Component
 public class PropertyDetailsService implements com.brw.service.PropertyDetailsService  {
 
+	
+	@Autowired
+	private BusinessDetailsDAO businessDetailsDAO;
+	
 	@Autowired
 	private PropertyDetailsDAO propertyDetailsDAO; 
 	
@@ -83,8 +92,44 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	private BusinessRequirementDAO businessRequirementDAO;
 	
 	@Override
+	public BusinessListDTO searchBusiness(SimpleSearchFilterDTO simpleSearchFilter) {
+		// TODO Auto-generated method stub
+		System.out.println("**** Inside PropertyDetailsService.searchBusiness()");
+		
+		List<BusinessDetails> businessList = (List<BusinessDetails>) businessDetailsDAO.searchBusiness(simpleSearchFilter.getBizName(), simpleSearchFilter.getBizType());
+		List<BusinessDetailsDTO> businessDetailsDTOList = new ArrayList<BusinessDetailsDTO>();
+		BusinessListDTO businessListDTO = new BusinessListDTO();
+		
+		for (BusinessDetails businessDetails: businessList) {
+			BusinessDetailsDTO businessDetailsDTO = new BusinessDetailsDTO();
+			businessDetailsDTO.setBusinessId(businessDetails.getBusinessId());
+			businessDetailsDTO.setName(businessDetails.getName());		
+			businessDetailsDTO.setType(businessDetails.getType());
+			businessDetailsDTO.setSubType(businessDetails.getSubType());
+			businessDetailsDTO.setCity(businessDetails.getCity());
+			//businessDetailsDTO.setCurrentOwner(businessDetails.getCurrentOwner());
+			//businessDetailsDTO.setEstatedEstimatedValue(businessDetails.getEstatesEstimatedValue());
+			businessDetailsDTO.setImageFirst(businessDetails.getImageFirst());
+			businessDetailsDTO.setLatitude(businessDetails.getLatitude());
+			businessDetailsDTO.setLongitude(businessDetails.getLongitude());
+			businessDetailsDTO.setSqftLot(businessDetails.getSqftLot());
+			//businessDetailsDTO.setPropertyAddress(businessDetails.getPropertyAddress());
+			businessDetailsDTO.setStateCode(businessDetails.getStateCode());
+			businessDetailsDTO.setZip(businessDetails.getZip());
+			if(simpleSearchFilter.getInvokerId() != null) {
+				//businessDetailsDTO.setIsBookMarked(this.getBookMarksDetails(searchFilter.getUserId(), businessDetails.getBusinessId()));
+			}
+			businessDetailsDTOList.add(businessDetailsDTO);
+		}
+		businessListDTO.setBusinessList(businessDetailsDTOList);
+		return businessListDTO;
+	}
+	
+	@Override
 	public PropertyListDTO getAllPropertyList(FilterDTO filter) {
 		// TODO Auto-generated method stub
+		System.out.println("**** Inside PropertyDetailsService.getAllPropertyList()");
+		
 		List<PropertyDetails> propertyList = (List<PropertyDetails>) propertyDetailsDAO.getProperties(filter.getLatitude(), filter.getLongitude(), filter.getZipCode(), filter.getBusinessType(), filter.getMinPrice(), filter.getMaxPrice());
 		List<PropertyDetailsDTO> propertyDetailsDTOList = new ArrayList<PropertyDetailsDTO>();
 		PropertyListDTO propertyListDTO = new PropertyListDTO();
@@ -155,7 +200,8 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	@Override
 	public PropertyMetaDataDTO getPropertyDetails(int id) throws PropertyDetailsException {
 		// TODO Auto-generated method stub
-		
+		System.out.println("**** PropertyDetailsService.Inside getPropertyDetails() for id: "+id);
+
 		PropertyDetails propertyDetails = null;
 		try {
 				propertyDetails = propertyDetailsDAO.findById(id).get();
@@ -196,18 +242,18 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	@Override
 	public PropertyDetailsDTO updatePropertyDetail(PropertyDetailsDTO propertyDetailsDTO) {
 		// TODO Auto-generated method stub
-				PropertyDetails propertyDetails = propertyDetailsDAO.findById(propertyDetailsDTO.getId()).get();
-				propertyDetails.setPropertyName(propertyDetailsDTO.getPropertyName());
-				propertyDetails.setPropertyType(propertyDetailsDTO.getPropertyType());
-			
-				PropertyDetails	property = propertyDetailsDAO.save(propertyDetails);
-				PropertyDetailsDTO prodDTO = new PropertyDetailsDTO();
-				
-				prodDTO.setId(property.getId());
-				prodDTO.setPropertyName(property.getPropertyName());
-				prodDTO.setPropertyType(property.getPropertyType());
-				
-				return prodDTO;
+		PropertyDetails propertyDetails = propertyDetailsDAO.findById(propertyDetailsDTO.getId()).get();
+		propertyDetails.setPropertyName(propertyDetailsDTO.getPropertyName());
+		propertyDetails.setPropertyType(propertyDetailsDTO.getPropertyType());
+	
+		PropertyDetails	property = propertyDetailsDAO.save(propertyDetails);
+		PropertyDetailsDTO prodDTO = new PropertyDetailsDTO();
+		
+		prodDTO.setId(property.getId());
+		prodDTO.setPropertyName(property.getPropertyName());
+		prodDTO.setPropertyType(property.getPropertyType());
+		
+		return prodDTO;
 	}
 	
 	@Override
