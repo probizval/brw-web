@@ -1,6 +1,7 @@
 package com.brw.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.InheritanceType;
 
 @Entity
+@DynamicUpdate
 @Table(name = "t_brw_business")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class BusinessDetails implements Serializable {
@@ -44,6 +49,24 @@ public class BusinessDetails implements Serializable {
 	
 	@Column(name = "sub_type")
 	private String subType;
+	
+	@Column(name = "reg_city_name")
+	private String regCityName;
+	
+	@Column(name = "reg_city_code")
+	private String regCityCode;
+	
+	@Column(name = "reg_city_date")
+	private LocalDateTime regCityDate;
+	
+	@Column(name = "reg_state_name")
+	private String regStateName;
+	
+	@Column(name = "reg_state_code")
+	private String regStateCode;
+	
+	@Column(name = "reg_state_date")
+	private LocalDateTime regStateDate;
 	
 	@Column(name = "data_completeness_score")
 	private int dataCompletenessScore;
@@ -196,19 +219,19 @@ public class BusinessDetails implements Serializable {
 	private int populationIn1mileRadius;
 	
 	@Column(name = "1mile_rad_incoscore")
-	private int incomeScoreIn1milRadius;
+	private int incomeScoreIn1mileRadius;
 	
 	@Column(name = "3mile_rad_popln")
 	private int populationIn3mileRadius;
 	
 	@Column(name = "3mile_rad_incoscore")
-	private int incomeScoreIn3milRadius;
+	private int incomeScoreIn3mileRadius;
 	
 	@Column(name = "5mile_rad_popln")
 	private int populationIn5mileRadius;
 	
 	@Column(name = "5mile_rad_incoscore")
-	private int incomeScoreIn5milRadius;
+	private int incomeScoreIn5mileRadius;
 	
 	@Column(name = "dailypeople_doorfront_num")
 	private int dailyPeoplAtDoorNum;
@@ -223,13 +246,13 @@ public class BusinessDetails implements Serializable {
 	private int createdByUserId;
 	
 	@Column(name = "create_date")
-	private String createDate;
+	private LocalDateTime createDate;
 	
 	@Column(name = "updatedby_user_id")
 	private int updatedByUserId;
 	
 	@Column(name = "update_date")
-	private String updateDate;
+	private LocalDateTime updateDate;
 
 	public int getBusinessId() {
 		return businessId;
@@ -293,6 +316,54 @@ public class BusinessDetails implements Serializable {
 
 	public void setSubType(String subType) {
 		this.subType = subType;
+	}
+
+	public String getRegCityName() {
+		return regCityName;
+	}
+
+	public void setRegCityName(String regCityName) {
+		this.regCityName = regCityName;
+	}
+
+	public String getRegCityCode() {
+		return regCityCode;
+	}
+
+	public void setRegCityCode(String regCityCode) {
+		this.regCityCode = regCityCode;
+	}
+
+	public LocalDateTime getRegCityDate() {
+		return regCityDate;
+	}
+
+	public void setRegCityDate(LocalDateTime regCityDate) {
+		this.regCityDate = regCityDate;
+	}
+
+	public String getRegStateName() {
+		return regStateName;
+	}
+
+	public void setRegStateName(String regStateName) {
+		this.regStateName = regStateName;
+	}
+
+	public String getRegStateCode() {
+		return regStateCode;
+	}
+
+	public void setRegStateCode(String regStateCode) {
+		this.regStateCode = regStateCode;
+	}
+
+	public LocalDateTime getRegStateDate() {
+		return regStateDate;
+	}
+
+	public void setRegStateDate(LocalDateTime regStateDate) {
+		this.regStateDate = regStateDate;
 	}
 
 	public int getDataCompletenessScore() {
@@ -695,12 +766,12 @@ public class BusinessDetails implements Serializable {
 		this.populationIn1mileRadius = populationIn1mileRadius;
 	}
 
-	public int getIncomeScoreIn1milRadius() {
-		return incomeScoreIn1milRadius;
+	public int getIncomeScoreIn1mileRadius() {
+		return incomeScoreIn1mileRadius;
 	}
 
-	public void setIncomeScoreIn1milRadius(int incomeScoreIn1milRadius) {
-		this.incomeScoreIn1milRadius = incomeScoreIn1milRadius;
+	public void setIncomeScoreIn1mileRadius(int incomeScoreIn1mileRadius) {
+		this.incomeScoreIn1mileRadius = incomeScoreIn1mileRadius;
 	}
 
 	public int getPopulationIn3mileRadius() {
@@ -711,12 +782,12 @@ public class BusinessDetails implements Serializable {
 		this.populationIn3mileRadius = populationIn3mileRadius;
 	}
 
-	public int getIncomeScoreIn3milRadius() {
-		return incomeScoreIn3milRadius;
+	public int getIncomeScoreIn3mileRadius() {
+		return incomeScoreIn3mileRadius;
 	}
 
-	public void setIncomeScoreIn3milRadius(int incomeScoreIn3milRadius) {
-		this.incomeScoreIn3milRadius = incomeScoreIn3milRadius;
+	public void setIncomeScoreIn3mileRadius(int incomeScoreIn3mileRadius) {
+		this.incomeScoreIn3mileRadius = incomeScoreIn3mileRadius;
 	}
 
 	public int getPopulationIn5mileRadius() {
@@ -727,12 +798,12 @@ public class BusinessDetails implements Serializable {
 		this.populationIn5mileRadius = populationIn5mileRadius;
 	}
 
-	public int getIncomeScoreIn5milRadius() {
-		return incomeScoreIn5milRadius;
+	public int getIncomeScoreIn5mileRadius() {
+		return incomeScoreIn5mileRadius;
 	}
 
-	public void setIncomeScoreIn5milRadius(int incomeScoreIn5milRadius) {
-		this.incomeScoreIn5milRadius = incomeScoreIn5milRadius;
+	public void setIncomeScoreIn5mileRadius(int incomeScoreIn5mileRadius) {
+		this.incomeScoreIn5mileRadius = incomeScoreIn5mileRadius;
 	}
 
 	public int getDailyPeoplAtDoorNum() {
@@ -767,11 +838,11 @@ public class BusinessDetails implements Serializable {
 		this.createdByUserId = createdByUserId;
 	}
 
-	public String getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate) {
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
 
@@ -783,11 +854,11 @@ public class BusinessDetails implements Serializable {
 		this.updatedByUserId = updatedByUserId;
 	}
 
-	public String getUpdateDate() {
+	public LocalDateTime getUpdateDate() {
 		return updateDate;
 	}
 
-	public void setUpdateDate(String updateDate) {
+	public void setUpdateDate(LocalDateTime updateDate) {
 		this.updateDate = updateDate;
 	}
 

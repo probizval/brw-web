@@ -22,7 +22,7 @@ import com.brw.exceptions.PropertyDetailsException;
 
 public interface PropertyDetailsService {
 	
-	public BusinessListDTO searchBusiness(SimpleSearchFilterDTO searchFilter);
+	//public BusinessListDTO searchBusiness(SimpleSearchFilterDTO searchFilter);
 
 	public PropertyListDTO getAllPropertyList(FilterDTO filter);
 	public PropertyListDTO getAllPropertyListByUser(int userId, int pageNumber);

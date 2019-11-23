@@ -1,81 +1,103 @@
 package com.brw.dto;
 
-import com.brw.entities.BusinessDetails;
+
+/**
+ * @author sidpatil
+ * 2019
+ */
 
 public class BusinessDetailsDTO {
 
-	private int businessId;
+	private Integer invokerId;
+	private Integer businessId;
 	private String legalName;
 	private String name;
+	private String firstOwnerName;
+	private String secondOwnerName;
 	private String brandName;
 	private String type;
 	private String subType;
-	private int dataCompletionScore;
+	private String regCityName;
+	private String regCityCode;
+	private String regCityDate;
+	private String regStateName;
+	private String regStateCode;
+	private String regStateDate;
+	private Integer dataCompletionScore;
 	private String isforSell;
-	private int forSellPrice;
+	private Integer forSellPrice;
 	private String imageLogo;
 	private String imageFirst;
-	//private String imageDefault;
-	private int streetNum;
 	private String street1;
 	private String street2;
 	private String city;
 	private String county;
 	private String stateCode;
-	private int zip;
+	private Integer zip;
 	private double latitude;
 	private double longitude;
 	private String phone;
-	private String phone_ext;
+	private String phoneExt;
 	private String email;
 	private String website;
 	private String description;
-	private int NAICSNum;
+	private Integer NAICSNum;
 	private String NAICSDescription;
 	private String isFranchise;
 	private String isOwnerClaimed;
-	private int sqftIndoor;
-	private int sqftOutdoor;
-	private int sqftLot;
+	private Integer sqftIndoor;
+	private Integer sqftOutdoor;
+	private Integer sqftLot;
 	private String buildingType;
 	private String isBuildingOwned;
-	private int expenseMonthlyRent;
-	private int expenseMonthlyMortgage;
-	private int revenueMonthly;
-	private int expenseMonthlyMaterial;
-	private int expenseMonthlyEmp;
-	private int expenseMonthlyUtility;
-	private int expenseMonthlyOther;
-	private int valueTotalEquipment;
-	private int valueTotalFurniture;
-	private int valueIndoorDeco;
-	private int valueOutdoorDeco;
-	private int yearEquipment;
-	private int yearFurniture;
-	private int yearIndoorDeco;
-	private int yearOutdoorDeco;
-	private int relatedBusinessId;
-	private int empFullTimeNum;
-	private int empPartTimeNum;
-	private int areaCrimeScore;
-	private int areaWalkScore;
-	private int areaAttractionsScore;
-	private int areaTransitScore;
-	private int socialMediaScore;
-	private int poppulationIn1mileRadious;
-	private int poppulationIn3mileRadious;
-	private int poppulationIn5mileRadious;
-	private int dailyPeoplAtDoorNum;
-	private int dailyCarsAtParklotNum;
+	private Integer revenueMonthly;
+	private Integer expenseMonthlyRent;
+	private Integer expenseMonthlyMortgage;
+	private Integer expenseMonthlyMaterial;
+	private Integer expenseMonthlyEmp;
+	private Integer expenseMonthlyUtility;
+	private Integer expenseMonthlyOther;
+	private Integer valueTotalEquipment;
+	private Integer valueTotalFurniture;
+	private Integer valueIndoorDeco;
+	private Integer valueOutdoorDeco;
+	private Integer yearEquipment;
+	private Integer yearFurniture;
+	private Integer yearIndoorDeco;
+	private Integer yearOutdoorDeco;
+	private Integer empFullTimeNum;
+	private Integer empPartTimeNum;
+	private Integer areaCrimeScore;
+	private Integer areaWalkScore;
+	private Integer areaAttractionsScore;
+	private Integer areaTransitScore;
+	private Integer socialMediaScore;
+	private Integer populationIn1mileRadius;
+	private Integer incomeScoreIn1mileRadius;
+	private Integer populationIn3mileRadius;
+	private Integer incomeScoreIn3mileRadius;
+	private Integer populationIn5mileRadius;
+	private Integer incomeScoreIn5mileRadius;
+	private Integer dailyPeoplAtDoorNum;
+	private Integer dailyCarsAtParklotNum;
 	private String yearEstablished;
-	private int createdByUserId;
+	private String isEstimateAvailable;
+	private Integer createdByUserId;
 	private String createDate;
-	private int updatedByUserId;
+	private Integer updatedByUserId;
 	private String updateDate;
-	public int getBusinessId() {
+	
+	
+	public Integer getInvokerId() {
+		return invokerId;
+	}
+	public void setInvokerId(Integer invokerId) {
+		this.invokerId = invokerId;
+	}
+	public Integer getBusinessId() {
 		return businessId;
 	}
-	public void setBusinessId(int businessId) {
+	public void setBusinessId(Integer businessId) {
 		this.businessId = businessId;
 	}
 	public String getLegalName() {
@@ -89,6 +111,18 @@ public class BusinessDetailsDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getFirstOwnerName() {
+		return firstOwnerName;
+	}
+	public void setFirstOwnerName(String firstOwnerName) {
+		this.firstOwnerName = firstOwnerName;
+	}
+	public String getSecondOwnerName() {
+		return secondOwnerName;
+	}
+	public void setSecondOwnerName(String secondOwnerName) {
+		this.secondOwnerName = secondOwnerName;
 	}
 	public String getBrandName() {
 		return brandName;
@@ -108,10 +142,46 @@ public class BusinessDetailsDTO {
 	public void setSubType(String subType) {
 		this.subType = subType;
 	}
-	public int getDataCompletionScore() {
+	public String getRegCityName() {
+		return regCityName;
+	}
+	public void setRegCityName(String regCityName) {
+		this.regCityName = regCityName;
+	}
+	public String getRegCityCode() {
+		return regCityCode;
+	}
+	public void setRegCityCode(String regCityCode) {
+		this.regCityCode = regCityCode;
+	}
+	public String getRegCityDate() {
+		return regCityDate;
+	}
+	public void setRegCityDate(String regCityDate) {
+		this.regCityDate = regCityDate;
+	}
+	public String getRegStateName() {
+		return regStateName;
+	}
+	public void setRegStateName(String regStateName) {
+		this.regStateName = regStateName;
+	}
+	public String getRegStateCode() {
+		return regStateCode;
+	}
+	public void setRegStateCode(String regStateCode) {
+		this.regStateCode = regStateCode;
+	}
+	public String getRegStateDate() {
+		return regStateDate;
+	}
+	public void setRegStateDate(String regStateDate) {
+		this.regStateDate = regStateDate;
+	}
+	public Integer getDataCompletionScore() {
 		return dataCompletionScore;
 	}
-	public void setDataCompletionScore(int dataCompletionScore) {
+	public void setDataCompletionScore(Integer dataCompletionScore) {
 		this.dataCompletionScore = dataCompletionScore;
 	}
 	public String getIsforSell() {
@@ -120,10 +190,10 @@ public class BusinessDetailsDTO {
 	public void setIsforSell(String isforSell) {
 		this.isforSell = isforSell;
 	}
-	public int getForSellPrice() {
+	public Integer getForSellPrice() {
 		return forSellPrice;
 	}
-	public void setForSellPrice(int forSellPrice) {
+	public void setForSellPrice(Integer forSellPrice) {
 		this.forSellPrice = forSellPrice;
 	}
 	public String getImageLogo() {
@@ -137,12 +207,6 @@ public class BusinessDetailsDTO {
 	}
 	public void setImageFirst(String imageFirst) {
 		this.imageFirst = imageFirst;
-	}
-	public int getStreetNum() {
-		return streetNum;
-	}
-	public void setStreetNum(int streetNum) {
-		this.streetNum = streetNum;
 	}
 	public String getStreet1() {
 		return street1;
@@ -174,10 +238,10 @@ public class BusinessDetailsDTO {
 	public void setStateCode(String stateCode) {
 		this.stateCode = stateCode;
 	}
-	public int getZip() {
+	public Integer getZip() {
 		return zip;
 	}
-	public void setZip(int zip) {
+	public void setZip(Integer zip) {
 		this.zip = zip;
 	}
 	public double getLatitude() {
@@ -198,11 +262,11 @@ public class BusinessDetailsDTO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getPhone_ext() {
-		return phone_ext;
+	public String getPhoneExt() {
+		return phoneExt;
 	}
-	public void setPhone_ext(String phone_ext) {
-		this.phone_ext = phone_ext;
+	public void setPhoneExt(String phoneExt) {
+		this.phoneExt = phoneExt;
 	}
 	public String getEmail() {
 		return email;
@@ -222,10 +286,10 @@ public class BusinessDetailsDTO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getNAICSNum() {
+	public Integer getNAICSNum() {
 		return NAICSNum;
 	}
-	public void setNAICSNum(int nAICSNum) {
+	public void setNAICSNum(Integer nAICSNum) {
 		NAICSNum = nAICSNum;
 	}
 	public String getNAICSDescription() {
@@ -246,22 +310,22 @@ public class BusinessDetailsDTO {
 	public void setIsOwnerClaimed(String isOwnerClaimed) {
 		this.isOwnerClaimed = isOwnerClaimed;
 	}
-	public int getSqftIndoor() {
+	public Integer getSqftIndoor() {
 		return sqftIndoor;
 	}
-	public void setSqftIndoor(int sqftIndoor) {
+	public void setSqftIndoor(Integer sqftIndoor) {
 		this.sqftIndoor = sqftIndoor;
 	}
-	public int getSqftOutdoor() {
+	public Integer getSqftOutdoor() {
 		return sqftOutdoor;
 	}
-	public void setSqftOutdoor(int sqftOutdoor) {
+	public void setSqftOutdoor(Integer sqftOutdoor) {
 		this.sqftOutdoor = sqftOutdoor;
 	}
-	public int getSqftLot() {
+	public Integer getSqftLot() {
 		return sqftLot;
 	}
-	public void setSqftLot(int sqftLot) {
+	public void setSqftLot(Integer sqftLot) {
 		this.sqftLot = sqftLot;
 	}
 	public String getBuildingType() {
@@ -276,172 +340,184 @@ public class BusinessDetailsDTO {
 	public void setIsBuildingOwned(String isBuildingOwned) {
 		this.isBuildingOwned = isBuildingOwned;
 	}
-	public int getExpenseMonthlyRent() {
-		return expenseMonthlyRent;
-	}
-	public void setExpenseMonthlyRent(int expenseMonthlyRent) {
-		this.expenseMonthlyRent = expenseMonthlyRent;
-	}
-	public int getExpenseMonthlyMortgage() {
-		return expenseMonthlyMortgage;
-	}
-	public void setExpenseMonthlyMortgage(int expenseMonthlyMortgage) {
-		this.expenseMonthlyMortgage = expenseMonthlyMortgage;
-	}
-	public int getRevenueMonthly() {
+	public Integer getRevenueMonthly() {
 		return revenueMonthly;
 	}
-	public void setRevenueMonthly(int revenueMonthly) {
+	public void setRevenueMonthly(Integer revenueMonthly) {
 		this.revenueMonthly = revenueMonthly;
 	}
-	public int getExpenseMonthlyMaterial() {
+	public Integer getExpenseMonthlyRent() {
+		return expenseMonthlyRent;
+	}
+	public void setExpenseMonthlyRent(Integer expenseMonthlyRent) {
+		this.expenseMonthlyRent = expenseMonthlyRent;
+	}
+	public Integer getExpenseMonthlyMortgage() {
+		return expenseMonthlyMortgage;
+	}
+	public void setExpenseMonthlyMortgage(Integer expenseMonthlyMortgage) {
+		this.expenseMonthlyMortgage = expenseMonthlyMortgage;
+	}
+	public Integer getExpenseMonthlyMaterial() {
 		return expenseMonthlyMaterial;
 	}
-	public void setExpenseMonthlyMaterial(int expenseMonthlyMaterial) {
+	public void setExpenseMonthlyMaterial(Integer expenseMonthlyMaterial) {
 		this.expenseMonthlyMaterial = expenseMonthlyMaterial;
 	}
-	public int getExpenseMonthlyEmp() {
+	public Integer getExpenseMonthlyEmp() {
 		return expenseMonthlyEmp;
 	}
-	public void setExpenseMonthlyEmp(int expenseMonthlyEmp) {
+	public void setExpenseMonthlyEmp(Integer expenseMonthlyEmp) {
 		this.expenseMonthlyEmp = expenseMonthlyEmp;
 	}
-	public int getExpenseMonthlyUtility() {
+	public Integer getExpenseMonthlyUtility() {
 		return expenseMonthlyUtility;
 	}
-	public void setExpenseMonthlyUtility(int expenseMonthlyUtility) {
+	public void setExpenseMonthlyUtility(Integer expenseMonthlyUtility) {
 		this.expenseMonthlyUtility = expenseMonthlyUtility;
 	}
-	public int getExpenseMonthlyOther() {
+	public Integer getExpenseMonthlyOther() {
 		return expenseMonthlyOther;
 	}
-	public void setExpenseMonthlyOther(int expenseMonthlyOther) {
+	public void setExpenseMonthlyOther(Integer expenseMonthlyOther) {
 		this.expenseMonthlyOther = expenseMonthlyOther;
 	}
-	public int getValueTotalEquipment() {
+	public Integer getValueTotalEquipment() {
 		return valueTotalEquipment;
 	}
-	public void setValueTotalEquipment(int valueTotalEquipment) {
+	public void setValueTotalEquipment(Integer valueTotalEquipment) {
 		this.valueTotalEquipment = valueTotalEquipment;
 	}
-	public int getValueTotalFurniture() {
+	public Integer getValueTotalFurniture() {
 		return valueTotalFurniture;
 	}
-	public void setValueTotalFurniture(int valueTotalFurniture) {
+	public void setValueTotalFurniture(Integer valueTotalFurniture) {
 		this.valueTotalFurniture = valueTotalFurniture;
 	}
-	public int getValueIndoorDeco() {
+	public Integer getValueIndoorDeco() {
 		return valueIndoorDeco;
 	}
-	public void setValueIndoorDeco(int valueIndoorDeco) {
+	public void setValueIndoorDeco(Integer valueIndoorDeco) {
 		this.valueIndoorDeco = valueIndoorDeco;
 	}
-	public int getValueOutdoorDeco() {
+	public Integer getValueOutdoorDeco() {
 		return valueOutdoorDeco;
 	}
-	public void setValueOutdoorDeco(int valueOutdoorDeco) {
+	public void setValueOutdoorDeco(Integer valueOutdoorDeco) {
 		this.valueOutdoorDeco = valueOutdoorDeco;
 	}
-	public int getYearEquipment() {
+	public Integer getYearEquipment() {
 		return yearEquipment;
 	}
-	public void setYearEquipment(int yearEquipment) {
+	public void setYearEquipment(Integer yearEquipment) {
 		this.yearEquipment = yearEquipment;
 	}
-	public int getYearFurniture() {
+	public Integer getYearFurniture() {
 		return yearFurniture;
 	}
-	public void setYearFurniture(int yearFurniture) {
+	public void setYearFurniture(Integer yearFurniture) {
 		this.yearFurniture = yearFurniture;
 	}
-	public int getYearIndoorDeco() {
+	public Integer getYearIndoorDeco() {
 		return yearIndoorDeco;
 	}
-	public void setYearIndoorDeco(int yearIndoorDeco) {
+	public void setYearIndoorDeco(Integer yearIndoorDeco) {
 		this.yearIndoorDeco = yearIndoorDeco;
 	}
-	public int getYearOutdoorDeco() {
+	public Integer getYearOutdoorDeco() {
 		return yearOutdoorDeco;
 	}
-	public void setYearOutdoorDeco(int yearOutdoorDeco) {
+	public void setYearOutdoorDeco(Integer yearOutdoorDeco) {
 		this.yearOutdoorDeco = yearOutdoorDeco;
 	}
-	public int getRelatedBusinessId() {
-		return relatedBusinessId;
-	}
-	public void setRelatedBusinessId(int relatedBusinessId) {
-		this.relatedBusinessId = relatedBusinessId;
-	}
-	public int getEmpFullTimeNum() {
+	public Integer getEmpFullTimeNum() {
 		return empFullTimeNum;
 	}
-	public void setEmpFullTimeNum(int empFullTimeNum) {
+	public void setEmpFullTimeNum(Integer empFullTimeNum) {
 		this.empFullTimeNum = empFullTimeNum;
 	}
-	public int getEmpPartTimeNum() {
+	public Integer getEmpPartTimeNum() {
 		return empPartTimeNum;
 	}
-	public void setEmpPartTimeNum(int empPartTimeNum) {
+	public void setEmpPartTimeNum(Integer empPartTimeNum) {
 		this.empPartTimeNum = empPartTimeNum;
 	}
-	public int getAreaCrimeScore() {
+	public Integer getAreaCrimeScore() {
 		return areaCrimeScore;
 	}
-	public void setAreaCrimeScore(int areaCrimeScore) {
+	public void setAreaCrimeScore(Integer areaCrimeScore) {
 		this.areaCrimeScore = areaCrimeScore;
 	}
-	public int getAreaWalkScore() {
+	public Integer getAreaWalkScore() {
 		return areaWalkScore;
 	}
-	public void setAreaWalkScore(int areaWalkScore) {
+	public void setAreaWalkScore(Integer areaWalkScore) {
 		this.areaWalkScore = areaWalkScore;
 	}
-	public int getAreaAttractionsScore() {
+	public Integer getAreaAttractionsScore() {
 		return areaAttractionsScore;
 	}
-	public void setAreaAttractionsScore(int areaAttractionsScore) {
+	public void setAreaAttractionsScore(Integer areaAttractionsScore) {
 		this.areaAttractionsScore = areaAttractionsScore;
 	}
-	public int getAreaTransitScore() {
+	public Integer getAreaTransitScore() {
 		return areaTransitScore;
 	}
-	public void setAreaTransitScore(int areaTransitScore) {
+	public void setAreaTransitScore(Integer areaTransitScore) {
 		this.areaTransitScore = areaTransitScore;
 	}
-	public int getSocialMediaScore() {
+	public Integer getSocialMediaScore() {
 		return socialMediaScore;
 	}
-	public void setSocialMediaScore(int socialMediaScore) {
+	public void setSocialMediaScore(Integer socialMediaScore) {
 		this.socialMediaScore = socialMediaScore;
 	}
-	public int getPoppulationIn1mileRadious() {
-		return poppulationIn1mileRadious;
+	public Integer getPopulationIn1mileRadius() {
+		return populationIn1mileRadius;
 	}
-	public void setPoppulationIn1mileRadious(int poppulationIn1mileRadious) {
-		this.poppulationIn1mileRadious = poppulationIn1mileRadious;
+	public void setPopulationIn1mileRadius(Integer populationIn1mileRadius) {
+		this.populationIn1mileRadius = populationIn1mileRadius;
 	}
-	public int getPoppulationIn3mileRadious() {
-		return poppulationIn3mileRadious;
+	public Integer getIncomeScoreIn1mileRadius() {
+		return incomeScoreIn1mileRadius;
 	}
-	public void setPoppulationIn3mileRadious(int poppulationIn3mileRadious) {
-		this.poppulationIn3mileRadious = poppulationIn3mileRadious;
+	public void setIncomeScoreIn1mileRadius(Integer incomeScoreIn1mileRadius) {
+		this.incomeScoreIn1mileRadius = incomeScoreIn1mileRadius;
 	}
-	public int getPoppulationIn5mileRadious() {
-		return poppulationIn5mileRadious;
+	public Integer getPopulationIn3mileRadius() {
+		return populationIn3mileRadius;
 	}
-	public void setPoppulationIn5mileRadious(int poppulationIn5mileRadious) {
-		this.poppulationIn5mileRadious = poppulationIn5mileRadious;
+	public void setPopulationIn3mileRadius(Integer populationIn3mileRadius) {
+		this.populationIn3mileRadius = populationIn3mileRadius;
 	}
-	public int getDailyPeoplAtDoorNum() {
+	public Integer getIncomeScoreIn3mileRadius() {
+		return incomeScoreIn3mileRadius;
+	}
+	public void setIncomeScoreIn3mileRadius(Integer incomeScoreIn3mileRadius) {
+		this.incomeScoreIn3mileRadius = incomeScoreIn3mileRadius;
+	}
+	public Integer getPopulationIn5mileRadius() {
+		return populationIn5mileRadius;
+	}
+	public void setPopulationIn5mileRadius(Integer populationIn5mileRadius) {
+		this.populationIn5mileRadius = populationIn5mileRadius;
+	}
+	public Integer getIncomeScoreIn5mileRadius() {
+		return incomeScoreIn5mileRadius;
+	}
+	public void setIncomeScoreIn5mileRadius(Integer incomeScoreIn5mileRadius) {
+		this.incomeScoreIn5mileRadius = incomeScoreIn5mileRadius;
+	}
+	public Integer getDailyPeoplAtDoorNum() {
 		return dailyPeoplAtDoorNum;
 	}
-	public void setDailyPeoplAtDoorNum(int dailyPeoplAtDoorNum) {
+	public void setDailyPeoplAtDoorNum(Integer dailyPeoplAtDoorNum) {
 		this.dailyPeoplAtDoorNum = dailyPeoplAtDoorNum;
 	}
-	public int getDailyCarsAtParklotNum() {
+	public Integer getDailyCarsAtParklotNum() {
 		return dailyCarsAtParklotNum;
 	}
-	public void setDailyCarsAtParklotNum(int dailyCarsAtParklotNum) {
+	public void setDailyCarsAtParklotNum(Integer dailyCarsAtParklotNum) {
 		this.dailyCarsAtParklotNum = dailyCarsAtParklotNum;
 	}
 	public String getYearEstablished() {
@@ -450,10 +526,16 @@ public class BusinessDetailsDTO {
 	public void setYearEstablished(String yearEstablished) {
 		this.yearEstablished = yearEstablished;
 	}
-	public int getCreatedByUserId() {
+	public String getIsEstimateAvailable() {
+		return isEstimateAvailable;
+	}
+	public void setIsEstimateAvailable(String isEstimateAvailable) {
+		this.isEstimateAvailable = isEstimateAvailable;
+	}
+	public Integer getCreatedByUserId() {
 		return createdByUserId;
 	}
-	public void setCreatedByUserId(int createdByUserId) {
+	public void setCreatedByUserId(Integer createdByUserId) {
 		this.createdByUserId = createdByUserId;
 	}
 	public String getCreateDate() {
@@ -462,10 +544,10 @@ public class BusinessDetailsDTO {
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
-	public int getUpdatedByUserId() {
+	public Integer getUpdatedByUserId() {
 		return updatedByUserId;
 	}
-	public void setUpdatedByUserId(int updatedByUserId) {
+	public void setUpdatedByUserId(Integer updatedByUserId) {
 		this.updatedByUserId = updatedByUserId;
 	}
 	public String getUpdateDate() {
@@ -474,5 +556,4 @@ public class BusinessDetailsDTO {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
-	
 }

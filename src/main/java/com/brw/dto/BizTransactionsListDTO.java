@@ -8,11 +8,11 @@ package com.brw.dto;
 import java.io.Serializable;
 import java.util.List;
 
-public class BusinessListDTO implements Serializable {
+public class BizTransactionsListDTO implements Serializable {
 
 	private static final long serialVersionUID = -65223447914153444L;
 	
-	private List<BusinessDetailsDTO> businessList;
+	private List<BizTransactionsDTO> bizTransactionsList;
 	
 	private Long totalCount;
 	
@@ -44,11 +44,11 @@ public class BusinessListDTO implements Serializable {
 		this.pageSize = pageSize;
 	}
 
-	public List<BusinessDetailsDTO> getBusinessList() {
-		return businessList;
+	public List<BizTransactionsDTO> getBizTransactionsList() {
+		return bizTransactionsList;
 	}
 
-	public void setBusinessList(List<BusinessDetailsDTO> businessList) {
-		this.businessList = businessList;
+	public void setBizTransactionsList(List<BizTransactionsDTO> bizTransactionsList) {
+		this.bizTransactionsList = bizTransactionsList;
 	}
 }

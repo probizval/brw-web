@@ -2,6 +2,7 @@ package com.brw.dao;
 
 /**
  * @author sidpatil
+ * 2019
  */
 
 import java.util.List;
@@ -15,24 +16,14 @@ import com.brw.entities.BusinessDetails;
 
 @Repository
 public interface BusinessDetailsDAO extends PagingAndSortingRepository<BusinessDetails, Integer>{
-
 	
-	//List<PropertyDetails> findByPropertyName(@Param ("propertyName") String propertyName);
-	
-	List<BusinessDetails> findByBusinessName(@Param ("businessName") String businessName);
-	
-	@Query(nativeQuery=true, value="SELECT * FROM t_brw_business where (:businessName is null or name_dba = :businessName ) AND (:businessType is null or type = :businessType);")
+	@Query(nativeQuery=true, value="SELECT * FROM t_brw_business WHERE (:businessName is null or name_dba = :businessName) AND (:businessType is null or type = :businessType) AND (:street1 is null or add_street1 = :street1) AND (:street2 is null or add_street1 = :street2) AND (:city is null or add_city = :city) AND (:state is null or add_city = :state) AND (:zip is null or add_zip = :zip);")
 	//@Query(nativeQuery=true, value="SELECT * FROM t_brw_business where (name_dba = :businessName) AND (type = :businessType);")
-	List<BusinessDetails> searchBusiness(@Param ("businessName") String businessName, @Param ("businessType") String businessType);
+	List<BusinessDetails> searchBusiness(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("city") String city, @Param ("state") String state, @Param ("zip") int zip);
 	
-	@Query(nativeQuery=true, value="SELECT * FROM t_brw_business where (:businessId is null or biz_id = :businessId);")
+	@Query(nativeQuery=true, value="SELECT * FROM t_brw_business WHERE (:businessId is null or biz_id = :businessId);")
 	BusinessDetails getBusinessDetails(@Param ("businessId") int businessId);
 	
-	//List<PropertyDetails> findAllByUserId(@Param ("userId") int userId);
-	
-	
-	//Page<PropertyDetails> findAllByUserId(Pageable pageable, @Param ("userId") int userId);
-	
-	//@Query(nativeQuery=true, value="Select propdetails.* from rw_user_bookmarked_listing as bookmarks INNER JOIN rw_property_details as propdetails ON bookmarks.property_details_id = propdetails.id and bookmarks.user_id=:userId")
-	//Page<PropertyDetails> findBookmarkPropByUserId(Pageable pageable, @Param ("userId") int userId);
+	@Query(nativeQuery=true, value="SELECT * FROM t_brw_business WHERE (:businessType is null or type = :businessName) AND (:businessSubType is null or sub_type = :businessSubType) AND (:state is null or add_state = :state) AND (:city is null or add_city = :city) LIMIT 5;")
+	List<BusinessDetails> searchComparableBusiness(@Param ("businessType") String businessType, @Param ("businessSubType") String businessSubType, @Param ("state") String state, @Param ("city") String city);
 }

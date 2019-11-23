@@ -92,40 +92,6 @@ public class PropertyDetailsService implements com.brw.service.PropertyDetailsSe
 	private BusinessRequirementDAO businessRequirementDAO;
 	
 	@Override
-	public BusinessListDTO searchBusiness(SimpleSearchFilterDTO simpleSearchFilter) {
-		// TODO Auto-generated method stub
-		System.out.println("**** Inside PropertyDetailsService.searchBusiness()");
-		
-		List<BusinessDetails> businessList = (List<BusinessDetails>) businessDetailsDAO.searchBusiness(simpleSearchFilter.getBizName(), simpleSearchFilter.getBizType());
-		List<BusinessDetailsDTO> businessDetailsDTOList = new ArrayList<BusinessDetailsDTO>();
-		BusinessListDTO businessListDTO = new BusinessListDTO();
-		
-		for (BusinessDetails businessDetails: businessList) {
-			BusinessDetailsDTO businessDetailsDTO = new BusinessDetailsDTO();
-			businessDetailsDTO.setBusinessId(businessDetails.getBusinessId());
-			businessDetailsDTO.setName(businessDetails.getName());		
-			businessDetailsDTO.setType(businessDetails.getType());
-			businessDetailsDTO.setSubType(businessDetails.getSubType());
-			businessDetailsDTO.setCity(businessDetails.getCity());
-			//businessDetailsDTO.setCurrentOwner(businessDetails.getCurrentOwner());
-			//businessDetailsDTO.setEstatedEstimatedValue(businessDetails.getEstatesEstimatedValue());
-			businessDetailsDTO.setImageFirst(businessDetails.getImageFirst());
-			businessDetailsDTO.setLatitude(businessDetails.getLatitude());
-			businessDetailsDTO.setLongitude(businessDetails.getLongitude());
-			businessDetailsDTO.setSqftLot(businessDetails.getSqftLot());
-			//businessDetailsDTO.setPropertyAddress(businessDetails.getPropertyAddress());
-			businessDetailsDTO.setStateCode(businessDetails.getStateCode());
-			businessDetailsDTO.setZip(businessDetails.getZip());
-			if(simpleSearchFilter.getInvokerId() != null) {
-				//businessDetailsDTO.setIsBookMarked(this.getBookMarksDetails(searchFilter.getUserId(), businessDetails.getBusinessId()));
-			}
-			businessDetailsDTOList.add(businessDetailsDTO);
-		}
-		businessListDTO.setBusinessList(businessDetailsDTOList);
-		return businessListDTO;
-	}
-	
-	@Override
 	public PropertyListDTO getAllPropertyList(FilterDTO filter) {
 		// TODO Auto-generated method stub
 		System.out.println("**** Inside PropertyDetailsService.getAllPropertyList()");
