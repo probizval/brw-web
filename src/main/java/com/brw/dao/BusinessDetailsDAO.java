@@ -24,8 +24,9 @@ public interface BusinessDetailsDAO extends PagingAndSortingRepository<BusinessD
 			+ "WHERE name_dba = :businessName "
 			+ "AND type = :businessType "
 			+ "AND add_street1 LIKE '%:street1%' "
+			+ "AND add_street2 LIKE '%:street2%' "
 			+ "AND add_zip = :zip")
-	List<BusinessDetails> searchBusiness_1(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("zip") int zip);
+	List<BusinessDetails> searchBusiness_1(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("zip") int zip);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Type
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN "
@@ -39,17 +40,19 @@ public interface BusinessDetailsDAO extends PagingAndSortingRepository<BusinessD
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN "
 			+ "FROM t_brw_business_1 "
 			+ "WHERE name_dba = :businessName "
-			+ "AND add_street1 = :street1 "
+			+ "AND add_street1 LIKE '%:street1%' "
+			+ "AND add_street2 LIKE '%:street2%' "
 			+ "AND add_zip = :zip")
-	List<BusinessDetails> searchBusiness_3(@Param ("businessName") String businessName, @Param ("street1") String street1, @Param ("zip") int zip);
+	List<BusinessDetails> searchBusiness_3(@Param ("businessName") String businessName, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("zip") int zip);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Type and Address
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN "
 			+ "FROM t_brw_business_1 "
 			+ "WHERE type = :businessType "
-			+ "AND add_street1 = :street1 "
+			+ "AND add_street1 LIKE '%:street1%' "
+			+ "AND add_street2 LIKE '%:street2%' "
 			+ "AND add_zip = :zip")
-	List<BusinessDetails> searchBusiness_4(@Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("zip") int zip);
+	List<BusinessDetails> searchBusiness_4(@Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("zip") int zip);
 	
 	//Search where only 1 non-required attributes are part of the input - Name
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN "
@@ -77,10 +80,11 @@ public interface BusinessDetailsDAO extends PagingAndSortingRepository<BusinessD
 			+ "FROM t_brw_business_1 "
 			+ "WHERE name_dba = :businessName "
 			+ "AND type = :businessType "
-			+ "AND add_street1 = :street1 "
+			+ "AND add_street1 LIKE '%:street1%' "
+			+ "AND add_street2 LIKE '%:street2%' "
 			+ "AND add_city = :city "
 			+ "AND add_state = :state")
-	List<BusinessDetails> searchBusiness_8(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("city") String city, @Param ("state") String state);
+	List<BusinessDetails> searchBusiness_8(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("city") String city, @Param ("state") String state);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Type
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN "
@@ -95,19 +99,21 @@ public interface BusinessDetailsDAO extends PagingAndSortingRepository<BusinessD
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN "
 			+ "FROM t_brw_business_1 "
 			+ "WHERE name_dba = :businessName "
-			+ "AND add_street1 = :street1 "
+			+ "AND add_street1 LIKE '%:street1%' "
+			+ "AND add_street2 LIKE '%:street2%' "
 			+ "AND add_city = :city "
 			+ "AND add_state = :state")
-	List<BusinessDetails> searchBusiness_10(@Param ("businessName") String businessName, @Param ("street1") String street1, @Param ("city") String city, @Param ("state") String state);
+	List<BusinessDetails> searchBusiness_10(@Param ("businessName") String businessName, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("city") String city, @Param ("state") String state);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Type and Address
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN "
 			+ "FROM t_brw_business_1 "
 			+ "WHERE type = :businessType "
-			+ "AND add_street1 = :street1 "
+			+ "AND add_street1 LIKE '%:street1%' "
+			+ "AND add_street2 LIKE '%:street2%' "
 			+ "AND add_city = :city "
 			+ "AND add_state = :state")
-	List<BusinessDetails> searchBusiness_11(@Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("city") String city, @Param ("state") String state);
+	List<BusinessDetails> searchBusiness_11(@Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("city") String city, @Param ("state") String state);
 	
 	//Search where only 1 non-required attributes are part of the input - Name
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN "
@@ -138,10 +144,11 @@ public interface BusinessDetailsDAO extends PagingAndSortingRepository<BusinessD
 			+ "FROM t_brw_business_1 "
 			+ "WHERE name_dba = :businessName "
 			+ "AND type = :businessType "
-			+ "AND add_street1 = :street1 "
+			+ "AND add_street1 LIKE '%:street1%' "
+			+ "AND add_street2 LIKE '%:street2%' "
 			+ "AND add_county = :county "
 			+ "AND add_state = :state")
-	List<BusinessDetails> searchBusiness_15(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("county") String county, @Param ("state") String state);
+	List<BusinessDetails> searchBusiness_15(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("county") String county, @Param ("state") String state);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Type
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN "
@@ -156,19 +163,21 @@ public interface BusinessDetailsDAO extends PagingAndSortingRepository<BusinessD
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN "
 			+ "FROM t_brw_business_1 "
 			+ "WHERE name_dba = :businessName "
-			+ "AND add_street1 = :street1 "
+			+ "AND add_street1 LIKE '%:street1%' "
+			+ "AND add_street2 LIKE '%:street2%' "
 			+ "AND add_county = :county "
 			+ "AND add_state = :state")
-	List<BusinessDetails> searchBusiness_17(@Param ("businessName") String businessName, @Param ("street1") String street1, @Param ("county") String county, @Param ("state") String state);
+	List<BusinessDetails> searchBusiness_17(@Param ("businessName") String businessName, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("county") String county, @Param ("state") String state);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Type and Address
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN "
 			+ "FROM t_brw_business_1 "
 			+ "WHERE type = :businessType "
-			+ "AND add_street1 = :street1 "
+			+ "AND add_street1 LIKE '%:street1%' "
+			+ "AND add_street2 LIKE '%:street2%' "
 			+ "AND add_county = :county "
 			+ "AND add_state = :state")
-	List<BusinessDetails> searchBusiness_18(@Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("county") String county, @Param ("state") String state);
+	List<BusinessDetails> searchBusiness_18(@Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("county") String county, @Param ("state") String state);
 	
 	//Search where only 1 non-required attributes are part of the input - Name
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN "
