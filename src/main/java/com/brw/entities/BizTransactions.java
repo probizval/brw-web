@@ -17,7 +17,7 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @DynamicUpdate
-@Table(name = "t_brw_biz_transaction")
+@Table(name = "t_brw_business_transaction")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class BizTransactions implements Serializable {
 	
@@ -47,19 +47,19 @@ public class BizTransactions implements Serializable {
 	@Column(name = "isVerified_YN")
 	private String isVerified;
 	
-	@Column(name = "verificationMethod")
+	@Column(name = "verification_method")
 	private String verificationMethod;
 	
 	@Column(name = "createdby_user_id")
 	private int createdByUserId;
 	
-	@Column(name = "create_date")
+	@Column(name = "created_date")
 	private LocalDateTime createDate;
 	
 	@Column(name = "updatedby_user_id")
 	private int updatedByUserId;
 	
-	@Column(name = "update_date")
+	@Column(name = "updated_date")
 	private LocalDateTime updateDate;
 
 	public int getTransactionId() {

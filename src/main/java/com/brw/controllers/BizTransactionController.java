@@ -75,6 +75,8 @@ public class BizTransactionController implements ErrorController {
 		
 		System.out.println("111 **** Inside BizTransactionController.addBizTransactions()");
 		
+		System.out.println("111 **** Inside BizTransactionController.addBizTransactions() bizTransactionsListDTO: "+bizTransactionsListDTO.getBizTransactionsList().size());
+		
 		logger.info("Add the New Business Transaction Details");
 		
 		try {

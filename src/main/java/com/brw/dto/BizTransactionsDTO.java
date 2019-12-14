@@ -21,6 +21,7 @@ public class BizTransactionsDTO {
 	private String createDate;
 	private Integer updatedByUserId;
 	private String updateDate;
+	
 	public Integer getInvokerId() {
 		return invokerId;
 	}

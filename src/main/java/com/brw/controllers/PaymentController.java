@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/payment")
+@RequestMapping("/api/stripePayment/v1/")
 public class PaymentController {
 
     private StripeClient stripeClient;
@@ -20,8 +20,10 @@ public class PaymentController {
         this.stripeClient = stripeClient;
     }
 
-    @PostMapping("/charge")
+    @PostMapping("chargeCustomer")
     public Charge chargeCard(@RequestBody  PaymentDTO paymentDTO) throws Exception {
+    	
+    	System.out.println("*** Inside PaymentController.chargeCard(): "+paymentDTO.getToken());
         String token = paymentDTO.getToken();
         Double amount = paymentDTO.getAmount();
         return this.stripeClient.chargeNewCard(token, amount);

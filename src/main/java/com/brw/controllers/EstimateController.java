@@ -75,7 +75,7 @@ public class EstimateController implements ErrorController {
 		
 		System.out.println("111 **** Inside BusinessController.addBusiness()");
 		
-		logger.info("Add the New Business Details");
+		logger.info("Add the New Estimates");
 		
 		try {
 			EstimatesListDTO eListDTo = estimateService.addEstimates(estimatesListDTO);
