@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +23,6 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
 
-import com.brw.dto.SimpleSearchFilterDTO;
 import com.brw.exceptions.BusinessException;
 
 import com.brw.dto.BusinessDetailsDTO;
@@ -38,7 +36,8 @@ import com.brw.service.BusinessService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/business/v1/")
+//@RequestMapping("/api/business/v1/")
+@RequestMapping(value = "/api/business/v1/", produces = "application/json")
 public class BusinessController implements ErrorController {
 
 	public static final Logger logger = LoggerFactory.getLogger(BusinessController.class);
@@ -57,16 +56,17 @@ public class BusinessController implements ErrorController {
 	 * searchBusiness - Service for simple search on home page based on business name, OR type, OR address returns list of matching businessess with limited attributes
 	 */
 	@RequestMapping(value = "searchBusiness", method = RequestMethod.POST, produces = "application/json")
-	public ApiResponse<?> searchBusiness(@RequestBody SimpleSearchFilterDTO simpleSearchFilter) {
+	//@PostMapping(value = "searchBusiness")
+	public ApiResponse<?> searchBusiness(@RequestBody BusinessDetailsDTO businessDetailsDTO) {
 		
-		System.out.println("**** 111 Inside BusinessController.searchBusiness() searchFilter: "+simpleSearchFilter.toString());
+		System.out.println("**** 111 Inside BusinessController.searchBusiness() searchFilter: "+businessDetailsDTO.toString());
 
 		logger.info("Search Business based on search criteria");
 		
 		BusinessListDTO businessList = null;
 
 		try {
-			businessList = businessService.searchBusiness(simpleSearchFilter);
+			businessList = businessService.searchBusiness(businessDetailsDTO);
 		
 		} catch (BusinessException be) {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
@@ -76,8 +76,42 @@ public class BusinessController implements ErrorController {
 	
 	/**
 	 * @author sidpatil
-	 * getBusinessDetails - Service to get the Business Details on the basis of biz_id, 
+	 * getBusinessDetails - Service to get the Business Details on the basis of biz_id
+	 * 1. This service first checks in the BRW DB for the Vendor Data Flag/s before calling Vendor API to get the data
+	 * 2. If Vendor Data flag returns FALSE, it makes vendor API calls.
+	 * 3. Store the data returned by Vendor APIs in BRW DB and then return it back in the response of getBusinessDetails
+	 * 4. If the Vendor Data flag returns TRUE, then do not call Vendor API store data in BRW MYSQL DB(subset of total result set) 
+	 *    and also in BRW MONGO DB(all attributes) and pull the data from BRW DB.
+	 * 5. This service also calculates the estimated worth of business. 
 	 */
+	//@RequestMapping(value = "getBusinessDetails/{businessId}", method = RequestMethod.GET, produces = "application/json")
+	@PostMapping(value = "getBusinessDetails")
+	public ApiResponse<?> getBusinessDetails(@RequestBody BusinessDetailsDTO businessDTO) {
+		
+		System.out.println("**** 111 Inside BusinessController.getBusinessDetails()");
+		
+		logger.info("GET the Business details based on business Id");
+
+		BusinessDetailsDTO businessDetailsDTO = null;
+		try {
+			//vendorDataFlag = businessService.getVendorDataFlag(businessId);
+			//if(vendorDataFlag) {
+				businessDetailsDTO = businessService.getBusinessDetails(businessDTO.getBusinessId());
+				businessDetailsDTO.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO));
+			//} else {
+				//String vendorId = vendorDataService.getVendorId(businessId);
+				//businessDetailsDTO = vendorDataService.getBusinessDetailsFromVendor(vendorId); //calls Vendor API stores data in DBs(My SQL and MONGODB) and returns stores data businessDetailsDTO
+				//businessDetailsDTO.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO));
+			//}
+			
+		} catch (BusinessException be) {
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
+			
+		}
+		return ApiResponse.withData(businessDetailsDTO);
+	}
+	
+	/*
 	@RequestMapping(value = "getBusinessDetails/{businessId}", method = RequestMethod.GET, produces = "application/json")
 	public ApiResponse<?> getBusinessDetails(@PathVariable int businessId) {
 		
@@ -87,8 +121,15 @@ public class BusinessController implements ErrorController {
 
 		BusinessDetailsDTO businessDetailsDTO = null;
 		try {
-			businessDetailsDTO = businessService.getBusinessDetails(businessId);
-			businessDetailsDTO.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO));
+			//vendorDataFlag = businessService.getVendorDataFlag(businessId);
+			//if(vendorDataFlag) {
+				businessDetailsDTO = businessService.getBusinessDetails(businessId);
+				businessDetailsDTO.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO));
+			//} else {
+				//String vendorId = vendorDataService.getVendorId(businessId);
+				//businessDetailsDTO = vendorDataService.getBusinessDetailsFromVendor(vendorId); //calls Vendor API stores data in DBs(My SQL and MONGODB) and returns stores data businessDetailsDTO
+				//businessDetailsDTO.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO));
+			//}
 			
 		} catch (BusinessException be) {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
@@ -96,6 +137,7 @@ public class BusinessController implements ErrorController {
 		}
 		return ApiResponse.withData(businessDetailsDTO);
 	}
+	*/
 	
 	/**
 	 * @author sidpatil

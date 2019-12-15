@@ -7,8 +7,8 @@
 	<artifactId>BRW</artifactId>
 	<packaging>war</packaging>
 
-	<name>BRV</name>
-	<description>Demo project for Spring Boot</description>
+	<name>BRW</name>
+	<description>Business Real Worth Application - We Know All about the Small and Medium scale Business!</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -28,6 +28,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -38,16 +39,19 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.auth0</groupId>
 			<artifactId>auth0</artifactId>
@@ -59,15 +63,22 @@
 			<artifactId>auth0-spring-security-api</artifactId>
 			<version>1.0.0-rc.2</version>
 		</dependency>
+		
 		<dependency>
 		    <groupId>com.stripe</groupId>
 		    <artifactId>stripe-java</artifactId>
-		    <version>5.21.0</version>
+		    <version>15.6.0</version>
 		</dependency>
+		
 		<dependency>
 		   <groupId>org.springframework.boot</groupId>
 		   <artifactId>spring-boot-starter-tomcat</artifactId>
 		   <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -79,6 +90,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>

@@ -87,6 +87,8 @@ public class BizTransactionServiceImpl implements com.brw.service.BizTransaction
 		System.out.println("222 **** Inside BizTransactionServiceImpl.addBizTransactions()");
 
 		List<BizTransactionsDTO> bizTransactionsDTOList = bizTransactionsListDTO.getBizTransactionsList();
+		System.out.println("222 **** Inside BizTransactionServiceImpl.addBizTransactions() bizTransactionsDTOList SIZE: "+bizTransactionsDTOList.size());
+		
 		List<BizTransactionsDTO> bizTransDTOList = new ArrayList<BizTransactionsDTO>();
 		BizTransactionsListDTO bizTransListDTO = new BizTransactionsListDTO();
 

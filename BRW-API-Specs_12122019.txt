@@ -1,0 +1,606 @@
+BRW API Specifications Doc
+
+Created By: Sid Patil
+Date: 11/14/2019
+Update Date: 12/12/2019
+
+1.	Name: AddBusinesssDetails
+
+Method - Post
+EndPoint –
+http://localhost:8080/api/business/v1/addBusiness
+
+Request -
+{
+    "legalName": "Cindy and Sisters LLC",
+    "name": "Cleopatra's Beauty Salon",
+    "firstOwnerName": "Cindy Cahill",
+    "secondOwnerName": "Mindy Cahill",
+    "brandName": "Saphora",
+    "type": "BEAUTY",
+    "subType": "BEAUTY_SALON",
+    "regCityName": "Fremont",
+    "regCityCode": "044095",
+    "regCityDate": "2009-09-04 12:00",
+    "regStateName": "CA",
+    "regStateCode": "20090801202",
+    "regStateDate": "2009-10-30 12:00",
+    "dataCompletionScore": 80,
+    "isforSell": "N",
+    "forSellPrice": 0,
+    "imageLogo": "",
+    "imageFirst": "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
+    "street1": "2140 Peralta Blvd",
+    "street2": "STE 111",
+    "city": "Fremont",
+    "county": "Alameda",
+    "stateCode": "CA",
+    "zip": 94536,
+    "latitude": 37.562376,
+    "longitude": -121.988676,
+    "phone": "510-111-2222",
+    "phone_ext": "",
+    "email": "cindymindy@cleopatrasalon.com",
+    "website": "www.cleopatrasalon.com",
+    "description": "Cleopatra's Salon is started 10 years ago by two sisters with passion in serving frinds and family with Beauty and Health Services. After 10 years of steady growth in satisfied customers and strong repeats and referrals it is now time for Owner's to get ready for their next stage in life. This place is conveniently located in the Central Fremont Area where there are 3 new communities are already build out in last 3 years and 2 more are planned to open in by 2021.",
+    "isFranchise": "N",
+    "isOwnerClaimed": "Y",
+    "sqftIndoor": 600,
+    "sqftOutdoor": 0,
+    "sqftLot": 25000,
+    "buildingType": "MULTI_UNIT",
+    "isBuildingOwned": "N",
+    "revenueMonthly": 30000,
+    "expenseMonthlyRent": 2000,
+    "expenseMonthlyMortgage": 0,
+    "expenseMonthlyMaterial": 10000,
+    "expenseMonthlyEmp": 5000,
+    "expenseMonthlyUtility": 500,
+    "expenseMonthlyOther": 0,
+    "valueTotalEquipment": 10000,
+    "valueTotalFurniture": 5000,
+    "valueIndoorDeco": 0,
+    "valueOutdoorDeco": 0,
+    "yearEquipment": 2015,
+    "yearFurniture": 2017,
+    "yearIndoorDeco": 0,
+    "yearOutdoorDeco": 0,
+    "empFullTimeNum": 2,
+    "empPartTimeNum": 1,
+    "areaCrimeScore": 20,
+    "areaWalkScore": 30,
+    "areaAttractionsScore": 10,
+    "areaTransitScore": 10,
+    "socialMediaScore": 80,
+    "poppulationIn1mileRadious": 25000,
+    "incomeScoreIn1mileRadious": 60,
+    "poppulationIn3mileRadious": 50000,
+    "incomeScoreIn3mileRadious": 60,
+    "poppulationIn5mileRadious": 100000,
+    "incomeScoreIn5mileRadious": 50,
+    "dailyPeoplAtDoorNum": 100,
+    "dailyCarsAtParklotNum": 100,
+    "yearEstablished": 2009,
+    "naicsnum": "812112",
+    "naicsdescription": "Beauty Salons"
+}
+
+Response -
+{
+    "businessId": 1000001,
+    "legalName": "Cindy and Sisters LLC",
+    "name": null,
+    "firstOwnerName": null,
+    "secondOwnerName": null,
+    "brandName": null,
+    "type": "BEAUTY",
+    "subType": null,
+    "regCityName": null,
+    "regCityCode": null,
+    "regCityDate": null,
+    "regStateName": null,
+    "regStateCode": null,
+    "regStateDate": null,
+    "dataCompletionScore": 0,
+    "isforSell": null,
+    "forSellPrice": 0,
+    "imageLogo": null,
+    "imageFirst": null,
+    "street1": null,
+    "street2": null,
+    "city": null,
+    "county": null,
+    "stateCode": null,
+    "zip": 0,
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "phone": null,
+    "phoneExt": null,
+    "email": null,
+    "website": null,
+    "description": null,
+    "isFranchise": null,
+    "isOwnerClaimed": null,
+    "sqftIndoor": 0,
+    "sqftOutdoor": 0,
+    "sqftLot": 0,
+    "buildingType": null,
+    "isBuildingOwned": null,
+    "revenueMonthly": 0,
+    "expenseMonthlyRent": 0,
+    "expenseMonthlyMortgage": 0,
+    "expenseMonthlyMaterial": 0,
+    "expenseMonthlyEmp": 0,
+    "expenseMonthlyUtility": 0,
+    "expenseMonthlyOther": 0,
+    "valueTotalEquipment": 0,
+    "valueTotalFurniture": 0,
+    "valueIndoorDeco": 0,
+    "valueOutdoorDeco": 0,
+    "yearEquipment": 0,
+    "yearFurniture": 0,
+    "yearIndoorDeco": 0,
+    "yearOutdoorDeco": 0,
+    "empFullTimeNum": 0,
+    "empPartTimeNum": 0,
+    "areaCrimeScore": 0,
+    "areaWalkScore": 0,
+    "areaAttractionsScore": 0,
+    "areaTransitScore": 0,
+    "socialMediaScore": 0,
+    "populationIn1mileRadius": 0,
+    "incomeScoreIn1mileRadius": 0,
+    "populationIn3mileRadius": 0,
+    "incomeScoreIn3mileRadius": 0,
+    "populationIn5mileRadius": 0,
+    "dailyPeoplAtDoorNum": 0,
+    "dailyCarsAtParklotNum": 0,
+    "yearEstablished": null,
+    "createdByUserId": 0,
+    "createDate": null,
+    "updatedByUserId": 0,
+    "updateDate": null,
+    "naicsnum": 0,
+    "naicsdescription": null,
+    "incomeScoreIn5mileRadious": 0
+}
+
+
+
+2.	Name: SearchBusiness
+
+Method - Post
+EndPoint – 
+http://localhost:8080/api/business/v1/searchBusiness
+
+
+Request -
+{
+    "businessName": "Business DBA Name - Misha's Italian",
+    "businessType": "RESTAURANT",
+    "street1": "Peralta",
+    "street2": "",
+    "city": "Fremont",
+    "zip": "94536",
+	"county": "Alamada".
+	"state": "CA"
+}
+
+Response –
+{
+    "status": "succcess",
+    "httpStatus": "OK",
+    "data": {
+        "businessList": [
+            {
+                "businessId": 1000000,
+                "legalName": null,
+                "name": "Business DBA Name - Misha's Italian",
+                "brandName": null,
+                "type": "RESTAURANT",
+                "subType": "GENERAL_RESTAURANT",
+                "dataCompletionScore": 0,
+                "isforSell": null,
+                "forSellPrice": 0,
+                "imageLogo": null,
+                "imageFirst": "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
+                "streetNum": 0,
+                "street1": null,
+                "street2": null,
+                "city": "Fremont",
+                "county": null,
+                "stateCode": "CA",
+                "zip": 94536,
+                "latitude": 37.562376,
+                "longitude": -121.988676,
+                "phone": null,
+                "phone_ext": null,
+                "email": null,
+                "website": null,
+                "description": null,
+                "isFranchise": null,
+                "isOwnerClaimed": null,
+                "sqftIndoor": 0,
+                "sqftOutdoor": 0,
+                "sqftLot": 25000,
+                "buildingType": null,
+                "isBuildingOwned": null,
+                "expenseMonthlyRent": 0,
+                "expenseMonthlyMortgage": 0,
+                "revenueMonthly": 0,
+                "expenseMonthlyMaterial": 0,
+                "expenseMonthlyEmp": 0,
+                "expenseMonthlyUtility": 0,
+                "expenseMonthlyOther": 0,
+                "valueTotalEquipment": 0,
+                "valueTotalFurniture": 0,
+                "valueIndoorDeco": 0,
+                "valueOutdoorDeco": 0,
+                "yearEquipment": 0,
+                "yearFurniture": 0,
+                "yearIndoorDeco": 0,
+                "yearOutdoorDeco": 0,
+                "relatedBusinessId": 0,
+                "empFullTimeNum": 0,
+                "empPartTimeNum": 0,
+                "areaCrimeScore": 0,
+                "areaWalkScore": 0,
+                "areaAttractionsScore": 0,
+                "areaTransitScore": 0,
+                "socialMediaScore": 0,
+                "poppulationIn1mileRadious": 0,
+                "poppulationIn3mileRadious": 0,
+                "poppulationIn5mileRadious": 0,
+                "dailyPeoplAtDoorNum": 0,
+                "dailyCarsAtParklotNum": 0,
+                "yearEstablished": null,
+                "createdByUserId": 0,
+                "createDate": null,
+                "updatedByUserId": 0,
+                "updateDate": null,
+                "naicsnum": 0,
+                "naicsdescription": null
+            }
+        ],
+        "totalCount": null,
+        "pageNumber": null,
+        "pageSize": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+
+3.	getBusinessDetails
+Method - Get
+EndPoint –
+http://localhost:8080/api/business/v1/getBusiness/1000000
+
+Request –
+NA
+
+Response - 
+{
+    "status": "succcess",
+    "httpStatus": "OK",
+    "data": {
+        "businessId": 1000000,
+        "legalName": null,
+        "name": "Business DBA Name - Misha's Italian",
+        "brandName": null,
+        "type": "RESTAURANT",
+        "subType": "GENERAL_RESTAURANT",
+        "dataCompletionScore": 0,
+        "isforSell": null,
+        "forSellPrice": 0,
+        "imageLogo": null,
+        "imageFirst": "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
+        "streetNum": 0,
+        "street1": null,
+        "street2": null,
+        "city": "Fremont",
+        "county": null,
+        "stateCode": "CA",
+        "zip": 94536,
+        "latitude": 37.562376,
+        "longitude": -121.988676,
+        "phone": null,
+        "phone_ext": null,
+        "email": null,
+        "website": null,
+        "description": null,
+        "isFranchise": null,
+        "isOwnerClaimed": null,
+        "sqftIndoor": 0,
+        "sqftOutdoor": 0,
+        "sqftLot": 25000,
+        "buildingType": null,
+        "isBuildingOwned": null,
+        "expenseMonthlyRent": 0,
+        "expenseMonthlyMortgage": 0,
+        "revenueMonthly": 0,
+        "expenseMonthlyMaterial": 0,
+        "expenseMonthlyEmp": 0,
+        "expenseMonthlyUtility": 0,
+        "expenseMonthlyOther": 0,
+        "valueTotalEquipment": 0,
+        "valueTotalFurniture": 0,
+        "valueIndoorDeco": 0,
+        "valueOutdoorDeco": 0,
+        "yearEquipment": 0,
+        "yearFurniture": 0,
+        "yearIndoorDeco": 0,
+        "yearOutdoorDeco": 0,
+        "relatedBusinessId": 0,
+        "empFullTimeNum": 0,
+        "empPartTimeNum": 0,
+        "areaCrimeScore": 0,
+        "areaWalkScore": 0,
+        "areaAttractionsScore": 0,
+        "areaTransitScore": 0,
+        "socialMediaScore": 0,
+        "poppulationIn1mileRadious": 0,
+        "poppulationIn3mileRadious": 0,
+        "poppulationIn5mileRadious": 0,
+        "dailyPeoplAtDoorNum": 0,
+        "dailyCarsAtParklotNum": 0,
+        "yearEstablished": null,
+        "createdByUserId": 0,
+        "createDate": null,
+        "updatedByUserId": 0,
+        "updateDate": null,
+        "naicsnum": 0,
+        "naicsdescription": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+
+4.	UpdateBusinessDetails –
+Method – PUT
+
+EndPoint -
+http://localhost:8080/api/business/v1/updateBusinessDetails
+
+Request -
+{
+    "invokerId": "1001",
+    "businessId": "1000001",
+    "legalName": "Cindy Mindy Beauty LLC"
+}
+
+Response -
+{
+    "invokerId": null,
+    "businessId": 1000001,
+    "legalName": "Cindy Mindy Beauty LLC",
+    "name": null,
+    "firstOwnerName": null,
+    "secondOwnerName": null,
+    "brandName": null,
+    "type": "BEAUTY",
+    "subType": null,
+    "regCityName": null,
+    "regCityCode": null,
+    "regCityDate": null,
+    "regStateName": null,
+    "regStateCode": null,
+    "regStateDate": null,
+    "dataCompletionScore": null,
+    "isforSell": null,
+    "forSellPrice": null,
+    "imageLogo": null,
+    "imageFirst": null,
+    "street1": null,
+    "street2": null,
+    "city": null,
+    "county": null,
+    "stateCode": null,
+    "zip": null,
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "phone": null,
+    "phoneExt": null,
+    "email": null,
+    "website": null,
+    "description": null,
+    "isFranchise": null,
+    "isOwnerClaimed": null,
+    "sqftIndoor": null,
+    "sqftOutdoor": null,
+    "sqftLot": null,
+    "buildingType": null,
+    "isBuildingOwned": null,
+    "revenueMonthly": null,
+    "expenseMonthlyRent": null,
+    "expenseMonthlyMortgage": null,
+    "expenseMonthlyMaterial": null,
+    "expenseMonthlyEmp": null,
+    "expenseMonthlyUtility": null,
+    "expenseMonthlyOther": null,
+    "valueTotalEquipment": null,
+    "valueTotalFurniture": null,
+    "valueIndoorDeco": null,
+    "valueOutdoorDeco": null,
+    "yearEquipment": null,
+    "yearFurniture": null,
+    "yearIndoorDeco": null,
+    "yearOutdoorDeco": null,
+    "empFullTimeNum": null,
+    "empPartTimeNum": null,
+    "areaCrimeScore": null,
+    "areaWalkScore": null,
+    "areaAttractionsScore": null,
+    "areaTransitScore": null,
+    "socialMediaScore": null,
+    "populationIn1mileRadius": null,
+    "incomeScoreIn1mileRadius": null,
+    "populationIn3mileRadius": null,
+    "incomeScoreIn3mileRadius": null,
+    "populationIn5mileRadius": null,
+    "incomeScoreIn5mileRadius": null,
+    "dailyPeoplAtDoorNum": null,
+    "dailyCarsAtParklotNum": null,
+    "yearEstablished": null,
+    "createdByUserId": null,
+    "createDate": null,
+    "updatedByUserId": null,
+    "updateDate": null,
+    "naicsnum": null,
+    "naicsdescription": null
+}
+
+
+5.	AddEstimates
+Method - Post
+End Point –
+http://localhost:8080/api/estimates/v1/addEstimates
+
+Request-
+{
+    "estimatesList": [
+        {
+            "invokerId": "1001",
+            "businessId": "1000000",
+            "estimateType": "ASSET_BASED",
+            "estimateSubType": "ASSET_BASED",
+            "estimatedAmount": "100025",
+            "estimatedAmountHigh": "125025",
+            "estimatedAmountLow": "75025"
+        },
+        {
+            "invokerId": "1001",
+            "businessId": "1000000",
+            "estimateType": "INCOME_BASED",
+            "estimateSubType": "INCOME_BASED",
+            "estimatedAmount": "200025",
+            "estimatedAmountHigh": "250025",
+            "estimatedAmountLow": "150025"
+        },
+        {
+            "invokerId": "1001",
+            "businessId": "1000000",
+            "estimateType": "MARKET_BASED",
+            "estimateSubType": "MARKET_BASED",
+            "estimatedAmount": "150025",
+            "estimatedAmountHigh": "175025",
+            "estimatedAmountLow": "125025"
+        }
+    ]
+}
+
+Response-
+{
+    "estimatesList": [
+        {
+            "invokerId": null,
+            "estimateId": 4,
+            "businessId": 1000000,
+            "estimateType": "ASSET_BASED",
+            "estimateSubType": "ASSET_BASED",
+            "estimatedAmount": "100025",
+            "estimatedAmountHigh": "125025",
+            "estimatedAmountLow": "75025",
+            "lastEstimationDate": "2019-11-20 17:29"
+        },
+        {
+            "invokerId": null,
+            "estimateId": 5,
+            "businessId": 1000000,
+            "estimateType": "INCOME_BASED",
+            "estimateSubType": "INCOME_BASED",
+            "estimatedAmount": "200025",
+            "estimatedAmountHigh": "250025",
+            "estimatedAmountLow": "150025",
+            "lastEstimationDate": "2019-11-20 17:29"
+        },
+        {
+            "invokerId": null,
+            "estimateId": 6,
+            "businessId": 1000000,
+            "estimateType": "MARKET_BASED",
+            "estimateSubType": "MARKET_BASED",
+            "estimatedAmount": "150025",
+            "estimatedAmountHigh": "175025",
+            "estimatedAmountLow": "125025",
+            "lastEstimationDate": "2019-11-20 17:29"
+        }
+    ],
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null
+}
+
+
+6.	GetEstimates -
+
+Method – GET
+
+End Point –
+http://localhost:8080/api/estimates/v1/getEstimates/1000000
+
+
+Request –
+NA
+
+Response –
+{
+    "status": "succcess",
+    "httpStatus": "OK",
+    "data": {
+        "estimatesList": [
+            {
+                "invokerId": null,
+                "estimateId": 6,
+                "businessId": 1000000,
+                "estimateType": "MARKET_BASED",
+                "estimateSubType": "MARKET_BASED",
+                "estimatedAmount": "150025",
+                "estimatedAmountHigh": "175025",
+                "estimatedAmountLow": "125025",
+                "lastEstimationDate": "2019-11-20 17:29"
+            },
+            {
+                "invokerId": null,
+                "estimateId": 5,
+                "businessId": 1000000,
+                "estimateType": "INCOME_BASED",
+                "estimateSubType": "INCOME_BASED",
+                "estimatedAmount": "200025",
+                "estimatedAmountHigh": "250025",
+                "estimatedAmountLow": "150025",
+                "lastEstimationDate": "2019-11-20 17:29"
+            },
+            {
+                "invokerId": null,
+                "estimateId": 4,
+                "businessId": 1000000,
+                "estimateType": "ASSET_BASED",
+                "estimateSubType": "ASSET_BASED",
+                "estimatedAmount": "100025",
+                "estimatedAmountHigh": "125025",
+                "estimatedAmountLow": "75025",
+                "lastEstimationDate": "2019-11-20 17:29"
+            }
+        ],
+        "totalCount": null,
+        "pageNumber": null,
+        "pageSize": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+

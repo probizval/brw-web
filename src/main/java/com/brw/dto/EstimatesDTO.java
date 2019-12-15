@@ -17,6 +17,7 @@ public class EstimatesDTO {
 	private String estimatedAmountHigh;
 	private String estimatedAmountLow;
 	private String lastEstimationDate;
+	
 	public Integer getInvokerId() {
 		return invokerId;
 	}
