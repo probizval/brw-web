@@ -86,7 +86,7 @@ public class BusinessDetailsDTO {
 	private String createDate;
 	private Integer updatedByUserId;
 	private String updateDate;
-	
+	private String isVendorCall;
 	
 	public Integer getInvokerId() {
 		return invokerId;
@@ -531,6 +531,11 @@ public class BusinessDetailsDTO {
 	}
 	public void setIsEstimateAvailable(String isEstimateAvailable) {
 		this.isEstimateAvailable = isEstimateAvailable;
+	}public String getIsVendorCall() {
+		return isVendorCall;
+	}
+	public void setIsVendorCall(String isVendorCall) {
+		this.isVendorCall = isVendorCall;
 	}
 	public Integer getCreatedByUserId() {
 		return createdByUserId;

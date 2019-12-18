@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.resource.HttpResource;
 
 import com.brw.common.constants.Constant;
 import com.brw.common.constants.ErrorCodes;
