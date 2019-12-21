@@ -696,3 +696,43 @@ Response –
     "validationErrors": null
 }
 
+7.	GetImages - This service is to read Image URLs from t_brw_image table
+
+Method – Post
+End Point –
+http://localhost:8080/api/image/v1/getImages
+
+
+Request –
+{
+    "businessId": 1000000
+}
+
+Response –
+{
+    "status": "succcess",
+    "httpStatus": "OK",
+    "data": {
+    	"businessId": 1000000,
+        "imagesList": [
+            {
+                "imageId": 1,
+                "url": "http://image/location/image1.jpg"
+            },
+            {
+                 "imageId": 2,
+                "url": "http://image/location/image2.jpg"
+            }
+        ],
+        "totalCount": null,
+        "pageNumber": null,
+        "pageSize": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
