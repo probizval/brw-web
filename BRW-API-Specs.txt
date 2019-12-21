@@ -703,8 +703,8 @@ Response –
 
 
 
-Tasks for Tomorrow -
-1. t_brw_business_add_attribute_def - read operation
+Pending Tasks -
+1. t_brw_business_add_attribute_def - read equipments operation, read misc attributes operation
 2. t_brw_business_add_attributes - add, update  and read operations
 3. t_brw_image - add, update and read operations
 4. t_brw_user - add, update and read operations
