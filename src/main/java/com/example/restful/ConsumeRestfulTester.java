@@ -1,7 +1,6 @@
 package com.example.restful;
 
 import java.nio.charset.Charset;
-import java.util.Collections;
 
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -41,15 +39,16 @@ public class ConsumeRestfulTester {
 		return args -> {
 			
 			
-			String key = "fUMoAOl6wPbiLfLQMtygfCiwX007lVGY";
-			String secret = "KtmfEXJ2EKf0kAPt";
+			String key = "P7AHcLiRnqA4JL7R9wdtXjHQzcI0HlKh";
+			String secret = "ZMuVFQxqqGWrfsnd";
 		    
 			///*
-			// CALL FAILS -> Caused by: org.springframework.web.client.HttpClientErrorException$Unauthorized: 401 Unauthorized
 			//Call to PB geoproperty API
 			ResponseEntity<PropertyAttributesFromPBResponse> propertyAttributes = 
 					restTemplate.exchange(
-					"https://api.pitneybowes.com/location-intelligence/geoproperty/v1/all/attributes/bypbkey?pbKey=P00003PZZOIE", HttpMethod.GET,
+					//"https://api.pitneybowes.com/location-intelligence/geoproperty/v1/all/attributes/bypbkey?pbKey=P00003PZZOIE", HttpMethod.GET,
+					"https://api.pitneybowes.com/location-intelligence/geoproperty/v1/all/attributes/byaddress?address=4750 Walnut St, Boulder, CO, 80301", HttpMethod.GET,  
+
 		            new HttpEntity<>(createHeaders(key, secret)), PropertyAttributesFromPBResponse.class);
 			log.info(propertyAttributes.toString());
 			//*/
@@ -73,7 +72,7 @@ public class ConsumeRestfulTester {
 	         System.out.println("Encoded Value: "+authHeader);
 	         
 	         //set( "Authorization", authHeader );
-	         set( "Authorization", "Bearer HDYnCWRnjn8qxTA81y3iNAikCeCJ");
+	         set( "Authorization", "Bearer 0Q1sv7jDlNAJiR45egAVCYMckPDQ");
 	      }};
 	}
 	
