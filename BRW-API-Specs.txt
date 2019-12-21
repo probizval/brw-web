@@ -2,7 +2,7 @@ BRW API Specifications Doc
 
 Created By: Sid Patil
 Date: 11/14/2019
-Update Date: 12/12/2019
+Update Date: 12/20/2019
 
 1.	Name: AddBusinesssDetails
 
@@ -368,12 +368,16 @@ Response –
 
 
 3.	getBusinessDetails
-Method - Get
+Method - Post
 EndPoint –
-http://localhost:8080/api/business/v1/getBusiness/1000000
+http://localhost:8080/api/business/v1/getBusinessDetails
 
 Request –
-NA
+{
+    "businessId": 1000000,
+    "isVendorCall": "Y",
+    "isEstimate": "Y"
+}
 
 Response - 
 {
