@@ -98,10 +98,16 @@ public class BusinessController implements ErrorController {
 		logger.info("GET the Business details based on business Id");
 
 		BusinessDetailsDTO businessDetailsDTO1 = null;
-		BusinessDetailsDTO businessDetailsDTO2 = null;
+		//BusinessDetailsDTO businessDetailsDTO2 = null;
 
 		try {
-			//vendorDataFlag = businessService.getVendorDataFlag(businessId);
+			
+			businessDetailsDTO1 = businessService.getBusinessDetailsFromBRWDB(businessDTO.getBusinessId());
+			businessDetailsDTO1.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO1));
+			
+			return ApiResponse.withData(businessDetailsDTO1);
+			
+			/* Code in case we decide to make Vendor API call run-time
 			if(null != businessDTO.getIsVendorCall() && Constant.Y == businessDTO.getIsVendorCall()) {
 				businessDetailsDTO1 = businessService.getBusinessDetailsFromBRWDB(businessDTO.getBusinessId());
 				businessDetailsDTO1.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO1));
@@ -125,7 +131,7 @@ public class BusinessController implements ErrorController {
 				
 				return ApiResponse.withData(businessDetailsDTO2);
 			}
-			
+			*/
 		} catch (BusinessException be) {
 			be.printStackTrace();
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Data Not Found");
