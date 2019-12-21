@@ -164,7 +164,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	}
 	
 	@Override
-	public BusinessDetailsDTO getBusinessDetails(int businessId) {
+	public BusinessDetailsDTO getBusinessDetailsFromBRWDB(int businessId) {
 		// TODO Auto-generated method stub
 		System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessId: "+businessId);
 		

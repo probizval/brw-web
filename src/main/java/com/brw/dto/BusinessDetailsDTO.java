@@ -82,11 +82,11 @@ public class BusinessDetailsDTO {
 	private Integer dailyCarsAtParklotNum;
 	private String yearEstablished;
 	private String isEstimateAvailable;
+	private String isVendorCall;
 	private Integer createdByUserId;
 	private String createDate;
 	private Integer updatedByUserId;
 	private String updateDate;
-	private String isVendorCall;
 	
 	public Integer getInvokerId() {
 		return invokerId;

@@ -20,14 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
+import com.brw.common.constants.Constant;
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
 
 import com.brw.exceptions.BusinessException;
-
+import com.brw.exceptions.DataFromPBException;
 import com.brw.dto.BusinessDetailsDTO;
 import com.brw.dto.BusinessListDTO;
 import com.brw.service.BusinessService;
+import com.brw.service.VendorDataService;
 
 /**
  * @author sidpatil
@@ -44,6 +46,9 @@ public class BusinessController implements ErrorController {
 
 	@Autowired
 	BusinessService businessService;
+	
+	@Autowired
+	VendorDataService vendorDataService;
 
 	@Override
 	public String getErrorPath() {
@@ -81,7 +86,7 @@ public class BusinessController implements ErrorController {
 	 * 2. If Vendor Data flag returns FALSE, it makes vendor API calls.
 	 * 3. Store the data returned by Vendor APIs in BRW DB and then return it back in the response of getBusinessDetails
 	 * 4. If the Vendor Data flag returns TRUE, then do not call Vendor API store data in BRW MYSQL DB(subset of total result set) 
-	 *    and also in BRW MONGO DB(all attributes) and pull the data from BRW DB.
+	 *    and (??also in BRW MONGO DB(all attributes)??) and pull the data from BRW DB.
 	 * 5. This service also calculates the estimated worth of business. 
 	 */
 	//@RequestMapping(value = "getBusinessDetails/{businessId}", method = RequestMethod.GET, produces = "application/json")
@@ -92,23 +97,39 @@ public class BusinessController implements ErrorController {
 		
 		logger.info("GET the Business details based on business Id");
 
-		BusinessDetailsDTO businessDetailsDTO = null;
+		BusinessDetailsDTO businessDetailsDTO1 = null;
+		BusinessDetailsDTO businessDetailsDTO2 = null;
+
 		try {
 			//vendorDataFlag = businessService.getVendorDataFlag(businessId);
-			//if(vendorDataFlag) {
-				businessDetailsDTO = businessService.getBusinessDetails(businessDTO.getBusinessId());
-				businessDetailsDTO.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO));
-			//} else {
-				//String vendorId = vendorDataService.getVendorId(businessId);
-				//businessDetailsDTO = vendorDataService.getBusinessDetailsFromVendor(vendorId); //calls Vendor API stores data in DBs(My SQL and MONGODB) and returns stores data businessDetailsDTO
-				//businessDetailsDTO.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO));
-			//}
+			if(null != businessDTO.getIsVendorCall() && Constant.Y == businessDTO.getIsVendorCall()) {
+				businessDetailsDTO1 = businessService.getBusinessDetailsFromBRWDB(businessDTO.getBusinessId());
+				businessDetailsDTO1.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO1));
+				
+				return ApiResponse.withData(businessDetailsDTO1);
+
+			} else {
+				//If the address and Vendor Id mapping is not available then make vendor call based on address
+				businessDetailsDTO1 = businessService.getBusinessDetailsFromBRWDB(businessDTO.getBusinessId());
+				
+				try {
+					businessDetailsDTO2 = vendorDataService.getBusinessDetailsFromPB(businessDetailsDTO1.getStreet1(), businessDetailsDTO1.getStreet2(), businessDetailsDTO1.getCity(), businessDetailsDTO1.getStateCode(), businessDetailsDTO1.getZip()); 
+				
+				} catch (DataFromPBException pe) {
+					pe.printStackTrace();
+					return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Data Not Found");
+				}
+				//calls Vendor API stores data in DBs(My SQL and MONGODB) and returns stores data businessDetailsDTO
+				businessDetailsDTO2.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO2));
+				businessDetailsDTO2 = updateBusinessWithVendorData(businessDetailsDTO2);
+				
+				return ApiResponse.withData(businessDetailsDTO2);
+			}
 			
 		} catch (BusinessException be) {
-			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
-			
+			be.printStackTrace();
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Data Not Found");
 		}
-		return ApiResponse.withData(businessDetailsDTO);
 	}
 	
 	/*
@@ -178,6 +199,26 @@ public class BusinessController implements ErrorController {
 		} catch (InternalServerError e) {
 			// TODO: handle exception
 			return new ResponseEntity<>(businessDetailsDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/**
+	 * @author sidpatil
+	 * updateBusinessWithVendorData - Service to update the existing business details based on Vendor data
+	 */
+	public BusinessDetailsDTO updateBusinessWithVendorData(BusinessDetailsDTO businessDetailsDTO) {
+		
+		System.out.println("**** Inside updateBusinessWithVendorData()");
+		
+		logger.info("UPDATE the Business Details based on Vendor Data");
+		
+		try {
+			BusinessDetailsDTO bDTo = businessService.updateBusinessDetails(businessDetailsDTO);
+			return bDTo;
+			
+		} catch (InternalServerError e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

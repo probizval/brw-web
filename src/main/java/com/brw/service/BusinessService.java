@@ -12,7 +12,7 @@ import com.brw.exceptions.BusinessException;
 public interface BusinessService {
 	
 	public BusinessListDTO searchBusiness(BusinessDetailsDTO searchFilter) throws BusinessException;
-	public BusinessDetailsDTO getBusinessDetails(int businessId) throws BusinessException;
+	public BusinessDetailsDTO getBusinessDetailsFromBRWDB(int businessId) throws BusinessException;
 	public BusinessDetailsDTO addBusinessDetails(BusinessDetailsDTO businessDetailsDTO);
 	public BusinessDetailsDTO updateBusinessDetails(BusinessDetailsDTO businessDetailsDTO);
 	public BusinessListDTO searchComparableBusiness(BusinessDetailsDTO businessInQuestion) throws BusinessException;
