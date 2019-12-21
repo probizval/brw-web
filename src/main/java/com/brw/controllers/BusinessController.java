@@ -47,8 +47,8 @@ public class BusinessController implements ErrorController {
 	@Autowired
 	BusinessService businessService;
 	
-	@Autowired
-	VendorDataService vendorDataService;
+	//@Autowired
+	//VendorDataService vendorDataService;
 
 	@Override
 	public String getErrorPath() {
