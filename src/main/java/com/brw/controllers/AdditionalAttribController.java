@@ -27,7 +27,7 @@ import com.brw.service.AdditionalAttribService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/additionalAttrib/v1/")
+@RequestMapping("/api/additionalAttributes/v1/")
 public class AdditionalAttribController implements ErrorController {
 
 	public static final Logger logger = LoggerFactory.getLogger(EstimateController.class);
@@ -48,7 +48,7 @@ public class AdditionalAttribController implements ErrorController {
 	@PostMapping(value = "getAdditionalAttribDefinitions")
 	public ApiResponse<?> getAdditionalAttribDefinitions(@RequestBody BusinessDetailsDTO businessDTO) {
 		
-		System.out.println("**** 111 Inside BizTransactionController.getBizTransactions()");
+		System.out.println("**** 111 Inside AdditionalAttribController.getAdditionalAttribDefinitions()");
 		
 		logger.info("Get the Business Transactions based on business Id");
 
@@ -68,10 +68,10 @@ public class AdditionalAttribController implements ErrorController {
 	 * @author sidpatil
 	 * getAdditionalAttribs - Service to get Additional Attributes on the basis of biz_id 
 	 */
-	@PostMapping(value = "getAdditionalAttribs")
+	@PostMapping(value = "getAdditionalAttributes")
 	public ApiResponse<?> getAdditionalAttribs(@RequestBody BusinessDetailsDTO businessDTO) {
 		
-		System.out.println("**** 111 Inside BizTransactionController.getBizTransactions()");
+		System.out.println("**** 111 Inside AdditionalAttribController.getAdditionalAttributes()");
 		
 		logger.info("Get the Business Transactions based on business Id");
 
@@ -92,10 +92,10 @@ public class AdditionalAttribController implements ErrorController {
 	 * @author sidpatil
 	 * addAdditionalAttribs - Service to add additional business attributes to BRW DB 
 	 */
-	@PostMapping(value = "addAdditionalAttribs")
+	@PostMapping(value = "addAdditionalAttributes")
 	public ResponseEntity<AdditionalAttribsListDTO> addAdditionalAttribs(@RequestBody AdditionalAttribsListDTO additionalAttribsListDTO) {
 		
-		System.out.println("111 **** Inside BizTransactionController.addBizTransactions()");
+		System.out.println("111 **** Inside AdditionalAttribController.addAdditionalAttributes()");
 				
 		logger.info("Add the New Business Transaction Details");
 		

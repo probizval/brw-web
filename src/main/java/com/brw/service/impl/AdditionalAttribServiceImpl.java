@@ -20,11 +20,8 @@ import com.brw.dto.AdditionalAttribDefinitionsDTO;
 import com.brw.dto.AdditionalAttribDefinitionsListDTO;
 import com.brw.dto.AdditionalAttribsDTO;
 import com.brw.dto.AdditionalAttribsListDTO;
-import com.brw.dto.EstimatesDTO;
-import com.brw.dto.EstimatesListDTO;
 import com.brw.entities.AdditionalAttribDefinitions;
 import com.brw.entities.AdditionalAttributes;
-import com.brw.entities.Estimates;
 
 @Component
 public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAttribService {
@@ -81,17 +78,17 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 			
 			additionalAttribsDTOList.add(additionalAttribsDTO);
 		}
-		additionalAttribsListDTO.setAdditionalAttribsDTOList(additionalAttribsDTOList);
+		additionalAttribsListDTO.setAddAttributesList(additionalAttribsDTOList);
 		return additionalAttribsListDTO;
 	}
 	
 	@Override
 	public AdditionalAttribsListDTO addAdditionalAttributes(AdditionalAttribsListDTO additionalAttribsListDTO) {
 		
-		System.out.println("222 **** Inside AdditionalAttribServiceImpl.addAdditionalAttribs()");
+		System.out.println("222 **** Inside AdditionalAttribServiceImpl.addAdditionalAttributes()");
 
-		List<AdditionalAttribsDTO> additionalAttribsDTOList = additionalAttribsListDTO.getAdditionalAttribsDTOList();
-		System.out.println("222 **** Inside BizTransactionServiceImpl.addBizTransactions() bizTransactionsDTOList SIZE: "+additionalAttribsDTOList.size());
+		List<AdditionalAttribsDTO> additionalAttribsDTOList = additionalAttribsListDTO.getAddAttributesList();
+		System.out.println("222 **** Inside AdditionalAttribServiceImpl.addAdditionalAttributes() addAdditionalAttributes SIZE: "+additionalAttribsDTOList.size());
 		
 		List<AdditionalAttribsDTO> addAttribsDTOList = new ArrayList<AdditionalAttribsDTO>();
 		AdditionalAttribsListDTO addAttribsListDTO = new AdditionalAttribsListDTO();
@@ -105,6 +102,7 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 			additionalAttributes.setBusinessId(additionalAttribsDTO.getBusinessId());
 			additionalAttributes.setAddAttribType(additionalAttribsDTO.getAttribType());
 			additionalAttributes.setAddAttribSubType(additionalAttribsDTO.getAttribSubType());
+			additionalAttributes.setValueType(additionalAttribsDTO.getValueType());
 			additionalAttributes.setValue(additionalAttribsDTO.getValue());
 			additionalAttributes.setQuantity(additionalAttribsDTO.getQuantity());
 			additionalAttributes.setPerUnitPrice(additionalAttribsDTO.getPricePerUnit());
@@ -120,6 +118,7 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 			addAttribsDTO.setBusinessId(addAttributes.getBusinessId());
 			addAttribsDTO.setAttribType(addAttributes.getAddAttribType());
 			addAttribsDTO.setAttribSubType(addAttributes.getAddAttribSubType());
+			addAttribsDTO.setValueType(addAttributes.getValueType());
 			addAttribsDTO.setValue(addAttributes.getValue());
 			addAttribsDTO.setQuantity(addAttributes.getQuantity());
 			addAttribsDTO.setPricePerUnit(addAttributes.getPerUnitPrice());
@@ -131,7 +130,7 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 			
 			addAttribsDTOList.add(addAttribsDTO);
 		}
-		addAttribsListDTO.setAdditionalAttribsDTOList(addAttribsDTOList);
+		addAttribsListDTO.setAddAttributesList(addAttribsDTOList);
 		return addAttribsListDTO;
 	}
 }

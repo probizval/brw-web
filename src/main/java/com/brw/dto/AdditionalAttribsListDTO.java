@@ -12,7 +12,7 @@ public class AdditionalAttribsListDTO implements Serializable {
 
 	private static final long serialVersionUID = -65223447914153444L;
 	
-	private List<AdditionalAttribsDTO> additionalAttribsDTOList;
+	private List<AdditionalAttribsDTO> addAttributesList;
 	
 	private Long totalCount;
 	
@@ -44,12 +44,12 @@ public class AdditionalAttribsListDTO implements Serializable {
 		this.pageSize = pageSize;
 	}
 	
-	public List<AdditionalAttribsDTO> getAdditionalAttribsDTOList() {
-		return additionalAttribsDTOList;
+	public List<AdditionalAttribsDTO> getAddAttributesList() {
+		return addAttributesList;
 	}
 
-	public void setAdditionalAttribsDTOList(List<AdditionalAttribsDTO> additionalAttribsDTOList) {
-		this.additionalAttribsDTOList = additionalAttribsDTOList;
+	public void setAddAttributesList(List<AdditionalAttribsDTO> addAttributesList) {
+		this.addAttributesList = addAttributesList;
 	}
 
 	public static long getSerialversionuid() {

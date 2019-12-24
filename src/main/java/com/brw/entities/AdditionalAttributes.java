@@ -41,6 +41,9 @@ public class AdditionalAttributes implements Serializable {
 	@Column(name = "value")
 	private String value;
 	
+	@Column(name = "value_type")
+	private String valueType;
+	
 	@Column(name = "quantity")
 	private int quantity;
 	
@@ -53,13 +56,13 @@ public class AdditionalAttributes implements Serializable {
 	@Column(name = "createdby_user_id")
 	private int createdByUserId;
 	
-	@Column(name = "created_date")
+	@Column(name = "create_date")
 	private LocalDateTime createDate;
 	
 	@Column(name = "updatedby_user_id")
 	private int updatedByUserId;
 	
-	@Column(name = "updated_date")
+	@Column(name = "update_date")
 	private LocalDateTime updateDate;
 
 	public int getAddAttributeId() {
@@ -100,6 +103,14 @@ public class AdditionalAttributes implements Serializable {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public String getValueType() {
+		return valueType;
+	}
+
+	public void setValueType(String valueType) {
+		this.valueType = valueType;
 	}
 
 	public int getQuantity() {

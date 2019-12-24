@@ -700,85 +700,69 @@ Response –
     "validationErrors": null
 }
 
-7.	AddAdditionalAttributes
+
+7.	AddAdditionalAttributes - Service to add any other attributes that are not part of AddBusiness Service. 
+Like Business specific attributes e.g. Fuel Dispensers, ATM Machines, Air and Water Machines in case of Gas Station.
+Stoves and Kitchen Heads, Dish Washer, and exhausts in case of Restaurants. etc.
+Please check the t_brw_business_add_attribute_def table for already defined types and sub-types for particular type of business.
+Service named getAdditionalAttribDefinitions(String bizType, String bizSubType) can be used to do it via API.
+Talk to Business Analysts or Sid if you want to add more types and sub-types.
+For anything else that cannot be categorized the type and sub-type can be set to OTHER and OTHER (Should be used only if there is no quick way to get the definitions added to the table.)
+
+VALUE TYPE can be - LENGTH_FT, VOLUME_GL, BRAND_NAME, GENERAL etc
+
 Method - Post
 End Point –
 http://localhost:8080/api/additionalAttrib/v1/addAdditionalAttributes
 
 Request-
 {
-    "estimatesList": [
+    "addAttributesList": [
         {
             "invokerId": "1001",
             "businessId": "1000000",
-            "estimateType": "ASSET_BASED",
-            "estimateSubType": "ASSET_BASED",
-            "estimatedAmount": "100025",
-            "estimatedAmountHigh": "125025",
-            "estimatedAmountLow": "75025"
+            "type": "EQUIPMENT",
+            "subType": "KITCHEN_HOOD",
+            "value": "12",
+            "quantity": "1",
+            "pricePerUnit": "8000",
+            "monthlyMaintCost": "100"
         },
         {
             "invokerId": "1001",
             "businessId": "1000000",
-            "estimateType": "INCOME_BASED",
-            "estimateSubType": "INCOME_BASED",
-            "estimatedAmount": "200025",
-            "estimatedAmountHigh": "250025",
-            "estimatedAmountLow": "150025"
+            "type": "EQUIPMENT",
+            "subType": "REGULAR_FREEZER",
+            "value": "50",
+            "quantity": "1",
+            "pricePerUnit": "3000",
+            "monthlyMaintCost": ""
         },
         {
             "invokerId": "1001",
             "businessId": "1000000",
-            "estimateType": "MARKET_BASED",
-            "estimateSubType": "MARKET_BASED",
-            "estimatedAmount": "150025",
-            "estimatedAmountHigh": "175025",
-            "estimatedAmountLow": "125025"
+            "type": "EQUIPMENT",
+            "subType": "DISH_WASHER",
+            "value": "WeWash",
+            "quantity": "1",
+            "pricePerUnit": "",
+            "monthlyMaintCost": "250"
+        },
+        {
+            "invokerId": "1001",
+            "businessId": "1000000",
+            "type": "EQUIPMENT",
+            "subType": "OTHER",
+            "value": "Clay Oven",
+            "quantity": "2",
+            "pricePerUnit": "2500",
+            "monthlyMaintCost": ""
         }
     ]
 }
 
 Response-
-{
-    "estimatesList": [
-        {
-            "invokerId": null,
-            "estimateId": 4,
-            "businessId": 1000000,
-            "estimateType": "ASSET_BASED",
-            "estimateSubType": "ASSET_BASED",
-            "estimatedAmount": "100025",
-            "estimatedAmountHigh": "125025",
-            "estimatedAmountLow": "75025",
-            "lastEstimationDate": "2019-11-20 17:29"
-        },
-        {
-            "invokerId": null,
-            "estimateId": 5,
-            "businessId": 1000000,
-            "estimateType": "INCOME_BASED",
-            "estimateSubType": "INCOME_BASED",
-            "estimatedAmount": "200025",
-            "estimatedAmountHigh": "250025",
-            "estimatedAmountLow": "150025",
-            "lastEstimationDate": "2019-11-20 17:29"
-        },
-        {
-            "invokerId": null,
-            "estimateId": 6,
-            "businessId": 1000000,
-            "estimateType": "MARKET_BASED",
-            "estimateSubType": "MARKET_BASED",
-            "estimatedAmount": "150025",
-            "estimatedAmountHigh": "175025",
-            "estimatedAmountLow": "125025",
-            "lastEstimationDate": "2019-11-20 17:29"
-        }
-    ],
-    "totalCount": null,
-    "pageNumber": null,
-    "pageSize": null
-}
+
 
 
 

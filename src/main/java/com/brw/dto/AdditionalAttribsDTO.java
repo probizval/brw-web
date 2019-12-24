@@ -14,6 +14,7 @@ public class AdditionalAttribsDTO {
 	private String attribType;
 	private String attribSubType;
 	private String value;
+	private String valueType;
 	private Integer quantity;
 	private Integer pricePerUnit;
 	private Integer monthlyMaintExpense;
@@ -57,6 +58,13 @@ public class AdditionalAttribsDTO {
 	}
 	public void setValue(String value) {
 		this.value = value;
+	}
+	
+	public String getValueType() {
+		return valueType;
+	}
+	public void setValueType(String valueType) {
+		this.valueType = valueType;
 	}
 	public Integer getQuantity() {
 		return quantity;
