@@ -902,7 +902,7 @@ Response-
 }
 
 
-9.	GetAdditionalAttributes - Service to read other business attributes that are not part of GetBusinessDetails Service and added by 
+9. GetAdditionalAttributes - Service to read other business attributes that are not part of GetBusinessDetails Service and added by 
 AddAdditionalAttributes service. 
 
 Method - Post
@@ -1007,15 +1007,13 @@ Response-
 }
 
 
-
-
 Pending Tasks -
-1. t_brw_business_add_attribute_def - read equipments operation, read misc attributes operation
-2. t_brw_business_add_attributes - add, update  and read operations
+2. t_brw_business_add_attributes - update operation
 3. t_brw_image - add, update and read operations
 4. t_brw_user - add, update and read operations
 5. t_brw_user_activity - add operation
 6. t_brw_user_business - add and delete operations
+
 7. t_brw_bill - add, update, and read operations
 8. t_brw_promorion - read operations
 9. t_brw_service - add, update, and read operations
