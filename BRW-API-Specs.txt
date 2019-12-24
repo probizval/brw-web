@@ -2,7 +2,7 @@ BRW API Specifications Doc
 
 Created By: Sid Patil
 Date: 11/14/2019
-Update Date: 12/23/2019
+Update Date: 12/24/2019
 
 1.	Name: AddBusinesssDetails
 
@@ -1008,7 +1008,7 @@ Response-
 
 
 
-8.	UpdateAdditionalAttributes - 
+10.	UpdateAdditionalAttributes - 
 
 Method - Post
 End Point –
@@ -1151,7 +1151,6 @@ Response-
 
 
 Pending Tasks -
-2. t_brw_business_add_attributes - update operation
 3. t_brw_image - add, update and read operations
 4. t_brw_user - add, update and read operations
 5. t_brw_user_activity - add operation
