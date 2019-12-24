@@ -713,7 +713,7 @@ VALUE TYPE can be - LENGTH_FT, VOLUME_GL, BRAND_NAME, GENERAL etc
 
 Method - Post
 End Point –
-http://localhost:8080/api/additionalAttrib/v1/addAdditionalAttributes
+http://localhost:8080/api/additionalAttributes/v1/addAdditionalAttributes
 
 Request-
 {
