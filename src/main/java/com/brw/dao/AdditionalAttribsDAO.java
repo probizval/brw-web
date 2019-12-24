@@ -19,4 +19,7 @@ public interface AdditionalAttribsDAO extends PagingAndSortingRepository<Additio
 
 	@Query(nativeQuery=true, value="SELECT * FROM t_brw_business_add_attributes WHERE biz_id = :businessId ORDER BY type, sub_type DESC;")
 	List<AdditionalAttributes> getAdditionalAttributes(@Param ("businessId") int businessId);
+	
+	//@Query(nativeQuery=true, value="DELETE FROM t_brw_business_add_attributes WHERE biz_id = :businessId")
+	//void deleteAdditionalAttributes(@Param ("businessId") int businessId);
 }

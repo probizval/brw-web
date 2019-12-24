@@ -111,4 +111,40 @@ public class AdditionalAttribController implements ErrorController {
 			return new ResponseEntity<>(addAttribsListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	/**
+	 * @author sidpatil
+	 * updateAdditionalAttribs - Service to update additional business attributes to BRW DB 
+	 */
+	@PostMapping(value = "updateAdditionalAttributes")
+	public ResponseEntity<AdditionalAttribsListDTO> updateAdditionalAttribs(@RequestBody AdditionalAttribsListDTO additionalAttribsListDTO) {
+		
+		System.out.println("111 **** Inside AdditionalAttribController.addAdditionalAttributes()");
+				
+		logger.info("Add the New Business Transaction Details");
+		
+		AdditionalAttribsListDTO addAttribsListDTO = null;
+		
+		//1. Delete the existing data based on Business Id from t_brw_business_add_attributes table
+		try {
+			additionalAttribService.deleteAdditionalAttributes(additionalAttribsListDTO);
+			//return new ResponseEntity<>(addAttribsListDTO, HttpStatus.OK);
+			
+		} catch (AdditionalAttribsException e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			//return new ResponseEntity<>(addAttribsListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		//2. Add data as comes in the input to t_brw_business_add_attributes table
+		try {
+			addAttribsListDTO = additionalAttribService.addAdditionalAttributes(additionalAttribsListDTO);
+			return new ResponseEntity<>(addAttribsListDTO, HttpStatus.OK);
+			
+		} catch (AdditionalAttribsException e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			return new ResponseEntity<>(addAttribsListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

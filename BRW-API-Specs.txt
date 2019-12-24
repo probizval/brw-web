@@ -1007,6 +1007,149 @@ Response-
 }
 
 
+
+8.	UpdateAdditionalAttributes - 
+
+Method - Post
+End Point –
+http://localhost:8080/api/additionalAttributes/v1/updateAdditionalAttributes
+
+Request-
+{
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "addAttributesList": [
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "KITCHEN_HOOD",
+            "valueType": "LENGTH_FT",
+            "value": "20",
+            "quantity": 1,
+            "pricePerUnit": 10000,
+            "monthlyMaintExpense": 100
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "REGULAR_FREEZER",
+            "valueType": "VOLUME_GL",
+            "value": "50",
+            "quantity": 1,
+            "pricePerUnit": 3000,
+            "monthlyMaintExpense": 0
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "DISH_WASHER",
+            "valueType": "BRAND_NAME",
+            "value": "WeWash",
+            "quantity": "1",
+            "pricePerUnit": 0,
+            "monthlyMaintExpense": 250
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "OTHER",
+            "valueType": "GENERAL",
+            "value": "Clay Oven",
+            "quantity": "2",
+            "pricePerUnit": 2500,
+            "monthlyMaintExpense": 0
+        },
+        {
+            "attribType": "OTHER",
+            "attribSubType": "OTHER",
+            "valueType": "GENERAL",
+            "value": "Tea Dispenser",
+            "quantity": "1",
+            "pricePerUnit": 500,
+            "monthlyMaintExpense": 0
+        }
+    ]
+}
+
+Response-
+{
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "addAttributesList": [
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "KITCHEN_HOOD",
+            "value": "20",
+            "valueType": "LENGTH_FT",
+            "quantity": 1,
+            "pricePerUnit": 10000,
+            "monthlyMaintExpense": 100,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "REGULAR_FREEZER",
+            "value": "50",
+            "valueType": "VOLUME_GL",
+            "quantity": 1,
+            "pricePerUnit": 3000,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "DISH_WASHER",
+            "value": "WeWash",
+            "valueType": "BRAND_NAME",
+            "quantity": 1,
+            "pricePerUnit": 0,
+            "monthlyMaintExpense": 250,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "OTHER",
+            "value": "Clay Oven",
+            "valueType": "GENERAL",
+            "quantity": 2,
+            "pricePerUnit": 2500,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "OTHER",
+            "attribSubType": "OTHER",
+            "value": "Tea Dispenser",
+            "valueType": "GENERAL",
+            "quantity": 1,
+            "pricePerUnit": 500,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        }
+    ],
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null
+}
+
+
+
 Pending Tasks -
 2. t_brw_business_add_attributes - update operation
 3. t_brw_image - add, update and read operations
