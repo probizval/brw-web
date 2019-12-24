@@ -4,6 +4,45 @@ Created By: Sid Patil
 Date: 11/14/2019
 Update Date: 12/24/2019
 
+
+Table of Contents -
+1. AddBusinesssDetails
+2. SearchBusiness
+3. GetBusinessDetails
+4. UpdateBusinessDetails
+5. AddEstimates
+6. GetEstimates
+7. GetAdditionalAttributes
+8. GetAdditionalAttributeDefinitions
+9. AddAdditionalAttributes
+10. UpdateAdditionalAttributes
+
+Pending -
+11. AddImages
+12. UpdateImages
+13. GetImages
+14. AddUserProfile
+15. UpdateUserProfile
+16. GetUserProfile
+17. AddUserBusiness
+18. GetUserBusiness
+19. DeleteUserBusiness
+20. AddUserActivity
+21. AddRelatedBusiness
+22. GetRelatedBusiness
+24. UpdateRelatedBusiness
+
+25. AddUserService
+26. DeleteUserService
+27. GetUserService
+28. GetServicePromotion
+29. AddUserBill
+30. GetUserBill
+31. AddBusinessOperation
+32. UpdateBusinessOperation
+33. GetBusinessOperation
+
+
 1.	Name: AddBusinesssDetails
 
 Method - Post
@@ -367,7 +406,7 @@ Response –
 }
 
 
-3.	getBusinessDetails
+3.	GetBusinessDetails
 Method - Post
 EndPoint –
 http://localhost:8080/api/business/v1/getBusinessDetails
@@ -1150,13 +1189,3 @@ Response-
 
 
 
-Pending Tasks -
-3. t_brw_image - add, update and read operations
-4. t_brw_user - add, update and read operations
-5. t_brw_user_activity - add operation
-6. t_brw_user_business - add and delete operations
-
-7. t_brw_bill - add, update, and read operations
-8. t_brw_promorion - read operations
-9. t_brw_service - add, update, and read operations
-10. t_brw_business_transaction - add, update, and read operations
