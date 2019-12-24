@@ -717,54 +717,114 @@ http://localhost:8080/api/additionalAttrib/v1/addAdditionalAttributes
 
 Request-
 {
+    "invokerId": 1001,
+    "businessId": 1000000,
     "addAttributesList": [
         {
-            "invokerId": "1001",
-            "businessId": "1000000",
-            "type": "EQUIPMENT",
-            "subType": "KITCHEN_HOOD",
+            "attribType": "EQUIPMENT",
+            "attribSubType": "KITCHEN_HOOD",
+            "valueType": "LENGTH_FT",
             "value": "12",
-            "quantity": "1",
-            "pricePerUnit": "8000",
-            "monthlyMaintCost": "100"
+            "quantity": 1,
+            "pricePerUnit": 8000,
+            "monthlyMaintExpense": 100
         },
         {
-            "invokerId": "1001",
-            "businessId": "1000000",
-            "type": "EQUIPMENT",
-            "subType": "REGULAR_FREEZER",
+            "attribType": "EQUIPMENT",
+            "attribSubType": "REGULAR_FREEZER",
+            "valueType": "VOLUME_GL",
             "value": "50",
-            "quantity": "1",
-            "pricePerUnit": "3000",
-            "monthlyMaintCost": ""
+            "quantity": 1,
+            "pricePerUnit": 3000,
+            "monthlyMaintExpense": 0
         },
         {
-            "invokerId": "1001",
-            "businessId": "1000000",
-            "type": "EQUIPMENT",
-            "subType": "DISH_WASHER",
+            "attribType": "EQUIPMENT",
+            "attribSubType": "DISH_WASHER",
+            "valueType": "BRAND_NAME",
             "value": "WeWash",
             "quantity": "1",
-            "pricePerUnit": "",
-            "monthlyMaintCost": "250"
+            "pricePerUnit": 0,
+            "monthlyMaintExpense": 250
         },
         {
-            "invokerId": "1001",
-            "businessId": "1000000",
-            "type": "EQUIPMENT",
-            "subType": "OTHER",
+            "attribType": "EQUIPMENT",
+            "attribSubType": "OTHER",
+            "valueType": "GENERAL",
             "value": "Clay Oven",
             "quantity": "2",
-            "pricePerUnit": "2500",
-            "monthlyMaintCost": ""
+            "pricePerUnit": 2500,
+            "monthlyMaintExpense": 0
         }
     ]
 }
 
 Response-
-
-
-
+{
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "addAttributesList": [
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "KITCHEN_HOOD",
+            "value": "12",
+            "valueType": "LENGTH_FT",
+            "quantity": 1,
+            "pricePerUnit": 8000,
+            "monthlyMaintExpense": 100,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-23 20:35",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-23 20:35"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "REGULAR_FREEZER",
+            "value": "50",
+            "valueType": "VOLUME_GL",
+            "quantity": 1,
+            "pricePerUnit": 3000,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-23 20:35",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-23 20:35"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "DISH_WASHER",
+            "value": "WeWash",
+            "valueType": "BRAND_NAME",
+            "quantity": 1,
+            "pricePerUnit": 0,
+            "monthlyMaintExpense": 250,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-23 20:35",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-23 20:35"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "OTHER",
+            "value": "Clay Oven",
+            "valueType": "GENERAL",
+            "quantity": 2,
+            "pricePerUnit": 2500,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-23 20:35",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-23 20:35"
+        }
+    ],
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null
+}
 
 
 Pending Tasks -

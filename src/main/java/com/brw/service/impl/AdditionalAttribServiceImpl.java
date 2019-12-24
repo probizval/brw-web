@@ -94,12 +94,14 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 		AdditionalAttribsListDTO addAttribsListDTO = new AdditionalAttribsListDTO();
 
 		AdditionalAttributes additionalAttributes;
-		
+		AdditionalAttribsDTO addAttribsDTO;
+		AdditionalAttributes addAttributes = new AdditionalAttributes();
+
 		for (AdditionalAttribsDTO additionalAttribsDTO: additionalAttribsDTOList) {
 			
 			additionalAttributes = new AdditionalAttributes();
 			
-			additionalAttributes.setBusinessId(additionalAttribsDTO.getBusinessId());
+			additionalAttributes.setBusinessId(additionalAttribsListDTO.getBusinessId());
 			additionalAttributes.setAddAttribType(additionalAttribsDTO.getAttribType());
 			additionalAttributes.setAddAttribSubType(additionalAttribsDTO.getAttribSubType());
 			additionalAttributes.setValueType(additionalAttribsDTO.getValueType());
@@ -107,15 +109,15 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 			additionalAttributes.setQuantity(additionalAttribsDTO.getQuantity());
 			additionalAttributes.setPerUnitPrice(additionalAttribsDTO.getPricePerUnit());
 			additionalAttributes.setMonthlyMaintCost(additionalAttribsDTO.getMonthlyMaintExpense());
-			additionalAttributes.setCreatedByUserId(additionalAttribsDTO.getInvokerId());
+			additionalAttributes.setCreatedByUserId(additionalAttribsListDTO.getInvokerId());
 			additionalAttributes.setCreateDate(LocalDateTime.now());
-			additionalAttributes.setUpdatedByUserId(additionalAttribsDTO.getInvokerId());
+			additionalAttributes.setUpdatedByUserId(additionalAttribsListDTO.getInvokerId());
 			additionalAttributes.setUpdateDate(LocalDateTime.now());
 			
-			AdditionalAttributes addAttributes = additionalAttribsDAO.save(additionalAttributes);
+			addAttributes = additionalAttribsDAO.save(additionalAttributes);
 			
-			AdditionalAttribsDTO addAttribsDTO = new AdditionalAttribsDTO();
-			addAttribsDTO.setBusinessId(addAttributes.getBusinessId());
+			addAttribsDTO = new AdditionalAttribsDTO();
+			//addAttribsDTO.setBusinessId(addAttributes.getBusinessId());
 			addAttribsDTO.setAttribType(addAttributes.getAddAttribType());
 			addAttribsDTO.setAttribSubType(addAttributes.getAddAttribSubType());
 			addAttribsDTO.setValueType(addAttributes.getValueType());
@@ -130,7 +132,11 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 			
 			addAttribsDTOList.add(addAttribsDTO);
 		}
+		
+		addAttribsListDTO.setInvokerId(addAttributes.getCreatedByUserId());
+		addAttribsListDTO.setBusinessId(addAttributes.getBusinessId());
 		addAttribsListDTO.setAddAttributesList(addAttribsDTOList);
+		
 		return addAttribsListDTO;
 	}
 }

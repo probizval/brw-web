@@ -8,9 +8,7 @@ package com.brw.dto;
 
 public class AdditionalAttribsDTO {
 
-	private Integer invokerId;
 	private Integer addAttribId;
-	private Integer businessId;
 	private String attribType;
 	private String attribSubType;
 	private String value;
@@ -23,23 +21,11 @@ public class AdditionalAttribsDTO {
 	private Integer updatedByUserId;
 	private String updateDate;
 	
-	public Integer getInvokerId() {
-		return invokerId;
-	}
-	public void setInvokerId(Integer invokerId) {
-		this.invokerId = invokerId;
-	}
 	public Integer getAddAttribId() {
 		return addAttribId;
 	}
 	public void setAddAttribId(Integer addAttribId) {
 		this.addAttribId = addAttribId;
-	}
-	public Integer getBusinessId() {
-		return businessId;
-	}
-	public void setBusinessId(Integer businessId) {
-		this.businessId = businessId;
 	}
 	public String getAttribType() {
 		return attribType;

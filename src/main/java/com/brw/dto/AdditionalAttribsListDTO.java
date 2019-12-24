@@ -12,6 +12,9 @@ public class AdditionalAttribsListDTO implements Serializable {
 
 	private static final long serialVersionUID = -65223447914153444L;
 	
+	private Integer invokerId;
+	private Integer businessId;
+
 	private List<AdditionalAttribsDTO> addAttributesList;
 	
 	private Long totalCount;
@@ -20,6 +23,22 @@ public class AdditionalAttribsListDTO implements Serializable {
 	
 	private Integer pageSize;
 	
+	public Integer getInvokerId() {
+		return invokerId;
+	}
+
+	public void setInvokerId(Integer invokerId) {
+		this.invokerId = invokerId;
+	}
+
+	public Integer getBusinessId() {
+		return businessId;
+	}
+
+	public void setBusinessId(Integer businessId) {
+		this.businessId = businessId;
+	}
+
 	public Long getTotalCount() {
 		return totalCount;
 	}
