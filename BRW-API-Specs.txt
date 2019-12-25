@@ -6,6 +6,8 @@ Update Date: 12/24/2019
 
 
 Table of Contents -
+
+Phase 1:
 1. AddBusinesssDetails
 2. SearchBusiness
 3. GetBusinessDetails
@@ -32,6 +34,7 @@ Pending -
 22. GetRelatedBusiness
 24. UpdateRelatedBusiness
 
+Phase 2:
 25. AddUserService
 26. DeleteUserService
 27. GetUserService
