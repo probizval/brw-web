@@ -121,30 +121,35 @@ public class AdditionalAttribController implements ErrorController {
 		
 		System.out.println("111 **** Inside AdditionalAttribController.addAdditionalAttributes()");
 				
-		logger.info("Add the New Business Transaction Details");
+		logger.info("Update Additional Business Attributes");
 		
-		AdditionalAttribsListDTO addAttribsListDTO = null;
+		AdditionalAttribsListDTO addAttribsListDTO = null;		
 		
+		boolean dataDeleted = false;
 		//1. Delete the existing data based on Business Id from t_brw_business_add_attributes table
 		try {
-			additionalAttribService.deleteAdditionalAttributes(additionalAttribsListDTO);
-			//return new ResponseEntity<>(addAttribsListDTO, HttpStatus.OK);
+			dataDeleted = additionalAttribService.deleteAdditionalAttributes(additionalAttribsListDTO.getBusinessId());
 			
 		} catch (AdditionalAttribsException e) {
 			e.printStackTrace();
 			// TODO: handle exception
-			//return new ResponseEntity<>(addAttribsListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+			
 		}
 		
 		//2. Add data as comes in the input to t_brw_business_add_attributes table
-		try {
-			addAttribsListDTO = additionalAttribService.addAdditionalAttributes(additionalAttribsListDTO);
-			return new ResponseEntity<>(addAttribsListDTO, HttpStatus.OK);
-			
-		} catch (AdditionalAttribsException e) {
-			e.printStackTrace();
-			// TODO: handle exception
+		if (dataDeleted) {
+			try {
+				addAttribsListDTO = additionalAttribService.addAdditionalAttributes(additionalAttribsListDTO);
+				return new ResponseEntity<>(addAttribsListDTO, HttpStatus.OK);
+				
+			} catch (AdditionalAttribsException e) {
+				e.printStackTrace();
+				// TODO: handle exception
+				return new ResponseEntity<>(addAttribsListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} else {
 			return new ResponseEntity<>(addAttribsListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+			
 		}
 	}
 }

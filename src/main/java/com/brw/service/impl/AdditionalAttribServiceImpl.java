@@ -11,7 +11,11 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.stereotype.Component;
 
 import com.brw.dao.AdditionalAttribDefinitionsDAO;
@@ -141,32 +145,13 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 	}
 	
 	@Override
-	public void deleteAdditionalAttributes(AdditionalAttribsListDTO additionalAttribsListDTO) {
+	public boolean deleteAdditionalAttributes(int businessId) {
 		System.out.println("222 **** Inside AdditionalAttribServiceImpl.updateAdditionalAttributes()");
+		
+		int records = additionalAttribsDAO.deleteAdditionalAttributes(businessId);
+		
+		System.out.println("222.1 **** Inside AdditionalAttribServiceImpl.updateAdditionalAttributes() Number of deletedRecords: "+ records);
 
-		List<AdditionalAttribsDTO> additionalAttribsDTOList = additionalAttribsListDTO.getAddAttributesList();
-		System.out.println("222 **** Inside AdditionalAttribServiceImpl.addAdditionalAttributes() addAdditionalAttributes SIZE: "+additionalAttribsDTOList.size());
-
-		AdditionalAttributes additionalAttributes;
-
-		for (AdditionalAttribsDTO additionalAttribsDTO: additionalAttribsDTOList) {
-			
-			additionalAttributes = new AdditionalAttributes();
-			
-			additionalAttributes.setBusinessId(additionalAttribsListDTO.getBusinessId());
-			additionalAttributes.setAddAttribType(additionalAttribsDTO.getAttribType());
-			additionalAttributes.setAddAttribSubType(additionalAttribsDTO.getAttribSubType());
-			additionalAttributes.setValueType(additionalAttribsDTO.getValueType());
-			additionalAttributes.setValue(additionalAttribsDTO.getValue());
-			additionalAttributes.setQuantity(additionalAttribsDTO.getQuantity());
-			additionalAttributes.setPerUnitPrice(additionalAttribsDTO.getPricePerUnit());
-			additionalAttributes.setMonthlyMaintCost(additionalAttribsDTO.getMonthlyMaintExpense());
-			additionalAttributes.setCreatedByUserId(additionalAttribsListDTO.getInvokerId());
-			additionalAttributes.setCreateDate(LocalDateTime.now());
-			additionalAttributes.setUpdatedByUserId(additionalAttribsListDTO.getInvokerId());
-			additionalAttributes.setUpdateDate(LocalDateTime.now());
-			
-			additionalAttribsDAO.delete(additionalAttributes);
-		}
+		return true;
 	}
 }

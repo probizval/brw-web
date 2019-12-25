@@ -14,6 +14,6 @@ public interface AdditionalAttribService {
 	public AdditionalAttribDefinitionsListDTO getAdditionalAttribDefinitions(String bizType, String bizSubType) throws AdditionalAttribsException;
 	public AdditionalAttribsListDTO getAdditionalAttributes(int businessId) throws AdditionalAttribsException;
 	public AdditionalAttribsListDTO addAdditionalAttributes(AdditionalAttribsListDTO additionalAttribsListDTO) throws AdditionalAttribsException;
-	public void deleteAdditionalAttributes(AdditionalAttribsListDTO additionalAttribsListDTO) throws AdditionalAttribsException;
-
+	public boolean deleteAdditionalAttributes(int businessId) throws AdditionalAttribsException;
+	//public AdditionalAttribsListDTO updateAdditionalAttributes(AdditionalAttribsListDTO additionalAttribsListDTO) throws AdditionalAttribsException;
 }

@@ -9,6 +9,7 @@ package com.brw.dto;
 public class AdditionalAttribsDTO {
 
 	private Integer addAttribId;
+	private String deleteYN;
 	private String attribType;
 	private String attribSubType;
 	private String value;
@@ -26,6 +27,12 @@ public class AdditionalAttribsDTO {
 	}
 	public void setAddAttribId(Integer addAttribId) {
 		this.addAttribId = addAttribId;
+	}
+	public String getDeleteYN() {
+		return deleteYN;
+	}
+	public void setDeleteYN(String deleteYN) {
+		this.deleteYN = deleteYN;
 	}
 	public String getAttribType() {
 		return attribType;
