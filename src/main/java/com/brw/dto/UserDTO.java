@@ -1,15 +1,13 @@
 package com.brw.dto;
 
-import java.time.LocalDateTime;
-
 /**
  * @author sidpatil
  * 2019
  */
 public class UserDTO {
 
-private int user_id;
-	
+	private int invokerId;
+	private int userId;
 	private String email;
 	private String firstName;
 	private String middleInitial;
@@ -21,10 +19,10 @@ private int user_id;
 	private String isSearchAgentEmail;
 	private String searchAgentEmailFreq;
 	private String isUserVerified;
-	private LocalDateTime userVerificationDate;
+	private String userVerificationDate;
 	private String userVerificationMethod;
 	private String isBrokerVerified;
-	private LocalDateTime brokerVerificationDate;
+	private String brokerVerificationDate;
 	private String brokerVerificationMethod;
 	private String brokerLicenseNumber;
 	private String brokerDescription;
@@ -37,22 +35,28 @@ private int user_id;
 	private String foreignState;
 	private String zip;
 	private String foreignPostalCode;
-	private int country;
+	private String country;
 	private String isVettedBuyer;
 	private String buyerVettingMethod;
 	private String buyerPurchaseCapLow;
 	private String buyerPurchaseCapHigh;
-	private LocalDateTime buyerVettingDate;
+	private String buyerVettingDate;
 	private int createdByUserId;
-	private LocalDateTime createDate;
+	private String createDate;
 	private int updatedByUserId;
-	private LocalDateTime updateDate;
+	private String updateDate;
 	
-	public int getUser_id() {
-		return user_id;
+	public int getInvokerId() {
+		return invokerId;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setInvokerId(int invokerId) {
+		this.invokerId = invokerId;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getEmail() {
 		return email;
@@ -120,10 +124,10 @@ private int user_id;
 	public void setIsUserVerified(String isUserVerified) {
 		this.isUserVerified = isUserVerified;
 	}
-	public LocalDateTime getUserVerificationDate() {
+	public String getUserVerificationDate() {
 		return userVerificationDate;
 	}
-	public void setUserVerificationDate(LocalDateTime userVerificationDate) {
+	public void setUserVerificationDate(String userVerificationDate) {
 		this.userVerificationDate = userVerificationDate;
 	}
 	public String getUserVerificationMethod() {
@@ -138,10 +142,10 @@ private int user_id;
 	public void setIsBrokerVerified(String isBrokerVerified) {
 		this.isBrokerVerified = isBrokerVerified;
 	}
-	public LocalDateTime getBrokerVerificationDate() {
+	public String getBrokerVerificationDate() {
 		return brokerVerificationDate;
 	}
-	public void setBrokerVerificationDate(LocalDateTime brokerVerificationDate) {
+	public void setBrokerVerificationDate(String brokerVerificationDate) {
 		this.brokerVerificationDate = brokerVerificationDate;
 	}
 	public String getBrokerVerificationMethod() {
@@ -216,10 +220,10 @@ private int user_id;
 	public void setForeignPostalCode(String foreignPostalCode) {
 		this.foreignPostalCode = foreignPostalCode;
 	}
-	public int getCountry() {
+	public String getCountry() {
 		return country;
 	}
-	public void setCountry(int country) {
+	public void setCountry(String country) {
 		this.country = country;
 	}
 	public String getIsVettedBuyer() {
@@ -246,10 +250,10 @@ private int user_id;
 	public void setBuyerPurchaseCapHigh(String buyerPurchaseCapHigh) {
 		this.buyerPurchaseCapHigh = buyerPurchaseCapHigh;
 	}
-	public LocalDateTime getBuyerVettingDate() {
+	public String getBuyerVettingDate() {
 		return buyerVettingDate;
 	}
-	public void setBuyerVettingDate(LocalDateTime buyerVettingDate) {
+	public void setBuyerVettingDate(String buyerVettingDate) {
 		this.buyerVettingDate = buyerVettingDate;
 	}
 	public int getCreatedByUserId() {
@@ -258,10 +262,10 @@ private int user_id;
 	public void setCreatedByUserId(int createdByUserId) {
 		this.createdByUserId = createdByUserId;
 	}
-	public LocalDateTime getCreateDate() {
+	public String getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(LocalDateTime createDate) {
+	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
 	public int getUpdatedByUserId() {
@@ -270,10 +274,10 @@ private int user_id;
 	public void setUpdatedByUserId(int updatedByUserId) {
 		this.updatedByUserId = updatedByUserId;
 	}
-	public LocalDateTime getUpdateDate() {
+	public String getUpdateDate() {
 		return updateDate;
 	}
-	public void setUpdateDate(LocalDateTime updateDate) {
+	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
 }

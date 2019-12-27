@@ -32,9 +32,10 @@ public class UserController implements ErrorController {
 	@PostMapping(value = "addUser")
 	public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO userDTO) {
 		try {
-			UserDTO userDTO1 = userService.addUser(userDTO);
-			return new ResponseEntity<>(userDTO1, HttpStatus.OK);
+			UserDTO returnUserDTO = userService.addUser(userDTO);
+			return new ResponseEntity<>(returnUserDTO, HttpStatus.OK);
 		} catch (InternalServerError e) {
+			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(userDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

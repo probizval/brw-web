@@ -22,7 +22,7 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-	private int user_id;
+	private int userId;
 	
 	@Column(name = "email")
 	private String email;
@@ -106,7 +106,7 @@ public class User implements Serializable {
 	private String foreignPostalCode;
 	
 	@Column(name = "add_country")
-	private int country;
+	private String country;
 	
 	@Column(name = "vetted_buyer_YN")
 	private String isVettedBuyer;
@@ -135,12 +135,12 @@ public class User implements Serializable {
 	@Column(name = "update_date")
 	private LocalDateTime updateDate;
 
-	public int getUser_id() {
-		return user_id;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getEmail() {
@@ -359,11 +359,11 @@ public class User implements Serializable {
 		this.foreignPostalCode = foreignPostalCode;
 	}
 
-	public int getCountry() {
+	public String getCountry() {
 		return country;
 	}
 
-	public void setCountry(int country) {
+	public void setCountry(String country) {
 		this.country = country;
 	}
 

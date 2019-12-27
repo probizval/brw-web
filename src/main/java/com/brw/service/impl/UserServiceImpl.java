@@ -1,10 +1,12 @@
 package com.brw.service.impl;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.brw.common.constants.Constant;
 import com.brw.dao.UserDAO;
 import com.brw.dto.UserDTO;
 import com.brw.entities.User;
@@ -19,40 +21,95 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO addUser(UserDTO userDTO) {
 		
-		/*
-		User user = userDAO.findById(userDTO.getUserId()).get();
-		userProfile.setFirstName(userProfileDTO.getFirstName());
-		userProfile.setLastName(userProfileDTO.getLastName());
-		userProfile.setContactNumber(userProfileDTO.getContactNumber());
-		userProfile.setAboutAgent(userProfileDTO.getAboutAgent());
-		userProfile.setAgentTitle(userProfileDTO.getAgentTitle());
-		userProfile.setLocation(userProfileDTO.getLocation());
-		userProfile.setAddress(userProfileDTO.getAddress());
-		userProfile.setCity(userProfileDTO.getCity());
-		userProfile.setState(userProfileDTO.getState());
-		userProfile.setCountry(userProfileDTO.getCountry());
-		userProfile.setZipcode(userProfileDTO.getZipcode());
-		userProfile.setUserType(userProfileDTO.getUserType());
+		User user = new User();
+		user.setUserId(userDTO.getUserId());
+		user.setEmail(userDTO.getEmail());
+		user.setIsBroker(userDTO.getIsBroker());
+		user.setFirstName(userDTO.getFirstName());
+		user.setLastName(userDTO.getLastName());
+		user.setMiddleInitial(userDTO.getMiddleInitial());
+		user.setPhoneCountryCode(userDTO.getPhoneCountryCode());
+		user.setPhoneNumber(userDTO.getPhoneNumber());
+		user.setPhoneExtention(userDTO.getPhoneExtention());
+		user.setIsSearchAgentEmail(userDTO.getIsSearchAgentEmail());
+		user.setSearchAgentEmailFreq(userDTO.getSearchAgentEmailFreq());
+		user.setIsUserVerified(userDTO.getIsUserVerified());
+		user.setUserVerificationMethod(userDTO.getUserVerificationMethod());
+		user.setUserVerificationDate(LocalDateTime.parse(userDTO.getUserVerificationDate(), DateTimeFormatter.ofPattern(Constant.DATE_FORMAT)));
+		user.setIsBrokerVerified(userDTO.getIsBrokerVerified());
+		user.setBrokerVerificationMethod(userDTO.getBrokerVerificationMethod());
+		user.setBrokerVerificationDate(LocalDateTime.parse(userDTO.getBrokerVerificationDate(), DateTimeFormatter.ofPattern(Constant.DATE_FORMAT)));
+		user.setBrokerLicenseNumber(userDTO.getBrokerLicenseNumber());
+		user.setBrokerImageUrl(userDTO.getBrokerImageUrl());
+		user.setBrokerDescription(userDTO.getBrokerDescription());
+		user.setLastLoginDate(userDTO.getLastLoginDate());
+		user.setStreet1(userDTO.getStreet1());
+		user.setStreet2(userDTO.getStreet2());
+		user.setCity(userDTO.getCity());
+		user.setStreet1(userDTO.getStreet1());
+		user.setStreet2(userDTO.getStreet2());
+		user.setCity(userDTO.getCity());
+		user.setState(userDTO.getState());
+		user.setForeignState(userDTO.getForeignState());
+		user.setZip(userDTO.getZip());
+		user.setForeignPostalCode(userDTO.getForeignPostalCode());
+		user.setCountry(userDTO.getCountry());
+		user.setIsVettedBuyer(userDTO.getIsVettedBuyer());
+		user.setBuyerVettingMethod(userDTO.getBuyerVettingMethod());
+		user.setBuyerPurchaseCapLow(userDTO.getBuyerPurchaseCapLow());
+		user.setBuyerPurchaseCapHigh(userDTO.getBuyerPurchaseCapHigh());
+		user.setBuyerVettingDate(LocalDateTime.parse(userDTO.getBuyerVettingDate(), DateTimeFormatter.ofPattern(Constant.DATE_FORMAT)));
+		user.setCreatedByUserId(userDTO.getInvokerId());
+		user.setCreateDate(LocalDateTime.now());
+		user.setUpdatedByUserId(userDTO.getInvokerId());
+		user.setUpdateDate(LocalDateTime.now());
 		
-		userProfile = userDAO.save(userProfile);
+		User returnUser = userDAO.save(user);
 		
-		userProfileDTO.setId(userProfile.getId());
-		userProfileDTO.setFirstName(userProfile.getFirstName());
-		userProfileDTO.setLastName(userProfile.getLastName());
-		userProfileDTO.setEmailId(userProfile.getEmailId());
-		userProfileDTO.setContactNumber(userProfile.getContactNumber());
-		userProfileDTO.setAboutAgent(userProfile.getAboutAgent());
-		userProfileDTO.setAgentTitle(userProfile.getAgentTitle());
-		userProfileDTO.setLocation(userProfile.getLocation());
-		userProfileDTO.setAddress(userProfile.getAddress());
-		userProfileDTO.setCity(userProfile.getCity());
-		userProfileDTO.setState(userProfile.getState());
-		userProfileDTO.setCountry(userProfile.getCountry());
-		userProfileDTO.setZipcode(userProfile.getZipcode());
-		userProfileDTO.setUserImgUrl(userProfile.getUserImgUrl());
-		userProfileDTO.setUserType(userProfile.getUserType());
-		*/
-		return userDTO;
+		UserDTO returnUserDTO = new UserDTO();
+		returnUserDTO.setUserId(returnUser.getUserId());
+		returnUserDTO.setEmail(returnUser.getEmail());
+		returnUserDTO.setIsBroker(returnUser.getIsBroker());
+		returnUserDTO.setFirstName(returnUser.getFirstName());
+		returnUserDTO.setLastName(returnUser.getLastName());
+		returnUserDTO.setMiddleInitial(returnUser.getMiddleInitial());
+		returnUserDTO.setPhoneCountryCode(returnUser.getPhoneCountryCode());
+		returnUserDTO.setPhoneNumber(returnUser.getPhoneNumber());
+		returnUserDTO.setPhoneExtention(returnUser.getPhoneExtention());
+		returnUserDTO.setIsSearchAgentEmail(returnUser.getIsSearchAgentEmail());
+		returnUserDTO.setSearchAgentEmailFreq(returnUser.getSearchAgentEmailFreq());
+		returnUserDTO.setIsUserVerified(returnUser.getIsUserVerified());
+		returnUserDTO.setUserVerificationMethod(returnUser.getUserVerificationMethod());
+		returnUserDTO.setUserVerificationDate(returnUser.getUserVerificationDate().format(DateTimeFormatter.ofPattern(Constant.DATE_FORMAT)));
+		returnUserDTO.setIsBrokerVerified(returnUser.getIsBrokerVerified());
+		returnUserDTO.setBrokerVerificationMethod(returnUser.getBrokerVerificationMethod());
+		returnUserDTO.setBrokerVerificationDate(returnUser.getBrokerVerificationDate().format(DateTimeFormatter.ofPattern(Constant.DATE_FORMAT)));
+		returnUserDTO.setBrokerLicenseNumber(returnUser.getBrokerLicenseNumber());
+		returnUserDTO.setBrokerImageUrl(returnUser.getBrokerImageUrl());
+		returnUserDTO.setBrokerDescription(returnUser.getBrokerDescription());
+		returnUserDTO.setLastLoginDate(returnUser.getLastLoginDate());
+		returnUserDTO.setStreet1(returnUser.getStreet1());
+		returnUserDTO.setStreet2(returnUser.getStreet2());
+		returnUserDTO.setCity(returnUser.getCity());
+		returnUserDTO.setStreet1(returnUser.getStreet1());
+		returnUserDTO.setStreet2(returnUser.getStreet2());
+		returnUserDTO.setCity(returnUser.getCity());
+		returnUserDTO.setState(returnUser.getState());
+		returnUserDTO.setForeignState(returnUser.getForeignState());
+		returnUserDTO.setZip(returnUser.getZip());
+		returnUserDTO.setForeignPostalCode(returnUser.getForeignPostalCode());
+		returnUserDTO.setCountry(returnUser.getCountry());
+		returnUserDTO.setIsVettedBuyer(returnUser.getIsVettedBuyer());
+		returnUserDTO.setBuyerVettingMethod(returnUser.getBuyerVettingMethod());
+		returnUserDTO.setBuyerPurchaseCapLow(returnUser.getBuyerPurchaseCapLow());
+		returnUserDTO.setBuyerPurchaseCapHigh(returnUser.getBuyerPurchaseCapHigh());
+		returnUserDTO.setBuyerVettingDate(returnUser.getBuyerVettingDate().format(DateTimeFormatter.ofPattern(Constant.DATE_FORMAT)));
+		returnUserDTO.setCreatedByUserId(returnUser.getCreatedByUserId());
+		returnUserDTO.setCreateDate(returnUser.getCreateDate().format(DateTimeFormatter.ofPattern(Constant.DATE_FORMAT)));
+		returnUserDTO.setUpdatedByUserId(returnUserDTO.getInvokerId());
+		returnUserDTO.setUpdateDate(returnUser.getUpdateDate().format(DateTimeFormatter.ofPattern(Constant.DATE_FORMAT)));
+		
+		return returnUserDTO;
 	}
 	
 	@Override
