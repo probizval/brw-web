@@ -13,9 +13,10 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
                   .split('=')[1];
 	
 	if(lochash && token) {
-		$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-		$httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
-		$httpProvider.defaults.headers.common['authorization'] = "Bearer " + token;
+		// $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+		$httpProvider.defaults.headers.common['Content-Type'] = "application/json";
+		// $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
+		$httpProvider.defaults.headers.common['authorization'] = "Bearer Bearer" + token;
 	}
 	 
 	 $httpProvider.defaults.useXDomain = true;
@@ -53,9 +54,10 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
             reload: true,
             resolve: {
             	propList: function(propertyService, $stateParams) {
-            		 //return propertyService.getPropertyList($stateParams.type);
-                     var obj = (localStorage.getItem('searchAddress')) || {};
-                     return propertyService.getPropertyList(obj);
+                     // var obj = (localStorage.getItem('searchAddress')) || {};
+                     // return propertyService.getPropertyList(obj);
+					var obj = (localStorage.getItem('searchBusinessAttributes')) || {};
+					return propertyService.getBusinessList(obj);
             	}
             }
         })
@@ -82,8 +84,8 @@ myapp.config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider,
 								},
 								similarProps: function(propertyService) {
 									//return propertyService.getPropertyList($stateParams.type);
-									console.log("similiarProps address", localStorage.getItem('searchAddress'));
-									var obj = (localStorage.getItem('searchAddress')) || {};
+									console.log("similiarProps address", localStorage.getItem('searchBusinessAttributes'));
+									var obj = (localStorage.getItem('searchBusinessAttributes')) || {};
 									return propertyService.getPropertyList(obj);
   							}
             }

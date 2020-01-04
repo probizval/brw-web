@@ -110,7 +110,7 @@
 
   function searchController($rootScope, $scope, $state, propertyService, propList) {
 
-			$scope.searchList = propList.data.data.propertyList;
+			$scope.searchList = propList.data.data.businessList;
 
     	$scope.minPriceList = allPriceList;
       $scope.maxPriceList = allPriceList;
@@ -128,10 +128,10 @@
     	  $scope.maxPriceList = allPriceList.slice(price.id + 1);
 
         //console.log("filterByMinPrice" + price.actualPrice);
-		var searchAddress = JSON.parse(localStorage.getItem('searchAddress'));
-		searchAddress['minPrice'] = price && price.actualPrice || null;
-		localStorage.setItem('searchAddress', JSON.stringify(searchAddress));				
-		updateSearchResult(searchAddress);
+			var searchAddress = JSON.parse(localStorage.getItem('searchBusinessAttributes'));
+			searchAddress['minPrice'] = price && price.actualPrice || null;
+			localStorage.setItem('searchAddress', JSON.stringify(searchAddress));
+			updateSearchResult(searchAddress);
 		
       };
 
@@ -140,7 +140,7 @@
     	  $scope.minPriceList = allPriceList.slice(0, price.id - 1);
     	  //console.log("filterByMaxPrice", $scope);
 
-    	  var searchAddress = JSON.parse(localStorage.getItem('searchAddress'));
+    	  var searchAddress = JSON.parse(localStorage.getItem('searchBusinessAttributes'));
   		searchAddress['maxPrice'] = price && price.actualPrice || null;
   		localStorage.setItem('searchAddress', JSON.stringify(searchAddress));				
   		updateSearchResult(searchAddress);
@@ -149,7 +149,7 @@
 			$scope.filterByBusinessType = function (businessType) {
 				 console.log("filterByBusinessType", $scope.$$childTail.businessType);
 				console.log("filterByBusinessType", businessType);
-				var searchAddress = JSON.parse(localStorage.getItem('searchAddress'));
+				var searchAddress = JSON.parse(localStorage.getItem('searchBusinessAttributes'));
 				searchAddress['businessType'] = businessType || null;
 				localStorage.setItem('searchAddress', JSON.stringify(searchAddress));				
 				updateSearchResult(searchAddress);
@@ -231,14 +231,14 @@
 		  			$scope.searchList[index].isBookMarked = true;
 		         })
 		         .error(function (error) {
-		             $scope.status = 'Unable to load property list: ' + error.message;
+		             $scope.status = 'Unable to load business list: ' + error.message;
 		         });
 				obj.isBookMarked && propertyService.removeBookMarkedProperty({"userId":userid.id,"propertyDetailsId":obj.id})
 		  		.success(function(res) {
 		  			$scope.searchList[index].isBookMarked = false;
 		         })
 		         .error(function (error) {
-		             $scope.status = 'Unable to load property list: ' + error.message;
+		             $scope.status = 'Unable to load business list: ' + error.message;
 		         });
 				}
 			};
@@ -339,7 +339,8 @@
         		 //  arrDestinations.push({'lat':dataset[i].latitude,'lon':dataset[i].longitude,'title':dataset[i].property_name,'description':dataset[i].property_name,'image_url': dataset[i].img_url});
         	  // }
 
-				var searchAddress = JSON.parse(localStorage.getItem('searchAddress'));
+				// var searchAddress = JSON.parse(localStorage.getItem('searchAddress'));
+				var searchAddress = JSON.parse(localStorage.getItem('searchBusinessAttributes'));
 				console.log("dataset",dataset);
 				var mapOptions = {
 					zoom: 12,
@@ -434,13 +435,11 @@
 				var bounds = map.getCenter();
 				deleteMarkers();
 				console.log(bounds.lat(), bounds.lng());
-				var searchAddress = {
-					type: "All",
-					postal_code: 0,
-					latitude: bounds.lat(),
-					longitude: bounds.lng()
-				};
-        // var response = [];
+				var search_address = JSON.parse(localStorage.getItem('searchBusinessAttributes'));
+				search_address['latitude'] = bounds.lat();
+				search_address["longitude"] = bounds.lng();
+				updateSearchResult(search_address);
+				// var response = [];
         // setTimeout(function () {
         //   response = propertyService.getPropertyList(JSON.stringify(searchAddress));
         // }, 100);
@@ -463,7 +462,6 @@
 						$scope.status = 'Unable to load store data: ' + error.message;
 						console.log("res ", $scope.status);
 					});*/
-				updateSearchResult(searchAddress);
 				// setTimeout(function(){
 				// 	$scope.$apply(function(){
          //    $scope.searchList = arrDestinations;
@@ -480,10 +478,9 @@
 			function updateSearchResult(filter) {
 				var arrDestinations = [];
 				localStorage.setItem('searchAddress', JSON.stringify(filter));
-				propertyService.getPropertyList(JSON.stringify(filter))
+				propertyService.getBusinessList(JSON.stringify(filter))
 				.success(function(res) {
-        console.log("res ", res, res.length);
-        arrDestinations = res.data.propertyList;
+			        arrDestinations = res.data.businessList;
 					addMarker(arrDestinations);
 					showMarkers();
         $scope.searchList = arrDestinations;
@@ -538,7 +535,7 @@
 				});
 			}
 
-        	$scope.initialize(propList.data.data.propertyList);
+        	$scope.initialize(propList.data.data.businessList);
 
 	}
 

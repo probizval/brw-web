@@ -3,9 +3,33 @@ var propertyService = angular.module('propertyService', [])
 propertyService.factory('propertyService', ['$http', 'authService', function ($http, authService) {
 
 	var urlBase = window.location.origin + window.location.pathname + 'api/v1/';
-    var propertyDataOp = {};
+  var urlBaseNew = window.location.origin + window.location.pathname + 'api/business/v1/';
 
-    propertyDataOp.getPropertyList = function (type) {
+  var propertyDataOp = {};
+
+  propertyDataOp.getBusinessList = function (searchBusinessAttributes) {
+      searchBusinessAttributes = JSON.parse(searchBusinessAttributes);
+      var userId = JSON.parse(sessionStorage.getItem('profile'));
+      console.log("--------getBusinesslist" + "Bearer "+localStorage.getItem('id_token') );
+      console.log("--------getBusinesslist", searchBusinessAttributes);
+      return $http.post(urlBaseNew + 'searchBusiness', {
+            "name": searchBusinessAttributes.businessName || "",
+            "type": searchBusinessAttributes.businessType || "",
+            "street1": searchBusinessAttributes.street1 || "",
+            "street2": searchBusinessAttributes.street2 || "",
+            "city": searchBusinessAttributes.city || "Fremont",
+            "stateCode": searchBusinessAttributes.state || "CA",
+            "zip": searchBusinessAttributes.zipCode || "94536",
+            "county": "",
+      }).success(function(res) {
+        console.log("getBusinessList", JSON.stringify(res));
+        return res.data;
+      }).error(function (error) {
+          return 'Unable to load store data: ' + error.message;
+      });
+  };
+
+  propertyDataOp.getPropertyList = function (type) {
     	type = JSON.parse(type);
     	var userid = JSON.parse(sessionStorage.getItem('profile'));
       console.log("--------getBuyPropertylist" + "Bearer "+localStorage.getItem('id_token') );

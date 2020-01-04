@@ -1,8 +1,9 @@
-<div ng-include="'resources/pages/header.html'"></div>
 <div class="page-header bordered">
-    <h1>Contact Us
-        <small>Have a question, problem, or suggestion? We want to hear from you.</small>
-    </h1>
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <h1>Contact Us
+            <small>Have a question, problem, or suggestion? We want to hear from you.</small>
+        </h1>
+    </div>
   </div>
   <form name="contactUs" ng-submit="submitted = true" novalidate>
     <div class="alert-danger" ng-show="submitted && contactUs.$invalid">
@@ -30,10 +31,12 @@
               </div>
               <div>
                   <div class="form-group">
-                      <label>Message</label>
-                      <textarea class="form-control form-control-md text-editor" ng-model="contactUsData.message" placeholder="" required></textarea>
+                      <label>Message*</label>
+                      <textarea class="form-control form-control-md text-editor" name="message" ng-model="contactUsData.message"
+                                id="message" placeholder="100 characters required" ng-minlength="100" required></textarea>
                       <div class="errors" ng-show="submitted || contactUs.message.$touched">
                           <div style="color:red" ng-show="contactUs.message.$error.required">Message is required.</div>
+                          <div style="color:red" ng-show="contactUs.message.$invalid">100 Characters required.</div>
                       </div>
                   </div>
               </div>
