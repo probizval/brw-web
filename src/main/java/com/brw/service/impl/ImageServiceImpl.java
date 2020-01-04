@@ -14,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.brw.dao.ImagesDAO;
+import com.brw.dto.EstimatesListDTO;
 import com.brw.dto.ImagesListDTO;
+import com.brw.entities.Estimates;
+import com.brw.entities.Images;
 import com.brw.exceptions.ImageException;
 
 
@@ -22,7 +25,7 @@ import com.brw.exceptions.ImageException;
 public class ImageServiceImpl implements com.brw.service.ImageService {
 	
 	@Autowired
-	private ImagesDAO imagesDetailsDAO;
+	private ImagesDAO imagesDAO;
 	
 	@Override
 	public ImagesListDTO addImages(ImagesListDTO imagesListDTO) {
@@ -32,19 +35,12 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	
 
 	@Override
-	public ImagesListDTO getImages(int bizId) throws ImageException {
-		// TODO Auto-generated method stub
-		return null;
+	public ImagesListDTO getImages(int businessId) throws ImageException {
+		
+		ImagesListDTO imageListRet = new ImagesListDTO();
+		
+		List<Images> imageList = (List<Images>)imagesDAO.getImages(businessId);
+		
+		return imageListRet;
 	}
-
-
-	public ImagesDAO getImagesDetailsDAO() {
-		return imagesDetailsDAO;
-	}
-
-
-	public void setImagesDetailsDAO(ImagesDAO imagesDetailsDAO) {
-		this.imagesDetailsDAO = imagesDetailsDAO;
-	}
-	
 }

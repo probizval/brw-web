@@ -13,9 +13,7 @@ import com.brw.entities.Images;
 
 @Repository
 public interface ImagesDAO extends PagingAndSortingRepository<Images, Integer>{
-	
-	//@Query(nativeQuery=true, value="SELECT * FROM t_brw_images where (name_dba = :imagesName) AND (type = :imagesType);")
-	
-	@Query(nativeQuery=true, value="SELECT * FROM t_brw_business WHERE (:businessId is null or biz_id = :imagesId);")
-	Images getImages(@Param ("imagesId") int imagesId);
+		
+	@Query(nativeQuery=true, value="SELECT * FROM t_brw_image WHERE biz_id = :businessId);")
+	Images getImages(@Param ("businessId") int businessId);
 }

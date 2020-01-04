@@ -1,8 +1,8 @@
 BRW API Specifications Doc
 
 Created By: Sid Patil
-Date: 11/14/2019
-Update Date: 12/24/2019
+Create Date: 11/14/2019
+Update Date: 01/04/2020
 
 
 Table of Contents -
@@ -748,7 +748,6 @@ Response –
     "validationErrors": null
 }
 
-<<<<<<< HEAD
 7.	GetImages - This service is to read Image URLs from t_brw_image table
 
 Method – Post
@@ -775,7 +774,10 @@ Response –
             {
                  "imageId": 2,
                 "url": "http://image/location/image2.jpg"
-=======
+			}
+}
+
+
 7.	GetAdditionalAttributes - Service to read other business attributes that are not part of GetBusinessDetails Service and added by 
 AddAdditionalAttributes service. 
 
@@ -1068,7 +1070,6 @@ Response-
                 "createDate": null,
                 "updatedByUserId": null,
                 "updateDate": null
->>>>>>> f1374067b84f5e608c7a24a967ad7cbc1aa323e1
             }
         ],
         "totalCount": null,
@@ -1082,9 +1083,6 @@ Response-
     "errorMessage": null,
     "validationErrors": null
 }
-
-<<<<<<< HEAD
-=======
 
 
 10.	UpdateAdditionalAttributes - 
@@ -1227,9 +1225,6 @@ Response-
     "pageSize": null
 }
 
-
-
-
 14.	Name: AddUserProfile
 
 Method - Post
@@ -1331,4 +1326,4 @@ Request -
 }
 
 Response -
->>>>>>> f1374067b84f5e608c7a24a967ad7cbc1aa323e1
+
