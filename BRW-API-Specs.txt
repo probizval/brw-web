@@ -2,7 +2,55 @@ BRW API Specifications Doc
 
 Created By: Sid Patil
 Date: 11/14/2019
-Update Date: 12/20/2019
+Update Date: 12/24/2019
+
+
+Table of Contents -
+
+Phase 1:
+1. AddBusinesssDetails
+2. SearchBusiness
+3. GetBusinessDetails
+4. UpdateBusinessDetails
+5. AddEstimates
+6. GetEstimates
+7. GetAdditionalAttributes
+8. GetAdditionalAttributeDefinitions
+9. AddAdditionalAttributes
+10. UpdateAdditionalAttributes
+.
+.
+.
+14. AddUserProfile
+15. UpdateUserProfile
+16. GetUserProfile
+
+
+Pending -
+11. AddImages
+12. UpdateImages
+13. GetImages
+
+
+17. AddUserBusiness
+18. GetUserBusiness
+19. DeleteUserBusiness
+20. AddUserActivity
+21. AddRelatedBusiness
+22. GetRelatedBusiness
+24. UpdateRelatedBusiness
+
+Phase 2:
+25. AddUserService
+26. DeleteUserService
+27. GetUserService
+28. GetServicePromotion
+29. AddUserBill
+30. GetUserBill
+31. AddBusinessOperation
+32. UpdateBusinessOperation
+33. GetBusinessOperation
+
 
 1.	Name: AddBusinesssDetails
 
@@ -367,7 +415,7 @@ Response –
 }
 
 
-3.	getBusinessDetails
+3.	GetBusinessDetails
 Method - Post
 EndPoint –
 http://localhost:8080/api/business/v1/getBusinessDetails
@@ -700,6 +748,7 @@ Response –
     "validationErrors": null
 }
 
+<<<<<<< HEAD
 7.	GetImages - This service is to read Image URLs from t_brw_image table
 
 Method – Post
@@ -726,6 +775,68 @@ Response –
             {
                  "imageId": 2,
                 "url": "http://image/location/image2.jpg"
+=======
+7.	GetAdditionalAttributes - Service to read other business attributes that are not part of GetBusinessDetails Service and added by 
+AddAdditionalAttributes service. 
+
+Method - Post
+End Point –
+http://localhost:8080/api/additionalAttributes/v1/getAdditionalAttribDefinitions
+
+Request-
+{
+    "invokerId": 1001,
+    "type": "GAS_STATION",
+    "subType": "GENERAL_GAS_STATION"
+}
+
+Response-
+{
+    "status": "success",
+    "httpStatus": "OK",
+    "data": {
+        "additionalAttribDefinitionsListDTO": [
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "EQUIPMENT",
+                "attribSubType": "POS"
+            },
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "EQUIPMENT",
+                "attribSubType": "POS"
+            },
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "EQUIPMENT",
+                "attribSubType": "POS"
+            },
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "EQUIPMENT",
+                "attribSubType": "POS"
+            },
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "FUEL_DISPENSER",
+                "attribSubType": "GASOLINE"
+            },
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "FUEL_DISPENSER",
+                "attribSubType": "GASOLINE"
+            },
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "OTHER",
+                "attribSubType": "OTHER"
             }
         ],
         "totalCount": null,
@@ -740,3 +851,484 @@ Response –
     "validationErrors": null
 }
 
+
+8.	AddAdditionalAttributes - Service to add any other attributes that are not part of AddBusiness Service. 
+Like Business specific attributes e.g. Fuel Dispensers, ATM Machines, Air and Water Machines in case of Gas Station.
+Stoves and Kitchen Heads, Dish Washer, and exhausts in case of Restaurants. etc.
+Please check the t_brw_business_add_attribute_def table for already defined types and sub-types for particular type of business.
+Service named getAdditionalAttribDefinitions(String bizType, String bizSubType) can be used to do it via API.
+Talk to Business Analysts or Sid if you want to add more types and sub-types.
+For anything else that cannot be categorized the type and sub-type can be set to OTHER and OTHER (Should be used only if there is no quick way to get the definitions added to the table.)
+
+VALUE TYPE can be - LENGTH_FT, VOLUME_GL, BRAND_NAME, GENERAL etc
+
+Method - Post
+End Point –
+http://localhost:8080/api/additionalAttributes/v1/addAdditionalAttributes
+
+Request-
+{
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "addAttributesList": [
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "KITCHEN_HOOD",
+            "valueType": "LENGTH_FT",
+            "value": "12",
+            "quantity": 1,
+            "pricePerUnit": 8000,
+            "monthlyMaintExpense": 100
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "REGULAR_FREEZER",
+            "valueType": "VOLUME_GL",
+            "value": "50",
+            "quantity": 1,
+            "pricePerUnit": 3000,
+            "monthlyMaintExpense": 0
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "DISH_WASHER",
+            "valueType": "BRAND_NAME",
+            "value": "WeWash",
+            "quantity": "1",
+            "pricePerUnit": 0,
+            "monthlyMaintExpense": 250
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "OTHER",
+            "valueType": "GENERAL",
+            "value": "Clay Oven",
+            "quantity": "2",
+            "pricePerUnit": 2500,
+            "monthlyMaintExpense": 0
+        }
+    ]
+}
+
+Response-
+{
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "addAttributesList": [
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "KITCHEN_HOOD",
+            "value": "12",
+            "valueType": "LENGTH_FT",
+            "quantity": 1,
+            "pricePerUnit": 8000,
+            "monthlyMaintExpense": 100,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-23 20:35",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-23 20:35"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "REGULAR_FREEZER",
+            "value": "50",
+            "valueType": "VOLUME_GL",
+            "quantity": 1,
+            "pricePerUnit": 3000,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-23 20:35",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-23 20:35"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "DISH_WASHER",
+            "value": "WeWash",
+            "valueType": "BRAND_NAME",
+            "quantity": 1,
+            "pricePerUnit": 0,
+            "monthlyMaintExpense": 250,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-23 20:35",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-23 20:35"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "OTHER",
+            "value": "Clay Oven",
+            "valueType": "GENERAL",
+            "quantity": 2,
+            "pricePerUnit": 2500,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-23 20:35",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-23 20:35"
+        }
+    ],
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null
+}
+
+
+9. GetAdditionalAttributes - Service to read other business attributes that are not part of GetBusinessDetails Service and added by 
+AddAdditionalAttributes service. 
+
+Method - Post
+End Point –
+http://localhost:8080/api/additionalAttributes/v1/getAdditionalAttributes
+
+Request-
+{
+    "invokerId": 1001,
+    "businessId": 1000000
+}
+
+Response-
+{
+    "status": "success",
+    "httpStatus": "OK",
+    "data": {
+        "invokerId": null,
+        "businessId": null,
+        "addAttributesList": [
+            {
+                "addAttribId": 5,
+                "attribType": "EQUIPMENT",
+                "attribSubType": "REGULAR_FREEZER",
+                "value": "50",
+                "valueType": null,
+                "quantity": 1,
+                "pricePerUnit": 3000,
+                "monthlyMaintExpense": 0,
+                "createdByUserId": null,
+                "createDate": null,
+                "updatedByUserId": null,
+                "updateDate": null
+            },
+            {
+                "addAttribId": 7,
+                "attribType": "EQUIPMENT",
+                "attribSubType": "OTHER",
+                "value": "Clay Oven",
+                "valueType": null,
+                "quantity": 2,
+                "pricePerUnit": 2500,
+                "monthlyMaintExpense": 0,
+                "createdByUserId": null,
+                "createDate": null,
+                "updatedByUserId": null,
+                "updateDate": null
+            },
+            {
+                "addAttribId": 3,
+                "attribType": "EQUIPMENT",
+                "attribSubType": "KITCHEN_HOOD",
+                "value": "12",
+                "valueType": null,
+                "quantity": 1,
+                "pricePerUnit": 8000,
+                "monthlyMaintExpense": 100,
+                "createdByUserId": null,
+                "createDate": null,
+                "updatedByUserId": null,
+                "updateDate": null
+            },
+            {
+                "addAttribId": 4,
+                "attribType": "EQUIPMENT",
+                "attribSubType": "KITCHEN_HOOD",
+                "value": "6",
+                "valueType": null,
+                "quantity": 1,
+                "pricePerUnit": 5000,
+                "monthlyMaintExpense": 100,
+                "createdByUserId": null,
+                "createDate": null,
+                "updatedByUserId": null,
+                "updateDate": null
+            },
+            {
+                "addAttribId": 6,
+                "attribType": "EQUIPMENT",
+                "attribSubType": "DISH_WASHER",
+                "value": "WeWash",
+                "valueType": null,
+                "quantity": 1,
+                "pricePerUnit": 0,
+                "monthlyMaintExpense": 250,
+                "createdByUserId": null,
+                "createDate": null,
+                "updatedByUserId": null,
+                "updateDate": null
+>>>>>>> f1374067b84f5e608c7a24a967ad7cbc1aa323e1
+            }
+        ],
+        "totalCount": null,
+        "pageNumber": null,
+        "pageSize": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+<<<<<<< HEAD
+=======
+
+
+10.	UpdateAdditionalAttributes - 
+
+Method - Post
+End Point –
+http://localhost:8080/api/additionalAttributes/v1/updateAdditionalAttributes
+
+Request-
+{
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "addAttributesList": [
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "KITCHEN_HOOD",
+            "valueType": "LENGTH_FT",
+            "value": "20",
+            "quantity": 1,
+            "pricePerUnit": 10000,
+            "monthlyMaintExpense": 100
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "REGULAR_FREEZER",
+            "valueType": "VOLUME_GL",
+            "value": "50",
+            "quantity": 1,
+            "pricePerUnit": 3000,
+            "monthlyMaintExpense": 0
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "DISH_WASHER",
+            "valueType": "BRAND_NAME",
+            "value": "WeWash",
+            "quantity": "1",
+            "pricePerUnit": 0,
+            "monthlyMaintExpense": 250
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "OTHER",
+            "valueType": "GENERAL",
+            "value": "Clay Oven",
+            "quantity": "2",
+            "pricePerUnit": 2500,
+            "monthlyMaintExpense": 0
+        },
+        {
+            "attribType": "OTHER",
+            "attribSubType": "OTHER",
+            "valueType": "GENERAL",
+            "value": "Tea Dispenser",
+            "quantity": "1",
+            "pricePerUnit": 500,
+            "monthlyMaintExpense": 0
+        }
+    ]
+}
+
+Response-
+{
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "addAttributesList": [
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "KITCHEN_HOOD",
+            "value": "20",
+            "valueType": "LENGTH_FT",
+            "quantity": 1,
+            "pricePerUnit": 10000,
+            "monthlyMaintExpense": 100,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "REGULAR_FREEZER",
+            "value": "50",
+            "valueType": "VOLUME_GL",
+            "quantity": 1,
+            "pricePerUnit": 3000,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "DISH_WASHER",
+            "value": "WeWash",
+            "valueType": "BRAND_NAME",
+            "quantity": 1,
+            "pricePerUnit": 0,
+            "monthlyMaintExpense": 250,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "OTHER",
+            "value": "Clay Oven",
+            "valueType": "GENERAL",
+            "quantity": 2,
+            "pricePerUnit": 2500,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "OTHER",
+            "attribSubType": "OTHER",
+            "value": "Tea Dispenser",
+            "valueType": "GENERAL",
+            "quantity": 1,
+            "pricePerUnit": 500,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        }
+    ],
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null
+}
+
+
+
+
+14.	Name: AddUserProfile
+
+Method - Post
+EndPoint –
+http://localhost:8080/api/user/v1/addUserProfile
+
+Request -
+{
+	"invokerId": 1001,
+	"email": "anisha@proswift.com",
+	"firstName": "Anisha",
+	"middleInitial": "V",
+	"lastName": "Jain",
+	"isBroker": "N",
+	"phoneCountryCode": "+1",
+	"phoneNumber": "510-550-5050",
+	"phoneExtention": "1234",
+	"isSearchAgentEmail": "Y",
+	"searchAgentEmailFreq": "weekly",
+	"isUserVerified": "Y",
+	"userVerificationDate": "2020-01-03 12:00",
+	"userVerificationMethod": "phone",
+	"isBrokerVerified": "Y",
+	"brokerVerificationDate": "2020-01-03 12:00",
+	"brokerVerificationMethod": "email",
+	"brokerLicenseNumber": "00904011",
+	"brokerDescription": "Joe Ranieri has been a business broker for over 20 years. Joe, having been a business owner previously, understands the stress of selling a business, and works tirelessly for his clients, so that they can smoothly run their business while he handles the sale. He specializes in selling small to medium sized businesses and services the areas of Orange County, Los Angeles, Riverside, San Diego, and San Bernardino County. Joe is a member of the Orange County Board of Realtors. He can sell any business, but his specialty is restaurant, bars and liquor stores. Joe, not only can sell the business, but the land underneath. He is routinely amongst the top producers in his office, and shares with them his vast knowledge and experience as one the senior members of the commercial division at Re/Max TerraSol in Huntington Beach, California. Phone him at 714-292-5448 to sell or buy a Los Angeles Or Orange County small to mid-sized business.",
+	"brokerImageUrl": "https://www.bizben.com/profiles/22709",
+	"lastLoginDate": "2020-01-03 12:00",
+	"street1": "2140 Peralta Blvd",
+	"street2": "STE 110",
+	"city": "Fremont",
+	"state": "CA",
+	"foreignState": "",
+	"zip": "94536",
+	"foreignPostalCode":"",
+	"country":"US",
+	"isVettedBuyer": "Y",
+	"buyerVettingMethod": "email",
+	"buyerPurchaseCapLow": 150000,
+	"buyerPurchaseCapHigh": 250000,
+	"buyerVettingDate": "2020-01-03 12:00"
+}
+
+Response -
+{
+    "invokerId": 0,
+    "userId": 1002,
+    "email": "anisha@proswift.com",
+    "firstName": "Anisha",
+    "middleInitial": "V",
+    "lastName": "Jain",
+    "isBroker": "N",
+    "phoneCountryCode": "+1",
+    "phoneNumber": "510-550-5050",
+    "phoneExtention": "1234",
+    "isSearchAgentEmail": "Y",
+    "searchAgentEmailFreq": "weekly",
+    "isUserVerified": "Y",
+    "userVerificationDate": "2020-01-03 12:00",
+    "userVerificationMethod": "phone",
+    "isBrokerVerified": "Y",
+    "brokerVerificationDate": "2020-01-03 12:00",
+    "brokerVerificationMethod": "email",
+    "brokerLicenseNumber": "00904011",
+    "brokerDescription": "Joe Ranieri has been a business broker for over 20 years. Joe, having been a business owner previously, understands the stress of selling a business, and works tirelessly for his clients, so that they can smoothly run their business while he handles the sale. He specializes in selling small to medium sized businesses and services the areas of Orange County, Los Angeles, Riverside, San Diego, and San Bernardino County. Joe is a member of the Orange County Board of Realtors. He can sell any business, but his specialty is restaurant, bars and liquor stores. Joe, not only can sell the business, but the land underneath. He is routinely amongst the top producers in his office, and shares with them his vast knowledge and experience as one the senior members of the commercial division at Re/Max TerraSol in Huntington Beach, California. Phone him at 714-292-5448 to sell or buy a Los Angeles Or Orange County small to mid-sized business.",
+    "brokerImageUrl": "https://www.bizben.com/profiles/22709",
+    "lastLoginDate": "2020-01-03 12:00",
+    "street1": "2140 Peralta Blvd",
+    "street2": "STE 110",
+    "city": "Fremont",
+    "state": "CA",
+    "foreignState": "",
+    "zip": "94536",
+    "foreignPostalCode": "",
+    "country": "US",
+    "isVettedBuyer": "Y",
+    "buyerVettingMethod": "email",
+    "buyerPurchaseCapLow": "150000",
+    "buyerPurchaseCapHigh": "250000",
+    "buyerVettingDate": "2020-01-03 12:00",
+    "createdByUserId": 1001,
+    "createDate": "2020-01-03 17:29",
+    "updatedByUserId": 0,
+    "updateDate": "2020-01-03 17:29"
+}
+
+4.	UpdateUserProfile –
+Method – PUT
+
+EndPoint -
+http://localhost:8080/api/user/v1/updateUserProfile
+
+Request -
+{
+    "invokerId": "1001",
+    "userId": "1002",
+    "firstName": "Varun"
+}
+
+Response -
+>>>>>>> f1374067b84f5e608c7a24a967ad7cbc1aa323e1
