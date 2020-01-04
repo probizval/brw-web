@@ -709,7 +709,7 @@ http://localhost:8080/api/image/v1/getImages
 
 Request –
 {
-    "businessId": 1000000
+    "bizId": 1000000
 }
 
 Response –

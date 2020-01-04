@@ -22,13 +22,15 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
+import com.brw.dto.EstimatesListDTO;
+import com.brw.dto.ImageDTO;
 import com.brw.dto.ImagesListDTO;
 import com.brw.exceptions.ImageException;
 import com.brw.service.ImageService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/images/v1/")
+@RequestMapping("/api/image/v1/")
 public class ImageController implements ErrorController {
 
 	public static final Logger logger = LoggerFactory.getLogger(EstimateController.class);
@@ -54,7 +56,7 @@ public class ImageController implements ErrorController {
 		logger.info("Add the New Business Details");
 		
 		try {
-			ImagesListDTO eListDTo = imageService.addImages(imagesListDTO);
+			ImagesListDTO eListDTO = imageService.addImages(imagesListDTO);
 			return null;
 			
 		} catch (InternalServerError e) {
@@ -67,17 +69,21 @@ public class ImageController implements ErrorController {
 	 * @author siyapatil
 	 * getImages - Service to get the Business Images on the basis of biz_id 
 	 */
-	@RequestMapping(value = "getImages/{businessId}", method = RequestMethod.GET, produces = "application/json")
-	public ApiResponse<?> getImages(@PathVariable int businessId) {
+	@PostMapping(value = "getImages")
+	public ApiResponse<ImagesListDTO> getImages(@RequestBody ImageDTO imageDTO) {
 		
-		System.out.println("**** 111 Inside ImageController.getImages()");
+		System.out.println("**** 111 Inside ImageController.getImages() bizId: "+imageDTO.getBizId());
 		
 		logger.info("Get the Business images based on business Id");
-
-		ImagesListDTO imagesListDTO = null;
 		
-		//imagesListDTO = imageService.getImages(imagesListDTO);
-		return ApiResponse.withData(imagesListDTO);
+		try {
+			EstimatesListDTO eListDTo = estimateService.addEstimates(estimatesListDTO);
+			return new ResponseEntity<>(eListDTo, HttpStatus.OK);
+			
+		} catch (InternalServerError e) {
+			// TODO: handle exception
+			return new ResponseEntity<>(estimatesListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		
 	}
 	
