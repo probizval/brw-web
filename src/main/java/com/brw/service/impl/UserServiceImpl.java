@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import com.brw.common.constants.Constant;
 import com.brw.dao.UserDAO;
 import com.brw.dto.UserDTO;
-import com.brw.entities.BusinessDetails;
 import com.brw.entities.User;
 import com.brw.service.UserService;
 
