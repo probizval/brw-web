@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 	private UserDAO userDAO;
 	
 	@Override
-	public UserDTO addUser(UserDTO userDTO) {
+	public UserDTO addUserProfile(UserDTO userDTO) {
 		
 		System.out.println("222 **** Inside UserServiceImpl.addUser(): "+userDTO.getUserId());
 		
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserDTO getUserDetails(UserDTO userDTO) {
+	public UserDTO getUserProfile(UserDTO userDTO) {
 		
 		/*
 		List<UserProfile> userProfileList = (List<UserProfile>) userProfileDAO.findByEmailId(userDTO.getEmailId());
@@ -159,7 +159,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDTO updateUserDetails(UserDTO userDTO) {
+	public UserDTO updateUserProfile(UserDTO userDTO) {
 		
 		System.out.println("222 **** Inside UserServiceImpl.updateUserDetails(): "+userDTO.getUserId());
 		

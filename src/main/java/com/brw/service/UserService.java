@@ -4,9 +4,9 @@ import com.brw.dto.UserDTO;
 
 public interface UserService {
 	
-	public UserDTO addUser(UserDTO userDTO);
-	public UserDTO updateUserDetails(UserDTO userDTO);
-	public UserDTO getUserDetails(UserDTO userDTO);
+	public UserDTO addUserProfile(UserDTO userDTO);
+	public UserDTO updateUserProfile(UserDTO userDTO);
+	public UserDTO getUserProfile(UserDTO userDTO);
 	public UserDTO addUserBusiness(UserDTO userDTO);
 	public UserDTO getUserBusiness(UserDTO userDTO);
 	public UserDTO removeUserBusiness(UserDTO userDTO);
