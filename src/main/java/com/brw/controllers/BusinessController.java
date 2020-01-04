@@ -47,8 +47,8 @@ public class BusinessController implements ErrorController {
 	@Autowired
 	BusinessService businessService;
 	
-	@Autowired
-	VendorDataService vendorDataService;
+	//@Autowired
+	//VendorDataService vendorDataService;
 
 	@Override
 	public String getErrorPath() {
@@ -103,7 +103,7 @@ public class BusinessController implements ErrorController {
 		try {
 			
 			businessDetailsDTO1 = businessService.getBusinessDetailsFromBRWDB(businessDTO.getBusinessId());
-			businessDetailsDTO1.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO1));
+			//businessDetailsDTO1.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO1));
 			
 			return ApiResponse.withData(businessDetailsDTO1);
 			

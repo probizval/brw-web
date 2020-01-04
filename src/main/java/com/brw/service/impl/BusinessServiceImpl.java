@@ -255,9 +255,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	@Override
 	public BusinessDetailsDTO addBusinessDetails(BusinessDetailsDTO businessDetailsDTO) {
 		
-		System.out.println("222 **** Inside BusinessServiceImpl.addBusinessDetails() businessDetailsDTO.getRegCityDate(): "+businessDetailsDTO.getRegCityDate());
+		System.out.println("222 **** Inside BusinessServiceImpl.addBusinessDetails()");
 
-		// TODO Auto-generated method stub
 		BusinessDetails businessDetails = new BusinessDetails();
 		businessDetails.setLegalName(businessDetailsDTO.getLegalName());
 		businessDetails.setName(businessDetailsDTO.getName());
@@ -341,6 +340,83 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		bizDTO.setBusinessId(business.getBusinessId());
 		bizDTO.setLegalName(business.getLegalName());
 		bizDTO.setType(business.getType());
+		
+		//BusinessDetails businessDetails = new BusinessDetails();
+		bizDTO.setLegalName(business.getLegalName());
+		bizDTO.setName(business.getName());
+		bizDTO.setFirstOwnerName(business.getFirstOwnerName());
+		bizDTO.setSecondOwnerName(business.getSecondOwnerName());
+		bizDTO.setBrandName(business.getBrandName());
+		bizDTO.setType(business.getType());
+		bizDTO.setSubType(business.getSubType());
+		bizDTO.setRegCityName(business.getRegCityName());
+		bizDTO.setRegCityCode(business.getRegCityCode());
+		bizDTO.setRegCityDate(business.getRegCityDate().toString());
+		bizDTO.setRegStateName(business.getRegStateName());
+		bizDTO.setRegStateCode(business.getRegStateCode());
+		bizDTO.setRegStateDate(business.getRegStateDate().toString());
+		bizDTO.setDataCompletionScore(business.getDataCompletenessScore());
+		bizDTO.setIsforSell(business.getIsforSell());
+		bizDTO.setForSellPrice(business.getForSellPrice());
+		bizDTO.setImageLogo(business.getImageLogo());
+		bizDTO.setImageFirst(business.getImageFirst());
+		bizDTO.setStreet1(business.getStreet1());
+		bizDTO.setStreet2(business.getStreet2());
+		bizDTO.setCity(business.getCity());
+		bizDTO.setCounty(business.getCounty());
+		bizDTO.setStateCode(business.getStateCode());
+		bizDTO.setZip(business.getZip());	
+		bizDTO.setLatitude(business.getLatitude());
+		bizDTO.setLongitude(business.getLongitude());
+		bizDTO.setPhone(business.getPhoneNumber());
+		bizDTO.setPhoneExt(business.getPhoneExtentionNumber());
+		bizDTO.setEmail(business.getEmail());
+		bizDTO.setWebsite(business.getWebsite());
+		bizDTO.setDescription(business.getFreeformDescription());
+		bizDTO.setNAICSNum(business.getNAICSNum());
+		bizDTO.setNAICSDescription(business.getNAICSDescription());
+		bizDTO.setIsFranchise(business.getIsFranchise());
+		bizDTO.setIsOwnerClaimed(business.getIsOwnerClaimed());
+		bizDTO.setSqftIndoor(business.getSqftIndoor());
+		bizDTO.setSqftOutdoor(business.getSqftOutdoor());
+		bizDTO.setSqftLot(business.getSqftLot());
+		bizDTO.setBuildingType(business.getBuildingType());
+		bizDTO.setIsBuildingOwned(business.getIsBuildingOwned());
+		bizDTO.setRevenueMonthly(business.getRevenueMonthly());
+		bizDTO.setExpenseMonthlyRent(business.getExpenseMonthlyRent());
+		bizDTO.setExpenseMonthlyMortgage(business.getExpenseMonthlyMortgage());
+		bizDTO.setExpenseMonthlyMaterial(business.getExpenseMonthlyMaterial());
+		bizDTO.setExpenseMonthlyEmp(business.getExpenseMonthlyEmp());
+		bizDTO.setExpenseMonthlyUtility(business.getExpenseMonthlyUtility());
+		bizDTO.setExpenseMonthlyOther(business.getExpenseMonthlyOther());
+		bizDTO.setValueTotalEquipment(business.getValueTotalEquipment());
+		bizDTO.setValueTotalFurniture(business.getValueTotalFurniture());
+		bizDTO.setValueIndoorDeco(business.getValueIndoorDeco());
+		bizDTO.setValueOutdoorDeco(business.getValueOutdoorDeco());
+		bizDTO.setYearEquipment(business.getYearEquipment());
+		bizDTO.setYearFurniture(business.getYearFurniture());
+		bizDTO.setYearIndoorDeco(business.getYearIndoorDeco());
+		bizDTO.setYearOutdoorDeco(business.getYearOutdoorDeco());
+		bizDTO.setEmpFullTimeNum(business.getEmpFullTimeNum());
+		bizDTO.setEmpPartTimeNum(business.getEmpPartTimeNum());
+		bizDTO.setAreaCrimeScore(business.getAreaCrimeScore());
+		bizDTO.setAreaWalkScore(business.getAreaWalkScore());
+		bizDTO.setAreaAttractionsScore(business.getAreaAttractionsScore());
+		bizDTO.setAreaTransitScore(business.getAreaTransitScore());
+		bizDTO.setSocialMediaScore(business.getSocialMediaScore());
+		bizDTO.setPopulationIn1mileRadius(business.getPopulationIn1mileRadius());
+		bizDTO.setIncomeScoreIn1mileRadius(business.getIncomeScoreIn1mileRadius());
+		bizDTO.setPopulationIn3mileRadius(business.getPopulationIn3mileRadius());
+		bizDTO.setIncomeScoreIn3mileRadius(business.getIncomeScoreIn3mileRadius());
+		bizDTO.setPopulationIn5mileRadius(business.getPopulationIn5mileRadius());
+		bizDTO.setIncomeScoreIn5mileRadius(business.getIncomeScoreIn5mileRadius());
+		bizDTO.setDailyPeoplAtDoorNum(business.getDailyPeoplAtDoorNum());
+		bizDTO.setDailyCarsAtParklotNum(business.getDailyCarsAtParklotNum());
+		bizDTO.setYearEstablished(business.getYearEstablished());
+		bizDTO.setCreatedByUserId(business.getCreatedByUserId());
+		bizDTO.setCreateDate(business.getCreateDate().format(DateTimeFormatter.ofPattern(Constant.DATE_FORMAT)));
+		bizDTO.setUpdatedByUserId(business.getUpdatedByUserId());
+		bizDTO.setUpdateDate(business.getUpdateDate().format(DateTimeFormatter.ofPattern(Constant.DATE_FORMAT)));
 		
 		return bizDTO;
 	}
@@ -636,9 +712,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessDetails.setYearEstablished(businessDetailsDTO.getYearEstablished());
 		}
 		
-		//businessDetails.setCreatedByUserId(businessDetailsDTO.getInvokerId());
-		//businessDetails.setCreateDate(LocalDateTime.now());
-		
 		businessDetails.setUpdatedByUserId(businessDetailsDTO.getInvokerId());
 		businessDetails.setUpdateDate(LocalDateTime.now());
 		
@@ -648,6 +721,83 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		bizDTO.setBusinessId(business.getBusinessId());
 		bizDTO.setLegalName(business.getLegalName());
 		bizDTO.setType(business.getType());
+		
+		//BusinessDetails businessDetails = new BusinessDetails();
+		bizDTO.setLegalName(business.getLegalName());
+		bizDTO.setName(business.getName());
+		bizDTO.setFirstOwnerName(business.getFirstOwnerName());
+		bizDTO.setSecondOwnerName(business.getSecondOwnerName());
+		bizDTO.setBrandName(business.getBrandName());
+		bizDTO.setType(business.getType());
+		bizDTO.setSubType(business.getSubType());
+		bizDTO.setRegCityName(business.getRegCityName());
+		bizDTO.setRegCityCode(business.getRegCityCode());
+		bizDTO.setRegCityDate(business.getRegCityDate().toString());
+		bizDTO.setRegStateName(business.getRegStateName());
+		bizDTO.setRegStateCode(business.getRegStateCode());
+		bizDTO.setRegStateDate(business.getRegStateDate().toString());
+		bizDTO.setDataCompletionScore(business.getDataCompletenessScore());
+		bizDTO.setIsforSell(business.getIsforSell());
+		bizDTO.setForSellPrice(business.getForSellPrice());
+		bizDTO.setImageLogo(business.getImageLogo());
+		bizDTO.setImageFirst(business.getImageFirst());
+		bizDTO.setStreet1(business.getStreet1());
+		bizDTO.setStreet2(business.getStreet2());
+		bizDTO.setCity(business.getCity());
+		bizDTO.setCounty(business.getCounty());
+		bizDTO.setStateCode(business.getStateCode());
+		bizDTO.setZip(business.getZip());	
+		bizDTO.setLatitude(business.getLatitude());
+		bizDTO.setLongitude(business.getLongitude());
+		bizDTO.setPhone(business.getPhoneNumber());
+		bizDTO.setPhoneExt(business.getPhoneExtentionNumber());
+		bizDTO.setEmail(business.getEmail());
+		bizDTO.setWebsite(business.getWebsite());
+		bizDTO.setDescription(business.getFreeformDescription());
+		bizDTO.setNAICSNum(business.getNAICSNum());
+		bizDTO.setNAICSDescription(business.getNAICSDescription());
+		bizDTO.setIsFranchise(business.getIsFranchise());
+		bizDTO.setIsOwnerClaimed(business.getIsOwnerClaimed());
+		bizDTO.setSqftIndoor(business.getSqftIndoor());
+		bizDTO.setSqftOutdoor(business.getSqftOutdoor());
+		bizDTO.setSqftLot(business.getSqftLot());
+		bizDTO.setBuildingType(business.getBuildingType());
+		bizDTO.setIsBuildingOwned(business.getIsBuildingOwned());
+		bizDTO.setRevenueMonthly(business.getRevenueMonthly());
+		bizDTO.setExpenseMonthlyRent(business.getExpenseMonthlyRent());
+		bizDTO.setExpenseMonthlyMortgage(business.getExpenseMonthlyMortgage());
+		bizDTO.setExpenseMonthlyMaterial(business.getExpenseMonthlyMaterial());
+		bizDTO.setExpenseMonthlyEmp(business.getExpenseMonthlyEmp());
+		bizDTO.setExpenseMonthlyUtility(business.getExpenseMonthlyUtility());
+		bizDTO.setExpenseMonthlyOther(business.getExpenseMonthlyOther());
+		bizDTO.setValueTotalEquipment(business.getValueTotalEquipment());
+		bizDTO.setValueTotalFurniture(business.getValueTotalFurniture());
+		bizDTO.setValueIndoorDeco(business.getValueIndoorDeco());
+		bizDTO.setValueOutdoorDeco(business.getValueOutdoorDeco());
+		bizDTO.setYearEquipment(business.getYearEquipment());
+		bizDTO.setYearFurniture(business.getYearFurniture());
+		bizDTO.setYearIndoorDeco(business.getYearIndoorDeco());
+		bizDTO.setYearOutdoorDeco(business.getYearOutdoorDeco());
+		bizDTO.setEmpFullTimeNum(business.getEmpFullTimeNum());
+		bizDTO.setEmpPartTimeNum(business.getEmpPartTimeNum());
+		bizDTO.setAreaCrimeScore(business.getAreaCrimeScore());
+		bizDTO.setAreaWalkScore(business.getAreaWalkScore());
+		bizDTO.setAreaAttractionsScore(business.getAreaAttractionsScore());
+		bizDTO.setAreaTransitScore(business.getAreaTransitScore());
+		bizDTO.setSocialMediaScore(business.getSocialMediaScore());
+		bizDTO.setPopulationIn1mileRadius(business.getPopulationIn1mileRadius());
+		bizDTO.setIncomeScoreIn1mileRadius(business.getIncomeScoreIn1mileRadius());
+		bizDTO.setPopulationIn3mileRadius(business.getPopulationIn3mileRadius());
+		bizDTO.setIncomeScoreIn3mileRadius(business.getIncomeScoreIn3mileRadius());
+		bizDTO.setPopulationIn5mileRadius(business.getPopulationIn5mileRadius());
+		bizDTO.setIncomeScoreIn5mileRadius(business.getIncomeScoreIn5mileRadius());
+		bizDTO.setDailyPeoplAtDoorNum(business.getDailyPeoplAtDoorNum());
+		bizDTO.setDailyCarsAtParklotNum(business.getDailyCarsAtParklotNum());
+		bizDTO.setYearEstablished(business.getYearEstablished());
+		bizDTO.setCreatedByUserId(business.getCreatedByUserId());
+		bizDTO.setCreateDate(business.getCreateDate().format(DateTimeFormatter.ofPattern(Constant.DATE_FORMAT)));
+		bizDTO.setUpdatedByUserId(business.getUpdatedByUserId());
+		bizDTO.setUpdateDate(business.getUpdateDate().format(DateTimeFormatter.ofPattern(Constant.DATE_FORMAT)));
 		
 		return bizDTO;
 	}

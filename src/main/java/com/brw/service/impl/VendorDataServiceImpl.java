@@ -29,13 +29,15 @@ public class VendorDataServiceImpl implements com.brw.service.VendorDataService 
 	@Autowired
 	BusinessService businessService;
 	
-	@Autowired
-	@Qualifier("pbRestTemplate")
-	private RestTemplate restTemplate;
+	//@Autowired
+	//@Qualifier("pbRestTemplate")
+	//private RestTemplate restTemplate;
 	
+	@Override
 	public BusinessDetailsDTO getBusinessDetailsFromPB(String street1, String street2, String city, String state, Integer zip) {
 		System.out.println("**** 222 Inside VendorDataServiceImpl.getBusinessDetailsFromPB()");
-		
+		BusinessDetailsDTO businessDetailsDTO = null;
+		/*
 		String key = "P7AHcLiRnqA4JL7R9wdtXjHQzcI0HlKh";
 		String secret = "ZMuVFQxqqGWrfsnd";
 		
@@ -49,8 +51,9 @@ public class VendorDataServiceImpl implements com.brw.service.VendorDataService 
 				"https://api.pitneybowes.com/location-intelligence/geoproperty/v1/all/attributes/byaddress?address="+addressString, HttpMethod.GET,  
 	            
 				new HttpEntity<>(createHeaders(key, secret)), PropertyAttributesFromPBResponse.class);
-		
-		return transferDatafromPBToBusinessDetailsDTO(propertyAttributes);
+		*/
+		//return transferDatafromPBToBusinessDetailsDTO(propertyAttributes);
+		return businessDetailsDTO;
 	}	
 	
 	private HttpHeaders createHeaders(String username, String password){
