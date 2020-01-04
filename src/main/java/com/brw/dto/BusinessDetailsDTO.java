@@ -82,11 +82,11 @@ public class BusinessDetailsDTO {
 	private Integer dailyCarsAtParklotNum;
 	private String yearEstablished;
 	private String isEstimateAvailable;
+	private String isVendorCall;
 	private Integer createdByUserId;
 	private String createDate;
 	private Integer updatedByUserId;
 	private String updateDate;
-	
 	
 	public Integer getInvokerId() {
 		return invokerId;
@@ -531,6 +531,11 @@ public class BusinessDetailsDTO {
 	}
 	public void setIsEstimateAvailable(String isEstimateAvailable) {
 		this.isEstimateAvailable = isEstimateAvailable;
+	}public String getIsVendorCall() {
+		return isVendorCall;
+	}
+	public void setIsVendorCall(String isVendorCall) {
+		this.isVendorCall = isVendorCall;
 	}
 	public Integer getCreatedByUserId() {
 		return createdByUserId;

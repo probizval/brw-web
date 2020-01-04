@@ -242,6 +242,9 @@ public class BusinessDetails implements Serializable {
 	@Column(name = "year_established")
 	private String yearEstablished;
 	
+	@Column(name = "vendor_call_YN")
+	private String isVendorCall;
+	
 	@Column(name = "createdby_user_id")
 	private int createdByUserId;
 	
@@ -828,6 +831,14 @@ public class BusinessDetails implements Serializable {
 
 	public void setYearEstablished(String yearEstablished) {
 		this.yearEstablished = yearEstablished;
+	}
+	
+	public String getIsVendorCall() {
+		return isVendorCall;
+	}
+
+	public void setIsVendorCall(String isVendorCall) {
+		this.isVendorCall = isVendorCall;
 	}
 
 	public int getCreatedByUserId() {

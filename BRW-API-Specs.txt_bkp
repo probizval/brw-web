@@ -1,0 +1,1302 @@
+BRW API Specifications Doc
+
+Created By: Sid Patil
+Date: 11/14/2019
+Update Date: 12/24/2019
+
+
+Table of Contents -
+
+Phase 1:
+1. AddBusinesssDetails
+2. SearchBusiness
+3. GetBusinessDetails
+4. UpdateBusinessDetails
+5. AddEstimates
+6. GetEstimates
+7. GetAdditionalAttributes
+8. GetAdditionalAttributeDefinitions
+9. AddAdditionalAttributes
+10. UpdateAdditionalAttributes
+.
+.
+.
+14. AddUserProfile
+15. UpdateUserProfile
+16. GetUserProfile
+
+
+Pending -
+11. AddImages
+12. UpdateImages
+13. GetImages
+
+
+17. AddUserBusiness
+18. GetUserBusiness
+19. DeleteUserBusiness
+20. AddUserActivity
+21. AddRelatedBusiness
+22. GetRelatedBusiness
+24. UpdateRelatedBusiness
+
+Phase 2:
+25. AddUserService
+26. DeleteUserService
+27. GetUserService
+28. GetServicePromotion
+29. AddUserBill
+30. GetUserBill
+31. AddBusinessOperation
+32. UpdateBusinessOperation
+33. GetBusinessOperation
+
+
+1.	Name: AddBusinesssDetails
+
+Method - Post
+EndPoint –
+http://localhost:8080/api/business/v1/addBusiness
+
+Request -
+{
+    "legalName": "Cindy and Sisters LLC",
+    "name": "Cleopatra's Beauty Salon",
+    "firstOwnerName": "Cindy Cahill",
+    "secondOwnerName": "Mindy Cahill",
+    "brandName": "Saphora",
+    "type": "BEAUTY",
+    "subType": "BEAUTY_SALON",
+    "regCityName": "Fremont",
+    "regCityCode": "044095",
+    "regCityDate": "2009-09-04 12:00",
+    "regStateName": "CA",
+    "regStateCode": "20090801202",
+    "regStateDate": "2009-10-30 12:00",
+    "dataCompletionScore": 80,
+    "isforSell": "N",
+    "forSellPrice": 0,
+    "imageLogo": "",
+    "imageFirst": "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
+    "street1": "2140 Peralta Blvd",
+    "street2": "STE 111",
+    "city": "Fremont",
+    "county": "Alameda",
+    "stateCode": "CA",
+    "zip": 94536,
+    "latitude": 37.562376,
+    "longitude": -121.988676,
+    "phone": "510-111-2222",
+    "phone_ext": "",
+    "email": "cindymindy@cleopatrasalon.com",
+    "website": "www.cleopatrasalon.com",
+    "description": "Cleopatra's Salon is started 10 years ago by two sisters with passion in serving frinds and family with Beauty and Health Services. After 10 years of steady growth in satisfied customers and strong repeats and referrals it is now time for Owner's to get ready for their next stage in life. This place is conveniently located in the Central Fremont Area where there are 3 new communities are already build out in last 3 years and 2 more are planned to open in by 2021.",
+    "isFranchise": "N",
+    "isOwnerClaimed": "Y",
+    "sqftIndoor": 600,
+    "sqftOutdoor": 0,
+    "sqftLot": 25000,
+    "buildingType": "MULTI_UNIT",
+    "isBuildingOwned": "N",
+    "revenueMonthly": 30000,
+    "expenseMonthlyRent": 2000,
+    "expenseMonthlyMortgage": 0,
+    "expenseMonthlyMaterial": 10000,
+    "expenseMonthlyEmp": 5000,
+    "expenseMonthlyUtility": 500,
+    "expenseMonthlyOther": 0,
+    "valueTotalEquipment": 10000,
+    "valueTotalFurniture": 5000,
+    "valueIndoorDeco": 0,
+    "valueOutdoorDeco": 0,
+    "yearEquipment": 2015,
+    "yearFurniture": 2017,
+    "yearIndoorDeco": 0,
+    "yearOutdoorDeco": 0,
+    "empFullTimeNum": 2,
+    "empPartTimeNum": 1,
+    "areaCrimeScore": 20,
+    "areaWalkScore": 30,
+    "areaAttractionsScore": 10,
+    "areaTransitScore": 10,
+    "socialMediaScore": 80,
+    "poppulationIn1mileRadious": 25000,
+    "incomeScoreIn1mileRadious": 60,
+    "poppulationIn3mileRadious": 50000,
+    "incomeScoreIn3mileRadious": 60,
+    "poppulationIn5mileRadious": 100000,
+    "incomeScoreIn5mileRadious": 50,
+    "dailyPeoplAtDoorNum": 100,
+    "dailyCarsAtParklotNum": 100,
+    "yearEstablished": 2009,
+    "naicsnum": "812112",
+    "naicsdescription": "Beauty Salons"
+}
+
+Response -
+{
+    "businessId": 1000001,
+    "legalName": "Cindy and Sisters LLC",
+    "name": null,
+    "firstOwnerName": null,
+    "secondOwnerName": null,
+    "brandName": null,
+    "type": "BEAUTY",
+    "subType": null,
+    "regCityName": null,
+    "regCityCode": null,
+    "regCityDate": null,
+    "regStateName": null,
+    "regStateCode": null,
+    "regStateDate": null,
+    "dataCompletionScore": 0,
+    "isforSell": null,
+    "forSellPrice": 0,
+    "imageLogo": null,
+    "imageFirst": null,
+    "street1": null,
+    "street2": null,
+    "city": null,
+    "county": null,
+    "stateCode": null,
+    "zip": 0,
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "phone": null,
+    "phoneExt": null,
+    "email": null,
+    "website": null,
+    "description": null,
+    "isFranchise": null,
+    "isOwnerClaimed": null,
+    "sqftIndoor": 0,
+    "sqftOutdoor": 0,
+    "sqftLot": 0,
+    "buildingType": null,
+    "isBuildingOwned": null,
+    "revenueMonthly": 0,
+    "expenseMonthlyRent": 0,
+    "expenseMonthlyMortgage": 0,
+    "expenseMonthlyMaterial": 0,
+    "expenseMonthlyEmp": 0,
+    "expenseMonthlyUtility": 0,
+    "expenseMonthlyOther": 0,
+    "valueTotalEquipment": 0,
+    "valueTotalFurniture": 0,
+    "valueIndoorDeco": 0,
+    "valueOutdoorDeco": 0,
+    "yearEquipment": 0,
+    "yearFurniture": 0,
+    "yearIndoorDeco": 0,
+    "yearOutdoorDeco": 0,
+    "empFullTimeNum": 0,
+    "empPartTimeNum": 0,
+    "areaCrimeScore": 0,
+    "areaWalkScore": 0,
+    "areaAttractionsScore": 0,
+    "areaTransitScore": 0,
+    "socialMediaScore": 0,
+    "populationIn1mileRadius": 0,
+    "incomeScoreIn1mileRadius": 0,
+    "populationIn3mileRadius": 0,
+    "incomeScoreIn3mileRadius": 0,
+    "populationIn5mileRadius": 0,
+    "dailyPeoplAtDoorNum": 0,
+    "dailyCarsAtParklotNum": 0,
+    "yearEstablished": null,
+    "createdByUserId": 0,
+    "createDate": null,
+    "updatedByUserId": 0,
+    "updateDate": null,
+    "naicsnum": 0,
+    "naicsdescription": null,
+    "incomeScoreIn5mileRadious": 0
+}
+
+
+
+2.	Name: SearchBusiness
+
+Method - Post
+EndPoint – 
+http://localhost:8080/api/business/v1/searchBusiness
+
+Request -
+{
+    "name": "",
+    "type": "",
+    "street1": "",
+    "street2": "",
+    "city": "Fremont",
+    "zip": 0,
+    "county": "",
+    "stateCode": "CA"
+}
+
+Response –
+{
+    "status": "succcess",
+    "httpStatus": "OK",
+    "data": {
+        "businessList": [
+            {
+                "invokerId": null,
+                "businessId": 1000000,
+                "legalName": null,
+                "name": "Business DBA Name - Misha's Italian",
+                "firstOwnerName": null,
+                "secondOwnerName": null,
+                "brandName": null,
+                "type": "RESTAURANT",
+                "subType": "GENERAL_RESTAURANT",
+                "regCityName": null,
+                "regCityCode": null,
+                "regCityDate": null,
+                "regStateName": null,
+                "regStateCode": null,
+                "regStateDate": null,
+                "dataCompletionScore": null,
+                "isforSell": "N",
+                "forSellPrice": 0,
+                "imageLogo": null,
+                "imageFirst": "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
+                "street1": "2140 Peralta Blvd",
+                "street2": "Suit #110",
+                "city": "Fremont",
+                "county": "Alameda",
+                "stateCode": "CA",
+                "zip": 94536,
+                "latitude": 37.562376,
+                "longitude": -121.988676,
+                "phone": null,
+                "phoneExt": null,
+                "email": null,
+                "website": null,
+                "description": null,
+                "isFranchise": null,
+                "isOwnerClaimed": null,
+                "sqftIndoor": null,
+                "sqftOutdoor": null,
+                "sqftLot": null,
+                "buildingType": null,
+                "isBuildingOwned": null,
+                "revenueMonthly": null,
+                "expenseMonthlyRent": null,
+                "expenseMonthlyMortgage": null,
+                "expenseMonthlyMaterial": null,
+                "expenseMonthlyEmp": null,
+                "expenseMonthlyUtility": null,
+                "expenseMonthlyOther": null,
+                "valueTotalEquipment": null,
+                "valueTotalFurniture": null,
+                "valueIndoorDeco": null,
+                "valueOutdoorDeco": null,
+                "yearEquipment": null,
+                "yearFurniture": null,
+                "yearIndoorDeco": null,
+                "yearOutdoorDeco": null,
+                "empFullTimeNum": null,
+                "empPartTimeNum": null,
+                "areaCrimeScore": null,
+                "areaWalkScore": null,
+                "areaAttractionsScore": null,
+                "areaTransitScore": null,
+                "socialMediaScore": null,
+                "populationIn1mileRadius": null,
+                "incomeScoreIn1mileRadius": null,
+                "populationIn3mileRadius": null,
+                "incomeScoreIn3mileRadius": null,
+                "populationIn5mileRadius": null,
+                "incomeScoreIn5mileRadius": null,
+                "dailyPeoplAtDoorNum": null,
+                "dailyCarsAtParklotNum": null,
+                "yearEstablished": null,
+                "isEstimateAvailable": null,
+                "createdByUserId": null,
+                "createDate": null,
+                "updatedByUserId": null,
+                "updateDate": null,
+                "isVendorCall": null,
+                "naicsnum": null,
+                "naicsdescription": null
+            },
+            {
+                "invokerId": null,
+                "businessId": 1000001,
+                "legalName": null,
+                "name": "Cleopatra's Beauty Salon",
+                "firstOwnerName": null,
+                "secondOwnerName": null,
+                "brandName": null,
+                "type": "BEAUTY",
+                "subType": "BEAUTY_SALON",
+                "regCityName": null,
+                "regCityCode": null,
+                "regCityDate": null,
+                "regStateName": null,
+                "regStateCode": null,
+                "regStateDate": null,
+                "dataCompletionScore": null,
+                "isforSell": "N",
+                "forSellPrice": 0,
+                "imageLogo": null,
+                "imageFirst": "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
+                "street1": "2140 Peralta Blvd",
+                "street2": "STE 111",
+                "city": "Fremont",
+                "county": "Alameda",
+                "stateCode": "CA",
+                "zip": 94536,
+                "latitude": 37.562376,
+                "longitude": -121.988676,
+                "phone": null,
+                "phoneExt": null,
+                "email": null,
+                "website": null,
+                "description": null,
+                "isFranchise": null,
+                "isOwnerClaimed": null,
+                "sqftIndoor": null,
+                "sqftOutdoor": null,
+                "sqftLot": null,
+                "buildingType": null,
+                "isBuildingOwned": null,
+                "revenueMonthly": null,
+                "expenseMonthlyRent": null,
+                "expenseMonthlyMortgage": null,
+                "expenseMonthlyMaterial": null,
+                "expenseMonthlyEmp": null,
+                "expenseMonthlyUtility": null,
+                "expenseMonthlyOther": null,
+                "valueTotalEquipment": null,
+                "valueTotalFurniture": null,
+                "valueIndoorDeco": null,
+                "valueOutdoorDeco": null,
+                "yearEquipment": null,
+                "yearFurniture": null,
+                "yearIndoorDeco": null,
+                "yearOutdoorDeco": null,
+                "empFullTimeNum": null,
+                "empPartTimeNum": null,
+                "areaCrimeScore": null,
+                "areaWalkScore": null,
+                "areaAttractionsScore": null,
+                "areaTransitScore": null,
+                "socialMediaScore": null,
+                "populationIn1mileRadius": null,
+                "incomeScoreIn1mileRadius": null,
+                "populationIn3mileRadius": null,
+                "incomeScoreIn3mileRadius": null,
+                "populationIn5mileRadius": null,
+                "incomeScoreIn5mileRadius": null,
+                "dailyPeoplAtDoorNum": null,
+                "dailyCarsAtParklotNum": null,
+                "yearEstablished": null,
+                "isEstimateAvailable": null,
+                "createdByUserId": null,
+                "createDate": null,
+                "updatedByUserId": null,
+                "updateDate": null,
+                "isVendorCall": null,
+                "naicsnum": null,
+                "naicsdescription": null
+            }
+        ],
+        "totalCount": null,
+        "pageNumber": null,
+        "pageSize": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+
+3.	GetBusinessDetails
+Method - Post
+EndPoint –
+http://localhost:8080/api/business/v1/getBusinessDetails
+
+Request –
+{
+    "businessId": 1000000,
+    "isVendorCall": "Y",
+    "isEstimate": "Y"
+}
+
+Response - 
+{
+    "status": "succcess",
+    "httpStatus": "OK",
+    "data": {
+        "businessId": 1000000,
+        "legalName": null,
+        "name": "Business DBA Name - Misha's Italian",
+        "brandName": null,
+        "type": "RESTAURANT",
+        "subType": "GENERAL_RESTAURANT",
+        "dataCompletionScore": 0,
+        "isforSell": null,
+        "forSellPrice": 0,
+        "imageLogo": null,
+        "imageFirst": "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
+        "streetNum": 0,
+        "street1": null,
+        "street2": null,
+        "city": "Fremont",
+        "county": null,
+        "stateCode": "CA",
+        "zip": 94536,
+        "latitude": 37.562376,
+        "longitude": -121.988676,
+        "phone": null,
+        "phone_ext": null,
+        "email": null,
+        "website": null,
+        "description": null,
+        "isFranchise": null,
+        "isOwnerClaimed": null,
+        "sqftIndoor": 0,
+        "sqftOutdoor": 0,
+        "sqftLot": 25000,
+        "buildingType": null,
+        "isBuildingOwned": null,
+        "expenseMonthlyRent": 0,
+        "expenseMonthlyMortgage": 0,
+        "revenueMonthly": 0,
+        "expenseMonthlyMaterial": 0,
+        "expenseMonthlyEmp": 0,
+        "expenseMonthlyUtility": 0,
+        "expenseMonthlyOther": 0,
+        "valueTotalEquipment": 0,
+        "valueTotalFurniture": 0,
+        "valueIndoorDeco": 0,
+        "valueOutdoorDeco": 0,
+        "yearEquipment": 0,
+        "yearFurniture": 0,
+        "yearIndoorDeco": 0,
+        "yearOutdoorDeco": 0,
+        "relatedBusinessId": 0,
+        "empFullTimeNum": 0,
+        "empPartTimeNum": 0,
+        "areaCrimeScore": 0,
+        "areaWalkScore": 0,
+        "areaAttractionsScore": 0,
+        "areaTransitScore": 0,
+        "socialMediaScore": 0,
+        "poppulationIn1mileRadious": 0,
+        "poppulationIn3mileRadious": 0,
+        "poppulationIn5mileRadious": 0,
+        "dailyPeoplAtDoorNum": 0,
+        "dailyCarsAtParklotNum": 0,
+        "yearEstablished": null,
+        "createdByUserId": 0,
+        "createDate": null,
+        "updatedByUserId": 0,
+        "updateDate": null,
+        "naicsnum": 0,
+        "naicsdescription": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+
+4.	UpdateBusinessDetails –
+Method – PUT
+
+EndPoint -
+http://localhost:8080/api/business/v1/updateBusinessDetails
+
+Request -
+{
+    "invokerId": "1001",
+    "businessId": "1000001",
+    "legalName": "Cindy Mindy Beauty LLC"
+}
+
+Response -
+{
+    "invokerId": null,
+    "businessId": 1000001,
+    "legalName": "Cindy Mindy Beauty LLC",
+    "name": null,
+    "firstOwnerName": null,
+    "secondOwnerName": null,
+    "brandName": null,
+    "type": "BEAUTY",
+    "subType": null,
+    "regCityName": null,
+    "regCityCode": null,
+    "regCityDate": null,
+    "regStateName": null,
+    "regStateCode": null,
+    "regStateDate": null,
+    "dataCompletionScore": null,
+    "isforSell": null,
+    "forSellPrice": null,
+    "imageLogo": null,
+    "imageFirst": null,
+    "street1": null,
+    "street2": null,
+    "city": null,
+    "county": null,
+    "stateCode": null,
+    "zip": null,
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "phone": null,
+    "phoneExt": null,
+    "email": null,
+    "website": null,
+    "description": null,
+    "isFranchise": null,
+    "isOwnerClaimed": null,
+    "sqftIndoor": null,
+    "sqftOutdoor": null,
+    "sqftLot": null,
+    "buildingType": null,
+    "isBuildingOwned": null,
+    "revenueMonthly": null,
+    "expenseMonthlyRent": null,
+    "expenseMonthlyMortgage": null,
+    "expenseMonthlyMaterial": null,
+    "expenseMonthlyEmp": null,
+    "expenseMonthlyUtility": null,
+    "expenseMonthlyOther": null,
+    "valueTotalEquipment": null,
+    "valueTotalFurniture": null,
+    "valueIndoorDeco": null,
+    "valueOutdoorDeco": null,
+    "yearEquipment": null,
+    "yearFurniture": null,
+    "yearIndoorDeco": null,
+    "yearOutdoorDeco": null,
+    "empFullTimeNum": null,
+    "empPartTimeNum": null,
+    "areaCrimeScore": null,
+    "areaWalkScore": null,
+    "areaAttractionsScore": null,
+    "areaTransitScore": null,
+    "socialMediaScore": null,
+    "populationIn1mileRadius": null,
+    "incomeScoreIn1mileRadius": null,
+    "populationIn3mileRadius": null,
+    "incomeScoreIn3mileRadius": null,
+    "populationIn5mileRadius": null,
+    "incomeScoreIn5mileRadius": null,
+    "dailyPeoplAtDoorNum": null,
+    "dailyCarsAtParklotNum": null,
+    "yearEstablished": null,
+    "createdByUserId": null,
+    "createDate": null,
+    "updatedByUserId": null,
+    "updateDate": null,
+    "naicsnum": null,
+    "naicsdescription": null
+}
+
+
+5.	AddEstimates
+Method - Post
+End Point –
+http://localhost:8080/api/estimates/v1/addEstimates
+
+Request-
+{
+    "estimatesList": [
+        {
+            "invokerId": "1001",
+            "businessId": "1000000",
+            "estimateType": "ASSET_BASED",
+            "estimateSubType": "ASSET_BASED",
+            "estimatedAmount": "100025",
+            "estimatedAmountHigh": "125025",
+            "estimatedAmountLow": "75025"
+        },
+        {
+            "invokerId": "1001",
+            "businessId": "1000000",
+            "estimateType": "INCOME_BASED",
+            "estimateSubType": "INCOME_BASED",
+            "estimatedAmount": "200025",
+            "estimatedAmountHigh": "250025",
+            "estimatedAmountLow": "150025"
+        },
+        {
+            "invokerId": "1001",
+            "businessId": "1000000",
+            "estimateType": "MARKET_BASED",
+            "estimateSubType": "MARKET_BASED",
+            "estimatedAmount": "150025",
+            "estimatedAmountHigh": "175025",
+            "estimatedAmountLow": "125025"
+        }
+    ]
+}
+
+Response-
+{
+    "estimatesList": [
+        {
+            "invokerId": null,
+            "estimateId": 4,
+            "businessId": 1000000,
+            "estimateType": "ASSET_BASED",
+            "estimateSubType": "ASSET_BASED",
+            "estimatedAmount": "100025",
+            "estimatedAmountHigh": "125025",
+            "estimatedAmountLow": "75025",
+            "lastEstimationDate": "2019-11-20 17:29"
+        },
+        {
+            "invokerId": null,
+            "estimateId": 5,
+            "businessId": 1000000,
+            "estimateType": "INCOME_BASED",
+            "estimateSubType": "INCOME_BASED",
+            "estimatedAmount": "200025",
+            "estimatedAmountHigh": "250025",
+            "estimatedAmountLow": "150025",
+            "lastEstimationDate": "2019-11-20 17:29"
+        },
+        {
+            "invokerId": null,
+            "estimateId": 6,
+            "businessId": 1000000,
+            "estimateType": "MARKET_BASED",
+            "estimateSubType": "MARKET_BASED",
+            "estimatedAmount": "150025",
+            "estimatedAmountHigh": "175025",
+            "estimatedAmountLow": "125025",
+            "lastEstimationDate": "2019-11-20 17:29"
+        }
+    ],
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null
+}
+
+
+6.	GetEstimates -
+
+Method – GET
+
+End Point –
+http://localhost:8080/api/estimates/v1/getEstimates/1000000
+
+
+Request –
+NA
+
+Response –
+{
+    "status": "succcess",
+    "httpStatus": "OK",
+    "data": {
+        "estimatesList": [
+            {
+                "invokerId": null,
+                "estimateId": 6,
+                "businessId": 1000000,
+                "estimateType": "MARKET_BASED",
+                "estimateSubType": "MARKET_BASED",
+                "estimatedAmount": "150025",
+                "estimatedAmountHigh": "175025",
+                "estimatedAmountLow": "125025",
+                "lastEstimationDate": "2019-11-20 17:29"
+            },
+            {
+                "invokerId": null,
+                "estimateId": 5,
+                "businessId": 1000000,
+                "estimateType": "INCOME_BASED",
+                "estimateSubType": "INCOME_BASED",
+                "estimatedAmount": "200025",
+                "estimatedAmountHigh": "250025",
+                "estimatedAmountLow": "150025",
+                "lastEstimationDate": "2019-11-20 17:29"
+            },
+            {
+                "invokerId": null,
+                "estimateId": 4,
+                "businessId": 1000000,
+                "estimateType": "ASSET_BASED",
+                "estimateSubType": "ASSET_BASED",
+                "estimatedAmount": "100025",
+                "estimatedAmountHigh": "125025",
+                "estimatedAmountLow": "75025",
+                "lastEstimationDate": "2019-11-20 17:29"
+            }
+        ],
+        "totalCount": null,
+        "pageNumber": null,
+        "pageSize": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+7.	GetAdditionalAttributes - Service to read other business attributes that are not part of GetBusinessDetails Service and added by 
+AddAdditionalAttributes service. 
+
+Method - Post
+End Point –
+http://localhost:8080/api/additionalAttributes/v1/getAdditionalAttribDefinitions
+
+Request-
+{
+    "invokerId": 1001,
+    "type": "GAS_STATION",
+    "subType": "GENERAL_GAS_STATION"
+}
+
+Response-
+{
+    "status": "success",
+    "httpStatus": "OK",
+    "data": {
+        "additionalAttribDefinitionsListDTO": [
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "EQUIPMENT",
+                "attribSubType": "POS"
+            },
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "EQUIPMENT",
+                "attribSubType": "POS"
+            },
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "EQUIPMENT",
+                "attribSubType": "POS"
+            },
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "EQUIPMENT",
+                "attribSubType": "POS"
+            },
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "FUEL_DISPENSER",
+                "attribSubType": "GASOLINE"
+            },
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "FUEL_DISPENSER",
+                "attribSubType": "GASOLINE"
+            },
+            {
+                "bizType": "GAS_STATION",
+                "bizSubType": "GENERAL_GAS_STATION",
+                "attribType": "OTHER",
+                "attribSubType": "OTHER"
+            }
+        ],
+        "totalCount": null,
+        "pageNumber": null,
+        "pageSize": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+
+8.	AddAdditionalAttributes - Service to add any other attributes that are not part of AddBusiness Service. 
+Like Business specific attributes e.g. Fuel Dispensers, ATM Machines, Air and Water Machines in case of Gas Station.
+Stoves and Kitchen Heads, Dish Washer, and exhausts in case of Restaurants. etc.
+Please check the t_brw_business_add_attribute_def table for already defined types and sub-types for particular type of business.
+Service named getAdditionalAttribDefinitions(String bizType, String bizSubType) can be used to do it via API.
+Talk to Business Analysts or Sid if you want to add more types and sub-types.
+For anything else that cannot be categorized the type and sub-type can be set to OTHER and OTHER (Should be used only if there is no quick way to get the definitions added to the table.)
+
+VALUE TYPE can be - LENGTH_FT, VOLUME_GL, BRAND_NAME, GENERAL etc
+
+Method - Post
+End Point –
+http://localhost:8080/api/additionalAttributes/v1/addAdditionalAttributes
+
+Request-
+{
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "addAttributesList": [
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "KITCHEN_HOOD",
+            "valueType": "LENGTH_FT",
+            "value": "12",
+            "quantity": 1,
+            "pricePerUnit": 8000,
+            "monthlyMaintExpense": 100
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "REGULAR_FREEZER",
+            "valueType": "VOLUME_GL",
+            "value": "50",
+            "quantity": 1,
+            "pricePerUnit": 3000,
+            "monthlyMaintExpense": 0
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "DISH_WASHER",
+            "valueType": "BRAND_NAME",
+            "value": "WeWash",
+            "quantity": "1",
+            "pricePerUnit": 0,
+            "monthlyMaintExpense": 250
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "OTHER",
+            "valueType": "GENERAL",
+            "value": "Clay Oven",
+            "quantity": "2",
+            "pricePerUnit": 2500,
+            "monthlyMaintExpense": 0
+        }
+    ]
+}
+
+Response-
+{
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "addAttributesList": [
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "KITCHEN_HOOD",
+            "value": "12",
+            "valueType": "LENGTH_FT",
+            "quantity": 1,
+            "pricePerUnit": 8000,
+            "monthlyMaintExpense": 100,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-23 20:35",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-23 20:35"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "REGULAR_FREEZER",
+            "value": "50",
+            "valueType": "VOLUME_GL",
+            "quantity": 1,
+            "pricePerUnit": 3000,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-23 20:35",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-23 20:35"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "DISH_WASHER",
+            "value": "WeWash",
+            "valueType": "BRAND_NAME",
+            "quantity": 1,
+            "pricePerUnit": 0,
+            "monthlyMaintExpense": 250,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-23 20:35",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-23 20:35"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "OTHER",
+            "value": "Clay Oven",
+            "valueType": "GENERAL",
+            "quantity": 2,
+            "pricePerUnit": 2500,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-23 20:35",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-23 20:35"
+        }
+    ],
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null
+}
+
+
+9. GetAdditionalAttributes - Service to read other business attributes that are not part of GetBusinessDetails Service and added by 
+AddAdditionalAttributes service. 
+
+Method - Post
+End Point –
+http://localhost:8080/api/additionalAttributes/v1/getAdditionalAttributes
+
+Request-
+{
+    "invokerId": 1001,
+    "businessId": 1000000
+}
+
+Response-
+{
+    "status": "success",
+    "httpStatus": "OK",
+    "data": {
+        "invokerId": null,
+        "businessId": null,
+        "addAttributesList": [
+            {
+                "addAttribId": 5,
+                "attribType": "EQUIPMENT",
+                "attribSubType": "REGULAR_FREEZER",
+                "value": "50",
+                "valueType": null,
+                "quantity": 1,
+                "pricePerUnit": 3000,
+                "monthlyMaintExpense": 0,
+                "createdByUserId": null,
+                "createDate": null,
+                "updatedByUserId": null,
+                "updateDate": null
+            },
+            {
+                "addAttribId": 7,
+                "attribType": "EQUIPMENT",
+                "attribSubType": "OTHER",
+                "value": "Clay Oven",
+                "valueType": null,
+                "quantity": 2,
+                "pricePerUnit": 2500,
+                "monthlyMaintExpense": 0,
+                "createdByUserId": null,
+                "createDate": null,
+                "updatedByUserId": null,
+                "updateDate": null
+            },
+            {
+                "addAttribId": 3,
+                "attribType": "EQUIPMENT",
+                "attribSubType": "KITCHEN_HOOD",
+                "value": "12",
+                "valueType": null,
+                "quantity": 1,
+                "pricePerUnit": 8000,
+                "monthlyMaintExpense": 100,
+                "createdByUserId": null,
+                "createDate": null,
+                "updatedByUserId": null,
+                "updateDate": null
+            },
+            {
+                "addAttribId": 4,
+                "attribType": "EQUIPMENT",
+                "attribSubType": "KITCHEN_HOOD",
+                "value": "6",
+                "valueType": null,
+                "quantity": 1,
+                "pricePerUnit": 5000,
+                "monthlyMaintExpense": 100,
+                "createdByUserId": null,
+                "createDate": null,
+                "updatedByUserId": null,
+                "updateDate": null
+            },
+            {
+                "addAttribId": 6,
+                "attribType": "EQUIPMENT",
+                "attribSubType": "DISH_WASHER",
+                "value": "WeWash",
+                "valueType": null,
+                "quantity": 1,
+                "pricePerUnit": 0,
+                "monthlyMaintExpense": 250,
+                "createdByUserId": null,
+                "createDate": null,
+                "updatedByUserId": null,
+                "updateDate": null
+            }
+        ],
+        "totalCount": null,
+        "pageNumber": null,
+        "pageSize": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+
+
+10.	UpdateAdditionalAttributes - 
+
+Method - Post
+End Point –
+http://localhost:8080/api/additionalAttributes/v1/updateAdditionalAttributes
+
+Request-
+{
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "addAttributesList": [
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "KITCHEN_HOOD",
+            "valueType": "LENGTH_FT",
+            "value": "20",
+            "quantity": 1,
+            "pricePerUnit": 10000,
+            "monthlyMaintExpense": 100
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "REGULAR_FREEZER",
+            "valueType": "VOLUME_GL",
+            "value": "50",
+            "quantity": 1,
+            "pricePerUnit": 3000,
+            "monthlyMaintExpense": 0
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "DISH_WASHER",
+            "valueType": "BRAND_NAME",
+            "value": "WeWash",
+            "quantity": "1",
+            "pricePerUnit": 0,
+            "monthlyMaintExpense": 250
+        },
+        {
+            "attribType": "EQUIPMENT",
+            "attribSubType": "OTHER",
+            "valueType": "GENERAL",
+            "value": "Clay Oven",
+            "quantity": "2",
+            "pricePerUnit": 2500,
+            "monthlyMaintExpense": 0
+        },
+        {
+            "attribType": "OTHER",
+            "attribSubType": "OTHER",
+            "valueType": "GENERAL",
+            "value": "Tea Dispenser",
+            "quantity": "1",
+            "pricePerUnit": 500,
+            "monthlyMaintExpense": 0
+        }
+    ]
+}
+
+Response-
+{
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "addAttributesList": [
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "KITCHEN_HOOD",
+            "value": "20",
+            "valueType": "LENGTH_FT",
+            "quantity": 1,
+            "pricePerUnit": 10000,
+            "monthlyMaintExpense": 100,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "REGULAR_FREEZER",
+            "value": "50",
+            "valueType": "VOLUME_GL",
+            "quantity": 1,
+            "pricePerUnit": 3000,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "DISH_WASHER",
+            "value": "WeWash",
+            "valueType": "BRAND_NAME",
+            "quantity": 1,
+            "pricePerUnit": 0,
+            "monthlyMaintExpense": 250,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "EQUIPMENT",
+            "attribSubType": "OTHER",
+            "value": "Clay Oven",
+            "valueType": "GENERAL",
+            "quantity": 2,
+            "pricePerUnit": 2500,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        },
+        {
+            "addAttribId": null,
+            "attribType": "OTHER",
+            "attribSubType": "OTHER",
+            "value": "Tea Dispenser",
+            "valueType": "GENERAL",
+            "quantity": 1,
+            "pricePerUnit": 500,
+            "monthlyMaintExpense": 0,
+            "createdByUserId": 1001,
+            "createDate": "2019-12-24 12:11",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-24 12:11"
+        }
+    ],
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null
+}
+
+
+
+
+14.	Name: AddUserProfile
+
+Method - Post
+EndPoint –
+http://localhost:8080/api/user/v1/addUserProfile
+
+Request -
+{
+	"invokerId": 1001,
+	"email": "anisha@proswift.com",
+	"firstName": "Anisha",
+	"middleInitial": "V",
+	"lastName": "Jain",
+	"isBroker": "N",
+	"phoneCountryCode": "+1",
+	"phoneNumber": "510-550-5050",
+	"phoneExtention": "1234",
+	"isSearchAgentEmail": "Y",
+	"searchAgentEmailFreq": "weekly",
+	"isUserVerified": "Y",
+	"userVerificationDate": "2020-01-03 12:00",
+	"userVerificationMethod": "phone",
+	"isBrokerVerified": "Y",
+	"brokerVerificationDate": "2020-01-03 12:00",
+	"brokerVerificationMethod": "email",
+	"brokerLicenseNumber": "00904011",
+	"brokerDescription": "Joe Ranieri has been a business broker for over 20 years. Joe, having been a business owner previously, understands the stress of selling a business, and works tirelessly for his clients, so that they can smoothly run their business while he handles the sale. He specializes in selling small to medium sized businesses and services the areas of Orange County, Los Angeles, Riverside, San Diego, and San Bernardino County. Joe is a member of the Orange County Board of Realtors. He can sell any business, but his specialty is restaurant, bars and liquor stores. Joe, not only can sell the business, but the land underneath. He is routinely amongst the top producers in his office, and shares with them his vast knowledge and experience as one the senior members of the commercial division at Re/Max TerraSol in Huntington Beach, California. Phone him at 714-292-5448 to sell or buy a Los Angeles Or Orange County small to mid-sized business.",
+	"brokerImageUrl": "https://www.bizben.com/profiles/22709",
+	"lastLoginDate": "2020-01-03 12:00",
+	"street1": "2140 Peralta Blvd",
+	"street2": "STE 110",
+	"city": "Fremont",
+	"state": "CA",
+	"foreignState": "",
+	"zip": "94536",
+	"foreignPostalCode":"",
+	"country":"US",
+	"isVettedBuyer": "Y",
+	"buyerVettingMethod": "email",
+	"buyerPurchaseCapLow": 150000,
+	"buyerPurchaseCapHigh": 250000,
+	"buyerVettingDate": "2020-01-03 12:00"
+}
+
+Response -
+{
+    "invokerId": 0,
+    "userId": 1002,
+    "email": "anisha@proswift.com",
+    "firstName": "Anisha",
+    "middleInitial": "V",
+    "lastName": "Jain",
+    "isBroker": "N",
+    "phoneCountryCode": "+1",
+    "phoneNumber": "510-550-5050",
+    "phoneExtention": "1234",
+    "isSearchAgentEmail": "Y",
+    "searchAgentEmailFreq": "weekly",
+    "isUserVerified": "Y",
+    "userVerificationDate": "2020-01-03 12:00",
+    "userVerificationMethod": "phone",
+    "isBrokerVerified": "Y",
+    "brokerVerificationDate": "2020-01-03 12:00",
+    "brokerVerificationMethod": "email",
+    "brokerLicenseNumber": "00904011",
+    "brokerDescription": "Joe Ranieri has been a business broker for over 20 years. Joe, having been a business owner previously, understands the stress of selling a business, and works tirelessly for his clients, so that they can smoothly run their business while he handles the sale. He specializes in selling small to medium sized businesses and services the areas of Orange County, Los Angeles, Riverside, San Diego, and San Bernardino County. Joe is a member of the Orange County Board of Realtors. He can sell any business, but his specialty is restaurant, bars and liquor stores. Joe, not only can sell the business, but the land underneath. He is routinely amongst the top producers in his office, and shares with them his vast knowledge and experience as one the senior members of the commercial division at Re/Max TerraSol in Huntington Beach, California. Phone him at 714-292-5448 to sell or buy a Los Angeles Or Orange County small to mid-sized business.",
+    "brokerImageUrl": "https://www.bizben.com/profiles/22709",
+    "lastLoginDate": "2020-01-03 12:00",
+    "street1": "2140 Peralta Blvd",
+    "street2": "STE 110",
+    "city": "Fremont",
+    "state": "CA",
+    "foreignState": "",
+    "zip": "94536",
+    "foreignPostalCode": "",
+    "country": "US",
+    "isVettedBuyer": "Y",
+    "buyerVettingMethod": "email",
+    "buyerPurchaseCapLow": "150000",
+    "buyerPurchaseCapHigh": "250000",
+    "buyerVettingDate": "2020-01-03 12:00",
+    "createdByUserId": 1001,
+    "createDate": "2020-01-03 17:29",
+    "updatedByUserId": 0,
+    "updateDate": "2020-01-03 17:29"
+}
+
+4.	UpdateUserProfile –
+Method – PUT
+
+EndPoint -
+http://localhost:8080/api/user/v1/updateUserProfile
+
+Request -
+{
+    "invokerId": "1001",
+    "userId": "1002",
+    "firstName": "Varun"
+}
+
+Response -
