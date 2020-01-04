@@ -72,7 +72,7 @@ public class User implements Serializable {
 	@Column(name = "broker_verification_method")
 	private String brokerVerificationMethod;
 	
-	@Column(name = "broker_license_number")
+	@Column(name = "broker_license_num")
 	private String brokerLicenseNumber;
 	
 	@Column(name = "broker_description")

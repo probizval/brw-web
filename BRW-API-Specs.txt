@@ -18,12 +18,18 @@ Phase 1:
 8. GetAdditionalAttributeDefinitions
 9. AddAdditionalAttributes
 10. UpdateAdditionalAttributes
+.
+.
+.
+14. AddUserProfile
+
+
 
 Pending -
 11. AddImages
 12. UpdateImages
 13. GetImages
-14. AddUserProfile
+
 15. UpdateUserProfile
 16. GetUserProfile
 17. AddUserBusiness
@@ -1191,4 +1197,92 @@ Response-
 }
 
 
+
+
+14.	Name: AddUser
+
+Method - Post
+EndPoint –
+http://localhost:8080/api/user/v1/addUser
+
+Request -
+{
+	"invokerId": 1001,
+	"email": "anisha@proswift.com",
+	"firstName": "Anisha",
+	"middleInitial": "V",
+	"lastName": "Jain",
+	"isBroker": "N",
+	"phoneCountryCode": "+1",
+	"phoneNumber": "510-550-5050",
+	"phoneExtention": "1234",
+	"isSearchAgentEmail": "Y",
+	"searchAgentEmailFreq": "weekly",
+	"isUserVerified": "Y",
+	"userVerificationDate": "2020-01-03 12:00",
+	"userVerificationMethod": "phone",
+	"isBrokerVerified": "Y",
+	"brokerVerificationDate": "2020-01-03 12:00",
+	"brokerVerificationMethod": "email",
+	"brokerLicenseNumber": "00904011",
+	"brokerDescription": "Joe Ranieri has been a business broker for over 20 years. Joe, having been a business owner previously, understands the stress of selling a business, and works tirelessly for his clients, so that they can smoothly run their business while he handles the sale. He specializes in selling small to medium sized businesses and services the areas of Orange County, Los Angeles, Riverside, San Diego, and San Bernardino County. Joe is a member of the Orange County Board of Realtors. He can sell any business, but his specialty is restaurant, bars and liquor stores. Joe, not only can sell the business, but the land underneath. He is routinely amongst the top producers in his office, and shares with them his vast knowledge and experience as one the senior members of the commercial division at Re/Max TerraSol in Huntington Beach, California. Phone him at 714-292-5448 to sell or buy a Los Angeles Or Orange County small to mid-sized business.",
+	"brokerImageUrl": "https://www.bizben.com/profiles/22709",
+	"lastLoginDate": "2020-01-03 12:00",
+	"street1": "2140 Peralta Blvd",
+	"street2": "STE 110",
+	"city": "Fremont",
+	"state": "CA",
+	"foreignState": "",
+	"zip": "94536",
+	"foreignPostalCode":"",
+	"country":"US",
+	"isVettedBuyer": "Y",
+	"buyerVettingMethod": "email",
+	"buyerPurchaseCapLow": 150000,
+	"buyerPurchaseCapHigh": 250000,
+	"buyerVettingDate": "2020-01-03 12:00"
+}
+
+Response -
+{
+    "invokerId": 0,
+    "userId": 1002,
+    "email": "anisha@proswift.com",
+    "firstName": "Anisha",
+    "middleInitial": "V",
+    "lastName": "Jain",
+    "isBroker": "N",
+    "phoneCountryCode": "+1",
+    "phoneNumber": "510-550-5050",
+    "phoneExtention": "1234",
+    "isSearchAgentEmail": "Y",
+    "searchAgentEmailFreq": "weekly",
+    "isUserVerified": "Y",
+    "userVerificationDate": "2020-01-03 12:00",
+    "userVerificationMethod": "phone",
+    "isBrokerVerified": "Y",
+    "brokerVerificationDate": "2020-01-03 12:00",
+    "brokerVerificationMethod": "email",
+    "brokerLicenseNumber": "00904011",
+    "brokerDescription": "Joe Ranieri has been a business broker for over 20 years. Joe, having been a business owner previously, understands the stress of selling a business, and works tirelessly for his clients, so that they can smoothly run their business while he handles the sale. He specializes in selling small to medium sized businesses and services the areas of Orange County, Los Angeles, Riverside, San Diego, and San Bernardino County. Joe is a member of the Orange County Board of Realtors. He can sell any business, but his specialty is restaurant, bars and liquor stores. Joe, not only can sell the business, but the land underneath. He is routinely amongst the top producers in his office, and shares with them his vast knowledge and experience as one the senior members of the commercial division at Re/Max TerraSol in Huntington Beach, California. Phone him at 714-292-5448 to sell or buy a Los Angeles Or Orange County small to mid-sized business.",
+    "brokerImageUrl": "https://www.bizben.com/profiles/22709",
+    "lastLoginDate": "2020-01-03 12:00",
+    "street1": "2140 Peralta Blvd",
+    "street2": "STE 110",
+    "city": "Fremont",
+    "state": "CA",
+    "foreignState": "",
+    "zip": "94536",
+    "foreignPostalCode": "",
+    "country": "US",
+    "isVettedBuyer": "Y",
+    "buyerVettingMethod": "email",
+    "buyerPurchaseCapLow": "150000",
+    "buyerPurchaseCapHigh": "250000",
+    "buyerVettingDate": "2020-01-03 12:00",
+    "createdByUserId": 1001,
+    "createDate": "2020-01-03 17:29",
+    "updatedByUserId": 0,
+    "updateDate": "2020-01-03 17:29"
+}
 
