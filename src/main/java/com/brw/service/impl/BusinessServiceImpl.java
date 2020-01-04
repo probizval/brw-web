@@ -712,9 +712,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessDetails.setYearEstablished(businessDetailsDTO.getYearEstablished());
 		}
 		
-		//businessDetails.setCreatedByUserId(businessDetailsDTO.getInvokerId());
-		//businessDetails.setCreateDate(LocalDateTime.now());
-		
 		businessDetails.setUpdatedByUserId(businessDetailsDTO.getInvokerId());
 		businessDetails.setUpdateDate(LocalDateTime.now());
 		

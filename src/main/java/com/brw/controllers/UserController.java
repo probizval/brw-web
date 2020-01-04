@@ -29,7 +29,7 @@ public class UserController implements ErrorController {
 		return "/error";
 	}
 	
-	@PostMapping(value = "addUser")
+	@PostMapping(value = "addUserProfile")
 	public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO userDTO) {
 		try {
 			UserDTO returnUserDTO = userService.addUser(userDTO);
@@ -41,7 +41,7 @@ public class UserController implements ErrorController {
 		}
 	}
 	
-	@PostMapping(value = "getUserDetails")
+	@PostMapping(value = "getUserProfile")
 	public ResponseEntity<UserDTO> getUserDetails(@RequestBody UserDTO userDTO) {
 		try {
 			UserDTO userDTO1 = userService.getUserDetails(userDTO);
@@ -52,8 +52,8 @@ public class UserController implements ErrorController {
 		}
 	}
 	
-	@PutMapping(value = "updateUserDetails")
-	public ResponseEntity<UserDTO> updateUserDetails(@RequestBody UserDTO userDTO) {
+	@PutMapping(value = "updateUserProfile")
+	public ResponseEntity<UserDTO> updateUserProfile(@RequestBody UserDTO userDTO) {
 		try {
 			UserDTO userDTO1 = userService.updateUserDetails(userDTO);
 			return new ResponseEntity<>(userDTO1, HttpStatus.OK);

@@ -22,7 +22,8 @@ Phase 1:
 .
 .
 14. AddUserProfile
-
+15. UpdateUserProfile
+16. GetUserProfile
 
 
 Pending -
@@ -30,8 +31,7 @@ Pending -
 12. UpdateImages
 13. GetImages
 
-15. UpdateUserProfile
-16. GetUserProfile
+
 17. AddUserBusiness
 18. GetUserBusiness
 19. DeleteUserBusiness
@@ -1199,11 +1199,11 @@ Response-
 
 
 
-14.	Name: AddUser
+14.	Name: AddUserProfile
 
 Method - Post
 EndPoint –
-http://localhost:8080/api/user/v1/addUser
+http://localhost:8080/api/user/v1/addUserProfile
 
 Request -
 {
@@ -1286,3 +1286,17 @@ Response -
     "updateDate": "2020-01-03 17:29"
 }
 
+4.	UpdateUserProfile –
+Method – PUT
+
+EndPoint -
+http://localhost:8080/api/user/v1/updateUserProfile
+
+Request -
+{
+    "invokerId": "1001",
+    "userId": "1002",
+    "firstName": "Varun"
+}
+
+Response -
