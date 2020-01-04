@@ -44,8 +44,8 @@ public class UserController implements ErrorController {
 	@PostMapping(value = "getUserProfile")
 	public ResponseEntity<UserDTO> getUserDetails(@RequestBody UserDTO userDTO) {
 		try {
-			UserDTO userDTO1 = userService.getUserProfile(userDTO);
-			return new ResponseEntity<>(userDTO1, HttpStatus.OK);
+			UserDTO retUserDTO = userService.getUserProfile(userDTO);
+			return new ResponseEntity<>(retUserDTO, HttpStatus.OK);
 		} catch (InternalServerError e) {
 			// TODO: handle exception
 			return new ResponseEntity<>(userDTO, HttpStatus.INTERNAL_SERVER_ERROR);
