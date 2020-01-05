@@ -8,7 +8,6 @@ package com.brw.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,9 +17,6 @@ import com.brw.dto.ImageDTO;
 import com.brw.dto.ImagesListDTO;
 import com.brw.entities.Image;
 
-import com.brw.dao.ImagesDAO;
-import com.brw.dto.EstimatesListDTO;
-import com.brw.dto.ImagesListDTO;
 import com.brw.exceptions.ImageException;
 
 @Component
@@ -75,7 +71,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 		
 		ImagesListDTO imageListRet = new ImagesListDTO();
 		
-		List<Images> imageList = (List<Images>)imagesDAO.getImages(businessId);
+		//ssList<Images> imageList = (List<Images>)imagesDAO.getImages(businessId);
 		
 		return imageListRet;
 	}
