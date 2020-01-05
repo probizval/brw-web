@@ -1332,3 +1332,32 @@ Request -
 
 Response -
 >>>>>>> f1374067b84f5e608c7a24a967ad7cbc1aa323e1
+
+5.	AddImages
+Method - Post
+End Point –
+http://localhost:8080/api/image/v1/addImages
+
+Request-
+{
+    "imagesList": [
+        {
+        	"invokerId": "1001",
+            "businessId": "1000000",
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/Rvxn-vAmo6vwR7DE4spbnQ/l.jpg"
+        },
+        {
+            "invokerId": "1001",
+            "businessId": "1000000",
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/sqzsQkM3zMnMlwCpLSAehA/o.jpg"
+        },
+        {
+            "invokerId": "1001",
+            "businessId": "1000000",
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/faqTp5HgEKYnO_fv1wicQw/o.jpg"
+        }
+    ]
+}
+
+Response-
+

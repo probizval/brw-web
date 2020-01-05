@@ -56,7 +56,7 @@ public class ImageController implements ErrorController {
 		logger.info("Add the New Business Details");
 		
 		try {
-			ImagesListDTO eListDTO = imageService.addImages(imagesListDTO);
+			ImagesListDTO iListDTO = imageService.addImages(imagesListDTO);
 			return null;
 			
 		} catch (InternalServerError e) {
@@ -69,6 +69,7 @@ public class ImageController implements ErrorController {
 	 * @author siyapatil
 	 * getImages - Service to get the Business Images on the basis of biz_id 
 	 */
+	/*
 	@PostMapping(value = "getImages")
 	public ApiResponse<ImagesListDTO> getImages(@RequestBody ImageDTO imageDTO) {
 		
@@ -86,6 +87,5 @@ public class ImageController implements ErrorController {
 		}
 		
 	}
-	
-	
+	*/
 }

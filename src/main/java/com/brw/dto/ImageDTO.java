@@ -11,6 +11,8 @@ public class ImageDTO implements Serializable {
 
 	private static final long serialVersionUID = 1941284759903233525L;
 	
+	private int invokerId;
+	
 	private int imageId;
 	
 	private int bizId;
@@ -24,6 +26,14 @@ public class ImageDTO implements Serializable {
 	private String updatedBy;
 	
 	private String updatDate;
+	
+	public int getInvokerId() {
+		return invokerId;
+	}
+
+	public void setInvokerId(int invokerId) {
+		this.invokerId = invokerId;
+	}
 
 	public int getImageId() {
 		return imageId;
