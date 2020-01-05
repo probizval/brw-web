@@ -12,20 +12,24 @@ import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import com.brw.dao.ImageDAO;
 import com.brw.dto.ImageDTO;
 import com.brw.dto.ImagesListDTO;
 import com.brw.entities.Image;
-import com.brw.exceptions.ImageException;
 
+import com.brw.dao.ImagesDAO;
+import com.brw.dto.EstimatesListDTO;
+import com.brw.dto.ImagesListDTO;
+import com.brw.exceptions.ImageException;
 
 @Component
 public class ImageServiceImpl implements com.brw.service.ImageService {
 	
 	private static final String businessId = null;
 	@Autowired
-	private ImageDAO imageDAO;
-	
+
+	private ImageDAO imageDAO;	
 	@Override
 	public ImagesListDTO addImages(ImagesListDTO imagesListDTO) {
 		System.out.println("222 **** Inside EstimateServiceImpl.addEstimates()");
@@ -67,8 +71,12 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	}
 	
 	@Override
-	public ImagesListDTO getImages(int bizId) throws ImageException {
-		// TODO Auto-generated method stub
-		return null;
+	public ImagesListDTO getImages(int businessId) throws ImageException {
+		
+		ImagesListDTO imageListRet = new ImagesListDTO();
+		
+		List<Images> imageList = (List<Images>)imagesDAO.getImages(businessId);
+		
+		return imageListRet;
 	}
 }

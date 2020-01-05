@@ -32,7 +32,7 @@ public class UserController implements ErrorController {
 	@PostMapping(value = "addUserProfile")
 	public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO userDTO) {
 		try {
-			UserDTO returnUserDTO = userService.addUser(userDTO);
+			UserDTO returnUserDTO = userService.addUserProfile(userDTO);
 			return new ResponseEntity<>(returnUserDTO, HttpStatus.OK);
 		} catch (InternalServerError e) {
 			e.printStackTrace();
@@ -44,8 +44,8 @@ public class UserController implements ErrorController {
 	@PostMapping(value = "getUserProfile")
 	public ResponseEntity<UserDTO> getUserDetails(@RequestBody UserDTO userDTO) {
 		try {
-			UserDTO userDTO1 = userService.getUserDetails(userDTO);
-			return new ResponseEntity<>(userDTO1, HttpStatus.OK);
+			UserDTO retUserDTO = userService.getUserProfile(userDTO);
+			return new ResponseEntity<>(retUserDTO, HttpStatus.OK);
 		} catch (InternalServerError e) {
 			// TODO: handle exception
 			return new ResponseEntity<>(userDTO, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -55,7 +55,7 @@ public class UserController implements ErrorController {
 	@PutMapping(value = "updateUserProfile")
 	public ResponseEntity<UserDTO> updateUserProfile(@RequestBody UserDTO userDTO) {
 		try {
-			UserDTO userDTO1 = userService.updateUserDetails(userDTO);
+			UserDTO userDTO1 = userService.updateUserProfile(userDTO);
 			return new ResponseEntity<>(userDTO1, HttpStatus.OK);
 		} catch (InternalServerError e) {
 			// TODO: handle exception
