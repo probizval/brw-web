@@ -2,54 +2,71 @@
 
 Created By: Sid Patil
 Create Date: 11/14/2019
-Update Date: 01/04/2020
+Update Date: 01/08/2020
 
 
 Table of Contents -
 
 Phase 1:
-1. AddBusinesssDetails
-2. SearchBusiness
-3. GetBusinessDetails
-4. UpdateBusinessDetails
-5. AddEstimates
-6. GetEstimates
-7. GetAdditionalAttributes
-8. GetAdditionalAttributeDefinitions
-9. AddAdditionalAttributes
-10. UpdateAdditionalAttributes
-.
-.
-.
-14. AddUserProfile
-15. UpdateUserProfile
-16. GetUserProfile
+1. AddBusinesssDetails - Service to add Core Business details that are common for all type of business. 
+For Business Type specific details use AddAdditionalAttributes.
+
+2. SearchBusiness - Service to search Business.
+
+3. GetBusinessDetails - Service to get Core Business details.
+
+4. UpdateBusinessDetails - Service to update Core Business details.
+
+5. AddEstimates - Service to calculate and add Business Worth Estimates to estimates table
+
+6. GetEstimates - Service to get Business Worth Estimates
+
+7. GetAdditionalAttributes - Service to get additional Business attributes.
+
+8. GetAdditionalAttributeDefinitions - Service to get additional Business attribute definitions.
+
+9. AddAdditionalAttributes - Service to add additional Business attributes.
+
+10. UpdateAdditionalAttributes - Service to update additional Business attributes.
+
+11. AddUserProfile - Service to add new User profile.
+
+12. UpdateUserProfile - Service to update User profile.
+
+13. GetUserProfile - Service to get User profile.
+
+14. SendEmail - Service send email.
+
+15. AddSearchAgent - Service to add search agent based on user search criteria.
+
+16. GetSearchAgents - Service to get existing search agents saved by the user.
+
+17. DeleteSearchAgent - Service to delete existing search agent.
 
 
 Pending -
-11. AddImages
-12. UpdateImages
-13. GetImages
-
-17. AddUserBusiness
-18. GetUserBusiness
-19. DeleteUserBusiness
-20. AddUserActivity
-21. AddRelatedBusiness
-22. GetRelatedBusiness
-24. UpdateRelatedBusiness
-25. SendEmail
+1. AddImages
+2. UpdateImages
+3. GetImages
+4. AddUserBusiness
+5. GetUserBusiness
+5. DeleteUserBusiness
+6. AddUserActivity
+7. AddRelatedBusiness
+8. GetRelatedBusiness
+9. UpdateRelatedBusiness
+10. RunSearchAgent
 
 Phase 2:
-25. AddUserService
-26. DeleteUserService
-27. GetUserService
-28. GetServicePromotion
-29. AddUserBill
-30. GetUserBill
-31. AddBusinessOperation
-32. UpdateBusinessOperation
-33. GetBusinessOperation
+1. AddUserService
+2. DeleteUserService
+3. GetUserService
+4. GetServicePromotion
+5. AddUserBill
+6. GetUserBill
+7. AddBusinessOperation
+8. UpdateBusinessOperation
+9. GetBusinessOperation
 
 
 1.	Name: AddBusinesssDetails
@@ -1225,7 +1242,7 @@ Response-
     "pageSize": null
 }
 
-14.	Name: AddUserProfile
+11.	Name: AddUserProfile
 
 Method - Post
 EndPoint –
@@ -1312,7 +1329,7 @@ Response -
     "updateDate": "2020-01-03 17:29"
 }
 
-15.	UpdateUserProfile –
+12.	UpdateUserProfile –
 Method – PUT
 
 EndPoint -
@@ -1368,7 +1385,7 @@ Response -
     "updateDate": "2020-01-04 12:11"
 }
 
-16.	GetUserProfile
+13.	GetUserProfile
 Method - Post
 EndPoint –
 http://localhost:8080/api/user/v1/getUserProfile
@@ -1422,7 +1439,7 @@ Response -
 }
 
 
-11.	AddImages
+14.	AddImages
 Method - Post
 End Point –
 http://localhost:8080/api/image/v1/addImages
@@ -1473,4 +1490,141 @@ Response-
     "subject": null,
     "content": null,
     "emailPurpose": null
+}
+
+
+15.	AddSearchAgent
+Method - Post
+End Point –
+http://localhost:8080/api/searchAgent/v1/addSearchAgent
+
+Request-
+{
+   "invokerId": "1001",
+   "email": "sp@proswift.com",
+   "name": "My Saved Search",
+   "duration": "WEEKLY",
+   "bizTypeList": [
+        {
+        	"bizType": "RESTAURANT",
+   			"bizSubType": "RESTAURANT"
+        },
+        {
+            "bizType": "CAFE",
+   			"bizSubType": "CAFE"
+        },
+        {
+            "bizType": "BAR",
+   			"bizSubType": "BAR"
+        }
+    ]
+   
+   "priceLow": 100000,
+   "priceHigh": 200000,
+   "State": "CA",
+   "county": "Alameda",
+   "cityList": ["Fremont", "Newark"]
+}
+
+Response-
+
+
+16.	GetSearchAgents
+Method - Post
+End Point –
+http://localhost:8080/api/searchAgent/v1/getSearchAgents
+
+Request-
+{
+   "invokerId": "1001"
+}
+
+Response-
+{
+	"userId": "1001",
+	"agentId": "10",
+   	"email": "sp@proswift.com",
+   	"name": "My Saved Search",
+   	"duration": "WEEKLY",
+   	"bizTypeList": [
+        {
+        	"bizType": "RESTAURANT",
+   			"bizSubType": "RESTAURANT"
+        },
+        {
+            "bizType": "CAFE",
+   			"bizSubType": "CAFE"
+        },
+        {
+            "bizType": "BAR",
+   			"bizSubType": "BAR"
+        }
+    ]
+   
+   	"priceLow": 100000,
+   	"priceHigh": 200000,
+   	"State": "CA",
+   	"county": "Alameda",
+   	"cityList": ["Fremont", "Newark"]
+}
+
+17.	DeleteSearchAgent
+Method - Post
+End Point –
+http://localhost:8080/api/searchAgent/v1/deleteSearchAgent
+
+Request-
+{
+   "userId": "1001",
+	"agentId": "10"
+}
+
+Response-
+
+18. RunSearchAgent - This service is not to be invoked automatically(untill spring scheduler is configured). 
+This service takes the Search Agent duration as input. 
+Pulls the list of users and their respective search agents from t_rw_search_agent table, runs it and sends the 
+email to the users.
+
+Method - Post
+End Point –
+http://localhost:8080/api/searchAgent/v1/runSearchAgent
+
+Request -
+{
+   "duration": "WEEKLY"
+}
+
+Response -
+{
+   "duration": "WEEKLY"
+   "successList": [
+        {
+        	"userId": 1001,
+        	"email": "sp@proswift.com",
+   			"agentIdList": [10, 11, 12]
+        },
+        {
+            "userId": 1002,
+        	"email": "anisha@proswift.com",
+   			"agentIdList": [1, 8, 27]
+        },
+        {
+            "userId": 1003,
+        	"email": "ashwin@proswift.com",
+   			"agentIdList": [12, 11]
+        }
+    ]
+    "failureList": [
+        {
+        	"userId": 1003,
+        	"email": "ashwin@proswift.com",
+   			"agentIdList": [15]
+        },
+        {
+            "userId": 1005,
+        	"email": "siya@proswift.com",
+   			"agentIdList": [16, 22]
+        }
+    ]
 }
