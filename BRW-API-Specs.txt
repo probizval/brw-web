@@ -54,6 +54,11 @@ For Business Type specific details use AddAdditionalAttributes.
 
 21. DeleteUserBusiness - Service to de-link User and Business association.
 
+22. AddUserActivity - Service to capture User Activity on the BRW Website.
+
+23. GetTotalBusinessViews - Service to get Total Business Detail page Views.
+
+24. GetBusinessViewsSince - Service to get
 
 Pending from Phase 1-
 1. AddImages
@@ -714,14 +719,16 @@ Response-
 
 6.	GetEstimates -
 
-Method – GET
+Method – POST
 
 End Point –
-http://localhost:8080/api/estimates/v1/getEstimates/1000000
+http://localhost:8080/api/estimates/v1/getEstimates
 
 
 Request –
-NA
+{
+	"businessId": 1000000
+}
 
 Response –
 {

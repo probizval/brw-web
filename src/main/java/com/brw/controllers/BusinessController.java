@@ -97,15 +97,15 @@ public class BusinessController implements ErrorController {
 		
 		logger.info("GET the Business details based on business Id");
 
-		BusinessDetailsDTO businessDetailsDTO1 = null;
+		BusinessDetailsDTO returnBusinessDetailsDTO = null;
 		//BusinessDetailsDTO businessDetailsDTO2 = null;
 
 		try {
 			
-			businessDetailsDTO1 = businessService.getBusinessDetailsFromBRWDB(businessDTO.getBusinessId());
+			returnBusinessDetailsDTO = businessService.getBusinessDetailsFromBRWDB(businessDTO.getBusinessId());
 			//businessDetailsDTO1.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO1));
 			
-			return ApiResponse.withData(businessDetailsDTO1);
+			return ApiResponse.withData(returnBusinessDetailsDTO);
 			
 			/* Code in case we decide to make Vendor API call run-time
 			if(null != businessDTO.getIsVendorCall() && Constant.Y == businessDTO.getIsVendorCall()) {
@@ -137,34 +137,6 @@ public class BusinessController implements ErrorController {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Data Not Found");
 		}
 	}
-	
-	/*
-	@RequestMapping(value = "getBusinessDetails/{businessId}", method = RequestMethod.GET, produces = "application/json")
-	public ApiResponse<?> getBusinessDetails(@PathVariable int businessId) {
-		
-		System.out.println("**** 111 Inside BusinessController.getBusinessDetails()");
-		
-		logger.info("GET the Business details based on business Id");
-
-		BusinessDetailsDTO businessDetailsDTO = null;
-		try {
-			//vendorDataFlag = businessService.getVendorDataFlag(businessId);
-			//if(vendorDataFlag) {
-				businessDetailsDTO = businessService.getBusinessDetails(businessId);
-				businessDetailsDTO.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO));
-			//} else {
-				//String vendorId = vendorDataService.getVendorId(businessId);
-				//businessDetailsDTO = vendorDataService.getBusinessDetailsFromVendor(vendorId); //calls Vendor API stores data in DBs(My SQL and MONGODB) and returns stores data businessDetailsDTO
-				//businessDetailsDTO.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO));
-			//}
-			
-		} catch (BusinessException be) {
-			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
-			
-		}
-		return ApiResponse.withData(businessDetailsDTO);
-	}
-	*/
 	
 	/**
 	 * @author sidpatil

@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * @author sidpatil
- * 2019
+ * 2020
  */
 
 import org.springframework.data.jpa.repository.Query;
@@ -17,7 +17,7 @@ import com.brw.entities.Estimates;
 @Repository
 public interface EstimatesDAO extends PagingAndSortingRepository<Estimates, Integer>{
 
-	@Query(nativeQuery=true, value="SELECT * FROM t_brw_estimate WHERE (:businessId is null or biz_id = :businessId) ORDER BY est_id DESC LIMIT 3;")
+	@Query(nativeQuery=true, value="SELECT * FROM t_brw_estimate WHERE biz_id = :businessId ORDER BY est_id DESC LIMIT 3;")
 	List<Estimates> getEstimates(@Param ("businessId") int businessId);
 	
 	//@Query(nativeQuery=true, value="SELECT * FROM t_brw_estimate WHERE (:businessId is null or biz_id = :businessId) ORDER BY est_id DESC;")
