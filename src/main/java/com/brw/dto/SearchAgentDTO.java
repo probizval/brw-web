@@ -7,7 +7,8 @@ package com.brw.dto;
 
 public class SearchAgentDTO {
 
-	private Integer invokerId;
+	private Integer userId;
+	private Integer agentId;
 	private String email;
 	private String name;
 	private String frequency;
@@ -17,11 +18,18 @@ public class SearchAgentDTO {
 	private String state;
 	private String county;
 	
-	public Integer getInvokerId() {
-		return invokerId;
+	
+	public Integer getUserId() {
+		return userId;
 	}
-	public void setInvokerId(Integer invokerId) {
-		this.invokerId = invokerId;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public Integer getAgentId() {
+		return agentId;
+	}
+	public void setAgentId(Integer agentId) {
+		this.agentId = agentId;
 	}
 	public String getEmail() {
 		return email;

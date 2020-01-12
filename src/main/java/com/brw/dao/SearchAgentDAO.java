@@ -7,9 +7,11 @@ package com.brw.dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.brw.entities.SearchAgent;
 
@@ -21,6 +23,8 @@ public interface SearchAgentDAO extends PagingAndSortingRepository<SearchAgent, 
 	@Query(nativeQuery=true, value="SELECT * FROM t_brw_search_agent WHERE user_id = :userId")
 	List<SearchAgent> getSearchAgents(@Param ("userId") int userId);
 	
-	//@Query(nativeQuery=true, value="SELECT * FROM t_brw_estimate WHERE (:businessId is null or biz_id = :businessId) ORDER BY est_id DESC;")
-	//List<Estimates> getEstimatesHistory(@Param ("businessId") int businessId);
+	@Modifying
+	@Transactional
+	@Query(nativeQuery=true, value="DELETE FROM t_brw_search_agent WHERE user_id = :userId AND agent_id = :agentId")
+	int deleteSearchAgent(@Param ("userId") int userId, @Param ("agentId") int agentId);
 }

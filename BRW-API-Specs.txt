@@ -4,7 +4,7 @@ rW
 
 Created By: Sid Patil
 Create Date: 11/14/2019
-Update Date: 01/11/2020
+Update Date: 01/12/2020
 
 
 Table of Contents -
@@ -1503,7 +1503,7 @@ http://localhost:8080/api/searchAgent/v1/addSearchAgent
 
 Request-
 {
-   "invokerId": "1001",
+   "userId": "1001",
    "email": "sp@proswift.com",
    "name": "My Saved Search",
    "frequency": "WEEKLY",
@@ -1516,7 +1516,7 @@ Request-
 
 Response-
 {
-    "invokerId": 1001,
+    "userId": 1001,
     "email": "sp@proswift.com",
     "name": "My Saved Search",
     "frequency": "WEEKLY",
@@ -1535,7 +1535,7 @@ http://localhost:8080/api/searchAgent/v1/getSearchAgents
 
 Request-
 {
-   "invokerId": "1001"
+   "userId": "1001"
 }
 
 Response-
@@ -1545,7 +1545,8 @@ Response-
     "data": {
         "searchAgentsList": [
             {
-                "invokerId": 1001,
+                "userId": 1001,
+                "agentId": "1",
                 "email": "sp@proswift.com",
                 "name": "My Saved Search",
                 "frequency": "WEEKLY",
@@ -1575,8 +1576,8 @@ http://localhost:8080/api/searchAgent/v1/deleteSearchAgent
 
 Request-
 {
-   "userId": "1001",
-	"agentId": "10"
+   	"userId": "1001",
+	"agentId": "1"
 }
 
 Response-

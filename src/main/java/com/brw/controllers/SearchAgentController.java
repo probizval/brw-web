@@ -76,7 +76,7 @@ public class SearchAgentController implements ErrorController {
 		SearchAgentsListDTO searchAgentsListDTO = null;
 		
 		try {
-			searchAgentsListDTO = searchAgentService.getSearchAgents(searchAgentDTO.getInvokerId());
+			searchAgentsListDTO = searchAgentService.getSearchAgents(searchAgentDTO.getUserId());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,12 +87,12 @@ public class SearchAgentController implements ErrorController {
 	}
 	
 	@PostMapping(value = "deleteSearchAgent")
-	public ApiResponse<?> deleteSearchAgent(@RequestBody int agentId) {
+	public ApiResponse<?> deleteSearchAgent(@RequestBody SearchAgentDTO searchAgentDTO) {
 		
 		System.out.println("111 **** Inside SearchAgentController.deleteSearchAgent()");
 
 		try {
-			searchAgentService.deleteSearchAgent(agentId);
+			searchAgentService.deleteSearchAgent(searchAgentDTO.getUserId(), searchAgentDTO.getAgentId());
 			return ApiResponse.withData(Constants.RESPONSE_SUCCESS);
 		} catch (Exception e) {
 			e.printStackTrace();

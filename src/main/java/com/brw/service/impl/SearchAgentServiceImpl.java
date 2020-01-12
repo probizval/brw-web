@@ -28,7 +28,7 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 		
 		System.out.println("222 **** Inside SearchAgentServiceImpl.addSearchAgent()");
 		SearchAgent searchAgent = new SearchAgent();
-		searchAgent.setUserId(searchAgentDTO.getInvokerId());
+		searchAgent.setUserId(searchAgentDTO.getUserId());
 		searchAgent.setEmail(searchAgentDTO.getEmail());
 		searchAgent.setName(searchAgentDTO.getName());
 		searchAgent.setFrequency(searchAgentDTO.getFrequency());
@@ -36,15 +36,16 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 		searchAgent.setPriceHigh(searchAgentDTO.getPriceHigh());
 		searchAgent.setState(searchAgentDTO.getState());
 		searchAgent.setCounty(searchAgentDTO.getCounty());
-		searchAgent.setCreatedByUserId(searchAgentDTO.getInvokerId());
+		searchAgent.setCreatedByUserId(searchAgentDTO.getUserId());
 		searchAgent.setCreateDate(LocalDateTime.now());
-		searchAgent.setUpdatedByUserId(searchAgentDTO.getInvokerId());
+		searchAgent.setUpdatedByUserId(searchAgentDTO.getUserId());
 		searchAgent.setUpdateDate(LocalDateTime.now());
 		
 		SearchAgent returnSearchAgent = searchAgentDAO.save(searchAgent);
 		
 		SearchAgentDTO returnSearchAgentDTO = new SearchAgentDTO();
-		returnSearchAgentDTO.setInvokerId(returnSearchAgent.getUserId());
+		returnSearchAgentDTO.setUserId(returnSearchAgent.getUserId());
+		returnSearchAgentDTO.setAgentId(returnSearchAgent.getAgentId());
 		returnSearchAgentDTO.setEmail(returnSearchAgent.getEmail());
 		returnSearchAgentDTO.setName(returnSearchAgent.getName());
 		returnSearchAgentDTO.setFrequency(returnSearchAgent.getFrequency());
@@ -68,7 +69,8 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 		for (SearchAgent searchAgent: searchAgentsList) {
 			SearchAgentDTO searchAgentDTO = new SearchAgentDTO();
 			
-			searchAgentDTO.setInvokerId(searchAgent.getUserId());
+			searchAgentDTO.setUserId(searchAgent.getUserId());
+			searchAgentDTO.setAgentId(searchAgent.getAgentId());
 			searchAgentDTO.setEmail(searchAgent.getEmail());
 			searchAgentDTO.setName(searchAgent.getName());
 			searchAgentDTO.setFrequency(searchAgent.getFrequency());
@@ -84,9 +86,13 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 	}
 	
 	@Override
-	public void deleteSearchAgent(int agentId) {
+	public void deleteSearchAgent(int userId, int agentId) {
 		
 		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent()");
-	
+		
+		int nurDeleted = searchAgentDAO.deleteSearchAgent(userId, agentId);
+		
+		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent() nurDeleted: "+nurDeleted);
+
 	}
 }
