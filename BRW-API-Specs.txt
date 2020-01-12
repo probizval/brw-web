@@ -4,7 +4,7 @@ rW
 
 Created By: Sid Patil
 Create Date: 11/14/2019
-Update Date: 01/10/2020
+Update Date: 01/11/2020
 
 
 Table of Contents -
@@ -1515,6 +1515,17 @@ Request-
 }
 
 Response-
+{
+    "invokerId": 1001,
+    "email": "sp@proswift.com",
+    "name": "My Saved Search",
+    "frequency": "WEEKLY",
+    "bizType": null,
+    "priceLow": "100000",
+    "priceHigh": "200000",
+    "state": "CA",
+    "county": "Alameda"
+}
 
 
 16.	GetSearchAgents
