@@ -1,13 +1,15 @@
 ﻿BRW API Specifications Doc
+bRw
+rW
 
 Created By: Sid Patil
 Create Date: 11/14/2019
-Update Date: 01/08/2020
+Update Date: 01/10/2020
 
 
 Table of Contents -
 
-Phase 1:
+Phase 1: Core Functions to Show Business Details, Add Business Details, User Registrations, Search Agents, tracking User Activity etc.
 1. AddBusinesssDetails - Service to add Core Business details that are common for all type of business. 
 For Business Type specific details use AddAdditionalAttributes.
 
@@ -44,7 +46,7 @@ For Business Type specific details use AddAdditionalAttributes.
 17. DeleteSearchAgent - Service to delete existing search agent.
 
 
-Pending -
+Pending from Phase 1-
 1. AddImages
 2. UpdateImages
 3. GetImages
@@ -57,16 +59,17 @@ Pending -
 9. UpdateRelatedBusiness
 10. RunSearchAgent
 
-Phase 2:
-1. AddUserService
-2. DeleteUserService
-3. GetUserService
-4. GetServicePromotion
-5. AddUserBill
-6. GetUserBill
-7. AddBusinessOperation
-8. UpdateBusinessOperation
-9. GetBusinessOperation
+Phase 2: Functionality where users can sign up for services using payment gateway, get billed automatically, 
+and pull out the billing details
+1. AddUserService - User signs up for Service
+2. DeleteUserService - User removes the service
+3. GetUserService - List of services user is signed up for
+4. GetServicePromotion - pull out any applicable promotions with the service at that point in time
+5. AddUserBill - Add billable activity to user and charge the user 
+6. GetUserBill - List the user billing details
+7. AddBusinessTransaction - Service to add past business sell transaction details
+8. DeleteBusinessTransaction - Service to delete past business sell transactions
+9. GetBusinessTransactions - Service to list past business sell transactions
 
 
 1.	Name: AddBusinesssDetails
@@ -1503,27 +1506,12 @@ Request-
    "invokerId": "1001",
    "email": "sp@proswift.com",
    "name": "My Saved Search",
-   "duration": "WEEKLY",
-   "bizTypeList": [
-        {
-        	"bizType": "RESTAURANT",
-   			"bizSubType": "RESTAURANT"
-        },
-        {
-            "bizType": "CAFE",
-   			"bizSubType": "CAFE"
-        },
-        {
-            "bizType": "BAR",
-   			"bizSubType": "BAR"
-        }
-    ]
-   
+   "frequency": "WEEKLY",
+   "bizType": "RESTAURANT",
    "priceLow": 100000,
    "priceHigh": 200000,
-   "State": "CA",
-   "county": "Alameda",
-   "cityList": ["Fremont", "Newark"]
+   "state": "CA",
+   "county": "Alameda"
 }
 
 Response-
@@ -1545,7 +1533,7 @@ Response-
 	"agentId": "10",
    	"email": "sp@proswift.com",
    	"name": "My Saved Search",
-   	"duration": "WEEKLY",
+   	"frequency": "WEEKLY",
    	"bizTypeList": [
         {
         	"bizType": "RESTAURANT",
@@ -1563,7 +1551,7 @@ Response-
    
    	"priceLow": 100000,
    	"priceHigh": 200000,
-   	"State": "CA",
+   	"state": "CA",
    	"county": "Alameda",
    	"cityList": ["Fremont", "Newark"]
 }
@@ -1592,7 +1580,7 @@ http://localhost:8080/api/searchAgent/v1/runSearchAgent
 
 Request -
 {
-   "duration": "WEEKLY"
+   "frequency": "WEEKLY"
 }
 
 Response -
