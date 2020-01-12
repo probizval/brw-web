@@ -2,6 +2,8 @@ package com.brw.service.impl;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,8 +11,12 @@ import org.springframework.stereotype.Component;
 import com.brw.common.constants.Constants;
 import com.brw.dao.UserBusinessDAO;
 import com.brw.dao.UserDAO;
+import com.brw.dto.SearchAgentDTO;
+import com.brw.dto.SearchAgentsListDTO;
 import com.brw.dto.UserBusinessDTO;
+import com.brw.dto.UserBusinessListDTO;
 import com.brw.dto.UserDTO;
+import com.brw.entities.SearchAgent;
 import com.brw.entities.User;
 import com.brw.entities.UserBusiness;
 import com.brw.entities.UserProfile;
@@ -382,78 +388,36 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserBusinessDTO getUserBusiness(UserBusinessDTO userBusinessDTO) {
-		/*
-		UserProfile userProfile = userDAO.findById(userProfileDTO.getId()).get();
-		userProfile.setFirstName(userProfileDTO.getFirstName());
-		userProfile.setLastName(userProfileDTO.getLastName());
-		userProfile.setContactNumber(userProfileDTO.getContactNumber());
-		userProfile.setAboutAgent(userProfileDTO.getAboutAgent());
-		userProfile.setAgentTitle(userProfileDTO.getAgentTitle());
-		userProfile.setLocation(userProfileDTO.getLocation());
-		userProfile.setAddress(userProfileDTO.getAddress());
-		userProfile.setCity(userProfileDTO.getCity());
-		userProfile.setState(userProfileDTO.getState());
-		userProfile.setCountry(userProfileDTO.getCountry());
-		userProfile.setZipcode(userProfileDTO.getZipcode());
-		userProfile.setUserType(userProfileDTO.getUserType());
+	public UserBusinessListDTO getUserBusiness(int userId) {
+		System.out.println("222 **** Inside SearchAgentServiceImpl.getSearchAgent()");
 		
-		userProfile = userDAO.save(userProfile);
+		List<UserBusiness> userBusinessList = (List<UserBusiness>)userBusinessDAO.getUserBusiness(userId);
+		List<UserBusinessDTO> useBusinessDTOList = new ArrayList<UserBusinessDTO>();
+		UserBusinessListDTO userBusinessListDTO = new UserBusinessListDTO();
 		
-		userProfileDTO.setId(userProfile.getId());
-		userProfileDTO.setFirstName(userProfile.getFirstName());
-		userProfileDTO.setLastName(userProfile.getLastName());
-		userProfileDTO.setEmailId(userProfile.getEmailId());
-		userProfileDTO.setContactNumber(userProfile.getContactNumber());
-		userProfileDTO.setAboutAgent(userProfile.getAboutAgent());
-		userProfileDTO.setAgentTitle(userProfile.getAgentTitle());
-		userProfileDTO.setLocation(userProfile.getLocation());
-		userProfileDTO.setAddress(userProfile.getAddress());
-		userProfileDTO.setCity(userProfile.getCity());
-		userProfileDTO.setState(userProfile.getState());
-		userProfileDTO.setCountry(userProfile.getCountry());
-		userProfileDTO.setZipcode(userProfile.getZipcode());
-		userProfileDTO.setUserImgUrl(userProfile.getUserImgUrl());
-		userProfileDTO.setUserType(userProfile.getUserType());
-		*/
-		return userBusinessDTO;
+		for (UserBusiness returnUserBusiness: userBusinessList) {
+			UserBusinessDTO returnUserBusinessDTO = new UserBusinessDTO();
+			
+			returnUserBusinessDTO.setUserId(returnUserBusiness.getUserId());
+			returnUserBusinessDTO.setRelationship(returnUserBusiness.getRelationship());
+			returnUserBusinessDTO.setBusinessId(returnUserBusiness.getBusinessId());
+			returnUserBusinessDTO.setCreatedByUserId(returnUserBusiness.getCreatedByUserId());
+			returnUserBusinessDTO.setCreateDate(returnUserBusiness.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+			returnUserBusinessDTO.setUpdatedByUserId(returnUserBusiness.getUpdatedByUserId());
+			returnUserBusinessDTO.setUpdateDate(returnUserBusiness.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		
+			useBusinessDTOList.add(returnUserBusinessDTO);
+		}
+		userBusinessListDTO.setSearchAgentsList(useBusinessDTOList);
+		return userBusinessListDTO;
 	}
 	
 	@Override
-	public void deleteUserBusiness(UserBusinessDTO userBusinessDTO) {
-		/*
-		UserProfile userProfile = userDAO.findById(userProfileDTO.getId()).get();
-		userProfile.setFirstName(userProfileDTO.getFirstName());
-		userProfile.setLastName(userProfileDTO.getLastName());
-		userProfile.setContactNumber(userProfileDTO.getContactNumber());
-		userProfile.setAboutAgent(userProfileDTO.getAboutAgent());
-		userProfile.setAgentTitle(userProfileDTO.getAgentTitle());
-		userProfile.setLocation(userProfileDTO.getLocation());
-		userProfile.setAddress(userProfileDTO.getAddress());
-		userProfile.setCity(userProfileDTO.getCity());
-		userProfile.setState(userProfileDTO.getState());
-		userProfile.setCountry(userProfileDTO.getCountry());
-		userProfile.setZipcode(userProfileDTO.getZipcode());
-		userProfile.setUserType(userProfileDTO.getUserType());
+	public void deleteUserBusiness(int userId, String relationship) {
+System.out.println("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent()");
 		
-		userProfile = userDAO.save(userProfile);
+		int nurDeleted = userBusinessDAO.deleteUserBusiness(userId, relationship);
 		
-		userProfileDTO.setId(userProfile.getId());
-		userProfileDTO.setFirstName(userProfile.getFirstName());
-		userProfileDTO.setLastName(userProfile.getLastName());
-		userProfileDTO.setEmailId(userProfile.getEmailId());
-		userProfileDTO.setContactNumber(userProfile.getContactNumber());
-		userProfileDTO.setAboutAgent(userProfile.getAboutAgent());
-		userProfileDTO.setAgentTitle(userProfile.getAgentTitle());
-		userProfileDTO.setLocation(userProfile.getLocation());
-		userProfileDTO.setAddress(userProfile.getAddress());
-		userProfileDTO.setCity(userProfile.getCity());
-		userProfileDTO.setState(userProfile.getState());
-		userProfileDTO.setCountry(userProfile.getCountry());
-		userProfileDTO.setZipcode(userProfile.getZipcode());
-		userProfileDTO.setUserImgUrl(userProfile.getUserImgUrl());
-		userProfileDTO.setUserType(userProfile.getUserType());
-		*/
-		//return userDTO;
+		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent() nurDeleted: "+nurDeleted);
 	}
 }

@@ -72,18 +72,14 @@ public class SearchAgentController implements ErrorController {
 	public ApiResponse<?> getSearchAgents(@RequestBody SearchAgentDTO searchAgentDTO) {
 		
 		System.out.println("111 **** Inside SearchAgentController.getSearchAgents()");
-
-		SearchAgentsListDTO searchAgentsListDTO = null;
 		
 		try {
-			searchAgentsListDTO = searchAgentService.getSearchAgents(searchAgentDTO.getUserId());
-			
+			SearchAgentsListDTO searchAgentsListDTO = searchAgentService.getSearchAgents(searchAgentDTO.getUserId());
+			return ApiResponse.withData(searchAgentsListDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
-			
 		}
-		return ApiResponse.withData(searchAgentsListDTO);
 	}
 	
 	@PostMapping(value = "deleteSearchAgent")

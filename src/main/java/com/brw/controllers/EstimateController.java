@@ -22,6 +22,7 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
+import com.brw.dto.EstimatesDTO;
 import com.brw.dto.EstimatesListDTO;
 import com.brw.exceptions.EstimateException;
 import com.brw.service.EstimateService;
@@ -46,8 +47,9 @@ public class EstimateController implements ErrorController {
 	 * @author sidpatil
 	 * getEstimates - Service to get the Business Estimates on the basis of biz_id 
 	 */
-	@RequestMapping(value = "getEstimates/{businessId}", method = RequestMethod.GET, produces = "application/json")
-	public ApiResponse<?> getEstimates(@PathVariable int businessId) {
+	//@RequestMapping(value = "getEstimates/{businessId}", method = RequestMethod.GET, produces = "application/json")
+	@PostMapping(value = "getEstimates")
+	public ApiResponse<?> getEstimates(@RequestBody EstimatesDTO estimatesDTO) {
 		
 		System.out.println("**** 111 Inside EstimateController.getEstimateDetails()");
 		
@@ -56,7 +58,7 @@ public class EstimateController implements ErrorController {
 		EstimatesListDTO estimatesListDTO = null;
 		
 		try {
-			estimatesListDTO = estimateService.getEstimates(businessId);
+			estimatesListDTO = estimateService.getEstimates(estimatesDTO.getBusinessId());
 			
 		} catch (EstimateException ee) {
 			ee.printStackTrace();
