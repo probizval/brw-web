@@ -59,6 +59,7 @@ public class EstimateController implements ErrorController {
 			estimatesListDTO = estimateService.getEstimates(businessId);
 			
 		} catch (EstimateException ee) {
+			ee.printStackTrace();
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
 			
 		}
@@ -83,6 +84,7 @@ public class EstimateController implements ErrorController {
 			
 		} catch (InternalServerError e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			return new ResponseEntity<>(estimatesListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

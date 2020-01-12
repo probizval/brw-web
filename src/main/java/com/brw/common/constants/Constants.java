@@ -1,6 +1,6 @@
 package com.brw.common.constants;
 
-public interface Constant {
+public interface Constants {
 	
 	public static final String RESPONSE_SUCCESS = "success";
 	

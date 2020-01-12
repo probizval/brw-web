@@ -2,16 +2,19 @@ package com.brw.service.impl;
 
 /**
  * @author sidpatil
- * 2019
+ * 2020
  */
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.brw.dao.SearchAgentDAO;
 import com.brw.dto.SearchAgentDTO;
+import com.brw.dto.SearchAgentsListDTO;
 import com.brw.entities.SearchAgent;
 
 @Component
@@ -51,5 +54,39 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 		returnSearchAgentDTO.setCounty(returnSearchAgent.getCounty());
 		
 		return returnSearchAgentDTO;
+	}
+	
+	@Override
+	public SearchAgentsListDTO getSearchAgents(int userId) {
+		
+		System.out.println("222 **** Inside SearchAgentServiceImpl.getSearchAgent()");
+	
+		List<SearchAgent> searchAgentsList = (List<SearchAgent>)searchAgentDAO.getSearchAgents(userId);
+		List<SearchAgentDTO> searchAgentsDTOList = new ArrayList<SearchAgentDTO>();
+		SearchAgentsListDTO searchAgentsListDTO = new SearchAgentsListDTO();
+		
+		for (SearchAgent searchAgent: searchAgentsList) {
+			SearchAgentDTO searchAgentDTO = new SearchAgentDTO();
+			
+			searchAgentDTO.setInvokerId(searchAgent.getUserId());
+			searchAgentDTO.setEmail(searchAgent.getEmail());
+			searchAgentDTO.setName(searchAgent.getName());
+			searchAgentDTO.setFrequency(searchAgent.getFrequency());
+			searchAgentDTO.setPriceLow(searchAgent.getPriceLow());
+			searchAgentDTO.setPriceHigh(searchAgent.getPriceHigh());
+			searchAgentDTO.setState(searchAgent.getState());
+			searchAgentDTO.setCounty(searchAgent.getCounty());
+		
+			searchAgentsDTOList.add(searchAgentDTO);
+		}
+		searchAgentsListDTO.setSearchAgentsList(searchAgentsDTOList);
+		return searchAgentsListDTO;
+	}
+	
+	@Override
+	public void deleteSearchAgent(int agentId) {
+		
+		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent()");
+	
 	}
 }

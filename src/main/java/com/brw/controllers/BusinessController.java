@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
-import com.brw.common.constants.Constant;
+import com.brw.common.constants.Constants;
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
 

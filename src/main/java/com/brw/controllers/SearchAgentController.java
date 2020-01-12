@@ -22,9 +22,14 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
+import com.brw.dto.EstimatesListDTO;
 import com.brw.dto.SearchAgentDTO;
+import com.brw.dto.SearchAgentsListDTO;
+import com.brw.dto.UserDTO;
+import com.brw.exceptions.EstimateException;
 import com.brw.exceptions.SearchAgentException;
 import com.brw.service.SearchAgentService;
+import com.brw.common.constants.Constants;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -60,6 +65,33 @@ public class SearchAgentController implements ErrorController {
 		} catch (SearchAgentException e) {
 			// TODO: handle exception
 			return new ResponseEntity<>(searchAgentDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping(value = "getSearchAgents")
+	public ApiResponse<?> getSearchAgents(@RequestBody int userId) {
+		
+		SearchAgentsListDTO searchAgentsListDTO = null;
+		
+		try {
+			searchAgentsListDTO = searchAgentService.getSearchAgents(userId);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
+			
+		}
+		return ApiResponse.withData(searchAgentsListDTO);
+	}
+	
+	@PostMapping(value = "deleteSearchAgent")
+	public ApiResponse<?> deleteSearchAgent(@RequestBody int agentId) {
+		try {
+			searchAgentService.deleteSearchAgent(agentId);
+			return ApiResponse.withData(Constants.RESPONSE_SUCCESS);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
 		}
 	}
 }
