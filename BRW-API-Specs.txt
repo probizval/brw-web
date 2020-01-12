@@ -1540,31 +1540,32 @@ Request-
 
 Response-
 {
-	"userId": "1001",
-	"agentId": "10",
-   	"email": "sp@proswift.com",
-   	"name": "My Saved Search",
-   	"frequency": "WEEKLY",
-   	"bizTypeList": [
-        {
-        	"bizType": "RESTAURANT",
-   			"bizSubType": "RESTAURANT"
-        },
-        {
-            "bizType": "CAFE",
-   			"bizSubType": "CAFE"
-        },
-        {
-            "bizType": "BAR",
-   			"bizSubType": "BAR"
-        }
-    ]
-   
-   	"priceLow": 100000,
-   	"priceHigh": 200000,
-   	"state": "CA",
-   	"county": "Alameda",
-   	"cityList": ["Fremont", "Newark"]
+    "status": "success",
+    "httpStatus": "OK",
+    "data": {
+        "searchAgentsList": [
+            {
+                "invokerId": 1001,
+                "email": "sp@proswift.com",
+                "name": "My Saved Search",
+                "frequency": "WEEKLY",
+                "bizType": null,
+                "priceLow": "100000",
+                "priceHigh": "200000",
+                "state": "CA",
+                "county": "Alameda"
+            }
+        ],
+        "totalCount": null,
+        "pageNumber": null,
+        "pageSize": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
 }
 
 17.	DeleteSearchAgent

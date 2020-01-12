@@ -18,7 +18,7 @@ import org.springframework.data.repository.query.Param;
 @Repository
 public interface SearchAgentDAO extends PagingAndSortingRepository<SearchAgent, Integer>{
 
-	@Query(nativeQuery=true, value="SELECT * FROM t_brw_search_agent WHERE user_id = :userId;")
+	@Query(nativeQuery=true, value="SELECT * FROM t_brw_search_agent WHERE user_id = :userId")
 	List<SearchAgent> getSearchAgents(@Param ("userId") int userId);
 	
 	//@Query(nativeQuery=true, value="SELECT * FROM t_brw_estimate WHERE (:businessId is null or biz_id = :businessId) ORDER BY est_id DESC;")
