@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 
-import com.brw.common.constants.Constant;
+import com.brw.common.constants.Constants;
 import com.brw.common.constants.ErrorCodes;
 
 public class ApiResponse<T> implements Serializable {
@@ -92,7 +92,7 @@ public class ApiResponse<T> implements Serializable {
 	
 	private ApiResponse (HttpStatus httpStatus, T data, Long totalCount, Integer pageNumber, Integer pageSize ) {
 	
-		this.status = Constant.RESPONSE_SUCCESS;
+		this.status = Constants.RESPONSE_SUCCESS;
 		this.httpStatus = httpStatus;
 		this.data = data;
 		this.totalCount = totalCount;
@@ -102,7 +102,7 @@ public class ApiResponse<T> implements Serializable {
 	
 	private ApiResponse (ErrorCodes errorCodes, String errorMessage, List<ValidationError> validationErrors ) {
 		
-		this.status = Constant.RESPONSE_FAILURE;
+		this.status = Constants.RESPONSE_FAILURE;
 		this.httpStatus = errorCodes.getHttpStatus();
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;

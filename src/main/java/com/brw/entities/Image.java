@@ -9,27 +9,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "t_brw_user")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Images implements Serializable {
+import org.hibernate.annotations.DynamicUpdate;
 
-	private static final long serialVersionUID = 7488754260792718849L;
+import javax.persistence.InheritanceType;
+
+@Entity
+@DynamicUpdate
+@Table(name = "t_brw_image")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Image implements Serializable {
+	
+	private static final long serialVersionUID = -8504035975938683238L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	@Column(name = "image_id")
-	private int estimateId;
+	private int imageId;
 	
 	@Column(name = "biz_id")
 	private int businessId;
 	
 	@Column(name = "url")
-	private String estimateType;
+	private String url;
 	
 	@Column(name = "createdby_user_id")
 	private int createdByUserId;
@@ -43,12 +47,12 @@ public class Images implements Serializable {
 	@Column(name = "update_date")
 	private LocalDateTime updateDate;
 
-	public int getEstimateId() {
-		return estimateId;
+	public int getImageId() {
+		return imageId;
 	}
 
-	public void setEstimateId(int estimateId) {
-		this.estimateId = estimateId;
+	public void setImageId(int imageId) {
+		this.imageId = imageId;
 	}
 
 	public int getBusinessId() {
@@ -59,12 +63,12 @@ public class Images implements Serializable {
 		this.businessId = businessId;
 	}
 
-	public String getEstimateType() {
-		return estimateType;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setEstimateType(String estimateType) {
-		this.estimateType = estimateType;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public int getCreatedByUserId() {
@@ -102,4 +106,5 @@ public class Images implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 }

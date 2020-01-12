@@ -1,55 +1,79 @@
-BRW API Specifications Doc
+﻿BRW API Specifications Doc
+bRw
+rW
 
 Created By: Sid Patil
 Create Date: 11/14/2019
-Update Date: 01/04/2020
+Update Date: 01/12/2020
 
 
 Table of Contents -
 
-Phase 1:
-1. AddBusinesssDetails
-2. SearchBusiness
-3. GetBusinessDetails
-4. UpdateBusinessDetails
-5. AddEstimates
-6. GetEstimates
-7. GetAdditionalAttributes
-8. GetAdditionalAttributeDefinitions
-9. AddAdditionalAttributes
-10. UpdateAdditionalAttributes
-.
-.
-.
-14. AddUserProfile
-15. UpdateUserProfile
-16. GetUserProfile
+Phase 1: Core Functions to Show Business Details, Add Business Details, User Registrations, Search Agents, tracking User Activity etc.
+1. AddBusinesssDetails - Service to add Core Business details that are common for all type of business. 
+For Business Type specific details use AddAdditionalAttributes.
+
+2. SearchBusiness - Service to search Business.
+
+3. GetBusinessDetails - Service to get Core Business details.
+
+4. UpdateBusinessDetails - Service to update Core Business details.
+
+5. AddEstimates - Service to calculate and add Business Worth Estimates to estimates table
+
+6. GetEstimates - Service to get Business Worth Estimates
+
+7. GetAdditionalAttributes - Service to get additional Business attributes.
+
+8. GetAdditionalAttributeDefinitions - Service to get additional Business attribute definitions.
+
+9. AddAdditionalAttributes - Service to add additional Business attributes.
+
+10. UpdateAdditionalAttributes - Service to update additional Business attributes.
+
+11. AddUserProfile - Service to add new User profile.
+
+12. UpdateUserProfile - Service to update User profile.
+
+13. GetUserProfile - Service to get User profile.
+
+14. SendEmail - Service send email.
+
+15. AddSearchAgent - Service to add search agent based on user search criteria.
+
+16. GetSearchAgents - Service to get existing search agents saved by the user.
+
+17. DeleteSearchAgent - Service to delete existing search agent.
+
+18. AddUserBusiness - Service to Associate Business with User after User Claims the Business, he can claim it as Owner or Broker.
+
+19. GetUserBusiness - Service to list Businesses associated with User, User role may be Owner or Broker.
+
+20. DeleteUserBusiness - Service to de-link User and Business association.
 
 
-Pending -
-11. AddImages
-12. UpdateImages
-13. GetImages
+Pending from Phase 1-
+1. AddImages
+2. UpdateImages
+3. GetImages
 
+4. AddUserActivity
+5. AddRelatedBusiness
+6. GetRelatedBusiness
+7. UpdateRelatedBusiness
+8. RunSearchAgent
 
-17. AddUserBusiness
-18. GetUserBusiness
-19. DeleteUserBusiness
-20. AddUserActivity
-21. AddRelatedBusiness
-22. GetRelatedBusiness
-24. UpdateRelatedBusiness
-
-Phase 2:
-25. AddUserService
-26. DeleteUserService
-27. GetUserService
-28. GetServicePromotion
-29. AddUserBill
-30. GetUserBill
-31. AddBusinessOperation
-32. UpdateBusinessOperation
-33. GetBusinessOperation
+Phase 2: Functionality where users can sign up for services using payment gateway, get billed automatically, 
+and pull out the billing details
+1. AddUserService - User signs up for Service
+2. DeleteUserService - User removes the service
+3. GetUserService - List of services user is signed up for
+4. GetServicePromotion - pull out any applicable promotions with the service at that point in time
+5. AddUserBill - Add billable activity to user and charge the user 
+6. GetUserBill - List the user billing details
+7. AddBusinessTransaction - Service to add past business sell transaction details
+8. DeleteBusinessTransaction - Service to delete past business sell transactions
+9. GetBusinessTransactions - Service to list past business sell transactions
 
 
 1.	Name: AddBusinesssDetails
@@ -1225,7 +1249,7 @@ Response-
     "pageSize": null
 }
 
-14.	Name: AddUserProfile
+11.	Name: AddUserProfile
 
 Method - Post
 EndPoint –
@@ -1312,7 +1336,7 @@ Response -
     "updateDate": "2020-01-03 17:29"
 }
 
-15.	UpdateUserProfile –
+12.	UpdateUserProfile –
 Method – PUT
 
 EndPoint -
@@ -1367,3 +1391,323 @@ Response -
     "updatedByUserId": 0,
     "updateDate": "2020-01-04 12:11"
 }
+
+13.	GetUserProfile
+Method - Post
+EndPoint –
+http://localhost:8080/api/user/v1/getUserProfile
+
+Request –
+{
+    "email": "anisha@proswift.com"
+}
+
+Response - 
+{
+    "invokerId": 0,
+    "userId": 1002,
+    "email": "anisha@proswift.com",
+    "firstName": "Varun",
+    "middleInitial": "V",
+    "lastName": "Jain",
+    "isBroker": "N",
+    "phoneCountryCode": "+1",
+    "phoneNumber": "510-550-5050",
+    "phoneExtention": "1234",
+    "isSearchAgentEmail": "Y",
+    "searchAgentEmailFreq": "weekly",
+    "isUserVerified": "Y",
+    "userVerificationDate": "2020-01-03 12:00",
+    "userVerificationMethod": "phone",
+    "isBrokerVerified": "Y",
+    "brokerVerificationDate": "2020-01-03 12:00",
+    "brokerVerificationMethod": "email",
+    "brokerLicenseNumber": "00904011",
+    "brokerDescription": "Joe Ranieri has been a business broker for over 20 years. Joe, having been a business owner previously, understands the stress of selling a business, and works tirelessly for his clients, so that they can smoothly run their business while he handles the sale. He specializes in selling small to medium sized businesses and services the areas of Orange County, Los Angeles, Riverside, San Diego, and San Bernardino County. Joe is a member of the Orange County Board of Realtors. He can sell any business, but his specialty is restaurant, bars and liquor stores. Joe, not only can sell the business, but the land underneath. He is routinely amongst the top producers in his office, and shares with them his vast knowledge and experience as one the senior members of the commercial division at Re/Max TerraSol in Huntington Beach, California. Phone him at 714-292-5448 to sell or buy a Los Angeles Or Orange County small to mid-sized business.",
+    "brokerImageUrl": "https://www.bizben.com/profiles/22709",
+    "lastLoginDate": "2020-01-03 12:00:00",
+    "street1": "2140 Peralta Blvd",
+    "street2": "STE 110",
+    "city": "Fremont",
+    "state": "CA",
+    "foreignState": "",
+    "zip": "94536",
+    "foreignPostalCode": "",
+    "country": "US",
+    "isVettedBuyer": "Y",
+    "buyerVettingMethod": "email",
+    "buyerPurchaseCapLow": "150000",
+    "buyerPurchaseCapHigh": "250000",
+    "buyerVettingDate": "2020-01-03 12:00",
+    "createdByUserId": 1001,
+    "createDate": "2020-01-03 17:29",
+    "updatedByUserId": 0,
+    "updateDate": "2020-01-04 12:11"
+}
+
+
+14.	AddImages
+Method - Post
+End Point –
+http://localhost:8080/api/image/v1/addImages
+
+Request-
+{
+    "imagesList": [
+        {
+        	"invokerId": "1001",
+            "businessId": "10000000",
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/Rvxn-vAmo6vwR7DE4spbnQ/l.jpg"
+        },
+        {
+            "invokerId": "1001",
+            "businessId": "10000000",
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/sqzsQkM3zMnMlwCpLSAehA/o.jpg"
+        },
+        {
+            "invokerId": "1001",
+            "businessId": "10000000",
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/faqTp5HgEKYnO_fv1wicQw/o.jpg"
+        }
+    ]
+}
+
+Response-
+
+
+12.	SendEmail
+Method - Post
+End Point –
+http://localhost:8080/api/email/v1/sendEmail
+
+Request-
+{
+   "invokerId": "1001",
+   "toList": ["sp@proswift.com", "admin@bizrealworth.com"],
+   "subject": "Test Mail Subject",
+   "content": "Test Mail Content",
+   "emailPurpose": "CONTACT_US"
+}
+
+Response-
+{
+    "invokerId": null,
+    "from": null,
+    "toList": null,
+    "subject": null,
+    "content": null,
+    "emailPurpose": null
+}
+
+
+15.	AddSearchAgent
+Method - Post
+End Point –
+http://localhost:8080/api/searchAgent/v1/addSearchAgent
+
+Request-
+{
+   "userId": "1001",
+   "email": "sp@proswift.com",
+   "name": "My Saved Search",
+   "frequency": "WEEKLY",
+   "bizType": "RESTAURANT",
+   "priceLow": 100000,
+   "priceHigh": 200000,
+   "state": "CA",
+   "county": "Alameda"
+}
+
+Response-
+{
+    "userId": 1001,
+    "email": "sp@proswift.com",
+    "name": "My Saved Search",
+    "frequency": "WEEKLY",
+    "bizType": null,
+    "priceLow": "100000",
+    "priceHigh": "200000",
+    "state": "CA",
+    "county": "Alameda"
+}
+
+
+16.	GetSearchAgents
+Method - Post
+End Point –
+http://localhost:8080/api/searchAgent/v1/getSearchAgents
+
+Request-
+{
+   "userId": "1001"
+}
+
+Response-
+{
+    "status": "success",
+    "httpStatus": "OK",
+    "data": {
+        "searchAgentsList": [
+            {
+                "userId": 1001,
+                "agentId": "1",
+                "email": "sp@proswift.com",
+                "name": "My Saved Search",
+                "frequency": "WEEKLY",
+                "bizType": null,
+                "priceLow": "100000",
+                "priceHigh": "200000",
+                "state": "CA",
+                "county": "Alameda"
+            }
+        ],
+        "totalCount": null,
+        "pageNumber": null,
+        "pageSize": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+17.	DeleteSearchAgent
+Method - Post
+End Point –
+http://localhost:8080/api/searchAgent/v1/deleteSearchAgent
+
+Request-
+{
+   	"userId": "1001",
+	"agentId": "1"
+}
+
+Response-
+
+18. RunSearchAgent - This service is not to be invoked automatically(untill spring scheduler is configured). 
+This service takes the Search Agent duration as input. 
+Pulls the list of users and their respective search agents from t_rw_search_agent table, runs it and sends the 
+email to the users.
+
+Method - Post
+End Point –
+http://localhost:8080/api/searchAgent/v1/runSearchAgent
+
+Request -
+{
+   "frequency": "WEEKLY"
+}
+
+Response -
+{
+   "duration": "WEEKLY"
+   "successList": [
+        {
+        	"userId": 1001,
+        	"email": "sp@proswift.com",
+   			"agentIdList": [10, 11, 12]
+        },
+        {
+            "userId": 1002,
+        	"email": "anisha@proswift.com",
+   			"agentIdList": [1, 8, 27]
+        },
+        {
+            "userId": 1003,
+        	"email": "ashwin@proswift.com",
+   			"agentIdList": [12, 11]
+        }
+    ]
+    "failureList": [
+        {
+        	"userId": 1003,
+        	"email": "ashwin@proswift.com",
+   			"agentIdList": [15]
+        },
+        {
+            "userId": 1005,
+        	"email": "siya@proswift.com",
+   			"agentIdList": [16, 22]
+        }
+    ]
+}
+
+19.	AddUserBusiness
+Method - Post
+End Point –
+http://localhost:8080/api/user/v1/addUserBusiness
+
+Request-
+{
+   "userId": 1001,
+   "relationship": "OWNER",
+   "businessId": 1000000
+}
+
+Response-
+{
+    "userId": 1001,
+    "relationship": "OWNER",
+    "businessId": 1000000,
+    "createdByUserId": 1001,
+    "createDate": "2020-01-12 11:43",
+    "updatedByUserId": 1001,
+    "updateDate": "2020-01-12 11:43"
+}
+
+
+20.	GetSearchAgents
+Method - Post
+End Point –
+http://localhost:8080/api/searchAgent/v1/getSearchAgents
+
+Request-
+{
+   "userId": "1001"
+}
+
+Response-
+{
+    "status": "success",
+    "httpStatus": "OK",
+    "data": {
+        "searchAgentsList": [
+            {
+                "userId": 1001,
+                "agentId": "1",
+                "email": "sp@proswift.com",
+                "name": "My Saved Search",
+                "frequency": "WEEKLY",
+                "bizType": null,
+                "priceLow": "100000",
+                "priceHigh": "200000",
+                "state": "CA",
+                "county": "Alameda"
+            }
+        ],
+        "totalCount": null,
+        "pageNumber": null,
+        "pageSize": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+21.	DeleteSearchAgent
+Method - Post
+End Point –
+http://localhost:8080/api/searchAgent/v1/deleteSearchAgent
+
+Request-
+{
+   	"userId": "1001",
+	"agentId": "1"
+}
+
+Response-

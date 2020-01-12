@@ -49,7 +49,7 @@ public class ImageController implements ErrorController {
 		logger.info("Add the New Business Details");
 		
 		try {
-			ImagesListDTO eListDTO = imageService.addImages(imagesListDTO);
+			ImagesListDTO iListDTO = imageService.addImages(imagesListDTO);
 			return null;
 			
 		} catch (InternalServerError e) {
