@@ -19,9 +19,10 @@ For Business Type specific details use AddAdditionalAttributes.
 
 4. UpdateBusinessDetails - Service to update Core Business details.
 
-5. AddEstimates - Service to calculate and add Business Worth Estimates to estimates table
+5. AddEstimates - Service to calculate and add Business Worth Estimates to estimates table.
 
-6. GetEstimates - Service to get Business Worth Estimates
+6. GetEstimates - Service to get Business Worth Estimates. NOT TO BE INTEGRATED ON FRONT END, for internal code purpose only. 
+	The result will be part of the GetBusinessDetails API.
 
 7. GetAdditionalAttributes - Service to get additional Business attributes.
 
@@ -45,11 +46,13 @@ For Business Type specific details use AddAdditionalAttributes.
 
 17. DeleteSearchAgent - Service to delete existing search agent.
 
-18. AddUserBusiness - Service to Associate Business with User after User Claims the Business, he can claim it as Owner or Broker.
+18. RunSearchAgent - Service to run Search Agent, NOT TO BE INTEGRATED ON FRONT END.
 
-19. GetUserBusiness - Service to list Businesses associated with User, User role may be Owner or Broker.
+19. AddUserBusiness - Service to Associate Business with User after User Claims the Business, he can claim it as Owner or Broker.
 
-20. DeleteUserBusiness - Service to de-link User and Business association.
+20. GetUserBusiness - Service to list Businesses associated with User, User role may be Owner or Broker.
+
+21. DeleteUserBusiness - Service to de-link User and Business association.
 
 
 Pending from Phase 1-
@@ -1507,7 +1510,7 @@ http://localhost:8080/api/searchAgent/v1/addSearchAgent
 
 Request-
 {
-   "userId": "1001",
+   "userId": 1001,
    "email": "sp@proswift.com",
    "name": "My Saved Search",
    "frequency": "WEEKLY",
@@ -1539,7 +1542,7 @@ http://localhost:8080/api/searchAgent/v1/getSearchAgents
 
 Request-
 {
-   "userId": "1001"
+   "userId": 1001
 }
 
 Response-
@@ -1580,11 +1583,22 @@ http://localhost:8080/api/searchAgent/v1/deleteSearchAgent
 
 Request-
 {
-   	"userId": "1001",
-	"agentId": "1"
+   	"userId": 1001,
+	"agentId": 1
 }
 
 Response-
+{
+    "status": "success",
+    "httpStatus": "OK",
+    "data": "success",
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
 
 18. RunSearchAgent - This service is not to be invoked automatically(untill spring scheduler is configured). 
 This service takes the Search Agent duration as input. 
@@ -1658,14 +1672,14 @@ Response-
 }
 
 
-20.	GetSearchAgents
+20.	GetUserBusiness
 Method - Post
 End Point –
-http://localhost:8080/api/searchAgent/v1/getSearchAgents
+http://localhost:8080/api/user/v1/getUserBusiness
 
 Request-
 {
-   "userId": "1001"
+   "userId": 1001
 }
 
 Response-
@@ -1676,15 +1690,21 @@ Response-
         "searchAgentsList": [
             {
                 "userId": 1001,
-                "agentId": "1",
-                "email": "sp@proswift.com",
-                "name": "My Saved Search",
-                "frequency": "WEEKLY",
-                "bizType": null,
-                "priceLow": "100000",
-                "priceHigh": "200000",
-                "state": "CA",
-                "county": "Alameda"
+                "relationship": "OWNER",
+                "businessId": 1000000,
+                "createdByUserId": 1001,
+                "createDate": "2020-01-12 11:43",
+                "updatedByUserId": 1001,
+                "updateDate": "2020-01-12 11:43"
+            },
+            {
+                "userId": 1001,
+                "relationship": "BROKER",
+                "businessId": 1000001,
+                "createdByUserId": 1001,
+                "createDate": "2020-01-12 12:00",
+                "updatedByUserId": 1001,
+                "updateDate": "2020-01-12 12:00"
             }
         ],
         "totalCount": null,
@@ -1699,15 +1719,28 @@ Response-
     "validationErrors": null
 }
 
-21.	DeleteSearchAgent
+21.	DeleteUserBusiness
 Method - Post
 End Point –
-http://localhost:8080/api/searchAgent/v1/deleteSearchAgent
+http://localhost:8080/api/user/v1/deleteUserBusiness
 
 Request-
 {
-   	"userId": "1001",
-	"agentId": "1"
+   	"userId": 1001,
+	"relationship": "BROKER"
 }
 
 Response-
+{
+    "status": "success",
+    "httpStatus": "OK",
+    "data": "success",
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+

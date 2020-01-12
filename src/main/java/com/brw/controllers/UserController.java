@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
+import com.brw.common.constants.Constants;
+import com.brw.common.constants.ErrorCodes;
+import com.brw.common.response.ApiResponse;
 import com.brw.dto.UserBusinessDTO;
+import com.brw.dto.UserBusinessListDTO;
 import com.brw.dto.UserDTO;
 import com.brw.service.UserService;
 
@@ -79,26 +83,28 @@ public class UserController implements ErrorController {
 	}
 	
 	@PostMapping(value = "getUserBusiness")
-	public ResponseEntity<UserBusinessDTO> getUserBusiness(@RequestBody UserBusinessDTO userBusinessDTO) {
+	public ApiResponse<?> getUserBusiness(@RequestBody UserBusinessDTO userBusinessDTO) {
+		
+		UserBusinessListDTO userBusinessListDTO = null;
 		try {
-			UserBusinessDTO returnUserBusinessDTO = userService.getUserBusiness(userBusinessDTO);
-			return new ResponseEntity<>(returnUserBusinessDTO, HttpStatus.OK);
+			userBusinessListDTO = userService.getUserBusiness(userBusinessDTO.getUserId());
 		} catch (InternalServerError e) {
 			e.printStackTrace();
 			// TODO: handle exception
-			return new ResponseEntity<>(userBusinessDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
 		}
+		return ApiResponse.withData(userBusinessListDTO);
 	}
 	
 	@PostMapping(value = "deleteUserBusiness")
-	public ResponseEntity<UserBusinessDTO> deleteUserBusiness(@RequestBody UserBusinessDTO userBusinessDTO) {
+	public ApiResponse<?> deleteUserBusiness(@RequestBody UserBusinessDTO userBusinessDTO) {
 		try {
-			userService.deleteUserBusiness(userBusinessDTO);
-			return new ResponseEntity<>(userBusinessDTO, HttpStatus.OK);
+			userService.deleteUserBusiness(userBusinessDTO.getUserId(), userBusinessDTO.getRelationship());
+			return ApiResponse.withData(Constants.RESPONSE_SUCCESS);
 		} catch (InternalServerError e) {
 			e.printStackTrace();
 			// TODO: handle exception
-			return new ResponseEntity<>(userBusinessDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
 		}
 	}
 }

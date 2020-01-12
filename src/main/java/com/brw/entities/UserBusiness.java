@@ -21,7 +21,7 @@ public class UserBusiness implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "userBiz_id")
+	@Column(name = "user_biz_id")
 	private int userBizId;
 	
 	@Column(name = "user_id")
