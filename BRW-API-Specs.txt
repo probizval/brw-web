@@ -732,42 +732,42 @@ Request –
 
 Response –
 {
-    "status": "succcess",
+    "status": "success",
     "httpStatus": "OK",
     "data": {
         "estimatesList": [
             {
                 "invokerId": null,
-                "estimateId": 6,
+                "estimateId": 3,
                 "businessId": 1000000,
                 "estimateType": "MARKET_BASED",
                 "estimateSubType": "MARKET_BASED",
-                "estimatedAmount": "150025",
-                "estimatedAmountHigh": "175025",
-                "estimatedAmountLow": "125025",
-                "lastEstimationDate": "2019-11-20 17:29"
+                "estimatedAmount": "150000",
+                "estimatedAmountHigh": "175000",
+                "estimatedAmountLow": "125000",
+                "lastEstimationDate": "2019-11-20 17:25"
             },
             {
                 "invokerId": null,
-                "estimateId": 5,
+                "estimateId": 2,
                 "businessId": 1000000,
                 "estimateType": "INCOME_BASED",
                 "estimateSubType": "INCOME_BASED",
-                "estimatedAmount": "200025",
-                "estimatedAmountHigh": "250025",
-                "estimatedAmountLow": "150025",
-                "lastEstimationDate": "2019-11-20 17:29"
+                "estimatedAmount": "200000",
+                "estimatedAmountHigh": "250000",
+                "estimatedAmountLow": "150000",
+                "lastEstimationDate": "2019-11-20 17:25"
             },
             {
                 "invokerId": null,
-                "estimateId": 4,
+                "estimateId": 1,
                 "businessId": 1000000,
                 "estimateType": "ASSET_BASED",
                 "estimateSubType": "ASSET_BASED",
-                "estimatedAmount": "100025",
-                "estimatedAmountHigh": "125025",
-                "estimatedAmountLow": "75025",
-                "lastEstimationDate": "2019-11-20 17:29"
+                "estimatedAmount": "100000",
+                "estimatedAmountHigh": "125000",
+                "estimatedAmountLow": "75000",
+                "lastEstimationDate": "2019-11-20 17:25"
             }
         ],
         "totalCount": null,
