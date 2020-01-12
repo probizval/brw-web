@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.brw.common.constants.Constants;
+import com.brw.dao.UserBusinessDAO;
 import com.brw.dao.UserDAO;
+import com.brw.dto.UserBusinessDTO;
 import com.brw.dto.UserDTO;
 import com.brw.entities.User;
+import com.brw.entities.UserBusiness;
 import com.brw.entities.UserProfile;
 import com.brw.service.UserService;
 
@@ -18,6 +21,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
+	private UserBusinessDAO userBusinessDAO;
 	
 	@Override
 	public UserDTO addUserProfile(UserDTO userDTO) {
@@ -340,52 +346,43 @@ public class UserServiceImpl implements UserService {
 		returnUserDTO.setBuyerVettingDate(returnUser.getBuyerVettingDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		returnUserDTO.setCreatedByUserId(returnUser.getCreatedByUserId());
 		returnUserDTO.setCreateDate(returnUser.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
-		returnUserDTO.setUpdatedByUserId(returnUserDTO.getInvokerId());
+		returnUserDTO.setUpdatedByUserId(returnUserDTO.getUpdatedByUserId());
 		returnUserDTO.setUpdateDate(returnUser.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		
 		return returnUserDTO;
 	}
 
 	@Override
-	public UserDTO addUserBusiness(UserDTO userDTO) {
-		/*
-		UserProfile userProfile = userDAO.findById(userProfileDTO.getId()).get();
-		userProfile.setFirstName(userProfileDTO.getFirstName());
-		userProfile.setLastName(userProfileDTO.getLastName());
-		userProfile.setContactNumber(userProfileDTO.getContactNumber());
-		userProfile.setAboutAgent(userProfileDTO.getAboutAgent());
-		userProfile.setAgentTitle(userProfileDTO.getAgentTitle());
-		userProfile.setLocation(userProfileDTO.getLocation());
-		userProfile.setAddress(userProfileDTO.getAddress());
-		userProfile.setCity(userProfileDTO.getCity());
-		userProfile.setState(userProfileDTO.getState());
-		userProfile.setCountry(userProfileDTO.getCountry());
-		userProfile.setZipcode(userProfileDTO.getZipcode());
-		userProfile.setUserType(userProfileDTO.getUserType());
+	public UserBusinessDTO addUserBusiness(UserBusinessDTO userBusinessDTO) {
 		
-		userProfile = userDAO.save(userProfile);
+		System.out.println("222 **** Inside UserServiceImpl.addUserBusiness(): "+userBusinessDTO.getRelationship());
 		
-		userProfileDTO.setId(userProfile.getId());
-		userProfileDTO.setFirstName(userProfile.getFirstName());
-		userProfileDTO.setLastName(userProfile.getLastName());
-		userProfileDTO.setEmailId(userProfile.getEmailId());
-		userProfileDTO.setContactNumber(userProfile.getContactNumber());
-		userProfileDTO.setAboutAgent(userProfile.getAboutAgent());
-		userProfileDTO.setAgentTitle(userProfile.getAgentTitle());
-		userProfileDTO.setLocation(userProfile.getLocation());
-		userProfileDTO.setAddress(userProfile.getAddress());
-		userProfileDTO.setCity(userProfile.getCity());
-		userProfileDTO.setState(userProfile.getState());
-		userProfileDTO.setCountry(userProfile.getCountry());
-		userProfileDTO.setZipcode(userProfile.getZipcode());
-		userProfileDTO.setUserImgUrl(userProfile.getUserImgUrl());
-		userProfileDTO.setUserType(userProfile.getUserType());
-		*/
-		return userDTO;
+		UserBusiness userBusiness = new UserBusiness();
+		UserBusinessDTO returnUserBusinessDTO = new UserBusinessDTO();
+		
+		userBusiness.setUserId(userBusinessDTO.getUserId());
+		userBusiness.setRelationship(userBusinessDTO.getRelationship());
+		userBusiness.setBusinessId(userBusinessDTO.getBusinessId());
+		userBusiness.setCreatedByUserId(userBusinessDTO.getUserId());
+		userBusiness.setCreateDate(LocalDateTime.now());
+		userBusiness.setUpdatedByUserId(userBusinessDTO.getUserId());
+		userBusiness.setUpdateDate(LocalDateTime.now());
+		
+		UserBusiness returnUserBusiness = userBusinessDAO.save(userBusiness);
+		
+		returnUserBusinessDTO.setUserId(returnUserBusiness.getUserId());
+		returnUserBusinessDTO.setRelationship(returnUserBusiness.getRelationship());
+		returnUserBusinessDTO.setBusinessId(returnUserBusiness.getBusinessId());
+		returnUserBusinessDTO.setCreatedByUserId(returnUserBusiness.getCreatedByUserId());
+		returnUserBusinessDTO.setCreateDate(returnUserBusiness.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		returnUserBusinessDTO.setUpdatedByUserId(returnUserBusiness.getUpdatedByUserId());
+		returnUserBusinessDTO.setUpdateDate(returnUserBusiness.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		
+		return returnUserBusinessDTO;
 	}
 	
 	@Override
-	public UserDTO getUserBusiness(UserDTO userDTO) {
+	public UserBusinessDTO getUserBusiness(UserBusinessDTO userBusinessDTO) {
 		/*
 		UserProfile userProfile = userDAO.findById(userProfileDTO.getId()).get();
 		userProfile.setFirstName(userProfileDTO.getFirstName());
@@ -419,11 +416,11 @@ public class UserServiceImpl implements UserService {
 		userProfileDTO.setUserImgUrl(userProfile.getUserImgUrl());
 		userProfileDTO.setUserType(userProfile.getUserType());
 		*/
-		return userDTO;
+		return userBusinessDTO;
 	}
 	
 	@Override
-	public UserDTO removeUserBusiness(UserDTO userDTO) {
+	public void deleteUserBusiness(UserBusinessDTO userBusinessDTO) {
 		/*
 		UserProfile userProfile = userDAO.findById(userProfileDTO.getId()).get();
 		userProfile.setFirstName(userProfileDTO.getFirstName());
@@ -457,6 +454,6 @@ public class UserServiceImpl implements UserService {
 		userProfileDTO.setUserImgUrl(userProfile.getUserImgUrl());
 		userProfileDTO.setUserType(userProfile.getUserType());
 		*/
-		return userDTO;
+		//return userDTO;
 	}
 }

@@ -45,19 +45,23 @@ For Business Type specific details use AddAdditionalAttributes.
 
 17. DeleteSearchAgent - Service to delete existing search agent.
 
+18. AddUserBusiness - Service to Associate Business with User after User Claims the Business, he can claim it as Owner or Broker.
+
+19. GetUserBusiness - Service to list Businesses associated with User, User role may be Owner or Broker.
+
+20. DeleteUserBusiness - Service to de-link User and Business association.
+
 
 Pending from Phase 1-
 1. AddImages
 2. UpdateImages
 3. GetImages
-4. AddUserBusiness
-5. GetUserBusiness
-5. DeleteUserBusiness
-6. AddUserActivity
-7. AddRelatedBusiness
-8. GetRelatedBusiness
-9. UpdateRelatedBusiness
-10. RunSearchAgent
+
+4. AddUserActivity
+5. AddRelatedBusiness
+6. GetRelatedBusiness
+7. UpdateRelatedBusiness
+8. RunSearchAgent
 
 Phase 2: Functionality where users can sign up for services using payment gateway, get billed automatically, 
 and pull out the billing details
@@ -1629,3 +1633,81 @@ Response -
         }
     ]
 }
+
+19.	AddUserBusiness
+Method - Post
+End Point –
+http://localhost:8080/api/user/v1/addUserBusiness
+
+Request-
+{
+   "userId": 1001,
+   "relationship": "OWNER",
+   "businessId": 1000000
+}
+
+Response-
+{
+    "userId": 1001,
+    "relationship": "OWNER",
+    "businessId": 1000000,
+    "createdByUserId": 1001,
+    "createDate": "2020-01-12 11:43",
+    "updatedByUserId": 1001,
+    "updateDate": "2020-01-12 11:43"
+}
+
+
+20.	GetSearchAgents
+Method - Post
+End Point –
+http://localhost:8080/api/searchAgent/v1/getSearchAgents
+
+Request-
+{
+   "userId": "1001"
+}
+
+Response-
+{
+    "status": "success",
+    "httpStatus": "OK",
+    "data": {
+        "searchAgentsList": [
+            {
+                "userId": 1001,
+                "agentId": "1",
+                "email": "sp@proswift.com",
+                "name": "My Saved Search",
+                "frequency": "WEEKLY",
+                "bizType": null,
+                "priceLow": "100000",
+                "priceHigh": "200000",
+                "state": "CA",
+                "county": "Alameda"
+            }
+        ],
+        "totalCount": null,
+        "pageNumber": null,
+        "pageSize": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+21.	DeleteSearchAgent
+Method - Post
+End Point –
+http://localhost:8080/api/searchAgent/v1/deleteSearchAgent
+
+Request-
+{
+   	"userId": "1001",
+	"agentId": "1"
+}
+
+Response-

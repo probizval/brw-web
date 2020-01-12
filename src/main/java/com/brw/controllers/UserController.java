@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
+import com.brw.dto.UserBusinessDTO;
 import com.brw.dto.UserDTO;
 import com.brw.service.UserService;
 
@@ -47,6 +48,7 @@ public class UserController implements ErrorController {
 			UserDTO retUserDTO = userService.getUserProfile(userDTO);
 			return new ResponseEntity<>(retUserDTO, HttpStatus.OK);
 		} catch (InternalServerError e) {
+			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(userDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -58,55 +60,45 @@ public class UserController implements ErrorController {
 			UserDTO userDTO1 = userService.updateUserProfile(userDTO);
 			return new ResponseEntity<>(userDTO1, HttpStatus.OK);
 		} catch (InternalServerError e) {
+			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(userDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@PostMapping(value = "addUserBusiness")
-	public ResponseEntity<UserDTO> addUserBusiness(@RequestBody UserDTO userDTO) {
+	public ResponseEntity<UserBusinessDTO> addUserBusiness(@RequestBody UserBusinessDTO userBusinessDTO) {
 		try {
-			UserDTO userDTO1 = userService.addUserBusiness(userDTO);
-			return new ResponseEntity<>(userDTO1, HttpStatus.OK);
+			UserBusinessDTO returnUserBusinessDTO = userService.addUserBusiness(userBusinessDTO);
+			return new ResponseEntity<>(returnUserBusinessDTO, HttpStatus.OK);
 		} catch (InternalServerError e) {
+			e.printStackTrace();
 			// TODO: handle exception
-			return new ResponseEntity<>(userDTO, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
-	@PostMapping(value = "removeUserBusiness")
-	public ResponseEntity<UserDTO> removeUserBusiness(@RequestBody UserDTO userDTO) {
-		try {
-			UserDTO userDTO1 = userService.removeUserBusiness(userDTO);
-			return new ResponseEntity<>(userDTO1, HttpStatus.OK);
-		} catch (InternalServerError e) {
-			// TODO: handle exception
-			return new ResponseEntity<>(userDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(userBusinessDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@PostMapping(value = "getUserBusiness")
-	public ResponseEntity<UserDTO> getUserBusiness(@RequestBody UserDTO userDTO) {
+	public ResponseEntity<UserBusinessDTO> getUserBusiness(@RequestBody UserBusinessDTO userBusinessDTO) {
 		try {
-			UserDTO userDTO1 = userService.getUserBusiness(userDTO);
-			return new ResponseEntity<>(userDTO1, HttpStatus.OK);
+			UserBusinessDTO returnUserBusinessDTO = userService.getUserBusiness(userBusinessDTO);
+			return new ResponseEntity<>(returnUserBusinessDTO, HttpStatus.OK);
 		} catch (InternalServerError e) {
+			e.printStackTrace();
 			// TODO: handle exception
-			return new ResponseEntity<>(userDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(userBusinessDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	/*
-	@RequestMapping(value = "userprofile/propertyList/{userId}/{pageNumber}", method = RequestMethod.GET, produces = "application/json")
-	public ApiResponse<?> getAllProperties(@PathVariable int userId, @PathVariable int pageNumber) {
-		PropertyListDTO properties = propertyDetailsService.getAllPropertyListByUser(userId, pageNumber);
-		return ApiResponse.withPaginatedData(properties, properties.getTotalCount(), properties.getPageNumber(), properties.getPageSize());
+	@PostMapping(value = "deleteUserBusiness")
+	public ResponseEntity<UserBusinessDTO> deleteUserBusiness(@RequestBody UserBusinessDTO userBusinessDTO) {
+		try {
+			userService.deleteUserBusiness(userBusinessDTO);
+			return new ResponseEntity<>(userBusinessDTO, HttpStatus.OK);
+		} catch (InternalServerError e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			return new ResponseEntity<>(userBusinessDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-	
-	@RequestMapping(value = "userprofile/bookmarksPropertyList/{userId}/{pageNumber}", method = RequestMethod.GET, produces = "application/json")
-	public ApiResponse<?> getBookMarksProperties(@PathVariable int userId, @PathVariable int pageNumber) {
-		PropertyListDTO properties = propertyDetailsService.getBookMarkPropertyListByUser(userId, pageNumber);
-		return ApiResponse.withPaginatedData(properties, properties.getTotalCount(), properties.getPageNumber(), properties.getPageSize());
-	}
-	*/
 }
