@@ -82,18 +82,18 @@ public class UserController implements ErrorController {
 		}
 	}
 	
-	@PostMapping(value = "getUserBusiness")
-	public ApiResponse<?> getUserBusiness(@RequestBody UserBusinessDTO userBusinessDTO) {
+	@PostMapping(value = "getUserBusinesses")
+	public ApiResponse<?> getUserBusinesses(@RequestBody UserBusinessDTO userBusinessDTO) {
 		
 		UserBusinessListDTO userBusinessListDTO = null;
 		try {
-			userBusinessListDTO = userService.getUserBusiness(userBusinessDTO.getUserId());
+			userBusinessListDTO = userService.getUserBusinesses(userBusinessDTO.getUserId());
+			return ApiResponse.withData(userBusinessListDTO);
 		} catch (InternalServerError e) {
 			e.printStackTrace();
 			// TODO: handle exception
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
 		}
-		return ApiResponse.withData(userBusinessListDTO);
 	}
 	
 	@PostMapping(value = "deleteUserBusiness")
@@ -107,4 +107,18 @@ public class UserController implements ErrorController {
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
 		}
 	}
+	
+	/*
+	@PostMapping(value = "addUserActivity")
+	public ResponseEntity<UserBusinessDTO> addUserBusiness(@RequestBody UserBusinessDTO userBusinessDTO) {
+		try {
+			UserBusinessDTO returnUserBusinessDTO = userService.addUserBusiness(userBusinessDTO);
+			return new ResponseEntity<>(returnUserBusinessDTO, HttpStatus.OK);
+		} catch (InternalServerError e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			return new ResponseEntity<>(userBusinessDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	*/
 }

@@ -388,10 +388,10 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserBusinessListDTO getUserBusiness(int userId) {
+	public UserBusinessListDTO getUserBusinesses(int userId) {
 		System.out.println("222 **** Inside SearchAgentServiceImpl.getSearchAgent()");
 		
-		List<UserBusiness> userBusinessList = (List<UserBusiness>)userBusinessDAO.getUserBusiness(userId);
+		List<UserBusiness> userBusinessList = (List<UserBusiness>)userBusinessDAO.getUserBusinesses(userId);
 		List<UserBusinessDTO> useBusinessDTOList = new ArrayList<UserBusinessDTO>();
 		UserBusinessListDTO userBusinessListDTO = new UserBusinessListDTO();
 		
@@ -408,13 +408,13 @@ public class UserServiceImpl implements UserService {
 		
 			useBusinessDTOList.add(returnUserBusinessDTO);
 		}
-		userBusinessListDTO.setSearchAgentsList(useBusinessDTOList);
+		userBusinessListDTO.setUserBusinessList(useBusinessDTOList);
 		return userBusinessListDTO;
 	}
 	
 	@Override
 	public void deleteUserBusiness(int userId, String relationship) {
-System.out.println("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent()");
+		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent()");
 		
 		int nurDeleted = userBusinessDAO.deleteUserBusiness(userId, relationship);
 		

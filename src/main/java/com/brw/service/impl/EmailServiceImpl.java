@@ -29,8 +29,11 @@ import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.brw.common.constants.Constants;
 import com.brw.dao.UserDAO;
 import com.brw.dto.EmailDTO;
+import com.brw.dto.UserBusinessDTO;
+import com.brw.entities.UserBusiness;
 import com.brw.exceptions.EmailException;
 
 @Component
@@ -59,9 +62,25 @@ public class EmailServiceImpl implements com.brw.service.EmailService {
 		Message msg = new MimeMessage(session);
 		msg.setFrom(new InternetAddress("admin@bizrealworth.com", false));
 		
-		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("sp@proswift.com"));
-		msg.setSubject("Tutorials point email");
-		msg.setContent("Tutorials point email", "text/html");
+		String emailToList = Constants.EMPTY_STRING;
+		int i = 0;
+		for (String email: emailDTO.getToList()) {
+			System.out.println("**** 222 Inside EmailServiceImpl.sendEmail() i: "+i);
+			System.out.println("**** 222 Inside EmailServiceImpl.sendEmail() email: "+email);
+
+			if(i != 0) {
+				emailToList = emailToList.concat(Constants.COMMA);
+			}
+			emailToList = emailToList.concat(email);
+			System.out.println("**** 333 Inside EmailServiceImpl.sendEmail() emailToList: "+emailToList);
+
+			i++;
+		}
+		System.out.println("**** 444 Inside EmailServiceImpl.sendEmail() emailToList: "+emailToList);
+
+		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailToList));
+		msg.setSubject(emailDTO.getSubject());
+		msg.setContent(emailDTO.getContent(), "text/html");
 		msg.setSentDate(new Date());
 		
 		/*

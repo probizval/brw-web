@@ -10,6 +10,6 @@ public interface UserService {
 	public UserDTO updateUserProfile(UserDTO userDTO);
 	public UserDTO getUserProfile(UserDTO userDTO);
 	public UserBusinessDTO addUserBusiness(UserBusinessDTO userBusinessDTO);
-	public UserBusinessListDTO getUserBusiness(int userId);
+	public UserBusinessListDTO getUserBusinesses(int userId);
 	public void deleteUserBusiness(int userId, String relationship);
 }

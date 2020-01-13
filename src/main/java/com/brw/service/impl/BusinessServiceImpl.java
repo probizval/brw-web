@@ -15,14 +15,21 @@ import org.springframework.stereotype.Component;
 
 import com.brw.dao.BusinessDetailsDAO;
 import com.brw.dao.BusinessInfoDAO;
+import com.brw.dao.RelatedBusinessDAO;
 import com.brw.dto.BusinessDetailsDTO;
 import com.brw.dto.BusinessListDTO;
 import com.brw.dto.EstimatesDTO;
 import com.brw.dto.EstimatesListDTO;
+import com.brw.dto.RelatedBusinessDTO;
+import com.brw.dto.RelatedBusinessListDTO;
+import com.brw.dto.UserBusinessDTO;
+import com.brw.dto.UserBusinessListDTO;
 import com.brw.common.constants.Constants;
 
 import com.brw.entities.BusinessDetails;
 import com.brw.entities.BusinessInfo;
+import com.brw.entities.RelatedBusiness;
+import com.brw.entities.UserBusiness;
 import com.brw.service.BizTransactionService;
 import com.brw.service.EstimateService;
 
@@ -36,6 +43,9 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
 	@Autowired
 	private BusinessInfoDAO businessInfoDAO;
+	
+	@Autowired
+	private RelatedBusinessDAO relatedBusinessDAO;
 	
 	@Autowired
 	EstimateService estimateService;
@@ -1109,4 +1119,65 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
         System.out.println(findClosest(arr, target)); 
     } 
     */
+    
+    @Override
+	public RelatedBusinessDTO addRelatedBusiness(RelatedBusinessDTO relatedBusinessDTO) {
+		
+		System.out.println("222 **** Inside UserServiceImpl.addRelatedBusiness() BusinessId: "+relatedBusinessDTO.getBusinessId());
+		System.out.println("222 **** Inside UserServiceImpl.addRelatedBusiness() RelatedBizId: "+relatedBusinessDTO.getRelatedBizId());
+		
+		RelatedBusiness relatedBusiness = new RelatedBusiness();
+		RelatedBusinessDTO returnRelatedBusinessDTO = new RelatedBusinessDTO();
+		
+		relatedBusiness.setBusinessId(relatedBusinessDTO.getBusinessId());
+		relatedBusiness.setRelatedBizId(relatedBusinessDTO.getRelatedBizId());
+		relatedBusiness.setCreatedByUserId(relatedBusinessDTO.getInvokerId());
+		relatedBusiness.setCreateDate(LocalDateTime.now());
+		relatedBusiness.setUpdatedByUserId(relatedBusinessDTO.getInvokerId());
+		relatedBusiness.setUpdateDate(LocalDateTime.now());
+		
+		RelatedBusiness returnRelatedBusiness = relatedBusinessDAO.save(relatedBusiness);
+		
+		returnRelatedBusinessDTO.setBusinessId(returnRelatedBusiness.getBusinessId());
+		returnRelatedBusinessDTO.setRelatedBizId(returnRelatedBusiness.getRelatedBizId());
+		returnRelatedBusinessDTO.setCreatedByUserId(returnRelatedBusiness.getCreatedByUserId());
+		returnRelatedBusinessDTO.setCreateDate(returnRelatedBusiness.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		returnRelatedBusinessDTO.setUpdatedByUserId(returnRelatedBusiness.getUpdatedByUserId());
+		returnRelatedBusinessDTO.setUpdateDate(returnRelatedBusiness.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		
+		return returnRelatedBusinessDTO;
+	}
+	
+	@Override
+	public RelatedBusinessListDTO getRelatedBusinesses(int businessId) {
+		System.out.println("222 **** Inside SearchAgentServiceImpl.getRelatedBusinesses()");
+		
+		List<RelatedBusiness> relatedBusinessList = (List<RelatedBusiness>)relatedBusinessDAO.getRelatedBusinesses(businessId);
+		List<RelatedBusinessDTO> relatedBusinessDTOList = new ArrayList<RelatedBusinessDTO>();
+		RelatedBusinessListDTO relatedBusinessListDTO = new RelatedBusinessListDTO();
+		
+		for (RelatedBusiness returnRelatedBusiness: relatedBusinessList) {
+			RelatedBusinessDTO returnRelatedBusinessDTO = new RelatedBusinessDTO();
+			
+			returnRelatedBusinessDTO.setBusinessId(returnRelatedBusiness.getBusinessId());
+			returnRelatedBusinessDTO.setRelatedBizId(returnRelatedBusiness.getRelatedBizId());
+			returnRelatedBusinessDTO.setCreatedByUserId(returnRelatedBusiness.getCreatedByUserId());
+			returnRelatedBusinessDTO.setCreateDate(returnRelatedBusiness.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+			returnRelatedBusinessDTO.setUpdatedByUserId(returnRelatedBusiness.getUpdatedByUserId());
+			returnRelatedBusinessDTO.setUpdateDate(returnRelatedBusiness.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		
+			relatedBusinessDTOList.add(returnRelatedBusinessDTO);
+		}
+		relatedBusinessListDTO.setRelatedBusinessList(relatedBusinessDTOList);
+		return relatedBusinessListDTO;
+	}
+	
+	@Override
+	public void deleteRelatedBusiness(int businessId, int relatedBizId) {
+		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteRelatedBusiness()");
+		
+		int nurDeleted = relatedBusinessDAO.deleteRelatedBusiness(businessId, relatedBizId);
+		
+		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteRelatedBusiness() nurDeleted: "+nurDeleted);
+	}
 }

@@ -50,26 +50,28 @@ For Business Type specific details use AddAdditionalAttributes.
 
 19. AddUserBusiness - Service to Associate Business with User after User Claims the Business, he can claim it as Owner or Broker.
 
-20. GetUserBusiness - Service to list Businesses associated with User, User role may be Owner or Broker.
+20. GetUserBusinesses - Service to list Businesses associated with User, User role may be Owner or Broker.
 
 21. DeleteUserBusiness - Service to de-link User and Business association.
 
-22. AddUserActivity - Service to capture User Activity on the BRW Website.
+23. AddRelatedBusiness - Service to add related business - Eg. Mechanic Shop associated with Gas Station
+ 
+24. GetRelatedBusinesses - Service to list all the associated businesses.
 
-23. GetTotalBusinessViews - Service to get Total Business Detail page Views.
+25. DeleteRelatedBusiness - Service to delete the associated business one at a time.
 
-24. GetBusinessViewsSince - Service to get
 
 Pending from Phase 1-
 1. AddImages
 2. UpdateImages
 3. GetImages
 
-4. AddUserActivity
-5. AddRelatedBusiness
-6. GetRelatedBusiness
-7. UpdateRelatedBusiness
-8. RunSearchAgent
+4. AddUserActivity - Service to capture User Activity on the BRW Website.
+5. GetTotalBusinessViews - Service to get Total Business Detail page Views.
+6. GetBusinessViewsSince - Service to get Business Detail page Views since a specific date.
+
+
+7. RunSearchAgent
 
 Phase 2: Functionality where users can sign up for services using payment gateway, get billed automatically, 
 and pull out the billing details
@@ -1485,7 +1487,7 @@ Request-
 Response-
 
 
-12.	SendEmail
+15.	SendEmail
 Method - Post
 End Point –
 http://localhost:8080/api/email/v1/sendEmail
@@ -1493,9 +1495,9 @@ http://localhost:8080/api/email/v1/sendEmail
 Request-
 {
    "invokerId": "1001",
-   "toList": ["sp@proswift.com", "admin@bizrealworth.com"],
+   "toList": ["sp@proswift.com", "siddharthmp@hotmail.com"],
    "subject": "Test Mail Subject",
-   "content": "Test Mail Content",
+   "content": "<B>Test Mail Content</B>",
    "emailPurpose": "CONTACT_US"
 }
 
@@ -1510,7 +1512,7 @@ Response-
 }
 
 
-15.	AddSearchAgent
+16.	AddSearchAgent
 Method - Post
 End Point –
 http://localhost:8080/api/searchAgent/v1/addSearchAgent
@@ -1542,7 +1544,7 @@ Response-
 }
 
 
-16.	GetSearchAgents
+17.	GetSearchAgents
 Method - Post
 End Point –
 http://localhost:8080/api/searchAgent/v1/getSearchAgents
@@ -1583,7 +1585,7 @@ Response-
     "validationErrors": null
 }
 
-17.	DeleteSearchAgent
+18.	DeleteSearchAgent
 Method - Post
 End Point –
 http://localhost:8080/api/searchAgent/v1/deleteSearchAgent
@@ -1607,7 +1609,7 @@ Response-
     "validationErrors": null
 }
 
-18. RunSearchAgent - This service is not to be invoked automatically(untill spring scheduler is configured). 
+19. RunSearchAgent - This service is not to be invoked automatically(untill spring scheduler is configured). 
 This service takes the Search Agent duration as input. 
 Pulls the list of users and their respective search agents from t_rw_search_agent table, runs it and sends the 
 email to the users.
@@ -1655,7 +1657,7 @@ Response -
     ]
 }
 
-19.	AddUserBusiness
+20.	AddUserBusiness
 Method - Post
 End Point –
 http://localhost:8080/api/user/v1/addUserBusiness
@@ -1679,10 +1681,10 @@ Response-
 }
 
 
-20.	GetUserBusiness
+21.	GetUserBusiness
 Method - Post
 End Point –
-http://localhost:8080/api/user/v1/getUserBusiness
+http://localhost:8080/api/user/v1/getUserBusinesses
 
 Request-
 {
@@ -1726,7 +1728,7 @@ Response-
     "validationErrors": null
 }
 
-21.	DeleteUserBusiness
+22.	DeleteUserBusiness
 Method - Post
 End Point –
 http://localhost:8080/api/user/v1/deleteUserBusiness
@@ -1750,4 +1752,100 @@ Response-
     "validationErrors": null
 }
 
+
+20.	AddRelatedBusiness
+Method - Post
+End Point –
+http://localhost:8080/api/business/v1/addRelatedBusiness
+
+Request-
+{
+    "invokerId": 1001
+    "businessId": 1000000,
+    "relatedBizId": 1000001
+}
+
+Response-
+{
+    "invokerId": 0,
+    "relationshipId": 0,
+    "businessId": 1000000,
+    "relatedBizId": 1000001,
+    "createdByUserId": 0,
+    "createDate": null,
+    "updatedByUserId": 0,
+    "updateDate": null
+}
+
+
+23.	GetRelatedBusiness
+Method - Post
+End Point –
+http://localhost:8080/api/business/v1/getRelatedBusinesses
+
+Request-
+{
+   "userId": 1001
+}
+
+Response-
+{
+    "status": "success",
+    "httpStatus": "OK",
+    "data": {
+        "searchAgentsList": [
+            {
+                "userId": 1001,
+                "relationship": "OWNER",
+                "businessId": 1000000,
+                "createdByUserId": 1001,
+                "createDate": "2020-01-12 11:43",
+                "updatedByUserId": 1001,
+                "updateDate": "2020-01-12 11:43"
+            },
+            {
+                "userId": 1001,
+                "relationship": "BROKER",
+                "businessId": 1000001,
+                "createdByUserId": 1001,
+                "createDate": "2020-01-12 12:00",
+                "updatedByUserId": 1001,
+                "updateDate": "2020-01-12 12:00"
+            }
+        ],
+        "totalCount": null,
+        "pageNumber": null,
+        "pageSize": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+24.	DeleteRelatedBusiness
+Method - Post
+End Point –
+http://localhost:8080/api/business/v1/deleteRelatedBusiness
+
+Request-
+{
+   	"userId": 1001,
+	"relationship": "BROKER"
+}
+
+Response-
+{
+    "status": "success",
+    "httpStatus": "OK",
+    "data": "success",
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
 
