@@ -15,6 +15,7 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 import com.brw.common.constants.Constants;
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
+import com.brw.dto.UserActivityDTO;
 import com.brw.dto.UserBusinessDTO;
 import com.brw.dto.UserBusinessListDTO;
 import com.brw.dto.UserDTO;
@@ -108,17 +109,39 @@ public class UserController implements ErrorController {
 		}
 	}
 	
-	/*
-	@PostMapping(value = "addUserActivity")
-	public ResponseEntity<UserBusinessDTO> addUserBusiness(@RequestBody UserBusinessDTO userBusinessDTO) {
+	@PostMapping(value = "trackUserActivity")
+	public ResponseEntity<UserActivityDTO> trackUserActivity(@RequestBody UserActivityDTO userActivityDTO) {
 		try {
-			UserBusinessDTO returnUserBusinessDTO = userService.addUserBusiness(userBusinessDTO);
-			return new ResponseEntity<>(returnUserBusinessDTO, HttpStatus.OK);
+			UserActivityDTO returnUserActivityDTO = userService.trackUserActivity(userActivityDTO);
+			return new ResponseEntity<>(returnUserActivityDTO, HttpStatus.OK);
 		} catch (InternalServerError e) {
 			e.printStackTrace();
 			// TODO: handle exception
-			return new ResponseEntity<>(userBusinessDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(userActivityDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	*/
+	
+	@PostMapping(value = "getTotalBusinessViews")
+	public ApiResponse<?> getTotalBusinessViews(@RequestBody UserActivityDTO userActivityDTO) {
+		try {
+			int viewCount = userService.getTotalBusinessViews(userActivityDTO.getBusinessId());
+			return ApiResponse.withData(viewCount);
+		} catch (InternalServerError e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
+		}
+	}
+	
+	@PostMapping(value = "getBusinessViewsSince")
+	public ApiResponse<?> getBusinessViewsSince(@RequestBody UserActivityDTO userActivityDTO) {
+		try {
+			int viewCount = userService.getBusinessViewsSince(userActivityDTO.getBusinessId(), userActivityDTO.getDateSince());
+			return ApiResponse.withData(viewCount);
+		} catch (InternalServerError e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
+		}
+	}
 }

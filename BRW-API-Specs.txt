@@ -4,7 +4,7 @@ rW
 
 Created By: Sid Patil
 Create Date: 11/14/2019
-Update Date: 01/12/2020
+Update Date: 01/13/2020
 
 
 Table of Contents -
@@ -70,7 +70,6 @@ Pending from Phase 1-
 5. GetTotalBusinessViews - Service to get Total Business Detail page Views.
 6. GetBusinessViewsSince - Service to get Business Detail page Views since a specific date.
 
-
 7. RunSearchAgent
 
 Phase 2: Functionality where users can sign up for services using payment gateway, get billed automatically, 
@@ -79,15 +78,13 @@ and pull out the billing details
 2. DeleteUserService - User removes the service
 3. GetUserService - List of services user is signed up for
 4. GetServicePromotion - pull out any applicable promotions with the service at that point in time
-5. AddUserBill - Add billable activity to user and charge the user 
+5. AddUserBill - Add bill-able activity to user and charge the user 
 6. GetUserBill - List the user billing details
 7. AddBusinessTransaction - Service to add past business sell transaction details
 8. DeleteBusinessTransaction - Service to delete past business sell transactions
 9. GetBusinessTransactions - Service to list past business sell transactions
 
-
-1.	Name: AddBusinesssDetails
-
+1. Name: AddBusinesssDetails
 Method - Post
 EndPoint –
 http://localhost:8080/api/business/v1/addBusiness
@@ -246,8 +243,6 @@ Response -
     "naicsdescription": null,
     "incomeScoreIn5mileRadious": 0
 }
-
-
 
 2.	Name: SearchBusiness
 

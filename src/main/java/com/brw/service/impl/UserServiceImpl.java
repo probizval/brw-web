@@ -9,15 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.brw.common.constants.Constants;
+import com.brw.dao.UserActivityDAO;
 import com.brw.dao.UserBusinessDAO;
 import com.brw.dao.UserDAO;
 import com.brw.dto.SearchAgentDTO;
 import com.brw.dto.SearchAgentsListDTO;
+import com.brw.dto.UserActivityDTO;
 import com.brw.dto.UserBusinessDTO;
 import com.brw.dto.UserBusinessListDTO;
 import com.brw.dto.UserDTO;
 import com.brw.entities.SearchAgent;
 import com.brw.entities.User;
+import com.brw.entities.UserActivity;
 import com.brw.entities.UserBusiness;
 import com.brw.entities.UserProfile;
 import com.brw.service.UserService;
@@ -30,6 +33,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserBusinessDAO userBusinessDAO;
+	
+	@Autowired
+	private UserActivityDAO userActivityDAO;
 	
 	@Override
 	public UserDTO addUserProfile(UserDTO userDTO) {
@@ -419,5 +425,49 @@ public class UserServiceImpl implements UserService {
 		int nurDeleted = userBusinessDAO.deleteUserBusiness(userId, relationship);
 		
 		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent() nurDeleted: "+nurDeleted);
+	}
+	
+	@Override
+	public UserActivityDTO trackUserActivity(UserActivityDTO userActivityDTO) {
+		
+		System.out.println("222 **** Inside UserServiceImpl.trackUserActivity()");
+		
+		UserActivity userActivity = new UserActivity();
+		userActivity.setUserId(userActivityDTO.getUserId());
+		userActivity.setBusinessId(userActivityDTO.getBusinessId());
+		userActivity.setType(userActivityDTO.getType());
+		userActivity.setSubType(userActivityDTO.getSubType());
+		userActivity.setCreatedByUserId(userActivityDTO.getUserId());
+		userActivity.setCreateDate(LocalDateTime.now());
+		userActivity.setUpdatedByUserId(userActivityDTO.getUserId());
+		userActivity.setUpdateDate(LocalDateTime.now());
+		
+		UserActivity returnUserActivity = userActivityDAO.save(userActivity);
+		
+		UserActivityDTO returnUserActivityDTO = new UserActivityDTO();
+		returnUserActivityDTO.setUserId(returnUserActivity.getUserId());
+		returnUserActivityDTO.setBusinessId(returnUserActivity.getBusinessId());
+		returnUserActivityDTO.setType(returnUserActivity.getType());
+		returnUserActivityDTO.setSubType(returnUserActivity.getSubType());
+		returnUserActivityDTO.setCreatedByUserId(returnUserActivity.getUserId());
+		returnUserActivityDTO.setCreateDate(returnUserActivity.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		returnUserActivityDTO.setUpdatedByUserId(returnUserActivity.getUserId());
+		returnUserActivityDTO.setUpdateDate(returnUserActivity.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		
+		return returnUserActivityDTO;
+	}
+	
+	@Override
+	public int getTotalBusinessViews(int userId) {
+		
+		System.out.println("222 **** Inside UserServiceImpl.getTotalBusinessViews()");
+		return 0;
+	}
+	
+	@Override
+	public int getBusinessViewsSince(int userId, String dateSince) {
+		
+		System.out.println("222 **** Inside UserServiceImpl.getTotalBusinessViews()");
+		return 0;
 	}
 }
