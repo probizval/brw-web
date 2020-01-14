@@ -22,14 +22,11 @@ import com.brw.dto.EstimatesDTO;
 import com.brw.dto.EstimatesListDTO;
 import com.brw.dto.RelatedBusinessDTO;
 import com.brw.dto.RelatedBusinessListDTO;
-import com.brw.dto.UserBusinessDTO;
-import com.brw.dto.UserBusinessListDTO;
 import com.brw.common.constants.Constants;
 
 import com.brw.entities.BusinessDetails;
 import com.brw.entities.BusinessInfo;
 import com.brw.entities.RelatedBusiness;
-import com.brw.entities.UserBusiness;
 import com.brw.service.BizTransactionService;
 import com.brw.service.EstimateService;
 

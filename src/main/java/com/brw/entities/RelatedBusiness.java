@@ -13,7 +13,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "t_brw_user_related_business")
+@Table(name = "t_brw_related_business")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class RelatedBusiness implements Serializable {
 

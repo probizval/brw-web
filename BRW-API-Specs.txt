@@ -1760,7 +1760,7 @@ http://localhost:8080/api/business/v1/addRelatedBusiness
 
 Request-
 {
-    "invokerId": 1001
+    "invokerId": 1001,
     "businessId": 1000000,
     "relatedBizId": 1000001
 }
@@ -1771,10 +1771,10 @@ Response-
     "relationshipId": 0,
     "businessId": 1000000,
     "relatedBizId": 1000001,
-    "createdByUserId": 0,
-    "createDate": null,
-    "updatedByUserId": 0,
-    "updateDate": null
+    "createdByUserId": 1001,
+    "createDate": "2020-01-13 18:44",
+    "updatedByUserId": 1001,
+    "updateDate": "2020-01-13 18:44"
 }
 
 
@@ -1785,7 +1785,7 @@ http://localhost:8080/api/business/v1/getRelatedBusinesses
 
 Request-
 {
-   "userId": 1001
+	"businessId": 1000000
 }
 
 Response-
@@ -1793,24 +1793,16 @@ Response-
     "status": "success",
     "httpStatus": "OK",
     "data": {
-        "searchAgentsList": [
+        "relatedBusinessList": [
             {
-                "userId": 1001,
-                "relationship": "OWNER",
+                "invokerId": 0,
+                "relationshipId": 0,
                 "businessId": 1000000,
+                "relatedBizId": 1000001,
                 "createdByUserId": 1001,
-                "createDate": "2020-01-12 11:43",
+                "createDate": "2020-01-13 18:44",
                 "updatedByUserId": 1001,
-                "updateDate": "2020-01-12 11:43"
-            },
-            {
-                "userId": 1001,
-                "relationship": "BROKER",
-                "businessId": 1000001,
-                "createdByUserId": 1001,
-                "createDate": "2020-01-12 12:00",
-                "updatedByUserId": 1001,
-                "updateDate": "2020-01-12 12:00"
+                "updateDate": "2020-01-13 18:44"
             }
         ],
         "totalCount": null,
@@ -1832,8 +1824,9 @@ http://localhost:8080/api/business/v1/deleteRelatedBusiness
 
 Request-
 {
-   	"userId": 1001,
-	"relationship": "BROKER"
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "relatedBizId": 1000001
 }
 
 Response-
