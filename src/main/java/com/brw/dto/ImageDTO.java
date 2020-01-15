@@ -10,87 +10,50 @@ import java.io.Serializable;
 public class ImageDTO implements Serializable {
 
 	private static final long serialVersionUID = 1941284759903233525L;
-	
-	private int invokerId;
-	
+		
 	private int imageId;
-	
-	private int bizId;
-	
 	private String url;
-	
-	private String createdBy;
-	
+	private int createdByUserId;
 	private String createDate;
+	private int updatedByUserId;
+	private String updateDate;
 	
-	private String updatedBy;
-	
-	private String updatDate;
-	
-	public int getInvokerId() {
-		return invokerId;
-	}
-
-	public void setInvokerId(int invokerId) {
-		this.invokerId = invokerId;
-	}
-
 	public int getImageId() {
 		return imageId;
 	}
-
 	public void setImageId(int imageId) {
 		this.imageId = imageId;
 	}
-
-	public int getBizId() {
-		return bizId;
-	}
-
-	public void setBizId(int bizId) {
-		this.bizId = bizId;
-	}
-
 	public String getUrl() {
 		return url;
 	}
-
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
-	public String getCreatedBy() {
-		return createdBy;
+	public int getCreatedByUserId() {
+		return createdByUserId;
 	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setCreatedByUserId(int createdByUserId) {
+		this.createdByUserId = createdByUserId;
 	}
-
 	public String getCreateDate() {
 		return createDate;
 	}
-
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
-
-	public String getUpdatedBy() {
-		return updatedBy;
+	public int getUpdatedByUserId() {
+		return updatedByUserId;
 	}
-
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
+	public void setUpdatedByUserId(int updatedByUserId) {
+		this.updatedByUserId = updatedByUserId;
 	}
-
-	public String getUpdatDate() {
-		return updatDate;
+	public String getUpdateDate() {
+		return updateDate;
 	}
-
-	public void setUpdatDate(String updatDate) {
-		this.updatDate = updatDate;
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
 	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

@@ -49,8 +49,8 @@ public class ImageController implements ErrorController {
 		logger.info("Add the New Business Details");
 		
 		try {
-			ImagesListDTO iListDTO = imageService.addImages(imagesListDTO);
-			return null;
+			ImagesListDTO returnImagesListDTO = imageService.addImages(imagesListDTO);
+			return new ResponseEntity<>(returnImagesListDTO, HttpStatus.OK);
 			
 		} catch (InternalServerError e) {
 			// TODO: handle exception

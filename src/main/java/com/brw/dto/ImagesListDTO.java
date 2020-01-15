@@ -12,6 +12,10 @@ public class ImagesListDTO implements Serializable {
 
 	private static final long serialVersionUID = -65223447914153444L;
 	
+	private int invokerId;
+
+	private int businessId;
+	
 	private List<ImageDTO> imagesList;
 	
 	private Long totalCount;
@@ -19,6 +23,26 @@ public class ImagesListDTO implements Serializable {
 	private Integer pageNumber;
 	
 	private Integer pageSize;
+	
+	public int getInvokerId() {
+		return invokerId;
+	}
+
+	public void setInvokerId(int invokerId) {
+		this.invokerId = invokerId;
+	}
+
+	public int getBusinessId() {
+		return businessId;
+	}
+
+	public void setBusinessId(int businessId) {
+		this.businessId = businessId;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 	public Long getTotalCount() {
 		return totalCount;

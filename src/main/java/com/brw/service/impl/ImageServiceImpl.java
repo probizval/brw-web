@@ -2,16 +2,18 @@ package com.brw.service.impl;
 
 /**
  * @author sidpatil
- * 2019
+ * 2020
  */
 
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.brw.common.constants.Constants;
 import com.brw.dao.ImageDAO;
 import com.brw.dto.ImageDTO;
 import com.brw.dto.ImagesListDTO;
@@ -21,48 +23,49 @@ import com.brw.exceptions.ImageException;
 
 @Component
 public class ImageServiceImpl implements com.brw.service.ImageService {
-	
-	private static final String businessId = null;
+		
 	@Autowired
-
 	private ImageDAO imageDAO;	
+	
 	@Override
 	public ImagesListDTO addImages(ImagesListDTO imagesListDTO) {
-		System.out.println("222 **** Inside EstimateServiceImpl.addEstimates()");
+		System.out.println("222 **** Inside ImageServiceImpl.addImages()");
 
 		List<ImageDTO> imagesDTOList = imagesListDTO.getImagesList();
-		List<ImageDTO> imgDTOList = new ArrayList<ImageDTO>();
+		List<ImageDTO> returnImageDTOList = new ArrayList<ImageDTO>();
 		ImagesListDTO returnImagesListDTO = new ImagesListDTO();
 
+		Image returnImage = new Image();
 		Image image;
-		ImageDTO retimgDTO;
+		ImageDTO retImageDTO;
 		
 		for (ImageDTO imageDTO: imagesDTOList) {
 			
 			image = new Image();
-			retimgDTO = new ImageDTO();
-			
-			//image.setImageId(imageDTO.getImageId());
-			image.setBusinessId(imageDTO.getBizId());
+
+			image.setBusinessId(imagesListDTO.getBusinessId());
 			image.setUrl(imageDTO.getUrl());
-			image.setCreatedByUserId(imageDTO.getInvokerId());
+			image.setCreatedByUserId(imagesListDTO.getInvokerId());
 			image.setCreateDate(LocalDateTime.now());
-			image.setUpdatedByUserId(imageDTO.getInvokerId());
+			image.setUpdatedByUserId(imagesListDTO.getInvokerId());
 			image.setUpdateDate(LocalDateTime.now());
 			
-			Image img = imageDAO.save(image);
+			returnImage = imageDAO.save(image);
 			
-			retimgDTO.setImageId(img.getImageId());
-			retimgDTO.setBizId(img.getBusinessId());
-			retimgDTO.setUrl(img.getUrl());
-			//retimgDTO.setCreatedByUserId(img.getCreatedByUserId());
-			//retimgDTO.setCreateDate(img.getCreateDate());
-			//retimgDTO.setUpdatedByUserId(img.getUpdatedByUserId());
-			//retimgDTO.setUpdateDate(img.now());
+			retImageDTO = new ImageDTO();
+
+			retImageDTO.setImageId(returnImage.getImageId());
+			//retimgDTO.setBizId(returnImage.getBusinessId());
+			retImageDTO.setUrl(returnImage.getUrl());
+			retImageDTO.setCreatedByUserId(returnImage.getCreatedByUserId());
+			retImageDTO.setCreateDate(returnImage.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+			retImageDTO.setUpdatedByUserId(returnImage.getUpdatedByUserId());
+			retImageDTO.setUpdateDate(returnImage.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 			
-			imgDTOList.add(retimgDTO);
+			returnImageDTOList.add(retImageDTO);
 		}
-		returnImagesListDTO.setImagesList(imgDTOList);
+		returnImagesListDTO.setBusinessId(returnImage.getBusinessId());
+		returnImagesListDTO.setImagesList(returnImageDTOList);
 		return returnImagesListDTO;
 	}
 	

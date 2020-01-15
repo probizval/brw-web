@@ -4,7 +4,7 @@ rW
 
 Created By: Sid Patil
 Create Date: 11/14/2019
-Update Date: 01/13/2020
+Update Date: 01/14/2020
 
 
 Table of Contents -
@@ -54,23 +54,26 @@ For Business Type specific details use AddAdditionalAttributes.
 
 21. DeleteUserBusiness - Service to de-link User and Business association.
 
-23. AddRelatedBusiness - Service to add related business - Eg. Mechanic Shop associated with Gas Station
+22. AddRelatedBusiness - Service to add related business - Eg. Mechanic Shop associated with Gas Station
  
-24. GetRelatedBusinesses - Service to list all the associated businesses.
+23. GetRelatedBusinesses - Service to list all the associated businesses.
 
-25. DeleteRelatedBusiness - Service to delete the associated business one at a time.
+24. DeleteRelatedBusiness - Service to delete the associated business one at a time.
 
+25. AddUserActivity - Service to capture User Activity on the BRW Website.
+
+26. GetTotalBusinessViews - Service to get Total Business Detail page Views.
+
+27. GetBusinessViewsSince - Service to get Business Detail page Views since a specific date.
+
+28. AddImages
+
+29. GetImages
+
+30. DeleteImages
 
 Pending from Phase 1-
-1. AddImages
-2. UpdateImages
-3. GetImages
-
-4. AddUserActivity - Service to capture User Activity on the BRW Website.
-5. GetTotalBusinessViews - Service to get Total Business Detail page Views.
-6. GetBusinessViewsSince - Service to get Business Detail page Views since a specific date.
-
-7. RunSearchAgent
+1. RunSearchAgent
 
 Phase 2: Functionality where users can sign up for services using payment gateway, get billed automatically, 
 and pull out the billing details
@@ -1452,37 +1455,7 @@ Response -
     "updateDate": "2020-01-04 12:11"
 }
 
-
-14.	AddImages
-Method - Post
-End Point –
-http://localhost:8080/api/image/v1/addImages
-
-Request-
-{
-    "imagesList": [
-        {
-        	"invokerId": "1001",
-            "businessId": "10000000",
-            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/Rvxn-vAmo6vwR7DE4spbnQ/l.jpg"
-        },
-        {
-            "invokerId": "1001",
-            "businessId": "10000000",
-            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/sqzsQkM3zMnMlwCpLSAehA/o.jpg"
-        },
-        {
-            "invokerId": "1001",
-            "businessId": "10000000",
-            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/faqTp5HgEKYnO_fv1wicQw/o.jpg"
-        }
-    ]
-}
-
-Response-
-
-
-15.	SendEmail
+14.	SendEmail
 Method - Post
 End Point –
 http://localhost:8080/api/email/v1/sendEmail
@@ -1507,7 +1480,7 @@ Response-
 }
 
 
-16.	AddSearchAgent
+15.	AddSearchAgent
 Method - Post
 End Point –
 http://localhost:8080/api/searchAgent/v1/addSearchAgent
@@ -1539,7 +1512,7 @@ Response-
 }
 
 
-17.	GetSearchAgents
+16.	GetSearchAgents
 Method - Post
 End Point –
 http://localhost:8080/api/searchAgent/v1/getSearchAgents
@@ -1580,7 +1553,7 @@ Response-
     "validationErrors": null
 }
 
-18.	DeleteSearchAgent
+17.	DeleteSearchAgent
 Method - Post
 End Point –
 http://localhost:8080/api/searchAgent/v1/deleteSearchAgent
@@ -1604,7 +1577,7 @@ Response-
     "validationErrors": null
 }
 
-19. RunSearchAgent - This service is not to be invoked automatically(untill spring scheduler is configured). 
+18. RunSearchAgent - This service is not to be invoked automatically(untill spring scheduler is configured). 
 This service takes the Search Agent duration as input. 
 Pulls the list of users and their respective search agents from t_rw_search_agent table, runs it and sends the 
 email to the users.
@@ -1652,7 +1625,7 @@ Response -
     ]
 }
 
-20.	AddUserBusiness
+19.	AddUserBusiness
 Method - Post
 End Point –
 http://localhost:8080/api/user/v1/addUserBusiness
@@ -1676,7 +1649,7 @@ Response-
 }
 
 
-21.	GetUserBusiness
+20.	GetUserBusiness
 Method - Post
 End Point –
 http://localhost:8080/api/user/v1/getUserBusinesses
@@ -1723,7 +1696,7 @@ Response-
     "validationErrors": null
 }
 
-22.	DeleteUserBusiness
+21.	DeleteUserBusiness
 Method - Post
 End Point –
 http://localhost:8080/api/user/v1/deleteUserBusiness
@@ -1748,7 +1721,7 @@ Response-
 }
 
 
-20.	AddRelatedBusiness
+22.	AddRelatedBusiness
 Method - Post
 End Point –
 http://localhost:8080/api/business/v1/addRelatedBusiness
@@ -1812,7 +1785,7 @@ Response-
     "validationErrors": null
 }
 
-24.	DeleteRelatedBusiness
+23.	DeleteRelatedBusiness
 Method - Post
 End Point –
 http://localhost:8080/api/business/v1/deleteRelatedBusiness
@@ -1836,4 +1809,93 @@ Response-
     "errorMessage": null,
     "validationErrors": null
 }
+
+24. TrackUserActivity - Service to capture User Activity on the BRW Website.
+Method - Post
+End Point –
+http://localhost:8080/api/user/v1/trackUserActivity
+
+Request-
+{
+    "userId": 1001,
+	"businessId": 1000000,
+	"type": "READ",
+	"subType": "BUSINESS"
+}
+
+Response-
+{
+    "userId": 1001,
+    "businessId": 1000000,
+    "type": "BUTTON_CLICK",
+    "subType": "APPLY_BIZ_LOAN",
+    "dateSince": null,
+    "createdByUserId": 1001,
+    "createDate": "2020-01-14 18:55",
+    "updatedByUserId": 1001,
+    "updateDate": "2020-01-14 18:55"
+}
+
+25. GetTotalBusinessViews - Service to get Total Business Detail page Views.
+
+26. GetBusinessViewsSince - Service to get Business Detail page Views since a specific date.
+
+27.	AddImages
+Method - Post
+End Point –
+http://localhost:8080/api/image/v1/addImages
+Request-
+{
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "imagesList": [
+        {
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/Rvxn-vAmo6vwR7DE4spbnQ/l.jpg"
+        },
+        {
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/sqzsQkM3zMnMlwCpLSAehA/o.jpg"
+        },
+        {
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/faqTp5HgEKYnO_fv1wicQw/o.jpg"
+        }
+    ]
+}
+Response-
+{
+    "invokerId": 0,
+    "businessId": 1000000,
+    "imagesList": [
+        {
+            "imageId": 12,
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/Rvxn-vAmo6vwR7DE4spbnQ/l.jpg",
+            "createdByUserId": 1001,
+            "createDate": "2020-01-14 20:16",
+            "updatedByUserId": 1001,
+            "updateDate": "2020-01-14 20:16"
+        },
+        {
+            "imageId": 13,
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/sqzsQkM3zMnMlwCpLSAehA/o.jpg",
+            "createdByUserId": 1001,
+            "createDate": "2020-01-14 20:16",
+            "updatedByUserId": 1001,
+            "updateDate": "2020-01-14 20:16"
+        },
+        {
+            "imageId": 14,
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/faqTp5HgEKYnO_fv1wicQw/o.jpg",
+            "createdByUserId": 1001,
+            "createDate": "2020-01-14 20:16",
+            "updatedByUserId": 1001,
+            "updateDate": "2020-01-14 20:16"
+        }
+    ],
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null
+}
+
+28. GetImages
+
+29. DeleteImages
 
