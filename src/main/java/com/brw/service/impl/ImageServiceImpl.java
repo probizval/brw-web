@@ -101,8 +101,16 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	@Override
 	public int deleteImages(ImagesListDTO imagesListDTO) {
 		System.out.println("222 **** Inside ImageServiceImpl.getImages()");
-
 		
-		return 0;
+		int businessId = imagesListDTO.getBusinessId();
+		int nurDeleted = 0;
+		
+		for (ImageDTO imageDTO: imagesListDTO.getImagesList()) {
+			
+			imageDAO.deleteImage(businessId, imageDTO.getImageId());
+			nurDeleted ++;
+		}
+		
+		return nurDeleted;
 	}
 }

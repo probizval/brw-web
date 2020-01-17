@@ -1978,6 +1978,29 @@ Response-
 Method - Post
 End Point – http://localhost:8080/api/image/v1/deleteImages
 Request-
-
+{
+    "invokerId": 1001,
+    "businessId": 1000000,
+    "imagesList": [
+        {
+            "imageId": 12
+        },
+        {
+            "imageId": 13
+        }
+    ]
+}
 
 Response-
+{
+    "status": "success",
+    "httpStatus": "OK",
+    "data": "success",
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
