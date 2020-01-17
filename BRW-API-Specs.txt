@@ -4,7 +4,7 @@ rW
 
 Created By: Sid Patil
 Create Date: 11/14/2019
-Update Date: 01/16/2020
+Update Date: 01/17/2020
 
 
 Table of Contents -
@@ -263,6 +263,9 @@ Request -
     "zip": 0,
     "county": "",
     "stateCode": "CA"
+    "latitude": 37.5485,
+    "longitude": 121.9886,
+    "searchRange":10
 }
 
 Response –
@@ -1896,6 +1899,85 @@ Response-
 }
 
 28. GetImages
+Method - Post
+End Point – http://localhost:8080/api/image/v1/getImages
+Request-
+{
+    "invokerId": 1001,
+    "businessId": 1000000
+}
+
+Response-
+{
+    "invokerId": 0,
+    "businessId": 1000000,
+    "imagesList": [
+        {
+            "imageId": 1,
+            "url": "https://lh3.googleusercontent.com/p/AF1QipPaiKNDvC2FPKud_j_1oBzpCclgBPrPT7QlGPC_=s1600-w500",
+            "createdByUserId": 1001,
+            "createDate": "2019-12-13 16:00",
+            "updatedByUserId": 1001,
+            "updateDate": "2019-12-13 16:00"
+        },
+        {
+            "imageId": 9,
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/Rvxn-vAmo6vwR7DE4spbnQ/l.jpg",
+            "createdByUserId": 1001,
+            "createDate": "2020-01-14 20:15",
+            "updatedByUserId": 1001,
+            "updateDate": "2020-01-14 20:15"
+        },
+        {
+            "imageId": 10,
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/sqzsQkM3zMnMlwCpLSAehA/o.jpg",
+            "createdByUserId": 1001,
+            "createDate": "2020-01-14 20:15",
+            "updatedByUserId": 1001,
+            "updateDate": "2020-01-14 20:15"
+        },
+        {
+            "imageId": 11,
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/faqTp5HgEKYnO_fv1wicQw/o.jpg",
+            "createdByUserId": 1001,
+            "createDate": "2020-01-14 20:15",
+            "updatedByUserId": 1001,
+            "updateDate": "2020-01-14 20:15"
+        },
+        {
+            "imageId": 12,
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/Rvxn-vAmo6vwR7DE4spbnQ/l.jpg",
+            "createdByUserId": 1001,
+            "createDate": "2020-01-14 20:16",
+            "updatedByUserId": 1001,
+            "updateDate": "2020-01-14 20:16"
+        },
+        {
+            "imageId": 13,
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/sqzsQkM3zMnMlwCpLSAehA/o.jpg",
+            "createdByUserId": 1001,
+            "createDate": "2020-01-14 20:16",
+            "updatedByUserId": 1001,
+            "updateDate": "2020-01-14 20:16"
+        },
+        {
+            "imageId": 14,
+            "url": "https://s3-media0.fl.yelpcdn.com/bphoto/faqTp5HgEKYnO_fv1wicQw/o.jpg",
+            "createdByUserId": 1001,
+            "createDate": "2020-01-14 20:16",
+            "updatedByUserId": 1001,
+            "updateDate": "2020-01-14 20:16"
+        }
+    ],
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null
+}
 
 29. DeleteImages
+Method - Post
+End Point – http://localhost:8080/api/image/v1/deleteImages
+Request-
 
+
+Response-

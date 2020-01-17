@@ -36,6 +36,7 @@ public class BusinessDetailsDTO {
 	private Integer zip;
 	private double latitude;
 	private double longitude;
+	private Integer searchRange;
 	private String phone;
 	private String phoneExt;
 	private String email;
@@ -255,6 +256,12 @@ public class BusinessDetailsDTO {
 	}
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+	public Integer getSearchRange() {
+		return searchRange;
+	}
+	public void setSearchRange(Integer searchRange) {
+		this.searchRange = searchRange;
 	}
 	public String getPhone() {
 		return phone;

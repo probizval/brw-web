@@ -1,5 +1,7 @@
 package com.brw.dao;
 
+import java.util.List;
+
 /**
  * @author siyapatil
  * 2019
@@ -15,6 +17,6 @@ import com.brw.entities.Image;
 @Repository
 public interface ImageDAO extends PagingAndSortingRepository<Image, Integer>{
 		
-	@Query(nativeQuery=true, value="SELECT * FROM t_brw_image WHERE biz_id = :businessId);")
-	Image getImages(@Param ("businessId") int businessId);
+	@Query(nativeQuery=true, value="SELECT * FROM t_brw_image WHERE biz_id = :businessId")
+	List <Image> getImages(@Param ("businessId") int businessId);
 }
