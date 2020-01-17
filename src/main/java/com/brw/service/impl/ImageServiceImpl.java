@@ -17,8 +17,10 @@ import com.brw.common.constants.Constants;
 import com.brw.dao.ImageDAO;
 import com.brw.dto.ImageDTO;
 import com.brw.dto.ImagesListDTO;
+import com.brw.dto.SearchAgentDTO;
+import com.brw.dto.SearchAgentsListDTO;
 import com.brw.entities.Image;
-
+import com.brw.entities.SearchAgent;
 import com.brw.exceptions.ImageException;
 
 @Component
@@ -70,12 +72,37 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	}
 	
 	@Override
-	public ImagesListDTO getImages(int businessId) throws ImageException {
+	public ImagesListDTO getImages(int businessId) {
+		System.out.println("222 **** Inside ImageServiceImpl.getImages()");
+
+		List<Image> imageList = (List<Image>)imageDAO.getImages(businessId);
+		List<ImageDTO> returnImageListDTO = new ArrayList<ImageDTO>();
+		ImagesListDTO returnImageDTOList = new ImagesListDTO();
+		int bizId = 0;
 		
-		ImagesListDTO imageListRet = new ImagesListDTO();
+		for (Image image: imageList) {
+			ImageDTO returnImageDTO = new ImageDTO();
+			
+			returnImageDTO.setImageId(image.getImageId());
+			returnImageDTO.setUrl(image.getUrl());
+			returnImageDTO.setCreatedByUserId(image.getCreatedByUserId());
+			returnImageDTO.setCreateDate(image.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+			returnImageDTO.setUpdatedByUserId(image.getUpdatedByUserId());
+			returnImageDTO.setUpdateDate(image.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+			
+			bizId = image.getBusinessId();
+			returnImageListDTO.add(returnImageDTO);
+		}
+		returnImageDTOList.setBusinessId(bizId);
+		returnImageDTOList.setImagesList(returnImageListDTO);
+		return returnImageDTOList;
+	}
+	
+	@Override
+	public int deleteImages(ImagesListDTO imagesListDTO) {
+		System.out.println("222 **** Inside ImageServiceImpl.getImages()");
+
 		
-		//ssList<Images> imageList = (List<Images>)imagesDAO.getImages(businessId);
-		
-		return imageListRet;
+		return 0;
 	}
 }
