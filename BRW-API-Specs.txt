@@ -255,17 +255,17 @@ http://localhost:8080/api/business/v1/searchBusiness
 
 Request -
 {
-    "name": "",
-    "type": "",
+    "name": "SID",
+    "type": "RESTAURANT",
     "street1": "",
     "street2": "",
-    "city": "Fremont",
+    "city": "",
     "zip": 0,
     "county": "",
-    "stateCode": "CA",
-    "latitude": 37.5485,
-    "longitude": 121.9886,
-    "searchRange":10
+    "stateCode": "",
+    "latitude": 37.7749,
+    "longitude": -122.4194,
+    "rangeMile": 30
 }
 
 Response –
