@@ -3,7 +3,7 @@ package com.brw.dto;
 
 /**
  * @author sidpatil
- * 2019
+ * 2019-20
  */
 
 public class BusinessDetailsDTO {
@@ -36,7 +36,7 @@ public class BusinessDetailsDTO {
 	private Integer zip;
 	private double latitude;
 	private double longitude;
-	private Integer searchRange;
+	private Integer rangeMile;
 	private String phone;
 	private String phoneExt;
 	private String email;
@@ -257,11 +257,11 @@ public class BusinessDetailsDTO {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	public Integer getSearchRange() {
-		return searchRange;
+	public Integer getRangeMile() {
+		return rangeMile;
 	}
-	public void setSearchRange(Integer searchRange) {
-		this.searchRange = searchRange;
+	public void setRangeMile(Integer rangeMile) {
+		this.rangeMile = rangeMile;
 	}
 	public String getPhone() {
 		return phone;

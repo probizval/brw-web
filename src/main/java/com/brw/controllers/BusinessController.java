@@ -30,14 +30,12 @@ import com.brw.dto.BusinessDetailsDTO;
 import com.brw.dto.BusinessListDTO;
 import com.brw.dto.RelatedBusinessDTO;
 import com.brw.dto.RelatedBusinessListDTO;
-import com.brw.dto.UserBusinessDTO;
-import com.brw.dto.UserBusinessListDTO;
 import com.brw.service.BusinessService;
 import com.brw.service.VendorDataService;
 
 /**
  * @author sidpatil
- * 2020
+ * 2019-20
  */
 
 @RestController

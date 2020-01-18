@@ -66,11 +66,11 @@ For Business Type specific details use AddAdditionalAttributes.
 
 27. GetBusinessViewsSince - Service to get Business Detail page Views since a specific date.
 
-28. AddImages
+28. AddImages - Service to add Business Images.
 
-29. GetImages
+29. GetImages - Service to get Business Images based on Business Id.
 
-30. DeleteImages
+30. DeleteImages - Service to delete one or many images at a time.
 
 Pending from Phase 1-
 1. RunSearchAgent
@@ -262,7 +262,7 @@ Request -
     "city": "Fremont",
     "zip": 0,
     "county": "",
-    "stateCode": "CA"
+    "stateCode": "CA",
     "latitude": 37.5485,
     "longitude": 121.9886,
     "searchRange":10

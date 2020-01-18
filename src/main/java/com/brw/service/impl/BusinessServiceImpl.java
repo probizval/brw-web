@@ -2,7 +2,7 @@ package com.brw.service.impl;
 
 /**
  * @author sidpatil
- * 2019
+ * 2019-20
  */
 
 import java.util.ArrayList;
@@ -33,8 +33,6 @@ import com.brw.service.EstimateService;
 @Component
 public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
-	//private static final String Constant.Constant.EMPTY_STRING = null;
-
 	@Autowired
 	private BusinessDetailsDAO businessDetailsDAO;
 	
@@ -68,9 +66,16 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getCounty: "+businessDTO.getCounty());
 
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getStateCode: "+businessDTO.getStateCode());
+		
+		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getLatitude: "+businessDTO.getLatitude());
+
+		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getLongitude: "+businessDTO.getLongitude());
+
+		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getRangeMile: "+businessDTO.getRangeMile());
+
 
 		List<BusinessInfo> businessList = null;
-		if(null != businessDTO.getZip() && 0 != businessDTO.getZip()) {
+		if (null != businessDTO.getZip() && 0 != businessDTO.getZip()) {
 			if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
 				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_1(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getStreet2(), businessDTO.getZip());
 			
@@ -138,6 +143,23 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			} else {
 				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_21(businessDTO.getCounty(), businessDTO.getStateCode());
 
+			}
+		} else if (businessDTO.getLatitude() != 0 && businessDTO.getLongitude() != 0) {
+			System.out.println("**** XXX Constants.PERCENT+businessDTO.getName()+Constants.PERCENT: "+Constants.PERCENT+businessDTO.getName()+Constants.PERCENT);
+
+			if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
+				System.out.println("**** XXX 111 businessDTO.getName(): "+businessDTO.getName());
+				System.out.println("**** XXX 111 businessDTO.getType(): "+businessDTO.getType());
+
+				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_22(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getType(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
+			
+			} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
+				System.out.println("**** XXX 222 businessDTO.getName(): "+businessDTO.getName());
+				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_23(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
+			
+			} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
+				System.out.println("**** XXX 333 businessDTO.getType(): "+businessDTO.getType());
+				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_24(businessDTO.getType(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
 			}
 		}
 		

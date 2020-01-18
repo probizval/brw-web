@@ -2,7 +2,7 @@ package com.brw.dao;
 
 /**
  * @author sidpatil
- * 2019
+ * 2019-20
  */
 
 import java.util.List;
@@ -200,5 +200,22 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "FROM t_brw_business "
 			+ "WHERE add_county = :county "
 			+ "AND add_state = :state")
-	List<BusinessInfo> searchBusiness_21(@Param ("county") String county, @Param ("state") String state);	
+	List<BusinessInfo> searchBusiness_21(@Param ("county") String county, @Param ("state") String state);
+	
+	
+	
+	
+	
+	
+	//Search where non of the non-required attributes are part of the input
+	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, ( 3959 * acos( cos( radians(:latitude) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(:longitude) ) + sin( radians(:latitude) ) * sin( radians( latitude ) ) ) ) AS distance FROM t_brw_business WHERE name_dba LIKE :name AND type = :type HAVING distance < :rangeMile")
+	List<BusinessInfo> searchBusiness_22(@Param ("name") String name, @Param ("type") String type, @Param ("latitude") double latitude, @Param ("longitude") double longitude, @Param ("rangeMile") int rangeMile);
+	
+	//Search where non of the non-required attributes are part of the input
+	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, ( 3959 * acos( cos( radians(:latitude) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(:longitude) ) + sin( radians(:latitude) ) * sin( radians( latitude ) ) ) ) AS distance FROM t_brw_business WHERE name_dba LIKE :name HAVING distance < :rangeMile")
+	List<BusinessInfo> searchBusiness_23(@Param ("name") String name, @Param ("latitude") double latitude, @Param ("longitude") double longitude, @Param ("rangeMile") int rangeMile);
+	
+	//Search where non of the non-required attributes are part of the input
+	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, ( 3959 * acos( cos( radians(:latitude) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(:longitude) ) + sin( radians(:latitude) ) * sin( radians( latitude ) ) ) ) AS distance FROM t_brw_business WHERE type = :type HAVING distance < :rangeMile")
+	List<BusinessInfo> searchBusiness_24(@Param ("type") String type, @Param ("latitude") double latitude, @Param ("longitude") double longitude, @Param ("rangeMile") int rangeMile);
 }
