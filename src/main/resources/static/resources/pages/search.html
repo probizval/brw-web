@@ -42,21 +42,21 @@
                 <div class="row item-listing grid">
                     <div ng-repeat="prop in searchList track by $index" class="item col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-6" id="prop{{$index}}">
                         <div class="item-image">
-                            <a class="item-image" href="#propertyDetails/{{prop.id}}">
-                                <img src="{{prop.imageUrl}}" style="width:400px;height:240px" class="img-fluid" alt="">
+                            <a class="item-image" href="#businessDetails/{{prop.businessId}}">
+                                <img src="{{prop.imageFirst}}" style="width:400px;height:240px" class="img-fluid" alt="">
                                 <a class="save-item" ng-class="{'save-item-active': prop.isBookMarked}" ng-click="bookMarked(prop, $index)"><i class="fa fa-star"></i></a>
                             </a>
 
-                            <a href="#propertyDetails/{{prop.id}}" class="item-meta">
-                                <span class="item-badge-left item-address">For Sale{{prop.propertyAvailableFor}}</span>
-                                <span class="item-badge-right item-address">{{prop.businessType}}</span>
+                            <a href="#businessDetails/{{prop.businessId}}" class="item-meta">
+                                <span class="item-badge-left item-address" ng-if="prop.isforSell">For Sale {{prop.isforSell}}</span>
+                                <span class="item-badge-right item-address">{{prop.type}}</span>
                                 <br/>
-                                <span class="item-price" ng-if="prop.estatedEstimatedValue">{{ prop.estatedEstimatedValue | currency : "$" : false }}</span> &nbsp;&nbsp;
-                                <span class="item-badge-right item-price" ng-if="prop.lotSize">{{prop.lotSize}} sq ft.</span>
+                                <span class="item-price" ng-if="prop.isforSell">{{ prop.forSellPrice | currency : "$" : false }}</span> &nbsp;&nbsp;
+                                <span class="item-badge-right item-price" ng-if="prop.sqftLot">{{prop.sqftLot}} sq ft.</span>
                                 <br/>
-                                <span class="item-address" ng-if="prop.property_name">{{prop.propertyName}}</span>
+                                <span class="item-address" ng-if="prop.name">{{prop.name}}</span>
                                 <br/>
-                                <span class="item-address">{{ prop.propertyAddress }}, {{prop.city}}, {{prop.state}} {{prop.zipCode}}</span>
+                                <span class="item-address">{{ prop.street1 }}, {{prop.city}}, {{prop.stateCode}} {{prop.zip}}</span>
                             </a>
                         </div>
                     </div>
