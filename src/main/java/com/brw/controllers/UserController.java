@@ -15,6 +15,7 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 import com.brw.common.constants.Constants;
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
+import com.brw.dto.UserActivityDTO;
 import com.brw.dto.UserBusinessDTO;
 import com.brw.dto.UserBusinessListDTO;
 import com.brw.dto.UserDTO;
@@ -82,18 +83,18 @@ public class UserController implements ErrorController {
 		}
 	}
 	
-	@PostMapping(value = "getUserBusiness")
-	public ApiResponse<?> getUserBusiness(@RequestBody UserBusinessDTO userBusinessDTO) {
+	@PostMapping(value = "getUserBusinesses")
+	public ApiResponse<?> getUserBusinesses(@RequestBody UserBusinessDTO userBusinessDTO) {
 		
 		UserBusinessListDTO userBusinessListDTO = null;
 		try {
-			userBusinessListDTO = userService.getUserBusiness(userBusinessDTO.getUserId());
+			userBusinessListDTO = userService.getUserBusinesses(userBusinessDTO.getUserId());
+			return ApiResponse.withData(userBusinessListDTO);
 		} catch (InternalServerError e) {
 			e.printStackTrace();
 			// TODO: handle exception
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
 		}
-		return ApiResponse.withData(userBusinessListDTO);
 	}
 	
 	@PostMapping(value = "deleteUserBusiness")
@@ -101,6 +102,42 @@ public class UserController implements ErrorController {
 		try {
 			userService.deleteUserBusiness(userBusinessDTO.getUserId(), userBusinessDTO.getRelationship());
 			return ApiResponse.withData(Constants.RESPONSE_SUCCESS);
+		} catch (InternalServerError e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
+		}
+	}
+	
+	@PostMapping(value = "trackUserActivity")
+	public ResponseEntity<UserActivityDTO> trackUserActivity(@RequestBody UserActivityDTO userActivityDTO) {
+		try {
+			UserActivityDTO returnUserActivityDTO = userService.trackUserActivity(userActivityDTO);
+			return new ResponseEntity<>(returnUserActivityDTO, HttpStatus.OK);
+		} catch (InternalServerError e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			return new ResponseEntity<>(userActivityDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping(value = "getTotalBusinessViews")
+	public ApiResponse<?> getTotalBusinessViews(@RequestBody UserActivityDTO userActivityDTO) {
+		try {
+			int viewCount = userService.getTotalBusinessViews(userActivityDTO.getBusinessId());
+			return ApiResponse.withData(viewCount);
+		} catch (InternalServerError e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
+		}
+	}
+	
+	@PostMapping(value = "getBusinessViewsSince")
+	public ApiResponse<?> getBusinessViewsSince(@RequestBody UserActivityDTO userActivityDTO) {
+		try {
+			int viewCount = userService.getBusinessViewsSince(userActivityDTO.getBusinessId(), userActivityDTO.getDateSince());
+			return ApiResponse.withData(viewCount);
 		} catch (InternalServerError e) {
 			e.printStackTrace();
 			// TODO: handle exception

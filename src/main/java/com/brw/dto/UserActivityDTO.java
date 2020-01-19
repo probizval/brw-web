@@ -1,34 +1,44 @@
 package com.brw.dto;
 
 /**
- * @author siyapatil
- * 2019
+ * @author sidpatil
+ * 2020
  */
+public class UserActivityDTO {
 
-import java.io.Serializable;
-
-public class ImageDTO implements Serializable {
-
-	private static final long serialVersionUID = 1941284759903233525L;
-		
-	private int imageId;
-	private String url;
+	private int userId;
+	private int businessId;
+	private String type;
+	private String subType;
+	private String dateSince;
 	private int createdByUserId;
 	private String createDate;
 	private int updatedByUserId;
 	private String updateDate;
 	
-	public int getImageId() {
-		return imageId;
+	public int getUserId() {
+		return userId;
 	}
-	public void setImageId(int imageId) {
-		this.imageId = imageId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public String getUrl() {
-		return url;
+	public int getBusinessId() {
+		return businessId;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setBusinessId(int businessId) {
+		this.businessId = businessId;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getSubType() {
+		return subType;
+	}
+	public void setSubType(String subType) {
+		this.subType = subType;
 	}
 	public int getCreatedByUserId() {
 		return createdByUserId;
@@ -54,7 +64,10 @@ public class ImageDTO implements Serializable {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getDateSince() {
+		return dateSince;
+	}
+	public void setDateSince(String dateSince) {
+		this.dateSince = dateSince;
 	}
 }

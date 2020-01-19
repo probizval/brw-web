@@ -13,7 +13,7 @@ import com.brw.entities.UserBusiness;
 public interface UserBusinessDAO extends PagingAndSortingRepository<UserBusiness, Integer> {
 
 	@Query(nativeQuery=true, value="SELECT * FROM t_brw_user_business WHERE user_id = :userId")
-	List<UserBusiness> getUserBusiness(@Param ("userId") int userId);
+	List<UserBusiness> getUserBusinesses(@Param ("userId") int userId);
 	
 	@Modifying
 	@Transactional

@@ -1,34 +1,43 @@
 package com.brw.dto;
 
 /**
- * @author siyapatil
- * 2019
+ * @author sidpatil
+ * 2020
  */
+public class RelatedBusinessDTO {
 
-import java.io.Serializable;
-
-public class ImageDTO implements Serializable {
-
-	private static final long serialVersionUID = 1941284759903233525L;
-		
-	private int imageId;
-	private String url;
+	private int invokerId;
+	private int relationshipId;
+	private int businessId;
+	private int relatedBizId;
 	private int createdByUserId;
 	private String createDate;
 	private int updatedByUserId;
 	private String updateDate;
 	
-	public int getImageId() {
-		return imageId;
+	public int getInvokerId() {
+		return invokerId;
 	}
-	public void setImageId(int imageId) {
-		this.imageId = imageId;
+	public void setInvokerId(int invokerId) {
+		this.invokerId = invokerId;
 	}
-	public String getUrl() {
-		return url;
+	public int getRelationshipId() {
+		return relationshipId;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setRelationshipId(int relationshipId) {
+		this.relationshipId = relationshipId;
+	}
+	public int getBusinessId() {
+		return businessId;
+	}
+	public void setBusinessId(int businessId) {
+		this.businessId = businessId;
+	}
+	public int getRelatedBizId() {
+		return relatedBizId;
+	}
+	public void setRelatedBizId(int relatedBizId) {
+		this.relatedBizId = relatedBizId;
 	}
 	public int getCreatedByUserId() {
 		return createdByUserId;
@@ -53,8 +62,5 @@ public class ImageDTO implements Serializable {
 	}
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 }

@@ -19,4 +19,8 @@ public interface Constants {
 	public static final String INCOME_BASED = "INCOME_BASED";
 
 	public static final String MARKET_BASED = "INCOME_BASED";
+	
+	public static final String COMMA = ",";
+	
+	public static final String PERCENT = "%";
 }

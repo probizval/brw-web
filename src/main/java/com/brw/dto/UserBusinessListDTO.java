@@ -12,7 +12,7 @@ public class UserBusinessListDTO implements Serializable {
 
 	private static final long serialVersionUID = -65223447914153444L;
 	
-	private List<UserBusinessDTO> searchAgentsList;
+	private List<UserBusinessDTO> userBusinessList;
 	
 	private Long totalCount;
 	
@@ -20,12 +20,12 @@ public class UserBusinessListDTO implements Serializable {
 	
 	private Integer pageSize;
 
-	public List<UserBusinessDTO> getSearchAgentsList() {
-		return searchAgentsList;
+	public List<UserBusinessDTO> getUserBusinessList() {
+		return userBusinessList;
 	}
 
-	public void setSearchAgentsList(List<UserBusinessDTO> searchAgentsList) {
-		this.searchAgentsList = searchAgentsList;
+	public void setUserBusinessList(List<UserBusinessDTO> userBusinessList) {
+		this.userBusinessList = userBusinessList;
 	}
 
 	public Long getTotalCount() {

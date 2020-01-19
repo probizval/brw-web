@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
+import com.brw.common.constants.Constants;
+import com.brw.common.constants.ErrorCodes;
+import com.brw.common.response.ApiResponse;
+import com.brw.dto.ImageDTO;
 import com.brw.dto.ImagesListDTO;
 import com.brw.service.ImageService;
 
@@ -49,8 +53,8 @@ public class ImageController implements ErrorController {
 		logger.info("Add the New Business Details");
 		
 		try {
-			ImagesListDTO iListDTO = imageService.addImages(imagesListDTO);
-			return null;
+			ImagesListDTO returnImagesListDTO = imageService.addImages(imagesListDTO);
+			return new ResponseEntity<>(returnImagesListDTO, HttpStatus.OK);
 			
 		} catch (InternalServerError e) {
 			// TODO: handle exception
@@ -62,23 +66,39 @@ public class ImageController implements ErrorController {
 	 * @author siyapatil
 	 * getImages - Service to get the Business Images on the basis of biz_id 
 	 */
-	/*
 	@PostMapping(value = "getImages")
-	public ApiResponse<ImagesListDTO> getImages(@RequestBody ImageDTO imageDTO) {
+	public ResponseEntity<ImagesListDTO> getImages(@RequestBody ImagesListDTO imagesListDTO) {
 		
-		System.out.println("**** 111 Inside ImageController.getImages() bizId: "+imageDTO.getBizId());
+		System.out.println("**** 111 Inside ImageController.getImages() getBusinessId: "+imagesListDTO.getBusinessId());
 		
 		logger.info("Get the Business images based on business Id");
 		
 		try {
-			EstimatesListDTO eListDTo = estimateService.addEstimates(estimatesListDTO);
-			return new ResponseEntity<>(eListDTo, HttpStatus.OK);
-			
+			ImagesListDTO returnImagesListDTO = imageService.getImages(imagesListDTO.getBusinessId());
+			return new ResponseEntity<>(returnImagesListDTO, HttpStatus.OK);
 		} catch (InternalServerError e) {
 			// TODO: handle exception
-			return new ResponseEntity<>(estimatesListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(imagesListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
 	}
-	*/
+	
+	/**
+	 * @author siyapatil
+	 * deleteImages - Service to get the Business Images on the basis of biz_id 
+	 */
+	@PostMapping(value = "deleteImages")
+	public ApiResponse<?> deleteImages(@RequestBody ImagesListDTO imagesListDTO) {
+		
+		System.out.println("**** 111 Inside ImageController.getImages() getBusinessId: "+imagesListDTO.getBusinessId());
+		
+		logger.info("Get the Business images based on business Id");
+		
+		try {
+			int numOfDelImg = imageService.deleteImages(imagesListDTO);
+			return ApiResponse.withData(Constants.RESPONSE_SUCCESS);
+		} catch (InternalServerError e) {
+			// TODO: handle exception
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
+		}
+	}
 }

@@ -28,12 +28,14 @@ import com.brw.exceptions.BusinessException;
 import com.brw.exceptions.DataFromPBException;
 import com.brw.dto.BusinessDetailsDTO;
 import com.brw.dto.BusinessListDTO;
+import com.brw.dto.RelatedBusinessDTO;
+import com.brw.dto.RelatedBusinessListDTO;
 import com.brw.service.BusinessService;
 import com.brw.service.VendorDataService;
 
 /**
  * @author sidpatil
- * 2019
+ * 2019-20
  */
 
 @RestController
@@ -153,7 +155,8 @@ public class BusinessController implements ErrorController {
 			BusinessDetailsDTO bDTo = businessService.addBusinessDetails(businessDetailsDTO);
 			return new ResponseEntity<>(bDTo, HttpStatus.OK);
 			
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(businessDetailsDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -174,7 +177,8 @@ public class BusinessController implements ErrorController {
 			BusinessDetailsDTO bDTo = businessService.updateBusinessDetails(businessDetailsDTO);
 			return new ResponseEntity<>(bDTo, HttpStatus.OK);
 			
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(businessDetailsDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -194,9 +198,47 @@ public class BusinessController implements ErrorController {
 			BusinessDetailsDTO bDTo = businessService.updateBusinessDetails(businessDetailsDTO);
 			return bDTo;
 			
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	@PostMapping(value = "addRelatedBusiness")
+	public ResponseEntity<RelatedBusinessDTO> addRelatedBusiness(@RequestBody RelatedBusinessDTO relatedBusinessDTO) {
+		try {
+			RelatedBusinessDTO returnRelatedBusinessDTO = businessService.addRelatedBusiness(relatedBusinessDTO);
+			return new ResponseEntity<>(returnRelatedBusinessDTO, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			return new ResponseEntity<>(relatedBusinessDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping(value = "getRelatedBusinesses")
+	public ApiResponse<?> getRelatedBusiness(@RequestBody RelatedBusinessDTO relatedBusinessDTO) {
+		
+		RelatedBusinessListDTO relatedBusinessListDTO = null;
+		try {
+			relatedBusinessListDTO = businessService.getRelatedBusinesses(relatedBusinessDTO.getBusinessId());
+			return ApiResponse.withData(relatedBusinessListDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
+		}
+	}
+	
+	@PostMapping(value = "deleteRelatedBusiness")
+	public ApiResponse<?> deleteUserBusiness(@RequestBody RelatedBusinessDTO relatedBusinessDTO) {
+		try {
+			businessService.deleteRelatedBusiness(relatedBusinessDTO.getBusinessId(), relatedBusinessDTO.getRelatedBizId());
+			return ApiResponse.withData(Constants.RESPONSE_SUCCESS);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
 		}
 	}
 }

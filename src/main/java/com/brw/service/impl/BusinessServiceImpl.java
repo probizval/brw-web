@@ -2,7 +2,7 @@ package com.brw.service.impl;
 
 /**
  * @author sidpatil
- * 2019
+ * 2019-20
  */
 
 import java.util.ArrayList;
@@ -15,27 +15,32 @@ import org.springframework.stereotype.Component;
 
 import com.brw.dao.BusinessDetailsDAO;
 import com.brw.dao.BusinessInfoDAO;
+import com.brw.dao.RelatedBusinessDAO;
 import com.brw.dto.BusinessDetailsDTO;
 import com.brw.dto.BusinessListDTO;
 import com.brw.dto.EstimatesDTO;
 import com.brw.dto.EstimatesListDTO;
+import com.brw.dto.RelatedBusinessDTO;
+import com.brw.dto.RelatedBusinessListDTO;
 import com.brw.common.constants.Constants;
 
 import com.brw.entities.BusinessDetails;
 import com.brw.entities.BusinessInfo;
+import com.brw.entities.RelatedBusiness;
 import com.brw.service.BizTransactionService;
 import com.brw.service.EstimateService;
 
 @Component
 public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
-	//private static final String Constant.Constant.EMPTY_STRING = null;
-
 	@Autowired
 	private BusinessDetailsDAO businessDetailsDAO;
 	
 	@Autowired
 	private BusinessInfoDAO businessInfoDAO;
+	
+	@Autowired
+	private RelatedBusinessDAO relatedBusinessDAO;
 	
 	@Autowired
 	EstimateService estimateService;
@@ -61,9 +66,16 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getCounty: "+businessDTO.getCounty());
 
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getStateCode: "+businessDTO.getStateCode());
+		
+		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getLatitude: "+businessDTO.getLatitude());
+
+		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getLongitude: "+businessDTO.getLongitude());
+
+		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getRangeMile: "+businessDTO.getRangeMile());
+
 
 		List<BusinessInfo> businessList = null;
-		if(null != businessDTO.getZip() && 0 != businessDTO.getZip()) {
+		if (null != businessDTO.getZip() && 0 != businessDTO.getZip()) {
 			if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
 				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_1(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getStreet2(), businessDTO.getZip());
 			
@@ -131,6 +143,23 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			} else {
 				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_21(businessDTO.getCounty(), businessDTO.getStateCode());
 
+			}
+		} else if (businessDTO.getLatitude() != 0 && businessDTO.getLongitude() != 0) {
+			System.out.println("**** XXX Constants.PERCENT+businessDTO.getName()+Constants.PERCENT: "+Constants.PERCENT+businessDTO.getName()+Constants.PERCENT);
+
+			if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
+				System.out.println("**** XXX 111 businessDTO.getName(): "+businessDTO.getName());
+				System.out.println("**** XXX 111 businessDTO.getType(): "+businessDTO.getType());
+
+				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_22(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getType(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
+			
+			} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
+				System.out.println("**** XXX 222 businessDTO.getName(): "+businessDTO.getName());
+				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_23(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
+			
+			} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
+				System.out.println("**** XXX 333 businessDTO.getType(): "+businessDTO.getType());
+				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_24(businessDTO.getType(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
 			}
 		}
 		
@@ -1109,4 +1138,65 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
         System.out.println(findClosest(arr, target)); 
     } 
     */
+    
+    @Override
+	public RelatedBusinessDTO addRelatedBusiness(RelatedBusinessDTO relatedBusinessDTO) {
+		
+		System.out.println("222 **** Inside UserServiceImpl.addRelatedBusiness() BusinessId: "+relatedBusinessDTO.getBusinessId());
+		System.out.println("222 **** Inside UserServiceImpl.addRelatedBusiness() RelatedBizId: "+relatedBusinessDTO.getRelatedBizId());
+		
+		RelatedBusiness relatedBusiness = new RelatedBusiness();
+		RelatedBusinessDTO returnRelatedBusinessDTO = new RelatedBusinessDTO();
+		
+		relatedBusiness.setBusinessId(relatedBusinessDTO.getBusinessId());
+		relatedBusiness.setRelatedBizId(relatedBusinessDTO.getRelatedBizId());
+		relatedBusiness.setCreatedByUserId(relatedBusinessDTO.getInvokerId());
+		relatedBusiness.setCreateDate(LocalDateTime.now());
+		relatedBusiness.setUpdatedByUserId(relatedBusinessDTO.getInvokerId());
+		relatedBusiness.setUpdateDate(LocalDateTime.now());
+		
+		RelatedBusiness returnRelatedBusiness = relatedBusinessDAO.save(relatedBusiness);
+		
+		returnRelatedBusinessDTO.setBusinessId(returnRelatedBusiness.getBusinessId());
+		returnRelatedBusinessDTO.setRelatedBizId(returnRelatedBusiness.getRelatedBizId());
+		returnRelatedBusinessDTO.setCreatedByUserId(returnRelatedBusiness.getCreatedByUserId());
+		returnRelatedBusinessDTO.setCreateDate(returnRelatedBusiness.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		returnRelatedBusinessDTO.setUpdatedByUserId(returnRelatedBusiness.getUpdatedByUserId());
+		returnRelatedBusinessDTO.setUpdateDate(returnRelatedBusiness.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		
+		return returnRelatedBusinessDTO;
+	}
+	
+	@Override
+	public RelatedBusinessListDTO getRelatedBusinesses(int businessId) {
+		System.out.println("222 **** Inside SearchAgentServiceImpl.getRelatedBusinesses()");
+		
+		List<RelatedBusiness> relatedBusinessList = (List<RelatedBusiness>)relatedBusinessDAO.getRelatedBusinesses(businessId);
+		List<RelatedBusinessDTO> relatedBusinessDTOList = new ArrayList<RelatedBusinessDTO>();
+		RelatedBusinessListDTO relatedBusinessListDTO = new RelatedBusinessListDTO();
+		
+		for (RelatedBusiness returnRelatedBusiness: relatedBusinessList) {
+			RelatedBusinessDTO returnRelatedBusinessDTO = new RelatedBusinessDTO();
+			
+			returnRelatedBusinessDTO.setBusinessId(returnRelatedBusiness.getBusinessId());
+			returnRelatedBusinessDTO.setRelatedBizId(returnRelatedBusiness.getRelatedBizId());
+			returnRelatedBusinessDTO.setCreatedByUserId(returnRelatedBusiness.getCreatedByUserId());
+			returnRelatedBusinessDTO.setCreateDate(returnRelatedBusiness.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+			returnRelatedBusinessDTO.setUpdatedByUserId(returnRelatedBusiness.getUpdatedByUserId());
+			returnRelatedBusinessDTO.setUpdateDate(returnRelatedBusiness.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		
+			relatedBusinessDTOList.add(returnRelatedBusinessDTO);
+		}
+		relatedBusinessListDTO.setRelatedBusinessList(relatedBusinessDTOList);
+		return relatedBusinessListDTO;
+	}
+	
+	@Override
+	public void deleteRelatedBusiness(int businessId, int relatedBizId) {
+		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteRelatedBusiness()");
+		
+		int nurDeleted = relatedBusinessDAO.deleteRelatedBusiness(businessId, relatedBizId);
+		
+		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteRelatedBusiness() nurDeleted: "+nurDeleted);
+	}
 }

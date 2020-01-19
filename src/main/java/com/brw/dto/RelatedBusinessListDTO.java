@@ -1,49 +1,33 @@
 package com.brw.dto;
 
 /**
- * @author siyapatil
- * 2019
+ * @author sidpatil
+ * 2020
  */
 
 import java.io.Serializable;
 import java.util.List;
 
-public class ImagesListDTO implements Serializable {
+public class RelatedBusinessListDTO implements Serializable {
 
 	private static final long serialVersionUID = -65223447914153444L;
 	
-	private int invokerId;
-
-	private int businessId;
-	
-	private List<ImageDTO> imagesList;
+	private List<RelatedBusinessDTO> relatedBusinessList;
 	
 	private Long totalCount;
 	
 	private Integer pageNumber;
 	
 	private Integer pageSize;
-	
-	public int getInvokerId() {
-		return invokerId;
+
+	public List<RelatedBusinessDTO> getRelatedBusinessList() {
+		return relatedBusinessList;
 	}
 
-	public void setInvokerId(int invokerId) {
-		this.invokerId = invokerId;
+	public void setRelatedBusinessList(List<RelatedBusinessDTO> relatedBusinessList) {
+		this.relatedBusinessList = relatedBusinessList;
 	}
 
-	public int getBusinessId() {
-		return businessId;
-	}
-
-	public void setBusinessId(int businessId) {
-		this.businessId = businessId;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
 	public Long getTotalCount() {
 		return totalCount;
 	}
@@ -68,11 +52,7 @@ public class ImagesListDTO implements Serializable {
 		this.pageSize = pageSize;
 	}
 
-	public List<ImageDTO> getImagesList() {
-		return imagesList;
-	}
-
-	public void setImagesList(List<ImageDTO> imagesList) {
-		this.imagesList = imagesList;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }
