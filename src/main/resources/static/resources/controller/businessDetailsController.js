@@ -7,10 +7,10 @@
         .controller('businessDetailsController', businessDetailsController);
 
     businessDetailsController.$inject = ['$rootScope', '$scope', '$state', 'details', 'estimates', 'additionalAttributes',
-        'propImages', 'propertyService', 'similarProps', 'authService', 'constants'];
+        'propImages', 'propertyService', 'authService', 'constants'];
 
     function businessDetailsController($rootScope, $scope, $state, details, estimates, additionalAttributes, propImages,
-                                       propertyService, similarProps, authService, constants) {
+                                       propertyService, authService, constants) {
         $rootScope.authService = authService;
         $rootScope.isAuthenticated = authService.isAuthenticated();
 
@@ -31,7 +31,7 @@
                 $scope.$apply();
             });
         }
-        $scope.similarPropertyList = similarProps.data.data.propertyList;
+        // $scope.similarPropertyList = similarProps.data.data.propertyList;
         $scope.businessDetails = details.data.data;
         $scope.businessDetails.createDate = details.data.data.createDate.split('T')[0];
         $scope.estimates = estimates.data.data.estimatesList;

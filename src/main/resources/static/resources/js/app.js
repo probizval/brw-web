@@ -85,12 +85,12 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                     //return propertyService.getImagesByPropertyCode(propDetails.data[0].property_code)
                     return [];//Need to add service
                 },
-                similarProps: function (propertyService) {
-                    //return propertyService.getPropertyList($stateParams.type);
-                    console.log("similiarProps address", localStorage.getItem('searchBusinessAttributes'));
-                    var obj = (localStorage.getItem('searchBusinessAttributes')) || {};
-                    return propertyService.getPropertyList(obj);
-                }
+                // similarProps: function (propertyService) {
+                //     //return propertyService.getPropertyList($stateParams.type);
+                //     console.log("similiarProps address", localStorage.getItem('searchBusinessAttributes'));
+                //     var obj = (localStorage.getItem('searchBusinessAttributes')) || {};
+                //     return propertyService.getPropertyList(obj);
+                // }
             }
         })
         .state('myProfile', {
