@@ -6,14 +6,16 @@
         .module('myApp')
         .controller('businessDetailsController', businessDetailsController);
 
-    businessDetailsController.$inject = ['$rootScope', '$scope', '$state', 'details', 'estimates', 'additionalAttributes',
+    businessDetailsController.$inject = ['$rootScope', '$scope', '$state', '$filter', 'details', 'estimates', 'additionalAttributes',
         'propImages', 'propertyService', 'authService', 'constants'];
 
-    function businessDetailsController($rootScope, $scope, $state, details, estimates, additionalAttributes, propImages,
+    function businessDetailsController($rootScope, $scope, $state, $filter, details, estimates, additionalAttributes, propImages,
                                        propertyService, authService, constants) {
         $rootScope.authService = authService;
         $rootScope.isAuthenticated = authService.isAuthenticated();
-
+        $scope.isNumber = function isNumber(val) {
+            return typeof val === 'number'
+        };
         if (authService.getCachedProfile()) {
             $rootScope.profile = authService.getCachedProfile();
         } else {
@@ -37,11 +39,43 @@
         $scope.estimates = estimates.data.data.estimatesList;
         $scope.imageArray = details.data.data.propertyImages || [];
         $scope.businessCommonFeatures =  [
-            {id:1, label: "Lot Size", model: $scope.businessDetails.sqftLot + " Sq. Ft.", tooltip: "Lot Size"},
-            {id:2, label: "Business Type", model: constants.businessDefinition[$scope.businessDetails.type].label, tooltip: "Business Type"},
-            {id:3, label: "Year Established", model: $scope.businessDetails.yearEstablished, tooltip: "Year Established"},
-            // {id:4, label: "Price/sqft", model: $scope.businessDetails.propertyMetaData.pricePerSqft, tooltip: "Price per square feet"},
-            // {id:5, label: "Days on BRW", model: $scope.businessDetails.propertyMetaData.daysOnBrw, tooltip: "Days on BRW"},
+            {id:1, label: "Inside SQFT", model: $scope.businessDetails.sqftIndoor},
+            {id:2, label: "Open Air SQFT", model: $scope.businessDetails.sqftOutdoor},
+            {id:3, label: "Lot Size SQFT", model: $scope.businessDetails.sqftLot},
+            {id:4, label: "Average Monthly Revenue", model: "$" + $filter('number')($scope.businessDetails.revenueMonthly)},
+            {id:5, label: "Average Monthly Expense", model: "$" +  $filter('number')($scope.businessDetails.expenseMonthlyMaterial)},
+            {id:6, label: "Monthly Rent", model: "$" + $filter('number')($scope.businessDetails.expenseMonthlyRent)},
+            {id:7, label: "Monthly Mortgage", model: "$" + $filter('number')($scope.businessDetails.expenseMonthlyMortgage)},
+            {id:8, label: "Avg Monthly Row Material Cost", model: "$" + $filter('number')($scope.businessDetails.expenseMonthlyMaterial)},
+            {id:9, label: "Avg Monthly Utility Cost", model: "$" + $filter('number')($scope.businessDetails.expenseMonthlyUtility)},
+            {id:10, label: "Avg Monthly Other Cost", model: "$" + $filter('number')($scope.businessDetails.expenseMonthlyOther)},
+            {id:11, label: "Number of Full Time Employees", model: $scope.businessDetails.empFullTimeNum},
+            {id:12, label: "Number of Part Time Employees", model: $scope.businessDetails.empPartTimeNum},
+            {id:13, label: "Avg Monthly Employee Cost", model: "$" + $filter('number')($scope.businessDetails.expenseMonthlyEmp)},
+            {id:14, label: "Est Total Value of Equipment", model: "$" + $filter('number')($scope.businessDetails.valueTotalEquipment)},
+            {id:15, label: "Est Total Value of Furniture", model: "$" + $filter('number')($scope.businessDetails.valueTotalFurniture)},
+            {id:16, label: "Est Total Value of Indoor Decoration", model: "$" + $filter('number')($scope.businessDetails.valueIndoorDeco)},
+            {id:17, label: "Est Total Value of Outdoor Decoration", model: "$" + $filter('number')($scope.businessDetails.valueOutdoorDeco)},
+//            {id:5, label: "Number of Parking Spots", model: $scope.businessDetails},
+            {id:18, label: "Area Walk Score", model: $scope.businessDetails.areaWalkScore},
+            {id:19, label: "Area Crime Score", model: $scope.businessDetails.areaCrimeScore},
+            {id:20, label: "Area Attractions Score", model: $scope.businessDetails.areaAttractionsScore},
+            {id:21, label: "Area Transit Score", model: $scope.businessDetails.areaTransitScore},
+            {id:22, label: "Social Media Score", model: $scope.businessDetails.socialMediaScore},
+            {id:23, label: "Population in 1 mile Rad", model: $scope.businessDetails.populationIn1mileRadius},
+            {id:24, label: "Population in 3 mile Rad", model: $scope.businessDetails.populationIn3mileRadius},
+            {id:25, label: "Population in 5 mile Rad", model: $scope.businessDetails.populationIn5mileRadius},
+            {id:26, label: "Yr household income 1 mile Rad", model: "$" + $filter('number')($scope.businessDetails.incomeScoreIn1mileRadius)},
+            {id:27, label: "Yr household income 3 mile Rad", model: "$" + $filter('number')($scope.businessDetails.incomeScoreIn3mileRadius)},
+            {id:28, label: "Yr household income 5 mile Rad", model: "$" + $filter('number')($scope.businessDetails.incomeScoreIn5mileRadius)},
+            {id:29, label: "Avg Daily num of ppl at door front", model: $scope.businessDetails.dailyPeoplAtDoorNum},
+            {id:30, label: "Avg Daily number of cars in parking lot", model: $scope.businessDetails.dailyCarsAtParklotNum},
+            {id:31, label: "Year Business Started", model: $scope.businessDetails.yearEstablished},
+            {id:32, label: "Data Completeness Score", model: $scope.businessDetails.dataCompletionScore},
+            {id:33, label: "Website", model: $scope.businessDetails.website},
+            {id:34, label: "NAICS", model: $scope.businessDetails.naicsnum},
+            {id:35, label: "Claimed by Owner", model: $scope.businessDetails.isOwnerClaimed},
+            {id:36, label: "Last Data Update Date", model: $scope.businessDetails.updateDate},
         ];
         $scope.additionalAttributes = additionalAttributes.data.data.addAttributesList;
         $scope.estimateList = [];

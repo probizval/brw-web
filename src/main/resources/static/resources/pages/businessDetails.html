@@ -25,7 +25,7 @@
     }
 </style>
 <div class="container">
-    <div class="row ">
+    <div class="row">
         <div class="col-md-12 col-lg-12 col-xl-12">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -193,73 +193,58 @@
             <div class="col-md-12 col-lg-12 col-xl-12">
                 <div class="row justify-content-md-center">
                     <div>
-                        <div class="item-description">
-                            <h3 class="headline">Business description</h3>
-                            {{businessDetails.description}}
-                            <p>
-                                Well established, profitable Chevron branded gas station and C-Store in Alameda County in the Fremont City, Central California. Located on a busy Highway that serves not only local patrons but travelers and the working population as well. Not only is it successful as it is, it has a tremendous upside.
-                            </p>
-                            <p>
-                                The Convenience Store is setup to have a Deli in it and has room to expand. It has a drive through car wash and two large propane tanks. There are three tanks with a total volume of 30,000 gallons, four MPD’s with 12 gas nozzles and 2 diesel nozzles. Offering includes the business and real estate.
-                            </p>
-                        </div>
-                        <h3 class="headline">Business Features</h3>
-                        <div class="item-features" ng-if="businessCommonFeatures">
-                            <div class="row">
-                                <div class="col-md-4 col-lg-4 col-xl-4" ng-repeat="feature in businessCommonFeatures track by feature.id">
-                                    <div ng-if="feature.model">
-                                        <h6>{{feature.label}}</h6>
-                                        <span style="text-align: center;">{{feature.model}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 class="headline">Business Details</h3>
-                        <div ng-if="businessDetails.type === 'RESTAURANT'" ng-include="'resources/pages/businessDetailTemplates/restaurantDetailTemplate.html'"></div>
-                        <div ng-if="businessDetails.type === 'Gas Station'" ng-include="'resources/pages/businessDetailTemplates/gasStationDetailTemplate.html'"></div>
-                        <div ng-if="businessDetails.type === 'Laundry'" ng-include="'resources/pages/businessDetailTemplates/coinLaundryDetailTemplate.html'"></div>
-                        <!--<div ng-if="businessDetails.propertyMetaData.businessType === 'Dry Cleaners'" ng-include="'resources/pages/businessDetailTemplates/dryCleanersDetailTemplate.html'"></div>-->
-                        <div ng-if="businessDetails.type === 'Liquor Store'" ng-include="'resources/pages/businessDetailTemplates/liquorStoreDetailTemplate.html'"></div>
-                        <div ng-if="businessDetails.type === 'BEAUTY'" ng-include="'resources/pages/businessDetailTemplates/beautySalonDetailTemplate.html'"></div>
-                        <br/>
-                        <h3 class="headline" ng-if="equipmentList">Equipment List</h3>
-                        <div class="business-specific-details-container" >
-<!--                            <div class="super-group-title">Kitchen Features</div>-->
-                            <div class="super-group-content" ng-repeat="equipment in equipmentList track by equipment.id">
-                                <div class="details-group">
-                                    <ul class="ul-style">
-                                        <div class="no-break-inside">
-                                            <div class="details-group-title" ng-if="equipment.label">
-                                                {{equipment.label}}
-                                            </div>
-                                            <li class="entry-item" ng-if="equipment.quantity">
-                                                <span class="entryItemContent">Quantity - {{equipment.quantity}}</span>
-                                            </li>
-                                            <li class="entry-item" ng-if="equipment.pricePerUnit">
-                                                <span class="entryItemContent">Per unit cost - ${{equipment.pricePerUnit}}</span>
-                                            </li>
-                                            <li class="entry-item" ng-if="equipment.maintenanceCost">
-                                                <span class="entryItemContent">Monthly maintenance cost - ${{equipment.maintenanceCost}}</span>
-                                            </li>
-                                        </div>
-                                    </ul>
-                                </div>
-                            </div>
+                        <h3 class="headline" ng-if="businessDetails.description">Business description</h3>
+                        <div class="row" style="margin:10px" ng-if="businessDetails.description">
+                            <p style="margin-bottom: 0">{{businessDetails.description}}</p>
+                            <p style="margin-bottom: 0">Well established, profitable Chevron branded gas station and C-Store in Alameda County in the Fremont City, Central California. Located on a busy Highway that serves not only local patrons but travelers and the working population as well. Not only is it successful as it is, it has a tremendous upside.</p>
+                            <p style="margin-bottom: 0">The Convenience Store is setup to have a Deli in it and has room to expand. It has a drive through car wash and two large propane tanks. There are three tanks with a total volume of 30,000 gallons, four MPD’s with 12 gas nozzles and 2 diesel nozzles. Offering includes the business and real estate.</p>
                         </div>
 
-<!--                        <div class="item-features" ng-if="equipmentList">-->
-<!--                            <h3 class="headline">Equipment List</h3>-->
-<!--                            <div class="row">-->
-<!--                                <div class="col-md-4 col-lg-4 col-xl-4" ng-repeat="equipment in equipmentList track by equipment.id">-->
-<!--                                    <div ng-if="equipment.label">-->
-<!--                                        <h6>{{equipment.label}}</h6>-->
-<!--                                        <span style="text-align: center;" ng-if="equipment.quantity">Quantity - {{equipment.quantity}}</span>-->
-<!--                                        <span style="text-align: center;" ng-if="equipment.pricePerUnit">Per unit cost - {{equipment.pricePerUnit}}</span>-->
-<!--                                        <span style="text-align: center;" ng-if="equipment.maintenanceCost">Monthly maintenance cost - {{equipment.maintenanceCost}}</span>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <h3 class="headline" ng-if="businessCommonFeatures" >Business Details</h3>
+                        <div class="row" style="margin:10px" ng-if="businessCommonFeatures">
+                            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3" ng-repeat="feature in businessCommonFeatures track by feature.id"
+                                 ng-if="feature.model || feature.model != '0'">
+                                    <div class="details-group-title">{{feature.label}}</div>
+                                    <div ng-if="isNumber(feature.model)">
+                                        <p style="margin-bottom: 0">{{feature.model | number}}</p>
+                                    </div>
+                                    <div ng-if="!isNumber(feature.model)">
+                                        <div ng-if="feature.label === 'Website'">
+                                            <a href={{feature.model}} target="_blank" style="margin-bottom: 0">{{feature.model}}</a>
+                                        </div>
+                                        <div ng-if="feature.label !== 'Website'">
+                                            <p style="margin-bottom: 0">{{feature.model}}</p>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                                <div class="details-group-title">Claimed by Owner</div>
+                                <div ng-if="businessDetails.isOwnerClaimed">
+                                    <p style="margin-bottom: 0">Yes</p>
+                                </div>
+                                <div ng-if!="businessDetails.isOwnerClaimed">
+                                    <p style="margin-bottom: 0">No <a href="">Claim Business</a> </p>
+                                </div>
+                            </div>
+                        </div>
+<!--                        <h3 class="headline">Business Details</h3>-->
+<!--                        <div ng-if="businessDetails.type === 'RESTAURANT'" ng-include="'resources/pages/businessDetailTemplates/restaurantDetailTemplate.html'"></div>-->
+<!--                        <div ng-if="businessDetails.type === 'Gas Station'" ng-include="'resources/pages/businessDetailTemplates/gasStationDetailTemplate.html'"></div>-->
+<!--                        <div ng-if="businessDetails.type === 'Laundry'" ng-include="'resources/pages/businessDetailTemplates/coinLaundryDetailTemplate.html'"></div>-->
+<!--                        &lt;!&ndash;<div ng-if="businessDetails.propertyMetaData.businessType === 'Dry Cleaners'" ng-include="'resources/pages/businessDetailTemplates/dryCleanersDetailTemplate.html'"></div>&ndash;&gt;-->
+<!--                        <div ng-if="businessDetails.type === 'Liquor Store'" ng-include="'resources/pages/businessDetailTemplates/liquorStoreDetailTemplate.html'"></div>-->
+<!--                        <div ng-if="businessDetails.type === 'BEAUTY'" ng-include="'resources/pages/businessDetailTemplates/beautySalonDetailTemplate.html'"></div>-->
+                        <h3 class="headline" ng-if="equipmentList">Equipment List</h3>
+                        <div class="row" style="margin:10px">
+                            <div ng-repeat="equipment in equipmentList track by equipment.id" class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                                <div class="details-group-title" ng-if="equipment.label">
+                                    {{equipment.label}}
+                                </div>
+                                <p style="margin-bottom: 0" ng-if="equipment.quantity">Quantity - {{equipment.quantity}}</p>
+                                <p style="margin-bottom: 0" ng-if="equipment.pricePerUnit">Per unit cost - {{equipment.pricePerUnit | number}}</p>
+                                <p style="margin-bottom: 0" ng-if="equipment.maintenanceCost">Monthly maintenance cost - {{equipment.maintenanceCost | number}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
     </div>
