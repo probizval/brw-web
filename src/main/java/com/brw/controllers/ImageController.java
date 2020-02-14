@@ -48,7 +48,9 @@ public class ImageController implements ErrorController {
 	 * @author sidpatil
 	 * uploadImages - Service to upload business images to S3 and then add image URLs to BRW DB 
 	 */
-	@PostMapping(value = "uploadImages", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	//@PostMapping(value = "uploadImages", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(value = "uploadImages")
+	
 	public ResponseEntity<UploadImagesListDTO> uploadImages(@RequestBody UploadImagesListDTO uploadImagesListDTO) throws IOException{
 		
 		System.out.println("111 **** Inside BusinessController.uploadImages()");
