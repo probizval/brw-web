@@ -1,8 +1,10 @@
 package com.brw.controllers;
 
+import java.io.IOException;
+
 /**
  * @author siyapatil
- * 2019
+ * 2019-20
  */
 
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +24,8 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 import com.brw.common.constants.Constants;
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
-import com.brw.dto.ImageDTO;
 import com.brw.dto.ImagesListDTO;
+import com.brw.dto.UploadImagesListDTO;
 import com.brw.service.ImageService;
 
 @RestController
@@ -42,6 +45,27 @@ public class ImageController implements ErrorController {
 	}
 	
 	/**
+	 * @author sidpatil
+	 * uploadImages - Service to upload business images to S3 and then add image URLs to BRW DB 
+	 */
+	@PostMapping(value = "uploadImages", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<UploadImagesListDTO> uploadImages(@RequestBody UploadImagesListDTO uploadImagesListDTO) throws IOException{
+		
+		System.out.println("111 **** Inside BusinessController.uploadImages()");
+		
+		logger.info("Upload the Business Images to S3 and add URLs to BRW DB");
+		
+		try {
+			UploadImagesListDTO returnUploadImagesListDTO = imageService.uploadImages(uploadImagesListDTO);
+			return new ResponseEntity<>(returnUploadImagesListDTO, HttpStatus.OK);
+			
+		} catch (InternalServerError e) {
+			// TODO: handle exception
+			return new ResponseEntity<>(uploadImagesListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/**
 	 * @author siyapatil
 	 * addImages - Service to add business images in BRW DB 
 	 */
@@ -50,7 +74,7 @@ public class ImageController implements ErrorController {
 		
 		System.out.println("111 **** Inside BusinessController.addImages()");
 		
-		logger.info("Add the New Business Details");
+		logger.info("Add the Business Image URLs");
 		
 		try {
 			ImagesListDTO returnImagesListDTO = imageService.addImages(imagesListDTO);
