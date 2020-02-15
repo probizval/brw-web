@@ -7,34 +7,24 @@ package com.brw.dto;
 
 import java.io.Serializable;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class UploadImageDTO implements Serializable {
 
 	private static final long serialVersionUID = 1941284759903233525L;
-		
-	private MultipartFile file;
-	private String jsonData;
 	
-	private String imageDescription;
+	private String name;
 	private String imageBase64;
+	private String s3url;
 
 	private int createdByUserId;
 	private String createDate;
 	private int updatedByUserId;
 	private String updateDate;
 	
-	public MultipartFile getFile() {
-		return file;
+	public String getS3url() {
+		return s3url;
 	}
-	public void setFile(MultipartFile file) {
-		this.file = file;
-	}
-	public String getJsonData() {
-		return jsonData;
-	}
-	public void setJsonData(String jsonData) {
-		this.jsonData = jsonData;
+	public void setS3url(String s3url) {
+		this.s3url = s3url;
 	}
 	public int getCreatedByUserId() {
 		return createdByUserId;
@@ -63,11 +53,11 @@ public class UploadImageDTO implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public String getImageDescription() {
-		return imageDescription;
+	public String getName() {
+		return name;
 	}
-	public void setImageDescription(String imageDescription) {
-		this.imageDescription = imageDescription;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getImageBase64() {
 		return imageBase64;

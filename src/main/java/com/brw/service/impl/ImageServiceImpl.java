@@ -8,15 +8,8 @@ package com.brw.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.DatatypeConverter;
-
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,12 +17,13 @@ import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.transfer.Upload;
 import com.brw.common.constants.Constants;
 import com.brw.dao.ImageDAO;
 import com.brw.dto.ImageDTO;
@@ -53,29 +47,30 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 		UploadImagesListDTO returnImagesListDTO = new UploadImagesListDTO();
 
 		Image returnImage = new Image();
-		Image image;
-		ImageDTO retImageDTO;
 		
 		for (UploadImageDTO uploadImageDTO: uploadImagesDTOList) {
-			System.out.println("222 **** uploadImageDTO.getImageDescription "+uploadImageDTO.getImageDescription());
+			System.out.println("222 **** uploadImageDTO.name "+uploadImageDTO.getName());
 			System.out.println("222 **** uploadImageDTO.getImageBase64 "+uploadImageDTO.getImageBase64());
 			
 			//String base64String = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAHkAAAB5C...";
 			String base64String = uploadImageDTO.getImageBase64();
 			
 	        String[] strings = base64String.split(Constants.COMMA);
-	        String extension;
+	        String fileType;
 	        switch (strings[0]) {//check image's extension
 	            case "data:image/jpeg;base64":
-	                extension = "jpeg";
+	            	fileType = "jpeg";
 	                break;
 	            case "data:image/png;base64":
-	                extension = "png";
+	            	fileType = "png";
 	                break;
 	            default://should write cases for more images types
-	                extension = "jpg";
+	            	fileType = "jpg";
 	                break;
 	        }
+	        
+	        //Code to write in local for TEST
+	        /*
 	        //convert base64 string to binary data
 	        byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
 	        String path = "/Users/sidpatil/Desktop/BizRealWorth/DATA/test_image." + extension;
@@ -87,9 +82,12 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
+	        */
 	        
-	        uploadBase64Image(uploadImageDTO.getImageBase64(), extension, "test_image", "test_path");
-
+	        //Code to upload image to AWS S3
+	        String s3URL = uploadBase64Image(strings[1], fileType, String.valueOf(uploadImagesListDTO.getBusinessId()), uploadImageDTO.getName());
+	        
+	        uploadImageDTO.setS3url(s3URL);
 			returnImageDTOList.add(uploadImageDTO);
 		}
 		returnImagesListDTO.setBusinessId(returnImage.getBusinessId());
@@ -98,33 +96,39 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 		return returnImagesListDTO;
 	}
 	
-	public void uploadBase64Image(String base64String, String fileType, String fileName, String pathToFile) {
-	    InputStream stream = new ByteArrayInputStream(base64String.getBytes());
+	public String uploadBase64Image(String base64String, String fileType, String pathToFile, String name) {
+		
+		byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64String);		
+	    InputStream stream = new ByteArrayInputStream(imageBytes);
 
 	    ObjectMetadata metadata = new ObjectMetadata();
-	    metadata.setContentLength(base64String.getBytes().length);
+	    metadata.setContentLength(imageBytes.length);
 	    metadata.setContentType("image/"+fileType);
-
-	    //String bucketName = awsS3Configuration.getBucketName();
 	    
-	    String bucketName = "TestS3Bucket";
-
-	    String key = pathToFile + fileName;
+	    String s3bucketName = "brwbusinessimages";
+	    
+	    String key = name + "." + fileType;
+	    URL s3Url = null;
 
 	    try {
-	        PutObjectRequest objectRequest = new PutObjectRequest(bucketName, key, stream, metadata);
+	    	
+	        PutObjectRequest objectRequest = new PutObjectRequest(s3bucketName, key, stream, metadata);
 	        objectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
 	        
-	        AmazonS3Client s3Client = (AmazonS3Client)AmazonS3ClientBuilder.defaultClient();
+	        BasicAWSCredentials creds = new BasicAWSCredentials("AKIAITCWQF4LXNVAICBQ", "BfXEr/91/bmzShibB5xnzNIqb3LOucwpyPo/usCT");
+	        AmazonS3 s3Client = AmazonS3Client.builder()
+	        	    .withRegion("us-west-1")
+	        	    .withCredentials(new AWSStaticCredentialsProvider(creds))
+	        	    .build();
+	        
 	        s3Client.putObject(objectRequest);
+	        s3Url = s3Client.getUrl(s3bucketName, key);
 	        
-	        String s3Url = s3Client.getResourceUrl(bucketName, "some-path/some-key.jpg");
-	        
-	        System.out.println("S3 url is " + s3Url);
-	        
+	        System.out.println("S3 url is: " + s3Url.toString());
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	    }      
+	    }
+	    return s3Url.toString();
 	}
 	
 	@Override
@@ -151,11 +155,9 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 			image.setUpdateDate(LocalDateTime.now());
 			
 			returnImage = imageDAO.save(image);
-			
 			retImageDTO = new ImageDTO();
 
 			retImageDTO.setImageId(returnImage.getImageId());
-			//retimgDTO.setBizId(returnImage.getBusinessId());
 			retImageDTO.setUrl(returnImage.getUrl());
 			retImageDTO.setCreatedByUserId(returnImage.getCreatedByUserId());
 			retImageDTO.setCreateDate(returnImage.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
