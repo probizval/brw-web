@@ -45,6 +45,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 		List<UploadImageDTO> uploadImagesDTOList = uploadImagesListDTO.getUploadImagesList();
 		List<UploadImageDTO> returnImageDTOList = new ArrayList<UploadImageDTO>();
 		UploadImagesListDTO returnImagesListDTO = new UploadImagesListDTO();
+		UploadImageDTO returnImageDTO = new UploadImageDTO();
 
 		Image returnImage = new Image();
 		
@@ -87,8 +88,9 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	        //Code to upload image to AWS S3
 	        String s3URL = uploadBase64Image(strings[1], fileType, String.valueOf(uploadImagesListDTO.getBusinessId()), uploadImageDTO.getName());
 	        
-	        uploadImageDTO.setS3url(s3URL);
-			returnImageDTOList.add(uploadImageDTO);
+	        returnImageDTO.setName(uploadImageDTO.getName());
+	        returnImageDTO.setS3url(s3URL);
+			returnImageDTOList.add(returnImageDTO);
 		}
 		returnImagesListDTO.setBusinessId(returnImage.getBusinessId());
 		returnImagesListDTO.setUploadImagesList(returnImageDTOList);
@@ -107,7 +109,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	    
 	    String s3bucketName = "brwbusinessimages";
 	    
-	    String key = name + "." + fileType;
+	    String key = pathToFile + "/" +name + "." + fileType;
 	    URL s3Url = null;
 
 	    try {
