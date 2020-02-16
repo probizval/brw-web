@@ -260,10 +260,14 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		businessDetailsDTO.setSubType(businessDetails.getSubType());
 		businessDetailsDTO.setRegCityName(businessDetails.getRegCityName());
 		businessDetailsDTO.setRegCityCode(businessDetails.getRegCityCode());
-		businessDetailsDTO.setRegCityDate(businessDetails.getRegCityDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		if (null != businessDetails.getRegCityDate()) {
+			businessDetailsDTO.setRegCityDate(businessDetails.getRegCityDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		}
 		businessDetailsDTO.setRegStateName(businessDetails.getRegStateName());
 		businessDetailsDTO.setRegStateCode(businessDetails.getRegStateCode());
-		businessDetailsDTO.setRegStateDate(businessDetails.getRegStateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		if (null != businessDetails.getRegStateDate()) {
+			businessDetailsDTO.setRegStateDate(businessDetails.getRegStateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		}
 		businessDetailsDTO.setDataCompletionScore(businessDetails.getDataCompletenessScore());
 		businessDetailsDTO.setIsForSell(businessDetails.getIsForSell());
 		businessDetailsDTO.setForSellPrice(businessDetails.getForSellPrice());
