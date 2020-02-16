@@ -59,31 +59,24 @@
                     <div class="col-xl-6">
                         <div>
                             <div class="swiper-container gallery-top" data-pswp-uid="1">
-                                <div class="swiper-wrapper" lazyload>
-                                    <div class="swiper-slide" ng-repeat="image_prop in imageArray track by $index" id="image_prop{{index}}">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide" ng-repeat="image_prop in imageArray track by image_prop.imageId">
                                         <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                                            <img src="{{image_prop.imageUrl}}" class="img-fluid swiper-lazy" style="height:450px;" alt="Drawing Room">
+                                            <img src={{image_prop.url}} class="img-fluid swiper-lazy" style="height:450px; width:1024px" alt="Drawing Room">
                                         </figure>
                                     </div>
                                 </div>
-                                <div class="swiper-button-next swiper-button-white"></div>
-                                <div class="swiper-button-prev swiper-button-white"></div>
+                                <div class="swiper-button-next swiper-button-white" ng-if="imageArray.length > 1"></div>
+                                <div class="swiper-button-prev swiper-button-white" ng-if="imageArray.length > 1"></div>
                             </div>
                             <div class="swiper-container gallery-thumbs">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide" style="width:60px;height:50px;" ng-repeat="prop in imageArray">
+                                <div class="swiper-wrapper" ng-if="imageArray.length > 1">
+                                    <div class="swiper-slide" ng-repeat="prop in imageArray" style="width:60px;height:50px;" >
                                         <!--<div class="swiper-slide" ng-style="{'background-image':'url({{prop_image.imageUrl}})'}" style="width:60px;height:50px"></div>-->
                                         <!--<div class="swiper-slide" style="background-image:url(https://picsum.photos/200/300/?random);width:60px;height:50px;"></div>-->
-                                        <img style="width:60px;height:50px;" src="{{prop.imageUrl}}" alt="">
+                                        <img src={{prop.url}} style="width:60px;height:50px;" alt="">
                                     </div>
                                 </div>
-                            </div>
-                            <div ng-if="imageArray.length === 0">
-                                <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                                    <a href="img1" itemprop="contentUrl" data-size="2000x1414">
-                                        <img src="{{businessDetails.imageFirst}}" class="img-fluid swiper-lazy" style="height:450px; width:610px;" alt="Drawing Room">
-                                    </a>
-                                </figure>
                             </div>
                         </div>
                     </div>
@@ -234,17 +227,25 @@
 <!--                        &lt;!&ndash;<div ng-if="businessDetails.propertyMetaData.businessType === 'Dry Cleaners'" ng-include="'resources/pages/businessDetailTemplates/dryCleanersDetailTemplate.html'"></div>&ndash;&gt;-->
 <!--                        <div ng-if="businessDetails.type === 'Liquor Store'" ng-include="'resources/pages/businessDetailTemplates/liquorStoreDetailTemplate.html'"></div>-->
 <!--                        <div ng-if="businessDetails.type === 'BEAUTY'" ng-include="'resources/pages/businessDetailTemplates/beautySalonDetailTemplate.html'"></div>-->
-                        <h3 class="headline" ng-if="equipmentList">Equipment List</h3>
-                        <div class="row" style="margin:10px">
-                            <div ng-repeat="equipment in equipmentList track by equipment.id" class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-                                <div class="details-group-title" ng-if="equipment.label">
-                                    {{equipment.label}}
+                            <h3 class="headline">
+                                Equipment List
+                                <button type="button" ng-click="expandEquipments(!equipmentExpanded)">
+                                    <span ng-bind="equipmentExpanded ? '-' : '+'"></span>
+                                </button>
+                            </h3>
+                            <div class="row" style="margin:10px" ng-show="equipmentExpanded">
+                                <div ng-if="equipmentList.length > 0" ng-repeat="equipment in equipmentList track by equipment.id" class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                                    <div class="details-group-title" ng-if="equipment.label">
+                                        {{equipment.label}}
+                                    </div>
+                                    <p style="margin-bottom: 0" ng-if="equipment.quantity">Quantity - {{equipment.quantity}}</p>
+                                    <p style="margin-bottom: 0" ng-if="equipment.pricePerUnit">Per unit cost - {{equipment.pricePerUnit | number}}</p>
+                                    <p style="margin-bottom: 0" ng-if="equipment.maintenanceCost">Monthly maintenance cost - {{equipment.maintenanceCost | number}}</p>
                                 </div>
-                                <p style="margin-bottom: 0" ng-if="equipment.quantity">Quantity - {{equipment.quantity}}</p>
-                                <p style="margin-bottom: 0" ng-if="equipment.pricePerUnit">Per unit cost - {{equipment.pricePerUnit | number}}</p>
-                                <p style="margin-bottom: 0" ng-if="equipment.maintenanceCost">Monthly maintenance cost - {{equipment.maintenanceCost | number}}</p>
+                                <div ng-if="equipmentList.length === 0">
+                                    <p>Sorry, We don't have equipments information for this Business.</p>
+                                </div>
                             </div>
-                        </div>
                     </div>
                 </div>
     </div>

@@ -6,12 +6,13 @@
         .module('myApp')
         .controller('businessDetailsController', businessDetailsController);
 
-    businessDetailsController.$inject = ['$rootScope', '$scope', '$state', '$filter', 'details', 'estimates', 'additionalAttributes',
+    businessDetailsController.$inject = ['$rootScope', '$scope', '$state', '$filter', 'details', 'estimates',
         'propImages', 'propertyService', 'authService', 'constants'];
 
-    function businessDetailsController($rootScope, $scope, $state, $filter, details, estimates, additionalAttributes, propImages,
+    function businessDetailsController($rootScope, $scope, $state, $filter, details, estimates, propImages,
                                        propertyService, authService, constants) {
         $rootScope.authService = authService;
+        $scope.equipmentExpanded = false;
         $rootScope.isAuthenticated = authService.isAuthenticated();
         $scope.isNumber = function isNumber(val) {
             return typeof val === 'number'
@@ -37,7 +38,11 @@
         $scope.businessDetails = details.data.data;
         $scope.businessDetails.createDate = details.data.data.createDate.split('T')[0];
         $scope.estimates = estimates.data.data.estimatesList;
-        $scope.imageArray = details.data.data.propertyImages || [];
+//        $scope.imageArray = propImages.data.imagesList
+        $scope.imageArray = [{"imageId": 100, "url": $scope.businessDetails.imageFirst}];
+        if (propImages.data.imagesList.length !== 0) {
+            $scope.imageArray.push(...propImages.data.imagesList)
+        }
         $scope.businessCommonFeatures =  [
             {id:1, label: "Inside SQFT", model: $scope.businessDetails.sqftIndoor},
             {id:2, label: "Open Air SQFT", model: $scope.businessDetails.sqftOutdoor},
@@ -77,7 +82,6 @@
             {id:35, label: "Claimed by Owner", model: $scope.businessDetails.isOwnerClaimed},
             {id:36, label: "Last Data Update Date", model: $scope.businessDetails.updateDate},
         ];
-        $scope.additionalAttributes = additionalAttributes.data.data.addAttributesList;
         $scope.estimateList = [];
         $scope.equipmentList = [];
         var label = "";
@@ -97,45 +101,29 @@
                 tooltip: label + " estimate"})
         }
 
-        for (let i=0; i<$scope.additionalAttributes.length; i++ ) {
-            if ($scope.additionalAttributes[i].attribType === 'EQUIPMENT') {
-                $scope.equipmentList.push({
-                    id: i+1,
-                    label: constants.equipmentListMapping[$scope.additionalAttributes[i].attribSubType],
-                    quantity: $scope.additionalAttributes[i].quantity,
-                    pricePerUnit: $scope.additionalAttributes[i].pricePerUnit,
-                    maintenanceCost: $scope.additionalAttributes[i].monthlyMaintExpense,
-                })
-            }
-        }
-
         setTimeout(function(){
-            var galleryThumbs = new Swiper('.gallery-thumbs', {
-                spaceBetween: 10,
-                slidesPerView: "auto",
-                touchRatio: 0.2,
-                loop:true,
-                slideToClickedSlide: true,
-                loopedSlides: 10,
-                freeMode: true,
-                watchSlidesVisibility: true,
-                watchSlidesProgress: true,
-            });
-
             var galleryTop = new Swiper('.gallery-top', {
                 spaceBetween: 10,
-                loop: true,
-                loopedSlides: 10,
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
-                thumbs: {
-                    swiper: galleryThumbs
-                }
+                loop: true,
+                loopedSlides: 4
             });
-            // galleryTop.params.control = galleryThumbs;
-            // galleryThumbs.params.control = galleryTop;
+            var galleryThumbs = new Swiper('.gallery-thumbs', {
+                spaceBetween: 10,
+                slidesPerView: 'auto',
+                touchRatio: 0.2,
+                slideToClickedSlide: true,
+                loop: true,
+                loopedSlides: 4,
+                watchSlidesVisibility: true,
+                centeredSlides: true,
+                watchSlidesProgress: true,
+            });
+            galleryTop.controller.control = galleryThumbs;
+            galleryThumbs.controller.control = galleryTop;
         }, 100);
 
         setTimeout(function() {
@@ -156,6 +144,31 @@
             });
         },100);
 
+        $scope.expandEquipments = function(equipmentExpanded) {
+            if (!equipmentExpanded){
+                $scope.equipmentExpanded = equipmentExpanded;
+                $scope.equipmentList = [];
+                return
+            }
+            propertyService.getAdditionalAttributes($state.params.id)
+                .then(function (response) {
+                    $scope.additionalAttributes = response.data.data.addAttributesList;
+                    for (let i=0; i<$scope.additionalAttributes.length; i++ ) {
+                        if ($scope.additionalAttributes[i].attribType === 'EQUIPMENT') {
+                            $scope.equipmentList.push({
+                                id: $scope.additionalAttributes[i].addAttribId,
+                                label: constants.equipmentListMapping[$scope.additionalAttributes[i].attribSubType],
+                                quantity: $scope.additionalAttributes[i].quantity,
+                                pricePerUnit: $scope.additionalAttributes[i].pricePerUnit,
+                                maintenanceCost: $scope.additionalAttributes[i].monthlyMaintExpense,
+                            })
+                        }
+                    }
+                    $scope.equipmentExpanded = equipmentExpanded;
+                }, function (error) {
+                    $scope.error = 'Unable to load business additional attributes: ' + error.message;
+                });
+        }
     }
 
 })();

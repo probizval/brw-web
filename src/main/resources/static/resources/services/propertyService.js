@@ -4,6 +4,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
 
 	var urlBase = window.location.origin + window.location.pathname + 'api/v1/';
   var businessUrl = window.location.origin + window.location.pathname + 'api/business/v1/';
+  var imageUrl = window.location.origin + window.location.pathname + 'api/image/v1/';
   var estimateUrl = window.location.origin + window.location.pathname + 'api/estimates/v1/';
   var additionAttributesUrl = window.location.origin + window.location.pathname + 'api/additionalAttributes/v1/';
   var propertyDataOp = {};
@@ -54,6 +55,17 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
             "isEstimate": "Y"
         }).success(function(res) {
             console.log("getBusinessDetails", JSON.stringify(res));
+            return res.data;
+        }).error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+
+    propertyDataOp.getBusinessImages = function (id) {
+        return $http.post(imageUrl + 'getImages', {
+            "businessId": id,
+        }).success(function(res) {
+            console.log("getBusinessImages", JSON.stringify(res));
             return res.data;
         }).error(function (error) {
             return 'Unable to load store data: ' + error.message;

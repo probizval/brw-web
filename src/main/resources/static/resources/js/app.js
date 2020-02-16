@@ -78,12 +78,8 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                 estimates: function (propertyService, $stateParams) {
                     return propertyService.getEstimates($stateParams.id)
                 },
-                additionalAttributes: function(propertyService, $stateParams) {
-                    return propertyService.getAdditionalAttributes($stateParams.id)
-                },
-                propImages: function (propertyService, details) {
-                    //return propertyService.getImagesByPropertyCode(propDetails.data[0].property_code)
-                    return [];//Need to add service
+                propImages: function (propertyService, $stateParams) {
+                    return propertyService.getBusinessImages($stateParams.id)
                 },
                 // similarProps: function (propertyService) {
                 //     //return propertyService.getPropertyList($stateParams.type);
