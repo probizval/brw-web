@@ -449,6 +449,22 @@ Response –
     "validationErrors": null
 }
 
+Search Flavors - 
+
+#1 - Based on just the City and State
+{
+    "name": "",
+    "type": "",
+    "street1": "",
+    "street2": "",
+    "city": "Fremont",
+    "zip":0,
+    "county": "",
+    "stateCode": "CA"
+}
+
+
+
 
 3.	GetBusinessDetails
 Method - Post

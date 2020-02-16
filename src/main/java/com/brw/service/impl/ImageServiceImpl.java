@@ -60,13 +60,13 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	        String fileType;
 	        switch (strings[0]) {//check image's extension
 	            case "data:image/jpeg;base64":
-	            	fileType = "jpeg";
+	            	fileType = Constants.JPEG;
 	                break;
 	            case "data:image/png;base64":
-	            	fileType = "png";
+	            	fileType = Constants.PNG;
 	                break;
 	            default://should write cases for more images types
-	            	fileType = "jpg";
+	            	fileType = Constants.JPG;
 	                break;
 	        }
 	        
@@ -107,9 +107,9 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	    metadata.setContentLength(imageBytes.length);
 	    metadata.setContentType("image/"+fileType);
 	    
-	    String s3bucketName = "brwbusinessimages";
+	    String s3bucketName = Constants.S3_BUCKET_NAME;
 	    
-	    String key = pathToFile + "/" +name + "." + fileType;
+	    String key = pathToFile + Constants.FORWARD_SLASH +name + Constants.PERIOD + fileType;
 	    URL s3Url = null;
 
 	    try {
@@ -119,14 +119,14 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	        
 	        BasicAWSCredentials creds = new BasicAWSCredentials("AKIAITCWQF4LXNVAICBQ", "BfXEr/91/bmzShibB5xnzNIqb3LOucwpyPo/usCT");
 	        AmazonS3 s3Client = AmazonS3Client.builder()
-	        	    .withRegion("us-west-1")
+	        	    .withRegion(Constants.US_WEST_1)
 	        	    .withCredentials(new AWSStaticCredentialsProvider(creds))
 	        	    .build();
 	        
 	        s3Client.putObject(objectRequest);
 	        s3Url = s3Client.getUrl(s3bucketName, key);
 	        
-	        System.out.println("S3 url is: " + s3Url.toString());
+	        System.out.println("333 **** AWS S3 URL for this IMAGE: " + s3Url.toString());
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
