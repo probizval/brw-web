@@ -265,7 +265,9 @@ Request -
     "stateCode": "",
     "latitude": 37.7749,
     "longitude": -122.4194,
-    "rangeMile": 30
+    "rangeMile": 30,
+    "isFranchise": "N",
+    "isForSell": "N"
 }
 
 Response –
@@ -460,7 +462,9 @@ Search Flavors -
     "city": "Fremont",
     "zip":0,
     "county": "",
-    "stateCode": "CA"
+    "stateCode": "CA",
+    "isFranchise": "N",
+    "isForSell": "N"
 }
 
 

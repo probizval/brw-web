@@ -72,7 +72,7 @@ public class BusinessDetails implements Serializable {
 	private int dataCompletenessScore;
 	
 	@Column(name = "for_sell_YN")
-	private String isforSell;
+	private String isForSell;
 	
 	@Column(name = "for_sell_price")
 	private int forSellPrice;
@@ -377,12 +377,12 @@ public class BusinessDetails implements Serializable {
 		this.dataCompletenessScore = dataCompletenessScore;
 	}
 
-	public String getIsforSell() {
-		return isforSell;
+	public String getIsForSell() {
+		return isForSell;
 	}
 
-	public void setIsforSell(String isforSell) {
-		this.isforSell = isforSell;
+	public void setIsForSell(String isForSell) {
+		this.isForSell = isForSell;
 	}
 
 	public int getForSellPrice() {

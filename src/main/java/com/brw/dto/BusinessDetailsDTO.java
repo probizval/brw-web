@@ -24,8 +24,9 @@ public class BusinessDetailsDTO {
 	private String regStateCode;
 	private String regStateDate;
 	private Integer dataCompletionScore;
-	private String isforSell;
+	private String isForSell;
 	private Integer forSellPrice;
+	private Integer estimatedAmount;
 	private String imageLogo;
 	private String imageFirst;
 	private String street1;
@@ -185,17 +186,23 @@ public class BusinessDetailsDTO {
 	public void setDataCompletionScore(Integer dataCompletionScore) {
 		this.dataCompletionScore = dataCompletionScore;
 	}
-	public String getIsforSell() {
-		return isforSell;
+	public String getIsForSell() {
+		return isForSell;
 	}
-	public void setIsforSell(String isforSell) {
-		this.isforSell = isforSell;
+	public void setIsForSell(String isForSell) {
+		this.isForSell = isForSell;
 	}
 	public Integer getForSellPrice() {
 		return forSellPrice;
 	}
 	public void setForSellPrice(Integer forSellPrice) {
 		this.forSellPrice = forSellPrice;
+	}
+	public Integer getEstimatedAmount() {
+		return estimatedAmount;
+	}
+	public void setEstimatedAmount(Integer estimatedAmount) {
+		this.estimatedAmount = estimatedAmount;
 	}
 	public String getImageLogo() {
 		return imageLogo;
