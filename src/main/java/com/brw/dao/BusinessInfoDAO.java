@@ -27,7 +27,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_street2 LIKE '%:street2%' "
 			+ "AND add_zip = :zip "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_1(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Type
@@ -37,7 +37,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND type = :businessType "
 			+ "AND add_zip = :zip "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_2(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Address
@@ -48,7 +48,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_street2 LIKE '%:street2%' "
 			+ "AND add_zip = :zip "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_3(@Param ("businessName") String businessName, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Type and Address
@@ -59,7 +59,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_street2 LIKE '%:street2%' "
 			+ "AND add_zip = :zip "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_4(@Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where only 1 non-required attributes are part of the input - Name
@@ -68,7 +68,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "WHERE name_dba = :businessName "
 			+ "AND add_zip = :zip "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_5(@Param ("businessName") String businessName, @Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where only 1 non-required attributes are part of the input - Type
@@ -77,7 +77,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "WHERE type = :businessType "
 			+ "AND add_zip = :zip "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_6(@Param ("businessType") String businessType, @Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where non of the non-required attributes are part of the input
@@ -85,7 +85,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "FROM t_brw_business "
 			+ "WHERE add_zip = :zip "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_7(@Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 
 	//CITY
@@ -99,7 +99,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_city = :city "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_8(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("city") String city, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Type
@@ -110,7 +110,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_city = :city "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_9(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("city") String city, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Address
@@ -122,7 +122,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_city = :city "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_10(@Param ("businessName") String businessName, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("city") String city, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Type and Address
@@ -134,7 +134,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_city = :city "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_11(@Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("city") String city, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where only 1 non-required attributes are part of the input - Name
@@ -144,7 +144,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_city = :city "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_12(@Param ("businessName") String businessName, @Param ("city") String city, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where only 1 non-required attributes are part of the input - Type
@@ -154,7 +154,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_city = :city "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_13(@Param ("businessType") String businessType, @Param ("city") String city, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where non of the non-required attributes are part of the input
@@ -163,7 +163,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "WHERE add_city = :city "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_14(@Param ("city") String city, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//COUNTY
@@ -177,7 +177,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_county = :county "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_15(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("county") String county, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Type
@@ -188,7 +188,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_county = :county "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_16(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("county") String county, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Address
@@ -200,7 +200,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_county = :county "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_17(@Param ("businessName") String businessName, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("county") String county, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Type and Address
@@ -212,7 +212,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_county = :county "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_18(@Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("street2") String street2, @Param ("county") String county, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where only 1 non-required attributes are part of the input - Name
@@ -222,7 +222,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_county = :county "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_19(@Param ("businessName") String businessName, @Param ("county") String county, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where only 1 non-required attributes are part of the input - Type
@@ -232,7 +232,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_county = :county "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_20(@Param ("businessType") String businessType, @Param ("county") String county, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where non of the non-required attributes are part of the input
@@ -241,7 +241,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "WHERE add_county = :county "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
-			+ "AND forSell_YN = :forSellYN")
+			+ "AND for_sell_YN = :forSellYN")
 	List<BusinessInfo> searchBusiness_21(@Param ("county") String county, @Param ("state") String state, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	

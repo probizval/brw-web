@@ -466,7 +466,7 @@ Search Flavors -
     "street1": "",
     "street2": "",
     "city": "Fremont",
-    "zip":0,
+    "zip": 0,
     "county": "",
     "stateCode": "CA",
     "isFranchise": "N",
