@@ -88,6 +88,7 @@ and pull out the billing details
 9. GetBusinessTransactions - Service to list past business sell transactions
 
 1. Name: AddBusinesssDetails
+
 Method - Post
 EndPoint –
 http://localhost:8080/api/business/v1/addBusiness
@@ -248,6 +249,11 @@ Response -
 }
 
 2.	Name: SearchBusiness
+
+Notes - 
+1. This API supports search based on isFranchise and isForSell flag
+2. Make first call with isForSell coming from user if its Y
+3. Make second call with just the location identifiers in given radius so we can show those on the map view
 
 Method - Post
 EndPoint – 
