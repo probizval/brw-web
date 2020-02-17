@@ -51,19 +51,21 @@ public class ImageController implements ErrorController {
 	//@PostMapping(value = "uploadImages", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@PostMapping(value = "uploadImages")
 	
-	public ResponseEntity<UploadImagesListDTO> uploadImages(@RequestBody UploadImagesListDTO uploadImagesListDTO) throws IOException{
+	public ResponseEntity<ImagesListDTO> uploadImages(@RequestBody UploadImagesListDTO uploadImagesListDTO) throws IOException{
 		
 		System.out.println("111 **** Inside BusinessController.uploadImages()");
 		
 		logger.info("Upload the Business Images to S3 and add URLs to BRW DB");
 		
+		ImagesListDTO returnImagesListDTO = new ImagesListDTO();
+		
 		try {
-			UploadImagesListDTO returnUploadImagesListDTO = imageService.uploadImages(uploadImagesListDTO);
-			return new ResponseEntity<>(returnUploadImagesListDTO, HttpStatus.OK);
+			returnImagesListDTO = imageService.uploadImages(uploadImagesListDTO);
+			return new ResponseEntity<>(returnImagesListDTO, HttpStatus.OK);
 			
 		} catch (InternalServerError e) {
 			// TODO: handle exception
-			return new ResponseEntity<>(uploadImagesListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(returnImagesListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

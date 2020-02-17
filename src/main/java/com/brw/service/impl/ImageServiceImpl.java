@@ -43,14 +43,14 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 		System.out.println("222 **** Inside ImageServiceImpl.uploadImages()");
 
 		List<UploadImageDTO> uploadImagesDTOList = uploadImagesListDTO.getUploadImagesList();
-		List<UploadImageDTO> returnImageDTOList = new ArrayList<UploadImageDTO>();
+		//List<UploadImageDTO> returnImageDTOList = new ArrayList<UploadImageDTO>();
 		ImagesListDTO returnImagesListDTO = new ImagesListDTO();
-		UploadImageDTO returnImageDTO = new UploadImageDTO();
+		//UploadImageDTO returnImageDTO = new UploadImageDTO();
 		
 		ImagesListDTO imagesToDBListDTO = new ImagesListDTO();
 		List<ImageDTO> imageToDBDTOList = new ArrayList<ImageDTO>();
 
-		Image returnImage = new Image();
+		//Image returnImage = new Image();
 		int i = 0;
 		
 		for (UploadImageDTO uploadImageDTO: uploadImagesDTOList) {
