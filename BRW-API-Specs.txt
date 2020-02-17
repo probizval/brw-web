@@ -278,7 +278,7 @@ Request -
 
 Response –
 {
-    "status": "succcess",
+    "status": "success",
     "httpStatus": "OK",
     "data": {
         "businessList": [

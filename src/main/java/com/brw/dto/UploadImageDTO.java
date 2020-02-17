@@ -11,7 +11,7 @@ public class UploadImageDTO implements Serializable {
 
 	private static final long serialVersionUID = 1941284759903233525L;
 	
-	private String name;
+	private String title;
 	private String imageBase64;
 	private String s3url;
 
@@ -53,11 +53,11 @@ public class UploadImageDTO implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getImageBase64() {
 		return imageBase64;

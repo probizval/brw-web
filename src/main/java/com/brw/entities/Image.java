@@ -32,6 +32,9 @@ public class Image implements Serializable {
 	@Column(name = "biz_id")
 	private int businessId;
 	
+	@Column(name = "title")
+	private String title;
+	
 	@Column(name = "url")
 	private String url;
 	
@@ -61,6 +64,14 @@ public class Image implements Serializable {
 
 	public void setBusinessId(int businessId) {
 		this.businessId = businessId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getUrl() {

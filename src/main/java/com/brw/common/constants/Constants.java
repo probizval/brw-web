@@ -37,5 +37,7 @@ public interface Constants {
 	public static final String US_WEST_1 = "us-west-1";
 
 	public static final String FORWARD_SLASH = "/";
+	
+	public static final String UNDERSCORE = "_";
 
 }

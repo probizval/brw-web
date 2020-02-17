@@ -20,7 +20,7 @@ import com.brw.entities.Image;
 @Repository
 public interface ImageDAO extends PagingAndSortingRepository<Image, Integer>{
 		
-	@Query(nativeQuery=true, value="SELECT * FROM t_brw_image WHERE biz_id = :businessId")
+	@Query(nativeQuery=true, value="SELECT * FROM t_brw_image WHERE biz_id = :businessId ORDER BY image_id ASC")
 	List <Image> getImages(@Param ("businessId") int businessId);
 	
 	@Modifying
