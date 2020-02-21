@@ -77,6 +77,9 @@ public class BusinessDetails implements Serializable {
 	@Column(name = "for_sell_price")
 	private int forSellPrice;
 	
+	@Column(name = "est_amount")
+	private int estimatedAmount;
+	
 	@Column(name = "image_logo")
 	private String imageLogo;
 	
@@ -391,6 +394,14 @@ public class BusinessDetails implements Serializable {
 
 	public void setForSellPrice(int forSellPrice) {
 		this.forSellPrice = forSellPrice;
+	}
+
+	public int getEstimatedAmount() {
+		return estimatedAmount;
+	}
+
+	public void setEstimatedAmount(int estimatedAmount) {
+		this.estimatedAmount = estimatedAmount;
 	}
 
 	public String getImageLogo() {

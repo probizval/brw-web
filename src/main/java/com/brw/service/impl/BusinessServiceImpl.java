@@ -270,6 +270,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		}
 		businessDetailsDTO.setDataCompletionScore(businessDetails.getDataCompletenessScore());
 		businessDetailsDTO.setIsForSell(businessDetails.getIsForSell());
+		businessDetailsDTO.setEstimatedAmount(businessDetails.getEstimatedAmount());
 		businessDetailsDTO.setForSellPrice(businessDetails.getForSellPrice());
 		businessDetailsDTO.setImageLogo(businessDetails.getImageLogo());
 		businessDetailsDTO.setImageFirst(businessDetails.getImageFirst());
