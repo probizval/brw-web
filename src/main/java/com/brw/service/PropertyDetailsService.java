@@ -5,7 +5,6 @@ import java.util.List;
 import com.brw.dao.RestaurentDAO;
 import com.brw.dto.AutoServiceDTO;
 import com.brw.dto.BookMarksDTO;
-import com.brw.dto.BusinessListDTO;
 import com.brw.dto.BusinessRequirementDTO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;

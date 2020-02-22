@@ -6,20 +6,19 @@ package com.brw.service;
  */
 
 import com.brw.dto.BusinessDetailsDTO;
-import com.brw.dto.BusinessListDTO;
+import com.brw.dto.BusinessDetailsListDTO;
+import com.brw.dto.BusinessInfoListDTO;
 import com.brw.dto.RelatedBusinessDTO;
 import com.brw.dto.RelatedBusinessListDTO;
-import com.brw.dto.UserBusinessDTO;
-import com.brw.dto.UserBusinessListDTO;
 import com.brw.exceptions.BusinessException;
 
 public interface BusinessService {
 	
-	public BusinessListDTO searchBusiness(BusinessDetailsDTO searchFilter) throws BusinessException;
+	public BusinessInfoListDTO searchBusiness(BusinessDetailsDTO searchFilter) throws BusinessException;
 	public BusinessDetailsDTO getBusinessDetailsFromBRWDB(int businessId) throws BusinessException;
 	public BusinessDetailsDTO addBusinessDetails(BusinessDetailsDTO businessDetailsDTO) throws BusinessException;
 	public BusinessDetailsDTO updateBusinessDetails(BusinessDetailsDTO businessDetailsDTO) throws BusinessException;
-	public BusinessListDTO searchComparableBusiness(BusinessDetailsDTO businessInQuestion) throws BusinessException;
+	public BusinessDetailsListDTO searchComparableBusiness(BusinessDetailsDTO businessInQuestion) throws BusinessException;
 	public String estimateRealWorth(BusinessDetailsDTO businessDetailsDTO) throws BusinessException;
 	
 	public RelatedBusinessDTO addRelatedBusiness(RelatedBusinessDTO relatedBusinessDTO) throws BusinessException;

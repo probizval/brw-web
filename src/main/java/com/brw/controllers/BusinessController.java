@@ -18,20 +18,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.web.client.HttpServerErrorException.InternalServerError;
-
 import com.brw.common.constants.Constants;
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
 
 import com.brw.exceptions.BusinessException;
-import com.brw.exceptions.DataFromPBException;
 import com.brw.dto.BusinessDetailsDTO;
-import com.brw.dto.BusinessListDTO;
+import com.brw.dto.BusinessInfoListDTO;
 import com.brw.dto.RelatedBusinessDTO;
 import com.brw.dto.RelatedBusinessListDTO;
 import com.brw.service.BusinessService;
-import com.brw.service.VendorDataService;
 
 /**
  * @author sidpatil
@@ -70,7 +66,7 @@ public class BusinessController implements ErrorController {
 
 		logger.info("Search Business based on search criteria");
 		
-		BusinessListDTO businessList = null;
+		BusinessInfoListDTO businessList = null;
 
 		try {
 			businessList = businessService.searchBusiness(businessDetailsDTO);

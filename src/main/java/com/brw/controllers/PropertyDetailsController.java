@@ -1,7 +1,5 @@
 package com.brw.controllers;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,21 +7,17 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
-import com.brw.dao.BusinessDetailsDAO;
-import com.brw.dao.PropertyDetailsDAO;
 import com.brw.dto.GasStationDetailsDTO;
 import com.brw.dto.LiquorStoreDTO;
 import com.brw.dto.PropertyDetailsDTO;
@@ -31,11 +25,9 @@ import com.brw.dto.PropertyListDTO;
 import com.brw.dto.PropertyMetaDataDTO;
 import com.brw.dto.RestaurantDetailsDTO;
 import com.brw.dto.SalonStoreDTO;
-import com.brw.dto.SimpleSearchFilterDTO;
 import com.brw.exceptions.PropertyDetailsException;
 import com.brw.dto.AutoServiceDTO;
 import com.brw.dto.BookMarksDTO;
-import com.brw.dto.BusinessListDTO;
 import com.brw.dto.BusinessRequirementDTO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;

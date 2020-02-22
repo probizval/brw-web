@@ -27,7 +27,6 @@ import com.brw.dao.SalonStoreDAO;
 import com.brw.dto.AutoServiceDTO;
 import com.brw.dto.BookMarksDTO;
 import com.brw.dto.BusinessDetailsDTO;
-import com.brw.dto.BusinessListDTO;
 import com.brw.dto.BusinessRequirementDTO;
 import com.brw.dto.CoinLaundryDetailsDTO;
 import com.brw.dto.FilterDTO;

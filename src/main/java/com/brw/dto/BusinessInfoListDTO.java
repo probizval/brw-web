@@ -2,24 +2,32 @@ package com.brw.dto;
 
 /**
  * @author sidpatil
- * 2019
+ * 2020
  */
 
 import java.io.Serializable;
 import java.util.List;
 
-public class BusinessListDTO implements Serializable {
+public class BusinessInfoListDTO implements Serializable {
 
 	private static final long serialVersionUID = -65223447914153444L;
 	
-	private List<BusinessDetailsDTO> businessList;
+	private List<BusinessInfoDTO> businessList;
 	
 	private Long totalCount;
 	
 	private Integer pageNumber;
 	
 	private Integer pageSize;
-	
+
+	public List<BusinessInfoDTO> getBusinessList() {
+		return businessList;
+	}
+
+	public void setBusinessList(List<BusinessInfoDTO> businessList) {
+		this.businessList = businessList;
+	}
+
 	public Long getTotalCount() {
 		return totalCount;
 	}
@@ -44,11 +52,7 @@ public class BusinessListDTO implements Serializable {
 		this.pageSize = pageSize;
 	}
 
-	public List<BusinessDetailsDTO> getBusinessList() {
-		return businessList;
-	}
-
-	public void setBusinessList(List<BusinessDetailsDTO> businessList) {
-		this.businessList = businessList;
-	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}	
 }

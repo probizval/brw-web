@@ -17,7 +17,9 @@ import com.brw.dao.BusinessDetailsDAO;
 import com.brw.dao.BusinessInfoDAO;
 import com.brw.dao.RelatedBusinessDAO;
 import com.brw.dto.BusinessDetailsDTO;
-import com.brw.dto.BusinessListDTO;
+import com.brw.dto.BusinessDetailsListDTO;
+import com.brw.dto.BusinessInfoDTO;
+import com.brw.dto.BusinessInfoListDTO;
 import com.brw.dto.EstimatesDTO;
 import com.brw.dto.EstimatesListDTO;
 import com.brw.dto.RelatedBusinessDTO;
@@ -49,7 +51,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	BizTransactionService bizTransactionService;
 	
 	@Override
-	public BusinessListDTO searchBusiness(BusinessDetailsDTO businessDTO) {
+	public BusinessInfoListDTO searchBusiness(BusinessDetailsDTO businessDTO) {
 		// TODO Auto-generated method stub
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getName: "+businessDTO.getName());
 		
@@ -209,36 +211,36 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			}
 		}
 		
-		List<BusinessDetailsDTO> businessDetailsDTOList = new ArrayList<BusinessDetailsDTO>();
-		BusinessListDTO businessListDTO = new BusinessListDTO();
+		List<BusinessInfoDTO> businessInfoDTOList = new ArrayList<BusinessInfoDTO>();
+		BusinessInfoListDTO businessInfoListDTO = new BusinessInfoListDTO();
 		
 		for (BusinessInfo businessInfo: businessList) {
-			BusinessDetailsDTO businessDetailsDTO = new BusinessDetailsDTO();
+			BusinessInfoDTO businessInfoDTO = new BusinessInfoDTO();
 			
-			businessDetailsDTO.setBusinessId(businessInfo.getBusinessId());
-			businessDetailsDTO.setLegalName(businessInfo.getName());
-			businessDetailsDTO.setType(businessInfo.getType());
+			businessInfoDTO.setInvokerId(businessDTO.getInvokerId());
+			businessInfoDTO.setBusinessId(businessInfo.getBusinessId());
+			businessInfoDTO.setName(businessInfo.getName());
+			businessInfoDTO.setType(businessInfo.getType());
 			
-			//DON'T NEED all attributes for the search results
-			businessDetailsDTO.setIsForSell(businessInfo.getIsForSell());
-			businessDetailsDTO.setForSellPrice(businessInfo.getForSellPrice());
-			businessDetailsDTO.setEstimatedAmount(businessInfo.getEstimatedAmount());
-			businessDetailsDTO.setImageFirst(businessInfo.getImageFirst());
-			businessDetailsDTO.setStreet1(businessInfo.getStreet1());
-			businessDetailsDTO.setStreet2(businessInfo.getStreet2());
-			businessDetailsDTO.setCity(businessInfo.getCity());
-			businessDetailsDTO.setCounty(businessInfo.getCounty());
-			businessDetailsDTO.setStateCode(businessInfo.getStateCode());
-			businessDetailsDTO.setZip(businessInfo.getZip());	
-			businessDetailsDTO.setLatitude(businessInfo.getLatitude());
-			businessDetailsDTO.setLongitude(businessInfo.getLongitude());
-			businessDetailsDTO.setIsVendorCall(businessInfo.getIsVendorCall());
-			businessDetailsDTO.setIsFranchise(businessInfo.getIsFranchise());
+			businessInfoDTO.setIsForSell(businessInfo.getIsForSell());
+			businessInfoDTO.setForSellPrice(businessInfo.getForSellPrice());
+			businessInfoDTO.setEstimatedAmount(businessInfo.getEstimatedAmount());
+			businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
+			businessInfoDTO.setStreet1(businessInfo.getStreet1());
+			businessInfoDTO.setStreet2(businessInfo.getStreet2());
+			businessInfoDTO.setCity(businessInfo.getCity());
+			businessInfoDTO.setCounty(businessInfo.getCounty());
+			businessInfoDTO.setStateCode(businessInfo.getStateCode());
+			businessInfoDTO.setZip(businessInfo.getZip());	
+			businessInfoDTO.setLatitude(businessInfo.getLatitude());
+			businessInfoDTO.setLongitude(businessInfo.getLongitude());
+			businessInfoDTO.setIsVendorCall(businessInfo.getIsVendorCall());
+			businessInfoDTO.setIsFranchise(businessInfo.getIsFranchise());
 			
-			businessDetailsDTOList.add(businessDetailsDTO);
+			businessInfoDTOList.add(businessInfoDTO);
 		}
-		businessListDTO.setBusinessList(businessDetailsDTOList);
-		return businessListDTO;
+		businessInfoListDTO.setBusinessList(businessInfoDTOList);
+		return businessInfoListDTO;
 	}
 	
 	@Override
@@ -886,13 +888,13 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	}
 	
 	@Override
-	public BusinessListDTO searchComparableBusiness(BusinessDetailsDTO businessInQuestion) {
+	public BusinessDetailsListDTO searchComparableBusiness(BusinessDetailsDTO businessInQuestion) {
 		// TODO Auto-generated method stub
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchComparableBusiness()");
 		
 		List<BusinessDetails> comparableBusinessList = (List<BusinessDetails>) businessDetailsDAO.searchComparableBusiness(businessInQuestion.getType(), businessInQuestion.getSubType(), businessInQuestion.getStateCode(), businessInQuestion.getCity());
 		List<BusinessDetailsDTO> businessDetailsDTOList = new ArrayList<BusinessDetailsDTO>();
-		BusinessListDTO businessListDTO = new BusinessListDTO();
+		BusinessDetailsListDTO businessListDTO = new BusinessDetailsListDTO();
 		
 		for (BusinessDetails businessDetails: comparableBusinessList) {
 			BusinessDetailsDTO businessDetailsDTO = new BusinessDetailsDTO();
@@ -1081,7 +1083,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		Integer estimatedWorthLow = 0;
 		
 		//1. Find as many as 5 comparable business based on type, state and city
-		BusinessListDTO comparableBusinessDTOList = null;
+		BusinessDetailsListDTO comparableBusinessDTOList = null;
 		
 		try {
 			comparableBusinessDTOList = searchComparableBusiness(businessInQuestionDTO);
