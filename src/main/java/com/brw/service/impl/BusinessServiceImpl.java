@@ -512,7 +512,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		bizDTO.setUpdateDate(business.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		
 		//Add Business and User relationship in t_brw_user_business table
-		addUserBusiness(bizDTO);
+		addUserBusiness(bizDTO, businessDetailsDTO.getBuRelationship());
 		
 		return bizDTO;
 	}
@@ -895,6 +895,9 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		bizDTO.setUpdatedByUserId(business.getUpdatedByUserId());
 		bizDTO.setUpdateDate(business.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		
+		//Add Business and User relationship in t_brw_user_business table
+		addUserBusiness(bizDTO, businessDetailsDTO.getBuRelationship());
+		
 		return bizDTO;
 	}
 	
@@ -1267,14 +1270,14 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		System.out.println("222 **** Inside BusinessServiceImpl.deleteRelatedBusiness() nurDeleted: "+nurDeleted);
 	}
 	
-	private void addUserBusiness(BusinessDetailsDTO businessDetailsDTO) {
+	private void addUserBusiness(BusinessDetailsDTO businessDetailsDTO, String relationshipType) {
 		
 		System.out.println("222 **** Inside BusinessServiceImpl.addUserBusiness() getInvokerId: "+businessDetailsDTO.getInvokerId());
 		
 		UserBusiness userBusiness = new UserBusiness();
 		
 		userBusiness.setUserId(businessDetailsDTO.getInvokerId());
-		userBusiness.setRelationship("OWNER");
+		userBusiness.setRelationship(relationshipType);
 		userBusiness.setBusinessId(businessDetailsDTO.getBusinessId());
 		userBusiness.setCreatedByUserId(businessDetailsDTO.getInvokerId());
 		userBusiness.setCreateDate(LocalDateTime.now());
@@ -1282,6 +1285,5 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		userBusiness.setUpdateDate(LocalDateTime.now());
 		
 		userBusinessDAO.save(userBusiness);
-		
 	}
 }

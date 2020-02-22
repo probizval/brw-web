@@ -9,6 +9,7 @@ package com.brw.dto;
 public class BusinessDetailsDTO {
 
 	private Integer invokerId;
+	private String buRelationship;
 	private Integer businessId;
 	private String legalName;
 	private String name;
@@ -90,6 +91,12 @@ public class BusinessDetailsDTO {
 	private Integer updatedByUserId;
 	private String updateDate;
 	
+	public String getBuRelationship() {
+		return buRelationship;
+	}
+	public void setBuRelationship(String buRelationship) {
+		this.buRelationship = buRelationship;
+	}
 	public Integer getInvokerId() {
 		return invokerId;
 	}
