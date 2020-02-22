@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.brw.dao.BusinessDetailsDAO;
 import com.brw.dao.BusinessInfoDAO;
 import com.brw.dao.RelatedBusinessDAO;
+import com.brw.dao.UserBusinessDAO;
 import com.brw.dto.BusinessDetailsDTO;
 import com.brw.dto.BusinessDetailsListDTO;
 import com.brw.dto.BusinessInfoDTO;
@@ -24,11 +25,13 @@ import com.brw.dto.EstimatesDTO;
 import com.brw.dto.EstimatesListDTO;
 import com.brw.dto.RelatedBusinessDTO;
 import com.brw.dto.RelatedBusinessListDTO;
+import com.brw.dto.UserBusinessDTO;
 import com.brw.common.constants.Constants;
 
 import com.brw.entities.BusinessDetails;
 import com.brw.entities.BusinessInfo;
 import com.brw.entities.RelatedBusiness;
+import com.brw.entities.UserBusiness;
 import com.brw.service.BizTransactionService;
 import com.brw.service.EstimateService;
 
@@ -49,6 +52,9 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
 	@Autowired
 	BizTransactionService bizTransactionService;
+	
+	@Autowired
+	private UserBusinessDAO userBusinessDAO;
 	
 	@Override
 	public BusinessInfoListDTO searchBusiness(BusinessDetailsDTO businessDTO) {
@@ -343,6 +349,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		System.out.println("222 **** Inside BusinessServiceImpl.addBusinessDetails()");
 
 		BusinessDetails businessDetails = new BusinessDetails();
+
 		businessDetails.setLegalName(businessDetailsDTO.getLegalName());
 		businessDetails.setName(businessDetailsDTO.getName());
 		businessDetails.setFirstOwnerName(businessDetailsDTO.getFirstOwnerName());
@@ -419,6 +426,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		businessDetails.setUpdatedByUserId(businessDetailsDTO.getInvokerId());
 		businessDetails.setUpdateDate(LocalDateTime.now());
 		
+		//Add Business to t_brw_business table
 		BusinessDetails business = businessDetailsDAO.save(businessDetails);
 		
 		BusinessDetailsDTO bizDTO = new BusinessDetailsDTO();
@@ -502,6 +510,9 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		bizDTO.setCreateDate(business.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		bizDTO.setUpdatedByUserId(business.getUpdatedByUserId());
 		bizDTO.setUpdateDate(business.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		
+		//Add Business and User relationship in t_brw_user_business table
+		addUserBusiness(bizDTO);
 		
 		return bizDTO;
 	}
@@ -1249,10 +1260,28 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
 	@Override
 	public void deleteRelatedBusiness(int businessId, int relatedBizId) {
-		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteRelatedBusiness()");
+		System.out.println("222 **** Inside BusinessServiceImpl.deleteRelatedBusiness()");
 		
 		int nurDeleted = relatedBusinessDAO.deleteRelatedBusiness(businessId, relatedBizId);
 		
-		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteRelatedBusiness() nurDeleted: "+nurDeleted);
+		System.out.println("222 **** Inside BusinessServiceImpl.deleteRelatedBusiness() nurDeleted: "+nurDeleted);
+	}
+	
+	private void addUserBusiness(BusinessDetailsDTO businessDetailsDTO) {
+		
+		System.out.println("222 **** Inside BusinessServiceImpl.addUserBusiness() getInvokerId: "+businessDetailsDTO.getInvokerId());
+		
+		UserBusiness userBusiness = new UserBusiness();
+		
+		userBusiness.setUserId(businessDetailsDTO.getInvokerId());
+		userBusiness.setRelationship("OWNER");
+		userBusiness.setBusinessId(businessDetailsDTO.getBusinessId());
+		userBusiness.setCreatedByUserId(businessDetailsDTO.getInvokerId());
+		userBusiness.setCreateDate(LocalDateTime.now());
+		userBusiness.setUpdatedByUserId(businessDetailsDTO.getInvokerId());
+		userBusiness.setUpdateDate(LocalDateTime.now());
+		
+		userBusinessDAO.save(userBusiness);
+		
 	}
 }
