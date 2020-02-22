@@ -14,25 +14,19 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
       var userId = JSON.parse(sessionStorage.getItem('profile'));
       console.log("--------getBusinesslist", searchBusinessAttributes);
       return $http.post(businessUrl + 'searchBusiness', {
-//            "name": searchBusinessAttributes.businessName || "",
-//            "type": searchBusinessAttributes.businessType || "",
-//            "street1": searchBusinessAttributes.street1 || "",
-//            "street2": searchBusinessAttributes.street2 || "",
-//            "city": searchBusinessAttributes.city || "Fremont",
-//            "stateCode": searchBusinessAttributes.state || "CA",
-//            "zip": searchBusinessAttributes.zipCode || "94536",
-//            "county": "",
-            "name": "misha",
-            "type": "",
-            "street1": "2140 Peralta",
-            "street2": "",
-            "city": "",
-            "zip": 0,
-            "county": "",
-            "stateCode": "CA",
-            "latitude": 37.7749,
-            "longitude": -122.4194,
-            "rangeMile": 50
+            "name": searchBusinessAttributes.businessName || "",
+            "type": searchBusinessAttributes.businessType || "",
+            "street1": searchBusinessAttributes.street1 || "",
+            "street2": searchBusinessAttributes.street2 || "",
+            "city": searchBusinessAttributes.city || "Fremont",
+            "stateCode": searchBusinessAttributes.state || "CA",
+            "zip": searchBusinessAttributes.zipCode || "94536",
+            "latitude": searchBusinessAttributes.latitude || 37.7749,
+            "longitude": searchBusinessAttributes.longitude || -122.4194,
+            "rangeMile": searchBusinessAttributes.rangeMile || 5,
+            "county": searchBusinessAttributes.county || "",
+            "isFranchise": searchBusinessAttributes.isFranchise || "N",
+            "isForSell": searchBusinessAttributes.isForSell || "N"
       }).success(function(res) {
         console.log("getBusinessList", JSON.stringify(res));
         return res.data;

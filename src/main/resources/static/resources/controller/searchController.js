@@ -290,7 +290,7 @@
                 },
             ];
             var mapOptions = {
-                zoom: 12,
+                zoom: 13,
                 center: new google.maps.LatLng(searchAddress.latitude, searchAddress.longitude),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 streetViewControl: false,
@@ -318,7 +318,7 @@
             showMarkers();
             // When map becomes idle after zoom ing or panning
             console.log("Initial zoom", map.getZoom());
-            map.addListener('idle', function (e) {
+            map.addListener('zoom_changed', function (e) {
                 mapZoomPanChangeListeners();
             });
 
@@ -462,8 +462,9 @@
                 });
         }
 
-        function addMarker(arrDestinations) {
+        async function addMarker(arrDestinations) {
             console.log("Add markers", arrDestinations);
+            markers = [];
             for (var i = 0; i < arrDestinations.length; i++) {
                 var marker = new google.maps.Marker({
                     title: arrDestinations[i].propertyName,
