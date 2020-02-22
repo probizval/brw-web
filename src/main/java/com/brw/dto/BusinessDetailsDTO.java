@@ -187,7 +187,11 @@ public class BusinessDetailsDTO {
 		this.dataCompletionScore = dataCompletionScore;
 	}
 	public String getIsForSell() {
-		return isForSell;
+		if (null != isForSell) {
+			return isForSell.toUpperCase();
+		} else {
+			return "N";
+		}
 	}
 	public void setIsForSell(String isForSell) {
 		this.isForSell = isForSell;
@@ -313,7 +317,11 @@ public class BusinessDetailsDTO {
 		NAICSDescription = nAICSDescription;
 	}
 	public String getIsFranchise() {
-		return isFranchise;
+		if (null != isFranchise) {
+			return isFranchise.toUpperCase();
+		} else {
+			return "N";
+		}
 	}
 	public void setIsFranchise(String isFranchise) {
 		this.isFranchise = isFranchise;
