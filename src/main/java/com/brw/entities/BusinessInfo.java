@@ -38,10 +38,16 @@ public class BusinessInfo implements Serializable {
 	private String subType;
 	
 	@Column(name = "for_sell_YN")
-	private String isforSell;
+	private String isForSell;
+	
+	@Column(name = "franchise_YN")
+	private String isFranchise;
 	
 	@Column(name = "for_sell_price")
 	private int forSellPrice;
+	
+	@Column(name = "est_amount")
+	private int estimatedAmount;
 	
 	@Column(name = "image_first")
 	private String imageFirst;
@@ -105,20 +111,36 @@ public class BusinessInfo implements Serializable {
 		this.subType = subType;
 	}
 
-	public String getIsforSell() {
-		return isforSell;
-	}
-
-	public void setIsforSell(String isforSell) {
-		this.isforSell = isforSell;
-	}
-
 	public int getForSellPrice() {
 		return forSellPrice;
 	}
 
 	public void setForSellPrice(int forSellPrice) {
 		this.forSellPrice = forSellPrice;
+	}
+
+	public String getIsForSell() {
+		return isForSell;
+	}
+
+	public void setIsForSell(String isForSell) {
+		this.isForSell = isForSell;
+	}
+
+	public String getIsFranchise() {
+		return isFranchise;
+	}
+
+	public void setIsFranchise(String isFranchise) {
+		this.isFranchise = isFranchise;
+	}
+
+	public int getEstimatedAmount() {
+		return estimatedAmount;
+	}
+
+	public void setEstimatedAmount(int estimatedAmount) {
+		this.estimatedAmount = estimatedAmount;
 	}
 
 	public String getImageFirst() {

@@ -12,6 +12,7 @@ public class ImageDTO implements Serializable {
 	private static final long serialVersionUID = 1941284759903233525L;
 		
 	private int imageId;
+	private String title;
 	private String url;
 	private int createdByUserId;
 	private String createDate;
@@ -23,6 +24,12 @@ public class ImageDTO implements Serializable {
 	}
 	public void setImageId(int imageId) {
 		this.imageId = imageId;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getUrl() {
 		return url;

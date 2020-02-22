@@ -39,34 +39,38 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	private ImageDAO imageDAO;
 	
 	@Override
-	public UploadImagesListDTO uploadImages(UploadImagesListDTO uploadImagesListDTO) {
+	public ImagesListDTO uploadImages(UploadImagesListDTO uploadImagesListDTO) {
 		System.out.println("222 **** Inside ImageServiceImpl.uploadImages()");
 
 		List<UploadImageDTO> uploadImagesDTOList = uploadImagesListDTO.getUploadImagesList();
-		List<UploadImageDTO> returnImageDTOList = new ArrayList<UploadImageDTO>();
-		UploadImagesListDTO returnImagesListDTO = new UploadImagesListDTO();
-		UploadImageDTO returnImageDTO = new UploadImageDTO();
+		//List<UploadImageDTO> returnImageDTOList = new ArrayList<UploadImageDTO>();
+		ImagesListDTO returnImagesListDTO = new ImagesListDTO();
+		//UploadImageDTO returnImageDTO = new UploadImageDTO();
+		
+		ImagesListDTO imagesToDBListDTO = new ImagesListDTO();
+		List<ImageDTO> imageToDBDTOList = new ArrayList<ImageDTO>();
 
-		Image returnImage = new Image();
+		//Image returnImage = new Image();
+		int i = 0;
 		
 		for (UploadImageDTO uploadImageDTO: uploadImagesDTOList) {
-			System.out.println("222 **** uploadImageDTO.name "+uploadImageDTO.getName());
+			System.out.println("222 **** uploadImageDTO.name "+uploadImageDTO.getTitle());
 			System.out.println("222 **** uploadImageDTO.getImageBase64 "+uploadImageDTO.getImageBase64());
 			
 			//String base64String = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAHkAAAB5C...";
 			String base64String = uploadImageDTO.getImageBase64();
-			
+
 	        String[] strings = base64String.split(Constants.COMMA);
 	        String fileType;
 	        switch (strings[0]) {//check image's extension
 	            case "data:image/jpeg;base64":
-	            	fileType = "jpeg";
+	            	fileType = Constants.JPEG;
 	                break;
 	            case "data:image/png;base64":
-	            	fileType = "png";
+	            	fileType = Constants.PNG;
 	                break;
 	            default://should write cases for more images types
-	            	fileType = "jpg";
+	            	fileType = Constants.JPG;
 	                break;
 	        }
 	        
@@ -85,16 +89,27 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	        }
 	        */
 	        
-	        //Code to upload image to AWS S3
-	        String s3URL = uploadBase64Image(strings[1], fileType, String.valueOf(uploadImagesListDTO.getBusinessId()), uploadImageDTO.getName());
+	        //Upload image to AWS S3
+	        String pathToFile = String.valueOf(uploadImagesListDTO.getBusinessId());
+	        String name = pathToFile +Constants.UNDERSCORE+i++;
+
+	        String s3URL = uploadBase64Image(strings[1], fileType, pathToFile, name);
 	        
-	        returnImageDTO.setName(uploadImageDTO.getName());
-	        returnImageDTO.setS3url(s3URL);
-			returnImageDTOList.add(returnImageDTO);
+			//Build imagesToDBListDTO to call AddImages API
+			ImageDTO imageToDBDTO = new ImageDTO();
+			
+			imageToDBDTO.setUrl(s3URL);
+	        imageToDBDTOList.add(imageToDBDTO);
+	        imagesToDBListDTO.setBusinessId(uploadImagesListDTO.getBusinessId());
+	        imagesToDBListDTO.setImagesList(imageToDBDTOList);
+	        
+	        //Build return Image Object
+	        //returnImageDTO.setTitle(uploadImageDTO.getTitle());
+	        //returnImageDTO.setS3url(s3URL);
+			//returnImageDTOList.add(returnImageDTO);
 		}
-		returnImagesListDTO.setBusinessId(returnImage.getBusinessId());
-		returnImagesListDTO.setUploadImagesList(returnImageDTOList);
-		
+		//Add Image URL to BRW DB
+		returnImagesListDTO = addImages(imagesToDBListDTO);
 		return returnImagesListDTO;
 	}
 	
@@ -107,9 +122,9 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	    metadata.setContentLength(imageBytes.length);
 	    metadata.setContentType("image/"+fileType);
 	    
-	    String s3bucketName = "brwbusinessimages";
+	    String s3bucketName = Constants.S3_BUCKET_NAME;
 	    
-	    String key = pathToFile + "/" +name + "." + fileType;
+	    String key = pathToFile + Constants.FORWARD_SLASH + name + Constants.PERIOD + fileType;
 	    URL s3Url = null;
 
 	    try {
@@ -119,14 +134,14 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	        
 	        BasicAWSCredentials creds = new BasicAWSCredentials("AKIAITCWQF4LXNVAICBQ", "BfXEr/91/bmzShibB5xnzNIqb3LOucwpyPo/usCT");
 	        AmazonS3 s3Client = AmazonS3Client.builder()
-	        	    .withRegion("us-west-1")
+	        	    .withRegion(Constants.US_WEST_1)
 	        	    .withCredentials(new AWSStaticCredentialsProvider(creds))
 	        	    .build();
 	        
 	        s3Client.putObject(objectRequest);
 	        s3Url = s3Client.getUrl(s3bucketName, key);
 	        
-	        System.out.println("S3 url is: " + s3Url.toString());
+	        System.out.println("333 **** AWS S3 URL for this IMAGE: " + s3Url.toString());
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
@@ -151,6 +166,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 
 			image.setBusinessId(imagesListDTO.getBusinessId());
 			image.setUrl(imageDTO.getUrl());
+			image.setTitle(imageDTO.getTitle());
 			image.setCreatedByUserId(imagesListDTO.getInvokerId());
 			image.setCreateDate(LocalDateTime.now());
 			image.setUpdatedByUserId(imagesListDTO.getInvokerId());
@@ -160,6 +176,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 			retImageDTO = new ImageDTO();
 
 			retImageDTO.setImageId(returnImage.getImageId());
+			retImageDTO.setTitle(returnImage.getTitle());
 			retImageDTO.setUrl(returnImage.getUrl());
 			retImageDTO.setCreatedByUserId(returnImage.getCreatedByUserId());
 			retImageDTO.setCreateDate(returnImage.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
@@ -186,6 +203,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 			ImageDTO returnImageDTO = new ImageDTO();
 			
 			returnImageDTO.setImageId(image.getImageId());
+			returnImageDTO.setTitle(image.getTitle());
 			returnImageDTO.setUrl(image.getUrl());
 			returnImageDTO.setCreatedByUserId(image.getCreatedByUserId());
 			returnImageDTO.setCreateDate(image.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));

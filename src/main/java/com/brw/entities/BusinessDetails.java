@@ -72,10 +72,13 @@ public class BusinessDetails implements Serializable {
 	private int dataCompletenessScore;
 	
 	@Column(name = "for_sell_YN")
-	private String isforSell;
+	private String isForSell;
 	
 	@Column(name = "for_sell_price")
 	private int forSellPrice;
+	
+	@Column(name = "est_amount")
+	private int estimatedAmount;
 	
 	@Column(name = "image_logo")
 	private String imageLogo;
@@ -377,12 +380,12 @@ public class BusinessDetails implements Serializable {
 		this.dataCompletenessScore = dataCompletenessScore;
 	}
 
-	public String getIsforSell() {
-		return isforSell;
+	public String getIsForSell() {
+		return isForSell;
 	}
 
-	public void setIsforSell(String isforSell) {
-		this.isforSell = isforSell;
+	public void setIsForSell(String isForSell) {
+		this.isForSell = isForSell;
 	}
 
 	public int getForSellPrice() {
@@ -391,6 +394,14 @@ public class BusinessDetails implements Serializable {
 
 	public void setForSellPrice(int forSellPrice) {
 		this.forSellPrice = forSellPrice;
+	}
+
+	public int getEstimatedAmount() {
+		return estimatedAmount;
+	}
+
+	public void setEstimatedAmount(int estimatedAmount) {
+		this.estimatedAmount = estimatedAmount;
 	}
 
 	public String getImageLogo() {
