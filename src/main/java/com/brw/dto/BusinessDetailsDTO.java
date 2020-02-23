@@ -1,5 +1,6 @@
 package com.brw.dto;
 
+import com.brw.common.constants.Constants;
 
 /**
  * @author sidpatil
@@ -140,13 +141,22 @@ public class BusinessDetailsDTO {
 		this.brandName = brandName;
 	}
 	public String getType() {
-		return type;
+		if (null != type) {
+			return type.toUpperCase();
+		} else {
+			return Constants.EMPTY_STRING;
+		}
 	}
 	public void setType(String type) {
 		this.type = type;
 	}
 	public String getSubType() {
-		return subType;
+		//return subType;
+		if (null != type) {
+			return type.toUpperCase();
+		} else {
+			return Constants.EMPTY_STRING;
+		}
 	}
 	public void setSubType(String subType) {
 		this.subType = subType;
@@ -258,7 +268,12 @@ public class BusinessDetailsDTO {
 		this.stateCode = stateCode;
 	}
 	public Integer getZip() {
-		return zip;
+		if (null != zip) {
+			return zip;
+		} else {
+			return 0;
+		}
+		//return zip;
 	}
 	public void setZip(Integer zip) {
 		this.zip = zip;
