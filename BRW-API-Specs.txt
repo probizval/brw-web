@@ -93,7 +93,7 @@ and pull out the billing details
 
 Method - Post
 EndPoint –
-http://localhost:8080/api/business/v1/addBusiness
+http://localhost:8080/api/business/v1/addBusinessDetails
 
 Request -
 {
