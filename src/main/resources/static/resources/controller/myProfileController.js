@@ -38,7 +38,7 @@
                  console.log("res "+ res);
                  console.log("res "+ res.status);
                  $state.go("profileconfirmation", {status: res.status});
-                 //$state.go("property.confirmation");
+                 //$state.go("business.confirmation");
             })
             .error(function (error) {
                 $scope.status = 'Unable to load store data: ' + error.message;

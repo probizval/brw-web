@@ -119,17 +119,17 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             templateUrl: 'resources/pages/socialAccounts.html'
         })
 
-        .state('property', {
-            url: '/property',
+        .state('business', {
+            url: '/business',
             templateUrl: 'resources/pages/nav.html'
         })
-        .state('property.addListing', {
+        .state('business.addListing', {
             url: '/addListing',
             templateUrl: 'resources/pages/addListingForm.html',
             controller: 'addListingController',
             reload: true
         })
-        .state('property.bookmarkedListing', {
+        .state('business.bookmarkedListing', {
             url: '/bookmarkedListing',
             templateUrl: 'resources/pages/bookmarkedListing.html',
             controller: 'bookmarkedListingController',
@@ -140,7 +140,7 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                 }
             }
         })
-        .state('property.myListing', {
+        .state('business.myListing', {
             url: '/myListing',
             templateUrl: 'resources/pages/myListing.html',
             controller: 'myListingController',
@@ -151,7 +151,7 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                 }
             }
         })
-        .state('property.editProperty', {
+        .state('business.editProperty', {
             url: '/editProperty/:id',
             templateUrl: 'resources/pages/editListingForm.html',
             controller: 'editPropertyDetailsController',
@@ -162,7 +162,7 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                 }
             }
         })
-        .state('property.confirmation', {
+        .state('business.confirmation', {
             url: '/confirmation',
             templateUrl: 'resources/pages/confirmation.html'
         })

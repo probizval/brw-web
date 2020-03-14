@@ -9,6 +9,12 @@
   addListingController.$inject = ['$document', '$scope', '$state', 'propertyService', '$timeout'];
     function addListingController($document, $scope, $state, propertyService, $timeout) {
         $scope.imageFiles = [];
+        $scope.businessMetaData = {};
+        $scope.businessDetails = {};
+        $scope.businessImages = [];
+        $scope.equipments = [];
+        $scope.imagesAsDataURL = [];
+
         $scope.yearEstablishedList = [
           {id: 1, year: 2018},
           {id: 2, year: 2017},
@@ -31,40 +37,6 @@
           {id: 15, year: 1930}
         ];
 
-      // $scope.property = {
-      //           "propertyTitle": "",
-      //           "image_url": "",
-      //           "display_phone": 0,
-      //           "propertyDescription": "",
-      //           "bedrooms": "",
-      //           "bathrooms": "",
-      //           "price": 0,
-      //           "address": "",
-      //           "city": "",
-      //           "state": "",
-      //           "country": "",
-      //           "zipcode": 0,
-      //           "lat": 0,
-      //           "lng": 0,
-      //           "userName": "",
-      //           "rentSale": "Buy",
-      //           "sqFt": 0,
-      //           "pricePerSqFt": 0,
-      //           "mlsNumber": 0,
-      //           "type": "",
-      //           "rest": {
-      //               "cuisineType": "Indo",
-      //               "desc": "Indo Restaurant"
-      //           },
-      //           "gas": {
-      //               "brand": "Shell",
-      //               "fuelType": ""
-      //           },
-      //           "uploaded_image_aws_urls": []
-      //   };
-
-        $scope.propertyMetaData = {};
-        $scope.propertyImages = [];
         $scope.property = {
           'rest':          {},
           'gas':          {},
@@ -75,78 +47,17 @@
         };
         
         $scope.types = [
-                         {name:'Restaurants and Food', code:'b_type_1', apiName: "restaurant"},
-                         {name:'Gas Station', code:'b_type_2', apiName: "gasstation"},
-                         {name:'Liquor Store', code:'b_type_3', apiName: "liquorstore"},
-                         {name:'Beauty Salon/Spa/Nail', code:'b_type_4', apiName: "salonstore"},
-                         {name:'Convenience store', code:'b_type_5', apiName: "conveniencestore"},
-                         {name:'Auto Service Shop', code:'b_type_6', apiName: "autoservice"},
-                         {name:'Laundry', code:'b_type_7', apiName: "laundry"},
-                         {name:'Cafe', code:'b_type_8', apiName: "cafe"},
-                         {name:'Dry Cleaners', code:'b_type_9', apiName: "drycleaners"}
+             {name:'Restaurants and Food', code:'b_type_1', apiName: "RESTAURANT"},
+             {name:'Gas Station', code:'b_type_2', apiName: "GAS_STATION"},
+             {name:'Liquor Store', code:'b_type_3', apiName: "LIQUOR_STORE"},
+             {name:'Beauty Salon/Spa/Nail', code:'b_type_4', apiName: "BEAUTY"},
+             {name:'Convenience store', code:'b_type_5', apiName: "MERCHANDISE_STORE"},
+             {name:'Auto Service Shop', code:'b_type_6', apiName: "autoservice"},
+             {name:'Laundry', code:'b_type_7', apiName: "LAUNDRY"},
+             {name:'Cafe', code:'b_type_8', apiName: "CAFE"},
+             {name:'Dry Cleaners', code:'b_type_9', apiName: "drycleaners"},
+             {name:'Other', code:'b_type_9', apiName: "OTHER"}
         ];
-        // $scope.property.type = $scope.types[0];
-        
-        $scope.saveBusiness = function(addListingForm) {
-            if (addListingForm.$invalid) {
-              if (angular.element($document[0].querySelector('select.ng-invalid'))[0]) {
-                console.log("Select focus", angular.element($document[0].querySelector('select.ng-invalid'))[0]);
-                angular.element($document[0].querySelector('select.ng-invalid'))[0].focus();
-                return false;
-              } else {
-                console.log("Input focus", angular.element($document[0].querySelector('input.ng-invalid'))[0]);
-                angular.element($document[0].querySelector('input.ng-invalid'))[0].focus();
-                return false
-              }
-            }
-
-
-            $scope.uploadPhotoOnAWS();
-            var apiName = $scope.propertyMetaData.businessType.apiName;
-            $scope.propertyMetaData.longitude = document.getElementById("lng").value;
-            $scope.propertyMetaData.latitude = document.getElementById("lat").value;
-            $scope.propertyMetaData.city = document.getElementById("locality").value;
-            $scope.propertyMetaData.zipCode = document.getElementById("postal_code").value;
-            $scope.propertyMetaData.state = document.getElementById("administrative_area_level_1").value;
-            $scope.propertyMetaData.country = document.getElementById("country").value;
-            $scope.propertyMetaData.propertyAddress = document.getElementById("address").value;
-            $scope.propertyMetaData.location = document.getElementById("autocomplete").value;
-            $scope.propertyMetaData.businessType = $scope.propertyMetaData.businessType.name;
-            // $scope.propertyMetaData.imageUrl = "https://s3-us-east-1.amazonaws.com/bizrealworth-image/2.jpg";
-
-
-            $scope.business = angular.extend($scope.property.rest, $scope.property.gas, $scope.property.beautySalon,
-              $scope.property.laundry, $scope.property.dryCleaners, $scope.property.liquorStore);
-            $scope.business.propertyImages = $scope.propertyImages;
-            $scope.business.propertyMetaData = $scope.propertyMetaData;
-            console.log($scope.propertyImages, $scope.propertyMetaData, $scope.business);
-
-            //TODO need to get userid
-            var userProfile = JSON.parse(sessionStorage.getItem('profile'));
-            $scope.propertyMetaData.userId = userProfile.id;
-
-            propertyService.savePropertyDetails(apiName, $scope.business)
-            .success(function(res) {
-                 console.log("res ", res);
-                 console.log("res ", res.status);
-                 //$state.go("property.confirmation", {status: res.status});
-                 $state.go("property.confirmation");
-            })
-            .error(function (error) {
-                $scope.status = 'Unable to load store data: ' + error.message;
-            });
-            // TODO Create api for saving uploaded business images to database table
-            // propertyService.savePropertyImages($scope.property)
-            //   .success(function(res) {
-            //     console.log("res "+ res);
-            //     console.log("res "+ res.status);
-            //     //$state.go("property.confirmation", {status: res.status});
-            //     $state.go("property.confirmation");
-            //   })
-            //   .error(function (error) {
-            //     $scope.status = 'Unable to load store data: ' + error.message;
-            //   });
-        };
         
         $scope.initialize = function() {
             // This example displays an address form, using the autocomplete feature
@@ -223,9 +134,33 @@
                 
          }
 
-      $scope.imagesAsDataURL = [];
+        $scope.removePhoto = function(image){
+        var itemIndex = $scope.imagesAsDataURL.indexOf(image);
+        $scope.imagesAsDataURL.splice(itemIndex, 1);
+        $scope.imageFiles.splice(itemIndex, 1);
+        };
 
-      $scope.imageUpload = function(event){
+        $scope.uploadPhotos = function(businessId){
+        var imageList = {}
+        for (var i=0; i < $scope.imagesAsDataURL.length; i++) {
+            var photo = $scope.imagesAsDataURL[i];
+            imageList.push({
+                "title": $scope.imageFiles[0].name,
+                "imageBase64": photo
+            })
+        }
+        // Upload base64 images
+        propertyService.uploadBusinessImages(businessId, $scope.businessDetails.invokerId, imageList)
+        .success(function(res) {
+             console.log("uploadBusinessImages res ", res);
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to load store data: ' + error.message;
+        });
+
+        }
+
+        $scope.imageUpload = function(event){
         var files = event.target.files;
         for (var i = 0; i < files.length; i++) {
           var file = files[i];
@@ -234,71 +169,203 @@
           reader.onload = $scope.imageIsLoaded;
           reader.readAsDataURL(file);
         }
-      };
+        };
 
-      $scope.imageIsLoaded = function(e){
+        $scope.imageIsLoaded = function(e){
         $scope.$apply(function() {
           $scope.imagesAsDataURL.push(e.target.result);
         });
-      };
+        };
 
-      $scope.removePhoto = function(image){
-        var itemIndex = $scope.imagesAsDataURL.indexOf(image);
-        $scope.imagesAsDataURL.splice(itemIndex, 1);
-        $scope.imageFiles.splice(itemIndex, 1);
-      };
-
-      $scope.progress=0;
-      $scope.uploadPhotoOnAWS = function(){
-        for (var i=0; i < $scope.imageFiles.length; i++) {
-          var photo = $scope.imageFiles[i];
-          console.log("-here-----", photo.name, photo.type);
-          //amazon aws credentials
-          AWS.config.update({
-            accessKeyId: 'AKIAJJFDVJ7R234QR6ZA',
-            secretAccessKey: '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'
-          });
-          //amazon s3 region
-          AWS.config.region = 'us-east-1';
-          //amazon s3 bucket name
-          var bucket = new AWS.S3({params: {Bucket: 'bizrealworth-image'}});
-          var params = { Key: photo.name, ContentType: photo.type, Body: photo};
-          bucket.upload(params).on('httpUploadProgress', function (evt) {
-            //logs the image uploading progress
-            console.log("Uploaded :: " + parseInt((evt.loaded * 100) / evt.total) + '%');
-            var progress = parseInt((evt.loaded * 100) / evt.total);
-            if (progress === 100) {
-              console.log("photo uploaded successfully");
-            }
-          }).send(function (err, data) {
-            if (data) {
-              //displays the image location on amazon s3 bucket
-              console.log(data.Location);
-              $scope.propertyImages.push(data.Location);
-            }
-          });
-          // bucket.putObject(params, function(err, data) {
-          //   if(err) {
-          //     // There Was An Error With Your S3 Config
-          //     alert(err.message);
-          //     return false;
-          //   }
-          //   else {
-          //     // Success!
-          //     console.log(data);
-          //     alert('Upload Done', data);
-          //   }
-          // })
-          // .on('httpUploadProgress',function(progress) {
-          //   // Log Progress Information
-          //   console.log(Math.round(progress.loaded / progress.total * 100) + '% done');
-          // });
+        $scope.saveEquipments = function(businessId) {
+        propertyService.addAdditionalAttributes(businessId, $scope.businessDetails.invokerId, $scope.equipments)
+        .success(function(res) {
+             console.log("saveEquipments res ", res);
+             $state.go("business.confirmation");
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to load store data: ' + error.message;
+        });
         }
-      };
 
-      $scope.initialize();
-        
-      console.log('In addListingController');
+        $scope.addEquipments = function() {
+        var equipment = {attribType: "", attribSubType: "", valueType: "", value: "", quantity: "", pricePerUnit: "", monthlyMaintExpense: ""}
+        $scope.equipments.push(equipment)
+        console.log("add Equipments: ", $scope.equipments)
+        };
+
+        $scope.removeEquipment = function($event, equipment){
+        var index = $scope.equipments.indexOf(equipment);
+          if($event.which == 1) {
+             $scope.equipments.splice(index,1);
+          }
+          console.log("Remove Equipments: ", $scope.equipments)
+        };
+
+        $scope.saveBusiness = function(addListingForm) {
+//            if (addListingForm.$invalid) {
+//              if (angular.element($document[0].querySelector('input.ng-invalid'))[0]) {
+//                console.log("Input focus", angular.element($document[0].querySelector('input.ng-invalid'))[0]);
+//                angular.element($document[0].querySelector('input.ng-invalid'))[0].focus();
+//                return false
+//              } else {
+//                console.log("Select focus", angular.element($document[0].querySelector('select.ng-invalid'))[0]);
+//                angular.element($document[0].querySelector('select.ng-invalid'))[0].focus();
+//                return false;
+//              }
+//            }
+
+            var apiName = $scope.type.apiName;
+            $scope.businessDetails = {
+                legalName: $scope.legalName,
+                name: $scope.name,
+                firstOwnerName: $scope.firstOwnerName,
+                secondOwnerName: $scope.secondOwnerName,
+                brandName: $scope.brandName || "",
+                type: $scope.type.apiName,
+                subType: $scope.subType,
+//                "regCityName": "Fremont",
+//                "regCityCode": "044095",
+//                "regCityDate": "2009-09-04 12:00",
+//                "regStateName": "CA",
+//                "regStateCode": "20090801202",
+//                "regStateDate": "2009-10-30 12:00",
+//                "dataCompletionScore": 80,
+                isforSell: $scope.isforSell,
+                forSellPrice: $scope.forSellPrice,
+                imageLogo: "",
+//                imageFirst: "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
+                street1: document.getElementById("address").value,
+                street2: "",
+                city: $scope.city,
+                stateCode: $scope.stateCode,
+                county: "Alameda", //TODO Need to ask from user
+                county: $scope.county,
+                zip: $scope.zipCode,
+                latitude: document.getElementById("lat").value,
+                longitude: document.getElementById("lng").value,
+                phone: $scope.phone,
+                email: $scope.email,
+                website: $scope.website,
+                description: $scope.description,
+                isFranchise: $scope.isFranchise,
+                isOwnerClaimed: $scope.isOwnerClaimed,
+                sqftIndoor: $scope.sqftIndoor,
+                sqftOutdoor: $scope.sqftOutdoor,
+                sqftLot: $scope.sqftLot,
+                buildingType: $scope.buildingType,
+                isBuildingOwned: $scope.isBuildingOwned,
+                revenueMonthly: $scope.revenueMonthly,
+                expenseMonthlyRent: $scope.expenseMonthlyRent,
+                expenseMonthlyMortgage: $scope.expenseMonthlyMortgage,
+                expenseMonthlyMaterial: $scope.expenseMonthlyMortgage,
+                expenseMonthlyEmp: $scope.expenseMonthlyEmp,
+                expenseMonthlyUtility: $scope.expenseMonthlyUtility,
+                expenseMonthlyOther: $scope.expenseMonthlyOther,
+                valueTotalEquipment: $scope.valueTotalEquipment,
+                valueTotalFurniture: $scope.valueTotalFurniture,
+                valueIndoorDeco: $scope.valueIndoorDeco,
+                valueOutdoorDeco: $scope.valueOutdoorDeco,
+                yearEquipment: $scope.yearEquipment,
+                yearFurniture: $scope.yearFurniture,
+                yearIndoorDeco: $scope.yearIndoorDeco,
+                yearOutdoorDeco: $scope.yearOutdoorDeco,
+                empFullTimeNum: $scope.empFullTimeNum,
+                empPartTimeNum: $scope.empPartTimeNum,
+                dailyPeoplAtDoorNum: $scope.dailyPeoplAtDoorNum,
+                dailyCarsAtParklotNum: $scope.dailyCarsAtParklotNum,
+                yearEstablished: $scope.yearEstablished,
+                naicsnum: $scope.naicsnum,
+                naicsdescription: $scope.naicsdescription,
+                numberOfParkings: $scope.numberOfParkings
+            }
+
+//            $scope.businessMetaData.longitude = document.getElementById("lng").value;
+//            $scope.businessMetaData.latitude = document.getElementById("lat").value;
+//            $scope.businessMetaData.city = document.getElementById("locality").value;
+//            $scope.businessMetaData.zipCode = document.getElementById("postal_code").value;
+//            $scope.businessMetaData.state = document.getElementById("administrative_area_level_1").value;
+//            $scope.businessMetaData.country = document.getElementById("country").value;
+//            $scope.businessMetaData.businessAddress = document.getElementById("address").value;
+//            $scope.businessMetaData.location = document.getElementById("autocomplete").value;
+//            $scope.businessMetaData.businessType = $scope.type.name;
+            // $scope.businessMetaData.imageUrl = "https://s3-us-east-1.amazonaws.com/bizrealworth-image/2.jpg";
+
+//            $scope.business = angular.extend($scope.property.rest, $scope.property.gas, $scope.property.beautySalon,
+//              $scope.property.laundry, $scope.property.dryCleaners, $scope.property.liquorStore);
+//            $scope.business.businessImages = $scope.businessImages;
+//            $scope.business.businessMetaData = $scope.businessMetaData;
+//            console.log($scope.businessImages, $scope.businessMetaData, $scope.business, $scope.businessDetails);
+            console.log($scope.businessDetails)
+            //TODO need to get userid
+//            var userProfile = JSON.parse(sessionStorage.getItem('profile'));
+//            $scope.businessMetaData.userId = userProfile.id;
+            var userProfile = JSON.parse(sessionStorage.getItem('profile'));
+            $scope.businessDetails.invokerId = userProfile.id;
+//            propertyService.savePropertyDetails(apiName, $scope.business)
+            propertyService.addBusinessDetails($scope.businessDetails)
+            .success(function(res) {
+                 console.log("res ", res.data);
+                 console.log("res ", res.status);
+                 $scope.uploadPhotos(res.data.businessId);
+                 $scope.saveEquipments(res.data.businessId);
+                 //$state.go("business.confirmation", {status: res.status});
+            })
+            .error(function (error) {
+                $scope.status = 'Unable to load store data: ' + error.message;
+            });
+        };
+
+        $scope.initialize();
+
+        console.log('In addListingController');
+        //      $scope.uploadPhotoOnAWS = function(){
+        //        for (var i=0; i < $scope.imageFiles.length; i++) {
+        //          var photo = $scope.imageFiles[i];
+        //          console.log("-here-----", photo.name, photo.type);
+        //          //amazon aws credentials
+        //          AWS.config.update({
+        //            accessKeyId: 'AKIAJJFDVJ7R234QR6ZA',
+        //            secretAccessKey: '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'
+        //          });
+        //          //amazon s3 region
+        //          AWS.config.region = 'us-east-1';
+        //          //amazon s3 bucket name
+        //          var bucket = new AWS.S3({params: {Bucket: 'bizrealworth-image'}});
+        //          var params = { Key: photo.name, ContentType: photo.type, Body: photo};
+        //          bucket.upload(params).on('httpUploadProgress', function (evt) {
+        //            //logs the image uploading progress
+        //            console.log("Uploaded :: " + parseInt((evt.loaded * 100) / evt.total) + '%');
+        //            var progress = parseInt((evt.loaded * 100) / evt.total);
+        //            if (progress === 100) {
+        //              console.log("photo uploaded successfully");
+        //            }
+        //          }).send(function (err, data) {
+        //            if (data) {
+        //              //displays the image location on amazon s3 bucket
+        //              console.log(data.Location);
+        //              $scope.businessImages.push(data.Location);
+        //            }
+        //          });
+        //          // bucket.putObject(params, function(err, data) {
+        //          //   if(err) {
+        //          //     // There Was An Error With Your S3 Config
+        //          //     alert(err.message);
+        //          //     return false;
+        //          //   }
+        //          //   else {
+        //          //     // Success!
+        //          //     console.log(data);
+        //          //     alert('Upload Done', data);
+        //          //   }
+        //          // })
+        //          // .on('httpUploadProgress',function(progress) {
+        //          //   // Log Progress Information
+        //          //   console.log(Math.round(progress.loaded / progress.total * 100) + '% done');
+        //          // });
+        //        }
+        //      };
+
     }    
 
 })();
