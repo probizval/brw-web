@@ -246,7 +246,6 @@
 
             // var searchAddress = JSON.parse(localStorage.getItem('searchAddress'));
             var searchAddress = JSON.parse(localStorage.getItem('searchBusinessAttributes'));
-            console.log("dataset", dataset);
             var styles = [
                 {
                     featureType: 'poi.government',

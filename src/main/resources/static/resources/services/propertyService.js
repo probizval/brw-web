@@ -2,11 +2,12 @@
 var propertyService = angular.module('propertyService', [])
 propertyService.factory('propertyService', ['$http', 'authService', function ($http, authService) {
 
-	var urlBase = window.location.origin + window.location.pathname + 'api/v1/';
+  var urlBase = window.location.origin + window.location.pathname + 'api/v1/';
   var businessUrl = window.location.origin + window.location.pathname + 'api/business/v1/';
   var imageUrl = window.location.origin + window.location.pathname + 'api/image/v1/';
   var estimateUrl = window.location.origin + window.location.pathname + 'api/estimates/v1/';
   var additionAttributesUrl = window.location.origin + window.location.pathname + 'api/additionalAttributes/v1/';
+  var emailUrl = window.location.origin + window.location.pathname + 'api/email/v1/';
   var propertyDataOp = {};
 
   propertyDataOp.getBusinessList = function (searchBusinessAttributes) {
@@ -99,6 +100,62 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
         });
     };
 
+    propertyDataOp.addBusinessImages = function (businessId, invokerId, imageList) {
+        return $http.post(imageUrl + 'addImages', {
+            "businessId": businessId,
+            "invokerId": invokerId,
+            "imagesList": imageList
+        }).success(function(res) {
+            console.log("addBusinessImages", JSON.stringify(res));
+            return res.data;
+        }).error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+
+    propertyDataOp.uploadBusinessImages = function (businessId, invokerId, imageList) {
+        return $http.post(imageUrl + 'uploadImages', {
+            "businessId": businessId,
+            "invokerId": invokerId,
+            "uploadImagesList": imageList
+        }).success(function(res) {
+            console.log("uploadBusinessImages", JSON.stringify(res));
+            return res.data;
+        }).error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+
+    propertyDataOp.addBusinessDetails = function (businessDetails) {
+        return $http.post(businessUrl + 'addBusinessDetails', businessDetails).success(function(res) {
+            console.log("addBusinessDetails", JSON.stringify(res));
+            return res.data;
+        }).error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+
+    propertyDataOp.addAdditionalAttributes = function (businessId, invokerId, additionalAttributes) {
+        return $http.post(additionAttributesUrl + 'addAdditionalAttributes', {
+            "businessId": businessId,
+            "invokerId": invokerId,
+            "addAttributesList": additionalAttributes
+        }).success(function(res) {
+            console.log("addAdditionalAttributes", JSON.stringify(res));
+            return res.data;
+        }).error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+
+    propertyDataOp.sendEmail = function (emailInformation) {
+        return $http.post(emailUrl + 'sendEmail', emailInformation).success(function(res) {
+            console.log("sendEmail", JSON.stringify(res));
+            return res.data;
+        }).error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
 
     propertyDataOp.getPropertyDetails =  function (id) {
         return $http.get(urlBase + 'propertydetails/'+id).success(function(res) {
