@@ -358,15 +358,25 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		businessDetails.setSubType(businessDetailsDTO.getSubType());
 		businessDetails.setRegCityName(businessDetailsDTO.getRegCityName());
 		businessDetails.setRegCityCode(businessDetailsDTO.getRegCityCode());
-		businessDetails.setRegCityDate(LocalDateTime.parse(businessDetailsDTO.getRegCityDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		//System.out.println("*** businessDetailsDTO.getRegCityDate() "+businessDetailsDTO.getRegCityDate());
+		if (null != businessDetailsDTO.getRegCityDate() && Constants.EMPTY_STRING != businessDetailsDTO.getRegCityDate()) {
+			businessDetails.setRegCityDate(LocalDateTime.parse(businessDetailsDTO.getRegCityDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		}
 		businessDetails.setRegStateName(businessDetailsDTO.getRegStateName());
 		businessDetails.setRegStateCode(businessDetailsDTO.getRegStateCode());
-		businessDetails.setRegStateDate(LocalDateTime.parse(businessDetailsDTO.getRegStateDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
-		businessDetails.setDataCompletenessScore(businessDetailsDTO.getDataCompletionScore());
+		if (null != businessDetailsDTO.getRegStateDate() && Constants.EMPTY_STRING != businessDetailsDTO.getRegStateDate()) {
+			businessDetails.setRegStateDate(LocalDateTime.parse(businessDetailsDTO.getRegStateDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		}
+		System.out.println("*** businessDetailsDTO.getDataCompletionScore() "+businessDetailsDTO.getDataCompletionScore());
+		if (null != businessDetailsDTO.getDataCompletionScore()) {
+			businessDetails.setDataCompletenessScore(businessDetailsDTO.getDataCompletionScore());
+		} else {
+			businessDetails.setDataCompletenessScore(0);
+		}
 		businessDetails.setIsForSell(businessDetailsDTO.getIsForSell());
 		businessDetails.setForSellPrice(businessDetailsDTO.getForSellPrice());
 		businessDetails.setImageLogo(businessDetailsDTO.getImageLogo());
-		businessDetails.setImageFirst(businessDetailsDTO.getImageFirst());
+		businessDetails.setImageFirst(Constants.IMAGE_FIRST);
 		businessDetails.setStreet1(businessDetailsDTO.getStreet1());
 		businessDetails.setStreet2(businessDetailsDTO.getStreet2());
 		businessDetails.setCity(businessDetailsDTO.getCity());
@@ -380,45 +390,214 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		businessDetails.setEmail(businessDetailsDTO.getEmail());
 		businessDetails.setWebsite(businessDetailsDTO.getWebsite());
 		businessDetails.setFreeformDescription(businessDetailsDTO.getDescription());
-		businessDetails.setNAICSNum(businessDetailsDTO.getNAICSNum());
+		if (null != businessDetailsDTO.getNAICSNum()) {
+			businessDetails.setNAICSNum(businessDetailsDTO.getNAICSNum());
+		} else {
+			businessDetails.setNAICSNum(0);
+		}
 		businessDetails.setNAICSDescription(businessDetailsDTO.getNAICSDescription());
 		businessDetails.setIsFranchise(businessDetailsDTO.getIsFranchise());
 		businessDetails.setIsOwnerClaimed(businessDetailsDTO.getIsOwnerClaimed());
-		businessDetails.setSqftIndoor(businessDetailsDTO.getSqftIndoor());
-		businessDetails.setSqftOutdoor(businessDetailsDTO.getSqftOutdoor());
-		businessDetails.setSqftLot(businessDetailsDTO.getSqftLot());
+		//businessDetails.setSqftIndoor(businessDetailsDTO.getSqftIndoor());
+		if (null != businessDetailsDTO.getNAICSNum()) {
+			businessDetails.setNAICSNum(businessDetailsDTO.getNAICSNum());
+		} else {
+			businessDetails.setNAICSNum(0);
+		}
+		//businessDetails.setSqftOutdoor(businessDetailsDTO.getSqftOutdoor());
+		if (null != businessDetailsDTO.getSqftOutdoor()) {
+			businessDetails.setSqftOutdoor(businessDetailsDTO.getSqftOutdoor());
+		} else {
+			businessDetails.setSqftOutdoor(0);
+		}
+		//businessDetails.setSqftLot(businessDetailsDTO.getSqftLot());
+		if (null != businessDetailsDTO.getSqftLot()) {
+			businessDetails.setSqftLot(businessDetailsDTO.getSqftLot());
+		} else {
+			businessDetails.setSqftLot(0);
+		}
 		businessDetails.setBuildingType(businessDetailsDTO.getBuildingType());
 		businessDetails.setIsBuildingOwned(businessDetailsDTO.getIsBuildingOwned());
-		businessDetails.setRevenueMonthly(businessDetailsDTO.getRevenueMonthly());
-		businessDetails.setExpenseMonthlyRent(businessDetailsDTO.getExpenseMonthlyRent());
-		businessDetails.setExpenseMonthlyMortgage(businessDetailsDTO.getExpenseMonthlyMortgage());
-		businessDetails.setExpenseMonthlyMaterial(businessDetailsDTO.getExpenseMonthlyMaterial());
-		businessDetails.setExpenseMonthlyEmp(businessDetailsDTO.getExpenseMonthlyEmp());
-		businessDetails.setExpenseMonthlyUtility(businessDetailsDTO.getExpenseMonthlyUtility());
-		businessDetails.setExpenseMonthlyOther(businessDetailsDTO.getExpenseMonthlyOther());
-		businessDetails.setValueTotalEquipment(businessDetailsDTO.getValueTotalEquipment());
-		businessDetails.setValueTotalFurniture(businessDetailsDTO.getValueTotalFurniture());
-		businessDetails.setValueIndoorDeco(businessDetailsDTO.getValueIndoorDeco());
-		businessDetails.setValueOutdoorDeco(businessDetailsDTO.getValueOutdoorDeco());
-		businessDetails.setYearEquipment(businessDetailsDTO.getYearEquipment());
-		businessDetails.setYearFurniture(businessDetailsDTO.getYearFurniture());
-		businessDetails.setYearIndoorDeco(businessDetailsDTO.getYearIndoorDeco());
-		businessDetails.setYearOutdoorDeco(businessDetailsDTO.getYearOutdoorDeco());
-		businessDetails.setEmpFullTimeNum(businessDetailsDTO.getEmpFullTimeNum());
-		businessDetails.setEmpPartTimeNum(businessDetailsDTO.getEmpPartTimeNum());
-		businessDetails.setAreaCrimeScore(businessDetailsDTO.getAreaCrimeScore());
-		businessDetails.setAreaWalkScore(businessDetailsDTO.getAreaWalkScore());
-		businessDetails.setAreaAttractionsScore(businessDetailsDTO.getAreaAttractionsScore());
-		businessDetails.setAreaTransitScore(businessDetailsDTO.getAreaTransitScore());
-		businessDetails.setSocialMediaScore(businessDetailsDTO.getSocialMediaScore());
-		businessDetails.setPopulationIn1mileRadius(businessDetailsDTO.getPopulationIn1mileRadius());
-		businessDetails.setIncomeScoreIn1mileRadius(businessDetailsDTO.getIncomeScoreIn1mileRadius());
-		businessDetails.setPopulationIn3mileRadius(businessDetailsDTO.getPopulationIn3mileRadius());
-		businessDetails.setIncomeScoreIn3mileRadius(businessDetailsDTO.getIncomeScoreIn3mileRadius());
-		businessDetails.setPopulationIn5mileRadius(businessDetailsDTO.getPopulationIn5mileRadius());
-		businessDetails.setIncomeScoreIn5mileRadius(businessDetailsDTO.getIncomeScoreIn5mileRadius());
-		businessDetails.setDailyPeoplAtDoorNum(businessDetailsDTO.getDailyPeoplAtDoorNum());
-		businessDetails.setDailyCarsAtParklotNum(businessDetailsDTO.getDailyCarsAtParklotNum());
+		//businessDetails.setRevenueMonthly(businessDetailsDTO.getRevenueMonthly());
+		if (null != businessDetailsDTO.getRevenueMonthly()) {
+			businessDetails.setRevenueMonthly(businessDetailsDTO.getRevenueMonthly());
+		} else {
+			businessDetails.setRevenueMonthly(0);
+		}
+		//businessDetails.setExpenseMonthlyRent(businessDetailsDTO.getExpenseMonthlyRent());
+		if (null != businessDetailsDTO.getExpenseMonthlyRent()) {
+			businessDetails.setExpenseMonthlyRent(businessDetailsDTO.getExpenseMonthlyRent());
+		} else {
+			businessDetails.setExpenseMonthlyRent(0);
+		}
+		//businessDetails.setExpenseMonthlyMortgage(businessDetailsDTO.getExpenseMonthlyMortgage());
+		if (null != businessDetailsDTO.getExpenseMonthlyMortgage()) {
+			businessDetails.setExpenseMonthlyMortgage(businessDetailsDTO.getExpenseMonthlyMortgage());
+		} else {
+			businessDetails.setExpenseMonthlyMortgage(0);
+		}
+		//businessDetails.setExpenseMonthlyMaterial(businessDetailsDTO.getExpenseMonthlyMaterial());
+		if (null != businessDetailsDTO.getExpenseMonthlyMaterial()) {
+			businessDetails.setExpenseMonthlyMaterial(businessDetailsDTO.getExpenseMonthlyMaterial());
+		} else {
+			businessDetails.setExpenseMonthlyMaterial(0);
+		}
+		//businessDetails.setExpenseMonthlyEmp(businessDetailsDTO.getExpenseMonthlyEmp());
+		if (null != businessDetailsDTO.getExpenseMonthlyEmp()) {
+			businessDetails.setExpenseMonthlyEmp(businessDetailsDTO.getExpenseMonthlyEmp());
+		} else {
+			businessDetails.setExpenseMonthlyEmp(0);
+		}
+		//businessDetails.setExpenseMonthlyUtility(businessDetailsDTO.getExpenseMonthlyUtility());
+		if (null != businessDetailsDTO.getExpenseMonthlyUtility()) {
+			businessDetails.setExpenseMonthlyUtility(businessDetailsDTO.getExpenseMonthlyUtility());
+		} else {
+			businessDetails.setExpenseMonthlyUtility(0);
+		}
+		//businessDetails.setExpenseMonthlyOther(businessDetailsDTO.getExpenseMonthlyOther());
+		if (null != businessDetailsDTO.getExpenseMonthlyOther()) {
+			businessDetails.setExpenseMonthlyOther(businessDetailsDTO.getExpenseMonthlyOther());
+		} else {
+			businessDetails.setExpenseMonthlyOther(0);
+		}
+		//businessDetails.setValueTotalEquipment(businessDetailsDTO.getValueTotalEquipment());
+		if (null != businessDetailsDTO.getValueTotalEquipment()) {
+			businessDetails.setValueTotalEquipment(businessDetailsDTO.getValueTotalEquipment());
+		} else {
+			businessDetails.setValueTotalEquipment(0);
+		}
+		//businessDetails.setValueTotalFurniture(businessDetailsDTO.getValueTotalFurniture());
+		if (null != businessDetailsDTO.getValueTotalFurniture()) {
+			businessDetails.setValueTotalFurniture(businessDetailsDTO.getValueTotalFurniture());
+		} else {
+			businessDetails.setValueTotalFurniture(0);
+		}
+		//businessDetails.setValueIndoorDeco(businessDetailsDTO.getValueIndoorDeco());
+		if (null != businessDetailsDTO.getValueIndoorDeco()) {
+			businessDetails.setValueIndoorDeco(businessDetailsDTO.getValueIndoorDeco());
+		} else {
+			businessDetails.setValueIndoorDeco(0);
+		}
+		//businessDetails.setValueOutdoorDeco(businessDetailsDTO.getValueOutdoorDeco());
+		if (null != businessDetailsDTO.getValueOutdoorDeco()) {
+			businessDetails.setValueOutdoorDeco(businessDetailsDTO.getValueOutdoorDeco());
+		} else {
+			businessDetails.setValueOutdoorDeco(0);
+		}
+		//businessDetails.setYearEquipment(businessDetailsDTO.getYearEquipment());
+		if (null != businessDetailsDTO.getYearEquipment()) {
+			businessDetails.setYearEquipment(businessDetailsDTO.getYearEquipment());
+		} else {
+			businessDetails.setYearEquipment(0);
+		}
+		//businessDetails.setYearFurniture(businessDetailsDTO.getYearFurniture());
+		if (null != businessDetailsDTO.getYearFurniture()) {
+			businessDetails.setYearFurniture(businessDetailsDTO.getYearFurniture());
+		} else {
+			businessDetails.setYearFurniture(0);
+		}
+		//businessDetails.setYearIndoorDeco(businessDetailsDTO.getYearIndoorDeco());
+		if (null != businessDetailsDTO.getYearIndoorDeco()) {
+			businessDetails.setYearIndoorDeco(businessDetailsDTO.getYearIndoorDeco());
+		} else {
+			businessDetails.setYearIndoorDeco(0);
+		}
+		//businessDetails.setYearOutdoorDeco(businessDetailsDTO.getYearOutdoorDeco());
+		if (null != businessDetailsDTO.getYearOutdoorDeco()) {
+			businessDetails.setYearOutdoorDeco(businessDetailsDTO.getYearOutdoorDeco());
+		} else {
+			businessDetails.setYearOutdoorDeco(0);
+		}
+		//businessDetails.setEmpFullTimeNum(businessDetailsDTO.getEmpFullTimeNum());
+		if (null != businessDetailsDTO.getEmpFullTimeNum()) {
+			businessDetails.setEmpFullTimeNum(businessDetailsDTO.getEmpFullTimeNum());
+		} else {
+			businessDetails.setEmpFullTimeNum(0);
+		}
+		//businessDetails.setEmpPartTimeNum(businessDetailsDTO.getEmpPartTimeNum());
+		if (null != businessDetailsDTO.getEmpPartTimeNum()) {
+			businessDetails.setEmpPartTimeNum(businessDetailsDTO.getEmpPartTimeNum());
+		} else {
+			businessDetails.setEmpPartTimeNum(0);
+		}
+		//businessDetails.setAreaCrimeScore(businessDetailsDTO.getAreaCrimeScore());
+		if (null != businessDetailsDTO.getAreaCrimeScore()) {
+			businessDetails.setAreaCrimeScore(businessDetailsDTO.getAreaCrimeScore());
+		} else {
+			businessDetails.setAreaCrimeScore(0);
+		}
+		//businessDetails.setAreaWalkScore(businessDetailsDTO.getAreaWalkScore());
+		if (null != businessDetailsDTO.getAreaWalkScore()) {
+			businessDetails.setAreaWalkScore(businessDetailsDTO.getAreaWalkScore());
+		} else {
+			businessDetails.setAreaWalkScore(0);
+		}
+		//businessDetails.setAreaAttractionsScore(businessDetailsDTO.getAreaAttractionsScore());
+		if (null != businessDetailsDTO.getAreaAttractionsScore()) {
+			businessDetails.setAreaAttractionsScore(businessDetailsDTO.getAreaAttractionsScore());
+		} else {
+			businessDetails.setAreaAttractionsScore(0);
+		}
+		//businessDetails.setAreaTransitScore(businessDetailsDTO.getAreaTransitScore());
+		if (null != businessDetailsDTO.getAreaTransitScore()) {
+			businessDetails.setAreaTransitScore(businessDetailsDTO.getAreaTransitScore());
+		} else {
+			businessDetails.setAreaTransitScore(0);
+		}
+		//businessDetails.setSocialMediaScore(businessDetailsDTO.getSocialMediaScore());
+		if (null != businessDetailsDTO.getSocialMediaScore()) {
+			businessDetails.setSocialMediaScore(businessDetailsDTO.getSocialMediaScore());
+		} else {
+			businessDetails.setSocialMediaScore(0);
+		}
+		//businessDetails.setPopulationIn1mileRadius(businessDetailsDTO.getPopulationIn1mileRadius());
+		if (null != businessDetailsDTO.getPopulationIn1mileRadius()) {
+			businessDetails.setPopulationIn1mileRadius(businessDetailsDTO.getPopulationIn1mileRadius());
+		} else {
+			businessDetails.setPopulationIn1mileRadius(0);
+		}
+		//businessDetails.setIncomeScoreIn1mileRadius(businessDetailsDTO.getIncomeScoreIn1mileRadius());
+		if (null != businessDetailsDTO.getIncomeScoreIn1mileRadius()) {
+			businessDetails.setIncomeScoreIn1mileRadius(businessDetailsDTO.getIncomeScoreIn1mileRadius());
+		} else {
+			businessDetails.setIncomeScoreIn1mileRadius(0);
+		}
+		//businessDetails.setPopulationIn3mileRadius(businessDetailsDTO.getPopulationIn3mileRadius());
+		if (null != businessDetailsDTO.getPopulationIn3mileRadius()) {
+			businessDetails.setPopulationIn3mileRadius(businessDetailsDTO.getPopulationIn3mileRadius());
+		} else {
+			businessDetails.setPopulationIn3mileRadius(0);
+		}
+		//businessDetails.setIncomeScoreIn3mileRadius(businessDetailsDTO.getIncomeScoreIn3mileRadius());
+		if (null != businessDetailsDTO.getIncomeScoreIn3mileRadius()) {
+			businessDetails.setIncomeScoreIn3mileRadius(businessDetailsDTO.getIncomeScoreIn3mileRadius());
+		} else {
+			businessDetails.setIncomeScoreIn3mileRadius(0);
+		}
+		//businessDetails.setPopulationIn5mileRadius(businessDetailsDTO.getPopulationIn5mileRadius());
+		if (null != businessDetailsDTO.getPopulationIn5mileRadius()) {
+			businessDetails.setPopulationIn5mileRadius(businessDetailsDTO.getPopulationIn5mileRadius());
+		} else {
+			businessDetails.setPopulationIn5mileRadius(0);
+		}
+		//businessDetails.setIncomeScoreIn5mileRadius(businessDetailsDTO.getIncomeScoreIn5mileRadius());
+		if (null != businessDetailsDTO.getIncomeScoreIn5mileRadius()) {
+			businessDetails.setIncomeScoreIn5mileRadius(businessDetailsDTO.getIncomeScoreIn5mileRadius());
+		} else {
+			businessDetails.setIncomeScoreIn5mileRadius(0);
+		}
+		//businessDetails.setDailyPeoplAtDoorNum(businessDetailsDTO.getDailyPeoplAtDoorNum());
+		if (null != businessDetailsDTO.getDailyPeoplAtDoorNum()) {
+			businessDetails.setDailyPeoplAtDoorNum(businessDetailsDTO.getDailyPeoplAtDoorNum());
+		} else {
+			businessDetails.setDailyPeoplAtDoorNum(0);
+		}
+		//businessDetails.setDailyCarsAtParklotNum(businessDetailsDTO.getDailyCarsAtParklotNum());
+		if (null != businessDetailsDTO.getDailyCarsAtParklotNum()) {
+			businessDetails.setDailyCarsAtParklotNum(businessDetailsDTO.getDailyCarsAtParklotNum());
+		} else {
+			businessDetails.setDailyCarsAtParklotNum(0);
+		}
 		businessDetails.setYearEstablished(businessDetailsDTO.getYearEstablished());
 		businessDetails.setCreatedByUserId(businessDetailsDTO.getInvokerId());
 		businessDetails.setCreateDate(LocalDateTime.now());
@@ -443,10 +622,14 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		bizDTO.setSubType(business.getSubType());
 		bizDTO.setRegCityName(business.getRegCityName());
 		bizDTO.setRegCityCode(business.getRegCityCode());
-		bizDTO.setRegCityDate(business.getRegCityDate().toString());
+		if (null != business.getRegCityDate()) {
+			bizDTO.setRegCityDate(business.getRegCityDate().toString());
+		}
 		bizDTO.setRegStateName(business.getRegStateName());
 		bizDTO.setRegStateCode(business.getRegStateCode());
-		bizDTO.setRegStateDate(business.getRegStateDate().toString());
+		if (null != business.getRegStateDate()) {
+			bizDTO.setRegStateDate(business.getRegStateDate().toString());
+		}
 		bizDTO.setDataCompletionScore(business.getDataCompletenessScore());
 		bizDTO.setIsForSell(business.getIsForSell());
 		bizDTO.setForSellPrice(business.getForSellPrice());
@@ -1271,16 +1454,16 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
 	private void addUserBusiness(BusinessDetailsDTO businessDetailsDTO, String relationshipType) {
 		
-		System.out.println("222 **** Inside BusinessServiceImpl.addUserBusiness() getInvokerId: "+businessDetailsDTO.getInvokerId());
+		System.out.println("222 **** Inside BusinessServiceImpl.getCreatedByUserId(): "+businessDetailsDTO.getCreatedByUserId());
 		
 		UserBusiness userBusiness = new UserBusiness();
 		
-		userBusiness.setUserId(businessDetailsDTO.getInvokerId());
+		userBusiness.setUserId(businessDetailsDTO.getCreatedByUserId());
 		userBusiness.setRelationship(relationshipType);
 		userBusiness.setBusinessId(businessDetailsDTO.getBusinessId());
-		userBusiness.setCreatedByUserId(businessDetailsDTO.getInvokerId());
+		userBusiness.setCreatedByUserId(businessDetailsDTO.getCreatedByUserId());
 		userBusiness.setCreateDate(LocalDateTime.now());
-		userBusiness.setUpdatedByUserId(businessDetailsDTO.getInvokerId());
+		userBusiness.setUpdatedByUserId(businessDetailsDTO.getCreatedByUserId());
 		userBusiness.setUpdateDate(LocalDateTime.now());
 		
 		userBusinessDAO.save(userBusiness);
