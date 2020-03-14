@@ -17,8 +17,8 @@
     	var decodedToken = !localStorage.getItem('access_token') || parseJwt(localStorage.getItem('access_token'));
     	if(requireLogin && decodedToken) {
     		var location = window.location.hash;
-    		    location = location.substring(1, location.length);
-    		    sessionStorage.setItem("redirect_location",location);
+            location = location.substring(1, location.length);
+            sessionStorage.setItem("redirect_location", location);
     		authService.login();
     	}else {
     		let usermetadata = JSON.parse(sessionStorage.getItem('usermetadata'));

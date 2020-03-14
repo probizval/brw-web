@@ -58,6 +58,7 @@
              {name:'Dry Cleaners', code:'b_type_9', apiName: "drycleaners"},
              {name:'Other', code:'b_type_9', apiName: "OTHER"}
         ];
+        $scope.ownerClaimed = "N";
         
         $scope.initialize = function() {
             // This example displays an address form, using the autocomplete feature
@@ -141,7 +142,7 @@
         };
 
         $scope.uploadPhotos = function(businessId){
-        var imageList = {}
+        var imageList = [];
         for (var i=0; i < $scope.imagesAsDataURL.length; i++) {
             var photo = $scope.imagesAsDataURL[i];
             imageList.push({
@@ -203,19 +204,25 @@
         };
 
         $scope.saveBusiness = function(addListingForm) {
-//            if (addListingForm.$invalid) {
-//              if (angular.element($document[0].querySelector('input.ng-invalid'))[0]) {
-//                console.log("Input focus", angular.element($document[0].querySelector('input.ng-invalid'))[0]);
-//                angular.element($document[0].querySelector('input.ng-invalid'))[0].focus();
-//                return false
-//              } else {
-//                console.log("Select focus", angular.element($document[0].querySelector('select.ng-invalid'))[0]);
-//                angular.element($document[0].querySelector('select.ng-invalid'))[0].focus();
-//                return false;
-//              }
-//            }
+            if (addListingForm.$invalid) {
+              if (angular.element($document[0].querySelector('input.ng-invalid'))[0]) {
+                console.log("Input focus", angular.element($document[0].querySelector('input.ng-invalid'))[0]);
+                angular.element($document[0].querySelector('input.ng-invalid'))[0].focus();
+                return false
+              } else {
+                console.log("Select focus", angular.element($document[0].querySelector('select.ng-invalid'))[0]);
+                angular.element($document[0].querySelector('select.ng-invalid'))[0].focus();
+                return false;
+              }
+            }
 
-            var apiName = $scope.type.apiName;
+
+            if ($scope.buRelationship === "OWNER") {
+                $scope.ownerClaimed = "Y";
+            }
+            if ($scope.type.apiName !== "Other") {
+                $scope.subType = $scope.type.apiName;
+            }
             $scope.businessDetails = {
                 legalName: $scope.legalName,
                 name: $scope.name,
@@ -224,6 +231,8 @@
                 brandName: $scope.brandName || "",
                 type: $scope.type.apiName,
                 subType: $scope.subType,
+                isOwnerClaimed: $scope.ownerClaimed,
+                buRelationship: $scope.buRelationship,
 //                "regCityName": "Fremont",
 //                "regCityCode": "044095",
 //                "regCityDate": "2009-09-04 12:00",
@@ -234,13 +243,13 @@
                 isforSell: $scope.isforSell,
                 forSellPrice: $scope.forSellPrice,
                 imageLogo: "",
-//                imageFirst: "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
+                imageFirst: "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
                 street1: document.getElementById("address").value,
                 street2: "",
                 city: $scope.city,
                 stateCode: $scope.stateCode,
                 county: "Alameda", //TODO Need to ask from user
-                county: $scope.county,
+//                county: $scope.county,
                 zip: $scope.zipCode,
                 latitude: document.getElementById("lat").value,
                 longitude: document.getElementById("lng").value,
@@ -249,7 +258,6 @@
                 website: $scope.website,
                 description: $scope.description,
                 isFranchise: $scope.isFranchise,
-                isOwnerClaimed: $scope.isOwnerClaimed,
                 sqftIndoor: $scope.sqftIndoor,
                 sqftOutdoor: $scope.sqftOutdoor,
                 sqftLot: $scope.sqftLot,
@@ -274,7 +282,7 @@
                 empPartTimeNum: $scope.empPartTimeNum,
                 dailyPeoplAtDoorNum: $scope.dailyPeoplAtDoorNum,
                 dailyCarsAtParklotNum: $scope.dailyCarsAtParklotNum,
-                yearEstablished: $scope.yearEstablished,
+                yearEstablished: $scope.yearEstablished.year,
                 naicsnum: $scope.naicsnum,
                 naicsdescription: $scope.naicsdescription,
                 numberOfParkings: $scope.numberOfParkings
@@ -298,18 +306,14 @@
 //            console.log($scope.businessImages, $scope.businessMetaData, $scope.business, $scope.businessDetails);
             console.log($scope.businessDetails)
             //TODO need to get userid
-//            var userProfile = JSON.parse(sessionStorage.getItem('profile'));
-//            $scope.businessMetaData.userId = userProfile.id;
             var userProfile = JSON.parse(sessionStorage.getItem('profile'));
             $scope.businessDetails.invokerId = userProfile.id;
-//            propertyService.savePropertyDetails(apiName, $scope.business)
+            $scope.businessDetails.invokerId = 1001;
             propertyService.addBusinessDetails($scope.businessDetails)
             .success(function(res) {
-                 console.log("res ", res.data);
-                 console.log("res ", res.status);
-                 $scope.uploadPhotos(res.data.businessId);
-                 $scope.saveEquipments(res.data.businessId);
-                 //$state.go("business.confirmation", {status: res.status});
+                 console.log("addBusinessDetails ", res);
+                 $scope.uploadPhotos(res.businessId);
+                 $scope.saveEquipments(res.businessId);
             })
             .error(function (error) {
                 $scope.status = 'Unable to load store data: ' + error.message;
@@ -317,8 +321,6 @@
         };
 
         $scope.initialize();
-
-        console.log('In addListingController');
         //      $scope.uploadPhotoOnAWS = function(){
         //        for (var i=0; i < $scope.imageFiles.length; i++) {
         //          var photo = $scope.imageFiles[i];

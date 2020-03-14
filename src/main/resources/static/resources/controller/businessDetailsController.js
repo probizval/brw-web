@@ -160,6 +160,7 @@
                                 label: constants.equipmentListMapping[$scope.additionalAttributes[i].attribSubType],
                                 quantity: $scope.additionalAttributes[i].quantity,
                                 pricePerUnit: $scope.additionalAttributes[i].pricePerUnit,
+                                value: $scope.additionalAttributes[i].value,
                                 maintenanceCost: $scope.additionalAttributes[i].monthlyMaintExpense,
                             })
                         }

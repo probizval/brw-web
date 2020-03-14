@@ -102,7 +102,7 @@
                         ng-model="yearEstablished"
                         id="yearEstablished"
                         ng-options="yearEstablished.year for yearEstablished in yearEstablishedList">
-                    <option default selected style="color:#868e96;" value="">2018</option>
+                    <option default selected style="color:#868e96;" value="">-- Select years --</option>
                 </select>
             </div>
         </div>
@@ -121,11 +121,11 @@
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <label>Are you Owner or Broker?</label><br/>
                 <div class="radio radio-inline">
-                    <input type="radio" id="owner" ng-model="buRelationship" value="Owner">
+                    <input type="radio" id="owner" ng-model="buRelationship" value="OWNER">
                     <label for="owner">Yes</label>
                 </div>
                 <div class="radio radio-inline">
-                    <input type="radio" id="broker" ng-model="buRelationship" value="Broker">
+                    <input type="radio" id="broker" ng-model="buRelationship" value="BROKER">
                     <label for="broker">No</label>
                 </div>
             </div>
@@ -169,10 +169,10 @@
                 <label>Location*</label>
                 <input type="text" class="form-control form-control-md" name="location"
                        ng-model="location"
-                       id="autocomplete" placeholder="Enter Business Location" required>
-                <div class="errors" ng-show="submitted || addListingForm.location.$touched">
-                    <div style="color:red" ng-show="addListingForm.location.$error.required">Location is required.</div>
-                </div>
+                       id="autocomplete" placeholder="Enter Business Location">
+<!--                <div class="errors" ng-show="submitted || addListingForm.location.$touched">-->
+<!--                    <div style="color:red" ng-show="addListingForm.location.$error.required">Location is required.</div>-->
+<!--                </div>-->
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <label>Address</label>
@@ -297,11 +297,11 @@
                 <div class="col-md-6 col-lg-6 col-xl-6">
                     <label>Is building owned?</label><br/>
                     <div class="radio radio-inline">
-                        <input type="radio" id="yesOwned" ng-model="isBuildingOwned" value="Yes">
+                        <input type="radio" id="yesOwned" ng-model="isBuildingOwned" value="Y">
                         <label for="yesOwned">Yes</label>
                     </div>
                     <div class="radio radio-inline">
-                        <input type="radio" id="notOwned" ng-model="isBuildingOwned" value="No">
+                        <input type="radio" id="notOwned" ng-model="isBuildingOwned" value="N">
                         <label for="notOwned">No</label>
                     </div>
                 </div>

@@ -212,10 +212,10 @@
                             </div>
                             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
                                 <div class="details-group-title">Claimed by Owner</div>
-                                <div ng-if="businessDetails.isOwnerClaimed">
+                                <div ng-if="businessDetails.isOwnerClaimed === 'Y'">
                                     <p style="margin-bottom: 0">Yes</p>
                                 </div>
-                                <div ng-if!="businessDetails.isOwnerClaimed">
+                                <div ng-if="businessDetails.isOwnerClaimed === 'N'">
                                     <p style="margin-bottom: 0">No <a href="">Claim Business</a> </p>
                                 </div>
                             </div>
