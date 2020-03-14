@@ -63,7 +63,7 @@
       //           "uploaded_image_aws_urls": []
       //   };
 
-        $scope.propertyMetaData = {};
+        $scope.businessMetaData = {};
         $scope.propertyImages = [];
         $scope.property = {
           'rest':          {},
@@ -102,35 +102,35 @@
 
 
             $scope.uploadPhotoOnAWS();
-            var apiName = $scope.propertyMetaData.businessType.apiName;
-            $scope.propertyMetaData.longitude = document.getElementById("lng").value;
-            $scope.propertyMetaData.latitude = document.getElementById("lat").value;
-            $scope.propertyMetaData.city = document.getElementById("locality").value;
-            $scope.propertyMetaData.zipCode = document.getElementById("postal_code").value;
-            $scope.propertyMetaData.state = document.getElementById("administrative_area_level_1").value;
-            $scope.propertyMetaData.country = document.getElementById("country").value;
-            $scope.propertyMetaData.propertyAddress = document.getElementById("address").value;
-            $scope.propertyMetaData.location = document.getElementById("autocomplete").value;
-            $scope.propertyMetaData.businessType = $scope.propertyMetaData.businessType.name;
-            // $scope.propertyMetaData.imageUrl = "https://s3-us-east-1.amazonaws.com/bizrealworth-image/2.jpg";
+            var apiName = $scope.businessMetaData.businessType.apiName;
+            $scope.businessMetaData.longitude = document.getElementById("lng").value;
+            $scope.businessMetaData.latitude = document.getElementById("lat").value;
+            $scope.businessMetaData.city = document.getElementById("locality").value;
+            $scope.businessMetaData.zipCode = document.getElementById("postal_code").value;
+            $scope.businessMetaData.state = document.getElementById("administrative_area_level_1").value;
+            $scope.businessMetaData.country = document.getElementById("country").value;
+            $scope.businessMetaData.propertyAddress = document.getElementById("address").value;
+            $scope.businessMetaData.location = document.getElementById("autocomplete").value;
+            $scope.businessMetaData.businessType = $scope.businessMetaData.businessType.name;
+            // $scope.businessMetaData.imageUrl = "https://s3-us-east-1.amazonaws.com/bizrealworth-image/2.jpg";
 
 
             $scope.business = angular.extend($scope.property.rest, $scope.property.gas, $scope.property.beautySalon,
               $scope.property.laundry, $scope.property.dryCleaners, $scope.property.liquorStore);
             $scope.business.propertyImages = $scope.propertyImages;
-            $scope.business.propertyMetaData = $scope.propertyMetaData;
-            console.log($scope.propertyImages, $scope.propertyMetaData, $scope.business);
+            $scope.business.businessMetaData = $scope.businessMetaData;
+            console.log($scope.propertyImages, $scope.businessMetaData, $scope.business);
 
             //TODO need to get userid
             var userProfile = JSON.parse(sessionStorage.getItem('profile'));
-            $scope.propertyMetaData.userId = userProfile.id;
+            $scope.businessMetaData.userId = userProfile.id;
 
             propertyService.savePropertyDetails(apiName, $scope.business)
             .success(function(res) {
                  console.log("res ", res);
                  console.log("res ", res.status);
-                 //$state.go("property.confirmation", {status: res.status});
-                 $state.go("property.confirmation");
+                 //$state.go("business.confirmation", {status: res.status});
+                 $state.go("business.confirmation");
             })
             .error(function (error) {
                 $scope.status = 'Unable to load store data: ' + error.message;
@@ -140,8 +140,8 @@
             //   .success(function(res) {
             //     console.log("res "+ res);
             //     console.log("res "+ res.status);
-            //     //$state.go("property.confirmation", {status: res.status});
-            //     $state.go("property.confirmation");
+            //     //$state.go("business.confirmation", {status: res.status});
+            //     $state.go("business.confirmation");
             //   })
             //   .error(function (error) {
             //     $scope.status = 'Unable to load store data: ' + error.message;

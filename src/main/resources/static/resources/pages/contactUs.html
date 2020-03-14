@@ -13,23 +13,26 @@
         <div class="col-md-12 col-lg-12 col-xl-12">
             <!--Basic Details-->
             <small>Fields marked with an * are required.</small>
-            <div class="form-group">
-                <label for="name">Name*</label>
-                <input type="text" class="form-control form-control-md" id="name" ng-model="contactUsData.name"
-                       name="name" autofocus required>
-                <div class="errors" ng-show="submitted || contactUs.name.$touched">
-                    <div style="color:red" ng-show="contactUs.name.$error.required">Name is required.</div>
+            <div class="row form-group">
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                    <label for="name">Name*</label>
+                    <input type="text" class="form-control form-control-md" id="name" ng-model="contactUsData.name"
+                           name="name" autofocus required>
+                    <div class="errors" ng-show="submitted || contactUs.name.$touched">
+                        <div style="color:red" ng-show="contactUs.name.$error.required">Name is required.</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                    <label>Email Address*</label>
+                    <input type="email" class="form-control form-control-md" name="email" ng-model="contactUsData.email"
+                           id="email" placeholder="" required>
+                    <div class="errors" ng-show="submitted || contactUs.email.$touched">
+                        <div style="color:red" ng-show="contactUs.email.$error.required">E-mail is required.</div>
+                        <div style="color:red" ng-show="contactUs.email.$error.email">Email is invalid.</div>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label>Email Address*</label>
-                <input type="email" class="form-control form-control-md" name="email" ng-model="contactUsData.email"
-                       id="email" placeholder="" required>
-                <div class="errors" ng-show="submitted || contactUs.email.$touched">
-                    <div style="color:red" ng-show="contactUs.email.$error.required">E-mail is required.</div>
-                    <div style="color:red" ng-show="contactUs.email.$error.email">Email is invalid.</div>
-                </div>
-            </div>
+
             <div class="form-group">
                 <label>Subject*</label>
                 <input type="text" class="form-control form-control-md" name="subject" ng-model="contactUsData.subject"
