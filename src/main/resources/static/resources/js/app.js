@@ -12,7 +12,7 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
         // $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
         $httpProvider.defaults.headers.common['Content-Type'] = "application/json";
         // $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
-        $httpProvider.defaults.headers.common['authorization'] = "Bearer Bearer" + token;
+        $httpProvider.defaults.headers.common['authorization'] = "Bearer " + token;
     }
 
     $httpProvider.defaults.useXDomain = true;
