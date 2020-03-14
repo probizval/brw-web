@@ -39,5 +39,7 @@ public interface Constants {
 	public static final String FORWARD_SLASH = "/";
 	
 	public static final String UNDERSCORE = "_";
+	
+	public static final String IMAGE_FIRST = "https://brwbusinessimages.s3-us-west-1.amazonaws.com/small-business.png";
 
 }

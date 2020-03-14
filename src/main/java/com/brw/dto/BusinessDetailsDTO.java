@@ -152,8 +152,8 @@ public class BusinessDetailsDTO {
 	}
 	public String getSubType() {
 		//return subType;
-		if (null != type) {
-			return type.toUpperCase();
+		if (null != subType) {
+			return subType.toUpperCase();
 		} else {
 			return Constants.EMPTY_STRING;
 		}
