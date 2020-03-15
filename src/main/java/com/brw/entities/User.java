@@ -115,10 +115,10 @@ public class User implements Serializable {
 	private String buyerVettingMethod;
 	
 	@Column(name = "vetted_for_amountlow")
-	private String buyerPurchaseCapLow;
+	private Integer buyerPurchaseCapLow;
 	
 	@Column(name = "vetted_for_amounthigh")
-	private String buyerPurchaseCapHigh;
+	private Integer buyerPurchaseCapHigh;
 	
 	@Column(name = "vetted_date")
 	private LocalDateTime buyerVettingDate;
@@ -383,19 +383,19 @@ public class User implements Serializable {
 		this.buyerVettingMethod = buyerVettingMethod;
 	}
 
-	public String getBuyerPurchaseCapLow() {
+	public int getBuyerPurchaseCapLow() {
 		return buyerPurchaseCapLow;
 	}
 
-	public void setBuyerPurchaseCapLow(String buyerPurchaseCapLow) {
+	public void setBuyerPurchaseCapLow(int buyerPurchaseCapLow) {
 		this.buyerPurchaseCapLow = buyerPurchaseCapLow;
 	}
 
-	public String getBuyerPurchaseCapHigh() {
+	public int getBuyerPurchaseCapHigh() {
 		return buyerPurchaseCapHigh;
 	}
 
-	public void setBuyerPurchaseCapHigh(String buyerPurchaseCapHigh) {
+	public void setBuyerPurchaseCapHigh(int buyerPurchaseCapHigh) {
 		this.buyerPurchaseCapHigh = buyerPurchaseCapHigh;
 	}
 

@@ -57,10 +57,14 @@ public class UserServiceImpl implements UserService {
 		user.setSearchAgentEmailFreq(userDTO.getSearchAgentEmailFreq());
 		user.setIsUserVerified(userDTO.getIsUserVerified());
 		user.setUserVerificationMethod(userDTO.getUserVerificationMethod());
-		user.setUserVerificationDate(LocalDateTime.parse(userDTO.getUserVerificationDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		if (null != userDTO.getUserVerificationDate() && Constants.EMPTY_STRING != userDTO.getUserVerificationDate()) {
+			user.setUserVerificationDate(LocalDateTime.parse(userDTO.getUserVerificationDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		}
 		user.setIsBrokerVerified(userDTO.getIsBrokerVerified());
 		user.setBrokerVerificationMethod(userDTO.getBrokerVerificationMethod());
-		user.setBrokerVerificationDate(LocalDateTime.parse(userDTO.getBrokerVerificationDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		if (null != userDTO.getBrokerVerificationDate() && Constants.EMPTY_STRING != userDTO.getBrokerVerificationDate()) {
+			user.setBrokerVerificationDate(LocalDateTime.parse(userDTO.getBrokerVerificationDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		}
 		user.setBrokerLicenseNumber(userDTO.getBrokerLicenseNumber());
 		user.setBrokerImageUrl(userDTO.getBrokerImageUrl());
 		user.setBrokerDescription(userDTO.getBrokerDescription());
@@ -76,8 +80,20 @@ public class UserServiceImpl implements UserService {
 		user.setIsVettedBuyer(userDTO.getIsVettedBuyer());
 		user.setBuyerVettingMethod(userDTO.getBuyerVettingMethod());
 		user.setBuyerPurchaseCapLow(userDTO.getBuyerPurchaseCapLow());
+		if (null != userDTO.getBuyerPurchaseCapLow()) {
+			user.setBuyerPurchaseCapLow(userDTO.getBuyerPurchaseCapLow());
+		} else {
+			user.setBuyerPurchaseCapLow(0);
+		}
 		user.setBuyerPurchaseCapHigh(userDTO.getBuyerPurchaseCapHigh());
-		user.setBuyerVettingDate(LocalDateTime.parse(userDTO.getBuyerVettingDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		if (null != userDTO.getBuyerPurchaseCapHigh()) {
+			user.setBuyerPurchaseCapHigh(userDTO.getBuyerPurchaseCapHigh());
+		} else {
+			user.setBuyerPurchaseCapHigh(0);
+		}
+		if (null != userDTO.getBuyerVettingDate() && Constants.EMPTY_STRING != userDTO.getBuyerVettingDate()) {
+			user.setBuyerVettingDate(LocalDateTime.parse(userDTO.getBuyerVettingDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		}
 		user.setCreatedByUserId(userDTO.getInvokerId());
 		user.setCreateDate(LocalDateTime.now());
 		user.setUpdatedByUserId(userDTO.getInvokerId());
@@ -194,127 +210,127 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		if (null != userDTO.getFirstName() && userDTO.getFirstName() != Constants.EMPTY_STRING) {
-		user.setFirstName(userDTO.getFirstName());
+			user.setFirstName(userDTO.getFirstName());
 		}
 		
 		if (null != userDTO.getLastName() && userDTO.getLastName() != Constants.EMPTY_STRING) {
-		user.setLastName(userDTO.getLastName());
+			user.setLastName(userDTO.getLastName());
 		}
 		
 		if (null != userDTO.getMiddleInitial() && userDTO.getMiddleInitial() != Constants.EMPTY_STRING) {
-		user.setMiddleInitial(userDTO.getMiddleInitial());
+			user.setMiddleInitial(userDTO.getMiddleInitial());
 		}
 		
 		if (null != userDTO.getPhoneCountryCode() && userDTO.getPhoneCountryCode() != Constants.EMPTY_STRING) {
-		user.setPhoneCountryCode(userDTO.getPhoneCountryCode());
+			user.setPhoneCountryCode(userDTO.getPhoneCountryCode());
 		}
 		
 		if (null != userDTO.getPhoneNumber() && userDTO.getPhoneNumber() != Constants.EMPTY_STRING) {
-		user.setPhoneNumber(userDTO.getPhoneNumber());
+			user.setPhoneNumber(userDTO.getPhoneNumber());
 		}
 		
 		if (null != userDTO.getPhoneExtention() && userDTO.getPhoneExtention() != Constants.EMPTY_STRING) {
-		user.setPhoneExtention(userDTO.getPhoneExtention());
+			user.setPhoneExtention(userDTO.getPhoneExtention());
 		}
 		
 		if (null != userDTO.getIsSearchAgentEmail() && userDTO.getIsSearchAgentEmail() != Constants.EMPTY_STRING) {
-		user.setIsSearchAgentEmail(userDTO.getIsSearchAgentEmail());
+			user.setIsSearchAgentEmail(userDTO.getIsSearchAgentEmail());
 		}
 		
 		if (null != userDTO.getSearchAgentEmailFreq() && userDTO.getSearchAgentEmailFreq() != Constants.EMPTY_STRING) {
-		user.setSearchAgentEmailFreq(userDTO.getSearchAgentEmailFreq());
+			user.setSearchAgentEmailFreq(userDTO.getSearchAgentEmailFreq());
 		}
 		
 		if (null != userDTO.getIsUserVerified() && userDTO.getIsUserVerified() != Constants.EMPTY_STRING) {
-		user.setIsUserVerified(userDTO.getIsUserVerified());
+			user.setIsUserVerified(userDTO.getIsUserVerified());
 		}
 		
 		if (null != userDTO.getUserVerificationMethod() && userDTO.getUserVerificationMethod() != Constants.EMPTY_STRING) {
-		user.setUserVerificationMethod(userDTO.getUserVerificationMethod());
+			user.setUserVerificationMethod(userDTO.getUserVerificationMethod());
 		}
 		
 		if (null != userDTO.getUserVerificationDate() && userDTO.getUserVerificationDate() != Constants.EMPTY_STRING) {
-		user.setUserVerificationDate(LocalDateTime.parse(userDTO.getUserVerificationDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+			user.setUserVerificationDate(LocalDateTime.parse(userDTO.getUserVerificationDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		}
 		
 		if (null != userDTO.getIsBrokerVerified() && userDTO.getIsBrokerVerified() != Constants.EMPTY_STRING) {
-		user.setIsBrokerVerified(userDTO.getIsBrokerVerified());
+			user.setIsBrokerVerified(userDTO.getIsBrokerVerified());
 		}
 		
 		if (null != userDTO.getBrokerVerificationMethod() && userDTO.getBrokerVerificationMethod() != Constants.EMPTY_STRING) {
-		user.setBrokerVerificationMethod(userDTO.getBrokerVerificationMethod());
+			user.setBrokerVerificationMethod(userDTO.getBrokerVerificationMethod());
 		}
 		
 		if (null != userDTO.getBrokerVerificationDate() && userDTO.getBrokerVerificationDate() != Constants.EMPTY_STRING) {
-		user.setBrokerVerificationDate(LocalDateTime.parse(userDTO.getBrokerVerificationDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+			user.setBrokerVerificationDate(LocalDateTime.parse(userDTO.getBrokerVerificationDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		}
 		
 		if (null != userDTO.getBrokerLicenseNumber() && userDTO.getBrokerLicenseNumber() != Constants.EMPTY_STRING) {
-		user.setBrokerLicenseNumber(userDTO.getBrokerLicenseNumber());
+			user.setBrokerLicenseNumber(userDTO.getBrokerLicenseNumber());
 		}
 		
 		if (null != userDTO.getBrokerImageUrl() && userDTO.getBrokerImageUrl() != Constants.EMPTY_STRING) {
-		user.setBrokerImageUrl(userDTO.getBrokerImageUrl());
+			user.setBrokerImageUrl(userDTO.getBrokerImageUrl());
 		}
 		
 		if (null != userDTO.getBrokerDescription() && userDTO.getBrokerDescription() != Constants.EMPTY_STRING) {
-		user.setBrokerDescription(userDTO.getBrokerDescription());
+			user.setBrokerDescription(userDTO.getBrokerDescription());
 		}
 		
 		if (null != userDTO.getLastLoginDate() && userDTO.getLastLoginDate() != Constants.EMPTY_STRING) {
-		user.setLastLoginDate(userDTO.getLastLoginDate());
+			user.setLastLoginDate(userDTO.getLastLoginDate());
 		}
 		
 		if (null != userDTO.getStreet1() && userDTO.getStreet1() != Constants.EMPTY_STRING) {
-		user.setStreet1(userDTO.getStreet1());
+			user.setStreet1(userDTO.getStreet1());
 		}
 		
 		if (null != userDTO.getStreet2() && userDTO.getStreet2() != Constants.EMPTY_STRING) {
-		user.setStreet2(userDTO.getStreet2());
+			user.setStreet2(userDTO.getStreet2());
 		}
 		
 		if (null != userDTO.getCity() && userDTO.getCity() != Constants.EMPTY_STRING) {
-		user.setCity(userDTO.getCity());
+			user.setCity(userDTO.getCity());
 		}
 		
 		if (null != userDTO.getState() && userDTO.getState() != Constants.EMPTY_STRING) {
-		user.setState(userDTO.getState());
+			user.setState(userDTO.getState());
 		}
 		
 		if (null != userDTO.getForeignState() && userDTO.getForeignState() != Constants.EMPTY_STRING) {
-		user.setForeignState(userDTO.getForeignState());
+			user.setForeignState(userDTO.getForeignState());
 		}
 		
 		if (null != userDTO.getZip() && userDTO.getZip() != Constants.EMPTY_STRING) {
-		user.setZip(userDTO.getZip());
+			user.setZip(userDTO.getZip());
 		}
 		
 		if (null != userDTO.getForeignPostalCode() && userDTO.getForeignPostalCode() != Constants.EMPTY_STRING) {
-		user.setForeignPostalCode(userDTO.getForeignPostalCode());
+			user.setForeignPostalCode(userDTO.getForeignPostalCode());
 		}
 		
 		if (null != userDTO.getCountry() && userDTO.getCountry() != Constants.EMPTY_STRING) {
-		user.setCountry(userDTO.getCountry());
+			user.setCountry(userDTO.getCountry());
 		}
 		
 		if (null != userDTO.getIsVettedBuyer() && userDTO.getIsVettedBuyer() != Constants.EMPTY_STRING) {
-		user.setIsVettedBuyer(userDTO.getIsVettedBuyer());
+			user.setIsVettedBuyer(userDTO.getIsVettedBuyer());
 		}
 		
 		if (null != userDTO.getBuyerVettingMethod() && userDTO.getBuyerVettingMethod() != Constants.EMPTY_STRING) {
-		user.setBuyerVettingMethod(userDTO.getBuyerVettingMethod());
+			user.setBuyerVettingMethod(userDTO.getBuyerVettingMethod());
 		}
 		
-		if (null != userDTO.getBuyerPurchaseCapLow() && userDTO.getBuyerPurchaseCapLow() != Constants.EMPTY_STRING) {
-		user.setBuyerPurchaseCapLow(userDTO.getBuyerPurchaseCapLow());
+		if (null != userDTO.getBuyerPurchaseCapLow()) {
+			user.setBuyerPurchaseCapLow(userDTO.getBuyerPurchaseCapLow());
 		}
 		
-		if (null != userDTO.getBuyerPurchaseCapHigh() && userDTO.getBuyerPurchaseCapHigh() != Constants.EMPTY_STRING) {
-		user.setBuyerPurchaseCapHigh(userDTO.getBuyerPurchaseCapHigh());
+		if (null != userDTO.getBuyerPurchaseCapHigh()) {
+			user.setBuyerPurchaseCapHigh(userDTO.getBuyerPurchaseCapHigh());
 		}
 		
 		if (null != userDTO.getBuyerVettingDate() && userDTO.getBuyerVettingDate() != Constants.EMPTY_STRING) {
-		user.setBuyerVettingDate(LocalDateTime.parse(userDTO.getBuyerVettingDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+			user.setBuyerVettingDate(LocalDateTime.parse(userDTO.getBuyerVettingDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		}
 
 		user.setUpdatedByUserId(userDTO.getInvokerId());
