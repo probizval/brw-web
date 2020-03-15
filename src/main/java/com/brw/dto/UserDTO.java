@@ -12,7 +12,7 @@ public class UserDTO {
 	private String firstName;
 	private String middleInitial;
 	private String lastName;
-	private String isBroker;
+	private String userType;
 	private String phoneCountryCode;
 	private String phoneNumber;
 	private String phoneExtention;
@@ -82,11 +82,11 @@ public class UserDTO {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getIsBroker() {
-		return isBroker;
+	public String getUserType() {
+		return userType;
 	}
-	public void setIsBroker(String isBroker) {
-		this.isBroker = isBroker;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 	public String getPhoneCountryCode() {
 		return phoneCountryCode;

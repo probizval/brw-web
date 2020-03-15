@@ -1305,7 +1305,7 @@ Request -
 	"firstName": "Anisha",
 	"middleInitial": "V",
 	"lastName": "Jain",
-	"isBroker": "N",
+	"user_type": "USER",
 	"phoneCountryCode": "+1",
 	"phoneNumber": "510-550-5050",
 	"phoneExtention": "1234",

@@ -1,5 +1,10 @@
 package com.brw.service.impl;
 
+/**
+ * @author sidpatil
+ * 2019-20
+ */
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,17 +17,13 @@ import com.brw.common.constants.Constants;
 import com.brw.dao.UserActivityDAO;
 import com.brw.dao.UserBusinessDAO;
 import com.brw.dao.UserDAO;
-import com.brw.dto.SearchAgentDTO;
-import com.brw.dto.SearchAgentsListDTO;
 import com.brw.dto.UserActivityDTO;
 import com.brw.dto.UserBusinessDTO;
 import com.brw.dto.UserBusinessListDTO;
 import com.brw.dto.UserDTO;
-import com.brw.entities.SearchAgent;
 import com.brw.entities.User;
 import com.brw.entities.UserActivity;
 import com.brw.entities.UserBusiness;
-import com.brw.entities.UserProfile;
 import com.brw.service.UserService;
 
 @Component
@@ -45,7 +46,7 @@ public class UserServiceImpl implements UserService {
 		User user = new User();
 		user.setUserId(userDTO.getUserId());
 		user.setEmail(userDTO.getEmail());
-		user.setIsBroker(userDTO.getIsBroker());
+		user.setUserType(userDTO.getUserType());
 		user.setFirstName(userDTO.getFirstName());
 		user.setLastName(userDTO.getLastName());
 		user.setMiddleInitial(userDTO.getMiddleInitial());
@@ -87,7 +88,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO returnUserDTO = new UserDTO();
 		returnUserDTO.setUserId(returnUser.getUserId());
 		returnUserDTO.setEmail(returnUser.getEmail());
-		returnUserDTO.setIsBroker(returnUser.getIsBroker());
+		returnUserDTO.setUserType(returnUser.getUserType());
 		returnUserDTO.setFirstName(returnUser.getFirstName());
 		returnUserDTO.setLastName(returnUser.getLastName());
 		returnUserDTO.setMiddleInitial(returnUser.getMiddleInitial());
@@ -137,7 +138,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO returnUserDTO = new UserDTO();
 		returnUserDTO.setUserId(returnUser.getUserId());
 		returnUserDTO.setEmail(returnUser.getEmail());
-		returnUserDTO.setIsBroker(returnUser.getIsBroker());
+		returnUserDTO.setUserType(returnUser.getUserType());
 		returnUserDTO.setFirstName(returnUser.getFirstName());
 		returnUserDTO.setLastName(returnUser.getLastName());
 		returnUserDTO.setMiddleInitial(returnUser.getMiddleInitial());
@@ -188,8 +189,8 @@ public class UserServiceImpl implements UserService {
 			user.setEmail(userDTO.getEmail());
 		}
 		
-		if (null != userDTO.getIsBroker() && userDTO.getIsBroker() != Constants.EMPTY_STRING) {
-			user.setIsBroker(userDTO.getIsBroker());
+		if (null != userDTO.getUserType() && userDTO.getUserType() != Constants.EMPTY_STRING) {
+			user.setUserType(userDTO.getUserType());
 		}
 		
 		if (null != userDTO.getFirstName() && userDTO.getFirstName() != Constants.EMPTY_STRING) {
@@ -324,7 +325,7 @@ public class UserServiceImpl implements UserService {
 		UserDTO returnUserDTO = new UserDTO();
 		returnUserDTO.setUserId(returnUser.getUserId());
 		returnUserDTO.setEmail(returnUser.getEmail());
-		returnUserDTO.setIsBroker(returnUser.getIsBroker());
+		returnUserDTO.setUserType(returnUser.getUserType());
 		returnUserDTO.setFirstName(returnUser.getFirstName());
 		returnUserDTO.setLastName(returnUser.getLastName());
 		returnUserDTO.setMiddleInitial(returnUser.getMiddleInitial());

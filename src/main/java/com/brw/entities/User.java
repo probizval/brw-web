@@ -36,8 +36,8 @@ public class User implements Serializable {
 	@Column(name = "name_last")
 	private String lastName;
 	
-	@Column(name = "isBroker_YN")
-	private String isBroker;
+	@Column(name = "user_type")
+	private String userType;
 	
 	@Column(name = "phone_country")
 	private String phoneCountryCode;
@@ -175,12 +175,12 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public String getIsBroker() {
-		return isBroker;
+	public String getUserType() {
+		return userType;
 	}
 
-	public void setIsBroker(String isBroker) {
-		this.isBroker = isBroker;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 	public String getPhoneCountryCode() {
