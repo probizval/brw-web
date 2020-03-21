@@ -12,7 +12,7 @@ public class UserDTO {
 	private String firstName;
 	private String middleInitial;
 	private String lastName;
-	private String isBroker;
+	private String userType;
 	private String phoneCountryCode;
 	private String phoneNumber;
 	private String phoneExtention;
@@ -38,8 +38,8 @@ public class UserDTO {
 	private String country;
 	private String isVettedBuyer;
 	private String buyerVettingMethod;
-	private String buyerPurchaseCapLow;
-	private String buyerPurchaseCapHigh;
+	private Integer buyerPurchaseCapLow;
+	private Integer buyerPurchaseCapHigh;
 	private String buyerVettingDate;
 	private int createdByUserId;
 	private String createDate;
@@ -82,11 +82,11 @@ public class UserDTO {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getIsBroker() {
-		return isBroker;
+	public String getUserType() {
+		return userType;
 	}
-	public void setIsBroker(String isBroker) {
-		this.isBroker = isBroker;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 	public String getPhoneCountryCode() {
 		return phoneCountryCode;
@@ -238,16 +238,16 @@ public class UserDTO {
 	public void setBuyerVettingMethod(String buyerVettingMethod) {
 		this.buyerVettingMethod = buyerVettingMethod;
 	}
-	public String getBuyerPurchaseCapLow() {
+	public Integer getBuyerPurchaseCapLow() {
 		return buyerPurchaseCapLow;
 	}
-	public void setBuyerPurchaseCapLow(String buyerPurchaseCapLow) {
+	public void setBuyerPurchaseCapLow(Integer buyerPurchaseCapLow) {
 		this.buyerPurchaseCapLow = buyerPurchaseCapLow;
 	}
-	public String getBuyerPurchaseCapHigh() {
+	public Integer getBuyerPurchaseCapHigh() {
 		return buyerPurchaseCapHigh;
 	}
-	public void setBuyerPurchaseCapHigh(String buyerPurchaseCapHigh) {
+	public void setBuyerPurchaseCapHigh(Integer buyerPurchaseCapHigh) {
 		this.buyerPurchaseCapHigh = buyerPurchaseCapHigh;
 	}
 	public String getBuyerVettingDate() {
