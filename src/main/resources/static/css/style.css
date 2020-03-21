@@ -951,7 +951,7 @@ h4.title {
   right: 0;
   top: 0;
   bottom: 0;
-  background: url(../img/mask_grey.png) no-repeat center center;
+  background: no-repeat center center;
   background-size: cover;
   z-index: 1; }
 

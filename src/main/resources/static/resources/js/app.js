@@ -158,7 +158,8 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             reload: true,
             resolve: {
                 propDetails: function (propertyService, $stateParams) {
-                    return propertyService.getPropertyDetails($stateParams.id);
+//                    return propertyService.getPropertyDetails($stateParams.id);
+                    return propertyService.getBusinessDetails($stateParams.id);
                 }
             }
         })
