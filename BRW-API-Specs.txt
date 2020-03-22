@@ -2069,3 +2069,35 @@ Response-
     "pageNumber": null,
     "pageSize": null
 }
+
+
+Authentication and Authorization implementation - 
+
+Authentication - 
+User authentication managed by Auth0, by invoking the Auth0 User management API by UI.
+The same token is used to Authorize the user to Biz Real Worth custom APIs.
+
+Authorization - 
+Auth0 authorization for custom API is implemented using the  Auth0 Authorization Extension -
+https://dev-5friofof.us8.webtask.io/adf6e2f2b84784b57522e3b19dfc9201/users. A new permission is defined 
+all:api, which is checked before allowing access to the APIs. Rules are defined to allow these permissions
+to be added to the user. This framework would need to be enhanced in case we need to define new roles 
+with different permissions.
+
+API code changes to intercept and implement the authorization checks -
+
+1. WebSecurityConfig - 
+	a. configure(WebSecurity web) - overridden the method to ignore the requests for all the resources apis.
+	b. protectedUserUris and unprotectedUserUris - Static variables to hold the list of protected and unprotected
+	user APIs, respectively. Any new API to be protected or unprotected for User to access should be added here.
+	c. jwtDecoder - bean definition for the JWT(Json Web Token) validator.
+
+2. AudienceValidator - custom implementation of OAuth2TokenValidator, to validate the JWT. This class holds the logic
+to validate the user's token's audience or scope. It ensures that the user trying to access the API is either authenticated
+to the API or at least has the roles to access the APIs.
+
+3. pom.xml - 
+	a. Updated the Spring boot starter version to 2.2.0. Updated/added any new dependency to resolve compilation issues 
+	due to missing dependencies.
+	b. Added spring-boot-starter-security, spring-security-oauth2-resource-server, spring-security-oauth2-jose and 
+	spring-security-config for Auth0 JWT token authentication implementation.
