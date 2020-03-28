@@ -2101,3 +2101,5 @@ to the API or at least has the roles to access the APIs.
 	due to missing dependencies.
 	b. Added spring-boot-starter-security, spring-security-oauth2-resource-server, spring-security-oauth2-jose and 
 	spring-security-config for Auth0 JWT token authentication implementation.
+	
+	
