@@ -46,17 +46,35 @@ public class UserServiceImpl implements UserService {
 		User user = new User();
 		user.setUserId(userDTO.getUserId());
 		user.setEmail(userDTO.getEmail());
-		user.setUserType(userDTO.getUserType());
-		user.setFirstName(userDTO.getFirstName());
-		user.setLastName(userDTO.getLastName());
+		
+		if (null != userDTO.getUserType() && Constants.EMPTY_STRING != userDTO.getUserType()) {
+			user.setUserType(userDTO.getUserType());
+		} else {
+			user.setUserType(Constants.DEFAULT_USER_TYPE);
+		}
+		
+		if (null != userDTO.getFirstName() && Constants.EMPTY_STRING != userDTO.getFirstName()) {
+			user.setFirstName(userDTO.getFirstName());
+		} else {
+			user.setFirstName(Constants.DEFAULT_FIRST_NAME);
+		}
+		
+		if (null != userDTO.getLastName() && Constants.EMPTY_STRING != userDTO.getLastName()) {
+			user.setLastName(userDTO.getLastName());
+		} else {
+			user.setLastName(Constants.DEFAULT_LAST_NAME);
+		}
+		
 		user.setMiddleInitial(userDTO.getMiddleInitial());
 		user.setPhoneCountryCode(userDTO.getPhoneCountryCode());
 		user.setPhoneNumber(userDTO.getPhoneNumber());
 		user.setPhoneExtention(userDTO.getPhoneExtention());
+		
 		user.setIsSearchAgentEmail(userDTO.getIsSearchAgentEmail());
 		user.setSearchAgentEmailFreq(userDTO.getSearchAgentEmailFreq());
 		user.setIsUserVerified(userDTO.getIsUserVerified());
 		user.setUserVerificationMethod(userDTO.getUserVerificationMethod());
+		
 		if (null != userDTO.getUserVerificationDate() && Constants.EMPTY_STRING != userDTO.getUserVerificationDate()) {
 			user.setUserVerificationDate(LocalDateTime.parse(userDTO.getUserVerificationDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		}
@@ -68,7 +86,9 @@ public class UserServiceImpl implements UserService {
 		user.setBrokerLicenseNumber(userDTO.getBrokerLicenseNumber());
 		user.setBrokerImageUrl(userDTO.getBrokerImageUrl());
 		user.setBrokerDescription(userDTO.getBrokerDescription());
-		user.setLastLoginDate(userDTO.getLastLoginDate());
+		
+		user.setLastLoginDate(LocalDateTime.now());
+		
 		user.setStreet1(userDTO.getStreet1());
 		user.setStreet2(userDTO.getStreet2());
 		user.setCity(userDTO.getCity());
@@ -79,13 +99,11 @@ public class UserServiceImpl implements UserService {
 		user.setCountry(userDTO.getCountry());
 		user.setIsVettedBuyer(userDTO.getIsVettedBuyer());
 		user.setBuyerVettingMethod(userDTO.getBuyerVettingMethod());
-		user.setBuyerPurchaseCapLow(userDTO.getBuyerPurchaseCapLow());
 		if (null != userDTO.getBuyerPurchaseCapLow()) {
 			user.setBuyerPurchaseCapLow(userDTO.getBuyerPurchaseCapLow());
 		} else {
 			user.setBuyerPurchaseCapLow(0);
 		}
-		user.setBuyerPurchaseCapHigh(userDTO.getBuyerPurchaseCapHigh());
 		if (null != userDTO.getBuyerPurchaseCapHigh()) {
 			user.setBuyerPurchaseCapHigh(userDTO.getBuyerPurchaseCapHigh());
 		} else {
@@ -115,14 +133,32 @@ public class UserServiceImpl implements UserService {
 		returnUserDTO.setSearchAgentEmailFreq(returnUser.getSearchAgentEmailFreq());
 		returnUserDTO.setIsUserVerified(returnUser.getIsUserVerified());
 		returnUserDTO.setUserVerificationMethod(returnUser.getUserVerificationMethod());
-		returnUserDTO.setUserVerificationDate(returnUser.getUserVerificationDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+				
+		if (null != returnUser.getUserVerificationDate()) {
+			returnUserDTO.setUserVerificationDate(returnUser.getUserVerificationDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		} else {
+			returnUserDTO.setUserVerificationDate(null);
+		}
+		
 		returnUserDTO.setIsBrokerVerified(returnUser.getIsBrokerVerified());
 		returnUserDTO.setBrokerVerificationMethod(returnUser.getBrokerVerificationMethod());
-		returnUserDTO.setBrokerVerificationDate(returnUser.getBrokerVerificationDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+				
+		if (null != returnUser.getBrokerVerificationDate()) {
+			returnUserDTO.setBrokerVerificationDate(returnUser.getBrokerVerificationDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		} else {
+			returnUserDTO.setBrokerVerificationDate(null);
+		}
+		
 		returnUserDTO.setBrokerLicenseNumber(returnUser.getBrokerLicenseNumber());
 		returnUserDTO.setBrokerImageUrl(returnUser.getBrokerImageUrl());
 		returnUserDTO.setBrokerDescription(returnUser.getBrokerDescription());
-		returnUserDTO.setLastLoginDate(returnUser.getLastLoginDate());
+				
+		if (null != returnUser.getLastLoginDate()) {
+			returnUserDTO.setLastLoginDate(returnUser.getLastLoginDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		} else {
+			returnUserDTO.setLastLoginDate(null);
+		}
+		
 		returnUserDTO.setStreet1(returnUser.getStreet1());
 		returnUserDTO.setStreet2(returnUser.getStreet2());
 		returnUserDTO.setCity(returnUser.getCity());
@@ -135,7 +171,13 @@ public class UserServiceImpl implements UserService {
 		returnUserDTO.setBuyerVettingMethod(returnUser.getBuyerVettingMethod());
 		returnUserDTO.setBuyerPurchaseCapLow(returnUser.getBuyerPurchaseCapLow());
 		returnUserDTO.setBuyerPurchaseCapHigh(returnUser.getBuyerPurchaseCapHigh());
-		returnUserDTO.setBuyerVettingDate(returnUser.getBuyerVettingDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+				
+		if (null != returnUser.getBuyerVettingDate()) {
+			returnUserDTO.setBuyerVettingDate(returnUser.getBuyerVettingDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		} else {
+			returnUserDTO.setBuyerVettingDate(null);
+		}
+		
 		returnUserDTO.setCreatedByUserId(returnUser.getCreatedByUserId());
 		returnUserDTO.setCreateDate(returnUser.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		returnUserDTO.setUpdatedByUserId(returnUserDTO.getInvokerId());
@@ -172,7 +214,7 @@ public class UserServiceImpl implements UserService {
 		returnUserDTO.setBrokerLicenseNumber(returnUser.getBrokerLicenseNumber());
 		returnUserDTO.setBrokerImageUrl(returnUser.getBrokerImageUrl());
 		returnUserDTO.setBrokerDescription(returnUser.getBrokerDescription());
-		returnUserDTO.setLastLoginDate(returnUser.getLastLoginDate());
+		returnUserDTO.setLastLoginDate(returnUser.getLastLoginDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		returnUserDTO.setStreet1(returnUser.getStreet1());
 		returnUserDTO.setStreet2(returnUser.getStreet2());
 		returnUserDTO.setCity(returnUser.getCity());
@@ -278,7 +320,7 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		if (null != userDTO.getLastLoginDate() && userDTO.getLastLoginDate() != Constants.EMPTY_STRING) {
-			user.setLastLoginDate(userDTO.getLastLoginDate());
+			user.setLastLoginDate(LocalDateTime.parse(userDTO.getLastLoginDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		}
 		
 		if (null != userDTO.getStreet1() && userDTO.getStreet1() != Constants.EMPTY_STRING) {
@@ -359,7 +401,7 @@ public class UserServiceImpl implements UserService {
 		returnUserDTO.setBrokerLicenseNumber(returnUser.getBrokerLicenseNumber());
 		returnUserDTO.setBrokerImageUrl(returnUser.getBrokerImageUrl());
 		returnUserDTO.setBrokerDescription(returnUser.getBrokerDescription());
-		returnUserDTO.setLastLoginDate(returnUser.getLastLoginDate());
+		returnUserDTO.setLastLoginDate(returnUser.getLastLoginDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		returnUserDTO.setStreet1(returnUser.getStreet1());
 		returnUserDTO.setStreet2(returnUser.getStreet2());
 		returnUserDTO.setCity(returnUser.getCity());

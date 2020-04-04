@@ -41,5 +41,10 @@ public interface Constants {
 	public static final String UNDERSCORE = "_";
 	
 	public static final String IMAGE_FIRST = "https://brwbusinessimages.s3-us-west-1.amazonaws.com/small-business.png";
+	
+	public static final String DEFAULT_USER_TYPE = "DEFAULT_USER_TYPE";
+	
+	public static final String DEFAULT_FIRST_NAME = "DEFAULT_FIRST_NAME";
 
+	public static final String DEFAULT_LAST_NAME = "DEFAULT_LAST_NAME";
 }

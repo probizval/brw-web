@@ -82,7 +82,7 @@ public class User implements Serializable {
 	private String brokerImageUrl;
 	
 	@Column(name = "last_login_date")
-	private String lastLoginDate;
+	private LocalDateTime lastLoginDate;
 	
 	@Column(name = "add_street1")
 	private String street1;
@@ -295,11 +295,11 @@ public class User implements Serializable {
 		this.brokerImageUrl = brokerImageUrl;
 	}
 
-	public String getLastLoginDate() {
+	public LocalDateTime getLastLoginDate() {
 		return lastLoginDate;
 	}
 
-	public void setLastLoginDate(String lastLoginDate) {
+	public void setLastLoginDate(LocalDateTime lastLoginDate) {
 		this.lastLoginDate = lastLoginDate;
 	}
 
