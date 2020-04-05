@@ -207,14 +207,29 @@ public class UserServiceImpl implements UserService {
 		returnUserDTO.setSearchAgentEmailFreq(returnUser.getSearchAgentEmailFreq());
 		returnUserDTO.setIsUserVerified(returnUser.getIsUserVerified());
 		returnUserDTO.setUserVerificationMethod(returnUser.getUserVerificationMethod());
-		returnUserDTO.setUserVerificationDate(returnUser.getUserVerificationDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		if (null != returnUser.getUserVerificationDate()) {
+			returnUserDTO.setUserVerificationDate(returnUser.getUserVerificationDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		} else {
+			returnUserDTO.setUserVerificationDate(null);
+		}
+		
 		returnUserDTO.setIsBrokerVerified(returnUser.getIsBrokerVerified());
 		returnUserDTO.setBrokerVerificationMethod(returnUser.getBrokerVerificationMethod());
-		returnUserDTO.setBrokerVerificationDate(returnUser.getBrokerVerificationDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		if (null != returnUser.getUserVerificationDate()) {
+			returnUserDTO.setBrokerVerificationDate(returnUser.getBrokerVerificationDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		} else {
+			returnUserDTO.setBrokerVerificationDate(null);
+		}
+		
 		returnUserDTO.setBrokerLicenseNumber(returnUser.getBrokerLicenseNumber());
 		returnUserDTO.setBrokerImageUrl(returnUser.getBrokerImageUrl());
 		returnUserDTO.setBrokerDescription(returnUser.getBrokerDescription());
-		returnUserDTO.setLastLoginDate(returnUser.getLastLoginDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		if (null != returnUser.getUserVerificationDate()) {
+			returnUserDTO.setLastLoginDate(returnUser.getLastLoginDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		} else {
+			returnUserDTO.setLastLoginDate(null);
+		}
+		
 		returnUserDTO.setStreet1(returnUser.getStreet1());
 		returnUserDTO.setStreet2(returnUser.getStreet2());
 		returnUserDTO.setCity(returnUser.getCity());
@@ -227,7 +242,12 @@ public class UserServiceImpl implements UserService {
 		returnUserDTO.setBuyerVettingMethod(returnUser.getBuyerVettingMethod());
 		returnUserDTO.setBuyerPurchaseCapLow(returnUser.getBuyerPurchaseCapLow());
 		returnUserDTO.setBuyerPurchaseCapHigh(returnUser.getBuyerPurchaseCapHigh());
-		returnUserDTO.setBuyerVettingDate(returnUser.getBuyerVettingDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		if (null != returnUser.getUserVerificationDate()) {
+			returnUserDTO.setBuyerVettingDate(returnUser.getBuyerVettingDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		} else {
+			returnUserDTO.setBuyerVettingDate(null);
+		}
+		
 		returnUserDTO.setCreatedByUserId(returnUser.getCreatedByUserId());
 		returnUserDTO.setCreateDate(returnUser.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		returnUserDTO.setUpdatedByUserId(returnUserDTO.getInvokerId());
