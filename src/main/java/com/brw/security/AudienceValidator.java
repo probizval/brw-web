@@ -1,5 +1,8 @@
 package com.brw.security;
 
+
+import java.util.List;
+
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
@@ -18,11 +21,11 @@ public class AudienceValidator implements OAuth2TokenValidator<Jwt> {
 		OAuth2Error error = new OAuth2Error("invalid_token", "The required audience is missing", null);
 		//scope
         //System.out.println("Validating the bearer token for audience - "+ token.getAudience());
-        //System.out.println("scope for user" + token.getClaimAsString("scope"));
+        //System.out.println("API role for user" + token.getClaimAsString(audience+"roles"));
+        List<String> userRoles = token.getClaimAsStringList(audience+"roles");
         
         //;
-        if (token.getAudience().contains(audience)  || 
-        		token.getClaimAsString("scope").contains("all:api")) {
+        if (userRoles != null && userRoles.size() > 0) {
             return OAuth2TokenValidatorResult.success();
         }
         return OAuth2TokenValidatorResult.failure(error);
