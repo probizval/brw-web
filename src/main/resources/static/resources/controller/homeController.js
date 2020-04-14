@@ -126,29 +126,33 @@
                 }
             }
 
-            $rootScope.authService = authService;
-            $rootScope.isAuthenticated = authService.isAuthenticated();
-
-            if (authService.getCachedProfile()) {
-                $rootScope.profile = authService.getCachedProfile();
-            } else {
-                authService.getProfile(function (err, profile) {
-                    $rootScope.profile = profile;
-                    propertyService.saveProfile(profile).success(function (res) {
-                        if (res) {
-                            localStorage.setItem('userprofile', JSON.stringify(res[0]));
-                        }
-                    })
-                        .error(function (error) {
-                            $scope.status = 'Unable to get profile: ' + error.message;
-                        });
-                    $scope.$apply();
-                });
-            }
+//            $rootScope.authService = authService;
+//            $rootScope.isAuthenticated = authService.isAuthenticated();
+//
+//            if (authService.getCachedProfile()) {
+//                $rootScope.profile = authService.getCachedProfile();
+//            } else {
+//                authService.getProfile(function (err, profile) {
+//                    $rootScope.profile = profile;
+//                    console.log("homecontroller getProfile", profile)
+//                    propertyService.saveProfile(profile).success(function (res) {
+//                        if (res) {
+//                            localStorage.setItem('userprofile', JSON.stringify(res[0]));
+//                        }
+//                    })
+//                        .error(function (error) {
+//                            $scope.status = 'Unable to get profile: ' + error.message;
+//                        });
+//                    $scope.$apply();
+//                });
+//            }
 
         };
         function getLatLng(address) {
             console.log("getLatlng", address);
+            if (!address){
+                return
+            }
             var geocoder =  new google.maps.Geocoder();
             geocoder.geocode( { 'address': address}, function(results, status) {
               if (status === 'OK') {

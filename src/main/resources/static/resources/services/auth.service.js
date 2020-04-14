@@ -13,17 +13,29 @@
     var userProfile;
 
     function login() {
-      angularAuth0.authorize();
+      var location_hash = window.location.hash;
+      var location = window.location.href;
+//      location = location.substring(2, location.length);
+      sessionStorage.setItem("redirect_location", location);
+      sessionStorage.setItem("redirect_hash", location_hash);
+      angularAuth0.authorize({redirectUri: location});
     }
     
     function handleAuthentication() {
       angularAuth0.parseHash(function(err, authResult) {
         if (authResult && authResult.idToken) {
           setSession(authResult);
-          //$state.go('propertyDetails',{id:3}, {'reload':false});
           var redirect_location = sessionStorage.getItem("redirect_location");
-          sessionStorage.removeItem('redirect_location');
-          $location.path(redirect_location);
+          window.location.href = redirect_location
+          location.reload();
+//          if (redirect_location.includes("/")){
+//            let sub_type = redirect_location.split("/")[1]
+//            redirect_location = redirect_location.split("/")[0]
+//
+//            $state.go(redirect_location, {type: sub_type}, { reload: true })
+//          } else {
+//            $state.go(redirect_location, {}, { reload: true })
+//          }
         } else if (err) {
           $timeout(function() {
             $state.go('home',null, {'reload':true});
@@ -36,8 +48,10 @@
 
     function getProfile(cb) {
       var accessToken = localStorage.getItem('access_token');
+      console.log("getProfile", accessToken)
       if (!accessToken) {
-        //throw new Error('Access token must exist to fetch profile');
+        console.log('Access token must exist to fetch profile');
+//        throw new Error('Access token must exist to fetch profile');
       } else {
         angularAuth0.client.userInfo(accessToken, function(err, profile) {
           if (profile) {
@@ -73,9 +87,17 @@
       localStorage.removeItem('id_token');
       localStorage.removeItem('expires_at');
       localStorage.removeItem('userName');
+      localStorage.removeItem('userprofile');
       sessionStorage.removeItem('usermetadata');
       sessionStorage.removeItem('profile');
-      location.reload();
+      var redirect_location = window.location.href
+      var redirect_location1 = sessionStorage.getItem("redirect_location");
+      sessionStorage.removeItem("redirect_location")
+      console.log("------logout------", redirect_location, redirect_location1)
+      angularAuth0.logout({
+        "returnTo": window.location.href,
+        "client_id": AUTH0_CLIENT_ID
+      });
     }
     
     function isAuthenticated() {
@@ -85,13 +107,28 @@
       return new Date().getTime() < expiresAt;
     }
 
+    function refreshToken() {
+        angularAuth0.checkSession({}, function(err, authResult) {
+            if (authResult) {
+                setSession(authResult);
+                location.reload();
+            } else if (err) {
+                $timeout(function() {
+                   location.reload();
+                });
+                console.log(err);
+            }
+      });
+    }
+
     return {
       login: login,
       getProfile: getProfile,
       getCachedProfile: getCachedProfile,
       handleAuthentication: handleAuthentication,
       logout: logout,
-      isAuthenticated: isAuthenticated
+      isAuthenticated: isAuthenticated,
+      refreshToken: refreshToken,
     }
   }
 })();

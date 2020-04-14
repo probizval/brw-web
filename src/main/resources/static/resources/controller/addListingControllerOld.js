@@ -125,7 +125,7 @@
             var userProfile = JSON.parse(sessionStorage.getItem('profile'));
             $scope.businessMetaData.userId = userProfile.id;
 
-            propertyService.savePropertyDetails(apiName, $scope.business)
+            propertyService.addBusinessDetails(apiName, $scope.business)
             .success(function(res) {
                  console.log("res ", res);
                  console.log("res ", res.status);

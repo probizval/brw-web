@@ -97,7 +97,7 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             resolve: {
                 profileDetails: function (propertyService) {
                     let profile = JSON.parse(sessionStorage.getItem('profile'));
-                    return propertyService.getProfile({"emailId": profile.emailId});
+                    return propertyService.getUserProfile({"email": profile.email});
                 }
             }
         })

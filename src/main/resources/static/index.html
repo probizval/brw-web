@@ -8,7 +8,7 @@
 <title>Real Estate</title>
 
 <!-- Bootstrap -->
-<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900%7COpen+Sans" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900%7COpen+Sans" rel="stylesheet" type="text/css" />
 <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <link href="lib/animate.css" rel="stylesheet">
@@ -112,6 +112,25 @@
  	}
 }
 
+.page-loading {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 99;
+    left: 0;
+    right: 0;
+}
+
+.svgImage {
+    background-image: url(http://www.nasa.gov/multimedia/videogallery/ajax-loader.gif);
+    position: relative;
+    z-index: 99;
+    height: 65px;
+    width: 65px;
+    background-size: 56px;
+    top: 30%;
+    margin: 0 auto;
+}
 </style>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SR252ETTY4"></script>
@@ -128,8 +147,12 @@
 <div id="main">
 
 
-<div ng-include="'resources/pages/header.html'"></div>
-<div ui-view="">
+    <div ng-include="'resources/pages/header.html'"></div>
+    <div class="page-loading" ng-show="loader">
+        <div class="svgImage"></div>
+    </div>s
+    <div ui-view id="ui-view"></div>
+<!--    <div ui-view="">-->
 </div>
 
 
@@ -195,7 +218,7 @@
 <script>
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7O4KppCu5tcjAzWclyFcW8zg0mxZcfJk&libraries=places"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I&libraries=places"
         async defer></script>
 <!--    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_hBkjJyRoMYVqN6DdM7E8mWTtDO-mVns&libraries=places"-->
 <!--            async defer></script>-->

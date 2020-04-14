@@ -142,7 +142,7 @@
 
       <li class="nav-item dropdown user-account" ng-if="isAuthenticated">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="user-image" style="background-image:url({{ profile.picture }});"></span> Hi, {{ profile.given_name }}
+          <span class="user-image" style="background-image:url({{ profile.picture }});"></span>
         </a>
         <div class="dropdown-menu">
 						<a class="dropdown-item" href="#myProfile">Profile</a>
@@ -154,7 +154,14 @@
       <li class="nav-item" ng-if="!isAuthenticated">
       	<a class="nav-link nav-btn" ng-click="authService.login()">Log In</a>
       </li>
-      <li class="nav-item" ng-if="isAuthenticated"><a class="nav-link nav-btn" href="#business/addListing"><span><i class="fa fa-plus" aria-hidden="true"></i> Add Business</span></a></li>
+      <li class="nav-item" ng-if="isAuthenticated">
+          <a class="nav-link nav-btn" href="#business/addListing">
+              <span>
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                  Add Business
+              </span>
+          </a>
+      </li>
     </ul>
 
   </div>

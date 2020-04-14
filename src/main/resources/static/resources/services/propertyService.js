@@ -205,22 +205,25 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     };
 
     propertyDataOp.addUserProfile = function (userDetails) {
-        console.log("addUserProfile ", obj);
-        return $http.post(userUrl + 'addUserProfile', userDetails).success(function(res) {
+        userProfile = {"invokerId": 1001, "email": userDetails.email, "user_type": "USER"}
+        console.log("addUserProfile ", userProfile);
+        return $http.post(userUrl + 'addUserProfile', userProfile).success(function(res) {
             console.log("addUserProfile", JSON.stringify(res));
             return res.data;
-        }).error(function (error) {
-            return 'Unable to load store data: ' + error.message;
+        }).error(function (error, status) {
+            console.log("Unable to load store data", error, status)
+            return status;
         });
     };
 
     propertyDataOp.getUserProfile = function (userDetails) {
-        console.log("getUserProfile ", obj);
+        console.log("getUserProfile ", userDetails);
         return $http.post(userUrl + 'getUserProfile', userDetails).success(function(res) {
             console.log("getUserProfile", JSON.stringify(res));
             return res.data;
-        }).error(function (error) {
-            return 'Unable to load store data: ' + error.message;
+        }).error(function (error, status) {
+            console.log("Unable to load store data", error, status)
+            return status;
         });
     };
 
