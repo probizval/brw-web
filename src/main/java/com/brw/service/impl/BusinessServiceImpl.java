@@ -57,6 +57,10 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
 	@Override
 	public BusinessInfoListDTO searchBusiness(BusinessDetailsDTO businessDTO) {
+		
+		//businessDTO.setZip(0);
+		//businessDTO.setType("GAS_STATION");
+		
 		// TODO Auto-generated method stub
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getName: "+businessDTO.getName());
 		
