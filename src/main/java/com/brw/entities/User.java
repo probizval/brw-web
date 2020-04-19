@@ -22,7 +22,7 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-	private int userId;
+	private int id;
 	
 	@Column(name = "email")
 	private String email;
@@ -136,11 +136,11 @@ public class User implements Serializable {
 	private LocalDateTime updateDate;
 
 	public int getUserId() {
-		return userId;
+		return id;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserId(int id) {
+		this.id = id;
 	}
 
 	public String getEmail() {

@@ -69,6 +69,14 @@ public class UserprofileService implements UserProfileService {
 	@Override
 	public UserProfileDTO updateUserProfile(UserProfileDTO userProfileDTO) {
 		
+		userProfileDTO.setId(1001);
+		
+		System.out.println("**** 222 Inside UserProfileService.updateUserProfile() getId: "+userProfileDTO.getId());
+		System.out.println("**** 222 Inside UserProfileService.updateUserProfile() getEmailId: "+userProfileDTO.getEmailId());
+		System.out.println("**** 222 Inside UserProfileService.updateUserProfile() getFirstName: "+userProfileDTO.getFirstName());
+		System.out.println("**** 222 Inside UserProfileService.updateUserProfile() getLastName: "+userProfileDTO.getLastName());
+		System.out.println("**** 222 Inside UserProfileService.updateUserProfile() getAgentTitle: "+userProfileDTO.getAgentTitle());
+		
 		UserProfile userProfile = userProfileDAO.findById(userProfileDTO.getId()).get();
 		userProfile.setFirstName(userProfileDTO.getFirstName());
 		userProfile.setLastName(userProfileDTO.getLastName());

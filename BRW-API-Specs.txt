@@ -1295,6 +1295,15 @@ Response-
 11.	Name: AddUserProfile
 
 Method - Post
+
+Notes -
+1. User can be one of the following types - BUYER, OWNER, BROKER, OTHER(Capture free form text up to 20 characters and send into user_type)
+2. For OTHER and in general - Only email address and User Type are mandatory rest all are optional attributes, send in N for all isxxx attributes.
+3. For BUYER - If the User is trying to register for the Search Agent(want automated email notifications) he is considered BUYER, for Buyer Buyer Cap high and low are optional fields.
+4. For OWNER - First Name, Last Name, email, phone, address is mandatory.
+5. For BROKER - Broker License Number, First Name, Last Name, email, phone, address is mandatory and broker description and broker image url is optional.
+6. Rest all attributes need not be collected, many are verification related, which will be auto populated.(We will build the flows later) 
+
 EndPoint –
 http://localhost:8080/api/user/v1/addUserProfile
 
@@ -1305,7 +1314,7 @@ Request -
 	"firstName": "Anisha",
 	"middleInitial": "V",
 	"lastName": "Jain",
-	"user_type": "USER", - USER/OWNER/BUYER/SELLER/BUYSELL/BIZ_BROKER/BIZ_CONSULTANT/BIZ_ATTORNEY/OTHER
+	"user_type": "BUYER",
 	"phoneCountryCode": "+1",
 	"phoneNumber": "510-550-5050",
 	"phoneExtention": "1234",
@@ -1381,6 +1390,14 @@ Response -
 
 12.	UpdateUserProfile –
 Method – PUT
+
+Notes -
+1. User can be one of the following types - BUYER, OWNER, BROKER, OTHER(Capture free form text up to 20 characters and send into user_type)
+2. For OTHER and in general - Only email address and User Type are mandatory rest all are optional attributes, send in N for all isxxx attributes.
+3. For BUYER - If the User is trying to register for the Search Agent(want automated email notifications) he is considered BUYER, for Buyer Buyer Cap high and low are optional fields.
+4. For OWNER - First Name, Last Name, email, phone, address is mandatory.
+5. For BROKER - Broker License Number, First Name, Last Name, email, phone, address is mandatory and broker description and broker image url is optional.
+6. Rest all attributes need not be collected, many are verification related, which will be auto populated.(We will build the flows later) 
 
 EndPoint -
 http://localhost:8080/api/user/v1/updateUserProfile

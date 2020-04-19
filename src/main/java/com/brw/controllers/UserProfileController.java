@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import com.brw.common.response.ApiResponse;
-import com.brw.dto.FilterDTO;
-import com.brw.dto.PropertyDetailsDTO;
 import com.brw.dto.PropertyListDTO;
 import com.brw.dto.UserProfileDTO;
 import com.brw.service.PropertyDetailsService;

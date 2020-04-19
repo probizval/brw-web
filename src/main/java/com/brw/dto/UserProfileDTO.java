@@ -1,9 +1,5 @@
 package com.brw.dto;
 
-import java.util.List;
-
-import javax.persistence.Column;
-
 public class UserProfileDTO {
 	private int id;
 	
