@@ -602,7 +602,7 @@ hr {
   color: rgba(134, 158, 158, 0.7); }
 
 /* Pagination */
-.pagination {
+/*.pagination {
   margin-top: 30px; }
 
 .pagination > .page-item .page-link {
@@ -626,7 +626,7 @@ hr {
   color: #FFF;
   font-size: 16px;
   font-weight: bold;
-  margin-top: 0; }
+  margin-top: 0; }*/
 
 /* Tooltip*/
 .tooltip-inner {

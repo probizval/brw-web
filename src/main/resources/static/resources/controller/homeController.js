@@ -174,7 +174,7 @@
             //     latitude: latitude,
             //     longitude: longitude
             // }));
-            if (!latitude || !longitude) {
+            if (!latitude || !longitude && document.getElementById('autocomplete').value != null) {
                 getLatLng(document.getElementById('autocomplete').value);
             }
             localStorage.setItem('searchBusinessAttributes', JSON.stringify({

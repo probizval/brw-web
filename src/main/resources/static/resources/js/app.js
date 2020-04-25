@@ -4,9 +4,7 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
 
 
     var lochash = window.location.hash.substr(1),
-        token = localStorage.getItem('access_token') || lochash.substr(lochash.search(/(?<=^|&)access_token=/))
-            .split('&')[0]
-            .split('=')[1];
+        token = localStorage.getItem('access_token');
 
     if (lochash && token) {
         // $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';

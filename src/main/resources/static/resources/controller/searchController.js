@@ -4,13 +4,17 @@
 
     angular
         .module('myApp')
-        .controller('searchController', searchController);
-
+        .controller('searchController', searchController)
+        .filter('startFrom', startFrom);
     searchController.$inject = ['$rootScope', '$scope', '$state', 'propertyService', 'propList', 'constants'];
 
-
     function searchController($rootScope, $scope, $state, propertyService, propList, constants) {
+        $scope.currentPage = 1;
+        $scope.viewby = 10;
+        $scope.itemsPerPage = $scope.viewby;
         $scope.searchList = propList.data.data.businessList;
+        $scope.numberOfPages = Math.floor($scope.searchList.length/$scope.itemsPerPage);
+
         $scope.minPriceList = constants.allPriceList;
         $scope.maxPriceList = constants.allPriceList;
         $scope.minSqFeetList = constants.allSqFeet;
@@ -21,6 +25,34 @@
         $scope.maxYearBuiltList = constants.allYearBuiltList;
         $scope.maxHoaFeesList = constants.allMaxHoaFeesList;
         $scope.timeListedList = constants.allTimeListedList;
+        $('li').click(function() {
+            if (1 < $scope.currentPage < $scope.numberOfPages) {
+                $(this).addClass('active').siblings().removeClass('active');
+            }
+        });
+
+        $scope.disablePrevious = function() {
+            if ($scope.currentPage <= 1){
+                return true
+            } else {
+                $scope.currentPage -= 1
+                return false
+            }
+        };
+
+        $scope.disableNext = function() {
+            if ($scope.currentPage >= $scope.totalPages){
+                return false
+            } else {
+                $scope.currentPage += 1
+                return true
+            }
+        };
+        $scope.setItemsPerPage = function(num) {
+          $scope.itemsPerPage = num;
+          $scope.currentPage = 1; //reset to first page
+          $scope.numberOfPages = Math.floor($scope.searchList.length/$scope.itemsPerPage);
+        }
 
         $scope.filterByMinPrice = function (price) {
             //var key = constants.allPriceList.indexOf($scope.$$childTail.minPrice);
@@ -510,5 +542,13 @@
         $scope.initialize(propList.data.data.businessList);
 
     }
+
+        function startFrom() {
+        return function(input, start) {
+            start = +start;
+            return input.slice(start);
+        };
+    };
+
 
 })();
