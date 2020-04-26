@@ -13,7 +13,7 @@
         $scope.businessTypes = [
             {name: "All", code: 'b_type', apiName: ""},
             {name: 'Restaurants and Food', code: 'b_type_1', apiName: "restaurant"},
-            {name: 'Gas Station', code: 'b_type_2', apiName: "gasstation"},
+            {name: 'Gas Station', code: 'b_type_2', apiName: "gas_station"},
             {name: 'Liquor Store', code: 'b_type_3', apiName: "liquorstore"},
             {name: 'Beauty Salon/Spa/Nail', code: 'b_type_4', apiName: "salonstore"},
             {name: 'Convenience store', code: 'b_type_5', apiName: "conveniencestore"},
