@@ -48,8 +48,6 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             reload: true,
             resolve: {
                 propList: function (propertyService, $stateParams) {
-                    // var obj = (localStorage.getItem('searchAddress')) || {};
-                    // return propertyService.getPropertyList(obj);
                     var obj = (localStorage.getItem('searchBusinessAttributes')) || {};
                     return propertyService.getBusinessList(obj);
                 }
@@ -80,10 +78,10 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                     return propertyService.getBusinessImages($stateParams.id)
                 },
                 // similarProps: function (propertyService) {
-                //     //return propertyService.getPropertyList($stateParams.type);
+                //     //return propertyService.getBusinessDetails($stateParams.type);;
                 //     console.log("similiarProps address", localStorage.getItem('searchBusinessAttributes'));
                 //     var obj = (localStorage.getItem('searchBusinessAttributes')) || {};
-                //     return propertyService.getPropertyList(obj);
+                //     return propertyService.getBusinessDetails(obj);
                 // }
             }
         })

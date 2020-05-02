@@ -62,13 +62,13 @@
         <form name="searchBusinessForm" ng-controller="homeController" ng-submit="submitted = true" novalidate>
           <div class="justify-content-md-center">
             <div class="row form-group justify-content-md-center">
-              <div class="col-md-3 col-lg-3 col-xl-3">
+              <div class="col-md-4 col-lg-3 col-xl-3">
                 <label style="margin:0">Business Name</label>
                 <input type="text" id="businessName" name="businessName" ng-model="businessName" class="form-control"
                        placeholder="Enter a Business name">
               </div>
 
-              <div class="col-md-2 col-lg-2 col-xl-2">
+              <div class="col-md-4 col-lg-3 col-xl-3">
                 <label style="margin:0">Business Type</label>
                 <select class="form-control" name="businessType" ng-init="businessType = businessType || businessTypes[0]"
                         ng-model="businessType" ng-options="businessType.name for businessType in businessTypes" id="businessType">
@@ -92,8 +92,25 @@
                 </select>
                 <span style="color:red" ng-show="submitted && searchBusinessForm.businessCity.$error.required">City is required.</span>
               </div>
+<!--              <div class="col-md-5 col-lg-5 col-xl-5">-->
+<!--                <label style="margin:0">Business Address</label>-->
+<!--                <input type="text" id="autocomplete" name="location" ng-model="location" class="form-control"-->
+<!--                       ng-init="initialize" placeholder="Enter an address, city or zipcode">-->
+<!--              </div>-->
+                <div class="col-md-3 col-lg-2 col-xl-2">
+                    <label style="margin:0">City*</label>
+                    <select class="form-control" name="businessCity" ng-model="businessCity"
+                            ng-options="city as city.label for city in businessCities track by city.id"
+                            id="locality" required>
+                        <!--                  <option default selected style="color:#868e96;" value="">Select a city</option>-->
+                    </select>
+                    <span style="color:red" ng-show="submitted && searchBusinessForm.businessCity.$error.required">City is required.</span>
+                </div>
 
-              <div class="col-md-2 col-lg-2 col-xl-2">
+<!--            </div>-->
+<!--            <div class="row form-group justify-content-md-center">-->
+
+              <div class="col-md-2 col-lg-1 col-xl-1">
                 <label style="margin:0">State*</label>
                 <select class="form-control" name="businessState" ng-model="businessState"
                         ng-options="state.label for state in businessStates track by state.id"
@@ -103,13 +120,13 @@
                 <span style="color:red" ng-show="submitted && searchBusinessForm.businessState.$error.required">State is required.</span>
               </div>
 
-              <div class="col-md-2 col-lg-2 col-xl-2">
+              <div class="col-md-2 col-lg-1 col-xl-1">
                 <label style="margin:0">Zipcode</label>
                 <input type="text" id="postal_code" name="businessZipcode" ng-model="businessZipcode" class="form-control"
                        placeholder="94536">
               </div>
 
-              <div class="col-md-2 col-lg-2 col-xl-2">
+              <div class="col-md-2 col-lg-1 col-xl-1">
                 <label style="color:#eee;margin:0;visibility:hidden">Test</label>
                 <div class="form-group">
                   <input type="submit" value="Search" class="btn btn-md btn-primary" ng-click="search(searchBusinessForm)">

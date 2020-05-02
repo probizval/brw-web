@@ -22,7 +22,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
             "street2": searchBusinessAttributes.street2 || "",
             "city": searchBusinessAttributes.city || "Fremont",
             "stateCode": searchBusinessAttributes.state || "CA",
-            "zip": searchBusinessAttributes.zipCode || "94536",
+            "zip": searchBusinessAttributes.zip || "94536",
             "latitude": searchBusinessAttributes.latitude || 37.7749,
             "longitude": searchBusinessAttributes.longitude || -122.4194,
             "rangeMile": searchBusinessAttributes.rangeMile || 5,
@@ -36,24 +36,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
           return 'Unable to load store data: ' + error.message;
       });
   };
-
-  propertyDataOp.getPropertyList = function (type) {
-    	type = JSON.parse(type);
-    	var userid = JSON.parse(sessionStorage.getItem('profile'));
-        console.log("--------getBuyPropertylist" + "Bearer "+localStorage.getItem('id_token') );
-        return $http.post(urlBase + 'propertyList', /*{
-                          "latitude": type.latitude,
-                          "longitude": type.longitude,
-                          "zipCode": type.postal_code || null,
-                          "userId": (userid && userid.id ) || null
-                        }*/ type).success(function(res) {
-          // console.log("getBuyPropertylist", JSON.stringify(res));
-          return res.data;
-        })
-        .error(function (error) {
-            return 'Unable to load store data: ' + error.message;
-        });
-    };
 
     propertyDataOp.getBusinessDetails = function (id) {
         return $http.post(businessUrl + 'getBusinessDetails', {
