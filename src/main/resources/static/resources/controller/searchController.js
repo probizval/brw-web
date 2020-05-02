@@ -438,20 +438,19 @@
             var search_address = JSON.parse(localStorage.getItem('searchBusinessAttributes'));
             search_address['latitude'] = center.lat();
             search_address["longitude"] = center.lng();
-            search_address["radius"] = radius;
+            search_address["rangeMile"] = radius;
             updateSearchResult(search_address);
         }
 
         function updateSearchResult(filter) {
             var arrDestinations = [];
-            localStorage.setItem('searchAddress', JSON.stringify(filter));
+            localStorage.setItem('searchBusinessAttributes', JSON.stringify(filter));
             propertyService.getBusinessList(JSON.stringify(filter))
                 .success(function (res) {
                     arrDestinations = res.data.businessList;
                     addMarker(arrDestinations);
                     showMarkers();
                     $scope.searchList = arrDestinations;
-                    console.log("$scope.searchList ", $scope.searchList);
                 })
                 .error(function (error) {
                     $scope.status = 'Unable to load store data: ' + error.message;
