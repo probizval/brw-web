@@ -440,40 +440,6 @@
             search_address["longitude"] = center.lng();
             search_address["radius"] = radius;
             updateSearchResult(search_address);
-            // var response = [];
-            // setTimeout(function () {
-            //   response = propertyService.getPropertyList(JSON.stringify(searchAddress));
-            // }, 100);
-            // // var response = propertyService.getPropertyList(JSON.stringify(searchAddress));
-            // arrDestinations = response;
-            // console.log("res ", response, response.length);
-            // addMarker(arrDestinations);
-            // showMarkers();
-
-            /*propertyService.getPropertyList(JSON.stringify(searchAddress))
-                .success(function(res) {
-        console.log("res ", res, res.length);
-        arrDestinations = res.data.propertyList;
-                    addMarker(arrDestinations);
-                    showMarkers();
-        $scope.searchList = arrDestinations;
-                    // console.log("res ", res.status);
-                })
-                .error(function (error) {
-                    $scope.status = 'Unable to load store data: ' + error.message;
-                    console.log("res ", $scope.status);
-                });*/
-            // setTimeout(function(){
-            // 	$scope.$apply(function(){
-            //    $scope.searchList = arrDestinations;
-            //  })
-            // }, 100);
-            // var bounds1 =  map.getBounds();
-            // var ne = bounds1.getNorthEast();
-            // var sw = bounds1.getSouthWest();
-            // console.log("ne, sw", ne.lat(), ne.lng(), sw.lat(), sw.lng());
-            // arrDestinations = [{title: 'test', lat:37.55621007689943, lon:-121.9509967554608}];
-
         }
 
         function updateSearchResult(filter) {
