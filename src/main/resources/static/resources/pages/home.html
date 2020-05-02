@@ -76,22 +76,22 @@
                 </select>
               </div>
 
-              <div class="col-md-5 col-lg-5 col-xl-5">
-                <label style="margin:0">Business Address</label>
-                <input type="text" id="autocomplete" name="location" ng-model="location" class="form-control"
-                       ng-init="initialize" placeholder="Enter an address, city or zipcode">
-              </div>
-            </div>
-            <div class="row form-group justify-content-md-center">
-              <div class="col-md-2 col-lg-2 col-xl-2">
-                <label style="margin:0">City*</label>
-                <select class="form-control" name="businessCity" ng-model="businessCity"
-                        ng-options="city as city.label for city in businessCities track by city.id"
-                        id="locality" required>
-<!--                  <option default selected style="color:#868e96;" value="">Select a city</option>-->
-                </select>
-                <span style="color:red" ng-show="submitted && searchBusinessForm.businessCity.$error.required">City is required.</span>
-              </div>
+<!--              <div class="col-md-5 col-lg-5 col-xl-5">-->
+<!--                <label style="margin:0">Business Address</label>-->
+<!--                <input type="text" id="autocomplete" name="location" ng-model="location" class="form-control"-->
+<!--                       ng-init="initialize" placeholder="Enter an address, city or zipcode">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="row form-group justify-content-md-center">-->
+<!--              <div class="col-md-2 col-lg-2 col-xl-2">-->
+<!--                <label style="margin:0">City*</label>-->
+<!--                <select class="form-control" name="businessCity" ng-model="businessCity"-->
+<!--                        ng-options="city as city.label for city in businessCities track by city.id"-->
+<!--                        id="locality" required>-->
+<!--&lt;!&ndash;                  <option default selected style="color:#868e96;" value="">Select a city</option>&ndash;&gt;-->
+<!--                </select>-->
+<!--                <span style="color:red" ng-show="submitted && searchBusinessForm.businessCity.$error.required">City is required.</span>-->
+<!--              </div>-->
 <!--              <div class="col-md-5 col-lg-5 col-xl-5">-->
 <!--                <label style="margin:0">Business Address</label>-->
 <!--                <input type="text" id="autocomplete" name="location" ng-model="location" class="form-control"-->
