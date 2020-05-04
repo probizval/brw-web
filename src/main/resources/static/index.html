@@ -131,6 +131,20 @@
     top: 30%;
     margin: 0 auto;
 }
+.iframe-body {
+  align-self: center;
+  align-items: center;
+  height: 80vh;
+  width:100%;
+}
+.modal-full {
+    min-width: 80%;
+}
+
+.modal-full .modal-content {
+    min-height: 90vh;
+}
+
 </style>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SR252ETTY4"></script>
@@ -150,7 +164,7 @@
     <div ng-include="'resources/pages/header.html'"></div>
     <div class="page-loading" ng-show="loader">
         <div class="svgImage"></div>
-    </div>s
+    </div>
     <div ui-view id="ui-view"></div>
 <!--    <div ui-view="">-->
 </div>
@@ -176,15 +190,15 @@
           <div class="col-4 col-md-4 col-sm-4">
             <h5 subheadline>Company</h5>
             <ul class="list-unstyled">
-              <li><a href="">About Us</a></li>
+              <li><a href="#aboutUs">About Us</a></li>
             </ul>
           </div>
           <div class="col-4 col-md-4 col-sm-4">
             <h5 subheadline>Contact</h5>
             <ul class="list-unstyled">
               <li><a href="#">FAQs</a></li>
-              <li><a href="#">Terms of Service</a></li>
-              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#termsOfService">Terms of Service</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#privacyPolicy">Privacy Policy</a></li>
               <li><a href="#contactUs">Contact Us</a></li>
             </ul>
           </div>
@@ -193,7 +207,6 @@
             <div class="social-sharebox">
                 <a href="#"><i class="fa fa-twitter"></i></a>
                 <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-google"></i></a>
                 <a href="#"><i class="fa fa-linkedin"></i></a>
             </div>
             <!-- <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-pinterest"></i></a> -->
@@ -211,6 +224,35 @@
     </div>
   </div>
 </footer>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" id="termsOfService">
+    <div class="modal-dialog modal-full" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <iframe class="iframe-body" src="https://docs.google.com/document/d/e/2PACX-1vRJ-ypmfC-KVdraD6imSWTIvmVvLoZIaQ4HtBHKgATnvOX35eoydxXNuz0AxSYVdg/pub?embedded=true"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" id="privacyPolicy">
+    <div class="modal-dialog modal-full" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <iframe class="iframe-body" src="https://docs.google.com/document/d/e/2PACX-1vR2k6aRHR2CHGBnIb6odCYICb6ptbmwUynogRz0GnLm6PVElfnkitRaC5XSmzAajg/pub?embedded=true"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I&libraries=places"></script>
@@ -279,6 +321,7 @@
 <script src="resources/services/propertyService.js"></script>
 <script src="resources/services/auth.service.js"></script>
 <script src="resources/controller/contactUsController.js"></script>
+<script src="resources/controller/businessBuyGuidanceController.js"></script>
 
 
 <!--

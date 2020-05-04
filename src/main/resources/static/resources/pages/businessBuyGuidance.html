@@ -1,26 +1,68 @@
+<style>
+
+.iframe-body {
+  align-self: center;
+  align-items: center;
+  height: 80vh;
+  width:100%;
+}
+.modal-full {
+    min-width: 80%;
+}
+
+.modal-full .modal-content {
+    min-height: 90vh;
+}
+</style>
 <div id="content" class="item-single" >
   <div class="container">
 <div class="item-description">
                   <h3 class="headline">Buy a Business</h3>
-
                   <p>
-	                  <a href="files/How to Buy a Gas Station Business.docx" tooltip="Download"><strong>How to Buy a Gas Station Business</strong></a>
+					  <button class="btn btn-primary" data-toggle="modal" data-target="#businessGuidanceModal" ng-click="submit('gasStation')">How to Buy a Gas Station Business</button>
+				  </p>
+	              <p>
+					  <button class="btn btn-primary" data-toggle="modal" data-target="#businessGuidanceModal" ng-click="submit('groceryStore')">How to Buy a Grocery store Business</button>
 	              </p>
 	              <p>
-	                  <a href="files/How to Buy a Grocery store Business.docx" tooltip="Download"><strong>How to Buy a Grocery store Business</strong></a>
+					  <button class="btn btn-primary" data-toggle="modal" data-target="#businessGuidanceModal" ng-click="submit('liquorstore')">How to Buy a Liquor store Business</button>
 	              </p>
 	              <p>
-	                  <a href="files/How to Buy a Liquor store Business.docx" tooltip="Download"><strong>How to Buy a Liquor store Business</strong></a>
+					  <button class="btn btn-primary" data-toggle="modal" data-target="#businessGuidanceModal" ng-click="submit('motel')">How to Buy a Motel Business</button>
 	              </p>
 	              <p>
-	                  <a href="files/How to Buy a Motel Business.docx" tooltip="Download"><strong>How to Buy a Motel Business</strong></a>
+					  <button class="btn btn-primary" data-toggle="modal" data-target="#businessGuidanceModal" ng-click="submit('restaurant')">How to Buy Restaurant Business</button>
 	              </p>
-	              <p>
-	                  <a href="files/How to Buy Restaurant Business.docx" tooltip="Download"><strong>How to Buy Restaurant Business</strong></a>
-	              </p>
-
-                  <!-- <p><strong>Hall</strong> <strong>entrance</strong> UPVC double glazed door to the front, laminate flooring, storage cupboard, loft access and under floor heating.</p> -->
-                 
                 </div>
             </div>
         </div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" id="businessGuidanceModal">
+	<div class="modal-dialog modal-full" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>
+			<div class="modal-body">
+				<div ng-if="businessType === 'gasStation'">
+					<iframe class="iframe-body" src="https://docs.google.com/document/d/e/2PACX-1vRuN2pk3a1JcEyLwu_LrV821c-nDMj0NlyeCndAu3kXw-KNHpv65Nvfd6BdqAijSg/pub?embedded=true"></iframe>
+				</div>
+				<div ng-if="businessType === 'groceryStore'">
+					<iframe class="iframe-body" src="https://docs.google.com/document/d/e/2PACX-1vSS15g6CQk0JNzKyz0MdMf8zNQXKhzt1H3fG_f8z4okDpjHPPIziz3H2TJ2qJjiww/pub?embedded=true"></iframe>
+				</div>
+				<div ng-if="businessType === 'liquorstore'">
+					<iframe class="iframe-body" src="https://docs.google.com/document/d/e/2PACX-1vQuJ4t8GrcO7pXL7TejD74wZKSOr9HLoa73LdbaP7minyD_w14VLs3qBrOYp2OwKQ/pub?embedded=true"></iframe>
+				</div>
+				<div ng-if="businessType === 'motel'">
+					<iframe class="iframe-body" src="https://docs.google.com/document/d/e/2PACX-1vT2IUURRwn7xNmBMR9tG1npF5kfmDxJlOlDJquZ71PHJC3O3E68mb74qjx1Td1qcA/pub?embedded=true"></iframe>
+				</div>
+				<div ng-if="businessType === 'restaurant'">
+					<iframe class="iframe-body" src="https://docs.google.com/document/d/e/2PACX-1vRr30wcnEmBbxAeP4Uk41SY3PgQ0TnqfPf6XyS-MhTEWlGYGwIc1UaOBiFUqOre0Q/pub?embedded=true"></iframe>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

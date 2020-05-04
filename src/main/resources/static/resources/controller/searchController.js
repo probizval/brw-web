@@ -11,6 +11,9 @@
     function searchController($rootScope, $scope, $state, propertyService, propList, constants) {
         $scope.currentPage = 1;
         $scope.viewby = 10;
+        var businessAddress = JSON.parse(localStorage.getItem('searchBusinessAttributes'))
+        $scope.businessCity = businessAddress.city
+        $scope.businessState = businessAddress.state
         $scope.itemsPerPage = $scope.viewby;
         $scope.searchList = propList.data.data.businessList;
         $scope.numberOfPages = Math.floor($scope.searchList.length/$scope.itemsPerPage);

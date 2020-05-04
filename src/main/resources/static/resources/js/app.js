@@ -197,8 +197,15 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
         })
         .state('businessBuyGuidance', {
             url: '/businessBuyGuidance',
-            templateUrl: 'resources/pages/businessBuyGuidance.html'
+            templateUrl: 'resources/pages/businessBuyGuidance.html',
+            controller: 'businessBuyGuidanceController',
+            reload: true
         })
+        .state('businessSellGuidance', {
+            url: '/businessSellGuidance',
+            templateUrl: 'resources/pages/businessSellGuidance.html'
+        })
+
         .state('postbuyconfirmation', {
             url: '/postbuyconfirmation',
             templateUrl: 'resources/pages/postbuyconfirmation.html',
@@ -215,6 +222,10 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             templateUrl: 'resources/pages/contactUs.html',
             controller: 'contactUsController',
             reload: true
+        })
+        .state('aboutUs', {
+            url: '/aboutUs',
+            templateUrl: 'resources/pages/aboutUs.html',
         })
     ;
 
