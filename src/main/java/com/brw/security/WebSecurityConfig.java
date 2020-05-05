@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private static StringBuffer protectedUserUris = new StringBuffer();
 	private static StringBuffer unprotectedUserUris = new StringBuffer();
 	static{
+		/*
 		protectedUserUris.append("/api/business/v1/**")
 			.append("/api/estimates/v1/**")
 			.append("/api/stripePayment/v1/**")
@@ -37,7 +38,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.append("/api/image/v1/**")
 			.append("/api/user/v1/**")
 			;
+		*/
+		
+		protectedUserUris.append("/api/estimates/v1/**")
+		.append("/api/stripePayment/v1/**")
+		.append("/api/additionalAttributes/v1/**")
+		.append("/api/transactions/v1/**")
+		.append("/api/image/v1/**")
+		.append("/api/user/v1/**")
+		;
+		
 		unprotectedUserUris.append("/api/business/v1/searchBusiness");
+		unprotectedUserUris.append("/api/business/v1/**");
+
 		// TODO : user management and property management api should be protected via different role
 	}
 
