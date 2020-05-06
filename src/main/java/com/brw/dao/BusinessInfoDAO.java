@@ -21,7 +21,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 	//Search where all 3 non-required attributes are part of the input - Type, Name and Address
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, est_amount, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN, for_Sell_YN "
 			+ "FROM t_brw_business "
-			+ "WHERE name_dba = :businessName "
+			+ "WHERE name_dba LIKE %:businessName% "
 			+ "AND type = :businessType "
 			+ "AND add_street1 LIKE '%:street1%' "
 			+ "AND add_zip = :zip "
@@ -32,7 +32,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Type
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, est_amount, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN, for_Sell_YN "
 			+ "FROM t_brw_business "
-			+ "WHERE name_dba = :businessName "
+			+ "WHERE name_dba LIKE %:businessName% "
 			+ "AND type = :businessType "
 			+ "AND add_zip = :zip "
 			+ "AND franchise_YN = :franchiseYN "
@@ -42,7 +42,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Address
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, est_amount, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN, for_Sell_YN "
 			+ "FROM t_brw_business "
-			+ "WHERE name_dba = :businessName "
+			+ "WHERE name_dba LIKE %:businessName% "
 			+ "AND add_street1 LIKE '%:street1%' "
 			+ "AND add_zip = :zip "
 			+ "AND franchise_YN = :franchiseYN "
@@ -62,7 +62,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 	//Search where only 1 non-required attributes are part of the input - Name
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, est_amount, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN, for_Sell_YN "
 			+ "FROM t_brw_business "
-			+ "WHERE name_dba = :businessName "
+			+ "WHERE name_dba LIKE %:businessName% "
 			+ "AND add_zip = :zip "
 			+ "AND franchise_YN = :franchiseYN "
 			+ "AND for_sell_YN = :forSellYN")
@@ -89,7 +89,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 	//Search where all 3 non-required attributes are part of the input - Type, Name and Address
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, est_amount, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN, for_Sell_YN "
 			+ "FROM t_brw_business "
-			+ "WHERE name_dba = :businessName "
+			+ "WHERE name_dba = LIKE %:businessName% "
 			+ "AND type = :businessType "
 			+ "AND add_street1 LIKE '%:street1%' "
 			+ "AND add_city = :city "
@@ -101,7 +101,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Type
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, est_amount, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN, for_Sell_YN "
 			+ "FROM t_brw_business "
-			+ "WHERE name_dba = :businessName "
+			+ "WHERE name_dba LIKE %:businessName% "
 			+ "AND type = :businessType "
 			+ "AND add_city = :city "
 			+ "AND add_state = :state "
@@ -112,7 +112,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Address
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, est_amount, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN, for_Sell_YN "
 			+ "FROM t_brw_business "
-			+ "WHERE name_dba = :businessName "
+			+ "WHERE name_dba LIKE %:businessName% "
 			+ "AND add_street1 LIKE '%:street1%' "
 			+ "AND add_city = :city "
 			+ "AND add_state = :state "
@@ -134,7 +134,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 	//Search where only 1 non-required attributes are part of the input - Name
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, est_amount, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN, for_Sell_YN "
 			+ "FROM t_brw_business "
-			+ "WHERE name_dba = :businessName "
+			+ "WHERE name_dba LIKE %:businessName% "
 			+ "AND add_city = :city "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "
@@ -164,7 +164,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 	//Search where all 3 non-required attributes are part of the input - Type, Name and Address
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, est_amount, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN, for_Sell_YN "
 			+ "FROM t_brw_business "
-			+ "WHERE name_dba = :businessName "
+			+ "WHERE name_dba LIKE %:businessName% "
 			+ "AND type = :businessType "
 			+ "AND add_street1 LIKE '%:street1%' "
 			+ "AND add_county = :county "
@@ -176,7 +176,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Type
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, est_amount, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN, for_Sell_YN "
 			+ "FROM t_brw_business "
-			+ "WHERE name_dba = :businessName "
+			+ "WHERE name_dba LIKE %:businessName% "
 			+ "AND type = :businessType "
 			+ "AND add_county = :county "
 			+ "AND add_state = :state "
@@ -187,7 +187,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Address
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, est_amount, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN, for_Sell_YN "
 			+ "FROM t_brw_business "
-			+ "WHERE name_dba = :businessName "
+			+ "WHERE name_dba LIKE %:businessName% "
 			+ "AND add_street1 LIKE '%:street1%' "
 			+ "AND add_county = :county "
 			+ "AND add_state = :state "
@@ -209,7 +209,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 	//Search where only 1 non-required attributes are part of the input - Name
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, for_sell_price, est_amount, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN, for_Sell_YN "
 			+ "FROM t_brw_business "
-			+ "WHERE name_dba = :businessName "
+			+ "WHERE name_dba LIKE %:businessName% "
 			+ "AND add_county = :county "
 			+ "AND add_state = :state "
 			+ "AND franchise_YN = :franchiseYN "

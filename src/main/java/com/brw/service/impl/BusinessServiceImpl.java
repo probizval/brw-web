@@ -58,9 +58,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	@Override
 	public BusinessInfoListDTO searchBusiness(BusinessDetailsDTO businessDTO) {
 		
-		//businessDTO.setZip(0);
-		//businessDTO.setType("GAS_STATION");
-		
 		// TODO Auto-generated method stub
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getName: "+businessDTO.getName());
 		
@@ -88,7 +85,11 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getRangeMile: "+businessDTO.getRangeMile());
 
-
+		if (businessDTO.getZip() == 94536) {
+			businessDTO.setZip(null);
+		}
+		//businessDTO.setType("GAS_STATION");
+		
 		List<BusinessInfo> businessList = null;
 		if (null != businessDTO.getZip() && 0 != businessDTO.getZip()) {
 			if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
@@ -125,7 +126,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				System.out.println("**** 333 Executing searchBusiness_7");
 
 				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_7(businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-
 			}
 		} else if (null != businessDTO.getCity() && Constants.EMPTY_STRING != businessDTO.getCity()) {
 			if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
@@ -136,8 +136,10 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
 				System.out.println("**** 333 Executing searchBusiness_9");
 
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_9(businessDTO.getType(), businessDTO.getCity(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
+				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_9(businessDTO.getName(), businessDTO.getType(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+				
+				System.out.println("**** 333 Executing searchBusiness_9 businessList SIZE: "+businessList.size());
+
 			} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
 				System.out.println("**** 333 Executing searchBusiness_10");
 
