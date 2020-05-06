@@ -84,11 +84,35 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getLongitude: "+businessDTO.getLongitude());
 
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getRangeMile: "+businessDTO.getRangeMile());
-
+		//TODO:TEMPORARY translation of zip code and business type - need to fix it on UI and then remove this code
 		if (businessDTO.getZip() == 94536) {
 			businessDTO.setZip(null);
 		}
-		//businessDTO.setType("GAS_STATION");
+		
+		switch(businessDTO.getType()) {
+		
+		case "GASSTATION":
+			businessDTO.setType("GAS_STATION");
+			break;
+		case "BEAUTY":
+			businessDTO.setType("GAS_STATION");
+			break;
+		case "LIQUORSTORE":
+			businessDTO.setType("RETAIL");
+			break;
+		case "SALONSTORE":
+			businessDTO.setType("BEAUTY");
+			break;
+		case "CONVENIENCESTORE":
+			businessDTO.setType("RETAIL");
+			break;
+		case "AUTOSERVICE":
+			businessDTO.setType("AUTO");
+			break;
+		case "DRYCLEANERS":
+			businessDTO.setType("LAUNDRY");
+			break;
+		}
 		
 		List<BusinessInfo> businessList = null;
 		if (null != businessDTO.getZip() && 0 != businessDTO.getZip()) {
@@ -154,7 +178,9 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				System.out.println("**** 333 Executing searchBusiness_12");
 
 				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_12(businessDTO.getName(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
+				
+				System.out.println("**** 333 Executing searchBusiness_12 businessList SIZE: "+businessList.size());
+
 			} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
 				System.out.println("**** 333 Executing searchBusiness_13");
 
