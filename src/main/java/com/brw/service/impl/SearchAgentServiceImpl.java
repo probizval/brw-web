@@ -35,6 +35,9 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 		//Log the User Action - START
 		UserActivityDTO userActivityDTO = new UserActivityDTO();
 		
+		if(null == searchAgentDTO.getUserId()) {
+			searchAgentDTO.setUserId(1001);
+		}
 		userActivityDTO.setUserId(searchAgentDTO.getUserId());
 		userActivityDTO.setBusinessId(1000000);
 		userActivityDTO.setType(Constants.BUTTON_CLICK);
