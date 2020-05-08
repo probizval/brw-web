@@ -65,9 +65,17 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		
 		//Log the User Action - START
 		UserActivityDTO userActivityDTO = new UserActivityDTO();
-		
+
+		if(null == businessDTO.getInvokerId()) {
+			businessDTO.setInvokerId(1001);
+		}
 		userActivityDTO.setUserId(businessDTO.getInvokerId());
+		
+		if(null == businessDTO.getBusinessId()) {
+			businessDTO.setBusinessId(1000000);
+		}
 		userActivityDTO.setBusinessId(businessDTO.getBusinessId());
+		
 		userActivityDTO.setType(Constants.BUTTON_CLICK);
 		userActivityDTO.setSubType(Constants.SEARCH_BUSINESS);
 
