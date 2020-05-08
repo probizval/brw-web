@@ -115,6 +115,7 @@ Request -
     "regStateDate": "2009-10-30 12:00",
     "dataCompletionScore": 80,
     "isforSell": "N",
+    "isHidden": "N",
     "forSellPrice": 0,
     "imageLogo": "",
     "imageFirst": "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
@@ -190,7 +191,8 @@ Response -
     "regStateCode": null,
     "regStateDate": null,
     "dataCompletionScore": 0,
-    "isforSell": null,
+    "isforSell": "N",
+    "isHidden": "N",
     "forSellPrice": 0,
     "imageLogo": null,
     "imageFirst": null,
@@ -305,6 +307,7 @@ Response –
                 "regStateDate": null,
                 "dataCompletionScore": null,
                 "isforSell": "N",
+                "isHidden": "N",
                 "forSellPrice": 0,
                 "imageLogo": null,
                 "imageFirst": "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
@@ -386,6 +389,7 @@ Response –
                 "regStateDate": null,
                 "dataCompletionScore": null,
                 "isforSell": "N",
+                "isHidden": "N",
                 "forSellPrice": 0,
                 "imageLogo": null,
                 "imageFirst": "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
@@ -493,6 +497,8 @@ Request –
     "isEstimate": "Y"
 }
 
+5563552
+
 Response - 
 {
     "status": "succcess",
@@ -506,6 +512,7 @@ Response -
         "subType": "GENERAL_RESTAURANT",
         "dataCompletionScore": 0,
         "isforSell": null,
+        "isHidden": null,
         "forSellPrice": 0,
         "imageLogo": null,
         "imageFirst": "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",

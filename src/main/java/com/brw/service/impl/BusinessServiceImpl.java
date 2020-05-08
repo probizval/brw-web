@@ -258,17 +258,12 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			System.out.println("**** XXX Constants.PERCENT+businessDTO.getName()+Constants.PERCENT: "+Constants.PERCENT+businessDTO.getName()+Constants.PERCENT);
 
 			if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
-				System.out.println("**** XXX 111 businessDTO.getName(): "+businessDTO.getName());
-				System.out.println("**** XXX 111 businessDTO.getType(): "+businessDTO.getType());
-
 				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_22(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getType(), businessDTO.getIsFranchise(), businessDTO.getIsForSell(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
 			
 			} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
-				System.out.println("**** XXX 222 businessDTO.getName(): "+businessDTO.getName());
 				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_23(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getIsFranchise(), businessDTO.getIsForSell(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
 			
 			} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-				System.out.println("**** XXX 333 businessDTO.getType(): "+businessDTO.getType());
 				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_24(businessDTO.getType(), businessDTO.getIsFranchise(), businessDTO.getIsForSell(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
 			}
 		}
@@ -281,21 +276,27 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			
 			businessInfoDTO.setInvokerId(businessDTO.getInvokerId());
 			businessInfoDTO.setBusinessId(businessInfo.getBusinessId());
-			businessInfoDTO.setName(businessInfo.getName());
-			businessInfoDTO.setType(businessInfo.getType());
+
+			if (businessInfo.getIsHidden().equals(Constants.Y)) {
+				businessInfoDTO.setName("Business for Sell in " + businessInfo.getCity() + ", " + businessInfo.getCounty() + " " + "County" );
+			
+				businessInfoDTO.setStreet1(businessInfo.getStreet1());
+				businessInfoDTO.setStreet2(businessInfo.getStreet2());
+				businessInfoDTO.setCity(businessInfo.getCity());
+				businessInfoDTO.setCounty(businessInfo.getCounty());
+				businessInfoDTO.setStateCode(businessInfo.getStateCode());
+				businessInfoDTO.setZip(businessInfo.getZip());	
+				businessInfoDTO.setLatitude(businessInfo.getLatitude());
+				businessInfoDTO.setLongitude(businessInfo.getLongitude());
+			} else {
+				businessInfoDTO.setName(businessInfo.getName());
+			}
 			
 			businessInfoDTO.setIsForSell(businessInfo.getIsForSell());
 			businessInfoDTO.setForSellPrice(businessInfo.getForSellPrice());
 			businessInfoDTO.setEstimatedAmount(businessInfo.getEstimatedAmount());
 			businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
-			businessInfoDTO.setStreet1(businessInfo.getStreet1());
-			businessInfoDTO.setStreet2(businessInfo.getStreet2());
-			businessInfoDTO.setCity(businessInfo.getCity());
-			businessInfoDTO.setCounty(businessInfo.getCounty());
-			businessInfoDTO.setStateCode(businessInfo.getStateCode());
-			businessInfoDTO.setZip(businessInfo.getZip());	
-			businessInfoDTO.setLatitude(businessInfo.getLatitude());
-			businessInfoDTO.setLongitude(businessInfo.getLongitude());
+			
 			businessInfoDTO.setIsVendorCall(businessInfo.getIsVendorCall());
 			businessInfoDTO.setIsFranchise(businessInfo.getIsFranchise());
 			
@@ -315,8 +316,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		BusinessDetailsDTO businessDetailsDTO = new BusinessDetailsDTO();
 		
 		businessDetailsDTO.setBusinessId(businessDetails.getBusinessId());
-		businessDetailsDTO.setLegalName(businessDetails.getLegalName());
-		businessDetailsDTO.setName(businessDetails.getName());
+		
 		businessDetailsDTO.setFirstOwnerName(businessDetails.getFirstOwnerName());
 		businessDetailsDTO.setSecondOwnerName(businessDetails.getSecondOwnerName());
 		businessDetailsDTO.setBrandName(businessDetails.getBrandName());
@@ -334,22 +334,37 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		}
 		businessDetailsDTO.setDataCompletionScore(businessDetails.getDataCompletenessScore());
 		businessDetailsDTO.setIsForSell(businessDetails.getIsForSell());
+		businessDetailsDTO.setIsHidden(businessDetails.getIsHidden());
 		businessDetailsDTO.setEstimatedAmount(businessDetails.getEstimatedAmount());
 		businessDetailsDTO.setForSellPrice(businessDetails.getForSellPrice());
 		businessDetailsDTO.setImageLogo(businessDetails.getImageLogo());
 		businessDetailsDTO.setImageFirst(businessDetails.getImageFirst());
-		businessDetailsDTO.setStreet1(businessDetails.getStreet1());
-		businessDetailsDTO.setStreet2(businessDetails.getStreet2());
-		businessDetailsDTO.setCity(businessDetails.getCity());
-		businessDetailsDTO.setCounty(businessDetails.getCounty());
-		businessDetailsDTO.setStateCode(businessDetails.getStateCode());
-		businessDetailsDTO.setZip(businessDetails.getZip());	
-		businessDetailsDTO.setLatitude(businessDetails.getLatitude());
-		businessDetailsDTO.setLongitude(businessDetails.getLongitude());
-		businessDetailsDTO.setPhone(businessDetails.getPhoneNumber());
-		businessDetailsDTO.setPhoneExt(businessDetails.getPhoneExtentionNumber());
-		businessDetailsDTO.setEmail(businessDetails.getEmail());
-		businessDetailsDTO.setWebsite(businessDetails.getWebsite());
+		
+		System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetails.getIsHidden(): "+businessDetails.getIsHidden());
+
+		if (businessDetails.getIsHidden().equals(Constants.Y)) {
+			
+			businessDetailsDTO.setLegalName("Business for Sell in " + businessDetails.getCity() + ", " + businessDetails.getCounty() + " " + "County" );
+			businessDetailsDTO.setName("Business for Sell in " + businessDetails.getCity() + ", " + businessDetails.getCounty() + " " + "County" );
+			
+			System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetailsDTO.getName(): "+businessDetailsDTO.getName());
+
+			businessDetailsDTO.setStreet1(businessDetails.getStreet1());
+			businessDetailsDTO.setStreet2(businessDetails.getStreet2());
+			businessDetailsDTO.setCity(businessDetails.getCity());
+			businessDetailsDTO.setCounty(businessDetails.getCounty());
+			businessDetailsDTO.setStateCode(businessDetails.getStateCode());
+			businessDetailsDTO.setZip(businessDetails.getZip());	
+			businessDetailsDTO.setLatitude(businessDetails.getLatitude());
+			businessDetailsDTO.setLongitude(businessDetails.getLongitude());
+			businessDetailsDTO.setPhone(businessDetails.getPhoneNumber());
+			businessDetailsDTO.setPhoneExt(businessDetails.getPhoneExtentionNumber());
+			businessDetailsDTO.setEmail(businessDetails.getEmail());
+			businessDetailsDTO.setWebsite(businessDetails.getWebsite());
+		} else {
+			businessDetailsDTO.setLegalName(businessDetails.getLegalName());
+			businessDetailsDTO.setName(businessDetails.getName());
+		}
 		businessDetailsDTO.setDescription(businessDetails.getFreeformDescription());
 		businessDetailsDTO.setNAICSNum(businessDetails.getNAICSNum());
 		businessDetailsDTO.setNAICSDescription(businessDetails.getNAICSDescription());
@@ -465,6 +480,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		System.out.println("222 **** businessDetailsDTO.getDataCompletionScore(): "+businessDetailsDTO.getDataCompletionScore());
 
 		System.out.println("222 **** businessDetailsDTO.getIsForSell(): "+businessDetailsDTO.getIsForSell());
+		
+		System.out.println("222 **** businessDetailsDTO.getIsHidden(): "+businessDetailsDTO.getIsHidden());
 
 		System.out.println("222 **** businessDetailsDTO.getForSellPrice(): "+businessDetailsDTO.getForSellPrice());
 
@@ -599,6 +616,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessDetails.setDataCompletenessScore(0);
 		}
 		businessDetails.setIsForSell(businessDetailsDTO.getIsForSell());
+		businessDetails.setIsHidden(businessDetailsDTO.getIsHidden());
 		businessDetails.setForSellPrice(businessDetailsDTO.getForSellPrice());
 		businessDetails.setImageLogo(businessDetailsDTO.getImageLogo());
 		businessDetails.setImageFirst(Constants.IMAGE_FIRST);
@@ -844,6 +862,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		}
 		bizDTO.setDataCompletionScore(business.getDataCompletenessScore());
 		bizDTO.setIsForSell(business.getIsForSell());
+		bizDTO.setIsHidden(business.getIsHidden());
 		bizDTO.setForSellPrice(business.getForSellPrice());
 		bizDTO.setImageLogo(business.getImageLogo());
 		bizDTO.setImageFirst(business.getImageFirst());
@@ -976,6 +995,10 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		
 		if (null != businessDetailsDTO.getIsForSell() && businessDetailsDTO.getIsForSell() != Constants.EMPTY_STRING) {
 			businessDetails.setIsForSell(businessDetailsDTO.getIsForSell());
+		}
+		
+		if (null != businessDetailsDTO.getIsHidden() && businessDetailsDTO.getIsHidden() != Constants.EMPTY_STRING) {
+			businessDetails.setIsHidden(businessDetailsDTO.getIsHidden());
 		}
 		
 		if (null != businessDetailsDTO.getForSellPrice()) {
@@ -1228,6 +1251,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		bizDTO.setRegStateDate(business.getRegStateDate().toString());
 		bizDTO.setDataCompletionScore(business.getDataCompletenessScore());
 		bizDTO.setIsForSell(business.getIsForSell());
+		bizDTO.setIsHidden(business.getIsHidden());
 		bizDTO.setForSellPrice(business.getForSellPrice());
 		bizDTO.setImageLogo(business.getImageLogo());
 		bizDTO.setImageFirst(business.getImageFirst());

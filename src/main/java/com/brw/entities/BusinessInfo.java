@@ -40,6 +40,9 @@ public class BusinessInfo implements Serializable {
 	@Column(name = "for_sell_YN")
 	private String isForSell;
 	
+	@Column(name = "hidden_YN")
+	private String isHidden;
+	
 	@Column(name = "franchise_YN")
 	private String isFranchise;
 	
@@ -125,6 +128,14 @@ public class BusinessInfo implements Serializable {
 
 	public void setIsForSell(String isForSell) {
 		this.isForSell = isForSell;
+	}
+	
+	public String getIsHidden() {
+		return isHidden;
+	}
+
+	public void setIsHidden(String isHidden) {
+		this.isHidden = isHidden;
 	}
 
 	public String getIsFranchise() {

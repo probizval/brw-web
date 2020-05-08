@@ -27,6 +27,7 @@ public class BusinessDetailsDTO {
 	private String regStateDate;
 	private Integer dataCompletionScore;
 	private String isForSell;
+	private String isHidden;
 	private Integer forSellPrice;
 	private Integer estimatedAmount;
 	private String imageLogo;
@@ -212,6 +213,16 @@ public class BusinessDetailsDTO {
 	}
 	public void setIsForSell(String isForSell) {
 		this.isForSell = isForSell;
+	}
+	public String getIsHidden() {
+		if (null != isHidden) {
+			return isHidden.toUpperCase();
+		} else {
+			return "N";
+		}
+	}
+	public void setIsHidden(String isHidden) {
+		this.isHidden = isHidden;
 	}
 	public Integer getForSellPrice() {
 		return forSellPrice;

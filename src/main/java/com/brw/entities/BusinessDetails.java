@@ -74,6 +74,9 @@ public class BusinessDetails implements Serializable {
 	@Column(name = "for_sell_YN")
 	private String isForSell;
 	
+	@Column(name = "hidden_YN")
+	private String isHidden;
+	
 	@Column(name = "for_sell_price")
 	private int forSellPrice;
 	
@@ -386,6 +389,14 @@ public class BusinessDetails implements Serializable {
 
 	public void setIsForSell(String isForSell) {
 		this.isForSell = isForSell;
+	}
+	
+	public String getIsHidden() {
+		return isHidden;
+	}
+
+	public void setIsHidden(String isHidden) {
+		this.isHidden = isHidden;
 	}
 
 	public int getForSellPrice() {
