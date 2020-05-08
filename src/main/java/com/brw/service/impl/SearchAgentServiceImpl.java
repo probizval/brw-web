@@ -12,10 +12,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.brw.common.constants.Constants;
 import com.brw.dao.SearchAgentDAO;
 import com.brw.dto.SearchAgentDTO;
 import com.brw.dto.SearchAgentsListDTO;
+import com.brw.dto.UserActivityDTO;
 import com.brw.entities.SearchAgent;
+import com.brw.service.UserService;
 
 @Component
 public class SearchAgentServiceImpl implements com.brw.service.SearchAgentService {
@@ -23,8 +26,22 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 	@Autowired
 	private SearchAgentDAO searchAgentDAO;
 	
+	@Autowired
+	UserService userService;
+	
 	@Override
 	public SearchAgentDTO addSearchAgent(SearchAgentDTO searchAgentDTO) {
+		
+		//Log the User Action - START
+		UserActivityDTO userActivityDTO = new UserActivityDTO();
+		
+		userActivityDTO.setUserId(searchAgentDTO.getUserId());
+		userActivityDTO.setBusinessId(1000000);
+		userActivityDTO.setType(Constants.BUTTON_CLICK);
+		userActivityDTO.setSubType(Constants.SUBSCRIBE);
+
+		userService.trackUserActivity(userActivityDTO);
+		//Log the User Action - END
 		
 		System.out.println("222 **** Inside SearchAgentServiceImpl.addSearchAgent()");
 		SearchAgent searchAgent = new SearchAgent();

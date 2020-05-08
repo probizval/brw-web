@@ -10,6 +10,7 @@ Update Date: 03/14/2020
 Table of Contents -
 
 Phase 1: Core Functions to Show Business Details, Add Business Details, User Registrations, Search Agents, tracking User Activity etc.
+
 1. AddBusinesssDetails - Service to add Core Business details that are common for all type of business. 
 For Business Type specific details use AddAdditionalAttributes.
 

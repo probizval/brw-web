@@ -47,4 +47,23 @@ public interface Constants {
 	public static final String DEFAULT_FIRST_NAME = "DEFAULT_FIRST_NAME";
 
 	public static final String DEFAULT_LAST_NAME = "DEFAULT_LAST_NAME";
+	
+	public static final String BUTTON_CLICK = "BUTTON_CLICK";
+	
+	public static final String SEARCH_BUSINESS = "SEARCH_BUSINESS";
+	
+	public static final String CREATE = "CREATE";
+
+	public static final String BUSINESS = "BUSINESS";
+	
+	public static final String USER_PROFILE = "USER_PROFILE";
+	
+	public static final String CONTACT_BROKER = "CONTACT_BROKER";
+	
+	public static final String APPLY_BIZ_LOAN = "APPLY_BIZ_LOAN";
+	
+	public static final String MAKE_AN_OFFER = "MAKE_AN_OFFER";
+
+	public static final String SUBSCRIBE = "SUBSCRIBE";
+
 }

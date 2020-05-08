@@ -91,7 +91,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	        
 	        //Upload image to AWS S3
 	        String pathToFile = String.valueOf(uploadImagesListDTO.getBusinessId());
-	        String name = pathToFile +Constants.UNDERSCORE+i++;
+	        String name = pathToFile + Constants.UNDERSCORE + i++;
 
 	        String s3URL = uploadBase64Image(strings[1], fileType, pathToFile, name);
 	        

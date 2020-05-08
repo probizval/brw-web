@@ -25,6 +25,7 @@ import com.brw.dto.EstimatesDTO;
 import com.brw.dto.EstimatesListDTO;
 import com.brw.dto.RelatedBusinessDTO;
 import com.brw.dto.RelatedBusinessListDTO;
+import com.brw.dto.UserActivityDTO;
 import com.brw.common.constants.Constants;
 
 import com.brw.entities.BusinessDetails;
@@ -33,6 +34,7 @@ import com.brw.entities.RelatedBusiness;
 import com.brw.entities.UserBusiness;
 import com.brw.service.BizTransactionService;
 import com.brw.service.EstimateService;
+import com.brw.service.UserService;
 
 @Component
 public class BusinessServiceImpl implements com.brw.service.BusinessService {
@@ -53,11 +55,25 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	BizTransactionService bizTransactionService;
 	
 	@Autowired
+	UserService userService;
+	
+	@Autowired
 	private UserBusinessDAO userBusinessDAO;
 	
 	@Override
 	public BusinessInfoListDTO searchBusiness(BusinessDetailsDTO businessDTO) {
 		
+		//Log the User Action - START
+		UserActivityDTO userActivityDTO = new UserActivityDTO();
+		
+		userActivityDTO.setUserId(businessDTO.getInvokerId());
+		userActivityDTO.setBusinessId(businessDTO.getBusinessId());
+		userActivityDTO.setType(Constants.BUTTON_CLICK);
+		userActivityDTO.setSubType(Constants.SEARCH_BUSINESS);
+
+		userService.trackUserActivity(userActivityDTO);
+		//Log the User Action - END
+
 		// TODO Auto-generated method stub
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getName: "+businessDTO.getName());
 		
@@ -84,6 +100,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getLongitude: "+businessDTO.getLongitude());
 
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getRangeMile: "+businessDTO.getRangeMile());
+		
 		//TODO:TEMPORARY translation of zip code and business type - need to fix it on UI and then remove this code
 		if (businessDTO.getZip() == 94536) {
 			businessDTO.setZip(null);
@@ -377,8 +394,170 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	@Override
 	public BusinessDetailsDTO addBusinessDetails(BusinessDetailsDTO businessDetailsDTO) {
 		
-		System.out.println("222 **** Inside BusinessServiceImpl.addBusinessDetails()");
+		//Log the User Action - START
+		UserActivityDTO userActivityDTO = new UserActivityDTO();
+		
+		userActivityDTO.setUserId(businessDetailsDTO.getInvokerId());
+		userActivityDTO.setBusinessId(businessDetailsDTO.getBusinessId());
+		userActivityDTO.setType(Constants.CREATE);
+		userActivityDTO.setSubType(Constants.BUSINESS);
 
+		userService.trackUserActivity(userActivityDTO);
+		//Log the User Action - END
+		
+		//TODO:TEMPORARY translation of City and State Code - need to fix it on UI and then remove this code
+		if(null == businessDetailsDTO.getCity()) {
+			businessDetailsDTO.setCity("Fremont");
+		}
+		
+		if(null == businessDetailsDTO.getStateCode()) {
+			businessDetailsDTO.setStateCode("CA");
+		}
+		
+		System.out.println("222 **** Inside BusinessServiceImpl.addBusinessDetails()");
+		
+		System.out.println("222 **** businessDetailsDTO.getInvokerId(): "+businessDetailsDTO.getInvokerId());
+		
+		System.out.println("222 **** businessDetailsDTO.getBuRelationship(): "+businessDetailsDTO.getBuRelationship());
+		
+		System.out.println("222 **** businessDetailsDTO.getName(): "+businessDetailsDTO.getName());
+		
+		System.out.println("222 **** businessDetailsDTO.getLegalName(): "+businessDetailsDTO.getLegalName());
+		
+		System.out.println("222 **** businessDetailsDTO.getFirstOwnerName(): "+businessDetailsDTO.getFirstOwnerName());
+
+		System.out.println("222 **** businessDetailsDTO.getSecondOwnerName(): "+businessDetailsDTO.getSecondOwnerName());
+
+		System.out.println("222 **** businessDetailsDTO.getBrandName(): "+businessDetailsDTO.getBrandName());
+
+		System.out.println("222 **** businessDetailsDTO.getType(): "+businessDetailsDTO.getType());
+
+		System.out.println("222 **** businessDetailsDTO.getSubType(): "+businessDetailsDTO.getSubType());
+
+		System.out.println("222 **** businessDetailsDTO.getRegCityName(): "+businessDetailsDTO.getRegCityName());
+
+		System.out.println("222 **** businessDetailsDTO.getRegCityCode(): "+businessDetailsDTO.getRegCityCode());
+
+		System.out.println("222 **** businessDetailsDTO.getRegCityDate(): "+businessDetailsDTO.getRegCityDate());
+
+		System.out.println("222 **** businessDetailsDTO.getRegStateName(): "+businessDetailsDTO.getRegStateName());
+
+		System.out.println("222 **** businessDetailsDTO.getRegStateCode(): "+businessDetailsDTO.getRegStateCode());
+
+		System.out.println("222 **** businessDetailsDTO.getRegStateDate(): "+businessDetailsDTO.getRegStateDate());
+
+		System.out.println("222 **** businessDetailsDTO.getDataCompletionScore(): "+businessDetailsDTO.getDataCompletionScore());
+
+		System.out.println("222 **** businessDetailsDTO.getIsForSell(): "+businessDetailsDTO.getIsForSell());
+
+		System.out.println("222 **** businessDetailsDTO.getForSellPrice(): "+businessDetailsDTO.getForSellPrice());
+
+		System.out.println("222 **** businessDetailsDTO.getImageLogo(): "+businessDetailsDTO.getImageLogo());
+		
+		System.out.println("222 **** businessDetailsDTO.getImageFirst(): "+businessDetailsDTO.getImageFirst());
+
+		System.out.println("222 **** businessDetailsDTO.getStreet1(): "+businessDetailsDTO.getStreet1());
+
+		System.out.println("222 **** businessDetailsDTO.getStreet2(): "+businessDetailsDTO.getStreet2());
+
+		System.out.println("222 **** businessDetailsDTO.getCity(): "+businessDetailsDTO.getCity());
+
+		System.out.println("222 **** businessDetailsDTO.getCounty(): "+businessDetailsDTO.getCounty());
+
+		System.out.println("222 **** businessDetailsDTO.getStateCode(): "+businessDetailsDTO.getStateCode());
+
+		System.out.println("222 **** businessDetailsDTO.getZip(): "+businessDetailsDTO.getZip());
+
+		System.out.println("222 **** businessDetailsDTO.getLatitude(): "+businessDetailsDTO.getLatitude());
+
+		System.out.println("222 **** businessDetailsDTO.getLongitude(): "+businessDetailsDTO.getLongitude());
+
+		System.out.println("222 **** businessDetailsDTO.getPhone(): "+businessDetailsDTO.getPhone());
+
+		System.out.println("222 **** businessDetailsDTO.getPhoneExt(): "+businessDetailsDTO.getPhoneExt());
+
+		System.out.println("222 **** businessDetailsDTO.getEmail(): "+businessDetailsDTO.getEmail());
+
+		System.out.println("222 **** businessDetailsDTO.getWebsite(): "+businessDetailsDTO.getWebsite());
+
+		System.out.println("222 **** businessDetailsDTO.getDescription(): "+businessDetailsDTO.getDescription());
+
+		System.out.println("222 **** businessDetailsDTO.getNAICSNum(): "+businessDetailsDTO.getNAICSNum());
+
+		System.out.println("222 **** businessDetailsDTO.getNAICSDescription(): "+businessDetailsDTO.getNAICSDescription());
+
+		System.out.println("222 **** businessDetailsDTO.getIsFranchise(): "+businessDetailsDTO.getIsFranchise());
+
+		System.out.println("222 **** businessDetailsDTO.getIsOwnerClaimed(): "+businessDetailsDTO.getIsOwnerClaimed());
+
+		System.out.println("222 **** businessDetailsDTO.getSqftOutdoor(): "+businessDetailsDTO.getSqftOutdoor());
+
+		System.out.println("222 **** businessDetailsDTO.getBuildingType(): "+businessDetailsDTO.getBuildingType());
+
+		System.out.println("222 **** businessDetailsDTO.getIsBuildingOwned(): "+businessDetailsDTO.getIsBuildingOwned());
+
+		System.out.println("222 **** businessDetailsDTO.getRevenueMonthly(): "+businessDetailsDTO.getRevenueMonthly());
+		
+		System.out.println("222 **** businessDetailsDTO.getExpenseMonthlyRent(): "+businessDetailsDTO.getExpenseMonthlyRent());
+
+		System.out.println("222 **** businessDetailsDTO.getExpenseMonthlyMortgage(): "+businessDetailsDTO.getExpenseMonthlyMortgage());
+
+		System.out.println("222 **** businessDetailsDTO.getExpenseMonthlyMaterial(): "+businessDetailsDTO.getExpenseMonthlyMaterial());
+
+		System.out.println("222 **** businessDetailsDTO.getExpenseMonthlyEmp(): "+businessDetailsDTO.getExpenseMonthlyEmp());
+
+		System.out.println("222 **** businessDetailsDTO.getExpenseMonthlyUtility(): "+businessDetailsDTO.getExpenseMonthlyUtility());
+
+		System.out.println("222 **** businessDetailsDTO.getExpenseMonthlyOther(): "+businessDetailsDTO.getExpenseMonthlyOther());
+
+		System.out.println("222 **** businessDetailsDTO.getValueTotalEquipment(): "+businessDetailsDTO.getValueTotalEquipment());
+
+		System.out.println("222 **** businessDetailsDTO.getValueTotalFurniture(): "+businessDetailsDTO.getValueTotalFurniture());
+
+		System.out.println("222 **** businessDetailsDTO.getValueIndoorDeco(): "+businessDetailsDTO.getValueIndoorDeco());
+
+		System.out.println("222 **** businessDetailsDTO.getValueOutdoorDeco(): "+businessDetailsDTO.getValueOutdoorDeco());
+
+		System.out.println("222 **** businessDetailsDTO.getYearEquipment(): "+businessDetailsDTO.getYearEquipment());
+
+		System.out.println("222 **** businessDetailsDTO.getYearFurniture(): "+businessDetailsDTO.getYearFurniture());
+
+		System.out.println("222 **** businessDetailsDTO.getYearIndoorDeco(): "+businessDetailsDTO.getYearIndoorDeco());
+
+		System.out.println("222 **** businessDetailsDTO.getYearOutdoorDeco(): "+businessDetailsDTO.getYearOutdoorDeco());
+
+		System.out.println("222 **** businessDetailsDTO.getEmpFullTimeNum(): "+businessDetailsDTO.getEmpFullTimeNum());
+
+		System.out.println("222 **** businessDetailsDTO.getEmpPartTimeNum(): "+businessDetailsDTO.getEmpPartTimeNum());
+
+		System.out.println("222 **** businessDetailsDTO.getAreaCrimeScore(): "+businessDetailsDTO.getAreaCrimeScore());
+
+		System.out.println("222 **** businessDetailsDTO.getAreaWalkScore(): "+businessDetailsDTO.getAreaWalkScore());
+
+		System.out.println("222 **** businessDetailsDTO.getAreaAttractionsScore(): "+businessDetailsDTO.getAreaAttractionsScore());
+
+		System.out.println("222 **** businessDetailsDTO.getAreaTransitScore(): "+businessDetailsDTO.getAreaTransitScore());
+		
+		System.out.println("222 **** businessDetailsDTO.getSocialMediaScore(): "+businessDetailsDTO.getSocialMediaScore());
+
+		System.out.println("222 **** businessDetailsDTO.getPopulationIn1mileRadius(): "+businessDetailsDTO.getPopulationIn1mileRadius());
+
+		System.out.println("222 **** businessDetailsDTO.getIncomeScoreIn1mileRadius(): "+businessDetailsDTO.getIncomeScoreIn1mileRadius());
+
+		System.out.println("222 **** businessDetailsDTO.getPopulationIn3mileRadius(): "+businessDetailsDTO.getPopulationIn3mileRadius());
+
+		System.out.println("222 **** businessDetailsDTO.getIncomeScoreIn3mileRadius(): "+businessDetailsDTO.getIncomeScoreIn3mileRadius());
+
+		System.out.println("222 **** businessDetailsDTO.getPopulationIn5mileRadius(): "+businessDetailsDTO.getPopulationIn5mileRadius());
+
+		System.out.println("222 **** businessDetailsDTO.getIncomeScoreIn5mileRadius(): "+businessDetailsDTO.getIncomeScoreIn5mileRadius());
+
+		System.out.println("222 **** businessDetailsDTO.getDailyPeoplAtDoorNum(): "+businessDetailsDTO.getDailyPeoplAtDoorNum());
+
+		System.out.println("222 **** businessDetailsDTO.getDailyCarsAtParklotNum(): "+businessDetailsDTO.getDailyCarsAtParklotNum());
+
+		System.out.println("222 **** businessDetailsDTO.getYearEstablished(): "+businessDetailsDTO.getYearEstablished());
+		
 		BusinessDetails businessDetails = new BusinessDetails();
 
 		businessDetails.setLegalName(businessDetailsDTO.getLegalName());
@@ -390,7 +569,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		businessDetails.setSubType(businessDetailsDTO.getSubType());
 		businessDetails.setRegCityName(businessDetailsDTO.getRegCityName());
 		businessDetails.setRegCityCode(businessDetailsDTO.getRegCityCode());
-		//System.out.println("*** businessDetailsDTO.getRegCityDate() "+businessDetailsDTO.getRegCityDate());
 		if (null != businessDetailsDTO.getRegCityDate() && Constants.EMPTY_STRING != businessDetailsDTO.getRegCityDate()) {
 			businessDetails.setRegCityDate(LocalDateTime.parse(businessDetailsDTO.getRegCityDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		}
@@ -399,7 +577,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		if (null != businessDetailsDTO.getRegStateDate() && Constants.EMPTY_STRING != businessDetailsDTO.getRegStateDate()) {
 			businessDetails.setRegStateDate(LocalDateTime.parse(businessDetailsDTO.getRegStateDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		}
-		System.out.println("*** businessDetailsDTO.getDataCompletionScore() "+businessDetailsDTO.getDataCompletionScore());
 		if (null != businessDetailsDTO.getDataCompletionScore()) {
 			businessDetails.setDataCompletenessScore(businessDetailsDTO.getDataCompletionScore());
 		} else {
@@ -430,19 +607,16 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		businessDetails.setNAICSDescription(businessDetailsDTO.getNAICSDescription());
 		businessDetails.setIsFranchise(businessDetailsDTO.getIsFranchise());
 		businessDetails.setIsOwnerClaimed(businessDetailsDTO.getIsOwnerClaimed());
-		//businessDetails.setSqftIndoor(businessDetailsDTO.getSqftIndoor());
 		if (null != businessDetailsDTO.getNAICSNum()) {
 			businessDetails.setNAICSNum(businessDetailsDTO.getNAICSNum());
 		} else {
 			businessDetails.setNAICSNum(0);
 		}
-		//businessDetails.setSqftOutdoor(businessDetailsDTO.getSqftOutdoor());
 		if (null != businessDetailsDTO.getSqftOutdoor()) {
 			businessDetails.setSqftOutdoor(businessDetailsDTO.getSqftOutdoor());
 		} else {
 			businessDetails.setSqftOutdoor(0);
 		}
-		//businessDetails.setSqftLot(businessDetailsDTO.getSqftLot());
 		if (null != businessDetailsDTO.getSqftLot()) {
 			businessDetails.setSqftLot(businessDetailsDTO.getSqftLot());
 		} else {
@@ -450,61 +624,51 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		}
 		businessDetails.setBuildingType(businessDetailsDTO.getBuildingType());
 		businessDetails.setIsBuildingOwned(businessDetailsDTO.getIsBuildingOwned());
-		//businessDetails.setRevenueMonthly(businessDetailsDTO.getRevenueMonthly());
 		if (null != businessDetailsDTO.getRevenueMonthly()) {
 			businessDetails.setRevenueMonthly(businessDetailsDTO.getRevenueMonthly());
 		} else {
 			businessDetails.setRevenueMonthly(0);
 		}
-		//businessDetails.setExpenseMonthlyRent(businessDetailsDTO.getExpenseMonthlyRent());
 		if (null != businessDetailsDTO.getExpenseMonthlyRent()) {
 			businessDetails.setExpenseMonthlyRent(businessDetailsDTO.getExpenseMonthlyRent());
 		} else {
 			businessDetails.setExpenseMonthlyRent(0);
 		}
-		//businessDetails.setExpenseMonthlyMortgage(businessDetailsDTO.getExpenseMonthlyMortgage());
 		if (null != businessDetailsDTO.getExpenseMonthlyMortgage()) {
 			businessDetails.setExpenseMonthlyMortgage(businessDetailsDTO.getExpenseMonthlyMortgage());
 		} else {
 			businessDetails.setExpenseMonthlyMortgage(0);
 		}
-		//businessDetails.setExpenseMonthlyMaterial(businessDetailsDTO.getExpenseMonthlyMaterial());
 		if (null != businessDetailsDTO.getExpenseMonthlyMaterial()) {
 			businessDetails.setExpenseMonthlyMaterial(businessDetailsDTO.getExpenseMonthlyMaterial());
 		} else {
 			businessDetails.setExpenseMonthlyMaterial(0);
 		}
-		//businessDetails.setExpenseMonthlyEmp(businessDetailsDTO.getExpenseMonthlyEmp());
 		if (null != businessDetailsDTO.getExpenseMonthlyEmp()) {
 			businessDetails.setExpenseMonthlyEmp(businessDetailsDTO.getExpenseMonthlyEmp());
 		} else {
 			businessDetails.setExpenseMonthlyEmp(0);
 		}
-		//businessDetails.setExpenseMonthlyUtility(businessDetailsDTO.getExpenseMonthlyUtility());
 		if (null != businessDetailsDTO.getExpenseMonthlyUtility()) {
 			businessDetails.setExpenseMonthlyUtility(businessDetailsDTO.getExpenseMonthlyUtility());
 		} else {
 			businessDetails.setExpenseMonthlyUtility(0);
 		}
-		//businessDetails.setExpenseMonthlyOther(businessDetailsDTO.getExpenseMonthlyOther());
 		if (null != businessDetailsDTO.getExpenseMonthlyOther()) {
 			businessDetails.setExpenseMonthlyOther(businessDetailsDTO.getExpenseMonthlyOther());
 		} else {
 			businessDetails.setExpenseMonthlyOther(0);
 		}
-		//businessDetails.setValueTotalEquipment(businessDetailsDTO.getValueTotalEquipment());
 		if (null != businessDetailsDTO.getValueTotalEquipment()) {
 			businessDetails.setValueTotalEquipment(businessDetailsDTO.getValueTotalEquipment());
 		} else {
 			businessDetails.setValueTotalEquipment(0);
 		}
-		//businessDetails.setValueTotalFurniture(businessDetailsDTO.getValueTotalFurniture());
 		if (null != businessDetailsDTO.getValueTotalFurniture()) {
 			businessDetails.setValueTotalFurniture(businessDetailsDTO.getValueTotalFurniture());
 		} else {
 			businessDetails.setValueTotalFurniture(0);
 		}
-		//businessDetails.setValueIndoorDeco(businessDetailsDTO.getValueIndoorDeco());
 		if (null != businessDetailsDTO.getValueIndoorDeco()) {
 			businessDetails.setValueIndoorDeco(businessDetailsDTO.getValueIndoorDeco());
 		} else {
@@ -1486,7 +1650,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
 	private void addUserBusiness(BusinessDetailsDTO businessDetailsDTO, String relationshipType) {
 		
-		System.out.println("222 **** Inside BusinessServiceImpl.getCreatedByUserId(): "+businessDetailsDTO.getCreatedByUserId());
+		System.out.println("222 **** Inside BusinessServiceImpl.addUserBusiness - businessDetailsDTO.getCreatedByUserId(): "+businessDetailsDTO.getCreatedByUserId());
 		
 		UserBusiness userBusiness = new UserBusiness();
 		
