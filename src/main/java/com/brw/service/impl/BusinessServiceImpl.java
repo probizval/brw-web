@@ -119,9 +119,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		case "GASSTATION":
 			businessDTO.setType("GAS_STATION");
 			break;
-		case "BEAUTY":
-			businessDTO.setType("GAS_STATION");
-			break;
 		case "LIQUORSTORE":
 			businessDTO.setType("RETAIL");
 			break;
