@@ -9,7 +9,7 @@
     searchController.$inject = ['$rootScope', '$scope', '$state', 'propertyService', 'propList', 'constants'];
 
     function searchController($rootScope, $scope, $state, propertyService, propList, constants) {
-        $scope.currentPage = 1;
+        $scope.currentPage = 0;
         $scope.viewby = 10;
         var businessAddress = JSON.parse(localStorage.getItem('searchBusinessAttributes'))
         $scope.businessCity = businessAddress.city
@@ -17,7 +17,9 @@
         $scope.itemsPerPage = $scope.viewby;
         $scope.searchList = propList.data.data.businessList;
         $scope.numberOfPages = Math.floor($scope.searchList.length/$scope.itemsPerPage);
-
+        if ($scope.searchList.length%$scope.itemsPerPage !== 0){
+            $scope.numberOfPages += 1
+        }
         $scope.minPriceList = constants.allPriceList;
         $scope.maxPriceList = constants.allPriceList;
         $scope.minSqFeetList = constants.allSqFeet;
@@ -28,14 +30,15 @@
         $scope.maxYearBuiltList = constants.allYearBuiltList;
         $scope.maxHoaFeesList = constants.allMaxHoaFeesList;
         $scope.timeListedList = constants.allTimeListedList;
-        $('li').click(function() {
-            if (1 < $scope.currentPage < $scope.numberOfPages) {
-                $(this).addClass('active').siblings().removeClass('active');
-            }
+        $('body').on('click', 'li', function() {
+             $('li.active').removeClass('active');
+             $(this).addClass('active');
         });
-
+        $scope.changePage = function(pageNumber) {
+            $scope.currentPage = pageNumber - 1
+        }
         $scope.disablePrevious = function() {
-            if ($scope.currentPage <= 1){
+            if ($scope.currentPage + 1 <= 1){
                 return true
             } else {
                 $scope.currentPage -= 1
@@ -44,7 +47,7 @@
         };
 
         $scope.disableNext = function() {
-            if ($scope.currentPage >= $scope.totalPages){
+            if ($scope.currentPage + 1 >= $scope.numberOfPages){
                 return false
             } else {
                 $scope.currentPage += 1
@@ -53,8 +56,11 @@
         };
         $scope.setItemsPerPage = function(num) {
           $scope.itemsPerPage = num;
-          $scope.currentPage = 1; //reset to first page
+          $scope.currentPage = 0; //reset to first page
           $scope.numberOfPages = Math.floor($scope.searchList.length/$scope.itemsPerPage);
+          if ($scope.searchList.length%$scope.itemsPerPage !== 0){
+              $scope.numberOfPages += 1
+          }
         }
 
         $scope.filterByMinPrice = function (price) {
