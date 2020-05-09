@@ -223,19 +223,19 @@
             <div class="col-md-4 col-lg-4 col-xl-4">
                 <label>Is this business for sell?</label><br/>
                 <div class="radio radio-inline">
-                    <input type="radio" id="isforSell" ng-model="isforSell" value="Y">
-                    <label for="isforSell">Yes</label>
+                    <input type="radio" id="isForSell" ng-model="isForSell" value="Y">
+                    <label for="isForSell">Yes</label>
                 </div>
                 <div class="radio radio-inline">
-                    <input type="radio" id="noSell" ng-model="isforSell" value="N">
+                    <input type="radio" id="noSell" ng-model="isForSell" value="N">
                     <label for="noSell">No</label>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-4 col-xl-4" ng-show="isforSell">
+            <div class="col-md-4 col-lg-4 col-xl-4" ng-show="isForSell">
                 <label>Asking Sell Price*</label>
                 <input type="text" class="form-control form-control-md" ng-model="forSellPrice" id="forSellPrice"
-                       placeholder="Asking Sell Price" ng-required = "isforSell === 'Y'">
-                <div class="errors" ng-show="submitted || addListingForm.isforSell.$touched">
+                       placeholder="Asking Sell Price" ng-required = "isForSell === 'Y'">
+                <div class="errors" ng-show="submitted || addListingForm.isForSell.$touched">
                     <div style="color:red" ng-show="!forSellPrice">Asking Sell Price is
                         required.
                     </div>

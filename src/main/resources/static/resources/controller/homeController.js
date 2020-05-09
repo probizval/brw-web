@@ -124,6 +124,7 @@
                 city: $scope.businessCity.label,
                 state: $scope.businessState.code,
                 zip: document.getElementById("postal_code").value,
+                isForSell: $scope.isForSell,
                 latitude: latitude,
                 longitude: longitude
             }));

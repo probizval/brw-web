@@ -214,7 +214,7 @@
 //                "regStateCode": "20090801202",
 //                "regStateDate": "2009-10-30 12:00",
 //                "dataCompletionScore": 80,
-                isforSell: $scope.isforSell,
+                isforSell: $scope.isForSell,
                 isHidden: $scope.isHidden,
                 forSellPrice: $scope.forSellPrice,
                 imageLogo: "",

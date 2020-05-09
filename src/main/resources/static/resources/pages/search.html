@@ -42,13 +42,14 @@
                 <div class="row item-listing grid">
                     <div ng-repeat="prop in searchList | startFrom:currentPage*itemsPerPage | limitTo:itemsPerPage" class="item col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-6" id="prop{{$index}}">
                         <div class="item-image">
+
                             <a class="item-image" href="#businessDetails/{{prop.businessId}}">
                                 <img src="{{prop.imageFirst}}" style="width:400px;height:240px" class="img-fluid" alt="">
                                 <a class="save-item" ng-class="{'save-item-active': prop.isBookMarked}" ng-click="bookMarked(prop, $index)"><i class="fa fa-star"></i></a>
                             </a>
 
                             <a href="#businessDetails/{{prop.businessId}}" class="item-meta">
-                                <span class="item-badge-left item-address" ng-if="prop.isforSell">For Sale {{prop.isforSell}}</span>
+                                <span class="item-badge-left item-sale" ng-if="prop.isForSell">For Sale</span>
                                 <span class="item-badge-right item-address">{{prop.type}}</span>
                                 <br/>
                                 <span class="item-price" ng-if="prop.isforSell">{{ prop.forSellPrice | currency : "$" : false }}</span> &nbsp;&nbsp;

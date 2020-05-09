@@ -1682,6 +1682,14 @@ input[type="radio"], input[type="checkbox"] {
   text-shadow: 0 1px 0 black;
 }
 
+.item-listing .item .item-sale {
+  color: #FFF;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 0;
+  text-shadow: 0 1px 0 black;
+}
+
 .item-listing .item .item-badges {
   position: absolute;
   top: 0;
