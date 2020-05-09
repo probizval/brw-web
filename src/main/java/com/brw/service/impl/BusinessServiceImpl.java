@@ -276,7 +276,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
 			if (businessInfo.getIsHidden().equals(Constants.Y)) {
 				businessInfoDTO.setName("Business for Sell in " + businessInfo.getCity() + ", " + businessInfo.getCounty() + " " + "County" );
-			
+			} else {
+				businessInfoDTO.setName(businessInfo.getName());
 				businessInfoDTO.setStreet1(businessInfo.getStreet1());
 				businessInfoDTO.setStreet2(businessInfo.getStreet2());
 				businessInfoDTO.setCity(businessInfo.getCity());
@@ -285,8 +286,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				businessInfoDTO.setZip(businessInfo.getZip());	
 				businessInfoDTO.setLatitude(businessInfo.getLatitude());
 				businessInfoDTO.setLongitude(businessInfo.getLongitude());
-			} else {
-				businessInfoDTO.setName(businessInfo.getName());
 			}
 			
 			businessInfoDTO.setIsForSell(businessInfo.getIsForSell());
@@ -345,7 +344,9 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessDetailsDTO.setName("Business for Sell in " + businessDetails.getCity() + ", " + businessDetails.getCounty() + " " + "County" );
 			
 			System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetailsDTO.getName(): "+businessDetailsDTO.getName());
-
+		} else {
+			businessDetailsDTO.setLegalName(businessDetails.getLegalName());
+			businessDetailsDTO.setName(businessDetails.getName());
 			businessDetailsDTO.setStreet1(businessDetails.getStreet1());
 			businessDetailsDTO.setStreet2(businessDetails.getStreet2());
 			businessDetailsDTO.setCity(businessDetails.getCity());
@@ -358,9 +359,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessDetailsDTO.setPhoneExt(businessDetails.getPhoneExtentionNumber());
 			businessDetailsDTO.setEmail(businessDetails.getEmail());
 			businessDetailsDTO.setWebsite(businessDetails.getWebsite());
-		} else {
-			businessDetailsDTO.setLegalName(businessDetails.getLegalName());
-			businessDetailsDTO.setName(businessDetails.getName());
 		}
 		businessDetailsDTO.setDescription(businessDetails.getFreeformDescription());
 		businessDetailsDTO.setNAICSNum(businessDetails.getNAICSNum());
