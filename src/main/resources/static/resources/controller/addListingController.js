@@ -105,23 +105,25 @@
         };
 
         $scope.uploadPhotos = function(businessId){
-        var imageList = [];
-        for (var i=0; i < $scope.imagesAsDataURL.length; i++) {
-            var photo = $scope.imagesAsDataURL[i];
-            imageList.push({
-                "title": $scope.imageFiles[0].name,
-                "imageBase64": photo
-            })
-        }
-        // Upload base64 images
-        propertyService.uploadBusinessImages(businessId, $scope.businessDetails.invokerId, imageList)
-        .success(function(res) {
-             console.log("uploadBusinessImages res ", res);
-        })
-        .error(function (error) {
-            $scope.status = 'Unable to load store data: ' + error.message;
-        });
-
+            var imageList = [];
+            for (var i=0; i < $scope.imagesAsDataURL.length; i++) {
+                var photo = $scope.imagesAsDataURL[i];
+                imageList.push({
+                    "title": $scope.imageFiles[0].name,
+                    "imageBase64": photo
+                })
+            }
+            if (imageList.length > 0)
+            {
+                // Upload base64 images
+                propertyService.uploadBusinessImages(businessId, $scope.businessDetails.invokerId, imageList)
+                .success(function(res) {
+                     console.log("uploadBusinessImages res ", res);
+                })
+                .error(function (error) {
+                    $scope.status = 'Unable to load store data: ' + error.message;
+                });
+            }
         }
 
         $scope.imageUpload = function(event){
@@ -142,20 +144,29 @@
         };
 
         $scope.saveEquipments = function(businessId) {
-        propertyService.addAdditionalAttributes(businessId, $scope.businessDetails.invokerId, $scope.equipments)
-        .success(function(res) {
-             console.log("saveEquipments res ", res);
-             $state.go("business.confirmation");
-        })
-        .error(function (error) {
-            $scope.status = 'Unable to load store data: ' + error.message;
-        });
+            if ($scope.equipments.length > 0) {
+                propertyService.addAdditionalAttributes(businessId, $scope.businessDetails.invokerId, $scope.equipments)
+                    .success(function(res) {
+                         console.log("saveEquipments res ", res);
+                         $state.go("business.confirmation");
+                    })
+                    .error(function (error) {
+                        $scope.status = 'Unable to load store data: ' + error.message;
+                    });
+            }
         }
 
         $scope.addEquipments = function() {
-        var equipment = {attribType: "", attribSubType: "", valueType: "", value: "", quantity: "", pricePerUnit: "", monthlyMaintExpense: ""}
-        $scope.equipments.push(equipment)
-        console.log("add Equipments: ", $scope.equipments)
+            var equipment = {
+                attribType: "",
+                attribSubType: "",
+                valueType: "",
+                value: "",
+                quantity: "",
+                pricePerUnit: "",
+                monthlyMaintExpense: ""
+            }
+            $scope.equipments.push(equipment)
         };
 
         $scope.removeEquipment = function($event, equipment){
