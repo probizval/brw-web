@@ -6,32 +6,13 @@
         .module('myApp')
         .controller('homeController', homeController);
 
-    homeController.$inject = ['$rootScope', '$scope', '$state', 'authService', 'propertyService'];
+    homeController.$inject = ['$rootScope', '$scope', '$state', 'authService', 'propertyService', 'constants'];
 
-    function homeController($rootScope, $scope, $state, authService, propertyService) {
+    function homeController($rootScope, $scope, $state, authService, propertyService, constants) {
         var postal_code = '', latitude = '', longitude = '';
-        $scope.businessTypes = [
-            {name: "All", code: 'b_type', apiName: ""},
-            {name: 'Restaurants and Food', code: 'b_type_1', apiName: "restaurant"},
-            {name: 'Gas Station', code: 'b_type_2', apiName: "gasstation"},
-            {name: 'Liquor Store', code: 'b_type_3', apiName: "liquorstore"},
-            {name: 'Beauty Salon/Spa/Nail', code: 'b_type_4', apiName: "salonstore"},
-            {name: 'Convenience store', code: 'b_type_5', apiName: "conveniencestore"},
-            {name: 'Auto Service Shop', code: 'b_type_6', apiName: "autoservice"},
-            {name: 'Laundry', code: 'b_type_7', apiName: "laundry"},
-            {name: 'Cafe', code: 'b_type_8', apiName: "cafe"},
-            {name: 'Dry Cleaners', code: 'b_type_9', apiName: "drycleaners"}
-        ];
-        $scope.businessCities = [
-            {id: 1, name: "fremont", label: "Fremont"},
-            {id: 2, name: "newark", label: "Newark"},
-            {id: 3, name: "union city", label: "Union City"}
-        ];
-        $scope.businessStates = [
-            {id: 1, label: "CA", code: "CA"},
-            // {id: 2, label: "AZ"},
-            // {id: 3, label: "NY"}
-        ];
+        $scope.businessTypes = constants.searchBusinessTypes;
+        $scope.businessCities = constants.businessCities;
+        $scope.businessStates = constants.businessStates;
 
         $scope.initialize = function () {
             // This example displays an address form, using the autocomplete feature

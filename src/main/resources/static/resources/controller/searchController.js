@@ -466,14 +466,14 @@
             markers = [];
             for (var i = 0; i < arrDestinations.length; i++) {
                 var marker = new google.maps.Marker({
-                    title: arrDestinations[i].propertyName,
-                    icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png',
+                    title: arrDestinations[i].name,
+                    icon: 'https://labs.google.com/ridefinder/images/mm_20_blue.png',
                     position: new google.maps.LatLng(arrDestinations[i].latitude, arrDestinations[i].longitude),
                     map: map
                 });
                 markers.push(marker);
                 // add an event listener for this marker
-                bindInfoWindow(marker, map, "<p> <a href=\"#propertyDetails/" + arrDestinations[i].id + "\"><img src=\"" + arrDestinations[i].imageUrl + "\" style=\"width:40px;height:40px\" class=\"img-fluid\" alt=\"\"> " + arrDestinations[i].propertyName + "</p>");
+                bindInfoWindow(marker, map, "<p> <a href=\"#businessDetails/" + arrDestinations[i].businessId + "\"><img src=\"" + arrDestinations[i].imageFirst + "\" style=\"width:40px;height:40px\" class=\"img-fluid\" alt=\"\"> " + arrDestinations[i].name + "</p>");
             }
         }
 

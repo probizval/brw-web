@@ -13,7 +13,7 @@
                 <label for="name">Business Name*</label>
                 <input type="text" class="form-control form-control-md" id="name"
                        ng-model="name"
-                       name="name" placeholder="Business Name" autofocus required>
+                       name="name" placeholder="Business Name" required>
                 <div class="errors" ng-show="submitted || addListingForm.name.$touched">
                     <div style="color:red" ng-show="addListingForm.name.$error.required">Business Name is
                         required.
@@ -68,7 +68,7 @@
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <label for="type">Business Type*</label>
                 <select id="type" name="type" ng-model="type"
-                        ng-options="businessType.name for businessType in types"
+                        ng-options="businessType.name for businessType in businessTypes"
                         class="form-control form-control-md" required>
                     <option default selected style="color:#868e96;" value="">-- Choose Business Type --</option>
                 </select>
@@ -90,10 +90,10 @@
                 <label>Business Description*</label>
                 <textarea class="form-control form-control-md text-editor" name="description"
                           ng-model="description" id="description"
-                          placeholder="100 characters required" ng-minlength="100" required></textarea>
+                          placeholder="20 characters required" ng-minlength="20" required></textarea>
                 <div class="errors" ng-show="submitted || addListingForm.description.$touched">
                     <div style="color:red" ng-show="addListingForm.description.$error.required">Business Description is required.</div>
-                    <div style="color:red" ng-show="addListingForm.description.$invalid">100 Characters required.</div>
+                    <div style="color:red" ng-show="addListingForm.description.$invalid">20 Characters required.</div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6">
@@ -101,9 +101,10 @@
                 <select class="form-control form-control-md" name="yearEstablished"
                         ng-model="yearEstablished"
                         id="yearEstablished"
-                        ng-options="yearEstablished.year for yearEstablished in yearEstablishedList">
+                        ng-options="yearEstablished.year for yearEstablished in yearEstablishedList" required>
                     <option default selected style="color:#868e96;" value="">-- Select years --</option>
                 </select>
+                <span style="color:red" ng-show="submitted && addListingForm.yearEstablished.$error.required">Year is required.</span>
             </div>
         </div>
         <div class="row form-group">
@@ -119,7 +120,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6">
-                <label>Are you Owner or Broker?</label><br/>
+                <label>Are you Owner?</label><br/>
                 <div class="radio radio-inline">
                     <input type="radio" id="owner" ng-model="buRelationship" value="OWNER">
                     <label for="owner">Yes</label>
@@ -165,49 +166,61 @@
         <!--Business Location-->
         <h3 class="subheadline">Business Location</h3>
         <div class="row form-group">
+<!--            <div class="col-md-6 col-lg-6 col-xl-6">-->
+<!--                <label>Location*</label>-->
+<!--                <input type="text" class="form-control form-control-md" name="location"-->
+<!--                       ng-model="location"-->
+<!--                       id="autocomplete" placeholder="Enter Business Location">-->
+<!--&lt;!&ndash;                <div class="errors" ng-show="submitted || addListingForm.location.$touched">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div style="color:red" ng-show="addListingForm.location.$error.required">Location is required.</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            </div>-->
             <div class="col-md-6 col-lg-6 col-xl-6">
-                <label>Location*</label>
-                <input type="text" class="form-control form-control-md" name="location"
-                       ng-model="location"
-                       id="autocomplete" placeholder="Enter Business Location">
-<!--                <div class="errors" ng-show="submitted || addListingForm.location.$touched">-->
-<!--                    <div style="color:red" ng-show="addListingForm.location.$error.required">Location is required.</div>-->
-<!--                </div>-->
+                <label>Street 1</label>
+                <input type="text" class="form-control form-control-md" ng-model="street1" placeholder="" required>
+                <div class="errors" ng-show="submitted || addListingForm.street1.$touched">
+                    <div style="color:red" ng-show="addListingForm.street1.$error.required">Street 1 is required.
+                    </div>
+                </div>
+
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6">
-                <label>Address</label>
-                <input type="text" class="form-control form-control-md" ng-model="businessAddress"
-                       id="address" placeholder="">
+                <label>Street 2</label>
+                <input type="text" class="form-control form-control-md" ng-model="street2" placeholder="">
             </div>
         </div>
         <div class="row form-group">
-            <div class="col-md-6 col-lg-6 col-xl-6">
+            <div class="col-md-4 col-lg-4 col-xl-4">
                 <label>City</label>
-                <input type="text" class="form-control form-control-md" ng-model="city" placeholder=""
-                       id="locality">
+                <input type="text" class="form-control form-control-md" ng-model="city" placeholder="" required>
+                <div class="errors" ng-show="submitted || addListingForm.city.$touched">
+                    <div style="color:red" ng-show="addListingForm.city.$error.required">City is required.
+                    </div>
+                </div>
+
             </div>
-            <div class="col-md-6 col-lg-6 col-xl-6">
-                <label>State</label>
-                <input type="text" class="form-control form-control-md" ng-model="stateCode" placeholder=""
-                       id="administrative_area_level_1">
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <label>State*</label>
+                <select class="form-control" name="businessState" ng-model="businessState"
+                        ng-options="state.label for state in businessStates track by state.id"
+                        id="administrative_area_level_1" required>
+                </select>
+                <span style="color:red" ng-show="submitted && addListingForm.businessState.$error.required">State is required.</span>
             </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-6 col-lg-6 col-xl-6">
-                <label>Country</label>
-                <input type="text" class="form-control form-control-md" ng-model="country"
-                       placeholder="" id="country">
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-6">
+            <div class="col-md-4 col-lg-4 col-xl-4">
                 <label>Zipcode</label>
-                <input type="text" class="form-control form-control-md" ng-model="zipCode"
-                       placeholder="" id="postal_code">
+                <input type="text" class="form-control form-control-md" ng-model="zipCode" placeholder="" required>
+                <div class="errors" ng-show="submitted || addListingForm.zipCode.$touched">
+                    <div style="color:red" ng-show="addListingForm.zipCode.$error.required">Zip code is required.
+                    </div>
+                </div>
             </div>
+
         </div>
 
         <h3 class="subheadline">Sell Details</h3>
         <div class="row form-group">
-            <div class="col-md-6 col-lg-6 col-xl-6">
+            <div class="col-md-4 col-lg-4 col-xl-4">
                 <label>Is this business for sell?</label><br/>
                 <div class="radio radio-inline">
                     <input type="radio" id="isforSell" ng-model="isforSell" value="Y">
@@ -218,14 +231,26 @@
                     <label for="noSell">No</label>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-6 col-xl-6" ng-show="isforSell">
+            <div class="col-md-4 col-lg-4 col-xl-4" ng-show="isforSell">
                 <label>Asking Sell Price*</label>
                 <input type="text" class="form-control form-control-md" ng-model="forSellPrice" id="forSellPrice"
-                       placeholder="Asking Sell Price" required>
+                       placeholder="Asking Sell Price" ng-required = "isforSell === 'Y'">
                 <div class="errors" ng-show="submitted || addListingForm.isforSell.$touched">
                     <div style="color:red" ng-show="!forSellPrice">Asking Sell Price is
                         required.
                     </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-xl-4">
+                <label data-toggle="tooltip" title="Business in stealth mode means we won't show name and address of your business anywhere on our site.">
+                    Do you want to list your business in stealth mode?</label><br/>
+                <div class="radio radio-inline">
+                    <input type="radio" id="isHidden" ng-model="isHidden" value="Y">
+                    <label for="isHidden">Yes</label>
+                </div>
+                <div class="radio radio-inline">
+                    <input type="radio" id="noHidden" ng-model="isHidden" value="N">
+                    <label for="noHidden">No</label>
                 </div>
             </div>
         </div>

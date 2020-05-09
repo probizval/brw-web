@@ -6,61 +6,24 @@
     .module('myApp')
     .controller('addListingController', addListingController);
 
-  addListingController.$inject = ['$document', '$scope', '$state', 'propertyService', '$timeout'];
-    function addListingController($document, $scope, $state, propertyService, $timeout) {
+  addListingController.$inject = ['$document', '$scope', '$state', 'propertyService', '$timeout', 'constants'];
+    function addListingController($document, $scope, $state, propertyService, $timeout, constants) {
         $scope.imageFiles = [];
         $scope.businessMetaData = {};
         $scope.businessDetails = {};
         $scope.businessImages = [];
         $scope.equipments = [];
         $scope.imagesAsDataURL = [];
-
-        $scope.yearEstablishedList = [
-          {id: 1, year: 2018},
-          {id: 2, year: 2017},
-          {id: 3, year: 2016},
-          {id: 4, year: 2015},
-          {id: 1, year: 2014},
-          {id: 2, year: 2013},
-          {id: 3, year: 2012},
-          {id: 4, year: 2011},
-          {id: 5, year: 2010},
-          {id: 6, year: 2005},
-          {id: 7, year: 2000},
-          {id: 8, year: 1995},
-          {id: 9, year: 1990},
-          {id: 10, year: 1980},
-          {id: 11, year: 1970},
-          {id: 12, year: 1960},
-          {id: 13, year: 1950},
-          {id: 14, year: 1940},
-          {id: 15, year: 1930}
-        ];
-
-        $scope.property = {
-          'rest':          {},
-          'gas':          {},
-          'beautySalon':  {},
-          'laundry':      {},
-          'dryCleaners':  {},
-          'liquorStore':  {}
-        };
-        
-        $scope.types = [
-             {name:'Restaurants and Food', code:'b_type_1', apiName: "RESTAURANT"},
-             {name:'Gas Station', code:'b_type_2', apiName: "GAS_STATION"},
-             {name:'Liquor Store', code:'b_type_3', apiName: "LIQUOR_STORE"},
-             {name:'Beauty Salon/Spa/Nail', code:'b_type_4', apiName: "BEAUTY"},
-             {name:'Convenience store', code:'b_type_5', apiName: "MERCHANDISE_STORE"},
-             {name:'Auto Service Shop', code:'b_type_6', apiName: "autoservice"},
-             {name:'Laundry', code:'b_type_7', apiName: "LAUNDRY"},
-             {name:'Cafe', code:'b_type_8', apiName: "CAFE"},
-             {name:'Dry Cleaners', code:'b_type_9', apiName: "drycleaners"},
-             {name:'Other', code:'b_type_9', apiName: "OTHER"}
-        ];
+        $scope.businessStates = constants.businessStates;
+        $scope.yearEstablishedList = constants.allYearBuiltList;
+        $scope.businessTypes = constants.addBusinessTypes;
         $scope.ownerClaimed = "N";
-        
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();
+        });
+
         $scope.initialize = function() {
+            $scope.businessState = $scope.businessStates[0];
             // This example displays an address form, using the autocomplete feature
               // of the Google Places API to help users fill in the information.
 
@@ -68,23 +31,23 @@
               // parameter when you first load the API. For example:
               // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-              var placeSearch, autocomplete;
-              var componentForm = {
-                locality: 'long_name',
-                administrative_area_level_1: 'short_name',
-                country: 'short_name',
-                postal_code: 'short_name'
-              };
+//              var placeSearch, autocomplete;
+//              var componentForm = {
+//                locality: 'long_name',
+//                administrative_area_level_1: 'short_name',
+//                country: 'short_name',
+//                postal_code: 'short_name'
+//              };
 
                 // Create the autocomplete object, restricting the search to geographical
                 // location types.
-                autocomplete = new google.maps.places.Autocomplete(
-                    /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-                    {types: ['geocode']});
+//                autocomplete = new google.maps.places.Autocomplete(
+//                    /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+//                    {types: ['geocode']});
 
                 // When the user selects an address from the dropdown, populate the address
                 // fields in the form.
-                autocomplete.addListener('place_changed', fillInAddress);
+//                autocomplete.addListener('place_changed', fillInAddress);
 
               function fillInAddress() {
                 // Get the place details from the autocomplete object.
@@ -241,13 +204,14 @@
 //                "regStateDate": "2009-10-30 12:00",
 //                "dataCompletionScore": 80,
                 isforSell: $scope.isforSell,
+                isHidden: $scope.isHidden,
                 forSellPrice: $scope.forSellPrice,
                 imageLogo: "",
                 imageFirst: "https://s3-media1.fl.yelpcdn.com/bphoto/3oEbIFTQpS0-TdSpZoTz1g/o.jpg",
-                street1: document.getElementById("address").value,
-                street2: "",
+                street1: $scope.street1,
+                street2: $scope.street2,
                 city: $scope.city,
-                stateCode: $scope.stateCode,
+                stateCode: $scope.businessState.code,
                 county: "Alameda", //TODO Need to ask from user
 //                county: $scope.county,
                 zip: $scope.zipCode,
@@ -307,7 +271,7 @@
             console.log($scope.businessDetails)
             //TODO need to get userid
             var userProfile = JSON.parse(sessionStorage.getItem('profile'));
-            $scope.businessDetails.invokerId = userProfile.id;
+//            $scope.businessDetails.invokerId = userProfile.id;
             $scope.businessDetails.invokerId = 1001;
             propertyService.addBusinessDetails($scope.businessDetails)
             .success(function(res) {
