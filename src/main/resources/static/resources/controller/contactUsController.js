@@ -14,11 +14,9 @@
         $scope.sendContactUsEmail = function(contactUs) {
             if (contactUs.$invalid) {
               if (angular.element($document[0].querySelector('input.ng-invalid'))[0]) {
-                console.log("Input focus", angular.element($document[0].querySelector('input.ng-invalid'))[0]);
                 angular.element($document[0].querySelector('input.ng-invalid'))[0].focus();
                 return false
               } else if (angular.element($document[0].querySelector('textarea.ng-invalid'))[0]) {
-                console.log("Textarea focus", angular.element($document[0].querySelector('textarea.ng-invalid'))[0]);
                 angular.element($document[0].querySelector('textarea.ng-invalid'))[0].focus();
                 return false
               }
@@ -38,8 +36,6 @@
             }
             propertyService.sendEmail(emailInformation)
             .success(function(res) {
-              console.log("res ", res);
-              console.log("res ", res.status);
               $scope.contactUsData.emailSent = true
             })
             .error(function (error) {

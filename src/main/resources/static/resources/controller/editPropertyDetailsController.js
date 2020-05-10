@@ -16,7 +16,6 @@
 			$scope.propertyMetaData = $scope.propDetails.propertyMetaData;
       $scope.propertyImages = propDetails.data.data.propertyImages || [];
 
-      console.log($scope.propDetails, $scope.propertyMetaData);
       $scope.types = [
         {name:'Restaurants and Food', code:'b_type_1', apiName: "restaurant"},
         {name:'Gas Station', code:'b_type_2', apiName: "gasstation"},

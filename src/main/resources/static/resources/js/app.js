@@ -79,7 +79,6 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                 },
                 // similarProps: function (propertyService) {
                 //     //return propertyService.getBusinessDetails($stateParams.type);;
-                //     console.log("similiarProps address", localStorage.getItem('searchBusinessAttributes'));
                 //     var obj = (localStorage.getItem('searchBusinessAttributes')) || {};
                 //     return propertyService.getBusinessDetails(obj);
                 // }

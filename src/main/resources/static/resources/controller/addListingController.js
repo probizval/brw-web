@@ -147,7 +147,6 @@
             if ($scope.equipments.length > 0) {
                 propertyService.addAdditionalAttributes(businessId, $scope.businessDetails.invokerId, $scope.equipments)
                     .success(function(res) {
-                         console.log("saveEquipments res ", res);
                          $state.go("business.confirmation");
                     })
                     .error(function (error) {
@@ -174,17 +173,14 @@
           if($event.which == 1) {
              $scope.equipments.splice(index,1);
           }
-          console.log("Remove Equipments: ", $scope.equipments)
         };
 
         $scope.saveBusiness = function(addListingForm) {
             if (addListingForm.$invalid) {
               if (angular.element($document[0].querySelector('input.ng-invalid'))[0]) {
-                console.log("Input focus", angular.element($document[0].querySelector('input.ng-invalid'))[0]);
                 angular.element($document[0].querySelector('input.ng-invalid'))[0].focus();
                 return false
               } else {
-                console.log("Select focus", angular.element($document[0].querySelector('select.ng-invalid'))[0]);
                 angular.element($document[0].querySelector('select.ng-invalid'))[0].focus();
                 return false;
               }
@@ -278,15 +274,12 @@
 //              $scope.property.laundry, $scope.property.dryCleaners, $scope.property.liquorStore);
 //            $scope.business.businessImages = $scope.businessImages;
 //            $scope.business.businessMetaData = $scope.businessMetaData;
-//            console.log($scope.businessImages, $scope.businessMetaData, $scope.business, $scope.businessDetails);
-            console.log($scope.businessDetails)
             //TODO need to get userid
             var userProfile = JSON.parse(sessionStorage.getItem('profile'));
 //            $scope.businessDetails.invokerId = userProfile.id;
             $scope.businessDetails.invokerId = 1001;
             propertyService.addBusinessDetails($scope.businessDetails)
             .success(function(res) {
-                 console.log("addBusinessDetails ", res);
                  $scope.uploadPhotos(res.businessId);
                  $scope.saveEquipments(res.businessId);
             })
@@ -299,7 +292,6 @@
         //      $scope.uploadPhotoOnAWS = function(){
         //        for (var i=0; i < $scope.imageFiles.length; i++) {
         //          var photo = $scope.imageFiles[i];
-        //          console.log("-here-----", photo.name, photo.type);
         //          //amazon aws credentials
         //          AWS.config.update({
         //            accessKeyId: 'AKIAJJFDVJ7R234QR6ZA',
@@ -312,7 +304,6 @@
         //          var params = { Key: photo.name, ContentType: photo.type, Body: photo};
         //          bucket.upload(params).on('httpUploadProgress', function (evt) {
         //            //logs the image uploading progress
-        //            console.log("Uploaded :: " + parseInt((evt.loaded * 100) / evt.total) + '%');
         //            var progress = parseInt((evt.loaded * 100) / evt.total);
         //            if (progress === 100) {
         //              console.log("photo uploaded successfully");
@@ -320,7 +311,6 @@
         //          }).send(function (err, data) {
         //            if (data) {
         //              //displays the image location on amazon s3 bucket
-        //              console.log(data.Location);
         //              $scope.businessImages.push(data.Location);
         //            }
         //          });
@@ -332,7 +322,6 @@
         //          //   }
         //          //   else {
         //          //     // Success!
-        //          //     console.log(data);
         //          //     alert('Upload Done', data);
         //          //   }
         //          // })

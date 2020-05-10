@@ -20,7 +20,6 @@
     		var location = window.location.href;
 //            location = location.substring(1, location.length);
             sessionStorage.setItem("redirect_location", location);
-            console.log("Require login redirect_location", location);
     		authService.login();
     	}else {
     		let usermetadata = JSON.parse(sessionStorage.getItem('usermetadata'));
@@ -34,7 +33,6 @@
                         sessionStorage.setItem("profile",JSON.stringify(res));
                    })
                    .error(function (error, status) {
-                       console.log('Unable to get profile: ', error, status);
                        if (status == 404) {
                           propertyService.addUserProfile(profile).success(function(res) {
                                    if(res) {

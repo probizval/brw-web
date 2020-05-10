@@ -90,11 +90,9 @@
         $scope.saveBusiness = function(addListingForm) {
             if (addListingForm.$invalid) {
               if (angular.element($document[0].querySelector('select.ng-invalid'))[0]) {
-                console.log("Select focus", angular.element($document[0].querySelector('select.ng-invalid'))[0]);
                 angular.element($document[0].querySelector('select.ng-invalid'))[0].focus();
                 return false;
               } else {
-                console.log("Input focus", angular.element($document[0].querySelector('input.ng-invalid'))[0]);
                 angular.element($document[0].querySelector('input.ng-invalid'))[0].focus();
                 return false
               }
@@ -119,7 +117,6 @@
               $scope.property.laundry, $scope.property.dryCleaners, $scope.property.liquorStore);
             $scope.business.propertyImages = $scope.propertyImages;
             $scope.business.businessMetaData = $scope.businessMetaData;
-            console.log($scope.propertyImages, $scope.businessMetaData, $scope.business);
 
             //TODO need to get userid
             var userProfile = JSON.parse(sessionStorage.getItem('profile'));
@@ -127,8 +124,6 @@
 
             propertyService.addBusinessDetails(apiName, $scope.business)
             .success(function(res) {
-                 console.log("res ", res);
-                 console.log("res ", res.status);
                  //$state.go("business.confirmation", {status: res.status});
                  $state.go("business.confirmation");
             })

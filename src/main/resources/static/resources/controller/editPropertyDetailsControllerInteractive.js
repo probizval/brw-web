@@ -10,7 +10,6 @@
 
   function editPropertyDetailsController_new($rootScope, $scope, propDetails, propertyService, $state) {
 
-    console.log(propDetails.data.data);
     var prop = propDetails.data.data;
     $scope.propDetails = propDetails.data.data;
     $scope.imageArray = propDetails.data.data.propertyImages || [];
@@ -62,28 +61,24 @@
     };
 
     $scope.updateBusinessFeatures = function() {
-      // console.log("updateBusinessFeatures", $scope.propDetails.propertyMetaData);
       $scope.oldLotSize = $scope.propDetails.propertyMetaData.lotSize;
       $scope.oldYearBuilt = $scope.propDetails.propertyMetaData.yearBuilt;
       updateProperty()
     };
 
     $scope.cancelUpdateBusinessFeatures = function(oldLotSize, oldYearBuilt) {
-      // console.log("cancelUpdateBusinessFeatures", $scope.propDetails.propertyMetaData);
       $scope.propDetails.propertyMetaData.lotSize = oldLotSize;
       $scope.propDetails.propertyMetaData.yearBuilt = oldYearBuilt;
     };
 
 
     $scope.updateRestDetails = function() {
-      console.log("updateBusinessFeatures", $scope.propDetails.propertyMetaData);
       $scope.oldType = $scope.propDetails.type;
       $scope.oldDesciption = $scope.propDetails.description;
       // updateProperty()
     };
 
     $scope.cancelUpdateRestDetails = function(oldRest) {
-      console.log("cancelUpdateBusinessFeatures", $scope.propDetails.propertyMetaData, oldRest);
       // $scope.propDetails.type = oldType;
       // $scope.propDetails.description = oldDescription;
     };
@@ -97,11 +92,8 @@
           apiName = $scope.types[i].apiName
         }
       }
-      console.log($scope.propDetails, apiName);
       propertyService.updatePropertyDetails(apiName, $scope.propDetails)
         .success(function(res) {
-          console.log("res ", res);
-          console.log("res ", res.status);
           // TODO need to show some success model
         })
         .error(function (error) {
@@ -135,7 +127,6 @@
     };
 
     $scope.removePhoto = function(imageUrl){
-      console.log("$scope.imagesAsDataURL image",$scope.imagesAsDataURL, imageUrl);
       var itemIndex = $scope.imagesAsDataURL.indexOf(imageUrl);
       $scope.imagesAsDataURL.splice(itemIndex, 1);
       $scope.imageFiles.splice(itemIndex, 1);
@@ -145,8 +136,7 @@
     $scope.uploadPhotoOnAWS = function(){
       for (var i=0; i < $scope.imageFiles.length; i++) {
         var photo = $scope.imageFiles[i];
-        // console.log("-here-----", photo.name, photo.type);
-        //amazon aws credentials
+]        //amazon aws credentials
         AWS.config.update({
           accessKeyId: 'AKIAJJFDVJ7R234QR6ZA',
           secretAccessKey: '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'
@@ -158,15 +148,13 @@
         var params = { Key: photo.name, ContentType: photo.type, Body: photo};
         bucket.upload(params).on('httpUploadProgress', function (evt) {
           //logs the image uploading progress
-          console.log("Uploaded :: " + parseInt((evt.loaded * 100) / evt.total) + '%');
-          var progress = parseInt((evt.loaded * 100) / evt.total);
+]          var progress = parseInt((evt.loaded * 100) / evt.total);
           if (progress === 100) {
             console.log("photo uploaded successfully");
           }
         }).send(function (err, data) {
           if (data) {
             //displays the image location on amazon s3 bucket
-            console.log(data.Location);
             $scope.propertyImages.push(data.Location);
           }
         });

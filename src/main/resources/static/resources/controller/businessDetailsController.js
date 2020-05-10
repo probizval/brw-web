@@ -23,7 +23,6 @@
             authService.getProfile(function(err, profile) {
                 $rootScope.profile = profile;
                 propertyService.saveProfile(profile).success(function(res) {
-                    console.log("In businessDetailsController saveProfile "+ res);
                     if(res) {
                         localStorage.setItem('userprofile',JSON.stringify(res[0]));
                     }

@@ -67,7 +67,6 @@
             //var key = constants.allPriceList.indexOf($scope.$$childTail.minPrice);
             $scope.maxPriceList = constants.allPriceList.slice(price.id + 1);
 
-            //console.log("filterByMinPrice" + price.actualPrice);
             var searchAddress = JSON.parse(localStorage.getItem('searchBusinessAttributes'));
             searchAddress['minPrice'] = price && price.actualPrice || null;
             localStorage.setItem('searchAddress', JSON.stringify(searchAddress));
@@ -78,7 +77,6 @@
         $scope.filterByMaxPrice = function (price) {
             //var key = allPriceList.indexOf($scope.$$childTail.maxPrice);
             $scope.minPriceList = constants.allPriceList.slice(0, price.id - 1);
-            //console.log("filterByMaxPrice", $scope);
 
             var searchAddress = JSON.parse(localStorage.getItem('searchBusinessAttributes'));
             searchAddress['maxPrice'] = price && price.actualPrice || null;
@@ -87,8 +85,6 @@
         };
 
         $scope.filterByBusinessType = function (businessType) {
-            console.log("filterByBusinessType", $scope.$$childTail.businessType);
-            console.log("filterByBusinessType", businessType);
             var searchAddress = JSON.parse(localStorage.getItem('searchBusinessAttributes'));
             searchAddress['businessType'] = businessType || null;
             localStorage.setItem('searchAddress', JSON.stringify(searchAddress));
@@ -344,7 +340,7 @@
                     position: google.maps.ControlPosition.TOP_RIGHT
                 },
                 minZoom: 10,
-                maxZoom: 17,
+                maxZoom: 19,
                 zoomControl: true,
                 zoomControlOptions: {
                     position: google.maps.ControlPosition.RIGHT_TOP
@@ -357,7 +353,6 @@
             addMarker(dataset);
             showMarkers();
             // When map becomes idle after zoom ing or panning
-            console.log("Initial zoom", map.getZoom());
             map.addListener('zoom_changed', function (e) {
                 mapZoomPanChangeListeners();
             });
@@ -443,7 +438,6 @@
 
             var radius = getBoundsRadius(bounds);
             deleteMarkers();
-            console.log(center.lat(), center.lng(), radius);
             var search_address = JSON.parse(localStorage.getItem('searchBusinessAttributes'));
             search_address['latitude'] = center.lat();
             search_address["longitude"] = center.lng();
@@ -463,12 +457,10 @@
                 })
                 .error(function (error) {
                     $scope.status = 'Unable to load store data: ' + error.message;
-                    console.log("res ", $scope.status);
                 });
         }
 
         async function addMarker(arrDestinations) {
-            console.log("Add markers", arrDestinations);
             markers = [];
             for (var i = 0; i < arrDestinations.length; i++) {
                 var icon = '../../img/icon/purple_marker.svg';

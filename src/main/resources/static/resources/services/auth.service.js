@@ -40,7 +40,6 @@
           $timeout(function() {
             $state.go('home',null, {'reload':true});
           });
-          console.log(err);
           alert('Error: ' + err.error + '. Check the console for further details.');
         }
       });
@@ -48,7 +47,6 @@
 
     function getProfile(cb) {
       var accessToken = localStorage.getItem('access_token');
-      console.log("getProfile", accessToken)
       if (!accessToken) {
         console.log('Access token must exist to fetch profile');
 //        throw new Error('Access token must exist to fetch profile');
@@ -93,7 +91,6 @@
       var redirect_location = window.location.href
       var redirect_location1 = sessionStorage.getItem("redirect_location");
       sessionStorage.removeItem("redirect_location")
-      console.log("------logout------", redirect_location, redirect_location1)
       angularAuth0.logout({
         "returnTo": window.location.href,
         "client_id": AUTH0_CLIENT_ID

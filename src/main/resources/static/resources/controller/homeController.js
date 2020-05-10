@@ -86,7 +86,6 @@
             }
         };
         function getLatLng(address) {
-            console.log("getLatlng", address);
             if (!address){
                 return
             }

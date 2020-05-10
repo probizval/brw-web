@@ -165,7 +165,6 @@
     	            document.getElementById(addressType).value = val;
     	          }
     	        }
-              console.log("-------place----", place);
     	        document.getElementById("address").value = place.name;
               $scope.location = place.formatted_address;
     	        document.getElementById("lat").value = lat;
@@ -193,11 +192,9 @@
          $scope.saveBuyBusinessRequirements = function(postBuyForm) {
             if (postBuyForm.$invalid) {
               if (angular.element($document[0].querySelector('select.ng-invalid'))[0]) {
-                console.log("Select focus", angular.element($document[0].querySelector('select.ng-invalid'))[0])
                 angular.element($document[0].querySelector('select.ng-invalid'))[0].focus();
                 return false;
               } else {
-                console.log("Input focus", angular.element($document[0].querySelector('input.ng-invalid'))[0])
                 angular.element($document[0].querySelector('input.ng-invalid'))[0].focus();
                 return false
               }
@@ -271,12 +268,9 @@
             //$scope.business.isConnectWithLocalAgents = $scope.isConnectWithLocalAgents
             //$scope.business.isSendMatchedBusinessesEmail = $scope.isSendMatchedBusinessesEmail
 
-            console.log($scope.business, $scope.contactInformation, $scope.business.userProfile);
             $scope.business.userProfile = JSON.parse(localStorage.getItem('userprofile'));
             propertyService.sendEmailWithBuyRequirements($scope.business)
               .success(function(res) {
-                     console.log("res "+ res);
-                     console.log("res "+ res.status);
                      $state.go("postbuyconfirmation", {status: res.status});
                      //$state.go("business.confirmation");
                 })
@@ -287,7 +281,6 @@
 
     	$scope.initialize();
 
-      console.log('In postBuyRequirementsController');
     }
 
 })();

@@ -14,7 +14,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
   propertyDataOp.getBusinessList = function (searchBusinessAttributes) {
       searchBusinessAttributes = JSON.parse(searchBusinessAttributes);
       var userId = JSON.parse(sessionStorage.getItem('profile'));
-      console.log("--------getBusinesslist", searchBusinessAttributes);
       return $http.post(businessUrl + 'searchBusiness', {
             "name": searchBusinessAttributes.businessName || "",
             "type": searchBusinessAttributes.businessType || "",
@@ -30,7 +29,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
             "isFranchise": searchBusinessAttributes.isFranchise || "N",
             "isForSell": searchBusinessAttributes.isForSell || "N"
       }).success(function(res) {
-        console.log("getBusinessList", JSON.stringify(res));
         return res.data;
       }).error(function (error) {
           return 'Unable to load store data: ' + error.message;
@@ -43,7 +41,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
             "isVendorCall": "Y",
             "isEstimate": "Y"
         }).success(function(res) {
-            console.log("getBusinessDetails", JSON.stringify(res));
             return res.data;
         }).error(function (error) {
             return 'Unable to load store data: ' + error.message;
@@ -54,7 +51,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
         return $http.post(imageUrl + 'getImages', {
             "businessId": id,
         }).success(function(res) {
-            console.log("getBusinessImages", JSON.stringify(res));
             return res.data;
         }).error(function (error) {
             return 'Unable to load store data: ' + error.message;
@@ -65,7 +61,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
         return $http.post(estimateUrl + 'getEstimates', {
             "businessId": id,
         }).success(function(res) {
-            console.log("getEstimates", JSON.stringify(res));
             return res.data;
         }).error(function (error) {
             return 'Unable to load store data: ' + error.message;
@@ -76,7 +71,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
         return $http.post(additionAttributesUrl + 'getAdditionalAttributes', {
             "businessId": businessId
         }).success(function(res) {
-            console.log("getAdditionalAttributes", JSON.stringify(res));
             return res.data;
         }).error(function (error) {
             return 'Unable to load store data: ' + error.message;
@@ -89,7 +83,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
             "invokerId": invokerId,
             "imagesList": imageList
         }).success(function(res) {
-            console.log("addBusinessImages", JSON.stringify(res));
             return res.data;
         }).error(function (error) {
             return 'Unable to load store data: ' + error.message;
@@ -102,7 +95,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
             "invokerId": invokerId,
             "uploadImagesList": imageList
         }).success(function(res) {
-            console.log("uploadBusinessImages", JSON.stringify(res));
             return res.data;
         }).error(function (error) {
             return 'Unable to load store data: ' + error.message;
@@ -111,7 +103,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
 
     propertyDataOp.addBusinessDetails = function (businessDetails) {
         return $http.post(businessUrl + 'addBusinessDetails', businessDetails).success(function(res) {
-            console.log("addBusinessDetails", JSON.stringify(res));
             return res.data;
         }).error(function (error) {
             return 'Unable to load store data: ' + error.message;
@@ -124,7 +115,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
             "invokerId": invokerId,
             "addAttributesList": additionalAttributes
         }).success(function(res) {
-            console.log("addAdditionalAttributes", JSON.stringify(res));
             return res.data;
         }).error(function (error) {
             return 'Unable to load store data: ' + error.message;
@@ -133,7 +123,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
 
     propertyDataOp.sendEmail = function (emailInformation) {
         return $http.post(emailUrl + 'sendEmail', emailInformation).success(function(res) {
-            console.log("sendEmail", JSON.stringify(res));
             return res.data;
         }).error(function (error) {
             return 'Unable to load store data: ' + error.message;
@@ -188,9 +177,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
 
     propertyDataOp.addUserProfile = function (userDetails) {
         userProfile = {"invokerId": 1001, "email": userDetails.email, "user_type": "USER"}
-        console.log("addUserProfile ", userProfile);
         return $http.post(userUrl + 'addUserProfile', userProfile).success(function(res) {
-            console.log("addUserProfile", JSON.stringify(res));
             return res.data;
         }).error(function (error, status) {
             console.log("Unable to load store data", error, status)
@@ -199,9 +186,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     };
 
     propertyDataOp.getUserProfile = function (userDetails) {
-        console.log("getUserProfile ", userDetails);
         return $http.post(userUrl + 'getUserProfile', userDetails).success(function(res) {
-            console.log("getUserProfile", JSON.stringify(res));
             return res.data;
         }).error(function (error, status) {
             console.log("Unable to load store data", error, status)
@@ -210,16 +195,13 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     };
 
     propertyDataOp.updateUserProfile = function (userDetails) {
-        console.log("updateUserProfile ", obj);
         return $http.post(userUrl + 'updateUserProfile', userDetails).success(function(res) {
-            console.log("updateUserProfile", JSON.stringify(res));
             return res.data;
         }).error(function (error) {
             return 'Unable to load store data: ' + error.message;
         });
     };
     propertyDataOp.saveProfile = function (obj) {
-        console.log("save profile ", obj);
         return $http.post(urlBase + 'createProfile', obj).success(function(res) {
             return  JSON.stringify(res);
         })
@@ -230,7 +212,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     
     propertyDataOp.getProfile = function (obj) {
 
-        console.log("get profile ", obj);
         return $http.post(urlBase + 'userprofile', obj).success(function(res) {
             return  JSON.stringify(res);
         })
@@ -241,7 +222,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     
     propertyDataOp.updateProfile = function (obj) {
 
-        console.log("update profile ", obj);
         return $http.put(urlBase +'userprofile', obj).success(function(res) {
             return  JSON.stringify(res);
         })
@@ -251,7 +231,6 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     };
 
     propertyDataOp.sendEmailWithBuyRequirements = function (obj) {
-      console.log("------sendEmailWithBuyRequirements------", obj);
       return $http.post(urlBase + 'property/businessrequirement', obj).success(function(res) {
           return  JSON.stringify(res);
       })
@@ -261,17 +240,14 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
     };
 
     propertyDataOp.saveBuyBusinessRequirements = function (obj) {
-      console.log("------saveBuyBusinessRequirements------", obj);
     	return $http.post(urlBase + 'saveBuyBusinessRequirement', obj).success(function(res) {
 			     return  JSON.stringify(res);
         })
         .error(function (error) {
-            console.log("--------------error-------------", error);
             return 'Unable to load store data: ' + error.message;
         });
     };
     propertyDataOp.getAgentsList = function (type) {
-      console.log("--------getAgentsList");
       return $http.get(urlBase + 'getAgentsList/'+type).success(function(res) {
         return  JSON.stringify(res);
       })

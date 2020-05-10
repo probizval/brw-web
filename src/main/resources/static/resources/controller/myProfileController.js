@@ -14,7 +14,6 @@
       $scope.profileDetails = profileDetails.data;
       
       $scope.uploadPicture = function (profile) {
-        console.log("uploadPicture", profile);
         profile.picture = $scope.imageSrc;
         $scope.imageSrc = "";
         authService.setUserProfile(profile);
@@ -32,11 +31,8 @@
     	  $scope.profileDetails.zipcode = document.getElementById("postal_code").value;
     	  
     	  
-    	  console.log("update profile"+$scope.profileDetails);
     	  propertyService.updateProfile($scope.profileDetails)
           .success(function(res) {
-                 console.log("res "+ res);
-                 console.log("res "+ res.status);
                  $state.go("profileconfirmation", {status: res.status});
                  //$state.go("business.confirmation");
             })
@@ -44,8 +40,7 @@
                 $scope.status = 'Unable to load store data: ' + error.message;
             });
       };
-      console.log('In myProfileController', fileReader);
-      
+
       var autocomplete = new google.maps.places.Autocomplete(
 	            /** @type {!HTMLInputElement} */(document.getElementById('location')),
 	            {types: ['geocode']});
@@ -84,7 +79,6 @@
 	        document.getElementById("address").value  = place.formatted_address;
 	        
 	       
-        console.log("-------place----", place);
 	      }
 
 	      // Bias the autocomplete object to the user's geographical location,
