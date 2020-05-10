@@ -84,13 +84,13 @@
                         <div id="sidebar">
                             <div>
                                 <div id="feature-list" role="tablist" class="row">
-                                    <div class="col-lg-6 col-xl-6">
+                                    <div class="col-lg-6 col-xl-6" ng-if="estimateList.length > 0 || businessDetails.isForSell === 'Y'">
                                         <div class="card shadow">
-                                            <div class="card-header" role="tab" id="headingOne">
+                                            <div class="card-header" role="tab" id="headingOne" ng-if="businessDetails.isForSell === 'Y'">
                                                 <h4 class="panel-title">For sale</h4>
                                             </div>
                                             <div id="specification" class="panel-collapse collapse show" role="tabpanel">
-                                                <div class="card-body">
+                                                <div class="card-body" ng-if="businessDetails.isForSell === 'Y'">
                                                     <table class="table v1">
                                                         <tr style="border-style:hidden" ng-if="businessDetails.forSellPrice">
                                                             <td style="padding: 0.25rem">Owner Asking Price</td>
@@ -107,8 +107,8 @@
                                                     </table>
 
                                                 </div>
-                                                <div class="card-header" role="tab">
-                                                    <h4 class="panel-title">BRW estimates</h4>
+                                                <div class="card-header" role="tab" ng-if="estimateList.length > 0">
+                                                    <h4 classs="panel-title">BRW estimates</h4>
                                                 </div>
                                                 <div id="specification" class="panel-collapse collapse show" role="tabpanel">
                                                     <div class="card-body">
@@ -140,6 +140,25 @@
                                                 </div>
                                             </div>
                                             <hr style="margin-top: 0;margin-bottom: 0">
+                                            <!--<button class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#leadform">Request Details</button>-->
+                                            <div id="specification" class="panel-collapse collapse show" role="tabpanel" ng-if="businessDetails.isForSell === 'Y'">
+                                                <div class="card-body">
+                                                    <div style="text-align: center">
+                                                        <a href="agent.html">
+                                                            <img class="media-object rounded-circle" src="http://via.placeholder.com/300x300" width="64" height="64" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body" style="margin: 0">
+                                                        <p style="margin: 0">Listed By {{businessDetails.seller_type}}</p>
+                                                        <p style="margin: 0"><a href="agent.html">John Doe</a></p>
+                                                        <!--<h4><a href="agent.html">{{businessDetails.broker_name}}}</a></h4>-->
+                                                        <p style="margin: 0">Call - {{businessDetails.phone}}</p>
+                                                        <p style="margin: 0">Email - {{businessDetails.email}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr style="margin-top: 0;margin-bottom: 0">
                                             <div id="specification" class="panel-collapse collapse show" role="tabpanel">
                                                 <div class="card-body">
                                                     <div style="text-align: center">
@@ -153,24 +172,6 @@
                                                         <!--<h4><a href="agent.html">{{businessDetails.broker_name}}}</a></h4>-->
                                                         <p style="margin: 0">Call - {{businessDetails.buying_adviser_phone_number}}</p>
                                                         <p style="margin: 0">Email - {{businessDetails.buying_adviser_email}}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr style="margin-top: 0;margin-bottom: 0">
-                                            <!--<button class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#leadform">Request Details</button>-->
-                                            <div id="specification" class="panel-collapse collapse show" role="tabpanel">
-                                                <div class="card-body">
-                                                    <div style="text-align: center">
-                                                        <a href="agent.html">
-                                                            <img class="media-object rounded-circle" src="http://via.placeholder.com/300x300" width="64" height="64" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="media-body" style="margin: 0">
-                                                        <p style="margin: 0">Listed By {{businessDetails.seller_type}}</p>
-                                                        <p style="margin: 0"><a href="agent.html">John Doe</a></p>
-                                                        <!--<h4><a href="agent.html">{{businessDetails.broker_name}}}</a></h4>-->
-                                                        <p style="margin: 0">Call - {{businessDetails.phone}}</p>
-                                                        <p style="margin: 0">Email - {{businessDetails.email}}</p>
                                                     </div>
                                                 </div>
                                             </div>
