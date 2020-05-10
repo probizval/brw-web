@@ -136,7 +136,7 @@
     $scope.uploadPhotoOnAWS = function(){
       for (var i=0; i < $scope.imageFiles.length; i++) {
         var photo = $scope.imageFiles[i];
-]        //amazon aws credentials
+        //amazon aws credentials
         AWS.config.update({
           accessKeyId: 'AKIAJJFDVJ7R234QR6ZA',
           secretAccessKey: '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'
@@ -148,7 +148,7 @@
         var params = { Key: photo.name, ContentType: photo.type, Body: photo};
         bucket.upload(params).on('httpUploadProgress', function (evt) {
           //logs the image uploading progress
-]          var progress = parseInt((evt.loaded * 100) / evt.total);
+          var progress = parseInt((evt.loaded * 100) / evt.total);
           if (progress === 100) {
             console.log("photo uploaded successfully");
           }
