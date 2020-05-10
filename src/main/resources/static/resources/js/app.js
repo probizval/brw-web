@@ -226,6 +226,10 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             url: '/aboutUs',
             templateUrl: 'resources/pages/aboutUs.html',
         })
+        .state('productsAndServices', {
+            url: '/productsAndServices',
+            templateUrl: 'resources/pages/productsAndServices.html',
+        })
     ;
 
     // Initialization for the angular-auth0 library
