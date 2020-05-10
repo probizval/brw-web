@@ -471,9 +471,13 @@
             console.log("Add markers", arrDestinations);
             markers = [];
             for (var i = 0; i < arrDestinations.length; i++) {
+                var icon = '../../img/icon/purple_marker.svg';
+                if (arrDestinations[i].isForSell === "Y") {
+                    icon = '../../img/icon/red_marker.svg';
+                }
                 var marker = new google.maps.Marker({
                     title: arrDestinations[i].name,
-                    icon: 'https://labs.google.com/ridefinder/images/mm_20_blue.png',
+                    icon: icon,
                     position: new google.maps.LatLng(arrDestinations[i].latitude, arrDestinations[i].longitude),
                     map: map
                 });
