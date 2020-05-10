@@ -31,12 +31,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	static{
 		
 		protectedUserUris.append("/api/business/v1/**")
-			.append("/api/estimates/v1/**")
-			.append("/api/stripePayment/v1/**")
-			.append("/api/additionalAttributes/v1/**")
-			.append("/api/transactions/v1/**")
-			.append("/api/image/v1/**")
-			.append("/api/user/v1/**")
+			.append(",/api/estimates/v1/**")
+			.append(",/api/stripePayment/v1/**")
+			.append(",/api/additionalAttributes/v1/**")
+			.append(",/api/transactions/v1/**")
+			.append(",/api/image/v1/**")
+			.append(",/api/user/v1/**")
 			;
 		
 		
@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.append("/api/user/v1/**")
 		;
 		*/
-		
+		// Multiple URI should be comma separated in the buffer
 		unprotectedUserUris.append("/api/business/v1/searchBusiness");
 		//unprotectedUserUris.append("/api/business/v1/searchBusiness").append("/api/business/v1/**");
 
@@ -60,8 +60,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.csrf().disable()
-			.authorizeRequests().antMatchers(unprotectedUserUris.toString()).permitAll()
-			.and().authorizeRequests().antMatchers(protectedUserUris.toString()).authenticated()
+			.authorizeRequests().antMatchers(unprotectedUserUris.toString().split(",")).permitAll()
+			.and().authorizeRequests().antMatchers(protectedUserUris.toString().split(",")).authenticated()
 			.and().oauth2ResourceServer().jwt();
 	}
 	
