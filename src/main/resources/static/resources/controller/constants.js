@@ -6,27 +6,27 @@
         .module('myApp')
         .constant('constants', {
             searchBusinessTypes: [
-                {name: "All", code: 'b_type', apiName: ""},
-                {name: 'Restaurants and Food', code: 'b_type_1', apiName: "restaurant"},
-                {name: 'Gas Station', code: 'b_type_2', apiName: "gasstation"},
-                {name: 'Liquor Store', code: 'b_type_3', apiName: "liquorstore"},
-                {name: 'Beauty Salon/Spa/Nail', code: 'b_type_4', apiName: "salonstore"},
-                {name: 'Convenience store', code: 'b_type_5', apiName: "conveniencestore"},
-                {name: 'Auto Service Shop', code: 'b_type_6', apiName: "autoservice"},
-                {name: 'Laundry', code: 'b_type_7', apiName: "laundry"},
-                {name: 'Cafe', code: 'b_type_8', apiName: "cafe"},
-                {name: 'Dry Cleaners', code: 'b_type_9', apiName: "drycleaners"}
+                //{name: "Select Type", code: 'b_type', apiName: ""},
+                {name: 'Restaurants and Food', code: 'b_type_1', apiName: "RESTAURANT"},
+                {name: 'Gas Station', code: 'b_type_2', apiName: "GAS_STATION"},
+                {name: 'Liquor Store', code: 'b_type_3', apiName: "LIQUOR_STORE"},
+                {name: 'Beauty Salon/Spa/Nail', code: 'b_type_4', apiName: "BEAUTY"},
+                {name: 'Convenience store', code: 'b_type_5', apiName: "CONVENIENCE_STORE"},
+                {name: 'Auto Service Shop', code: 'b_type_6', apiName: "AUTO"},
+                {name: 'Laundry', code: 'b_type_7', apiName: "LAUNDRY"},
+                {name: 'Cafe', code: 'b_type_8', apiName: "CAFE"},
+                {name: 'Dry Cleaners', code: 'b_type_9', apiName: "LAUNDRY"}
             ],
             addBusinessTypes: [
-               {name: 'Restaurants and Food', code: 'b_type_1', apiName: "restaurant"},
-               {name: 'Gas Station', code: 'b_type_2', apiName: "gasstation"},
-               {name: 'Liquor Store', code: 'b_type_3', apiName: "liquorstore"},
-               {name: 'Beauty Salon/Spa/Nail', code: 'b_type_4', apiName: "salonstore"},
-               {name: 'Convenience store', code: 'b_type_5', apiName: "conveniencestore"},
-               {name: 'Auto Service Shop', code: 'b_type_6', apiName: "autoservice"},
-               {name: 'Laundry', code: 'b_type_7', apiName: "laundry"},
-               {name: 'Cafe', code: 'b_type_8', apiName: "cafe"},
-               {name: 'Dry Cleaners', code: 'b_type_9', apiName: "drycleaners"}
+               {name: 'Restaurants and Food', code: 'b_type_1', apiName: "RESTAURANT"},
+               {name: 'Gas Station', code: 'b_type_2', apiName: "GAS_STATION"},
+               {name: 'Liquor Store', code: 'b_type_3', apiName: "LIQUIR_STORE"},
+               {name: 'Beauty Salon/Spa/Nail', code: 'b_type_4', apiName: "BEAUTY"},
+               {name: 'Convenience store', code: 'b_type_5', apiName: "CONVENIENCE_STORE"},
+               {name: 'Auto Service Shop', code: 'b_type_6', apiName: "AUTO"},
+               {name: 'Laundry', code: 'b_type_7', apiName: "LAUNDRY"},
+               {name: 'Cafe', code: 'b_type_8', apiName: "CAFE"},
+	       {name: 'Dry Cleaners', code: 'b_type_9', apiName: "LAUNDRY"}
             ],
             equipmentListMapping: {
                 REGULAR_FREEZER: 'Regular Freezer',
