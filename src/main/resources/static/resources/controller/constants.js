@@ -142,8 +142,9 @@
 
             businessCities: [
                         {id: 1, name: "fremont", label: "Fremont"},
-                        {id: 2, name: "newark", label: "Newark"},
-                        {id: 3, name: "union city", label: "Union City"}
+		   	{id: 2, name: "hayward", label: "Hayward"},
+                        {id: 3, name: "newark", label: "Newark"},
+                        //{id: 4, name: "union city", label: "Union City"}
                     ],
             businessStates: [
                         {id: 1, label: "CA", code: "CA"},
