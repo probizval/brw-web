@@ -46,10 +46,10 @@
                     <label>Message*</label>
                     <textarea class="form-control form-control-md text-editor" name="message"
                               ng-model="contactUsData.message"
-                              id="message" placeholder="100 characters required" ng-minlength="100" required></textarea>
+                              id="message" placeholder="20 characters required" ng-minlength="20" required></textarea>
                     <div class="errors" ng-show="submitted || contactUs.message.$touched">
                         <div style="color:red" ng-show="contactUs.message.$error.required">Message is required.</div>
-                        <div style="color:red" ng-show="contactUs.message.$invalid">100 Characters required.</div>
+                        <div style="color:red" ng-show="contactUs.message.$invalid">20 Characters required.</div>
                     </div>
                 </div>
             </div>

@@ -18,6 +18,11 @@
         $scope.yearEstablishedList = constants.allYearBuiltList;
         $scope.businessTypes = constants.addBusinessTypes;
         $scope.ownerClaimed = "N";
+        var userProfile = JSON.parse(sessionStorage.getItem('profile'));
+        if (userProfile && userProfile.email) {
+            $scope.email = userProfile.email
+        }
+
         $(document).ready(function(){
           $('[data-toggle="tooltip"]').tooltip();
         });
@@ -275,9 +280,8 @@
 //            $scope.business.businessImages = $scope.businessImages;
 //            $scope.business.businessMetaData = $scope.businessMetaData;
             //TODO need to get userid
-            var userProfile = JSON.parse(sessionStorage.getItem('profile'));
-//            $scope.businessDetails.invokerId = userProfile.id;
-            $scope.businessDetails.invokerId = 1001;
+            $scope.businessDetails.invokerId = userProfile.userId;
+//            $scope.businessDetails.invokerId = 1001;
             propertyService.addBusinessDetails($scope.businessDetails)
             .success(function(res) {
                  $scope.uploadPhotos(res.businessId);

@@ -11,6 +11,10 @@
 
         $scope.contactUsData = {};
         $scope.contactUsData.emailSent = false
+        var profile = JSON.parse(sessionStorage.getItem("profile"));
+        if (profile && profile.email) {
+            $scope.contactUsData.email = profile.email
+        }
         $scope.sendContactUsEmail = function(contactUs) {
             if (contactUs.$invalid) {
               if (angular.element($document[0].querySelector('input.ng-invalid'))[0]) {
@@ -23,7 +27,7 @@
             }
             var userProfile = JSON.parse(sessionStorage.getItem('profile'));
             var emailInformation = {
-                invokerId: 1001,
+                invokerId: userProfile.userId,
                 name: $scope.contactUsData.name,
                 from: $scope.contactUsData.email,
                 toList: ["sp@proswift.com"],
@@ -32,7 +36,7 @@
                 emailPurpose: "CONTACT_US"
             }
             if (userProfile.id) {
-                emailInformation.invokerId = userProfile.id
+                emailInformation.invokerId = userProfile.userId
             }
             propertyService.sendEmail(emailInformation)
             .success(function(res) {
