@@ -14,6 +14,7 @@ public class BusinessInfoDTO {
 	private String type;
 	private String subType;
 	private String isForSell;
+	private String isHidden;
 	private Integer forSellPrice;
 	private Integer estimatedAmount;
 	private String imageLogo;
@@ -72,6 +73,13 @@ public class BusinessInfoDTO {
 	}
 	public void setForSellPrice(Integer forSellPrice) {
 		this.forSellPrice = forSellPrice;
+	}
+	public String getIsHidden() {
+		return isHidden;
+	}
+
+	public void setIsHidden(String isHidden) {
+		this.isHidden = isHidden;
 	}
 	public Integer getEstimatedAmount() {
 		return estimatedAmount;

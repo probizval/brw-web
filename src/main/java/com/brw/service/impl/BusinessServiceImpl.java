@@ -288,6 +288,9 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				businessInfoDTO.setLongitude(businessInfo.getLongitude());
 			}
 			
+			businessInfoDTO.setIsHidden(businessInfo.getIsHidden());
+			businessInfoDTO.setType(businessInfo.getType());
+			businessInfoDTO.setSubType(businessInfo.getSubType());
 			businessInfoDTO.setIsForSell(businessInfo.getIsForSell());
 			businessInfoDTO.setForSellPrice(businessInfo.getForSellPrice());
 			businessInfoDTO.setEstimatedAmount(businessInfo.getEstimatedAmount());
