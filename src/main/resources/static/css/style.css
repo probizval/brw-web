@@ -1717,12 +1717,24 @@ input[type="radio"], input[type="checkbox"] {
 .item-listing .item .save-item {
   display: block;
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 5px;
+  right: 5px;
   width: 40px;
   height: 40px;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 42px;
+  color: #fff;
+  text-align: center;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3); }
+
+.item-listing .item .save-item-left {
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 18px;
+  font-weight: bold;
   color: #fff;
   text-align: center;
   border-radius: 50%;
