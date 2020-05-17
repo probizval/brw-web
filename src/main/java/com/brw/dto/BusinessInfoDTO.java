@@ -16,7 +16,6 @@ public class BusinessInfoDTO {
 	private String isForSell;
 	private String isHidden;
 	private Integer forSellPrice;
-	private Integer estimatedAmount;
 	private String imageLogo;
 	private String imageFirst;
 	private String street1;
@@ -80,12 +79,6 @@ public class BusinessInfoDTO {
 
 	public void setIsHidden(String isHidden) {
 		this.isHidden = isHidden;
-	}
-	public Integer getEstimatedAmount() {
-		return estimatedAmount;
-	}
-	public void setEstimatedAmount(Integer estimatedAmount) {
-		this.estimatedAmount = estimatedAmount;
 	}
 	public String getImageLogo() {
 		return imageLogo;

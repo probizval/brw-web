@@ -433,7 +433,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessInfoDTO.setSubType(businessInfo.getSubType());
 			businessInfoDTO.setIsForSell(businessInfo.getIsForSell());
 			businessInfoDTO.setForSellPrice(businessInfo.getForSellPrice());
-			businessInfoDTO.setEstimatedAmount(businessInfo.getEstimatedAmount());
 			businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
 			
 			businessInfoDTO.setIsVendorCall(businessInfo.getIsVendorCall());

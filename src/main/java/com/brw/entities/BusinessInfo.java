@@ -49,9 +49,6 @@ public class BusinessInfo implements Serializable {
 	@Column(name = "for_sell_price")
 	private int forSellPrice;
 	
-	@Column(name = "est_amount")
-	private int estimatedAmount;
-	
 	@Column(name = "image_first")
 	private String imageFirst;
 	
@@ -144,14 +141,6 @@ public class BusinessInfo implements Serializable {
 
 	public void setIsFranchise(String isFranchise) {
 		this.isFranchise = isFranchise;
-	}
-
-	public int getEstimatedAmount() {
-		return estimatedAmount;
-	}
-
-	public void setEstimatedAmount(int estimatedAmount) {
-		this.estimatedAmount = estimatedAmount;
 	}
 
 	public String getImageFirst() {
