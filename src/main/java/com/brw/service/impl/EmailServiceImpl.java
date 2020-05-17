@@ -45,7 +45,8 @@ public class EmailServiceImpl implements com.brw.service.EmailService {
 	@Override
 	public EmailDTO sendEmail(EmailDTO emailDTO) throws EmailException, AddressException, MessagingException, IOException{
 		System.out.println("**** 222 Inside EmailServiceImpl.sendEmail()");
-		
+		System.out.println("**** 222 Inside EmailServiceImpl.sendEmail() emailDTO.getFrom(): "+emailDTO.getFrom());
+
 		EmailDTO returnEmailDTO = new EmailDTO();
 		
 		Properties props = new Properties();
@@ -72,15 +73,15 @@ public class EmailServiceImpl implements com.brw.service.EmailService {
 				emailToList = emailToList.concat(Constants.COMMA);
 			}
 			emailToList = emailToList.concat(email);
-			System.out.println("**** 333 Inside EmailServiceImpl.sendEmail() emailToList: "+emailToList);
+			System.out.println("**** 222 Inside EmailServiceImpl.sendEmail() emailToList: "+emailToList);
 
 			i++;
 		}
-		System.out.println("**** 444 Inside EmailServiceImpl.sendEmail() emailToList: "+emailToList);
+		System.out.println("**** 222 Inside EmailServiceImpl.sendEmail() emailToList: "+emailToList);
 
 		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailToList));
 		msg.setSubject(emailDTO.getSubject());
-		msg.setContent(emailDTO.getContent(), "text/html");
+		msg.setContent("Email from "+emailDTO.getFrom()+": "+emailDTO.getContent(), "text/html");
 		msg.setSentDate(new Date());
 		
 		/*
@@ -98,11 +99,47 @@ public class EmailServiceImpl implements com.brw.service.EmailService {
 		  
 		try {
 			Transport.send(msg);
-			
+			sendAcknowledgementEmail(emailDTO.getFrom());
 		} catch (Exception e) {
 			e.printStackTrace();
 			
 		}
 		return returnEmailDTO;
+	}
+	
+	
+	private void sendAcknowledgementEmail(String email) throws EmailException, AddressException, MessagingException, IOException{
+		System.out.println("**** 222 Inside EmailServiceImpl.sendAcknowledgementEmail()");
+		
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtpout.secureserver.net");
+		props.put("mail.smtp.port", "80");
+		   
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("admin@bizrealworth.com", "Admin$123");
+		      }
+		   });
+		Message msg = new MimeMessage(session);
+		msg.setFrom(new InternetAddress("admin@bizrealworth.com", false));
+		
+		String emailToList = Constants.EMPTY_STRING;
+		emailToList = emailToList.concat(email);
+
+		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailToList));
+		msg.setSubject("Your email is received at www.BizRealWorth.com");
+		msg.setContent("<P><B>Thank You for contacting us!</B></P><P>We at www.BizRealWorth.com will respond to your inquiry as soon as we can.</P><P>Meanwhile, for faster response you can also contact us by calling 1-855-522-5579.</P>", "text/html");
+		msg.setSentDate(new Date());
+		  
+		try {
+			Transport.send(msg);
+			System.out.println("**** 222 Inside EmailServiceImpl.sendAcknowledgementEmail() TO: "+email);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
 	}
 }
