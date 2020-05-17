@@ -340,7 +340,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 					System.out.println("**** 333 Executing searchBusiness_12 businessList SIZE: "+businessList.size());
 
 				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_13");
+					System.out.println("**** 333 Executing searchBusiness_13_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_13_FSN(businessDTO.getType(), businessDTO.getCity(), businessDTO.getStateCode());
 		
