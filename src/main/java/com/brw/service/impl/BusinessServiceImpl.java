@@ -81,7 +81,12 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
 		userService.trackUserActivity(userActivityDTO);
 		//Log the User Action - END
-
+		
+		//TODO:TEMPORARY translation of zip code and business type - need to fix it on UI and then remove this code
+		if (businessDTO.getZip() == 94536) {
+			businessDTO.setZip(null);
+		}
+				
 		// TODO Auto-generated method stub
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getName: "+businessDTO.getName());
 		
@@ -109,11 +114,9 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getRangeMile: "+businessDTO.getRangeMile());
 		
-		//TODO:TEMPORARY translation of zip code and business type - need to fix it on UI and then remove this code
-		if (businessDTO.getZip() == 94536) {
-			businessDTO.setZip(null);
-		}
 		
+		
+		/*
 		switch(businessDTO.getType()) {
 		
 		case "GASSTATION":
@@ -135,133 +138,270 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessDTO.setType("LAUNDRY");
 			break;
 		}
+		*/
 		
 		List<BusinessInfo> businessList = null;
-		if (null != businessDTO.getZip() && 0 != businessDTO.getZip()) {
-			if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-				System.out.println("**** 333 Executing searchBusiness_1");
+		if(businessDTO.getIsForSell().equals(Constants.Y)) {
+			if (null != businessDTO.getZip() && 0 != businessDTO.getZip()) {
+				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_1");
+					
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_1(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_1(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
-			} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
-				System.out.println("**** 333 Executing searchBusiness_2");
+				} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_2");
+					
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_2(businessDTO.getName(), businessDTO.getType(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_2(businessDTO.getName(), businessDTO.getType(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
-			} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-				System.out.println("**** 333 Executing searchBusiness_3");
+				} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_3");
+					
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_3(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_3(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
-			} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-				System.out.println("**** 333 Executing searchBusiness_4");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_4(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
-			} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
-				System.out.println("**** 333 Executing searchBusiness_5");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_5(businessDTO.getName(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
-			} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-				System.out.println("**** 333 Executing searchBusiness_6");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_6(businessDTO.getType(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+				} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_4");
 	
-			} else {
-				System.out.println("**** 333 Executing searchBusiness_7");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_7(businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			}
-		} else if (null != businessDTO.getCity() && Constants.EMPTY_STRING != businessDTO.getCity()) {
-			if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-				System.out.println("**** 333 Executing searchBusiness_8");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_8(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
-			} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
-				System.out.println("**** 333 Executing searchBusiness_9");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_9(businessDTO.getName(), businessDTO.getType(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_4(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
-				System.out.println("**** 333 Executing searchBusiness_9 businessList SIZE: "+businessList.size());
-
-			} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-				System.out.println("**** 333 Executing searchBusiness_10");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_10(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
-			} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-				System.out.println("**** 333 Executing searchBusiness_11");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_11(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
-			} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
-				System.out.println("**** 333 Executing searchBusiness_12");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_12(businessDTO.getName(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-				
-				System.out.println("**** 333 Executing searchBusiness_12 businessList SIZE: "+businessList.size());
-
-			} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-				System.out.println("**** 333 Executing searchBusiness_13");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_13(businessDTO.getType(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
+					System.out.println("**** 333 Executing searchBusiness_5");
 	
-			} else {
-				System.out.println("**** 333 Executing searchBusiness_14");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_14(businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-
-			}
-		} else if (null != businessDTO.getCounty() && Constants.EMPTY_STRING != businessDTO.getCounty()) {
-			if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-				System.out.println("**** 333 Executing searchBusiness_15");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_15(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
-			} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
-				System.out.println("**** 333 Executing searchBusiness_16");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_16(businessDTO.getName(),businessDTO.getType(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
-			} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-				System.out.println("**** 333 Executing searchBusiness_17");
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_5(businessDTO.getName(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_17(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
-			} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-				System.out.println("**** 333 Executing searchBusiness_18");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_18(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
-			} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
-				System.out.println("**** 333 Executing searchBusiness_19");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_19(businessDTO.getName(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-			
-			} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-				System.out.println("**** 333 Executing searchBusiness_20");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_20(businessDTO.getType(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_6");
 	
-			} else {
-				System.out.println("**** 333 Executing searchBusiness_21");
-
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_21(businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
-
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_6(businessDTO.getType(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+		
+				} else {
+					System.out.println("**** 333 Executing searchBusiness_7");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_7(businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+				}
+			} else if (null != businessDTO.getCity() && Constants.EMPTY_STRING != businessDTO.getCity()) {
+				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_8");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_8(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+				
+				} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_9");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_9(businessDTO.getName(), businessDTO.getType(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+					
+					System.out.println("**** 333 Executing searchBusiness_9 businessList SIZE: "+businessList.size());
+	
+				} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_10");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_10(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+				
+				} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_11");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_11(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+				
+				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
+					System.out.println("**** 333 Executing searchBusiness_12");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_12(businessDTO.getName(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+					
+					System.out.println("**** 333 Executing searchBusiness_12 businessList SIZE: "+businessList.size());
+	
+				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_13");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_13(businessDTO.getType(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+		
+				} else {
+					System.out.println("**** 333 Executing searchBusiness_14");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_14(businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+	
+				}
+			} else if (null != businessDTO.getCounty() && Constants.EMPTY_STRING != businessDTO.getCounty()) {
+				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_15");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_15(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+				
+				} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_16");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_16(businessDTO.getName(),businessDTO.getType(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+				
+				} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_17");
+					
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_17(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+				
+				} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_18");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_18(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+				
+				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
+					System.out.println("**** 333 Executing searchBusiness_19");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_19(businessDTO.getName(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+				
+				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_20");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_20(businessDTO.getType(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+		
+				} else {
+					System.out.println("**** 333 Executing searchBusiness_21");
+	
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_21(businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
+	
+				}
+			} else if (businessDTO.getLatitude() != 0 && businessDTO.getLongitude() != 0) {
+				System.out.println("**** XXX Constants.PERCENT+businessDTO.getName()+Constants.PERCENT: "+Constants.PERCENT+businessDTO.getName()+Constants.PERCENT);
+	
+				if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_22");
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_22(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getType(), businessDTO.getIsFranchise(), businessDTO.getIsForSell(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
+				
+				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
+					System.out.println("**** 333 Executing searchBusiness_23");
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_23(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getIsFranchise(), businessDTO.getIsForSell(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
+				
+				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_24");
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_24(businessDTO.getType(), businessDTO.getIsFranchise(), businessDTO.getIsForSell(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
+				}
 			}
-		} else if (businessDTO.getLatitude() != 0 && businessDTO.getLongitude() != 0) {
-			System.out.println("**** XXX Constants.PERCENT+businessDTO.getName()+Constants.PERCENT: "+Constants.PERCENT+businessDTO.getName()+Constants.PERCENT);
+		} else {
+			if (null != businessDTO.getZip() && 0 != businessDTO.getZip()) {
+				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_1_FSN");
+					
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_1_FSN(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getZip());
+				
+				} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_2_FSN");
+					
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_2_FSN(businessDTO.getName(), businessDTO.getType(), businessDTO.getZip());
+				
+				} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_3_FSN");
+					
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_3_FSN(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getZip());
+				
+				} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_4_FSN");
 
-			if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_22(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getType(), businessDTO.getIsFranchise(), businessDTO.getIsForSell(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
-			
-			} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_23(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getIsFranchise(), businessDTO.getIsForSell(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
-			
-			} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-				businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_24(businessDTO.getType(), businessDTO.getIsFranchise(), businessDTO.getIsForSell(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_4_FSN(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getZip());
+				
+				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
+					System.out.println("**** 333 Executing searchBusiness_5_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_5_FSN(businessDTO.getName(), businessDTO.getZip());
+				
+				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_6_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_6_FSN(businessDTO.getType(), businessDTO.getZip());
+		
+				} else {
+					System.out.println("**** 333 Executing searchBusiness_7_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_7_FSN(businessDTO.getZip());
+				}
+			} else if (null != businessDTO.getCity() && Constants.EMPTY_STRING != businessDTO.getCity()) {
+				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_8_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_8_FSN(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode());
+				
+				} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_9_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_9_FSN(businessDTO.getName(), businessDTO.getType(), businessDTO.getCity(), businessDTO.getStateCode());
+					
+					System.out.println("**** 333 Executing searchBusiness_9_FSN businessList SIZE: "+businessList.size());
+
+				} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_10_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_10_FSN(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode());
+				
+				} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_11_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_11_FSN(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode());
+				
+				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
+					System.out.println("**** 333 Executing searchBusiness_12_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_12_FSN(businessDTO.getName(), businessDTO.getCity(), businessDTO.getStateCode());
+					
+					System.out.println("**** 333 Executing searchBusiness_12 businessList SIZE: "+businessList.size());
+
+				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_13");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_13_FSN(businessDTO.getType(), businessDTO.getCity(), businessDTO.getStateCode());
+		
+				} else {
+					System.out.println("**** 333 Executing searchBusiness_14_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_14_FSN(businessDTO.getCity(), businessDTO.getStateCode());
+
+				}
+			} else if (null != businessDTO.getCounty() && Constants.EMPTY_STRING != businessDTO.getCounty()) {
+				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_15_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_15_FSN(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode());
+				
+				} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_16_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_16_FSN(businessDTO.getName(),businessDTO.getType(), businessDTO.getCounty(), businessDTO.getStateCode());
+				
+				} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_17_FSN");
+					
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_17_FSN(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode());
+				
+				} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
+					System.out.println("**** 333 Executing searchBusiness_18_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_18_FSN(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode());
+				
+				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
+					System.out.println("**** 333 Executing searchBusiness_19_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_19_FSN(businessDTO.getName(), businessDTO.getCounty(), businessDTO.getStateCode());
+				
+				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_20_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_20_FSN(businessDTO.getType(), businessDTO.getCounty(), businessDTO.getStateCode());
+		
+				} else {
+					System.out.println("**** 333 Executing searchBusiness_21_FSN");
+
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_21_FSN(businessDTO.getCounty(), businessDTO.getStateCode());
+
+				}
+			} else if (businessDTO.getLatitude() != 0 && businessDTO.getLongitude() != 0) {
+				System.out.println("**** XXX Constants.PERCENT+businessDTO.getName()+Constants.PERCENT: "+Constants.PERCENT+businessDTO.getName()+Constants.PERCENT);
+
+				if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_22_FSN");
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_22_FSN(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getType(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
+				
+				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
+					System.out.println("**** 333 Executing searchBusiness_23_FSN");
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_23_FSN(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
+				
+				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
+					System.out.println("**** 333 Executing searchBusiness_24_FSN");
+					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_24_FSN(businessDTO.getType(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
+				}
 			}
 		}
 		
