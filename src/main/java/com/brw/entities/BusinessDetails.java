@@ -71,6 +71,9 @@ public class BusinessDetails implements Serializable {
 	@Column(name = "data_completeness_score")
 	private int dataCompletenessScore;
 	
+	@Column(name = "view_counter")
+	private int viewCounter;
+	
 	@Column(name = "for_sell_YN")
 	private String isForSell;
 	
@@ -80,8 +83,29 @@ public class BusinessDetails implements Serializable {
 	@Column(name = "for_sell_price")
 	private int forSellPrice;
 	
-	@Column(name = "est_amount")
-	private int estimatedAmount;
+	@Column(name = "broker_first_name")
+	private String brokerFirstName;
+	
+	@Column(name = "broker_last_name")
+	private String brokerLastName;
+	
+	@Column(name = "broker_phone")
+	private String brokerPhone;
+	
+	@Column(name = "broker_email")
+	private String brokerEmail;
+	
+	@Column(name = "paid_listing_YN")
+	private String isPaidListing;
+	
+	@Column(name = "asset_based_est")
+	private int asset_based_est;
+	
+	@Column(name = "income_based_est")
+	private int income_based_est;
+	
+	@Column(name = "market_based_est")
+	private int market_based_est;
 	
 	@Column(name = "image_logo")
 	private String imageLogo;
@@ -383,6 +407,14 @@ public class BusinessDetails implements Serializable {
 		this.dataCompletenessScore = dataCompletenessScore;
 	}
 
+	public int getViewCounter() {
+		return viewCounter;
+	}
+
+	public void setViewCounter(int viewCounter) {
+		this.viewCounter = viewCounter;
+	}
+
 	public String getIsForSell() {
 		return isForSell;
 	}
@@ -407,12 +439,68 @@ public class BusinessDetails implements Serializable {
 		this.forSellPrice = forSellPrice;
 	}
 
-	public int getEstimatedAmount() {
-		return estimatedAmount;
+	public String getBrokerFirstName() {
+		return brokerFirstName;
 	}
 
-	public void setEstimatedAmount(int estimatedAmount) {
-		this.estimatedAmount = estimatedAmount;
+	public void setBrokerFirstName(String brokerFirstName) {
+		this.brokerFirstName = brokerFirstName;
+	}
+
+	public String getBrokerLastName() {
+		return brokerLastName;
+	}
+
+	public void setBrokerLastName(String brokerLastName) {
+		this.brokerLastName = brokerLastName;
+	}
+
+	public String getBrokerPhone() {
+		return brokerPhone;
+	}
+
+	public void setBrokerPhone(String brokerPhone) {
+		this.brokerPhone = brokerPhone;
+	}
+
+	public String getBrokerEmail() {
+		return brokerEmail;
+	}
+
+	public void setBrokerEmail(String brokerEmail) {
+		this.brokerEmail = brokerEmail;
+	}
+
+	public String getIsPaidListing() {
+		return isPaidListing;
+	}
+
+	public void setIsPaidListing(String isPaidListing) {
+		this.isPaidListing = isPaidListing;
+	}
+
+	public int getAsset_based_est() {
+		return asset_based_est;
+	}
+
+	public void setAsset_based_est(int asset_based_est) {
+		this.asset_based_est = asset_based_est;
+	}
+
+	public int getIncome_based_est() {
+		return income_based_est;
+	}
+
+	public void setIncome_based_est(int income_based_est) {
+		this.income_based_est = income_based_est;
+	}
+
+	public int getMarket_based_est() {
+		return market_based_est;
+	}
+
+	public void setMarket_based_est(int market_based_est) {
+		this.market_based_est = market_based_est;
 	}
 
 	public String getImageLogo() {

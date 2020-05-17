@@ -26,10 +26,18 @@ public class BusinessDetailsDTO {
 	private String regStateCode;
 	private String regStateDate;
 	private Integer dataCompletionScore;
+	private Integer viewCounter;
+	private String brokerFirstName;
+	private String brokerLastName;
+	private String brokerPhone;
+	private String brokerEmail;
+	private String isPaidListing;
+	private Integer asset_based_est;
+	private Integer income_based_est;
+	private Integer market_based_est;
 	private String isForSell;
 	private String isHidden;
 	private Integer forSellPrice;
-	private Integer estimatedAmount;
 	private String imageLogo;
 	private String imageFirst;
 	private String street1;
@@ -204,6 +212,65 @@ public class BusinessDetailsDTO {
 	public void setDataCompletionScore(Integer dataCompletionScore) {
 		this.dataCompletionScore = dataCompletionScore;
 	}
+	public Integer getViewCounter() {
+		return viewCounter;
+	}
+	public void setViewCounter(Integer viewCounter) {
+		this.viewCounter = viewCounter;
+	}
+	public String getBrokerFirstName() {
+		return brokerFirstName;
+	}
+	public void setBrokerFirstName(String brokerFirstName) {
+		this.brokerFirstName = brokerFirstName;
+	}
+	public String getBrokerLastName() {
+		return brokerLastName;
+	}
+	public void setBrokerLastName(String brokerLastName) {
+		this.brokerLastName = brokerLastName;
+	}
+	public String getBrokerPhone() {
+		return brokerPhone;
+	}
+	public void setBrokerPhone(String brokerPhone) {
+		this.brokerPhone = brokerPhone;
+	}
+	public String getBrokerEmail() {
+		return brokerEmail;
+	}
+	public void setBrokerEmail(String brokerEmail) {
+		this.brokerEmail = brokerEmail;
+	}
+	public String getIsPaidListing() {
+		
+		if (null != isPaidListing) {
+			return isPaidListing.toUpperCase();
+		} else {
+			return "N";
+		}
+	}
+	public void setIsPaidListing(String isPaidListing) {
+		this.isPaidListing = isPaidListing;
+	}
+	public Integer getAsset_based_est() {
+		return asset_based_est;
+	}
+	public void setAsset_based_est(Integer asset_based_est) {
+		this.asset_based_est = asset_based_est;
+	}
+	public Integer getIncome_based_est() {
+		return income_based_est;
+	}
+	public void setIncome_based_est(Integer income_based_est) {
+		this.income_based_est = income_based_est;
+	}
+	public Integer getMarket_based_est() {
+		return market_based_est;
+	}
+	public void setMarket_based_est(Integer market_based_est) {
+		this.market_based_est = market_based_est;
+	}
 	public String getIsForSell() {
 		if (null != isForSell) {
 			return isForSell.toUpperCase();
@@ -229,12 +296,6 @@ public class BusinessDetailsDTO {
 	}
 	public void setForSellPrice(Integer forSellPrice) {
 		this.forSellPrice = forSellPrice;
-	}
-	public Integer getEstimatedAmount() {
-		return estimatedAmount;
-	}
-	public void setEstimatedAmount(Integer estimatedAmount) {
-		this.estimatedAmount = estimatedAmount;
 	}
 	public String getImageLogo() {
 		return imageLogo;
