@@ -63,7 +63,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	@Override
 	public BusinessInfoListDTO searchBusiness(BusinessDetailsDTO businessDTO) {
 		
-		//Log the User Action - START
+		//Log the User Action - START - TODO Make this call Asynchronous
 		UserActivityDTO userActivityDTO = new UserActivityDTO();
 
 		if(null == businessDTO.getInvokerId()) {
@@ -81,6 +81,10 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
 		userService.trackUserActivity(userActivityDTO);
 		//Log the User Action - END
+		
+		//Increase the View Counter for Business - START - TODO Make this call Asynchronous
+		//Need to write the code to update View Counter on Business table
+		//Increase the View Counter for Business - END
 		
 		//TODO:TEMPORARY translation of zip code and business type - need to fix it on UI and then remove this code
 		if (businessDTO.getZip() == 94536) {
@@ -113,32 +117,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getLongitude: "+businessDTO.getLongitude());
 
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getRangeMile: "+businessDTO.getRangeMile());
-		
-		
-		
-		/*
-		switch(businessDTO.getType()) {
-		
-		case "GASSTATION":
-			businessDTO.setType("GAS_STATION");
-			break;
-		case "LIQUORSTORE":
-			businessDTO.setType("RETAIL");
-			break;
-		case "SALONSTORE":
-			businessDTO.setType("BEAUTY");
-			break;
-		case "CONVENIENCESTORE":
-			businessDTO.setType("RETAIL");
-			break;
-		case "AUTOSERVICE":
-			businessDTO.setType("AUTO");
-			break;
-		case "DRYCLEANERS":
-			businessDTO.setType("LAUNDRY");
-			break;
-		}
-		*/
 		
 		List<BusinessInfo> businessList = null;
 		if(businessDTO.getIsForSell().equals(Constants.Y)) {
