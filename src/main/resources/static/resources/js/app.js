@@ -71,9 +71,9 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                     // return propertyService.getPropertyDetails($stateParams.id);
                     return propertyService.getBusinessDetails($stateParams.id);
                 },
-                estimates: function (propertyService, $stateParams) {
-                    return propertyService.getEstimates($stateParams.id)
-                },
+//                estimates: function (propertyService, $stateParams) {
+//                    return propertyService.getEstimates($stateParams.id)
+//                },
                 propImages: function (propertyService, $stateParams) {
                     return propertyService.getBusinessImages($stateParams.id)
                 },

@@ -6,10 +6,10 @@
         .module('myApp')
         .controller('businessDetailsController', businessDetailsController);
 
-    businessDetailsController.$inject = ['$rootScope', '$scope', '$state', '$filter', 'details', 'estimates',
+    businessDetailsController.$inject = ['$rootScope', '$scope', '$state', '$filter', 'details',
         'propImages', 'propertyService', 'authService', 'constants'];
 
-    function businessDetailsController($rootScope, $scope, $state, $filter, details, estimates, propImages,
+    function businessDetailsController($rootScope, $scope, $state, $filter, details, propImages,
                                        propertyService, authService, constants) {
         $rootScope.authService = authService;
         $scope.equipmentExpanded = false;
@@ -36,7 +36,7 @@
         // $scope.similarPropertyList = similarProps.data.data.propertyList;
         $scope.businessDetails = details.data.data;
         $scope.businessDetails.createDate = details.data.data.createDate.split('T')[0];
-        $scope.estimates = estimates.data.data.estimatesList;
+//        $scope.estimates = estimates.data.data.estimatesList;
 //        $scope.imageArray = propImages.data.imagesList
         $scope.imageArray = [{"imageId": 100, "url": $scope.businessDetails.imageFirst}];
         if (propImages.data.imagesList.length !== 0) {
@@ -84,21 +84,21 @@
         $scope.estimateList = [];
         $scope.equipmentList = [];
         var label = "";
-        for (let i=0; i < $scope.estimates.length; i++) {
-            if ($scope.estimates[i].estimateType === "ASSET_BASED") {
-                label = "Asset Based";
-            } else if ($scope.estimates[i].estimateType === "MARKET_BASED") {
-                label = "Market Based";
-            } else if ($scope.estimates[i].estimateType === "INCOME_BASED") {
-                label = "Income Based";
-            }
-            $scope.estimateList.push({
-                id: i+1,
-                label: label,
-                model: "$" + $scope.estimates[i].estimatedAmount,
-                range: "$" + $scope.estimates[i].estimatedAmountLow + " - $" + $scope.estimates[i].estimatedAmountHigh,
-                tooltip: label + " estimate"})
-        }
+//        for (let i=0; i < $scope.estimates.length; i++) {
+//            if ($scope.estimates[i].estimateType === "ASSET_BASED") {
+//                label = "Asset Based";
+//            } else if ($scope.estimates[i].estimateType === "MARKET_BASED") {
+//                label = "Market Based";
+//            } else if ($scope.estimates[i].estimateType === "INCOME_BASED") {
+//                label = "Income Based";
+//            }
+//            $scope.estimateList.push({
+//                id: i+1,
+//                label: label,
+//                model: "$" + $scope.estimates[i].estimatedAmount,
+//                range: "$" + $scope.estimates[i].estimatedAmountLow + " - $" + $scope.estimates[i].estimatedAmountHigh,
+//                tooltip: label + " estimate"})
+//        }
 
         setTimeout(function(){
             var galleryTop = new Swiper('.gallery-top', {
@@ -142,7 +142,9 @@
                 },
             });
         },100);
-
+        $scope.contactUs = function(){
+            $state.go('contactUs',null, {'reload':true});
+        }
         $scope.expandEquipments = function(equipmentExpanded) {
             if (!equipmentExpanded){
                 $scope.equipmentExpanded = equipmentExpanded;

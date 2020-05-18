@@ -463,8 +463,11 @@
         async function addMarker(arrDestinations) {
             markers = [];
             for (var i = 0; i < arrDestinations.length; i++) {
+                if (arrDestinations[i].isHidden === 'Y') {
+                    continue
+                }
                 var icon = '../../img/icon/purple_marker.svg';
-                if (arrDestinations[i].isForSell === "Y") {
+                if (arrDestinations[i].isForSell === 'Y') {
                     icon = '../../img/icon/red_marker.svg';
                 }
                 var marker = new google.maps.Marker({
