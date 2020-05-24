@@ -6,14 +6,21 @@
     .module('myApp')
     .controller('contactUsController', contactUsController);
 
-  contactUsController.$inject = ['$document', '$scope', '$state', 'propertyService', '$timeout'];
-    function contactUsController($document, $scope, $state, propertyService, $timeout) {
-
+  contactUsController.$inject = ['$document', '$scope', '$state', 'propertyService', '$timeout', '$stateParams'];
+    function contactUsController($document, $scope, $state, propertyService, $timeout, $stateParams) {
         $scope.contactUsData = {};
         $scope.contactUsData.emailSent = false
         var profile = JSON.parse(sessionStorage.getItem("profile"));
         if (profile && profile.email) {
             $scope.contactUsData.email = profile.email
+        }
+        if ($stateParams && $stateParams.businessId !== null && $stateParams.action === "make_offer"){
+            $scope.contactUsData.subject = "Make an offer for Listing " + $stateParams.businessId
+            document.getElementById("subject").disabled = true;
+        }
+        if ($stateParams && $stateParams.businessId !== null && $stateParams.action === "contact_selling_agent"){
+            $scope.contactUsData.subject = "Contact Agent for Listing " + $stateParams.businessId
+            document.getElementById("subject").disabled = true;
         }
         $scope.sendContactUsEmail = function(contactUs) {
             if (contactUs.$invalid) {
@@ -37,6 +44,10 @@
             }
             if (userProfile.id) {
                 emailInformation.invokerId = userProfile.userId
+            }
+            if ($stateParams && $stateParams.businessId !== null) {
+                emailInformation.businessId = $stateParams.businessId
+                emailInformation.action = $stateParams.action
             }
             propertyService.sendEmail(emailInformation)
             .success(function(res) {

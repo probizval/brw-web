@@ -220,7 +220,11 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             url: '/contactUs',
             templateUrl: 'resources/pages/contactUs.html',
             controller: 'contactUsController',
-            reload: true
+            reload: true,
+            params: {
+                    businessId: {squash: true, value: null},
+                    action: {squash: true, value: null},
+                }
         })
         .state('aboutUs', {
             url: '/aboutUs',

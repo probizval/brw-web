@@ -11,6 +11,9 @@
 
     function businessDetailsController($rootScope, $scope, $state, $filter, details, propImages,
                                        propertyService, authService, constants) {
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+        });
         $rootScope.authService = authService;
         $scope.equipmentExpanded = false;
         $rootScope.isAuthenticated = authService.isAuthenticated();
@@ -143,7 +146,11 @@
             });
         },100);
         $scope.contactUs = function(){
-            $state.go('contactUs',null, {'reload':true});
+            var action = "make_offer"
+            if ($scope.businessDetails.isForSell === 'Y') {
+                action = "contact_selling_agent"
+            }
+            $state.go('contactUs', {'businessId': $scope.businessDetails.businessId, 'action': action}, {'reload':true});
         }
         $scope.expandEquipments = function(equipmentExpanded) {
             if (!equipmentExpanded){
