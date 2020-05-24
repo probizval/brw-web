@@ -16,6 +16,7 @@ public class BusinessInfoDTO {
 	private String isForSell;
 	private String isHidden;
 	private Integer forSellPrice;
+	private Integer marketBasedEst;
 	private String imageLogo;
 	private String imageFirst;
 	private String street1;
@@ -72,6 +73,12 @@ public class BusinessInfoDTO {
 	}
 	public void setForSellPrice(Integer forSellPrice) {
 		this.forSellPrice = forSellPrice;
+	}
+	public Integer getMarketBasedEst() {
+		return marketBasedEst;
+	}
+	public void setMarketBasedEst(Integer marketBasedEst) {
+		this.marketBasedEst = marketBasedEst;
 	}
 	public String getIsHidden() {
 		return isHidden;

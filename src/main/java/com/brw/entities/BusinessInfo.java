@@ -49,6 +49,9 @@ public class BusinessInfo implements Serializable {
 	@Column(name = "for_sell_price")
 	private int forSellPrice;
 	
+	@Column(name = "market_based_est")
+	private int marketBasedEst;
+	
 	@Column(name = "image_first")
 	private String imageFirst;
 	
@@ -117,6 +120,14 @@ public class BusinessInfo implements Serializable {
 
 	public void setForSellPrice(int forSellPrice) {
 		this.forSellPrice = forSellPrice;
+	}
+
+	public int getMarketBasedEst() {
+		return marketBasedEst;
+	}
+
+	public void setMarketBasedEst(int marketBasedEst) {
+		this.marketBasedEst = marketBasedEst;
 	}
 
 	public String getIsForSell() {
