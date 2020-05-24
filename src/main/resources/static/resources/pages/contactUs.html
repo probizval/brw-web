@@ -35,7 +35,7 @@
 
             <div class="form-group">
                 <label>Subject*</label>
-                <input type="text" class="form-control form-control-md" name="subject" ng-model="contactUsData.subject"
+                <input type="text" class="form-control form-control-md" id="subject" name="subject" ng-model="contactUsData.subject"
                        id="subject" placeholder="" required>
                 <div class="errors" ng-show="submitted || contactUs.subject.$touched">
                     <div style="color:red" ng-show="contactUs.subject.$error.required">Subject is required.</div>

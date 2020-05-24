@@ -157,9 +157,17 @@
                                             <div id="specification" class="panel-collapse collapse show" role="tabpanel">
                                                 <div class="card-body">
                                                     <div class="media-body" style="margin-bottom: 10px;">
-                                                        <button class="btn btn-lg btn-primary btn-block" data-ng-if="businessDetails.isForSell === 'N'" data-toggle="modal" data-ng-click="contactUs()">Make an Offer</button>
-                                                        <p ng-if="businessDetails.isForSell === 'N'">If you make an offer, it can't be refused</p>
-                                                        <button class="btn btn-lg btn-primary btn-block"  data-ng-if="businessDetails.isForSell === 'Y'" data-toggle="modal" data-ng-click="contactUs()">Contact Selling Agent</button>
+                                                        <button class="btn btn-lg btn-primary btn-block" data-ng-if="businessDetails.isForSell === 'N'" data-ng-click="contactUs()">
+                                                            Make an Offer
+                                                            <i class="fa fa-info-circle" style="font-size:14px;" data-toggle="popover" data-trigger="hover" data-content="This business is not on Sale but if you are interested we will try to contact the owner on your behalf."></i>
+                                                        </button>
+                                                        <p ng-if="businessDetails.isForSell === 'N'">If you make an offer, it can't be refused
+<!--                                                            <i class="fa fa-info-circle" style="font-size:14px;" data-toggle="tooltip" title="This business is not on Sale but if you are interested we will try to contact the owner on your behalf."></i>-->
+
+                                                        </p>
+                                                        <button class="btn btn-lg btn-primary btn-block"  data-ng-if="businessDetails.isForSell === 'Y'" data-ng-click="contactUs()">Contact Selling Agent
+                                                            <i class="fa fa-info-circle" style="font-size:14px;" data-toggle="popover" data-trigger="hover" data-content="This business is on Sale, you can try to contact selling Agent by sending an email"></i>
+                                                        </button>
 
                                                     </div>
                                                 </div>
