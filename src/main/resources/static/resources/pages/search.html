@@ -61,7 +61,7 @@
                                 <div ng-if="prop.isHidden === 'N' && (prop.street1 || prop.city)">
                                     <span class="item-address" ng-if="prop.street1 && prop.street2">{{prop.street1}}, {{prop.street2}}, {{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
                                     <span class="item-address" ng-if="prop.street1 && !prop.street2">{{prop.street1}}, {{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
-                                    <span class="item-address" ng-if="!prop.street1 && !prop.street2">{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
+                                    <span class="item-address" ng-if="!prop.street1 && !prop.street2">{{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
                                 </div>
                             </a>
                         </div>
