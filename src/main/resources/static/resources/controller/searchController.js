@@ -9,9 +9,20 @@
     searchController.$inject = ['$rootScope', '$scope', '$state', 'propertyService', 'propList', 'constants'];
 
     function searchController($rootScope, $scope, $state, propertyService, propList, constants) {
+        $(document).ready(function(){
+                $('[data-toggle="popover"]').popover();
+            });
         $scope.currentPage = 0;
         $scope.viewby = 10;
         var businessAddress = JSON.parse(localStorage.getItem('searchBusinessAttributes'))
+        var businessTypes = constants.searchBusinessTypes;
+        $scope.businessName = businessAddress.businessName;
+        for (var i=0; i < businessTypes.length; i++) {
+            if (businessTypes[i].apiName === businessAddress.businessType) {
+                $scope.businessType = businessTypes[i].name;
+                break
+            }
+        }
         $scope.businessCity = businessAddress.city
         $scope.businessState = businessAddress.state
         $scope.itemsPerPage = $scope.viewby;
@@ -462,6 +473,7 @@
 
         async function addMarker(arrDestinations) {
             markers = [];
+            var htmlContent = "";
             for (var i = 0; i < arrDestinations.length; i++) {
                 if (arrDestinations[i].isHidden === 'Y') {
                     continue
@@ -469,6 +481,15 @@
                 var icon = '../../img/icon/purple_marker.svg';
                 if (arrDestinations[i].isForSell === 'Y') {
                     icon = '../../img/icon/red_marker.svg';
+                }
+                if(arrDestinations[i].isForSell === 'Y' && arrDestinations[i].marketBasedEst !== 0) {
+                    htmlContent = "<a href=\"#businessDetails/" + arrDestinations[i].businessId + "\"><img src=\"" + arrDestinations[i].imageFirst + "\" style=\"width:200px;height:100px\" class=\"img-fluid\" alt=\"\"><p style=\"margin:0px;color:black;\">" + arrDestinations[i].name + "</p><p ng-if=\"arrDestinations[i].isForSell === \'Y\'\" style=\"margin:0px;color:black;\">" + "Asking Price: $" + arrDestinations[i].forSellPrice + "</p><p style=\"margin:0px;color:black;\">" + "Market Based Estimation: $" + arrDestinations[i].marketBasedEst + "</p>"
+                } else if (arrDestinations[i].isForSell === 'N' && arrDestinations[i].marketBasedEst !== 0) {
+                    htmlContent = "<a href=\"#businessDetails/" + arrDestinations[i].businessId + "\"><img src=\"" + arrDestinations[i].imageFirst + "\" style=\"width:200px;height:100px\" class=\"img-fluid\" alt=\"\"><p style=\"margin:0px;color:black;\">" + arrDestinations[i].name + "</p><p style=\"margin:0px;color:black;\">" + "Market Based Estimation: $" + arrDestinations[i].marketBasedEst + "</p>"
+                } else if (arrDestinations[i].isForSell === 'Y' && arrDestinations[i].marketBasedEst === 0) {
+                    htmlContent = "<a href=\"#businessDetails/" + arrDestinations[i].businessId + "\"><img src=\"" + arrDestinations[i].imageFirst + "\" style=\"width:200px;height:100px\" class=\"img-fluid\" alt=\"\"><p style=\"margin:0px;color:black;\">" + arrDestinations[i].name + "</p><p ng-if=\"arrDestinations[i].isForSell === \'Y\'\" style=\"margin:0px;color:black;\">" + "Asking Price: $" + arrDestinations[i].forSellPrice + "</p>"
+                } else {
+                    htmlContent = "<a href=\"#businessDetails/" + arrDestinations[i].businessId + "\"><img src=\"" + arrDestinations[i].imageFirst + "\" style=\"width:200px;height:100px\" class=\"img-fluid\" alt=\"\"><p style=\"margin:0px;color:black;\">" + arrDestinations[i].name + "</p>"
                 }
                 var marker = new google.maps.Marker({
                     title: arrDestinations[i].name,
@@ -478,7 +499,7 @@
                 });
                 markers.push(marker);
                 // add an event listener for this marker
-                bindInfoWindow(marker, map, "<p> <a href=\"#businessDetails/" + arrDestinations[i].businessId + "\"><img src=\"" + arrDestinations[i].imageFirst + "\" style=\"width:40px;height:40px\" class=\"img-fluid\" alt=\"\"> " + arrDestinations[i].name + "</p>");
+                bindInfoWindow(marker, map, htmlContent);
             }
         }
 

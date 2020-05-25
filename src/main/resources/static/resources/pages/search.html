@@ -15,56 +15,64 @@
     <div class="col-xs-12 col-sm-7 col-md-6 col-lg-5 col-xl-6">
         <div class="search-results">
             <div class="search-results-list">
+                <div style="color:red;">*Businesses in stealth mode are not marked on Map.
+                    <i class="fa fa-info-circle" style="font-size:14px;" data-toggle="popover" data-trigger="hover"
+                       data-content="Business in stealth mode is confidential business and we don't disclose name and address of confidential business anywhere on our website."></i>
+                </div>
                 <div class="page-header">
-                    <h1>Business near {{businessCity}}, {{businessState}}</h1>
+                    <h1 ng-if="businessName">{{businessName}} near {{businessCity}}, {{businessState}}</h1>
+                    <h1 ng-if="!businessName">{{businessType}} near {{businessCity}}, {{businessState}}</h1>
                 </div>
-                <div class="sorting">
-                  <div class="row justify-content-between">
-                    <div class="col-sm-6 col-lg-4">
-                      <div class="form-group">
-                        <select class="form-control form-control-md">
-                            <option selected="selected">Most recent</option>
-                            <option>Highest price</option>
-                            <option>Lowest price</option>
-                            <option>Most reduced</option>
-                            <option>Most popular</option>
-                        </select>
-                      </div>
-                    </div>
-                  <!-- <div class="col-sm-6 col-lg-4">
-                  <div class="btn-group float-right" role="group"> <a href="property_grid.html" class="btn btn-light"><i class="fa fa-th"></i></a> <a href="property_listing.html" class="btn btn-light active"><i class="fa fa-bars"></i></a> </div>
-                  </div> -->
-                  </div>
-                </div>
+<!--                <div class="sorting">-->
+<!--                  <div class="row justify-content-between">-->
+<!--                    <div class="col-sm-6 col-lg-4">-->
+<!--                      <div class="form-group">-->
+<!--                        <select class="form-control form-control-md">-->
+<!--                            <option selected="selected">Most recent</option>-->
+<!--                            <option>Highest price</option>-->
+<!--                            <option>Lowest price</option>-->
+<!--                            <option>Most reduced</option>-->
+<!--                            <option>Most popular</option>-->
+<!--                        </select>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  &lt;!&ndash; <div class="col-sm-6 col-lg-4">-->
+<!--                  <div class="btn-group float-right" role="group"> <a href="property_grid.html" class="btn btn-light"><i class="fa fa-th"></i></a> <a href="property_listing.html" class="btn btn-light active"><i class="fa fa-bars"></i></a> </div>-->
+<!--                  </div> &ndash;&gt;-->
+<!--                  </div>-->
+<!--                </div>-->
             
                 <div class="clearfix"></div>
 
                 <div class="row item-listing grid">
                     <div ng-repeat="prop in searchList | startFrom:currentPage*itemsPerPage | limitTo:itemsPerPage" class="item col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-6" id="prop{{$index}}">
-                        <div class="item-image">
+                            <a href="#businessDetails/{{prop.businessId}}">
+                                <div class="item-image" style="height:200px">
+                                    <img src="{{prop.imageFirst}}" style="width:350px;height:200px" class="img-fluid" alt="">
+                                    <div class="row item-badge-left save-item-left" ng-if="prop.isForSell">
+                                        <img src="../../img/icon/red_marker.svg" style="width:20px;height:20px"/>
+                                        <span>For Sale</span>
+                                    </div>
+                                    <a class="save-item" ng-class="{'save-item-active': prop.isBookMarked}" ng-click="bookMarked(prop, $index)"><i class="fa fa-star"></i></a>
+                                    <div class="item-badge-left save-item-bottom-left" ng-if="prop.name">
+                                        <span>{{prop.name}}</span>
+                                        <div ng-if="prop.isHidden === 'N' && (prop.street1 || prop.city)">
+                                            <span class="item-address" ng-if="prop.street1 && prop.street2">{{prop.street1}}, {{prop.street2}}, {{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
+                                            <span class="item-address" ng-if="prop.street1 && !prop.street2">{{prop.street1}}, {{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
+                                            <span class="item-address" ng-if="!prop.street1 && !prop.street2">{{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
+                                        </div>
+                                    </div>
 
-                            <a class="item-image" href="#businessDetails/{{prop.businessId}}">
-                                <img src="{{prop.imageFirst}}" style="width:400px;height:240px" class="img-fluid" alt="">
-                                <div class="row item-badge-left save-item-left" ng-if="prop.isForSell">
-                                    <img src="../../img/icon/red_marker.svg" style="width:24px;height:24px"/>
-                                    <span>For Sale</span>
-                                </div>
-                                <a class="save-item" ng-class="{'save-item-active': prop.isBookMarked}" ng-click="bookMarked(prop, $index)"><i class="fa fa-star"></i></a>
-                            </a>
-
-                            <a href="#businessDetails/{{prop.businessId}}" class="item-meta">
-                                <span class="item-price" ng-if="prop.isForSell === 'Y'">{{ prop.forSellPrice | currency : "$" : false }}</span> &nbsp;&nbsp;
-                                <span class="item-badge-right item-address">{{prop.type}}</span>
-                                <br/>
-                                <span class="item-address" ng-if="prop.name">{{prop.name}}</span>
-                                <br/>
-                                <div ng-if="prop.isHidden === 'N' && (prop.street1 || prop.city)">
-                                    <span class="item-address" ng-if="prop.street1 && prop.street2">{{prop.street1}}, {{prop.street2}}, {{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
-                                    <span class="item-address" ng-if="prop.street1 && !prop.street2">{{prop.street1}}, {{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
-                                    <span class="item-address" ng-if="!prop.street1 && !prop.street2">{{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
                                 </div>
                             </a>
-                        </div>
+                            <a href="#businessDetails/{{prop.businessId}}">
+                                <div style="padding:5px;">
+                                    <p class="item-price" ng-if="prop.isForSell === 'Y'">Asking Price ${{ prop.forSellPrice.toLocaleString('en', {useGrouping:true}) }}</p>
+                                    <p class="item-price" ng-if="prop.marketBasedEst">Market Estimated Price ${{ prop.marketBasedEst.toLocaleString('en', {useGrouping:true})}}</p>
+
+<!--                                    <p class="item-badge-right item-address">{{prop.type}}</p>-->
+                                </div>
+                            </a>
                     </div>
                 </div>
                 <div ng-if="searchList.length > 0">

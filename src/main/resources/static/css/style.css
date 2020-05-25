@@ -1662,11 +1662,10 @@ input[type="radio"], input[type="checkbox"] {
   margin-right: 10px; }
 
 .item-listing .item .item-price {
-  color: #FFF;
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 0;
-  text-shadow: 0 1px 0 black;}
+  color: #2A2A33;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 0;}
 
 .item-listing .item .item-price small {
   font-size: 14px;
@@ -1676,8 +1675,8 @@ input[type="radio"], input[type="checkbox"] {
 
 .item-listing .item .item-address {
   color: #FFF;
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 12px;
+  font-weight: normal;
   margin-bottom: 0;
   text-shadow: 0 1px 0 black;
 }
@@ -1732,13 +1731,25 @@ input[type="radio"], input[type="checkbox"] {
   display: block;
   position: absolute;
   top: 5px;
-  left: 10px;
-  font-size: 18px;
-  font-weight: bold;
+  left: 16px;
+  font-size: 16px;
+  font-weight: 600;
   color: #fff;
   text-align: center;
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.3); }
+
+.item-listing .item .save-item-bottom-left {
+    display: block;
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    font-size: 16px;
+    font-weight:bold;
+    line-height: 20px;
+    color: #fff;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.3);}
 
 .item-listing .item .save-item:hover {
   background-color: #FFF;
@@ -1757,12 +1768,11 @@ input[type="radio"], input[type="checkbox"] {
     text-align: left; } }
 .item-listing .item .item-badges .item-badge-right {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 10px;
+  right: 10px;
   padding: 5px 10px;
-  color: #FFF;
-  background-color: rgba(74, 74, 76, 0.7);
-  border-radius: 3px; }
+  color: #2A2A33;
+}
 
 .item-listing .item .item-title {
   font-size: 15px;
@@ -1813,12 +1823,9 @@ input[type="radio"], input[type="checkbox"] {
 
 .item-listing.grid .item .item-badge-right {
   position: absolute;
-  right: 15px;
-  color: #FFF;
-  padding: 0;
-  opacity: 1;
-  background-color: transparent;
-  text-shadow: 0 1px 0 black;}
+  right: 10px;
+  color: #2A2A33;
+  padding: 0;}
 
 .item-listing.grid .item .item-badge-left {
   position: absolute;
