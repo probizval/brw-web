@@ -1,0 +1,158 @@
+@@ -1,157 +0,0 @@
+<style>
+/*#menu .nav-item .nav-link {*/
+/*    .search-form.main.v2, .search-form.main.v5{*/
+/*    	min-height: 500px;*/
+/*        display: inline-block;*/
+/*    }*/
+/*    .col-md-12.col-lg-10.central-content {*/
+/*        background-color: #111111d4;*/
+/*        margin: 80px 0 65px 0;*/
+/*        padding: 30px 45px 45px 45px;*/
+/*        color: #fff;*/
+/*        display: inline-block;*/
+/*    }*/
+
+    .col-md-12.col-lg-12.col-xl-12.central-content{
+        background-color: rgba(0,0,0,.8);
+        margin: 50px 0 50px 0;
+        display: inline-block;
+    }
+
+    .search-form.main.v2, .search-form.main.v5{
+        background-image: url("../img/home-pr-1.jpg");
+        opacity: 0.8;
+        background-size: cover;
+        min-height: 500px;
+        padding: 20px 20px 20px 20px;
+    }
+
+    .col-md-6, .col-lg-6, .col-xl-6 {
+        padding: 0 5px 0 5px;
+    }
+    .col-md-5, .col-lg-5, .col-xl-5 {
+        padding: 0 5px 0 5px;
+    }
+
+    .col-md-4, .col-lg-4, .col-xl-4 {
+        padding: 0 5px 0 5px;
+    }
+
+    .col-md-3, .col-lg-3, .col-xl-3 {
+        padding: 0 5px 0 5px;
+    }
+
+    .col-md-2, .col-lg-2, .col-xl-2 {
+        padding: 0 5px 0 5px;
+    }
+    .col-md-1, .col-lg-1, .col-xl-1 {
+        padding: 0 5px 0 5px;
+    }
+
+/*}*/
+</style>
+<div class="home-search">
+<div class="main search-form v2">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-12 col-lg-12 col-xl-12 central-content">
+        <div class="heading">
+          <h2>Find <i>RealWorth</i><small>&trade;</small> of Business!</h2>
+	  <h6 style="color:#FF0000">Currently serving San Francisco - San Jose - Bay Area in California.</h6>
+        </div>
+        <form name="searchBusinessForm" ng-controller="homeController" ng-submit="submitted = true" novalidate>
+          <div class="justify-content-md-center">
+            <div class="row form-group justify-content-md-center">
+              <div class="col-md-4 col-lg-3 col-xl-3">
+                <label style="margin:0">Business Name</label>
+                <input type="text" id="businessName" name="businessName" ng-model="businessName" class="form-control"
+                       placeholder="Enter a Business name">
+              </div>
+
+              <div class="col-md-4 col-lg-3 col-xl-3">
+                <label style="margin:0">Business Type*</label>
+                <select class="form-control" name="businessType" ng-init="businessType = businessType || businessTypes[0]"
+                        ng-model="businessType" ng-options="businessType.name for businessType in businessTypes" id="businessType" required>
+<!--                  <option style="color:#868e96;" value="">All</option>-->
+                </select>
+		<span style="color:red" ng-show="submitted && searchBusinessForm.businessType.$error.required">Business Type is required.</span>
+              </div>
+
+<!--              <div class="col-md-5 col-lg-5 col-xl-5">-->
+<!--                <label style="margin:0">Business Address</label>-->
+<!--                <input type="text" id="autocomplete" name="location" ng-model="location" class="form-control"-->
+<!--                       ng-init="initialize" placeholder="Enter an address, city or zipcode">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="row form-group justify-content-md-center">-->
+<!--              <div class="col-md-2 col-lg-2 col-xl-2">-->
+<!--                <label style="margin:0">City*</label>-->
+<!--                <select class="form-control" name="businessCity" ng-model="businessCity"-->
+<!--                        ng-options="city as city.label for city in businessCities track by city.id"-->
+<!--                        id="locality" required>-->
+<!--&lt;!&ndash;                  <option default selected style="color:#868e96;" value="">Select a city</option>&ndash;&gt;-->
+<!--                </select>-->
+<!--                <span style="color:red" ng-show="submitted && searchBusinessForm.businessCity.$error.required">City is required.</span>-->
+<!--              </div>-->
+<!--              <div class="col-md-5 col-lg-5 col-xl-5">-->
+<!--                <label style="margin:0">Business Address</label>-->
+<!--                <input type="text" id="autocomplete" name="location" ng-model="location" class="form-control"-->
+<!--                       ng-init="initialize" placeholder="Enter an address, city or zipcode">-->
+<!--              </div>-->
+                <div class="col-md-3 col-lg-2 col-xl-2">
+                    <label style="margin:0">City*</label>
+                    <select class="form-control" name="businessCity" ng-model="businessCity"
+                            ng-options="city as city.label for city in businessCities track by city.id"
+                            id="locality" required>
+                        <!--                  <option default selected style="color:#868e96;" value="">Select a city</option>-->
+                    </select>
+                    <span style="color:red" ng-show="submitted && searchBusinessForm.businessCity.$error.required">City is required.</span>
+                </div>
+
+<!--            </div>-->
+<!--            <div class="row form-group justify-content-md-center">-->
+
+              <div class="col-md-2 col-lg-1 col-xl-1">
+                <label style="margin:0">State*</label>
+                <select class="form-control" name="businessState" ng-model="businessState"
+                        ng-options="state.label for state in businessStates track by state.id"
+                        id="administrative_area_level_1" required>
+<!--                  <option style="color:#868e96;" value="">Select a state</option>-->
+                </select>
+                <span style="color:red" ng-show="submitted && searchBusinessForm.businessState.$error.required">State is required.</span>
+              </div>
+
+              <div class="col-md-2 col-lg-1 col-xl-1">
+                <label style="margin:0">Zipcode</label>
+                <input type="text" id="postal_code" name="businessZipcode" ng-model="businessZipcode" class="form-control"
+                       placeholder="">
+              </div>
+                <div class="col-md-5 col-lg-4 col-xl-4">
+<!--                    <label style="color:white;margin-top:30px">Show For Sell Business only</label>-->
+                    <div class="checkbox checkbox-inline">
+                        <input type="checkbox" name="isForSell" id="isForSell" ng-model="isForSell" ng-false-value="N"
+                               ng-true-value="Y">
+                        <label style="color:white;margin-top:30px" for="isForSell">Show For Sale Business Only</label>
+                    </div>
+                </div>
+
+                <div class="col-md-1 col-lg-1 col-xl-1">
+                    <label style="color:#eee;margin:0;visibility:hidden">Test</label>
+                    <div class="form-group">
+                        <input type="submit" value="Search" class="btn btn-md btn-primary" ng-click="search(searchBusinessForm)">
+                    </div>
+                </div>
+            </div>
+          </div>
+          <input type="text" class="form-control" ng-model="businessAddress" id="address" hidden="hidden">
+          <input type="text" class="form-control" ng-model="businessCountry" id="country" hidden="hidden">
+          <input type="text" class="form-control" ng-model="businessRoute" id="route" hidden="hidden">
+          <input type="text" class="form-control" ng-model="businessStreetNumber" id="street_number" hidden="hidden">
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
