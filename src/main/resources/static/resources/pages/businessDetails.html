@@ -157,16 +157,28 @@
                                             <div id="specification" class="panel-collapse collapse show" role="tabpanel">
                                                 <div class="card-body">
                                                     <div class="media-body" style="margin-bottom: 10px;">
-                                                        <button class="btn btn-lg btn-primary btn-block" data-ng-if="businessDetails.isForSell === 'N'" data-ng-click="contactUs()">
+                                                        <button class="btn btn-lg btn-primary btn-block" style="font-size:14px;" data-ng-if="businessDetails.isForSell === 'N'" data-ng-click="contactUs('make_offer')">
                                                             Make an Offer
-                                                            <i class="fa fa-info-circle" style="font-size:14px;" data-toggle="popover" data-trigger="hover" data-content="This business is not on Sale but if you are interested we will try to contact the owner on your behalf."></i>
+                                                            <i class="fa fa-info-circle" style="font-size:12px;" data-toggle="popover" data-trigger="hover" data-content="This business is not on Sale but if you are interested we will try to contact the owner on your behalf."></i>
                                                         </button>
                                                         <p ng-if="businessDetails.isForSell === 'N'">If you make an offer, it can't be refused
 <!--                                                            <i class="fa fa-info-circle" style="font-size:14px;" data-toggle="tooltip" title="This business is not on Sale but if you are interested we will try to contact the owner on your behalf."></i>-->
 
                                                         </p>
-                                                        <button class="btn btn-lg btn-primary btn-block"  data-ng-if="businessDetails.isForSell === 'Y'" data-ng-click="contactUs()">Contact Selling Agent
-                                                            <i class="fa fa-info-circle" style="font-size:14px;" data-toggle="popover" data-trigger="hover" data-content="This business is on Sale, you can try to contact selling Agent by sending an email"></i>
+                                                        <button class="btn btn-lg btn-primary btn-block" style="font-size:14px;" data-ng-if="businessDetails.isForSell === 'Y'" data-ng-click="contactUs('contact_selling_agent')">Contact Selling Agent
+                                                            <i class="fa fa-info-circle" style="font-size:12px;" data-toggle="popover" data-trigger="hover" data-content="This business is on Sale, you can try to contact selling Agent by sending an email"></i>
+                                                        </button>
+                                                        <button class="btn btn-lg btn-primary btn-block" style="font-size:14px" data-ng-if="businessDetails.isForSell === 'N'" data-ng-click="contactUs('claim_business')">Claim Business
+                                                            <i class="fa fa-info-circle" style="font-size:12px;" data-toggle="popover" data-trigger="hover" data-content="You can claim this business"></i>
+                                                        </button>
+                                                        <button class="btn btn-lg btn-primary btn-block" style="font-size:14px;" data-ng-click="contactUs('geoeconomical_report')">GeoEconomical Report
+                                                            <i class="fa fa-info-circle" style="font-size:12px;" data-toggle="popover" data-trigger="hover" data-content="Get GeoEconomical Report"></i>
+                                                        </button>
+                                                        <button class="btn btn-lg btn-primary btn-block" style="font-size:14px;" data-ng-click="contactUs('premium_valuation')">Premium Valuation Report
+                                                            <i class="fa fa-info-circle" style="font-size:12px;" data-toggle="popover" data-trigger="hover" data-content="Get Premium Valuation Report"></i>
+                                                        </button>
+                                                        <button class="btn btn-lg btn-primary btn-block" style="font-size:14px;" data-ng-click="contactUs('professional_valuation')">Professional Valuation Report
+                                                            <i class="fa fa-info-circle" style="font-size:12px;" data-toggle="popover" data-trigger="hover" data-content="Get Professional Valuation Report"></i>
                                                         </button>
 
                                                     </div>

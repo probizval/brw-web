@@ -25,3 +25,6 @@
 /.nb-gradle/
 /.settings/
 /.mvn/
+
+#os files
+*.DS_Store

@@ -142,7 +142,19 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             reload: true,
             resolve: {
                 propList: function (propertyService) {
-                    return propertyService.getPropertyListByUser(0);
+//                    return propertyService.getPropertyListByUser(0);
+                    return propertyService.getUserBusinesses();
+                }
+            }
+        })
+        .state('business.editBusiness', {
+            url: '/editBusiness/:id',
+            templateUrl: 'resources/pages/editListingForm.html',
+            controller: 'editBusinessDetailsController',
+            reload: true,
+            resolve: {
+                propDetails: function (propertyService, $stateParams) {
+                    return propertyService.getBusinessDetails($stateParams.id);
                 }
             }
         })

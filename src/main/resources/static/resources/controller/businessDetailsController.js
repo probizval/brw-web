@@ -145,11 +145,7 @@
                 },
             });
         },100);
-        $scope.contactUs = function(){
-            var action = "make_offer"
-            if ($scope.businessDetails.isForSell === 'Y') {
-                action = "contact_selling_agent"
-            }
+        $scope.contactUs = function(action){
             $state.go('contactUs', {'businessId': $scope.businessDetails.businessId, 'action': action}, {'reload':true});
         }
         $scope.expandEquipments = function(equipmentExpanded) {

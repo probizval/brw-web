@@ -8,7 +8,15 @@
 
   myListingController.$inject = ['$scope','propList', 'propertyService'];
     function myListingController($scope, propList, propertyService) {
-      $scope.myList = propList.data.data;
+//      $scope.myBizList = propList.data.data;
+		$scope.myBizList = propList.data.data.userBusinessList;
+		$scope.currentPage = 0;
+		$scope.viewby = 10;
+		$scope.itemsPerPage = $scope.viewby;
+		$scope.numberOfPages = Math.floor($scope.myBizList.length/$scope.itemsPerPage);
+		if ($scope.myBizList.length%$scope.itemsPerPage !== 0){
+		    $scope.numberOfPages += 1
+		}
 
       $scope.next = function(pagenumber) {
     	 propertyService.getPropertyListByUser(Number(pagenumber))

@@ -2,33 +2,107 @@
             <div class="page-header bordered">
               <h1>My Listings</h1>
             </div>
-              <div class="row item-listing grid">
-                    <div ng-repeat="prop in myList.propertyList track by $index" class="item col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-6" id="prop{{index}}">
-                        <div class="item-image">
-                            <a class="item-image" href="#business/editProperty/{{prop.id}}">
-                                <img src="{{prop.imageUrl}}" style="width:400px;height:240px" class="img-fluid" alt="">
-                                <a href="#" class="save-item"><i class="fa fa-star"></i></a>
-                            </a>
+<!--              <div class="row item-listing grid">-->
+<!--                    <div ng-repeat="prop in myBizList.propertyList track by $index" class="item col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-6" id="prop{{index}}">-->
+<!--                        <div class="item-image">-->
+<!--                            <a class="item-image" href="#business/editProperty/{{prop.id}}">-->
+<!--                                <img src="{{prop.imageUrl}}" style="width:400px;height:240px" class="img-fluid" alt="">-->
+<!--                                <a href="#" class="save-item"><i class="fa fa-star"></i></a>-->
+<!--                            </a>-->
 
-                            <a href="#business/editProperty/{{prop.id}}" class="item-meta">
-                                <span class="item-badge-left item-address">For Sale{{prop.propertyAvailableFor}}</span>
-                                <span class="item-badge-right item-address">{{prop.businessType}}</span>
-                                <br/>
-                                <span class="item-price" ng-if="prop.estatedEstimatedValue">{{ prop.estatedEstimatedValue | currency : "$" : false }}</span> &nbsp;&nbsp;
-                                <span class="item-badge-right item-price" ng-if="prop.lotSize">{{prop.lotSize}} sq ft.</span>
-                                <br/>
-                                <span class="item-address" ng-if="prop.property_name">{{prop.propertyName}}</span>
-                                <br/>
-                                <span class="item-address">{{ prop.propertyAddress }}, {{prop.city}}, {{prop.state}} {{prop.zipCode}}</span>
-                            </a>
+<!--                            <a href="#business/editProperty/{{prop.id}}" class="item-meta">-->
+<!--                                <span class="item-badge-left item-address">For Sale{{prop.propertyAvailableFor}}</span>-->
+<!--                                <span class="item-badge-right item-address">{{prop.businessType}}</span>-->
+<!--                                <br/>-->
+<!--                                <span class="item-price" ng-if="prop.estatedEstimatedValue">{{ prop.estatedEstimatedValue | currency : "$" : false }}</span> &nbsp;&nbsp;-->
+<!--                                <span class="item-badge-right item-price" ng-if="prop.lotSize">{{prop.lotSize}} sq ft.</span>-->
+<!--                                <br/>-->
+<!--                                <span class="item-address" ng-if="prop.property_name">{{prop.propertyName}}</span>-->
+<!--                                <br/>-->
+<!--                                <span class="item-address">{{ prop.propertyAddress }}, {{prop.city}}, {{prop.state}} {{prop.zipCode}}</span>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            <div class="row item-listing grid">
+                <div ng-repeat="prop in myBizList | startFrom:currentPage*itemsPerPage | limitTo:itemsPerPage"
+                     class="item col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-6" id="prop{{$index}}">
+                    <a href="#business/editProperty/{{prop.businessId}}">
+                        <div class="item-image" style="height:200px">
+                            <img src="{{prop.imageFirst}}" style="width:350px;height:200px" class="img-fluid" alt="">
+                            <div class="row item-badge-left save-item-left" ng-if="prop.isForSell">
+                                <img src="../../img/icon/red_marker.svg" style="width:20px;height:20px"/>
+                                <span>For Sale</span>
+                            </div>
+                            <a class="save-item" ng-class="{'save-item-active': prop.isBookMarked}" ng-click="bookMarked(prop, $index)"><i class="fa fa-star"></i></a>
+                            <div class="item-badge-left save-item-bottom-left" ng-if="prop.name">
+                                <span>{{prop.name}}</span>
+                                <div ng-if="prop.street1 || prop.city">
+                                    <span class="item-address" ng-if="prop.street1 && prop.street2">{{prop.street1}}, {{prop.street2}}, {{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
+                                    <span class="item-address" ng-if="prop.street1 && !prop.street2">{{prop.street1}}, {{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
+                                    <span class="item-address" ng-if="!prop.street1 && !prop.street2">{{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
+                    </a>
+                    <a href="#business/editProperty/{{prop.businessId}}">
+                        <div style="padding:5px;">
+                            <p class="item-price" ng-if="prop.isForSell === 'Y'">Asking Price ${{ prop.forSellPrice.toLocaleString('en', {useGrouping:true}) }}</p>
+                            <p class="item-price" ng-if="prop.marketBasedEst">Market Estimated Price ${{ prop.marketBasedEst.toLocaleString('en', {useGrouping:true})}}</p>
+                        </div>
+                    </a>
                 </div>
-                
-               
-			<nav aria-label="Page navigation">
-              <ul class="pagination">
-                <li class="page-item"><a class="page-link" ng-click="next(myList.pageNumber - 1)">prev</a></li>
-                <li class="page-item"><a class="page-link" ng-click="next(myList.pageNumber + 1)">next</a></li>
-              </ul>
-            </nav>
+            </div>
+            <div ng-if="myBizList.length > 0">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pg-blue justify-content-center" style="margin:10px">
+                        <li class="page-item"><a class="page-link" ng-click="changePage(1)">First</a></li>
+                        <li ng-class="currentPage + 1 <= 1 ? 'page-item disabled': 'page-item'">
+                            <a class="page-link" aria-label="Previous" ng-click="disablePrevious()">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" ng-click="changePage(1)">1</a>
+                        </li>
+                        <li ng-class="numberOfPages < 2 ? 'page-item disabled': 'page-item'">
+                            <a class="page-link" ng-click="changePage(2)">2</a>
+                        </li>
+                        <li ng-class="numberOfPages < 3 ? 'page-item disabled': 'page-item'">
+                            <a class="page-link" ng-click="changePage(3)">3</a>
+                        </li>
+                        <li ng-class="currentPage + 1 >= numberOfPages ? 'page-item disabled': 'page-item'">
+                            <a class="page-link" aria-label="Next" ng-click="disableNext()">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" ng-click="changePage(numberOfPages)">Last</a>
+                        </li>
+
+                        <span style="margin:10px">
+                                Page {{currentPage + 1}} / {{numberOfPages}}
+                            </span>
+
+                        <span style="margin:10px">
+                                View Per Page
+                                <select ng-model="viewby" ng-change="setItemsPerPage(viewby)">
+                                    <option>10</option><option>20</option><option>50</option><option>100</option><option>200</option>
+                                </select>
+                            </span>
+
+                    </ul>
+
+                </nav>
+            </div>
+
+
+<!--            <nav aria-label="Page navigation">-->
+<!--              <ul class="pagination">-->
+<!--                <li class="page-item"><a class="page-link" ng-click="next(myBizList.pageNumber - 1)">prev</a></li>-->
+<!--                <li class="page-item"><a class="page-link" ng-click="next(myBizList.pageNumber + 1)">next</a></li>-->
+<!--              </ul>-->
+<!--            </nav>-->

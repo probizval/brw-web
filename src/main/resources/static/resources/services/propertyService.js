@@ -121,8 +121,27 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
         });
     };
 
+    propertyDataOp.updateBusinessDetails = function (businessDetails) {
+        return $http.post(businessUrl + 'UpdateBusinessDetails', businessDetails).success(function(res) {
+            return res.data;
+        }).error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+
     propertyDataOp.sendEmail = function (emailInformation) {
         return $http.post(emailUrl + 'sendEmail', emailInformation).success(function(res) {
+            return res.data;
+        }).error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+
+    propertyDataOp.getUserBusinesses = function () {
+        var profile = JSON.parse(sessionStorage.getItem('profile'));
+        var obj = {"userId": profile.userId}
+        var obj = {"userId": 1001}
+        return $http.post(userUrl + 'getUserBusinesses', obj).success(function(res) {
             return res.data;
         }).error(function (error) {
             return 'Unable to load store data: ' + error.message;

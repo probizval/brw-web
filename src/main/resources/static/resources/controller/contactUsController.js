@@ -22,6 +22,22 @@
             $scope.contactUsData.subject = "Contact Agent for Listing " + $stateParams.businessId
             document.getElementById("subject").disabled = true;
         }
+        if ($stateParams && $stateParams.businessId !== null && $stateParams.action === "claim_business"){
+            $scope.contactUsData.subject = "Claim Business " + $stateParams.businessId
+            document.getElementById("subject").disabled = true;
+        }
+        if ($stateParams && $stateParams.businessId !== null && $stateParams.action === "geoeconomical_report"){
+            $scope.contactUsData.subject = "Get GeoEconomical Report for Listing " + $stateParams.businessId
+            document.getElementById("subject").disabled = true;
+        }
+        if ($stateParams && $stateParams.businessId !== null && $stateParams.action === "premium_valuation"){
+            $scope.contactUsData.subject = "Get Premium Valuation Report for Listing " + $stateParams.businessId
+            document.getElementById("subject").disabled = true;
+        }
+        if ($stateParams && $stateParams.businessId !== null && $stateParams.action === "professional_valuation"){
+            $scope.contactUsData.subject = "Get Professional Valuation Report for Listing " + $stateParams.businessId
+            document.getElementById("subject").disabled = true;
+        }
         $scope.sendContactUsEmail = function(contactUs) {
             if (contactUs.$invalid) {
               if (angular.element($document[0].querySelector('input.ng-invalid'))[0]) {
