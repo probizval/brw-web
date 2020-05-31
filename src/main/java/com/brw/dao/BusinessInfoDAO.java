@@ -12,10 +12,16 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.query.Param;
 
+import com.brw.entities.BusinessDetails;
 import com.brw.entities.BusinessInfo;
 
 @Repository
 public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo, Integer>{
+	
+	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, hidden_YN, for_sell_price, market_based_est, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN "
+			+ "FROM t_brw_business "
+			+ "WHERE (:businessId is null or biz_id = :businessId);")
+	BusinessInfo getBusinessInfo(@Param ("businessId") int businessId);
 	
 	//ZIP
 	//Search where all 3 non-required attributes are part of the input - Type, Name and Address

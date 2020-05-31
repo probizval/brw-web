@@ -1,10 +1,8 @@
 ﻿BRW API Specifications Doc
-bRw
-rW
 
 Created By: Sid Patil
 Create Date: 11/14/2019
-Update Date: 03/14/2020
+Update Date: 05/31/2020
 
 
 Table of Contents -
@@ -1719,11 +1717,36 @@ Response-
     "status": "success",
     "httpStatus": "OK",
     "data": {
-        "searchAgentsList": [
+        "userBusinessList": [
             {
                 "userId": 1001,
                 "relationship": "OWNER",
-                "businessId": 1000000,
+                "businessId": 0,
+                "businessInfoDTO": {
+                    "invokerId": null,
+                    "businessId": 1000000,
+                    "name": "Business DBA Name - Misha's Italian",
+                    "type": "FARMING",
+                    "subType": "GENERAL_FARMING",
+                    "isForSell": "Y",
+                    "isHidden": "N",
+                    "forSellPrice": 0,
+                    "marketBasedEst": null,
+                    "imageLogo": null,
+                    "imageFirst": "https://s3-media0.fl.yelpcdn.com/bphoto/faqTp5HgEKYnO_fv1wicQw/o.jpg",
+                    "street1": "2140 Peralta Blvd",
+                    "street2": "Suit #110",
+                    "city": "Fremont",
+                    "county": "Alameda",
+                    "stateCode": "CA",
+                    "zip": 94536,
+                    "latitude": 37.562376,
+                    "longitude": -121.988676,
+                    "rangeMile": null,
+                    "isFranchise": null,
+                    "isEstimateAvailable": null,
+                    "isVendorCall": null
+                },
                 "createdByUserId": 1001,
                 "createDate": "2020-01-12 11:43",
                 "updatedByUserId": 1001,
@@ -1731,12 +1754,37 @@ Response-
             },
             {
                 "userId": 1001,
-                "relationship": "BROKER",
-                "businessId": 1000001,
+                "relationship": "OWNER",
+                "businessId": 0,
+                "businessInfoDTO": {
+                    "invokerId": null,
+                    "businessId": 5563543,
+                    "name": "TEST - ForSell Y and Hidden N",
+                    "type": "RESTAURANT",
+                    "subType": "RESTAURANT",
+                    "isForSell": "Y",
+                    "isHidden": "N",
+                    "forSellPrice": 120000,
+                    "marketBasedEst": null,
+                    "imageLogo": null,
+                    "imageFirst": "https://brwbusinessimages.s3-us-west-1.amazonaws.com/small-business.png",
+                    "street1": "2140 Peralta Boulevard, Fremont, CA, USA",
+                    "street2": "",
+                    "city": "Fremont",
+                    "county": "Alameda",
+                    "stateCode": "CA",
+                    "zip": 94536,
+                    "latitude": 37.5621208,
+                    "longitude": -121.9886765,
+                    "rangeMile": null,
+                    "isFranchise": null,
+                    "isEstimateAvailable": null,
+                    "isVendorCall": null
+                },
                 "createdByUserId": 1001,
-                "createDate": "2020-01-12 12:00",
+                "createDate": "2020-03-14 11:47",
                 "updatedByUserId": 1001,
-                "updateDate": "2020-01-12 12:00"
+                "updateDate": "2020-03-14 11:47"
             }
         ],
         "totalCount": null,

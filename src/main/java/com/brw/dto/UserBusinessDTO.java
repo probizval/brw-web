@@ -9,6 +9,7 @@ public class UserBusinessDTO {
 	private int userId;
 	private String relationship;
 	private int businessId;
+	private BusinessInfoDTO businessInfoDTO;
 	private int createdByUserId;
 	private String createDate;
 	private int updatedByUserId;
@@ -31,6 +32,12 @@ public class UserBusinessDTO {
 	}
 	public void setBusinessId(int businessId) {
 		this.businessId = businessId;
+	}
+	public BusinessInfoDTO getBusinessInfoDTO() {
+		return businessInfoDTO;
+	}
+	public void setBusinessInfoDTO(BusinessInfoDTO businessInfoDTO) {
+		this.businessInfoDTO = businessInfoDTO;
 	}
 	public int getCreatedByUserId() {
 		return createdByUserId;

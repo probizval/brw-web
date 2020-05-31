@@ -423,10 +423,49 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		return businessInfoListDTO;
 	}
 	
+	//Method to retrieve LIMITED Business Attributes from t_brw_busines table based on biz_id
+	@Override
+	public BusinessInfoDTO getBusinessInfoFromBRWDB(int businessId) {
+		// TODO Auto-generated method stub
+		System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessInfoFromBRWDB() businessId: "+businessId);
+		
+		BusinessInfo businessInfo = (BusinessInfo) businessInfoDAO.getBusinessInfo(businessId);
+		
+		BusinessInfoDTO businessInfoDTO = new BusinessInfoDTO();
+		businessInfoDTO.setBusinessId(businessInfo.getBusinessId());
+		businessInfoDTO.setType(businessInfo.getType());
+		businessInfoDTO.setSubType(businessInfo.getSubType());
+		businessInfoDTO.setIsForSell(businessInfo.getIsForSell());
+		businessInfoDTO.setIsHidden(businessInfo.getIsHidden());
+		businessInfoDTO.setForSellPrice(businessInfo.getForSellPrice());
+		businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
+		
+		System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetails.getIsHidden(): "+businessInfo.getIsHidden());
+
+		if (businessInfo.getIsHidden().equals(Constants.Y)) {			
+			businessInfoDTO.setName("Business for Sell in " + businessInfo.getCity() + ", " + businessInfo.getCounty() + " " + "County" );
+			
+			System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessInfoDTO.getName(): "+businessInfoDTO.getName());
+		} else {
+			businessInfoDTO.setName(businessInfo.getName());
+			businessInfoDTO.setStreet1(businessInfo.getStreet1());
+			businessInfoDTO.setStreet2(businessInfo.getStreet2());
+			businessInfoDTO.setCity(businessInfo.getCity());
+			businessInfoDTO.setCounty(businessInfo.getCounty());
+			businessInfoDTO.setStateCode(businessInfo.getStateCode());
+			businessInfoDTO.setZip(businessInfo.getZip());	
+			businessInfoDTO.setLatitude(businessInfo.getLatitude());
+			businessInfoDTO.setLongitude(businessInfo.getLongitude());
+		}
+		
+		return businessInfoDTO;
+	}
+	
+	//Method to retrieve ALL Business Attributes from t_brw_busines table based on biz_id
 	@Override
 	public BusinessDetailsDTO getBusinessDetailsFromBRWDB(int businessId) {
 		// TODO Auto-generated method stub
-		System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessId: "+businessId);
+		System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetailsFromBRWDB() businessId: "+businessId);
 		
 		BusinessDetails businessDetails = (BusinessDetails) businessDetailsDAO.getBusinessDetails(businessId);
 		

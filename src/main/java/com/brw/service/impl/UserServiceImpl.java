@@ -17,6 +17,8 @@ import com.brw.common.constants.Constants;
 import com.brw.dao.UserActivityDAO;
 import com.brw.dao.UserBusinessDAO;
 import com.brw.dao.UserDAO;
+import com.brw.dto.BusinessDetailsDTO;
+import com.brw.dto.BusinessInfoDTO;
 import com.brw.dto.UserActivityDTO;
 import com.brw.dto.UserBusinessDTO;
 import com.brw.dto.UserBusinessListDTO;
@@ -37,6 +39,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserActivityDAO userActivityDAO;
+	
+	@Autowired
+	private BusinessServiceImpl businessService; 
 	
 	@Override
 	public UserDTO addUserProfile(UserDTO userDTO) {
@@ -474,7 +479,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public UserBusinessListDTO getUserBusinesses(int userId) {
-		System.out.println("222 **** Inside SearchAgentServiceImpl.getSearchAgent()");
+		System.out.println("222 **** Inside UserServiceImpl.getUserBusinesses()");
 		
 		List<UserBusiness> userBusinessList = (List<UserBusiness>)userBusinessDAO.getUserBusinesses(userId);
 		List<UserBusinessDTO> useBusinessDTOList = new ArrayList<UserBusinessDTO>();
@@ -485,7 +490,12 @@ public class UserServiceImpl implements UserService {
 			
 			returnUserBusinessDTO.setUserId(returnUserBusiness.getUserId());
 			returnUserBusinessDTO.setRelationship(returnUserBusiness.getRelationship());
-			returnUserBusinessDTO.setBusinessId(returnUserBusiness.getBusinessId());
+			//returnUserBusinessDTO.setBusinessId(returnUserBusiness.getBusinessId());
+			//Call GetUserInfo based on the biz_Id to get few other details about the business and return as part of the response of getUserBusinesses
+			System.out.println("222 **** Inside UserServiceImpl.getUserBusinesses() bizId: "+returnUserBusiness.getBusinessId());
+			BusinessInfoDTO businessInfoDTO = businessService.getBusinessInfoFromBRWDB(returnUserBusiness.getBusinessId());
+			returnUserBusinessDTO.setBusinessInfoDTO(businessInfoDTO);
+			//
 			returnUserBusinessDTO.setCreatedByUserId(returnUserBusiness.getCreatedByUserId());
 			returnUserBusinessDTO.setCreateDate(returnUserBusiness.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 			returnUserBusinessDTO.setUpdatedByUserId(returnUserBusiness.getUpdatedByUserId());

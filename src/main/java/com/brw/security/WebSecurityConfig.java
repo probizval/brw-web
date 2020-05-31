@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.append(",/api/additionalAttributes/v1/**")
 			.append(",/api/transactions/v1/**")
 			.append(",/api/image/v1/**")
-			.append(",/api/user/v1/**")
+			//.append(",/api/user/v1/**")
 			;
 		
 		
