@@ -2187,6 +2187,48 @@ Response -
     "updateDate": "2020-01-04 12:11"
 }
 
+
+32.	GetStateCounties - This service returns list of counties based on StateName
+Method - Post
+EndPoint –
+http://localhost:8080/api/additionalAttributes/v1/getStateCounties
+
+Request -
+{
+   "stateName": "California"
+}
+
+Response -
+{
+    "status": "success",
+    "httpStatus": "OK",
+    "data": {
+        "stateCode": null,
+        "stateName": "California",
+        "listsOfCounties": [
+            "Yuba County",
+            "Yolo County",
+            "Ventura County",
+            "Tuolumne County",
+            "Tulare County",
+            "Trinity County",
+            "Tehama County",
+            "Sutter County",
+            "Stanislaus County"
+        ],
+        "listsOfCities": null
+    },
+    "totalCount": null,
+    "pageNumber": null,
+    "pageSize": null,
+    "errorCode": null,
+    "errorMessage": null,
+    "validationErrors": null
+}
+
+
+*****************************************************************************************************
+
 Authentication and Authorization implementation - 
 
 Authentication - 
