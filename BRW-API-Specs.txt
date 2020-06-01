@@ -73,6 +73,8 @@ For Business Type specific details use AddAdditionalAttributes.
 
 31. UploadImages - Service to upload user given images to S3 and then saving the S3 URLs to BRW DB.
 
+32.	GetStateCounties - This service returns list of counties based on StateName
+
 Pending from Phase 1-
 1. RunSearchAgent
 
