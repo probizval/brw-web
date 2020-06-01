@@ -20,6 +20,7 @@ import com.brw.dto.AdditionalAttribDefinitionsDTO;
 import com.brw.dto.AdditionalAttribDefinitionsListDTO;
 import com.brw.dto.AdditionalAttribsDTO;
 import com.brw.dto.AdditionalAttribsListDTO;
+import com.brw.dto.StateCountyCitiesDTO;
 import com.brw.entities.AdditionalAttribDefinitions;
 import com.brw.entities.AdditionalAttributes;
 
@@ -149,5 +150,21 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 		System.out.println("222.1 **** Inside AdditionalAttribServiceImpl.updateAdditionalAttributes() Number of deletedRecords: "+ records);
 
 		return true;
+	}
+	
+	@Override
+	public StateCountyCitiesDTO getStateCounties(String stateName) {
+		// TODO Auto-generated method stub
+		System.out.println("**** 222 Inside AdditionalAttribServiceImpl.getStateCounties() stateName: "+stateName);
+		
+		List<String> counties = (List<String>)additionalAttribsDAO.getStateCounties(stateName);
+
+		StateCountyCitiesDTO retuenStateCountyCitiesDTO = new StateCountyCitiesDTO();
+			
+		//retuenStateCountyCitiesDTO.setStateCode(stateCountyCitiesDTO.getStateCode());
+		retuenStateCountyCitiesDTO.setStateName(stateName);
+		retuenStateCountyCitiesDTO.setListsOfCounties(counties);
+			
+		return retuenStateCountyCitiesDTO;
 	}
 }

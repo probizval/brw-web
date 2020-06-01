@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 
 /**
  * @author sidpatil
- * 2019
+ * 2019-20
  */
 
 import org.springframework.data.jpa.repository.Query;
@@ -27,4 +27,7 @@ public interface AdditionalAttribsDAO extends PagingAndSortingRepository<Additio
 	@Transactional
 	@Query(nativeQuery=true, value="DELETE FROM t_brw_business_add_attributes WHERE biz_id = :businessId")
 	int deleteAdditionalAttributes(@Param ("businessId") int businessId);
+	
+	@Query(nativeQuery=true, value="SELECT county_name FROM t_brw_state_counties WHERE state_name = :stateName ORDER BY county_name DESC;")
+	List<String> getStateCounties(@Param ("stateName") String stateName);
 }

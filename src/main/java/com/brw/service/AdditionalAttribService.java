@@ -2,11 +2,12 @@ package com.brw.service;
 
 import com.brw.dto.AdditionalAttribDefinitionsListDTO;
 import com.brw.dto.AdditionalAttribsListDTO;
+import com.brw.dto.StateCountyCitiesDTO;
 import com.brw.exceptions.AdditionalAttribsException;
 
 /**
  * @author sidpatil
- * 2019
+ * 2019-20
  */
 
 public interface AdditionalAttribService {
@@ -15,5 +16,5 @@ public interface AdditionalAttribService {
 	public AdditionalAttribsListDTO getAdditionalAttributes(int businessId) throws AdditionalAttribsException;
 	public AdditionalAttribsListDTO addAdditionalAttributes(AdditionalAttribsListDTO additionalAttribsListDTO) throws AdditionalAttribsException;
 	public boolean deleteAdditionalAttributes(int businessId) throws AdditionalAttribsException;
-	//public AdditionalAttribsListDTO updateAdditionalAttributes(AdditionalAttribsListDTO additionalAttribsListDTO) throws AdditionalAttribsException;
+	public StateCountyCitiesDTO getStateCounties(String stateName) throws AdditionalAttribsException;
 }

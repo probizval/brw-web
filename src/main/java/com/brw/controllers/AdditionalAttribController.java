@@ -2,7 +2,7 @@ package com.brw.controllers;
 
 /**
  * @author sidpatil
- * 2019
+ * 2020
  */
 
 import org.slf4j.Logger;
@@ -22,6 +22,7 @@ import com.brw.common.response.ApiResponse;
 import com.brw.dto.AdditionalAttribDefinitionsListDTO;
 import com.brw.dto.AdditionalAttribsListDTO;
 import com.brw.dto.BusinessDetailsDTO;
+import com.brw.dto.StateCountyCitiesDTO;
 import com.brw.exceptions.AdditionalAttribsException;
 import com.brw.service.AdditionalAttribService;
 
@@ -151,5 +152,30 @@ public class AdditionalAttribController implements ErrorController {
 			return new ResponseEntity<>(addAttribsListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}
+	}
+	
+	/**
+	 * @author sidpatil
+	 * 2020
+	 * getStateCounties - Service to get list of counties based on state code 
+	 */
+	@PostMapping(value = "getStateCounties")
+	public ApiResponse<?> getStateCounties(@RequestBody StateCountyCitiesDTO stateCountyCitiesDTO) {
+		
+		System.out.println("**** 111 Inside AdditionalAttribController.getAdditionalAttributes()");
+		
+		logger.info("Get the Business Transactions based on business Id");
+
+		StateCountyCitiesDTO returnStateCountyCitiesDTO = null;
+		
+		try {
+			returnStateCountyCitiesDTO = additionalAttribService.getStateCounties(stateCountyCitiesDTO.getStateName());
+			
+		} catch (AdditionalAttribsException ee) {
+			ee.printStackTrace();
+			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
+			
+		}
+		return ApiResponse.withData(returnStateCountyCitiesDTO);
 	}
 }
