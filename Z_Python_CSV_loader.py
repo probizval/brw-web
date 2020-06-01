@@ -9,7 +9,13 @@ Created on Wed May 28 21:02:26 2020
 This script uploads the CSV file to MySQL DB.
 CSV file has to be formatted to match t_brw_business table.
 This program is suppose to handle close to 1 MIL rows of data in each run.
-Tyarget is to upload about 60 MIL rows of business data to cover all 50 states of US.
+Target is to upload about 60 MIL rows of business data to cover all 50 states of US.
+
+To split the file on MAC OS
+split -b 100m filename.csv
+
+To change the extention of the files
+for i in *; do mv "$i" "$i.csv"; done
 
 """
 
@@ -19,7 +25,7 @@ import mysql.connector
 
 # Open the workbook and define the worksheet
 #bizDataFile = open("CA_2.csv")
-bizDataFile = open("CA_1_t_brw_business.csv")
+bizDataFile = open("AZ_t_brw_business.csv")
 csvReader = reader(bizDataFile)
 
 # Establish a MySQL connection
