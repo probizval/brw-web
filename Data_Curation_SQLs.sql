@@ -39,14 +39,15 @@ select * from t_brw_business where biz_id = 15402854
 -- 8. Execute SQLs by ending them with ;
 
 -- find duplicates - this returns 0 results, must be wrong :)
-select a.biz_id, a.name_dba, a.add_street1, a.add_city, a.add_state 
-from t_brw_business a, t_brw_business b
-where 
-a.biz_id != b.biz_id
-and a.name_dba = b.name_dba
-and a.add_street1 = b.add_street1
-and a.add_city = b.add_city
-and a.add_city = 'FREMONT';
+select a.name_dba, a.add_street1, a.biz_id 
+from t_brw_business a, t_brw_business b 
+where a.biz_id != b.biz_id 
+and a.name_dba = b.name_dba 
+and a.add_street1 = b.add_street1 
+and a.add_city = b.add_city 
+and a.add_state = 'CA' 
+and b.add_state = 'CA' 
+order by a.name_dba;
 
 -- If the count is more than 1 for any row thats the duplicate
 select name_dba, add_street1, add_city, add_state, count(*) cnt 
