@@ -2,31 +2,36 @@ SELECT max(biz_id) FROM brwdev.t_brw_business;
 
 SELECT *  FROM brwdev.t_brw_business where biz_id < 6000
 
-SELECT count(*) FROM brwdev.t_brw_business where add_city like 'fremont'
+-- Delete SQL to delete duplicates for a particular business based on its 
+-- name and address
+update t_brw_business 
+set updatedby_user_id = 9999
+where 
+biz_id = (select biz_id 
+	from t_brw_business 
+	where 
+	biz_id in (select biz_id 
+		from t_brw_business 
+		where name_dba = 'PLAYBOY ENTERPRISES INC'
+		and add_street1 = '10236 CHARING CROSS RD'
+		and add_city = 'LOS ANGELES'
+		and add_state = 'CA')
+	and sales_range is not null
+	and employee_range is not null
+	-- and biz_contact_title = 'owner' 
+	limit 1);update_image_first
 
-SELECT count(*) FROM brwdev.t_brw_business where add_state = 'UT'
-
-SELECT count(biz_id)  FROM brwdev.t_brw_business where add_state = 'UT'
-
-
-select * from t_brw_business where name_legal like "%On Lock, Inc%"
-
-select * from t_brw_business where biz_id = 10724720
-
-select * from t_brw_business where name_legal = "TEST_1"
-
-
-select count(distinct add_city) from t_brw_business
-
-select distinct add_city from t_brw_business order by add_city asc
-
-select count(*) from t_brw_business where add_city like 'san francisco'
-
-
-select max(biz_id) from t_brw_business 
-where add_state = 'AZ' 
-
-select * from t_brw_business where biz_id = 15402854
+-- DELETE SQL to delete the record where updatedby_user_id IS NOT 9999
+-- delete from t_brw_business 
+select count(*) from t_brw_business 
+	where 
+	biz_id in (select biz_id 
+		from t_brw_business 
+		where name_dba = 'PLAYBOY ENTERPRISES INC'
+		and add_street1 = '10236 CHARING CROSS RD'
+		and add_city = 'LOS ANGELES'
+		and add_state = 'CA'
+        and updatedby_user_id != 9999);
 
 ***********************************************************
 -- 1. Data Curation Scripts start here
