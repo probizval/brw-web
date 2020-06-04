@@ -28,9 +28,17 @@ where add_state = 'AZ'
 
 select * from t_brw_business where biz_id = 15402854
 
+***********************************************************
+-- 1. Data Curation Scripts start here
+-- 2. Open Terminal on MAC
+-- 3. Goto cd - /usr/local/mysql-shell/bin/
+-- 4. run command - mysqlsh
+-- 5. rum command - \connect admin@brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com/brwdev
+-- 6. Enter password if it asks
+-- 7. Switch to SQL mode by command - \sql
+-- 8. Execute SQLs by ending them with ;
 
-
--- find duplicates
+-- find duplicates - this returns 0 results, must be wrong :)
 select a.biz_id, b.biz_id, a. name_dba, a.add_street1, b.add_street1, a.add_city 
 from t_brw_business a, t_brw_business b
 where 
@@ -43,10 +51,10 @@ and a.add_street1 like b.add_street1
 and a.add_city = b.add_city
 and a.add_city = 'CA';
 
-
-select add_street1, add_city, add_state, count(*) 
+-- If the count is more than 1 for any row thats the duplicate
+select name_dba, add_street1, add_city, add_state, count(*) 
 from t_brw_business 
-where add_city like 'fremont'
-group by add_street1, add_city, add_state
+where add_state = 'CA'
+group by name_dba, add_street1, add_city, add_state limit 1000;
 
 
