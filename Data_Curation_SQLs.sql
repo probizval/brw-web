@@ -93,11 +93,11 @@ and a.add_city = b.add_city
 and a.add_city = 'FREMONT';
 
 -- If the count is more than 1 for any row thats the duplicate
-select name_dba, add_street1, add_city, add_state, count(*) cnt 
-from t_brw_business 
-where add_state = 'CA'
-group by name_dba, add_street1, add_city, add_state 
-having cnt > 1
+select name_dba, add_street1, add_city, add_state, count(*) cnt  
+from t_brw_business  
+where add_state = 'CA' 
+group by name_dba, add_street1, add_city, add_state  
+having cnt > 1 
 order by cnt desc 
 limit 1000;
 
@@ -177,4 +177,5 @@ insert into t_brw_business_image (biz_id, image_URL)
 values ('biz_id', 's3//link_for_brw_aws_location_for_generic_restaurant_image.JPG');
 }
 -- *************************************************
+
 
