@@ -38,31 +38,6 @@ select * from t_brw_business where biz_id = 15402854
 -- 7. Switch to SQL mode by command - \sql
 -- 8. Execute SQLs by ending them with ;
 
--- find duplicates - this returns 0 results, must be wrong :)
-select a.name_dba, a.add_street1, a.biz_id 
-from t_brw_business a, t_brw_business b 
-where a.biz_id != b.biz_id 
-and a.name_dba = b.name_dba 
-and a.add_street1 = b.add_street1 
-and a.add_city = b.add_city 
-and a.add_state = 'CA' 
-and b.add_state = 'CA' 
-order by a.name_dba;
-
--- If the count is more than 1 for any row thats the duplicate
-select name_dba, add_street1, add_city, add_state, count(*) cnt 
-from t_brw_business 
-where add_state = 'CA'
-group by name_dba, add_street1, add_city, add_state 
-having cnt > 1
-order by cnt desc 
-limit 1000;
-
--- select distinct SIC description to decide the business type
-select distinct sic_description, sic_code
-from t_brw_business
-where state = 'CA' order by sic_description asc;
-
 -- ******************************************************
 -- *** Data Curation Rules and steps sequence ***
 -- 1. Delete Duplicates - Keep the record that has most columns, especially with 
@@ -82,24 +57,36 @@ where state = 'CA' order by sic_description asc;
 -- revenue range, employee range, specific SIC description, contact title as owner 
 -- and contact details.
 --
--- find duplicates - this returns 0 results, must be wrong :)
-select a.biz_id, a.name_dba, a.add_street1, a.add_city, a.add_state 
-from t_brw_business a, t_brw_business b
-where 
-a.biz_id != b.biz_id
-and a.name_dba = b.name_dba
-and a.add_street1 = b.add_street1
-and a.add_city = b.add_city
-and a.add_city = 'FREMONT';
+-- #1 find duplicates
+select a.name_dba, a.add_street1, a.biz_id 
+from t_brw_business a, t_brw_business b 
+where a.biz_id != b.biz_id 
+and a.name_dba = b.name_dba 
+and a.add_street1 = b.add_street1 
+and a.add_city = b.add_city 
+and a.add_state = 'CA' 
+and b.add_state = 'CA' 
+order by a.name_dba;
 
--- If the count is more than 1 for any row thats the duplicate
-select name_dba, add_street1, add_city, add_state, count(*) cnt  
-from t_brw_business  
-where add_state = 'CA' 
-group by name_dba, add_street1, add_city, add_state  
-having cnt > 1 
+-- #2 If the count is more than 1 for any row thats the duplicate
+select name_dba, add_street1, add_city, add_state, count(*) cnt 
+from t_brw_business 
+where add_state = 'CA'
+group by name_dba, add_street1, add_city, add_state 
+having cnt > 1
 order by cnt desc 
 limit 1000;
+
+
+-- Delete Duplicates - This has to be a SP
+-- Sudo Code
+-- Select duplicates name and address 
+-- select miltiple biz_ids based on above name and address
+-- select one single biz_id that has all necessary attributes filled in (revenue, employee etc)
+-- keep that selected biz_id row active while in-actibe rest all rows
+-- if all rows has same data just pick random one row
+-- change all selects to always return just the active rows
+
 
 -- 2. Based on SIC description decide the Biz Type - update type, sub type 
 -- and naics attributes
