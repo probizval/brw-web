@@ -1,6 +1,27 @@
+-- ***********************************************************
+-- 1. Data Curation Scripts start here
+-- 2. Open Terminal on MAC
+-- 3. Goto - cd /usr/local/mysql-shell/bin/
+-- 4. run command - mysqlsh
+-- 5. rum command - \connect admin@brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com/brwdev
+-- 6. Enter password if it asks
+-- 7. Switch to SQL mode by command - \sql
+-- 8. Execute SQLs by ending them with ;
+
 SELECT max(biz_id) FROM brwdev.t_brw_business;
 
-SELECT *  FROM brwdev.t_brw_business where biz_id < 6000
+SELECT count(*) FROM brwdev.t_brw_business;
+-- where biz_id < 6000
+
+-- create index for better performance
+CREATE INDEX idx_brw_primary_key
+ON t_brw_business (name_dba, add_street1, add_city, add_state);
+
+-- To list all DB process
+SHOW FULL PROCESSLIST;
+
+-- To kill the DB process
+-- CALL mysql.rds_kill(31);
 
 -- Delete SQL to delete duplicates for a particular business based on its 
 -- name and address
@@ -33,16 +54,14 @@ select count(*) from t_brw_business
 		and add_state = 'CA'
         and updatedby_user_id != 9999);
 
-***********************************************************
--- 1. Data Curation Scripts start here
--- 2. Open Terminal on MAC
--- 3. Goto - cd /usr/local/mysql-shell/bin/
--- 4. run command - mysqlsh
--- 5. rum command - \connect admin@brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com/brwdev
--- 6. Enter password if it asks
--- 7. Switch to SQL mode by command - \sql
--- 8. Execute SQLs by ending them with ;
 
+
+select count(biz_id) 
+		from t_brw_business 
+		where name_dba = 'PLAYBOY ENTERPRISES INC'
+		and add_street1 = '10236 CHARING CROSS RD'
+		and add_city = 'LOS ANGELES'
+		and add_state = 'CA';
 -- ******************************************************
 -- *** Data Curation Rules and steps sequence ***
 -- 1. Delete Duplicates - Keep the record that has most columns, especially with 
@@ -62,7 +81,7 @@ select count(*) from t_brw_business
 -- revenue range, employee range, specific SIC description, contact title as owner 
 -- and contact details.
 --
--- #1 find duplicates
+-- #1 find duplicates - not si effective SQL
 select a.name_dba, a.add_street1, a.biz_id 
 from t_brw_business a, t_brw_business b 
 where a.biz_id != b.biz_id 
@@ -76,10 +95,10 @@ order by a.name_dba;
 -- #2 If the count is more than 1 for any row thats the duplicate
 select name_dba, add_street1, add_city, add_state, count(*) cnt 
 from t_brw_business 
-where add_state = 'CA'
-and add_city = 'Fremont'
+where add_state = 'CA' 
+and add_city = 'Fremont' 
 group by name_dba, add_street1, add_city, add_state 
-having cnt > 1
+having cnt > 1 
 order by cnt desc 
 limit 10;
 
