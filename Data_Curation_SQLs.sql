@@ -21,7 +21,7 @@ ON t_brw_business (name_dba, add_street1, add_city, add_state);
 SHOW FULL PROCESSLIST;
 
 -- To kill the DB process
--- CALL mysql.rds_kill(31);
+CALL mysql.rds_kill(7);
 
 -- Delete SQL to delete duplicates for a particular business based on its 
 -- name and address
