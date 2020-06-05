@@ -2,6 +2,9 @@ CREATE DEFINER=`admin`@`%` PROCEDURE `delete_duplicate_business`()
 BEGIN
 	-- declare variables
 	declare v_single_biz_id int(10);
+    
+	declare v_count int(10);
+
     declare v_bizName varchar(45);
     declare v_street1 varchar(45);
 	declare v_city varchar(45);
@@ -30,15 +33,15 @@ BEGIN
 		where 
 		biz_id in (select biz_id 
 			from t_brw_business 
-			-- where name_dba = v_bizName
-			-- and add_street1 = v_street1
-			-- and add_city = v_city
-			-- and add_state = v_state)
+			where name_dba = v_bizName
+			and add_street1 = v_street1
+			and add_city = v_city
+			and add_state = v_state)
         
-			where name_dba = 'PLAYBOY ENTERPRISES INC'
-			and add_street1 = '10236 CHARING CROSS RD'
-			and add_city = 'LOS ANGELES'
-			and add_state = 'CA')
+			-- where name_dba = 'PLAYBOY ENTERPRISES INC'
+			-- and add_street1 = '10236 CHARING CROSS RD'
+			-- and add_city = 'LOS ANGELES'
+			-- and add_state = 'CA')
 		and sales_range is not null
 		and employee_range is not null
 		and biz_contact_title = 'owner' 
@@ -49,15 +52,15 @@ BEGIN
 		where 
 		biz_id in (select biz_id 
 			from t_brw_business 
-			-- where name_dba = v_bizName
-			-- and add_street1 = v_street1
-			-- and add_city = v_city
-			-- and add_state = v_state)
+			where name_dba = v_bizName
+			and add_street1 = v_street1
+			and add_city = v_city
+			and add_state = v_state)
         
-			where name_dba = 'PLAYBOY ENTERPRISES INC'
-			and add_street1 = '10236 CHARING CROSS RD'
-			and add_city = 'LOS ANGELES'
-			and add_state = 'CA')
+			-- where name_dba = 'PLAYBOY ENTERPRISES INC'
+			-- and add_street1 = '10236 CHARING CROSS RD'
+			-- and add_city = 'LOS ANGELES'
+			-- and add_state = 'CA')
 		and sales_range is not null
 		and employee_range is not null
 		-- and biz_contact_title = 'owner' 
@@ -68,15 +71,15 @@ BEGIN
 		where 
 		biz_id in (select biz_id 
 			from t_brw_business 
-			-- where name_dba = v_bizName
-			-- and add_street1 = v_street1
-			-- and add_city = v_city
-			-- and add_state = v_state)
+			where name_dba = v_bizName
+			and add_street1 = v_street1
+			and add_city = v_city
+			and add_state = v_state)
         
-			where name_dba = 'PLAYBOY ENTERPRISES INC'
-			and add_street1 = '10236 CHARING CROSS RD'
-			and add_city = 'LOS ANGELES'
-			and add_state = 'CA')
+			-- where name_dba = 'PLAYBOY ENTERPRISES INC'
+			-- and add_street1 = '10236 CHARING CROSS RD'
+			-- and add_city = 'LOS ANGELES'
+			-- and add_state = 'CA')
 		and sales_range is not null
 		-- and employee_range is not null
 		-- and biz_contact_title = 'owner' 
@@ -87,15 +90,15 @@ BEGIN
 		where 
 		biz_id in (select biz_id 
 			from t_brw_business 
-			-- where name_dba = v_bizName
-			-- and add_street1 = v_street1
-			-- and add_city = v_city
-			-- and add_state = v_state)
+			where name_dba = v_bizName
+			and add_street1 = v_street1
+			and add_city = v_city
+			and add_state = v_state)
         
-			where name_dba = 'PLAYBOY ENTERPRISES INC'
-			and add_street1 = '10236 CHARING CROSS RD'
-			and add_city = 'LOS ANGELES'
-			and add_state = 'CA')
+			-- where name_dba = 'PLAYBOY ENTERPRISES INC'
+			-- and add_street1 = '10236 CHARING CROSS RD'
+			-- and add_city = 'LOS ANGELES'
+			-- and add_state = 'CA')
 		-- and sales_range is not null
 			and employee_range is not null
 		-- and biz_contact_title = 'owner' 
@@ -106,15 +109,15 @@ BEGIN
 		where 
 		biz_id in (select biz_id 
 			from t_brw_business 
-			-- where name_dba = v_bizName
-			-- and add_street1 = v_street1
-			-- and add_city = v_city
-			-- and add_state = v_state)
+			where name_dba = v_bizName
+			and add_street1 = v_street1
+			and add_city = v_city
+			and add_state = v_state)
         
-			where name_dba = 'PLAYBOY ENTERPRISES INC'
-			and add_street1 = '10236 CHARING CROSS RD'
-			and add_city = 'LOS ANGELES'
-			and add_state = 'CA')
+			-- where name_dba = 'PLAYBOY ENTERPRISES INC'
+			-- and add_street1 = '10236 CHARING CROSS RD'
+			-- and add_city = 'LOS ANGELES'
+			-- and add_state = 'CA')
 		-- and sales_range is not null
 		-- and employee_range is not null
 		-- and biz_contact_title = 'owner' 
@@ -125,23 +128,24 @@ BEGIN
 		where 
 		biz_id in (select biz_id 
 			from t_brw_business 
-			-- where name_dba = v_bizName
-			-- and add_street1 = v_street1
-			-- and add_city = v_city
-			-- and add_state = v_state
-            -- and updatedby_user_id != 9999)
-        
-			where name_dba = 'PLAYBOY ENTERPRISES INC'
-			and add_street1 = '10236 CHARING CROSS RD'
-			and add_city = 'LOS ANGELES'
-			and add_state = 'CA'
+			where name_dba = v_bizName
+			and add_street1 = v_street1
+			and add_city = v_city
+			and add_state = v_state
             and updatedby_user_id != 9999);
+        
+			-- where name_dba = 'PLAYBOY ENTERPRISES INC'
+			-- and add_street1 = '10236 CHARING CROSS RD'
+			-- and add_city = 'LOS ANGELES'
+			-- and add_state = 'CA'
+            -- and updatedby_user_id != 9999);
     
     -- select duplicates
     open dup_cursor;
     dupLoop: loop
-        fetch dup_cursor into v_bizName, v_street1, v_city, v_state;
-        -- select the single biz_id based on specific criteria
+        fetch dup_cursor into v_bizName, v_street1, v_city, v_state, v_count;
+        select concate('*** After dup_cursor FETCH v_bizName: ', v_bizName, 'located at: ', v_street1, 'in the city of: ', v_city, 'in the state of: ' v_state);
+       
         open rule_1_cursor;
         open rule_2_cursor;
         open rule_3_cursor;
@@ -177,20 +181,26 @@ BEGIN
 		where 
 		biz_id in (select biz_id 
 		from t_brw_business 
-        -- where name_dba = v_bizName
-		-- and add_street1 = v_street1
-		-- and add_city = v_city
-		-- and add_state = v_state
-		-- and updatedby_user_id != 9999)
+        where name_dba = v_bizName
+		and add_street1 = v_street1
+		and add_city = v_city
+		and add_state = v_state
+		and updatedby_user_id != 9999);
             
-		where name_dba = 'PLAYBOY ENTERPRISES INC'
-		and add_street1 = '10236 CHARING CROSS RD'
-		and add_city = 'LOS ANGELES'
-		and add_state = 'CA'
-        and updatedby_user_id != 9999);
+		-- where name_dba = 'PLAYBOY ENTERPRISES INC'
+		-- and add_street1 = '10236 CHARING CROSS RD'
+		-- and add_city = 'LOS ANGELES'
+		-- and add_state = 'CA'
+        -- and updatedby_user_id != 9999);
         
+        -- close all cursors
+        close rule_1_cursor;
+        close rule_2_cursor;
+        close rule_3_cursor;
+        close rule_4_cursor;
+        close rule_5_cursor;  
     -- debug statement to print on console
-    -- select concate('Deleting DUPLICATES for: ', v_bizName, 'located at: ', v_street1, 'in the city of: ', v_city, 'in the state of: ' v_state);
+    select concate('*** Deleted DUPLICATES for: ', v_bizName, 'located at: ', v_street1, 'in the city of: ', v_city, 'in the state of: ' v_state);
 	end loop dupLoop;
     close dup_cursor;
 END

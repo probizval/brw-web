@@ -36,7 +36,7 @@ select count(*) from t_brw_business
 ***********************************************************
 -- 1. Data Curation Scripts start here
 -- 2. Open Terminal on MAC
--- 3. Goto cd - /usr/local/mysql-shell/bin/
+-- 3. Goto - cd /usr/local/mysql-shell/bin/
 -- 4. run command - mysqlsh
 -- 5. rum command - \connect admin@brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com/brwdev
 -- 6. Enter password if it asks
@@ -91,6 +91,8 @@ limit 1000;
 -- keep that selected biz_id row active while in-actibe rest all rows
 -- if all rows has same data just pick random one row
 -- change all selects to always return just the active rows
+
+exec delete_duplicate_business;
 
 
 -- 2. Based on SIC description decide the Biz Type - update type, sub type 
