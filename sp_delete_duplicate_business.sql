@@ -1,5 +1,6 @@
 CREATE DEFINER=`admin`@`%` PROCEDURE `delete_duplicate_business`()
 BEGIN
+    
 	-- declare variables
 	declare v_single_biz_id int(10);
     
@@ -143,40 +144,61 @@ BEGIN
     -- select duplicates
     open dup_cursor;
     dupLoop: loop
+		select '***** I am here 111';
         fetch dup_cursor into v_bizName, v_street1, v_city, v_state, v_count;
-        select concate('*** After dup_cursor FETCH v_bizName: ', v_bizName, 'located at: ', v_street1, 'in the city of: ', v_city, 'in the state of: ' v_state);
+        
+        -- debug statement to print on console
+        -- select 'I am in the dupLoop';
+        -- select concate('*** After dup_cursor FETCH v_bizName: ', v_bizName) as '';
+		-- select concate('*** After dup_cursor FETCH v_street1: ', v_street1) as '';
+        -- select concate('*** After dup_cursor FETCH v_city: ', v_city) as '';
+        -- select concate('*** After dup_cursor FETCH v_state: ', v_state) as '';
        
         open rule_1_cursor;
-        open rule_2_cursor;
-        open rule_3_cursor;
-        open rule_4_cursor;
-        open rule_5_cursor;        
-		
-		if (rule_1_cursor.rowcount > 0) then 
-			fetch rule_1_cursor into v_single_biz_id;
-			select concate(' RULE 1 Cursor returned v_single_biz_id: ', v_single_biz_id);
-		elseif (rule_2_cursor.rowcount > 0) then 
+        -- open rule_2_cursor;
+        -- open rule_3_cursor;
+        -- open rule_4_cursor;
+        -- open rule_5_cursor;        
+        
+        fetch rule_1_cursor into v_single_biz_id;
+        
+		if (v_single_biz_id = null) then 
+			select '***** I am here 222';
+            open rule_2_cursor;
 			fetch rule_2_cursor into v_single_biz_id;
-			select concate(' RULE 2 Cursor returned v_single_biz_id: ', v_single_biz_id);
-		elseif (rule_3_cursor.rowcount > 0) then
+            
+		elseif (v_single_biz_id = null) then 
+			select '***** I am here 333';
+            open rule_3_cursor;
 			fetch rule_3_cursor into v_single_biz_id;
-			select concate(' RULE 3 Cursor returned v_single_biz_id: ', v_single_biz_id);
-		elseif (rule_4_cursor.rowcount > 0) then 
+			
+		elseif (v_single_biz_id = null) then
+			select '***** I am here 444';
+            open rule_4_cursor;
 			fetch rule_4_cursor into v_single_biz_id;
-			select concate(' RULE 4 Cursor returned v_single_biz_id: ', v_single_biz_id);
-		else 
+			
+		else
+			select '***** I am here 555';
+            open rule_5_cursor;
 			fetch rule_5_cursor into v_single_biz_id;
-			select concate(' RULE 5 Cursor returned v_single_biz_id: ', v_single_biz_id);
+		
 		end if;
+        
+        -- close all cursors
+        close rule_1_cursor;
+        close rule_2_cursor;
+        close rule_3_cursor;
+        close rule_4_cursor;
+        close rule_5_cursor;  
         
         -- Update the updatedby_user_id to 9999 for single biz id
         update t_brw_business 
 		set updatedby_user_id = 9999
 		where 
 		biz_id = v_single_biz_id;
+        select '***** I am here 666';
         
         -- delete duplicates - delete all records that have updatedby_user_id != 9999
-		
         delete from t_brw_business 
 		where 
 		biz_id in (select biz_id 
@@ -186,21 +208,15 @@ BEGIN
 		and add_city = v_city
 		and add_state = v_state
 		and updatedby_user_id != 9999);
-            
-		-- where name_dba = 'PLAYBOY ENTERPRISES INC'
+		select '***** I am here 777';
+		
+        -- where name_dba = 'PLAYBOY ENTERPRISES INC'
 		-- and add_street1 = '10236 CHARING CROSS RD'
 		-- and add_city = 'LOS ANGELES'
 		-- and add_state = 'CA'
         -- and updatedby_user_id != 9999);
         
-        -- close all cursors
-        close rule_1_cursor;
-        close rule_2_cursor;
-        close rule_3_cursor;
-        close rule_4_cursor;
-        close rule_5_cursor;  
-    -- debug statement to print on console
-    select concate('*** Deleted DUPLICATES for: ', v_bizName, 'located at: ', v_street1, 'in the city of: ', v_city, 'in the state of: ' v_state);
+        select 'I am coming OUT of the dupLoop';
 	end loop dupLoop;
     close dup_cursor;
 END
