@@ -201,7 +201,9 @@ BEGIN
         select '***** About to Delete Duplicates for v_bizName: 'v_bizName;
 		delLoop: loop fetch del_cursor into v_del_biz_id;
 			select '***** I am here 777';
-			IF v_del_biz_id = null THEN
+			select '***** About to Delete ONE OF THE Duplicates for v_bizName: 'v_bizName;
+			
+			IF v_del_biz_id.length() = 0 THEN
 				LEAVE delLoop;
 			END IF;
             
