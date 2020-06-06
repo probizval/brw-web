@@ -155,10 +155,6 @@ BEGIN
         -- END IF;
         -- debug statement to print on console
         -- select 'I am in the dupLoop after Fetch';
-        -- select concate('*** After dup_cursor FETCH v_bizName: ', v_bizName) as '';
-		-- select concate('*** After dup_cursor FETCH v_street1: ', v_street1) as '';
-        -- select concate('*** After dup_cursor FETCH v_city: ', v_city) as '';
-        -- select concate('*** After dup_cursor FETCH v_state: ', v_state) as '';
        
         open rule_1_cursor;
         fetch rule_1_cursor into v_single_biz_id;
@@ -198,17 +194,18 @@ BEGIN
 		where 
 		biz_id = v_single_biz_id;
         commit;
-        select '***** I am here 666.1';
+        -- select '***** I am here 666.1';
         
         -- delete duplicates - delete all records that have updatedby_user_id != 9999
         open del_cursor;
-        select '***** I am here 666.2';
+        select '***** About to Delete Duplicates for v_bizName: 'v_bizName;
 		delLoop: loop fetch del_cursor into v_del_biz_id;
 			select '***** I am here 777';
-			IF del_cur_done = 1 THEN
+			IF v_del_biz_id = null THEN
 				LEAVE delLoop;
 			END IF;
-            select '***** I am here 888';
+            
+            select '***** I am here 888 v_del_biz_id: 'v_del_biz_id;
 			delete from t_brw_business 
 			where 
 			biz_id = v_del_biz_id;

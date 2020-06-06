@@ -17,7 +17,7 @@ SELECT count(*) FROM brwdev.t_brw_business;
 SHOW FULL PROCESSLIST;
 
 -- To kill the DB process
-CALL mysql.rds_kill(46);
+CALL mysql.rds_kill(31);
 
 -- call Delete SP
 call brwdev.delete_duplicate_business();
