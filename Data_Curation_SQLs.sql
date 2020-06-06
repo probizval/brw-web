@@ -13,6 +13,13 @@ SELECT max(biz_id) FROM brwdev.t_brw_business;
 SELECT count(*) FROM brwdev.t_brw_business;
 -- where biz_id < 6000
 
+-- To list all DB process
+SHOW FULL PROCESSLIST;
+
+-- To kill the DB process
+CALL mysql.rds_kill(46);
+
+-- call Delete SP
 call brwdev.delete_duplicate_business();
 
 -- SQL to find the duplicates
@@ -22,7 +29,7 @@ where add_state = 'CA'
 group by name_dba, add_street1, add_city, add_state  
 having cnt > 1 
 order by cnt desc 
-limit 1000;
+limit 1002;
 
 -- create index for better performance
 -- CREATE INDEX idx_brw_primary_key
