@@ -26,30 +26,30 @@
 <!--                </div>-->
             <div class="row item-listing grid">
                 <div ng-repeat="prop in myBizList | startFrom:currentPage*itemsPerPage | limitTo:itemsPerPage"
-                     class="item col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-6" id="prop{{$index}}">
-                    <a href="#business/editProperty/{{prop.businessId}}">
+                     class="item col-xs-10 col-sm-10 col-md-6 col-lg-6 col-xl-6" id="prop{{$index}}">
+                    <a href="#business/editProperty/{{prop.businessInfoDTO.businessId}}">
                         <div class="item-image" style="height:200px">
-                            <img src="{{prop.imageFirst}}" style="width:350px;height:200px" class="img-fluid" alt="">
-                            <div class="row item-badge-left save-item-left" ng-if="prop.isForSell">
+                            <img src="{{prop.businessInfoDTO.imageFirst}}" style="width:350px;height:200px" class="img-fluid" alt="">
+                            <div class="row item-badge-left save-item-left" ng-if="prop.businessInfoDTO.isForSell">
                                 <img src="../../img/icon/red_marker.svg" style="width:20px;height:20px"/>
                                 <span>For Sale</span>
                             </div>
                             <a class="save-item" ng-class="{'save-item-active': prop.isBookMarked}" ng-click="bookMarked(prop, $index)"><i class="fa fa-star"></i></a>
-                            <div class="item-badge-left save-item-bottom-left" ng-if="prop.name">
-                                <span>{{prop.name}}</span>
-                                <div ng-if="prop.street1 || prop.city">
-                                    <span class="item-address" ng-if="prop.street1 && prop.street2">{{prop.street1}}, {{prop.street2}}, {{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
-                                    <span class="item-address" ng-if="prop.street1 && !prop.street2">{{prop.street1}}, {{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
-                                    <span class="item-address" ng-if="!prop.street1 && !prop.street2">{{prop.city}} {{prop.stateCode}} {{prop.zip}}</span>
+                            <div class="item-badge-left save-item-bottom-left" ng-if="prop.businessInfoDTO.name">
+                                <span>{{prop.businessInfoDTO.name}}</span>
+                                <div ng-if="prop.businessInfoDTO.street1 || prop.businessInfoDTO.city">
+                                    <span class="item-address" ng-if="prop.businessInfoDTO.street1 && prop.businessInfoDTO.street2">{{prop.businessInfoDTO.street1}}, {{prop.businessInfoDTO.street2}}, {{prop.businessInfoDTO.city}} {{prop.businessInfoDTO.stateCode}} {{prop.businessInfoDTO.zip}}</span>
+                                    <span class="item-address" ng-if="prop.businessInfoDTO.street1 && !prop.businessInfoDTO.street2">{{prop.businessInfoDTO.street1}}, {{prop.businessInfoDTO.city}} {{prop.businessInfoDTO.stateCode}} {{prop.businessInfoDTO.zip}}</span>
+                                    <span class="item-address" ng-if="!prop.businessInfoDTO.street1 && !prop.businessInfoDTO.street2">{{prop.businessInfoDTO.city}} {{prop.businessInfoDTO.stateCode}} {{prop.businessInfoDTO.zip}}</span>
                                 </div>
                             </div>
 
                         </div>
                     </a>
-                    <a href="#business/editProperty/{{prop.businessId}}">
+                    <a href="#business/editProperty/{{prop.businessInfoDTO.businessId}}">
                         <div style="padding:5px;">
-                            <p class="item-price" ng-if="prop.isForSell === 'Y'">Asking Price ${{ prop.forSellPrice.toLocaleString('en', {useGrouping:true}) }}</p>
-                            <p class="item-price" ng-if="prop.marketBasedEst">Market Estimated Price ${{ prop.marketBasedEst.toLocaleString('en', {useGrouping:true})}}</p>
+                            <p class="item-price" ng-if="prop.businessInfoDTO.isForSell === 'Y'">Asking Price ${{ prop.businessInfoDTO.forSellPrice.toLocaleString('en', {useGrouping:true}) }}</p>
+                            <p class="item-price" ng-if="prop.businessInfoDTO.marketBasedEst">Market Estimated Price ${{ prop.businessInfoDTO.marketBasedEst.toLocaleString('en', {useGrouping:true})}}</p>
                         </div>
                     </a>
                 </div>
@@ -98,8 +98,6 @@
 
                 </nav>
             </div>
-
-
 <!--            <nav aria-label="Page navigation">-->
 <!--              <ul class="pagination">-->
 <!--                <li class="page-item"><a class="page-link" ng-click="next(myBizList.pageNumber - 1)">prev</a></li>-->
