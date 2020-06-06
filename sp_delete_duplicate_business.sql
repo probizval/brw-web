@@ -188,7 +188,7 @@ BEGIN
 			-- select '***** I am here 555';
             open rule_5_cursor;
 			fetch rule_5_cursor into v_single_biz_id;
-		
+			close rule_5_cursor;
 		end if;
 		-- select '***** I am here 666';
 
@@ -197,25 +197,29 @@ BEGIN
 		set updatedby_user_id = 9999
 		where 
 		biz_id = v_single_biz_id;
-        -- select '***** I am here 666';
+        commit;
+        select '***** I am here 666.1';
         
         -- delete duplicates - delete all records that have updatedby_user_id != 9999
         open del_cursor;
+        select '***** I am here 666.2';
 		delLoop: loop fetch del_cursor into v_del_biz_id;
+			select '***** I am here 777';
 			IF del_cur_done = 1 THEN
 				LEAVE delLoop;
 			END IF;
+            select '***** I am here 888';
 			delete from t_brw_business 
 			where 
 			biz_id = v_del_biz_id;
-			-- select '***** I am here 777';
+            commit;
+			select '***** I am here 999';
 		end loop delLoop;
         close del_cursor;
-        
+        select '***** I am here 101010';
         -- select 'Coming OUT of the dupLoop';
-	end loop dupLoop;
-    -- close all cursors
-	
+	end loop dupLoop;	
     close dup_cursor;
+    
     select 'Done with SP Execution!';
 END

@@ -14,14 +14,14 @@ SELECT count(*) FROM brwdev.t_brw_business;
 -- where biz_id < 6000
 
 -- create index for better performance
-CREATE INDEX idx_brw_primary_key
-ON t_brw_business (name_dba, add_street1, add_city, add_state);
+-- CREATE INDEX idx_brw_primary_key
+-- ON t_brw_business (name_dba, add_street1, add_city, add_state);
 
 -- To list all DB process
 SHOW FULL PROCESSLIST;
 
 -- To kill the DB process
-CALL mysql.rds_kill(7);
+CALL mysql.rds_kill(46);
 
 -- Delete SQL to delete duplicates for a particular business based on its 
 -- name and address
