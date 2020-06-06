@@ -2,10 +2,10 @@ CREATE DEFINER=`admin`@`%` PROCEDURE `delete_duplicate_business`()
 BEGIN
     
 	-- declare variables
-	DECLARE done INT DEFAULT 0;
+	-- DECLARE done INT DEFAULT 0;
 
     DECLARE dup_cur_done INT DEFAULT 0;
-    DECLARE del_cur_done INT DEFAULT 0;
+    -- DECLARE del_cur_done INT DEFAULT 0;
     
 	declare v_single_biz_id int(10) DEFAULT 0;
 	declare v_del_biz_id int(10) DEFAULT 0;
@@ -18,22 +18,21 @@ BEGIN
     declare v_state varchar(2);
     -- declare v_single_biz_id
 
-	-- declare the duplicates cursor
-	-- declare dup_cursor cursor for select name_dba, add_street1, add_city, add_state, count(*) cnt 
-	-- from t_brw_business 
-	-- where add_state = 'CA'
-	-- group by name_dba, add_street1, add_city, add_state 
-	-- having cnt > 1
-	-- order by cnt desc 
-	-- limit 1000;
-    
-    declare dup_cursor cursor for select name_dba, add_street1, add_city, add_state, count(*) cnt 
+	declare dup_cursor cursor for select name_dba, add_street1, add_city, add_state, count(*) cnt 
 	from t_brw_business 
-	where name_dba = 'PLAYBOY ENTERPRISES INC'
-	and add_street1 = '10236 CHARING CROSS RD'
-	and add_city = 'LOS ANGELES'
-	and add_state = 'CA' 
-	limit 1;
+	where add_state = 'CA'
+	group by name_dba, add_street1, add_city, add_state 
+	having cnt > 1
+	order by cnt desc 
+	limit 1000;
+    
+    -- declare dup_cursor cursor for select name_dba, add_street1, add_city, add_state, count(*) cnt 
+	-- from t_brw_business 
+	-- where name_dba = 'PLAYBOY ENTERPRISES INC'
+	-- and add_street1 = '10236 CHARING CROSS RD'
+	-- and add_city = 'LOS ANGELES'
+	-- and add_state = 'CA' 
+	-- limit 1;
     -- DECLARE CONTINUE HANDLER FOR NOT FOUND SET dup_cur_done = 1;
     
     declare rule_1_cursor cursor for select biz_id 
@@ -149,14 +148,14 @@ BEGIN
 			-- and add_state = 'CA'
             -- and updatedby_user_id != 9999);
             
-			DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+			DECLARE CONTINUE HANDLER FOR NOT FOUND SET dup_cur_done = 1;
     
     -- select duplicates
     open dup_cursor;
     dupLoop: loop fetch dup_cursor into v_bizName, v_street1, v_city, v_state, v_count;
-        -- IF done = 1 THEN
-            -- LEAVE dupLoop;
-        -- END IF;
+        IF dup_cur_done = 1 THEN
+            LEAVE dupLoop;
+        END IF;
         -- debug statement to print on console
         -- select 'I am in the dupLoop after Fetch';
         -- select concate('*** After dup_cursor FETCH v_bizName: ', v_bizName) as '';
@@ -216,7 +215,7 @@ BEGIN
 		-- and add_state = 'CA'
         -- and updatedby_user_id != 9999);
         
-        select 'I am coming OUT of the dupLoop';
+        select 'Coming OUT of the dupLoop';
 	end loop dupLoop;
     -- close all cursors
 	close rule_1_cursor;
@@ -225,4 +224,5 @@ BEGIN
 	close rule_4_cursor;
 	close rule_5_cursor; 
     close dup_cursor;
+    select 'Done with SP Execution!';
 END
