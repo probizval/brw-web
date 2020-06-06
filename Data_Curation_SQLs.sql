@@ -13,6 +13,17 @@ SELECT max(biz_id) FROM brwdev.t_brw_business;
 SELECT count(*) FROM brwdev.t_brw_business;
 -- where biz_id < 6000
 
+call brwdev.delete_duplicate_business();
+
+-- SQL to find the duplicates
+select name_dba, add_street1, add_city, add_state, count(*) cnt  
+from t_brw_business  
+where add_state = 'CA' 
+group by name_dba, add_street1, add_city, add_state  
+having cnt > 1 
+order by cnt desc 
+limit 1000;
+
 -- create index for better performance
 -- CREATE INDEX idx_brw_primary_key
 -- ON t_brw_business (name_dba, add_street1, add_city, add_state);
