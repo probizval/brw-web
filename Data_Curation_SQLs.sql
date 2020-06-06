@@ -11,18 +11,20 @@
 SELECT max(biz_id) FROM brwdev.t_brw_business;
 
 SELECT count(*) FROM brwdev.t_brw_business;
+
+select distinct add_state from t_brw_business
 -- where biz_id < 6000
 
 -- To list all DB process
 SHOW FULL PROCESSLIST;
 
 -- To kill the DB process
-CALL mysql.rds_kill(31);
+CALL mysql.rds_kill(46)
 
 -- call Delete SP
 call brwdev.delete_duplicate_business();
 
--- SQL to find the duplicates
+-- SQL to find the duplicates 1
 select name_dba, add_street1, add_city, add_state, count(*) cnt  
 from t_brw_business  
 where add_state = 'CA' 
@@ -30,6 +32,25 @@ group by name_dba, add_street1, add_city, add_state
 having cnt > 1 
 order by cnt desc 
 limit 1002;
+
+
+-- SQL to find the duplicates 2
+select t1 from contacts t1
+inner join contacts 2
+where
+	t.biz_id 
+    
+    select count(*) from t_brw_business b1
+	where 
+	b1.biz_id in (select b2.biz_id 
+		from t_brw_business b2
+		where b2.name_dba = 'PLAYBOY ENTERPRISES INC'
+		and b2.add_street1 = '10236 CHARING CROSS RD'
+		and b2.add_city = 'LOS ANGELES'
+		and b2.add_state = 'CA'
+        and b2.updatedby_user_id != 9999);
+
+
 
 -- create index for better performance
 -- CREATE INDEX idx_brw_primary_key
@@ -43,22 +64,22 @@ CALL mysql.rds_kill(46);
 
 -- Delete SQL to delete duplicates for a particular business based on its 
 -- name and address
-update t_brw_business 
-set updatedby_user_id = 9999
+update t_brw_business b1
+set b1.updatedby_user_id = 9999
 where 
-biz_id = (select biz_id 
-	from t_brw_business 
+b1.biz_id = (select b2.biz_id 
+	from t_brw_business b2
 	where 
-	biz_id in (select biz_id 
-		from t_brw_business 
-		where name_dba = 'PLAYBOY ENTERPRISES INC'
-		and add_street1 = '10236 CHARING CROSS RD'
-		and add_city = 'LOS ANGELES'
-		and add_state = 'CA')
-	and sales_range is not null
-	and employee_range is not null
-	-- and biz_contact_title = 'owner' 
-	limit 1);update_image_first
+	b2.biz_id in (select b3.biz_id 
+		from t_brw_business b3
+		where b3.name_dba = 'Chaffey College'
+		and b3.add_street1 = '5885 Haven Ave'
+		and b3.add_city = 'Rancho Cucamonga'
+		and b3.add_state = 'CA')
+	and b2.sales_range is not null
+	and b2.employee_range is not null
+	-- and b2.biz_contact_title = 'owner' 
+	limit 1);
 
 -- DELETE SQL to delete the record where updatedby_user_id IS NOT 9999
 -- delete from t_brw_business 
@@ -209,5 +230,16 @@ insert into t_brw_business_image (biz_id, image_URL)
 values ('biz_id', 's3//link_for_brw_aws_location_for_generic_restaurant_image.JPG');
 }
 -- *************************************************
+
+
+select *
+		from t_brw_business b2
+		where 
+        -- b2.name_dba like 'golden palace'
+		-- and 
+        b2.add_street1 = '581 Moraga Rd'
+		and 
+        b2.add_city = 'moraga'
+		and b2.add_state = 'CA'
 
 
