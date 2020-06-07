@@ -51,6 +51,7 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 		searchAgent.setUserId(searchAgentDTO.getUserId());
 		searchAgent.setEmail(searchAgentDTO.getEmail());
 		searchAgent.setName(searchAgentDTO.getName());
+		searchAgent.setBizType(searchAgentDTO.getBizType());
 		searchAgent.setFrequency(searchAgentDTO.getFrequency());
 		searchAgent.setPriceLow(searchAgentDTO.getPriceLow());
 		searchAgent.setPriceHigh(searchAgentDTO.getPriceHigh());
@@ -93,6 +94,7 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 			searchAgentDTO.setAgentId(searchAgent.getAgentId());
 			searchAgentDTO.setEmail(searchAgent.getEmail());
 			searchAgentDTO.setName(searchAgent.getName());
+			searchAgentDTO.setBizType(searchAgent.getBizType());
 			searchAgentDTO.setFrequency(searchAgent.getFrequency());
 			searchAgentDTO.setPriceLow(searchAgent.getPriceLow());
 			searchAgentDTO.setPriceHigh(searchAgent.getPriceHigh());

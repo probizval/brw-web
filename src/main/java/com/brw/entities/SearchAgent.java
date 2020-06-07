@@ -38,6 +38,9 @@ public class SearchAgent implements Serializable {
 	@Column(name = "name")
 	private String name;
 	
+	@Column(name = "type")
+	private String bizType;
+	
 	@Column(name = "frequency")
 	private String frequency;
 	
@@ -95,6 +98,14 @@ public class SearchAgent implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getBizType() {
+		return bizType;
+	}
+
+	public void setBizType(String bizType) {
+		this.bizType = bizType;
 	}
 
 	public String getFrequency() {

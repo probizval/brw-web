@@ -8,6 +8,9 @@
 -- 7. Switch to SQL mode by command - \sql
 -- 8. Execute SQLs by ending them with ;
 
+
+select * from t_brw_business where biz_id = 12536750;
+
 SELECT max(biz_id) FROM brwdev.t_brw_business;
 
 SELECT count(*) FROM brwdev.t_brw_business;
@@ -19,20 +22,28 @@ select distinct add_state from t_brw_business
 SHOW FULL PROCESSLIST;
 
 -- To kill the DB process
-CALL mysql.rds_kill(46)
+CALL mysql.rds_kill(406)
 
 -- call Delete SP
-call brwdev.delete_duplicate_business();
+-- call brwdev.delete_duplicate_business();
 
 -- SQL to find the duplicates 1
 select name_dba, add_street1, add_city, add_state, count(*) cnt  
 from t_brw_business  
-where add_state = 'CA' 
+where 
+add_city = 'Fremont' and
+add_state = 'CA' 
 group by name_dba, add_street1, add_city, add_state  
 having cnt > 1 
 order by cnt desc 
-limit 1002;
+limit 12;
 
+select * from t_brw_business 
+where name_dba = 'Infosys Technologies Limited'
+and add_street1 = '6607 KAISER DR'
+and add_city = 'FREMONT'
+and add_state = 'CA';
+-- 302
 
 -- SQL to find the duplicates 2
 select t1 from contacts t1
