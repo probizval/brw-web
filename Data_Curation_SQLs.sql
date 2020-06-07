@@ -9,7 +9,7 @@
 -- 8. Execute SQLs by ending them with ;
 
 
-select * from t_brw_business where biz_id = 1004939;
+select * from t_brw_business where biz_id = 1004311;
 
 select count(*) from t_brw_business where updatedby_user_id = 999;
 
@@ -94,7 +94,7 @@ CALL mysql.rds_kill(46);
 
 -- Delete SQL to delete duplicates for a particular business based on its 
 -- name and address
-update t_brw_business b1
+-- update t_brw_business b1
 set b1.updatedby_user_id = 9999
 where 
 b1.biz_id = (select b2.biz_id 
@@ -131,6 +131,8 @@ select count(biz_id)
 		and add_street1 = '10236 CHARING CROSS RD'
 		and add_city = 'LOS ANGELES'
 		and add_state = 'CA';
+        
+        
 -- ******************************************************
 -- *** Data Curation Rules and steps sequence ***
 -- 1. Delete Duplicates - Keep the record that has most columns, especially with 
@@ -150,18 +152,8 @@ select count(biz_id)
 -- revenue range, employee range, specific SIC description, contact title as owner 
 -- and contact details.
 --
--- #1 find duplicates - not si effective SQL
-select a.name_dba, a.add_street1, a.biz_id 
-from t_brw_business a, t_brw_business b 
-where a.biz_id != b.biz_id 
-and a.name_dba = b.name_dba 
-and a.add_street1 = b.add_street1 
-and a.add_city = b.add_city 
-and a.add_state = 'CA' 
-and b.add_state = 'CA' 
-order by a.name_dba;
 
--- #2 If the count is more than 1 for any row thats the duplicate
+-- If the count is more than 1 for any row thats the duplicate
 select name_dba, add_street1, add_city, add_state, count(*) cnt 
 from t_brw_business 
 where add_state = 'CA' 
@@ -181,28 +173,70 @@ limit 10;
 -- if all rows has same data just pick random one row
 -- change all selects to always return just the active rows
 
-exec delete_duplicate_business;
+-- call delete_duplicate_business;
+
+
+-- 1.1 FUNDAMENTAL CLEAN UPS *********************
+select count(*) from t_brw_business where name_dba is null and name_legal is null;
+select count(*) from t_brw_business where name_dba = '' and name_legal = '';
+select count(*) from t_brw_business where sic_code is null and sic_description is null; -- result: 21
+select count(*) from t_brw_business where sic_code = '' and sic_description = ''; -- result: 
+
 
 
 -- 2. Based on SIC description decide the Biz Type - update type, sub type 
 -- and naics attributes
 
--- select distinct SIC description to decide the business type and update type and subtype
-select distinct sic_description, sic_code
-from t_brw_business
-where state = 'CA' order by sic_description asc;
+2.1. Search based on known keywords
+-- SEARCH KEYWORDS - food, restaurant, eat
 
-update t_brw_business 
+select distinct sic_code, sic_description 
+from t_brw_business 
+where 
+add_state = 'CA' and 
+sic_description like 'food' or
+sic_description like 'restaurant' or
+sic_description like 'eat';
+
+2.2. Based on above response pick up sic_code that are relevant.
+Validate the SIC_CODEs with referance SQLs down below.
+
+
+2.3. Update the business with below SQL keep adding sic_code to the where clause
+-- SEARCH KEYWORDS - food, restaurant, eating
+-- update t_brw_business 
 set type = 'BTYPE_REST_FOOD', 
 sub_type = 'BTYPE_REST_FOOD'
 where 
-sic_description like 'restaurant'
-or sic_description like 'food'
-or sic_code in (712345, 2345);
+add_state = 'CA' and 
+sic_code like '58%' and 
+sic_code like '20%' and
+sic_code like '??%'; 
 
+
+Referance SQLs -
+select  distinct sic_code, sic_description 
+from t_brw_business  
+where add_state = 'CA'  and 
+sic_code like '58%';
+
+select name_dba, sic_code, sic_description 
+from t_brw_business  
+where add_state = 'CA'  and 
+sic_code like '58%' and 
+sic_description = 'SIC Not Defined';
 
 -- 3. Based on Biz Type, revenue range, county decide range of market based estimates
-update t_brw_business
+-- update t_brw_business
+
+select distinct sales_range 
+from t_brw_business 
+where add_state = 'CA';
+
+select distinct employee_range 
+from t_brw_business 
+where add_state = 'CA';
+
 set market_based_est = revenue/5
 where type = 'BTYPE_REST_FOOD'
 and add_county = 'ALAMEDA'
@@ -210,7 +244,7 @@ and add_state = 'CA';
 
 
 -- 4. Based on Business Type update image_first - no icon or vector but actual image
-update t_brw_business
+-- update t_brw_business
 set image_first = 's3//link_for_brw_aws_location_for_generic_restaurant_image.JPG'
 where type = 'BTYPE_REST_FOOD'
 and add_state = 'CA';
@@ -219,7 +253,7 @@ and add_state = 'CA';
 -- 5. Based on Biz Type and location (state, county and/or city) decide values of 
 -- other attributes but randomize while setting them up, so they don't look similar 
 -- for all business.
-update t_brw_business
+-- update t_brw_business
 set description = 'Come up with about 20 lines and 3 paragraphs for each biz type - refer to current listings and make generic description',
 naics_num = 'come up based on SIC code mapping and biz type',
 naics_description = 'same as above',
@@ -259,17 +293,7 @@ and state = 'CA'{
 insert into t_brw_business_image (biz_id, image_URL)
 values ('biz_id', 's3//link_for_brw_aws_location_for_generic_restaurant_image.JPG');
 }
--- *************************************************
+-- ******** DONE WITH DATA CURATION!! :) :) *************************************************
 
-
-select *
-		from t_brw_business b2
-		where 
-        -- b2.name_dba like 'golden palace'
-		-- and 
-        b2.add_street1 = '581 Moraga Rd'
-		and 
-        b2.add_city = 'moraga'
-		and b2.add_state = 'CA'
 
 
