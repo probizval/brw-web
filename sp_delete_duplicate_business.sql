@@ -21,11 +21,11 @@ BEGIN
 	declare dup_cursor cursor for select name_dba, add_street1, add_city, add_state, count(*) cnt 
 	from t_brw_business 
 	where add_state = 'CA'
-    and add_city = 'FREMONT'
+    -- and add_city = 'FREMONT'
 	group by name_dba, add_street1, add_city, add_state 
 	having cnt > 1
 	order by cnt desc 
-	limit 10;
+	limit 1000;
     
     -- declare dup_cursor cursor for select name_dba, add_street1, add_city, add_state, count(*) cnt 
 	-- from t_brw_business 

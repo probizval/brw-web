@@ -54,6 +54,14 @@ having cnt > 1
 order by cnt desc 
 limit 10;
 
+select name_dba, add_street1, add_city, add_state, count(*) cnt 
+	from t_brw_business 
+	where add_state = 'CA'
+	group by name_dba, add_street1, add_city, add_state 
+	having cnt > 1
+	order by cnt desc 
+	limit 1000;
+
 -- SQL to find the duplicates 2
 select t1 from contacts t1
 inner join contacts 2
