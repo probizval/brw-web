@@ -39,11 +39,20 @@ order by cnt desc
 limit 12;
 
 select * from t_brw_business 
-where name_dba = 'Infosys Technologies Limited'
+where name_dba = 'SYNNEX Corporation'
 and add_street1 = '6607 KAISER DR'
 and add_city = 'FREMONT'
 and add_state = 'CA';
 -- 302
+
+select name_dba, add_street1, add_city, add_state, count(*) cnt 
+from t_brw_business 
+where add_state = 'CA'
+and add_city = 'Fremont'
+group by name_dba, add_street1, add_city, add_state 
+having cnt > 1
+order by cnt desc 
+limit 10;
 
 -- SQL to find the duplicates 2
 select t1 from contacts t1
