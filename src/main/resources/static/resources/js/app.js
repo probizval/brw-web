@@ -147,6 +147,24 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                 }
             }
         })
+        .state('business.createSearchAgent', {
+            url: '/createSearchAgent',
+            templateUrl: 'resources/pages/createSearchAgentModal.html',
+            controller: 'createSearchAgentController',
+            reload: true,
+        })
+        .state('business.listSearchAgent', {
+            url: '/listSearchAgent',
+            templateUrl: 'resources/pages/listSearchAgents.html',
+            controller: 'listSearchAgentController',
+            reload: true,
+            resolve: {
+                propDetails: function (propertyService) {
+                    return propertyService.getSearchAgents();
+                }
+            }
+        })
+
         .state('business.editBusiness', {
             url: '/editBusiness/:id',
             templateUrl: 'resources/pages/editListingForm.html',

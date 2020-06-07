@@ -41,6 +41,22 @@
             //     // {id:4, label: "Price/sqft", model: $scope.businessDetails.propertyMetaData.pricePerSqft, tooltip: "Price per square feet"},
             //     // {id:5, label: "Days on BRW", model: $scope.businessDetails.propertyMetaData.daysOnBrw, tooltip: "Days on BRW"},
             // ],
+            priceRangeList: [
+                {id: 1, price: "Up to $50K", minPrice: 0, maxPrice: 50000},
+                {id: 2, price: "Up to $100K", minPrice: 0, maxPrice: 100000},
+                {id: 3, price: "$100K to $250K", minPrice: 100000, maxPrice: 250000},
+                {id: 4, price: "$250K to $500K", minPrice: 250000, maxPrice: 500000},
+                {id: 5, price: "$500K to $1M", minPrice: 500000, maxPrice: 1000000},
+                {id: 6, price: "$1M to $2M", minPrice: 1000000, maxPrice: 2000000},
+                {id: 7, price: "$2M to $5M", minPrice: 2000000, maxPrice: 5000000},
+                {id: 8, price: "$5M to $10M", minPrice: 5000000, maxPrice: 10000000},
+                {id: 9, price: "$10M and up", minPrice: 10000000, maxPrice: 100000000},
+            ],
+            subscriptionFrequencies: [
+                {id:1 , label: "Weekly", code: "WEEKLY"},
+                {id:2 , label: "Daily", code: "Daily"},
+                {id:3 , label: "Monthly", code: "MONTHLY"},
+            ],
             allPriceList: [
                 {id: 1, price: "$50k", actualPrice: 50000},
                 {id: 2, price: "$75k", actualPrice: 75000},
@@ -147,7 +163,7 @@
                         //{id: 4, name: "union city", label: "Union City"}
                     ],
             businessStates: [
-                        {id: 1, label: "CA", code: "CA"},
+                        {id: 1, label: "CA", code: "CA", name: "California"},
                         // {id: 2, label: "AZ"},
                         // {id: 3, label: "NY"}
                     ],

@@ -1,0 +1,19 @@
+<div class="page-header bordered">
+    <h1>My Saved Search Subscriptions</h1>
+</div>
+<div class="row item-listing grid">
+    <div ng-repeat="prop in searchAgentsList track by $index" class="item col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-6" id="prop{{index}}">
+        <div class="item-image">
+
+<!--            <a href="#business/editProperty/{{prop.id}}" class="item-meta">-->
+                <span class="item-badge-left item-address">{{prop.name}}</span>
+                <span class="item-badge-right item-address">{{prop.bizType}}</span>
+                <br/>
+                <span class="item-price">{{ prop.frequency }}</span> &nbsp;&nbsp;
+                <span class="item-badge-right item-price">{{prop.priceLow}} - {{prop.priceHigh}}</span>
+                <br/>
+                <span class="item-address">{{prop.city}} {{prop.county}} {{prop.state}}</span>
+<!--            </a>-->
+        </div>
+    </div>
+</div>

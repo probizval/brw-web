@@ -9,6 +9,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
   var estimateUrl = window.location.origin + window.location.pathname + 'api/estimates/v1/';
   var additionAttributesUrl = window.location.origin + window.location.pathname + 'api/additionalAttributes/v1/';
   var emailUrl = window.location.origin + window.location.pathname + 'api/email/v1/';
+  var searchAgentUrl = window.location.origin + window.location.pathname + 'api/searchAgent/v1/';
   var propertyDataOp = {};
 
   propertyDataOp.getBusinessList = function (searchBusinessAttributes) {
@@ -131,6 +132,38 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
 
     propertyDataOp.sendEmail = function (emailInformation) {
         return $http.post(emailUrl + 'sendEmail', emailInformation).success(function(res) {
+            return res.data;
+        }).error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+    propertyDataOp.getStateCounties = function (state) {
+        return $http.post(additionAttributesUrl + 'getStateCounties', state).success(function(res) {
+            return res.data;
+        }).error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+    propertyDataOp.addSearchAgent = function (obj) {
+        return $http.post(searchAgentUrl + 'addSearchAgent', obj).success(function(res) {
+            return res.data;
+        }).error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+
+    propertyDataOp.getSearchAgents = function () {
+        var profile = JSON.parse(sessionStorage.getItem('profile'));
+        var obj = {"userId": profile.userId}
+        return $http.post(searchAgentUrl + 'getSearchAgents', obj).success(function(res) {
+            return res.data;
+        }).error(function (error) {
+            return 'Unable to load store data: ' + error.message;
+        });
+    };
+
+    propertyDataOp.deleteSearchAgent = function (obj) {
+        return $http.post(searchAgentUrl + 'deleteSearchAgent', obj).success(function(res) {
             return res.data;
         }).error(function (error) {
             return 'Unable to load store data: ' + error.message;

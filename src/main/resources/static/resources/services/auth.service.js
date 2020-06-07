@@ -25,9 +25,10 @@
       angularAuth0.parseHash(function(err, authResult) {
         if (authResult && authResult.idToken) {
           setSession(authResult);
-          var redirect_location = sessionStorage.getItem("redirect_location");
-          window.location.href = redirect_location
-          location.reload();
+//          var redirect_location = sessionStorage.getItem("redirect_location");
+//          window.location.href = redirect_location
+//          location.reload();
+			$state.go('business.createSearchAgent', null)
 //          if (redirect_location.includes("/")){
 //            let sub_type = redirect_location.split("/")[1]
 //            redirect_location = redirect_location.split("/")[0]
