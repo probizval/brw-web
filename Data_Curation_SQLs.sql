@@ -9,7 +9,9 @@
 -- 8. Execute SQLs by ending them with ;
 
 
-select * from t_brw_business where biz_id = 12536750;
+select * from t_brw_business where biz_id = 1004939;
+
+select count(*) from t_brw_business where updatedby_user_id = 999;
 
 SELECT max(biz_id) FROM brwdev.t_brw_business;
 
@@ -31,7 +33,7 @@ CALL mysql.rds_kill(406)
 select name_dba, add_street1, add_city, add_state, count(*) cnt  
 from t_brw_business  
 where 
-add_city = 'Fremont' and
+-- add_city = 'Fremont' and
 add_state = 'CA' 
 group by name_dba, add_street1, add_city, add_state  
 having cnt > 1 

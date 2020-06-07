@@ -25,7 +25,7 @@ BEGIN
 	group by name_dba, add_street1, add_city, add_state 
 	having cnt > 1
 	order by cnt desc 
-	limit 1000;
+	limit 10000;
     
     -- declare dup_cursor cursor for select name_dba, add_street1, add_city, add_state, count(*) cnt 
 	-- from t_brw_business 
@@ -151,12 +151,12 @@ BEGIN
             DECLARE CONTINUE HANDLER FOR NOT FOUND SET del_cur_done = 1;
     
     -- select duplicates
-    select '***** JUST BEFORE dupLoop 111';
+    -- select '***** JUST BEFORE dupLoop 111';
     open dup_cursor;
     dupLoop: loop fetch dup_cursor into v_bizName, v_street1, v_city, v_state, v_count;
 		set v_dup_count = v_dup_count + 1;
         
-        select '***** INSIDE dupLoop v_dup_count: '+v_dup_count;
+        -- select '***** INSIDE dupLoop v_dup_count: '+v_dup_count;
         select '***** INSIDE dupLoop v_count: '+v_count;
         
         -- set v_single_biz_id = 0;
@@ -167,13 +167,13 @@ BEGIN
         open rule_1_cursor;
         fetch rule_1_cursor into v_single_biz_id;
         close rule_1_cursor;
-		select '*** AFTER rule_1_cursor Fetch v_single_biz_id: '+v_single_biz_id;
+		-- select '*** AFTER rule_1_cursor Fetch v_single_biz_id: '+v_single_biz_id;
         
 		if (v_single_biz_id = 0) then 
 			-- select '***** I am here 222';
             open rule_2_cursor;
 			fetch rule_2_cursor into v_single_biz_id;
-            select '*** AFTER rule_2_cursor Fetch v_single_biz_id: '+v_single_biz_id;
+            -- select '*** AFTER rule_2_cursor Fetch v_single_biz_id: '+v_single_biz_id;
             close rule_2_cursor;
             -- select '***** I am here 222';
             
@@ -181,21 +181,21 @@ BEGIN
 			-- select '***** I am here 333';
             open rule_3_cursor;
 			fetch rule_3_cursor into v_single_biz_id;
-            select '*** AFTER rule_3_cursor Fetch v_single_biz_id: '+v_single_biz_id;
+            -- select '*** AFTER rule_3_cursor Fetch v_single_biz_id: '+v_single_biz_id;
 			close rule_3_cursor;
             
 		elseif (v_single_biz_id = 0) then
 			-- select '***** I am here 444';
             open rule_4_cursor;
 			fetch rule_4_cursor into v_single_biz_id;
-            select '*** AFTER rule_4_cursor Fetch v_single_biz_id: '+v_single_biz_id;
+            -- select '*** AFTER rule_4_cursor Fetch v_single_biz_id: '+v_single_biz_id;
             close rule_4_cursor;
 			
 		else
 			-- select '***** I am here 555';
             open rule_5_cursor;
 			fetch rule_5_cursor into v_single_biz_id;
-            select '*** AFTER rule_5_cursor Fetch v_single_biz_id: '+v_single_biz_id;
+            -- select '*** AFTER rule_5_cursor Fetch v_single_biz_id: '+v_single_biz_id;
 			close rule_5_cursor;	
 			
 		end if;
@@ -243,7 +243,7 @@ BEGIN
             commit;
             set v_del_biz_id = 0;
             
-			select '***** I am here 999';
+			-- select '***** I am here 999';
 		end loop delLoop;
         close del_cursor;
         
@@ -254,7 +254,7 @@ BEGIN
         set v_city = null;
         set v_state = null;
         
-        select '***** I am here 101010';
+        -- select '***** I am here 101010';
         -- select 'Coming OUT of the dupLoop';
 	end loop dupLoop;	
     close dup_cursor;
