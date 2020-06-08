@@ -180,8 +180,7 @@ limit 10;
 select count(*) from t_brw_business where name_dba is null and name_legal is null;
 select count(*) from t_brw_business where name_dba = '' and name_legal = '';
 select count(*) from t_brw_business where sic_code is null and sic_description is null; -- result: 21
-select count(*) from t_brw_business where sic_code = '' and sic_description = ''; -- result: 
-
+select count(*) from t_brw_business where sic_code = '' and sic_description = ''; -- result: 295410!!
 
 
 -- 2. Based on SIC description decide the Biz Type - update type, sub type 
@@ -194,9 +193,9 @@ select distinct sic_code, sic_description
 from t_brw_business 
 where 
 add_state = 'CA' and 
-sic_description like 'food' or
-sic_description like 'restaurant' or
-sic_description like 'eat';
+(sic_description like '%food%'or
+sic_description like '%restaurant%' or
+sic_description like 'eat%');
 
 2.2. Based on above response pick up sic_code that are relevant.
 Validate the SIC_CODEs with referance SQLs down below.
@@ -204,7 +203,7 @@ Validate the SIC_CODEs with referance SQLs down below.
 
 2.3. Update the business with below SQL keep adding sic_code to the where clause
 -- SEARCH KEYWORDS - food, restaurant, eating
--- update t_brw_business 
+update t_brw_business 
 set type = 'BTYPE_REST_FOOD', 
 sub_type = 'BTYPE_REST_FOOD'
 where 
@@ -212,7 +211,6 @@ add_state = 'CA' and
 sic_code like '58%' and 
 sic_code like '20%' and
 sic_code like '??%'; 
-
 
 Referance SQLs -
 select  distinct sic_code, sic_description 
@@ -225,6 +223,11 @@ from t_brw_business
 where add_state = 'CA'  and 
 sic_code like '58%' and 
 sic_description = 'SIC Not Defined';
+
+2.4 Long Term Solution
+-- Come up with table that maps Distinct SIC_CODE to BRW_RO_BIZ_TYPES
+-- Then on every time new business is getting added look at the mapping and put it
+
 
 -- 3. Based on Biz Type, revenue range, county decide range of market based estimates
 -- update t_brw_business
@@ -241,6 +244,10 @@ set market_based_est = revenue/5
 where type = 'BTYPE_REST_FOOD'
 and add_county = 'ALAMEDA'
 and add_state = 'CA';
+
+-- To create a random integer number between two values (range), you can use the following formula: SELECT FLOOR(RAND()*(b-a+1))+a; Where a is the smallest number and b is the largest number that you want to generate a random number for.
+-- Return a random number >= 5 and <=10:
+SELECT FLOOR(RAND()*(100000-50000+1)+50000);
 
 
 -- 4. Based on Business Type update image_first - no icon or vector but actual image
