@@ -9,7 +9,7 @@
 -- 8. Execute SQLs by ending them with ;
 
 
-select * from t_brw_business where biz_id = 1004311;
+select * from t_brw_business where biz_id = 1006130;
 
 select count(*) from t_brw_business where updatedby_user_id = 999;
 
@@ -208,9 +208,14 @@ set type = 'BTYPE_REST_FOOD',
 sub_type = 'BTYPE_REST_FOOD'
 where 
 add_state = 'CA' and 
-sic_code like '58%' and 
-sic_code like '20%' and
-sic_code like '??%'; 
+(sic_description like '%food%'or 
+sic_description like '%restaurant%' or 
+sic_description like 'eat%' or
+sic_description like '%cafe%' or
+sic_description like '%bar%' or
+sic_description like '%club%');
+
+sic_description like '%cafe%' or sic_description like '%bar%' or sic_description like '%club%'
 
 Referance SQLs -
 select  distinct sic_code, sic_description 
