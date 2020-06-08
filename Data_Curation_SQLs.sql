@@ -9,7 +9,7 @@
 -- 8. Execute SQLs by ending them with ;
 
 
-select * from t_brw_business where biz_id = 1006130;
+select * from t_brw_business where biz_id = 5559957;
 
 select count(*) from t_brw_business where updatedby_user_id = 999;
 
