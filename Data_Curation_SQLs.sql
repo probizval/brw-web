@@ -81,7 +81,6 @@ where
         and b2.updatedby_user_id != 9999);
 
 
-
 -- create index for better performance
 -- CREATE INDEX idx_brw_primary_key
 -- ON t_brw_business (name_dba, add_street1, add_city, add_state);
@@ -175,12 +174,28 @@ limit 10;
 
 -- call delete_duplicate_business;
 
+1.1 FUNDAMENTAL UPDATES AND CLEAN UPS *********************
 
--- 1.1 FUNDAMENTAL CLEAN UPS *********************
-select count(*) from t_brw_business where name_dba is null and name_legal is null;
-select count(*) from t_brw_business where name_dba = '' and name_legal = '';
+
 select count(*) from t_brw_business where sic_code is null and sic_description is null; -- result: 21
 select count(*) from t_brw_business where sic_code = '' and sic_description = ''; -- result: 295410!!
+-- If sic code and sic descriptions is empty then update it with 0000 and miscellaneous respectively
+update t_brw_business
+set sic_code = '0000',
+set sic_description = 'Miscellaneous'
+where
+name_dba is null and name_legal is null or 
+name_dba = '' and name_legal = '';
+
+select count(*) from t_brw_business where name_dba is null and name_legal is null;
+select count(*) from t_brw_business where name_dba = '' and name_legal = '';
+-- If the name is null or empty update it with business type
+update t_brw_business
+set name_dba = 'sic_description',
+set name_legal = 'sic_description'
+where
+name_dba is null and name_legal is null or 
+name_dba = '' and name_legal = '';
 
 
 -- 2. Based on SIC description decide the Biz Type - update type, sub type 
@@ -195,7 +210,8 @@ where
 add_state = 'CA' and 
 (sic_description like '%food%'or
 sic_description like '%restaurant%' or
-sic_description like 'eat%');
+sic_description like 'eat%')
+order by sic_code asc;
 
 2.2. Based on above response pick up sic_code that are relevant.
 Validate the SIC_CODEs with referance SQLs down below.
@@ -237,13 +253,17 @@ sic_description = 'SIC Not Defined';
 -- 3. Based on Biz Type, revenue range, county decide range of market based estimates
 -- update t_brw_business
 
-select distinct sales_range 
+select distinct sales_range, count(*) cnt 
 from t_brw_business 
-where add_state = 'CA';
+where add_state = 'CA'
+group by sales_range
+order by cnt asc;
 
-select distinct employee_range 
+select distinct employee_range, count(*) cnt 
 from t_brw_business 
-where add_state = 'CA';
+where add_state = 'CA'
+group by employee_range
+order by cnt asc;
 
 set market_based_est = revenue/5
 where type = 'BTYPE_REST_FOOD'
