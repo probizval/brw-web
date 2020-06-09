@@ -167,37 +167,40 @@ BEGIN
         open rule_1_cursor;
         fetch rule_1_cursor into v_single_biz_id;
         close rule_1_cursor;
-		-- select '*** AFTER rule_1_cursor Fetch v_single_biz_id: '+v_single_biz_id;
+		select '*** AFTER rule_1_cursor Fetch v_single_biz_id: '+v_single_biz_id;
         
 		if (v_single_biz_id = 0) then 
-			-- select '***** I am here 222';
+			select '***** I am here 222';
             open rule_2_cursor;
 			fetch rule_2_cursor into v_single_biz_id;
-            -- select '*** AFTER rule_2_cursor Fetch v_single_biz_id: '+v_single_biz_id;
+            select '*** AFTER rule_2_cursor Fetch v_single_biz_id: '+v_single_biz_id;
             close rule_2_cursor;
-            -- select '***** I am here 222';
+		end if;
             
-		elseif (v_single_biz_id = 0) then 
-			-- select '***** I am here 333';
+		if (v_single_biz_id = 0) then 
+			select '***** I am here 333';
             open rule_3_cursor;
 			fetch rule_3_cursor into v_single_biz_id;
-            -- select '*** AFTER rule_3_cursor Fetch v_single_biz_id: '+v_single_biz_id;
+            select '*** AFTER rule_3_cursor Fetch v_single_biz_id: '+v_single_biz_id;
 			close rule_3_cursor;
             
-		elseif (v_single_biz_id = 0) then
-			-- select '***** I am here 444';
+		end if;
+            
+		if (v_single_biz_id = 0) then
+			select '***** I am here 444';
             open rule_4_cursor;
 			fetch rule_4_cursor into v_single_biz_id;
-            -- select '*** AFTER rule_4_cursor Fetch v_single_biz_id: '+v_single_biz_id;
+            select '*** AFTER rule_4_cursor Fetch v_single_biz_id: '+v_single_biz_id;
             close rule_4_cursor;
-			
-		else
-			-- select '***** I am here 555';
+            
+		end if;
+            
+		if (v_single_biz_id = 0) then
+			select '***** I am here 555';
             open rule_5_cursor;
 			fetch rule_5_cursor into v_single_biz_id;
-            -- select '*** AFTER rule_5_cursor Fetch v_single_biz_id: '+v_single_biz_id;
-			close rule_5_cursor;	
-			
+            select '*** AFTER rule_5_cursor Fetch v_single_biz_id: '+v_single_biz_id;
+			close rule_5_cursor;
 		end if;
         
         -- Leave the dupLoop if v_single_biz_id is 0 at this point

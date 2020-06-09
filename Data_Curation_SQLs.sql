@@ -3,8 +3,8 @@
 -- 2. Open Terminal on MAC
 -- 3. Goto - cd /usr/local/mysql-shell/bin/
 -- 4. run command - mysqlsh
--- 5. rum command - \connect brw_app_dev@brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com/brwdev PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
--- 6. Enter password if it asks
+-- 5. rum command - \connect admin@brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com/brwdev
+-- 6. Enter password if it asks - PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
 -- 7. Switch to SQL mode by command - \sql
 -- 8. Execute SQLs by ending them with ;
 
@@ -16,8 +16,8 @@ select * from mysql.user;
 USER/PWD - read_only/brw_2020
 USER/PWD - brw_app_dev/HDYnCWRnjn8qxTA81y3iNAikCeCJ
 
-CREATE USER 'brw_app_dev'@'%' IDENTIFIED BY 'HDYnCWRnjn8qxTA81y3iNAikCeCJ';
-GRANT SELECT ON *.* TO 'brw_app_dev'@'%';
+CREATE USER 'read_only'@'%' IDENTIFIED BY 'brw_2020';
+GRANT SELECT ON *.* TO 'read_only'@'%';
 GRANT INSERT ON *.* TO 'brw_app_dev'@'%';
 GRANT DELETE ON *.* TO 'brw_app_dev'@'%';
 -- GRANT CREATE ON *.* TO 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
@@ -38,9 +38,7 @@ UPDATE mysql.user
 SET file_priv='Y'
 WHERE user='admin';
 
-
-
-select * from t_brw_business where biz_id = 10010331;
+select * from t_brw_business where biz_id = 5563545;
 
 update t_brw_business 
 set updatedby_user_id = 9999
@@ -200,7 +198,7 @@ select count(biz_id)
 select name_dba, add_street1, add_city, add_state, count(*) cnt 
 from t_brw_business 
 where add_state = 'CA' 
-and add_city = 'Fremont' 
+-- and add_city = 'Fremont' 
 group by name_dba, add_street1, add_city, add_state 
 having cnt > 1 
 order by cnt desc 
@@ -384,9 +382,11 @@ select count(*) from t_brw_sic_biztype_mapping
 
 select * from t_brw_sic_biztype_mapping
 
-delete from t_brw_sic_biztype_mapping
+-- delete from t_brw_sic_biztype_mapping
 
 -- 8. Insert data in to state county city table
 select * from t_brw_state_county_cities
+
+-- delete from t_brw_state_county_cities
 
 -- ******** DONE WITH DATA CURATION!! :) :) *************************************************
