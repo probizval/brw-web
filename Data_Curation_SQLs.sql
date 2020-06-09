@@ -11,15 +11,17 @@
 -- Create User on MySql and grant permissions to particular table
 select * from mysql.user;
 
+-- delete from mysql.user where user = 'brw_app_dev'
+
 USER/PWD - read_only/brw_2020
 USER/PWD - brw_app_dev/HDYnCWRnjn8qxTA81y3iNAikCeCJ
 
--- CREATE USER 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com' IDENTIFIED BY 'HDYnCWRnjn8qxTA81y3iNAikCeCJ';
-GRANT SELECT ON *.* TO 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
-GRANT INSERT ON *.* TO 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
-GRANT DELETE ON *.* TO 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
+CREATE USER 'brw_app_dev'@'%' IDENTIFIED BY 'HDYnCWRnjn8qxTA81y3iNAikCeCJ';
+GRANT SELECT ON *.* TO 'brw_app_dev'@'%';
+GRANT INSERT ON *.* TO 'brw_app_dev'@'%';
+GRANT DELETE ON *.* TO 'brw_app_dev'@'%';
 -- GRANT CREATE ON *.* TO 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
-GRANT UPDATE ON *.* TO 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
+GRANT UPDATE ON *.* TO 'brw_app_dev'@'%';
 -- GRANT ALTER ON *.* TO 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
 
 revoke create ON *.* from 'read_only'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
