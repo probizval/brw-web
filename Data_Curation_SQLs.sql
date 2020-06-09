@@ -8,8 +8,37 @@
 -- 7. Switch to SQL mode by command - \sql
 -- 8. Execute SQLs by ending them with ;
 
+-- Create User on MySql and grant permissions to particular table
+select * from mysql.user;
 
-select * from t_brw_business where biz_id = 5562096;
+USER/PWD - read_only/brw_2020
+USER/PWD - brw_app_dev/HDYnCWRnjn8qxTA81y3iNAikCeCJ
+
+-- CREATE USER 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com' IDENTIFIED BY 'HDYnCWRnjn8qxTA81y3iNAikCeCJ';
+GRANT SELECT ON *.* TO 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
+GRANT INSERT ON *.* TO 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
+GRANT DELETE ON *.* TO 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
+-- GRANT CREATE ON *.* TO 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
+GRANT UPDATE ON *.* TO 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
+-- GRANT ALTER ON *.* TO 'brw_app_dev'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
+
+revoke create ON *.* from 'read_only'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
+revoke alter ON *.* from 'read_only'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
+revoke insert ON *.* from 'read_only'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
+revoke DELETE ON *.* from 'read_only'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
+revoke UPDATE ON *.* from 'read_only'@'brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com';
+
+FLUSH PRIVILEGES;
+
+SELECT file_priv FROM mysql.user WHERE user='admin';
+
+UPDATE mysql.user
+SET file_priv='Y'
+WHERE user='admin';
+
+
+
+select * from t_brw_business where biz_id = 10010331;
 
 update t_brw_business 
 set updatedby_user_id = 9999
@@ -22,6 +51,14 @@ SELECT max(biz_id) FROM brwdev.t_brw_business;
 
 SELECT count(*) FROM brwdev.t_brw_business;
 
+SELECT count(biz_id) FROM brwdev.t_brw_business where add_state = 'WY';
+
+select distinct sic_description, sic_code 
+INTO OUTFILE '/Users/sidpatil/Work/z_data/sic_desc_code.csv' 
+from t_brw_business 
+where add_state = 'CA' 
+order by sic_description asc;
+
 select distinct add_state from t_brw_business
 -- where biz_id < 6000
 
@@ -29,7 +66,7 @@ select distinct add_state from t_brw_business
 SHOW FULL PROCESSLIST;
 
 -- To kill the DB process
-CALL mysql.rds_kill(406)
+CALL mysql.rds_kill()
 
 -- call Delete SP
 -- call brwdev.delete_duplicate_business();
@@ -330,7 +367,15 @@ and state = 'CA'{
 insert into t_brw_business_image (biz_id, image_URL)
 values ('biz_id', 's3//link_for_brw_aws_location_for_generic_restaurant_image.JPG');
 }
+
+
+-- 7. Select ditinct combinations of sic_description and sic_code from business table and insert into sic
+-- biz type mapping table
+
+INSERT INTO t_brw_sic_biztype_mapping (sic_code, sic_description) 
+select distinct sic_description, sic_code 
+from t_brw_business 
+where add_state = 'CA'
+order by sic_description asc;
+
 -- ******** DONE WITH DATA CURATION!! :) :) *************************************************
-
-
-
