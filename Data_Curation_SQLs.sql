@@ -3,7 +3,7 @@
 -- 2. Open Terminal on MAC
 -- 3. Goto - cd /usr/local/mysql-shell/bin/
 -- 4. run command - mysqlsh
--- 5. rum command - \connect admin@brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com/brwdev
+-- 5. rum command - \connect brw_app_dev@brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com/brwdev PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
 -- 6. Enter password if it asks
 -- 7. Switch to SQL mode by command - \sql
 -- 8. Execute SQLs by ending them with ;
@@ -372,10 +372,19 @@ values ('biz_id', 's3//link_for_brw_aws_location_for_generic_restaurant_image.JP
 -- 7. Select ditinct combinations of sic_description and sic_code from business table and insert into sic
 -- biz type mapping table
 
-INSERT INTO t_brw_sic_biztype_mapping (sic_code, sic_description) 
+INSERT INTO t_brw_sic_biztype_mapping (sic_description, sic_code) 
 select distinct sic_description, sic_code 
 from t_brw_business 
 where add_state = 'CA'
 order by sic_description asc;
+
+select count(*) from t_brw_sic_biztype_mapping
+
+select * from t_brw_sic_biztype_mapping
+
+delete from t_brw_sic_biztype_mapping
+
+-- 8. Insert data in to state county city table
+select * from t_brw_state_county_cities
 
 -- ******** DONE WITH DATA CURATION!! :) :) *************************************************
