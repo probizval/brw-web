@@ -4,8 +4,8 @@
 -- 3. Goto - cd /usr/local/mysql-shell/bin/
 -- 4. run command - mysqlsh
 -- 5. rum command - \connect admin@brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com/brwdev
--- 6. Enter password if it asks - PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
--- 7. Switch to SQL mode by command - \sql
+-- 6. Switch to SQL mode by command - \sql
+-- 7. Enter password if it asks - PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
 -- 8. Execute SQLs by ending them with ;
 
 -- Create User on MySql and grant permissions to particular table
@@ -38,7 +38,7 @@ UPDATE mysql.user
 SET file_priv='Y'
 WHERE user='admin';
 
-select * from t_brw_business where biz_id = 5563545;
+select * from t_brw_business where biz_id = 5563551;
 
 update t_brw_business 
 set updatedby_user_id = 9999
@@ -47,11 +47,19 @@ updatedby_user_id = 999;
 
 select count(*) from t_brw_business where updatedby_user_id = 999;
 
-SELECT max(biz_id) FROM brwdev.t_brw_business;
+SELECT max(biz_id) FROM brwdev.t_brw_business where add_state = 'NY';
+-- 17073476
 
-SELECT count(*) FROM brwdev.t_brw_business;
+SELECT count(*) FROM brwdev.t_brw_business where add_state = 'NY';
+-- 31018
 
-SELECT count(biz_id) FROM brwdev.t_brw_business where add_state = 'WY';
+SELECT * 
+FROM brwdev.t_brw_business where 
+biz_id = 17073476 and 
+name_dba = 'Samaritan Medical Center' and
+owner_first = 'Terry Rutledge' and
+add_state = 'NY';
+-- 17045477
 
 select distinct sic_description, sic_code 
 INTO OUTFILE '/Users/sidpatil/Work/z_data/sic_desc_code.csv' 
@@ -386,6 +394,24 @@ select * from t_brw_sic_biztype_mapping
 
 -- 8. Insert data in to state county city table
 select * from t_brw_state_county_cities
+
+INSERT INTO t_brw_state_counties (state_code, state_name, county_name) 
+select distinct state_code, state_name, county_name 
+from t_brw_state_county_cities 
+order by state_code, county_name asc;
+-- where 
+-- add_state = 'CA'
+
+
+select count(distinct state_code, state_name, county_name) 
+from t_brw_state_county_cities 
+where 
+state_code = 'NV'
+
+select count(*) from t_brw_state_counties
+where state_code = 'CA'
+
+delete from t_brw_state_counties
 
 -- delete from t_brw_state_county_cities
 
