@@ -47,19 +47,19 @@ updatedby_user_id = 999;
 
 select count(*) from t_brw_business where updatedby_user_id = 999;
 
-SELECT max(biz_id) FROM brwdev.t_brw_business where add_state = 'NY';
--- 17073476
+SELECT max(biz_id) FROM brwdev.t_brw_business where add_state = 'HI';
+-- 16803963
 
 SELECT count(*) FROM brwdev.t_brw_business where add_state = 'NY';
 -- 31018
 
 SELECT * 
 FROM brwdev.t_brw_business where 
-biz_id = 17073476 and 
-name_dba = 'Samaritan Medical Center' and
-owner_first = 'Terry Rutledge' and
-add_state = 'NY';
--- 17045477
+-- biz_id = 17073476 and 
+name_dba = 'Advanced Landscape' and
+owner_first = 'Brad Wilks' and
+add_state = 'HI';
+-- 16803963
 
 select distinct sic_description, sic_code 
 INTO OUTFILE '/Users/sidpatil/Work/z_data/sic_desc_code.csv' 
@@ -78,6 +78,7 @@ CALL mysql.rds_kill()
 
 -- call Delete SP
 -- call brwdev.delete_duplicate_business();
+-- call brwdev.delete_duplicate_business_STATES();
 
 -- SQL to find the duplicates 1
 select name_dba, add_street1, add_city, add_state, count(*) cnt  
