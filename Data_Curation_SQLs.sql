@@ -38,7 +38,7 @@ UPDATE mysql.user
 SET file_priv='Y'
 WHERE user='admin';
 
-select * from t_brw_business where biz_id = 5563551;
+select * from t_brw_business where biz_id = 11267189;
 
 update t_brw_business 
 set updatedby_user_id = 9999
@@ -50,7 +50,7 @@ select count(*) from t_brw_business where updatedby_user_id = 999;
 SELECT max(biz_id) FROM brwdev.t_brw_business where add_state = 'HI';
 -- 16803963
 
-SELECT count(*) FROM brwdev.t_brw_business where add_state = 'NY';
+SELECT count(*) FROM brwdev.t_brw_business where add_state = 'AK';
 -- 31018
 
 SELECT * 
@@ -131,7 +131,6 @@ where
 		and b2.add_state = 'CA'
         and b2.updatedby_user_id != 9999);
 
-
 -- create index for better performance
 -- CREATE INDEX idx_brw_primary_key
 -- ON t_brw_business (name_dba, add_street1, add_city, add_state);
@@ -183,7 +182,7 @@ select count(biz_id)
 		and add_state = 'CA';
         
         
--- ******************************************************
+-- **************************** START OF RULES DUMENTATION **************************************************--
 -- *** Data Curation Rules and steps sequence ***
 -- 1. Delete Duplicates - Keep the record that has most columns, especially with 
 -- revenue range, employee range, specific SIC description, contact title as owner 
@@ -197,6 +196,7 @@ select count(biz_id)
 -- 4. Based on Biz Type and location (state and/or city) decide values of other attributes but randomize while 
 -- setting them up, so they don't look similar for all business
 
+-- **************************** END OF RULES DUMENTATION **************************************************--
 
 -- 1. SQLs to Find and Delete Duplicates - Keep the record that has most columns, especially with 
 -- revenue range, employee range, specific SIC description, contact title as owner 
@@ -227,26 +227,27 @@ limit 10;
 
 1.1 FUNDAMENTAL UPDATES AND CLEAN UPS *********************
 
-
+-- wherevere sic details are not avalable, set sic_code to 0000 and sic_description to Miscellaneous
 select count(*) from t_brw_business where sic_code is null and sic_description is null; -- result: 21
-select count(*) from t_brw_business where sic_code = '' and sic_description = ''; -- result: 295410!!
--- If sic code and sic descriptions is empty then update it with 0000 and miscellaneous respectively
+
 update t_brw_business
 set sic_code = '0000',
-set sic_description = 'Miscellaneous'
+sic_description = 'Miscellaneous'
 where
-name_dba is null and name_legal is null or 
-name_dba = '' and name_legal = '';
+(sic_code is null and sic_description is null) or
+(sic_code = '' and sic_description = '');
+-- 115637 rows updated
+
 
 select count(*) from t_brw_business where name_dba is null and name_legal is null;
 select count(*) from t_brw_business where name_dba = '' and name_legal = '';
 -- If the name is null or empty update it with business type
 update t_brw_business
-set name_dba = 'sic_description',
-set name_legal = 'sic_description'
+set name_dba = 'Name Not Available',
+name_legal = 'Name Not Available'
 where
-name_dba is null and name_legal is null or 
-name_dba = '' and name_legal = '';
+(name_dba is null and name_legal is null) or 
+(name_dba = '' and name_legal = '');
 
 
 -- 2. Based on SIC description decide the Biz Type - update type, sub type 
@@ -267,20 +268,27 @@ order by sic_code asc;
 2.2. Based on above response pick up sic_code that are relevant.
 Validate the SIC_CODEs with referance SQLs down below.
 
-
 2.3. Update the business with below SQL keep adding sic_code to the where clause
 -- SEARCH KEYWORDS - food, restaurant, eating
-update t_brw_business 
-set type = 'BTYPE_REST_FOOD', 
-sub_type = 'BTYPE_REST_FOOD'
+select * from t_brw_sic_biztype_mapping order by sic_description asc;
 where 
-add_state = 'CA' and 
 (sic_description like '%food%'or 
 sic_description like '%restaurant%' or 
 sic_description like 'eat%' or
 sic_description like '%cafe%' or
-sic_description like '%bar%' or
-sic_description like '%club%');
+sic_description like 'bar') 
+order by sic_description asc;
+
+update t_brw_sic_biztype_mapping 
+set biz_type = 'BTYPE_REST_FOOD'
+where 
+(sic_description like '%food%'or 
+sic_description like '%restaurant%' or 
+sic_description like 'eat%' or
+sic_description like '%cafe%' or
+sic_description like 'bar');
+
+select * from t_brw_sic_biztype_mapping where biz_type = 'BTYPE_REST_FOOD'
 
 sic_description like '%cafe%' or sic_description like '%bar%' or sic_description like '%club%'
 
