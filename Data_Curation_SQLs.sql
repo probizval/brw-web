@@ -38,7 +38,7 @@ UPDATE mysql.user
 SET file_priv='Y'
 WHERE user='admin';
 
-select * from t_brw_business where biz_id = 11267189;
+select * from t_brw_business where biz_id = 18260248;
 
 update t_brw_business 
 set updatedby_user_id = 9999
@@ -47,18 +47,18 @@ updatedby_user_id = 999;
 
 select count(*) from t_brw_business where updatedby_user_id = 999;
 
-SELECT max(biz_id) FROM brwdev.t_brw_business where add_state = 'HI';
+SELECT max(biz_id) FROM brwdev.t_brw_business where add_state = 'LA';
 -- 16803963
 
-SELECT count(*) FROM brwdev.t_brw_business where add_state = 'AK';
+SELECT count(*) FROM brwdev.t_brw_business where add_state = 'LA';
 -- 31018
 
 SELECT * 
 FROM brwdev.t_brw_business where 
 -- biz_id = 17073476 and 
-name_dba = 'Advanced Landscape' and
-owner_first = 'Brad Wilks' and
-add_state = 'HI';
+name_dba = 'Bancorpsouth Inc' and
+owner_first = 'Jerry Fielder' and
+add_state = 'LA';
 -- 16803963
 
 select distinct sic_description, sic_code 
@@ -310,6 +310,7 @@ sic_description = 'SIC Not Defined';
 
 
 -- 3. Based on Biz Type, revenue range, county decide range of market based estimates
+-- have the price range as 10-20% random number generator
 -- update t_brw_business
 
 select distinct sales_range, count(*) cnt 
@@ -335,6 +336,7 @@ SELECT FLOOR(RAND()*(100000-50000+1)+50000);
 
 
 -- 4. Based on Business Type update image_first - no icon or vector but actual image
+-- Use 10 images per business type random
 -- update t_brw_business
 set image_first = 's3//link_for_brw_aws_location_for_generic_restaurant_image.JPG'
 where type = 'BTYPE_REST_FOOD'
