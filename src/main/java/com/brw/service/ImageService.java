@@ -9,4 +9,5 @@ public interface ImageService {
 	public ImagesListDTO addImages(ImagesListDTO imagesListDTO);
 	public ImagesListDTO getImages(int businessId);
 	public int deleteImages(ImagesListDTO imagesListDTO);
+	public String getDefaultImageForBizType(String bizType);
 }

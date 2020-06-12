@@ -34,6 +34,7 @@ import com.brw.entities.RelatedBusiness;
 import com.brw.entities.UserBusiness;
 import com.brw.service.BizTransactionService;
 import com.brw.service.EstimateService;
+import com.brw.service.ImageService;
 import com.brw.service.UserService;
 
 @Component
@@ -56,6 +57,9 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	ImageService imageService;
 	
 	@Autowired
 	private UserBusinessDAO userBusinessDAO;
@@ -86,12 +90,14 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		//Need to write the code to update View Counter on Business table
 		//Increase the View Counter for Business - END
 		
-		//TODO:TEMPORARY translation of zip code and business type - need to fix it on UI and then remove this code
+		//TODO:TEMPORARY translation of zip code - need to fix it on UI and then remove this code
 		if (businessDTO.getZip() == 94536) {
 			businessDTO.setZip(null);
 		}
 				
 		// TODO Auto-generated method stub
+		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getInvokerId: "+businessDTO.getInvokerId());
+		
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getName: "+businessDTO.getName());
 		
 		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getType: "+businessDTO.getType());
@@ -411,9 +417,17 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessInfoDTO.setSubType(businessInfo.getSubType());
 			businessInfoDTO.setIsForSell(businessInfo.getIsForSell());
 			businessInfoDTO.setForSellPrice(businessInfo.getForSellPrice());
-			businessInfoDTO.setMarketBasedEst(businessInfo.getMarketBasedEst());
-			businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
-			
+			if(1001 == businessDTO.getInvokerId()) {
+				businessInfoDTO.setMarketBasedEst(businessInfo.getMarketBasedEst());
+			}
+			//businessInfoDTO.setMarketBasedEst(businessInfo.getMarketBasedEst());
+			if(null != businessInfo.getImageFirst() || Constants.EMPTY_STRING != businessInfo.getImageFirst()) {
+				//If ImageFirst Exist then pick up Image First
+				businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
+			} else {
+				//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
+				businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
+			}
 			businessInfoDTO.setIsVendorCall(businessInfo.getIsVendorCall());
 			businessInfoDTO.setIsFranchise(businessInfo.getIsFranchise());
 			
@@ -438,7 +452,14 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		businessInfoDTO.setIsForSell(businessInfo.getIsForSell());
 		businessInfoDTO.setIsHidden(businessInfo.getIsHidden());
 		businessInfoDTO.setForSellPrice(businessInfo.getForSellPrice());
-		businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
+		//businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
+		if(null != businessInfo.getImageFirst() || Constants.EMPTY_STRING != businessInfo.getImageFirst()) {
+			//If ImageFirst Exist then pick up Image First
+			businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
+		} else {
+			//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
+			businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
+		}
 		
 		System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetails.getIsHidden(): "+businessInfo.getIsHidden());
 
@@ -499,7 +520,14 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		businessDetailsDTO.setBrokerEmail(businessDetails.getBrokerEmail());
 		businessDetailsDTO.setIsPaidListing(businessDetails.getIsPaidListing());
 		businessDetailsDTO.setImageLogo(businessDetails.getImageLogo());
-		businessDetailsDTO.setImageFirst(businessDetails.getImageFirst());
+		//businessDetailsDTO.setImageFirst(businessDetails.getImageFirst());
+		if(null != businessDetails.getImageFirst() || Constants.EMPTY_STRING != businessDetails.getImageFirst()) {
+			//If ImageFirst Exist then pick up Image First
+			businessDetails.setImageFirst(businessDetails.getImageFirst());
+		} else {
+			//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
+			businessDetails.setImageFirst(imageService.getDefaultImageForBizType(businessDetails.getType()));
+		}
 		
 		System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetails.getIsHidden(): "+businessDetails.getIsHidden());
 

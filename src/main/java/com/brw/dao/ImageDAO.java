@@ -27,4 +27,7 @@ public interface ImageDAO extends PagingAndSortingRepository<Image, Integer>{
 	@Transactional
 	@Query(nativeQuery=true, value="DELETE FROM t_brw_image WHERE biz_id = :businessId AND image_id = :imageId")
 	int deleteImage(@Param ("businessId") int businessId, @Param ("imageId") int imageId);
+	
+	@Query(nativeQuery=true, value="SELECT url FROM t_brw_image WHERE biz_id = :businessId")
+	String getImage(@Param ("businessId") int businessId);
 }

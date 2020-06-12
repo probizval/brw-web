@@ -7,7 +7,8 @@ package com.brw.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
@@ -190,8 +191,55 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 		return returnImagesListDTO;
 	}
 	
+	/**
+	 * @author sidpatil
+	 * GetImages method first tries to get image URLs from t_brw_image table.
+	 * If there are no images already in DB for given business then it calls the google API to get the images.
+	 */
 	@Override
 	public ImagesListDTO getImages(int businessId) {
+		System.out.println("222 **** Inside ImageServiceImpl.getImages()");
+
+		ImagesListDTO returnImageDTOList = new ImagesListDTO();
+		ImagesListDTO dbIamgesDTOList = getImagesFromDB(businessId);
+		
+		if (dbIamgesDTOList.getImagesList().size() > 0) {
+			returnImageDTOList = dbIamgesDTOList;
+		} else {
+			//TODO: Call Google API to get images for the business
+			//Need the Business Address here
+			/*
+			photo_url = []
+	        if place_details_data is not None and "photos" in place_details_data["result"]:
+	                place_details_photos_list = place_details_data["result"]["photos"]
+	                for place_photo in place_details_photos_list:
+	                    photo_reference = place_photo["photo_reference"]
+	                    place_photo_data = get_place_photo_results(photo_reference)
+	                    if place_photo_data is not None:
+	                        photo_url.append(place_photo_data)
+	                    else:
+	                        continue
+			    
+			*/
+			
+			/*
+			        
+	        def get_place_photo_results(photo_reference):
+	            place_photo_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference={}&key={}".format(
+	                photo_reference, config.google_api_key)
+	            photo_response = requests.get(place_photo_url)
+	            if photo_response.status_code == 200:
+	                return photo_response.url
+	            else:
+	                return None
+			*/
+			
+		}
+		
+		return returnImageDTOList;
+	}
+	
+	private ImagesListDTO getImagesFromDB(int businessId) {
 		System.out.println("222 **** Inside ImageServiceImpl.getImages()");
 
 		List<Image> imageList = (List<Image>)imageDAO.getImages(businessId);
@@ -232,5 +280,104 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 		}
 		
 		return nurDeleted;
+	}
+	
+	@Override
+	public String getDefaultImageForBizType(String bizType) {
+		System.out.println("222 **** Inside ImageServiceImpl.getDefaultImageForBizType()");
+		
+		// switch case to pick up bizId range based on bizType
+		int min = 0;
+		int max = 0;
+		switch (bizType) {
+		  case Constants.BTYPE_AGRI:
+			 min = 990001;
+			 max = 990010;
+			 break;
+		  case Constants.BTYPE_AUTO_BOAT:
+			 min = 990011;
+			 max = 990020;
+			 break;
+		  case Constants.BTYPE_BEAUTY_PERSONA:
+			min = 990021;
+			max = 990030;
+			break;
+		  case Constants.BTYPE_BUILD_CONS:
+			min = 990031;
+			max = 990040;
+			break;
+		  case Constants.BTYPE_COM_MEDIA:
+			min = 990041;
+			max = 990050;
+			break;
+		  case Constants.BTYPE_EDU_CHILD:
+			min = 990051;
+			max = 990060;
+			break;
+		  case Constants.BTYPE_ENT_REC:
+			min = 990061;
+			max = 990070;
+			break;
+		  case Constants.BTYPE_FINANCIAL:
+			min = 990071;
+			max = 990080;
+			break;
+		  case Constants.BTYPE_HEALTH_FIT:
+			 min = 990081;
+			 max = 990090;
+			 break;
+		  case Constants.BTYPE_MANUFACTURING:
+			 min = 990091;
+			 max = 990100;
+			 break;
+		  case Constants.BTYPE_ONLINE_TECH:
+			min = 990101;
+			max = 990110;
+			break;
+		  case Constants.BTYPE_PET_SER:
+			min = 990111;
+			max = 990120;
+			break;
+		  case Constants.BTYPE_REAL_EST:
+			 min = 990121;
+			 max = 990130;
+			 break;
+		  case Constants.BTYPE_REST_FOOD:
+			 min = 990131;
+			 max = 990140;
+			 break;
+		  case Constants.BTYPE_RETAIL:
+			min = 990141;
+			max = 990150;
+			break;
+		  case Constants.BTYPE_SER_BIZ:
+			min = 990151;
+			max = 990160;
+			break;
+		  case Constants.BTYPE_TRANS_STOR:
+			 min = 990161;
+			 max = 990170;
+			 break;
+		  case Constants.BTYPE_TRAVEL:
+			 min = 990171;
+			 max = 990180;
+			 break;
+		  case Constants.BTYPE_WHLSL_DIST:
+			min = 990181;
+			max = 990190;
+			break;
+		  case Constants.BTYPE_MISC:
+			min = 990191;
+			max = 990200;
+			break;
+		}
+		
+		// nextInt is normally exclusive of the top value,
+		// so add 1 to make it inclusive
+		int bizId = ThreadLocalRandom.current().nextInt(min, max + 1);
+
+		String imageFirst = imageDAO.getImage(bizId);
+		
+		return imageFirst;
 	}
 }

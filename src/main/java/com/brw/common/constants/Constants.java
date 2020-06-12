@@ -65,5 +65,45 @@ public interface Constants {
 	public static final String MAKE_AN_OFFER = "MAKE_AN_OFFER";
 
 	public static final String SUBSCRIBE = "SUBSCRIBE";
+	
+	public static final String BTYPE_AGRI = "BTYPE_AGRI";
+	
+	public static final String BTYPE_AUTO_BOAT = "BTYPE_AUTO_BOAT";
+	
+	public static final String BTYPE_BEAUTY_PERSONA = "BTYPE_BEAUTY_PERSONA";
+	
+	public static final String BTYPE_BUILD_CONS = "BTYPE_BUILD_CONS";
+	
+	public static final String BTYPE_COM_MEDIA = "BTYPE_COM_MEDIA";
+	
+	public static final String BTYPE_EDU_CHILD = "BTYPE_EDU_CHILD";
+	
+	public static final String BTYPE_ENT_REC = "BTYPE_ENT_REC";
+	
+	public static final String BTYPE_FINANCIAL = "BTYPE_FINANCIAL";
+	
+	public static final String BTYPE_HEALTH_FIT = "BTYPE_HEALTH_FIT";
+	
+	public static final String BTYPE_MANUFACTURING = "BTYPE_MANUFACTURING";
+	
+	public static final String BTYPE_ONLINE_TECH = "BTYPE_ONLINE_TECH";
+	
+	public static final String BTYPE_PET_SER = "BTYPE_PET_SER";
+	
+	public static final String BTYPE_REAL_EST = "BTYPE_REAL_EST";
+	
+	public static final String BTYPE_REST_FOOD = "BTYPE_REST_FOOD";
+	
+	public static final String BTYPE_RETAIL = "BTYPE_RETAIL";
+	
+	public static final String BTYPE_SER_BIZ = "BTYPE_SER_BIZ";
+	
+	public static final String BTYPE_TRANS_STOR = "BTYPE_TRANS_STOR";
+	
+	public static final String BTYPE_TRAVEL = "BTYPE_TRAVEL";
+	
+	public static final String BTYPE_WHLSL_DIST = "BTYPE_WHLSL_DIST";
+	
+	public static final String BTYPE_MISC = "BTYPE_MISC";
 
 }
