@@ -8,11 +8,11 @@ You Need:
 
 PB Bearer Token: 
 {
-    "access_token": "HDYnCWRnjn8qxTA81y3iNAikCeCJ",
+    "access_DBtoken": "HDYnCWRnjn8qxTA81y3iNAikCeCJ",
     "tokenType": "BearerToken",
     "issuedAt": "1575502638056",
     "expiresIn": "35999",
-    "clientID": "fUMoAOl6wPbiLfLQMtygfCiwX007lVGY",
+    "clientAWID": "fUMoAOl6wPbiLfLQMtygfCiwX007lVGY",
     "org": "pitneybowes"
 }
 
