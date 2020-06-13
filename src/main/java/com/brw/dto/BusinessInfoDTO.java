@@ -24,7 +24,7 @@ public class BusinessInfoDTO {
 	private String city;
 	private String county;
 	private String stateCode;
-	private Integer zip;
+	private String zip;
 	private double latitude;
 	private double longitude;
 	private Integer rangeMile;
@@ -129,10 +129,10 @@ public class BusinessInfoDTO {
 	public void setStateCode(String stateCode) {
 		this.stateCode = stateCode;
 	}
-	public Integer getZip() {
+	public String getZip() {
 		return zip;
 	}
-	public void setZip(Integer zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 	public double getLatitude() {

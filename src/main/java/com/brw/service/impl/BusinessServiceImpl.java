@@ -90,6 +90,31 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		//Need to write the code to update View Counter on Business table
 		//Increase the View Counter for Business - END
 		
+		//Intercept the request to test visual impact of some test scenarios.
+		//Test 1 - County Level search
+		businessDTO.setCounty("ALAMEDA");
+		businessDTO.setCity(null);
+		//businessDTO.setLongitude(0.0);
+		//businessDTO.setLatitude(0.0);
+		
+		/*
+		//Test 2 - County Level search with no biz type
+		businessDTO.setType(null);
+		businessDTO.setStateCode("FL");
+		businessDTO.setCounty("Miami-dade");
+		businessDTO.setCity(null);
+		businessDTO.setLongitude(-80.1982);
+		businessDTO.setLatitude(25.779);
+		*/
+		
+		//Test 3 - State Level search
+		//businessDTO.setState("ALAMEDA");
+		//businessDTO.setCity(null);
+		//businessDTO.setLongitude(0.0);
+		//businessDTO.setLatitude(0.0);
+		
+		// End of request intercept
+		
 		//TODO:TEMPORARY translation of zip code - need to fix it on UI and then remove this code
 		if (businessDTO.getZip() == 94536) {
 			businessDTO.setZip(null);
