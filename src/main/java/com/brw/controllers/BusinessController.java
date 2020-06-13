@@ -53,10 +53,10 @@ public class BusinessController implements ErrorController {
 		// TODO Auto-generated method stub
 		return "/error";
 	}
-
+	
 	/**
 	 * @author sidpatil
-	 * searchBusiness - Service for simple search on home page based on business name, OR type, OR address returns list of matching businessess with limited attributes
+	 * searchBusiness - Service for simple search on home page based on business name, OR type, OR address returns list of matching businesses with limited attributes
 	 */
 	@RequestMapping(value = "searchBusiness", method = RequestMethod.POST, produces = "application/json")
 	//@PostMapping(value = "searchBusiness")
