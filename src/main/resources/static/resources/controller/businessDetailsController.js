@@ -42,7 +42,7 @@
 //        $scope.estimates = estimates.data.data.estimatesList;
 //        $scope.imageArray = propImages.data.imagesList
         $scope.imageArray = [{"imageId": 100, "url": $scope.businessDetails.imageFirst}];
-        if (propImages.data.imagesList.length !== 0) {
+        if (propImages.data.imagesList && propImages.data.imagesList.length !== 0) {
             $scope.imageArray.push(...propImages.data.imagesList)
         }
         $scope.businessCommonFeatures =  [
