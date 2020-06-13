@@ -152,6 +152,9 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             templateUrl: 'resources/pages/createSearchAgentModal.html',
             controller: 'createSearchAgentController',
             reload: true,
+            params: {
+                fromSignIn: {squash: true, value: true},
+            }
         })
         .state('business.listSearchAgent', {
             url: '/listSearchAgent',

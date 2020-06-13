@@ -1,19 +1,32 @@
-<div class="page-header bordered">
-    <h1>My Saved Search Subscriptions</h1>
+<div class="page-header bordered row">
+    <h1 class="col-md-8 col-lg-9 col-xl-9" ng-if="searchAgentsList">My Saved Search Subscriptions</h1>
+    <h1 class="col-md-8 col-lg-9 col-xl-9" ng-if="searchAgentsList.length === 0">There are no saved searches!!</h1>
+    <div class="col-md-4 col-lg-3 col-xl-3">
+        <button type="button" class="btn btn-primary"
+                data-ng-click="createSearchAgent()">Save new search</button>
+    </div>
 </div>
-<div class="row item-listing grid">
-    <div ng-repeat="prop in searchAgentsList track by $index" class="item col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-6" id="prop{{index}}">
-        <div class="item-image">
-
+<div class="row item-listing grid" ng-if="searchAgentsList">
+    <div ng-repeat="prop in searchAgentsList track by $index" class="item col-xs-10 col-sm-10 col-md-6 col-lg-6 col-xl-6"
+         id="prop{{index}}">
+        <div style="padding:5px;">
 <!--            <a href="#business/editProperty/{{prop.id}}" class="item-meta">-->
-                <span class="item-badge-left item-address">{{prop.name}}</span>
-                <span class="item-badge-right item-address">{{prop.bizType}}</span>
+                <span class="item-price">{{prop.name}}</span>
+                <button type="button" class="item-badge-right btn btn-secondary"
+                        data-ng-click="deleteSearchAgent(prop.agentId)">Delete</button>
                 <br/>
-                <span class="item-price">{{ prop.frequency }}</span> &nbsp;&nbsp;
-                <span class="item-badge-right item-price">{{prop.priceLow}} - {{prop.priceHigh}}</span>
+                <span class="item-price" ng-if="prop.bizType" style="color:black;font-weight:normal;">Business Type: {{prop.bizType}}</span>
+                <br ng-if="prop.bizType"/>
+                <span class="item-price" style="color:black;font-weight:normal;">Frequency: {{ prop.frequency }}</span>
                 <br/>
-                <span class="item-address">{{prop.city}} {{prop.county}} {{prop.state}}</span>
-<!--            </a>-->
+                <span class="item-price" style="color:black;font-weight:normal;">
+                    Price Range: ${{ prop.priceLow.toLocaleString('en', {useGrouping:true})}} -
+                    ${{ prop.priceHigh.toLocaleString('en', {useGrouping:true})}}</span>
+                <br/>
+                <span class="item-price" style="color:black;font-weight:normal;">{{prop.city}} {{prop.county}} {{prop.state}}</span>
+                <br/>
+
+            <!--            </a>-->
         </div>
     </div>
 </div>
