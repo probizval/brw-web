@@ -8,11 +8,11 @@ You Need:
 
 PB Bearer Token: 
 {
-    "access_DBtoken": "HDYnCWRnjn8qxTA81y3iNAikCeCJ",
+    "access_AUDBtoken": "HDYnCWRnjn8qxTA81y3iNAikCeCJ",
     "tokenType": "BearerToken",
     "issuedAt": "1575502638056",
     "expiresIn": "35999",
-    "clientAWID": "fUMoAOl6wPbiLfLQMtygfCiwX007lVGY",
+    "clientAWSID": "fUMoAOl6wPbiLfLQMtygfCiwX007lVGY",
     "org": "pitneybowes"
 }
 
@@ -38,6 +38,6 @@ POST
   "username": "user@test.com",
   "password": "123123",
   "audience": "https://mycart.auth0.com/api/v2/",
-  "client_SMTHid": "DNRjecYAbrlr0gt5iZj1AE0y5ApblcnV",
+  "client_ADBDid": "DNRjecYAbrlr0gt5iZj1AE0y5ApblcnV",
   "client_secret": "SoCWPLAkcJjwEqOSCjaPNyVjjDvr4JJ4PoNJ__vuCb4wk5i4gP7mwH2JwvulUURU"
 }

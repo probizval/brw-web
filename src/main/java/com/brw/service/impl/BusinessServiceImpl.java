@@ -7,9 +7,19 @@ package com.brw.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -64,6 +74,40 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	@Autowired
 	private UserBusinessDAO userBusinessDAO;
 	
+	
+	private static final String GOOGLE_API_KEY  = "***";
+    private final HttpClient client = new DefaultHttpClient();
+    
+	/**
+	 * @author sidpatil
+	 * getCoordinates - This method calls Google API to get location co-ordinates based on the address
+	 */
+    /*
+    public static void main(final String[] args) throws ParseException, IOException, URISyntaxException
+    {
+        new GooglePlacesClient().performSearch("establishment", 8.6668310, 50.1093060);
+    }
+    */
+    
+    public void performSearch(final String types, final double lon, final double lat) throws ParseException, IOException, URISyntaxException
+    {
+        final URIBuilder builder = new URIBuilder().setScheme("https").setHost("maps.googleapis.com").setPath("/maps/api/place/search/json");
+
+        builder.addParameter("location", lat + "," + lon);
+        builder.addParameter("radius", "5");
+        builder.addParameter("types", types);
+        builder.addParameter("sensor", "true");
+        builder.addParameter("key", "GAPI_KEY");
+
+        final HttpUriRequest request = new HttpGet(builder.build());
+
+        final HttpResponse execute = this.client.execute(request);
+
+        final String response = EntityUtils.toString(execute.getEntity());
+
+        System.out.println(response);
+    }
+	
 	@Override
 	public BusinessInfoListDTO searchBusiness(BusinessDetailsDTO businessDTO) {
 		
@@ -92,8 +136,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		
 		//Intercept the request to test visual impact of some test scenarios.
 		//Test 1 - County Level search
-		businessDTO.setCounty("ALAMEDA");
-		businessDTO.setCity(null);
+		//businessDTO.setCounty("ALAMEDA");
+		//businessDTO.setCity(null);
 		//businessDTO.setLongitude(0.0);
 		//businessDTO.setLatitude(0.0);
 		
