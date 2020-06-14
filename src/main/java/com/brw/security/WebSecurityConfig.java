@@ -33,13 +33,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		protectedUserUris.append("/api/business/v1/**")
 			.append(",/api/estimates/v1/**")
 			.append(",/api/stripePayment/v1/**")
-			//.append(",/api/additionalAttributes/v1/**")
+			.append(",/api/additionalAttributes/v1/**")
 			.append(",/api/transactions/v1/**")
 			.append(",/api/image/v1/**")
 			.append(",/api/user/v1/**")
 			;
 		
-		
+		//http://localhost:8080/api/additionalAttributes/v1/getStateCounties
+			
 		/*
 		protectedUserUris.append("/api/estimates/v1/**")
 		.append("/api/stripePayment/v1/**")
@@ -50,10 +51,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		;
 		*/
 		// Multiple URI should be comma separated in the buffer
-		unprotectedUserUris.append("/api/business/v1/searchBusiness");
-		//Trying to make getStateCounties unprotected
 		//unprotectedUserUris.append("/api/business/v1/searchBusiness")
-		//.append("/api/additionalAttributes/v1/getStateCounties");
+		//Trying to make getStateCounties unprotected
+		unprotectedUserUris.append("/api/business/v1/searchBusiness")
+		.append(",/api/additionalAttributes/v1/getStateCounties")
+		;
 		//
 		//unprotectedUserUris.append("/api/additionalAttributes/v1/getStateCounties");
 		//unprotectedUserUris.append("/api/business/v1/searchBusiness").append("/api/business/v1/**");
