@@ -22,6 +22,7 @@ import com.brw.common.response.ApiResponse;
 import com.brw.dto.AdditionalAttribDefinitionsListDTO;
 import com.brw.dto.AdditionalAttribsListDTO;
 import com.brw.dto.BusinessDetailsDTO;
+import com.brw.dto.CountyListDTO;
 import com.brw.dto.StateCountyCitiesDTO;
 import com.brw.exceptions.AdditionalAttribsException;
 import com.brw.service.AdditionalAttribService;
@@ -166,16 +167,17 @@ public class AdditionalAttribController implements ErrorController {
 		
 		logger.info("Get the Business Transactions based on business Id");
 
-		StateCountyCitiesDTO returnStateCountyCitiesDTO = null;
+		//StateCountyCitiesDTO returnStateCountyCitiesDTO = null;
+		CountyListDTO returnCountyListDTO = null;
 		
 		try {
-			returnStateCountyCitiesDTO = additionalAttribService.getStateCounties(stateCountyCitiesDTO.getStateName());
+			//returnCountyListDTO = additionalAttribService.getStateCounties(stateCountyCitiesDTO.getStateName());
+			returnCountyListDTO = additionalAttribService.getCountiesAndCoordinates(stateCountyCitiesDTO.getStateName());
 			
 		} catch (AdditionalAttribsException ee) {
 			ee.printStackTrace();
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
-			
 		}
-		return ApiResponse.withData(returnStateCountyCitiesDTO);
+		return ApiResponse.withData(returnCountyListDTO);
 	}
 }

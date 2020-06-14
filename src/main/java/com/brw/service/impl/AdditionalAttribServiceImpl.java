@@ -16,13 +16,16 @@ import org.springframework.stereotype.Component;
 
 import com.brw.dao.AdditionalAttribDefinitionsDAO;
 import com.brw.dao.AdditionalAttribsDAO;
+import com.brw.dao.StateAndCountiesDAO;
 import com.brw.dto.AdditionalAttribDefinitionsDTO;
 import com.brw.dto.AdditionalAttribDefinitionsListDTO;
 import com.brw.dto.AdditionalAttribsDTO;
 import com.brw.dto.AdditionalAttribsListDTO;
-import com.brw.dto.StateCountyCitiesDTO;
+import com.brw.dto.CountyDTO;
+import com.brw.dto.CountyListDTO;
 import com.brw.entities.AdditionalAttribDefinitions;
 import com.brw.entities.AdditionalAttributes;
+import com.brw.entities.CountyCoordinates;
 
 @Component
 public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAttribService {
@@ -32,6 +35,9 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 	
 	@Autowired
 	private AdditionalAttribDefinitionsDAO additionalAttribDefinitionsDAO;
+	
+	@Autowired
+	private StateAndCountiesDAO stateAndCountiesDAO;
 	
 	@Override
 	public AdditionalAttribDefinitionsListDTO getAdditionalAttribDefinitions(String bizType, String bizSubType) {
@@ -153,18 +159,27 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 	}
 	
 	@Override
-	public StateCountyCitiesDTO getStateCounties(String stateName) {
+	public CountyListDTO getCountiesAndCoordinates(String stateName) {
 		// TODO Auto-generated method stub
-		System.out.println("**** 222 Inside AdditionalAttribServiceImpl.getStateCounties() stateName: "+stateName);
+		System.out.println("**** 222 Inside AdditionalAttribServiceImpl.getCountiesAndCoordinates StateName: "+stateName);
 		
-		List<String> counties = (List<String>)additionalAttribsDAO.getStateCounties(stateName);
+		List<CountyCoordinates> countyCoordinatesList = (List<CountyCoordinates>)stateAndCountiesDAO.getCountiesAndCoordinates(stateName);
+		
+		List<CountyDTO> returnCountyListDTO = new ArrayList<CountyDTO>();
+		CountyListDTO returnCountyDTOList = new CountyListDTO();
+		
+		for (CountyCoordinates countyCoordinates: countyCoordinatesList) {
+			CountyDTO returnCountyDTO = new CountyDTO();
+			
+			returnCountyDTO.setStateCode(countyCoordinates.getStateCode());
+			returnCountyDTO.setStateName(countyCoordinates.getStateName());
+			returnCountyDTO.setCountyName(countyCoordinates.getCountyName());
+			returnCountyDTO.setLatitude(countyCoordinates.getLatitude());
+			returnCountyDTO.setLongitude(countyCoordinates.getLongitude());
 
-		StateCountyCitiesDTO retuenStateCountyCitiesDTO = new StateCountyCitiesDTO();
-			
-		//retuenStateCountyCitiesDTO.setStateCode(stateCountyCitiesDTO.getStateCode());
-		retuenStateCountyCitiesDTO.setStateName(stateName);
-		retuenStateCountyCitiesDTO.setListsOfCounties(counties);
-			
-		return retuenStateCountyCitiesDTO;
+			returnCountyListDTO.add(returnCountyDTO);
+		}
+		returnCountyDTOList.setCountyList(returnCountyListDTO);
+		return returnCountyDTOList;
 	}
 }

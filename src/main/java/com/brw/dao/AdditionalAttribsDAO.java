@@ -20,14 +20,11 @@ import com.brw.entities.AdditionalAttributes;
 @Repository
 public interface AdditionalAttribsDAO extends PagingAndSortingRepository<AdditionalAttributes, Integer>{
 
-	@Query(nativeQuery=true, value="SELECT * FROM t_brw_business_add_attributes WHERE biz_id = :businessId ORDER BY type, sub_type DESC;")
+	@Query(nativeQuery=true, value="SELECT * FROM t_brw_business_add_attributes WHERE biz_id = :businessId ORDER BY type, sub_type ASC;")
 	List<AdditionalAttributes> getAdditionalAttributes(@Param ("businessId") int businessId);
 	
 	@Modifying
 	@Transactional
 	@Query(nativeQuery=true, value="DELETE FROM t_brw_business_add_attributes WHERE biz_id = :businessId")
 	int deleteAdditionalAttributes(@Param ("businessId") int businessId);
-	
-	@Query(nativeQuery=true, value="SELECT county_name FROM t_brw_state_counties WHERE state_name = :stateName ORDER BY county_name DESC;")
-	List<String> getStateCounties(@Param ("stateName") String stateName);
 }

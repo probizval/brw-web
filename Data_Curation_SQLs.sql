@@ -83,13 +83,18 @@ AND add_ZIP = '33131-3032'
 ORDER BY for_sell_YN DESC
 
 
-SELECT * FROM t_brw_image WHERE biz_id = 2009 ORDER BY image_id ASC
+SELECT * FROM t_brw_image WHERE biz_id = 10000001 ORDER BY image_id ASC
 
 SELECT max(biz_id) FROM brwdev.t_brw_business where add_state = 'LA';
 -- 16803963
 
-SELECT count(*) FROM brwdev.t_brw_business where add_state = 'LA';
+SELECT count(*) FROM brwdev.t_brw_business where biz_id = 10000001;
 -- 31018
+
+SELECT biz_id, latitude, longitude FROM brwdev.t_brw_business 
+where latitude is not null
+and longitude is not null;
+
 
 SELECT * 
 FROM brwdev.t_brw_business where 
@@ -443,6 +448,40 @@ select * from t_brw_sic_biztype_mapping
 
 -- 8. Insert data in to state county city table
 select * from t_brw_state_county_cities
+
+SELECT * FROM t_brw_state_counties 
+WHERE state_name = 'Not Available' ORDER BY county_name asc;
+
+select * from t_brw_state_counties where county_name = 'York'
+
+select count(*) from t_brw_state_counties where state_name = 'ALABAMA'
+
+
+delete from t_brw_state_counties where id = 2428;
+delete from t_brw_state_counties where id = 2777;
+delete from t_brw_state_counties where id = 2776;
+delete from t_brw_state_counties where id = 111;
+
+delete from t_brw_state_counties where id = 308;
+
+delete from t_brw_state_counties where id = 3163;
+
+delete from t_brw_state_counties where id = 96;
+
+delete from t_brw_state_counties where id = 244;
+
+delete from t_brw_state_counties where id = 2775;
+
+delete from t_brw_state_counties where county_name = 'York';
+
+
+-- Update to update the state names in state counties table
+update t_brw_state_counties sc
+set state_name = (select distinct state_name 
+from t_brw_state_county_cities scc
+where sc.state_code = scc.state_code);
+
+
 
 INSERT INTO t_brw_state_counties (state_code, state_name, county_name) 
 select distinct state_code, state_name, county_name 

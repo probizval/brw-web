@@ -2205,20 +2205,29 @@ Response -
     "status": "success",
     "httpStatus": "OK",
     "data": {
-        "stateCode": null,
-        "stateName": "California",
-        "listsOfCounties": [
-            "Yuba County",
-            "Yolo County",
-            "Ventura County",
-            "Tuolumne County",
-            "Tulare County",
-            "Trinity County",
-            "Tehama County",
-            "Sutter County",
-            "Stanislaus County"
-        ],
-        "listsOfCities": null
+        "countyList": [
+            {
+                "stateCode": "CA",
+                "stateName": "California",
+                "countyName": "Alameda",
+                "latitude": 37.648081,
+                "longitude": -121.913304
+            },
+            {
+                "stateCode": "CA",
+                "stateName": "California",
+                "countyName": "Alpine",
+                "latitude": 38.61761,
+                "longitude": -119.798999
+            },
+            {
+                "stateCode": "CA",
+                "stateName": "California",
+                "countyName": "Amador",
+                "latitude": 38.44355,
+                "longitude": -120.653856
+            }
+        ]
     },
     "totalCount": null,
     "pageNumber": null,
