@@ -28,7 +28,7 @@
 //          var redirect_location = sessionStorage.getItem("redirect_location");
 //          window.location.href = redirect_location
 //          location.reload();
-			$state.go('business.createSearchAgent', null)
+			$state.go('business.createSearchAgent', {fromSignIn: true}, {reload: true})
 //          if (redirect_location.includes("/")){
 //            let sub_type = redirect_location.split("/")[1]
 //            redirect_location = redirect_location.split("/")[0]
