@@ -20,7 +20,7 @@ propertyService.factory('propertyService', ['$http', 'authService', function ($h
             "type": searchBusinessAttributes.businessType || "",
             "street1": searchBusinessAttributes.street1 || "",
             "street2": searchBusinessAttributes.street2 || "",
-            "city": searchBusinessAttributes.city || "Fremont",
+//            "city": searchBusinessAttributes.city || "Fremont",
             "stateCode": searchBusinessAttributes.state || "CA",
             "zip": searchBusinessAttributes.zip || "94536",
             "latitude": searchBusinessAttributes.latitude || 37.7749,

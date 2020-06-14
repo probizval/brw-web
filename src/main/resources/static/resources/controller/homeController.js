@@ -11,9 +11,18 @@
     function homeController($rootScope, $scope, $state, authService, propertyService, constants) {
         var postal_code = '', latitude = '', longitude = '';
         $scope.businessTypes = constants.searchBusinessTypes;
-        $scope.businessCities = constants.businessCities;
         $scope.businessStates = constants.businessStates;
-
+        $scope.businessState = $scope.businessStates[4]; // california
+        $scope.priceRangeList = constants.priceRangeList;
+		$scope.priceRange = $scope.priceRangeList[0];
+		propertyService.getStateCounties({'stateName': $scope.businessState.name})
+	        .success(function(res) {
+				$scope.businessCounties = res.data.countyList;
+				$scope.businessCounty = $scope.businessCounties[0];
+	        })
+	        .error(function (error) {
+	            $scope.status = 'Unable to load store data: ' + error.message;
+	        });
         $scope.initialize = function () {
             // This example displays an address form, using the autocomplete feature
             // of the Google Places API to help users fill in the information.
@@ -21,8 +30,7 @@
             // This example requires the Places library. Include the libraries=places
             // parameter when you first load the API. For example:
             // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-            $scope.businessCity = $scope.businessCities[0];
-            $scope.businessState = $scope.businessStates[0];
+
             var placeSearch, autocomplete;
             var componentForm = {
                 street_number: 'short_name',
@@ -85,6 +93,16 @@
                 }
             }
         };
+        $scope.getCounties = function () {
+            propertyService.getStateCounties({'stateName': $scope.businessState.name})
+            .success(function(res) {
+              $scope.businessCounties = res.data.countyList;
+              $scope.businessCounty = $scope.businessCounties[0];
+            })
+            .error(function (error) {
+             $scope.status = 'Unable to load store data: ' + error.message;
+            });
+        }
         function getLatLng(address) {
             if (!address){
                 return
@@ -113,19 +131,23 @@
 //            if (!latitude || !longitude && document.getElementById('autocomplete').value != null) {
 //                getLatLng(document.getElementById('autocomplete').value);
 //            }
-            var address = $scope.businessCity.label + ',' +$scope.businessState.code + ',' + $scope.businessZipcode;
-            getLatLng(address);
+//            var address = $scope.businessCity.label + ',' +$scope.businessState.code + ',' + $scope.businessZipcode;
+//            getLatLng(address);
+			latitude = $scope.businessCounty.latitude;
+			longitude = $scope.businessCounty.longitude;
             localStorage.setItem('searchBusinessAttributes', JSON.stringify({
                 businessName: document.getElementById("businessName").value,
                 businessType: $scope.businessType.apiName,
                 street1: document.getElementById("address").value,
                 //street2:
-                city: $scope.businessCity.label,
+                county: $scope.businessCounty.countyName,
                 state: $scope.businessState.code,
-                zip: document.getElementById("postal_code").value,
+//                zip: document.getElementById("postal_code").value,
                 isForSell: $scope.isForSell,
                 latitude: latitude,
-                longitude: longitude
+                longitude: longitude,
+                priceLow: $scope.priceRange.minPrice,
+                priceHigh: $scope.priceRange.maxPrice,
             }));
             $state.go('search', {
                 type: businessType
@@ -140,7 +162,7 @@
                 HAVING distance < 25;
                 */
         };
-        $scope.initialize();
+//        $scope.initialize();
     }
 
 })();

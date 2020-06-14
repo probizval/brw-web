@@ -11,9 +11,7 @@
 	    $(document).ready(function(){
 	        $('#createSearchAgentModal').modal('show');
         });
-        console.log("createSearchAgentModal", $stateParams.fromSignIn);
         $scope.businessTypes = constants.searchBusinessTypes;
-        $scope.businessCities = constants.businessCities;
         $scope.businessStates = constants.businessStates;
         $scope.frequencies = constants.subscriptionFrequencies;
         $scope.businessCounties = [];
@@ -27,7 +25,7 @@
 		$scope.filterCountyByState = function() {
             propertyService.getStateCounties({'stateName': $scope.businessState.name})
 		        .success(function(res) {
-		          $scope.businessCounties = res.data.listsOfCounties.sort();
+		          $scope.businessCounties = res.data.countyList;
 		          $scope.businessCounty = $scope.businessCounties[0];
                   $scope.searchName = 'Business search in ' + $scope.businessState.name;
                   var profile = JSON.parse(sessionStorage.getItem("profile"));
@@ -53,8 +51,8 @@
 				priceLow: $scope.priceRange.minPrice,
 				priceHigh: $scope.priceRange.maxPrice,
 				state: $scope.businessState.code,
-				county: $scope.businessCounty,
-				city: $scope.businessCity.name,
+				county: $scope.businessCounty.countyName,
+				city: $scope.businessCity,
             }
             propertyService.addSearchAgent(searchAgentDetails)
                 .success(function(res) {
@@ -79,8 +77,8 @@
         }
         $scope.initialize = function() {
             $scope.businessType = $scope.businessTypes[0];
-            $scope.businessCity = $scope.businessCities[0];
-            $scope.businessState = $scope.businessStates[0];
+//            $scope.businessCity = $scope.businessCities[0];
+            $scope.businessState = $scope.businessStates[4]; // California
             $scope.priceRange = $scope.priceRangeList[0];
             $scope.frequency = $scope.frequencies[0];
             if (profile && profile.email) {
