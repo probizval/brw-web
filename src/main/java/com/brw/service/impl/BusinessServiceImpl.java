@@ -7,19 +7,9 @@ package com.brw.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -75,8 +65,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	private UserBusinessDAO userBusinessDAO;
 	
 	
-	private static final String GOOGLE_API_KEY  = "***";
-    private final HttpClient client = new DefaultHttpClient();
+	//private static final String GOOGLE_API_KEY  = "***";
+    //private final HttpClient client = new DefaultHttpClient();
     
 	/**
 	 * @author sidpatil
@@ -89,6 +79,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
     }
     */
     
+	/*
     public void performSearch(final String types, final double lon, final double lat) throws ParseException, IOException, URISyntaxException
     {
         final URIBuilder builder = new URIBuilder().setScheme("https").setHost("maps.googleapis.com").setPath("/maps/api/place/search/json");
@@ -97,7 +88,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
         builder.addParameter("radius", "5");
         builder.addParameter("types", types);
         builder.addParameter("sensor", "true");
-        builder.addParameter("key", "GAPI_KEY");
+        builder.addParameter("key", "AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I");
 
         final HttpUriRequest request = new HttpGet(builder.build());
 
@@ -107,6 +98,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
         System.out.println(response);
     }
+    */
 	
 	@Override
 	public BusinessInfoListDTO searchBusiness(BusinessDetailsDTO businessDTO) {
