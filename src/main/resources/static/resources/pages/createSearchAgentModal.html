@@ -48,20 +48,24 @@
                         <div class="col-md-6 col-lg-6 col-xl-6">
                             <label style="margin:0">County*</label>
                             <select class="form-control form-control-md" name="businessCounty" ng-model="businessCounty"
-                                    ng-options="county for county in businessCounties" id="businessCounty" required>
+                                    ng-options="county.countyName for county in businessCounties" id="businessCounty" required>
                             </select>
                             <span style="color:red" ng-show="subscriptionForm.businessCounty.$error.required">County is required.</span>
                         </div>
                     </div>
                     <div class="row form-group">
+<!--                        <div class="col-md-6 col-lg-6 col-xl-6">-->
+<!--                            <label style="margin:0">City</label>-->
+<!--                            <select class="form-control form-control-md" name="businessCity" ng-model="businessCity"-->
+<!--                                    ng-options="city as city.label for city in businessCities track by city.id"-->
+<!--                                    id="businessCity">-->
+<!--                            </select>-->
+<!--                        </div>-->
                         <div class="col-md-6 col-lg-6 col-xl-6">
                             <label style="margin:0">City</label>
-                            <select class="form-control form-control-md" name="businessCity" ng-model="businessCity"
-                                    ng-options="city as city.label for city in businessCities track by city.id"
-                                    id="businessCity">
-                            </select>
+                            <input type="text" class="form-control form-control-md" name="businessCity" ng-model="businessCity"
+                                   id="businessCity">
                         </div>
-
                         <div class="col-md-6 col-lg-6 col-xl-6">
                             <label style="margin:0">Price Range</label>
                             <select class="form-control form-control-md" name="priceRange" ng-model="priceRange"
