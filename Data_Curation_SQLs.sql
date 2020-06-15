@@ -378,6 +378,18 @@ and add_state = 'CA';
 SELECT FLOOR(RAND()*(100000-50000+1)+50000);
 
 
+update t_brw_business bz
+set bz.type = (select distinct biz_type 
+from t_brw_sic_biztype_mapping sbm
+where bz.sic_code = sbm.sic_code
+and bz.sic_description = sbm.sic_description),
+bz.sub_type = (select distinct biz_type 
+from t_brw_sic_biztype_mapping sbm
+where bz.sic_code = sbm.sic_code
+and bz.sic_description = sbm.sic_description);
+
+
+
 -- 4. Based on Business Type update image_first - no icon or vector but actual image
 -- Use 10 images per business type random
 -- update t_brw_business
@@ -452,36 +464,11 @@ select * from t_brw_state_county_cities
 SELECT * FROM t_brw_state_counties 
 WHERE state_name = 'Not Available' ORDER BY county_name asc;
 
-select * from t_brw_state_counties where county_name = 'York'
-
-select count(*) from t_brw_state_counties where state_name = 'ALABAMA'
-
-
-delete from t_brw_state_counties where id = 2428;
-delete from t_brw_state_counties where id = 2777;
-delete from t_brw_state_counties where id = 2776;
-delete from t_brw_state_counties where id = 111;
-
-delete from t_brw_state_counties where id = 308;
-
-delete from t_brw_state_counties where id = 3163;
-
-delete from t_brw_state_counties where id = 96;
-
-delete from t_brw_state_counties where id = 244;
-
-delete from t_brw_state_counties where id = 2775;
-
-delete from t_brw_state_counties where county_name = 'York';
-
-
 -- Update to update the state names in state counties table
 update t_brw_state_counties sc
 set state_name = (select distinct state_name 
 from t_brw_state_county_cities scc
 where sc.state_code = scc.state_code);
-
-
 
 INSERT INTO t_brw_state_counties (state_code, state_name, county_name) 
 select distinct state_code, state_name, county_name 
@@ -489,7 +476,6 @@ from t_brw_state_county_cities
 order by state_code, county_name asc;
 -- where 
 -- add_state = 'CA'
-
 
 select count(distinct state_code, state_name, county_name) 
 from t_brw_state_county_cities 
