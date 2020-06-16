@@ -117,7 +117,7 @@ select distinct add_state from t_brw_business
 SHOW FULL PROCESSLIST;
 
 -- To kill the DB process
-CALL mysql.rds_kill()
+CALL mysql.rds_kill(7995)
 
 -- call Delete SP
 -- call brwdev.delete_duplicate_business();
@@ -133,6 +133,8 @@ group by name_dba, add_street1, add_city, add_state
 having cnt > 1 
 order by cnt desc 
 limit 12;
+
+select count(*) from t_brw_business where type = 'BTYPE_MISC'
 
 select * from t_brw_business 
 where name_dba = 'SYNNEX Corporation'
@@ -347,6 +349,86 @@ where add_state = 'CA'  and
 sic_code like '58%' and 
 sic_description = 'SIC Not Defined';
 
+
+select biz_type 
+from t_brw_sic_biztype_mapping sbm
+where sbm.sic_code = '142900'
+and sbm.sic_description = 'Crushed and Broken Stone, NEC';
+
+update t_brw_business bz
+set bz.type = (select biz_type 
+from t_brw_sic_biztype_mapping sbm
+where sbm.sic_code = bz.sic_code
+and sbm.sic_description = bz.sic_description);
+
+update t_brw_business bz
+set bz.sub_type = (select distinct biz_type 
+from t_brw_sic_biztype_mapping sbm
+where bz.sic_code = sbm.sic_code
+and bz.sic_description = sbm.sic_description);
+
+update t_brw_business 
+set type = 'BTYPE_AGRI'
+where type = 'FARMING';
+
+update t_brw_business 
+set type = 'BTYPE_AUTO_BOAT'
+where type = 'AUTO';
+
+update t_brw_business 
+set type = 'BTYPE_BEAUTY_PERSONA'
+where type = 'BEAUTY';
+
+update t_brw_business 
+set type = 'BTYPE_BUILD_CONS'
+where type = 'CONTRACTOR';
+
+
+update t_brw_business 
+set type = 'BTYPE_FINANCIAL'
+where type = 'ACCOUNTING';
+
+
+update t_brw_business 
+set type = 'BTYPE_HEALTH_FIT'
+where type in ('HEALTH', 'MEDICAL');
+
+
+update t_brw_business 
+set type = 'BTYPE_MANUFACTURING'
+where type = 'MANUFACTURING';
+
+
+update t_brw_business 
+set type = 'BTYPE_MISC'
+where type = 'OTHER';
+
+
+update t_brw_business 
+set type = 'BTYPE_ONLINE_TECH'
+where type = 'SOFTWARE';
+
+
+update t_brw_business 
+set type = 'BTYPE_REST_FOOD'
+where type in ('ALCOHOL', 'BAKERY', 'BAR', 'CAFE', 'RESTAURANT');
+
+
+update t_brw_business 
+set type = 'BTYPE_RETAIL'
+where type in ('GAS_STATION', 'MERCHANDISE_STORE', 'RETAIL');
+
+
+update t_brw_business 
+set type = 'BTYPE_SER_BIZ'
+where type in ('ADMIN', 'DOMESTIC_HELP', 'LAUNDRY');
+
+
+update t_brw_business 
+set type = 'BTYPE_TRAVEL'
+where type = 'HOSPITALITY';
+
+
 2.4 Long Term Solution
 -- Come up with table that maps Distinct SIC_CODE to BRW_RO_BIZ_TYPES
 -- Then on every time new business is getting added look at the mapping and put it
@@ -376,19 +458,6 @@ and add_state = 'CA';
 -- To create a random integer number between two values (range), you can use the following formula: SELECT FLOOR(RAND()*(b-a+1))+a; Where a is the smallest number and b is the largest number that you want to generate a random number for.
 -- Return a random number >= 5 and <=10:
 SELECT FLOOR(RAND()*(100000-50000+1)+50000);
-
-
-update t_brw_business bz
-set bz.type = (select distinct biz_type 
-from t_brw_sic_biztype_mapping sbm
-where bz.sic_code = sbm.sic_code
-and bz.sic_description = sbm.sic_description),
-bz.sub_type = (select distinct biz_type 
-from t_brw_sic_biztype_mapping sbm
-where bz.sic_code = sbm.sic_code
-and bz.sic_description = sbm.sic_description);
-
-
 
 -- 4. Based on Business Type update image_first - no icon or vector but actual image
 -- Use 10 images per business type random
