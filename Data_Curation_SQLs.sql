@@ -38,7 +38,7 @@ UPDATE mysql.user
 SET file_priv='Y'
 WHERE user='admin';
 
-select * from t_brw_business where biz_id = 2004;
+select * from t_brw_business where biz_id = 10105762;
 
 2019-11-13 00:00:00
 2020-05-10 00:00:00

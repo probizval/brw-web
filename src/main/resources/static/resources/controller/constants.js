@@ -7,15 +7,26 @@
         .constant('constants', {
             searchBusinessTypes: [
                 //{name: "Select Type", code: 'b_type', apiName: ""},
-                {name: 'Restaurants and Food', code: 'b_type_1', apiName: "RESTAURANT"},
-                {name: 'Gas Station', code: 'b_type_2', apiName: "GAS_STATION"},
-                {name: 'Liquor Store', code: 'b_type_3', apiName: "LIQUOR_STORE"},
-                {name: 'Beauty Salon/Spa/Nail', code: 'b_type_4', apiName: "BEAUTY"},
-                {name: 'Convenience store', code: 'b_type_5', apiName: "CONVENIENCE_STORE"},
-                {name: 'Auto Service Shop', code: 'b_type_6', apiName: "AUTO"},
-                {name: 'Laundry', code: 'b_type_7', apiName: "LAUNDRY"},
-                {name: 'Cafe', code: 'b_type_8', apiName: "CAFE"},
-                {name: 'Dry Cleaners', code: 'b_type_9', apiName: "LAUNDRY"}
+                {name: 'All Others', code: 'b_type_1', apiName: "BTYPE_MISC"},
+                {name: 'Animals and Pet Services', code: 'b_type_2', apiName: "BTYPE_PET_SER"},
+                {name: 'Children and Education', code: 'b_type_3', apiName: "BTYPE_EDU_CHILD"},
+                {name: 'Commercial Real Estate', code: 'b_type_4', apiName: "BTYPE_REAL_EST"},
+                {name: 'Construction and Building', code: 'b_type_5', apiName: "BTYPE_BUILD_CONS"},
+                {name: 'Distribution and Wholesale', code: 'b_type_6', apiName: "BTYPE_WHLSL_DIST"},
+                {name: 'Factory and Manufacturing', code: 'b_type_7', apiName: "BTYPE_MANUFACTURING"},
+                {name: 'Farming and Agriculture', code: 'b_type_8', apiName: "BTYPE_AGRI"},
+                {name: 'Fitness and Health', code: 'b_type_9', apiName: "BTYPE_HEALTH_FIT"},
+                {name: 'Food and Restaurants', code: 'b_type_10', apiName: "BTYPE_REST_FOOD"},
+                {name: 'General Service Business', code: 'b_type_11', apiName: "BTYPE_SER_BIZ"},
+                {name: 'Investment and Financial', code: 'b_type_12', apiName: "BTYPE_FINANCIAL"},
+                {name: 'Media and Communications', code: 'b_type_13', apiName: "BTYPE_COM_MEDIA"},
+                {name: 'Personal and Beauty', code: 'b_type_14', apiName: "BTYPE_BEAUTY_PERSONA"},
+                {name: 'Recreation and Entertainment', code: 'b_type_15', apiName: "BTYPE_ENT_REC"},
+                {name: 'Storage and Transport', code: 'b_type_16', apiName: "BTYPE_TRANS_STOR"},
+                {name: 'Stores and Retail', code: 'b_type_17', apiName: "BTYPE_RETAIL"},
+                {name: 'Technology and Online', code: 'b_type_18', apiName: "BTYPE_ONLINE_TECH"},
+                {name: 'Tourism and Travel', code: 'b_type_29', apiName: "BTYPE_TRAVEL"},
+                {name: 'Vehicle and Boat', code: 'b_type_20', apiName: "BTYPE_AUTO_BOAT"}
             ],
             addBusinessTypes: [
                {name: 'Restaurants and Food', code: 'b_type_1', apiName: "RESTAURANT"},
@@ -26,7 +37,7 @@
                {name: 'Auto Service Shop', code: 'b_type_6', apiName: "AUTO"},
                {name: 'Laundry', code: 'b_type_7', apiName: "LAUNDRY"},
                {name: 'Cafe', code: 'b_type_8', apiName: "CAFE"},
-	       {name: 'Dry Cleaners', code: 'b_type_9', apiName: "LAUNDRY"}
+               {name: 'Dry Cleaners', code: 'b_type_9', apiName: "LAUNDRY"}
             ],
             equipmentListMapping: {
                 REGULAR_FREEZER: 'Regular Freezer',
