@@ -8,10 +8,41 @@
 -- 7. Enter password if it asks - PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
 -- 8. Execute SQLs by ending them with ;
 
+
+select * from t_brw_business 
+	where sales_range is null;
+    
 -- Create User on MySql and grant permissions to particular table
 select * from mysql.user;
 
 -- delete from mysql.user where user = 'brw_app_dev'
+
+select distinct sales_range 
+from t_brw_business 
+order by sales_range asc;
+
+-- How do I read revenue range that is in varchar and pick up just the numbers?
+-- $1,931,283,000
+SELECT CAST('1931283000' AS DECIMAL);
+
+-- 20 to 50 million 
+SELECT CAST('1931283000' AS DECIMAL);
+
+
+SELECT CAST("2017-08-29" AS DATE);
+
+SELECT INSTR('20 to 50 million','to');
+
+select SUBSTRING('20 to 50 million', 1, (INSTR('20 to 50 million','to') - 1));
+-- 20
+-- *******
+
+SELECT INSTR('20 to 50 million','to');
+
+select SUBSTRING('$27,819,000,000  ', '$', length($27,819,000,000  ));
+-- 
+-- ******
+
 
 USER/PWD - read_only/brw_2020
 USER/PWD - brw_app_dev/HDYnCWRnjn8qxTA81y3iNAikCeCJ
@@ -367,67 +398,6 @@ from t_brw_sic_biztype_mapping sbm
 where bz.sic_code = sbm.sic_code
 and bz.sic_description = sbm.sic_description);
 
-update t_brw_business 
-set type = 'BTYPE_AGRI'
-where type = 'FARMING';
-
-update t_brw_business 
-set type = 'BTYPE_AUTO_BOAT'
-where type = 'AUTO';
-
-update t_brw_business 
-set type = 'BTYPE_BEAUTY_PERSONA'
-where type = 'BEAUTY';
-
-update t_brw_business 
-set type = 'BTYPE_BUILD_CONS'
-where type = 'CONTRACTOR';
-
-
-update t_brw_business 
-set type = 'BTYPE_FINANCIAL'
-where type = 'ACCOUNTING';
-
-
-update t_brw_business 
-set type = 'BTYPE_HEALTH_FIT'
-where type in ('HEALTH', 'MEDICAL');
-
-
-update t_brw_business 
-set type = 'BTYPE_MANUFACTURING'
-where type = 'MANUFACTURING';
-
-
-update t_brw_business 
-set type = 'BTYPE_MISC'
-where type = 'OTHER';
-
-
-update t_brw_business 
-set type = 'BTYPE_ONLINE_TECH'
-where type = 'SOFTWARE';
-
-
-update t_brw_business 
-set type = 'BTYPE_REST_FOOD'
-where type in ('ALCOHOL', 'BAKERY', 'BAR', 'CAFE', 'RESTAURANT');
-
-
-update t_brw_business 
-set type = 'BTYPE_RETAIL'
-where type in ('GAS_STATION', 'MERCHANDISE_STORE', 'RETAIL');
-
-
-update t_brw_business 
-set type = 'BTYPE_SER_BIZ'
-where type in ('ADMIN', 'DOMESTIC_HELP', 'LAUNDRY');
-
-
-update t_brw_business 
-set type = 'BTYPE_TRAVEL'
-where type = 'HOSPITALITY';
-
 
 2.4 Long Term Solution
 -- Come up with table that maps Distinct SIC_CODE to BRW_RO_BIZ_TYPES
@@ -438,12 +408,25 @@ where type = 'HOSPITALITY';
 -- have the price range as 10-20% random number generator
 -- update t_brw_business
 
+-- 3.1.1 Make all range in number format
+update t_brw_business 
+set sales_range = '10000000'
+where sales_range = '$10 mil to less than $25';
+
+-- 3.1.2 Clean up the characters between numbers like '$' and ',' and keep only numbers
+ 
+    
 select distinct sales_range, count(*) cnt 
 from t_brw_business 
 where add_state = 'CA'
 group by sales_range
 order by cnt asc;
 
+
+update t_brw_business 
+	set sales_range = '10000000'
+	where sales_range = '$10 mil to less than $25';
+    
 select distinct employee_range, count(*) cnt 
 from t_brw_business 
 where add_state = 'CA'
@@ -502,6 +485,10 @@ dailycar_parklot_num = 'randomized, if applicable to type of business - based on
 where type = 'BTYPE_REST_FOOD'
 and add_county = 'ALAMEDA'
 and add_state = 'CA';
+
+
+SELECT ROUND(FLOOR(RAND()*(100000-50000+1)+50000), -2);
+
 
 
 -- 6. update other images for business also same as #4 above - write a SP or function
