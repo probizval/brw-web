@@ -9,8 +9,28 @@
 -- 8. Execute SQLs by ending them with ;
 
 
-select * from t_brw_business 
-	where sales_range is null;
+select count(*) from t_brw_business where sales_range is null;
+
+select count(*) from t_brw_business where sales_range = 0;
+-- 1247686
+select count(*) from t_brw_business where sales_range = '0';
+-- 1247686
+
+select distinct sales_range 
+from t_brw_business 
+where cast(sales_range as UNSIGNED) > 100000
+order by cast(sales_range as UNSIGNED) asc limit 10;
+
+
+select biz_id, sales_range, market_based_est  
+	from t_brw_business 
+    where biz_id in(18796269, 18796263, 18796151)
+    order by biz_id asc limit 100;
+    
+update t_brw_business 
+set market_based_est = '0'
+where biz_id in(18796269, 18796263, 18796151);
+
     
 -- Create User on MySql and grant permissions to particular table
 select * from mysql.user;
@@ -215,7 +235,7 @@ where
 SHOW FULL PROCESSLIST;
 
 -- To kill the DB process
-CALL mysql.rds_kill(46);
+CALL mysql.rds_kill(8796);
 
 -- Delete SQL to delete duplicates for a particular business based on its 
 -- name and address
@@ -332,6 +352,42 @@ where
 2.1. Search based on known keywords
 -- SEARCH KEYWORDS - food, restaurant, eat
 
+select type, count(*) cnt 
+from t_brw_business 
+group by type
+having cnt > 1
+order by cnt desc;
+
+-- result as of 6/17
+'BTYPE_MISC','1117320'
+'BTYPE_RETAIL','191344'
+'BTYPE_MANUFACTURING','183735'
+'BTYPE_SER_BIZ','182628'
+'BTYPE_EDU_CHILD','162189'
+'BTYPE_REST_FOOD','147785'
+'BTYPE_HEALTH_FIT','126930'
+'BTYPE_TRANS_STOR','109820'
+'BTYPE_WHLSL_DIST','98574'
+'BTYPE_REAL_EST','93439'
+'BTYPE_FINANCIAL','41777'
+'BTYPE_BUILD_CONS','33683'
+'BTYPE_COM_MEDIA','32829'
+'BTYPE_ENT_REC','26208'
+'BTYPE_ONLINE_TECH','23016'
+'BTYPE_TRAVEL','11063'
+'BTYPE_BEAUTY_PERSONA','10426'
+'BTYPE_AGRI','7623'
+
+
+select count(*) from t_brw_business where type is null;
+
+select count(*) from t_brw_business where type = 'BTYPE_MISC';
+
+select count(*) from t_brw_business where type = 'BTYPE_MISC';
+
+select count(*) from t_brw_business where type is null;
+
+
 select distinct sic_code, sic_description 
 from t_brw_business 
 where 
@@ -441,6 +497,37 @@ and add_state = 'CA';
 -- To create a random integer number between two values (range), you can use the following formula: SELECT FLOOR(RAND()*(b-a+1))+a; Where a is the smallest number and b is the largest number that you want to generate a random number for.
 -- Return a random number >= 5 and <=10:
 SELECT FLOOR(RAND()*(100000-50000+1)+50000);
+
+select count(*) from t_brw_business where market_based_est is null;
+-- 0
+select count(*) from t_brw_business where market_based_est != '';
+-- 6
+
+select count(*) from t_brw_business where asset_based_est != '';
+-- 6
+
+select count(*) from t_brw_business where income_based_est != '';
+-- 6
+
+select count(*) from t_brw_business where market_based_est = '';
+-- 2600383
+
+select count(*) from t_brw_business where sales_range != '';
+-- 1621450
+select count(*) from t_brw_business where sales_range = '';
+-- 978939
+
+select count(*) from t_brw_business where sales_range is null;
+-- 0
+select count(*) from t_brw_business where sales_range = '0';
+-- 268746
+select count(*) from t_brw_business where sales_range = 0;
+-- 1247686
+
+select sales_range from t_brw_business where sales_range != '0' limit 10;
+-- 
+
+select distinct sales_range from t_brw_business
 
 -- 4. Based on Business Type update image_first - no icon or vector but actual image
 -- Use 10 images per business type random
