@@ -8,6 +8,25 @@
 -- 7. Enter password if it asks - PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
 -- 8. Execute SQLs by ending them with ;
 
+SELECT count(*) FROM brwdev.t_brw_state_counties;
+
+SELECT * FROM brwdev.t_brw_state_counties where state_code = 'HI';
+
+update t_brw_state_counties
+set county_name = 'Bedford Co' 
+where id = 2830;
+
+SELECT * FROM brwdev.t_brw_county_population where state_code = 'VA';
+
+-- find duplicates in two tables
+select * from t_brw_state_counties where CONCAT(state_code,',', county_name) 
+not in (select CONCAT(state_code,',', county_name) from t_brw_county_population)
+
+update t_brw_state_counties
+set 
+
+
+
 
 select count(*) from t_brw_business where sales_range is null;
 
