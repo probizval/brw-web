@@ -7,7 +7,7 @@
         .constant('constants', {
             searchBusinessTypes: [
                 //{name: "Select Type", code: 'b_type', apiName: ""},
-                {name: 'All Others', code: 'b_type_1', apiName: "BTYPE_MISC"},
+                {name: 'All Non-classified', code: 'b_type_1', apiName: "BTYPE_MISC"},
                 {name: 'Animals and Pet Services', code: 'b_type_2', apiName: "BTYPE_PET_SER"},
                 {name: 'Children and Education', code: 'b_type_3', apiName: "BTYPE_EDU_CHILD"},
                 {name: 'Commercial Real Estate', code: 'b_type_4', apiName: "BTYPE_REAL_EST"},

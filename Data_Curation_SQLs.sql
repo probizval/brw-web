@@ -10,7 +10,7 @@
 
 SELECT count(*) FROM brwdev.t_brw_state_counties;
 
-SELECT * FROM brwdev.t_brw_state_counties where state_code = 'HI';
+SELECT * FROM brwdev.t_brw_state_counties where state_code = 'FL';
 
 update t_brw_state_counties
 set county_name = 'Bedford Co' 
@@ -18,12 +18,34 @@ where id = 2830;
 
 SELECT * FROM brwdev.t_brw_county_population where state_code = 'VA';
 
--- find duplicates in two tables
+-- find difference/duplicates in two tables
 select * from t_brw_state_counties where CONCAT(state_code,',', county_name) 
 not in (select CONCAT(state_code,',', county_name) from t_brw_county_population)
 
-update t_brw_state_counties
-set 
+
+select count(t1.id) 
+from t_brw_state_counties t1, t_brw_county_population t2
+where
+t1.state_code = t2.state_code
+and t1.county_name = t2.county_name
+
+
+
+update t_brw_state_counties t1, t_brw_county_population t2
+set t1.population = t2.population,
+t1.pop_density = t2.pop_density,
+t1.num_houses = t2.num_houses,
+t1.hos_density = t2.hos_density
+where
+t1.state_code = t2.state_code
+and t1.county_name = t2.county_name
+
+
+
+-- find difference/duplicates in two tables
+select * from t_brw_state_counties where CONCAT(state_code,',', county_name) 
+not in (select CONCAT(state_code,',', county_name) from t_brw_state_county_cities)
+
 
 
 
