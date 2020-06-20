@@ -1,38 +1,37 @@
-CREATE DEFINER=`admin`@`%` PROCEDURE `8_update_other_details`()
+CREATE DEFINER=`admin`@`%` PROCEDURE `7_update_other_details`()
 BEGIN
 	-- This SP is to update rest of the bizness details as listed below in update statement
     -- declare an array with various business tyeps - this is achieved using temp tables in mysql
     -- CREATE TEMPORARY TABLE t_brw_temp_types SELECT type FROM t_brw_business_type_def;
+    -- call 7_update_other_details();
     
-    DECLARE del_cur_done INT DEFAULT 0;
+    DECLARE cur_done INT DEFAULT 0;
 	declare v_count int(10) DEFAULT 0;
+    -- for testing
+    declare v_id int(10) DEFAULT 99;
     
     declare v_biz_id int(10) DEFAULT 0;
-    declare v_biz_type varchar(45) DEFAULT '';
+    declare v_state varchar(45) DEFAULT '';
+    declare v_county varchar(45) DEFAULT '';
     
 	declare v_vc_sales_range varchar(45) DEFAULT '0';
 	declare v_int_sales_range int(10) DEFAULT 0;
     
 	declare v_sales_range_Plus50P int(10) DEFAULT 0;
 	declare v_sales_range_Minus50P int(10) DEFAULT 0;
+        
+    declare v_vc_emp_range varchar(45) DEFAULT '0';
+	declare v_int_emp_range int(10) DEFAULT 0;
+	
+	declare v_emp_range_Plus30P int(10) DEFAULT 0;
+	declare v_emp_range_Minus30P int(10) DEFAULT 0;
     
-	declare v_county_pop int(10) DEFAULT 0;
-	declare v_county_pop_dct int(10) DEFAULT 0;
-    
-    declare v_market_based int(10) default 0;
-    
-    declare v_vc_employee_range varchar(45) DEFAULT '0';
-	declare v_int_employee_range int(10) DEFAULT 0;
-
-	declare v_state varchar(45) DEFAULT '';
-    declare v_county varchar(45) DEFAULT '';
-    
-    declare v_county_pop int(10) DEFAULT 0;
+    -- declare v_county_pop int(10) DEFAULT 0;
     declare v_county_pop_den double DEFAULT 0.0;
-    declare v_county_hos_den double DEFAULT 0.0;
+    declare v_vc_county_pop_den varchar(45) DEFAULT '0.0';
+    -- declare v_county_hos_den double DEFAULT 0.0;
     
     -- variables to capture the values to set in the table
-    
     declare v_annual_cash_flow int(10) DEFAULT 0;
 	declare v_monthly_payroll_cost int(10) DEFAULT 0;
 	declare v_inventory_cost int(10) DEFAULT 0;
@@ -54,31 +53,68 @@ BEGIN
 	declare v_dailypeople_doorfront_num int(10) DEFAULT 0;
 	declare v_dailycar_parklot_num int(10) DEFAULT 0;
     
-    -- declare biz_type_cursor cursor for select type from t_brw_temp_types;
-	
-    declare all_records_cursor cursor for select biz_id, type, add_state, add_county, sales_range, employee_range   
+	-- declare cursor to pull all records which are NOT ALREADY UPDATED
+    declare all_records_cursor cursor for select biz_id, add_state, add_county, sales_range, employee_range   
 	from t_brw_business 
     where 
     -- updatedby_user_id != 9999;
-    biz_id in(18796269, 18796263, 18796151);
+    biz_id in(18796151, 18796263, 8796269);
+    -- biz_id = 8796269;
+    -- for validation run below sql
+	-- select biz_id, type, sales_range, market_based_est where bizId in (8796269, 18796263, 18796151);
     
-    declare  county_stats_cursor cursor for select state_code, county_name, population, pop_density, hos_density 
+    -- declare cursor to get counties stats
+    declare county_stats_cursor cursor for select pop_density 
 	from t_brw_state_counties 
     where 
     state_code = v_state 
     and county_name = v_county_name;
-	-- for validation run below sql
-	-- select biz_id, type, sales_range, market_based_est where bizId in (8796269, 18796263, 18796151);
+
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET cur_done = 1;
 
     open all_records_cursor;
-    all_records_Loop: loop fetch all_records_cursor into v_biz_id, v_biz_type, v_state, v_county, v_vc_sales_range, v_vc_employee_range;
-    
-		IF v_biz_id = 0 THEN
+    all_records_Loop: loop fetch all_records_cursor into v_biz_id, v_state, v_county, v_vc_sales_range, v_vc_emp_range;
+		set v_count = v_count + 1;
+		
+        IF v_biz_id = 0 THEN
 			select '***** EXITING all_records_Loop *****';
 			LEAVE all_records_Loop;
 		END IF;
+        
+		select '**** v_biz_id: '+v_biz_id;
+		select '**** v_state: '+v_state;
+		select '**** v_county: '+v_county;
+		select '**** v_vc_sales_range: '+v_vc_sales_range;
+		select '**** v_vc_emp_range: '+v_vc_emp_range;
 		
-		select 'Updating record for v_biz_id: '+v_biz_id;
+        select '**** 111 v_county_pop_den: '+v_county_pop_den;
+        select '**** 111 v_id: '+v_id;
+        
+        IF v_count = 1 THEN
+			select '***** v_count: '+v_count;
+			set v_county_pop_den = 2171.5;
+		END IF;
+        
+        IF v_biz_id = 2 THEN
+			select '***** v_count: '+v_count;
+			set v_county_pop_den = 2171.5;
+		END IF;
+        
+        IF v_biz_id = 3 THEN
+			select '***** v_count: '+v_count;
+			set v_county_pop_den = 459.2;
+		END IF;
+        
+		-- Open the county statistics cursor
+		-- open county_stats_cursor;
+        -- select '**** 111.1 v_id: '+v_id;
+		-- fetch county_stats_cursor into v_county_pop_den;
+        -- fetch county_stats_cursor into v_id;
+        -- select '**** 111.2 v_id: '+v_id;
+		-- close county_stats_cursor;
+        
+		select '**** 222 v_county_pop_den: '+v_county_pop_den;
+        select '**** 222 v_id: '+v_id;
 		
 		-- sales range calculations	
 		set v_int_sales_range = cast(v_vc_sales_range as UNSIGNED);
@@ -86,12 +122,12 @@ BEGIN
 		set v_sales_range_Minus50P = (v_int_sales_range * 0.5);
         
         -- employee range calculations
-        set v_int_emp_range = cast(v_vc_sales_range as UNSIGNED);
-		set v_emp_range_Plus30P = (v_int_sales_range * 1.3);
-		set v_emp_range__Minus30P = (v_int_sales_range * 0.3);
-		
+        set v_int_emp_range = cast(v_vc_emp_range as UNSIGNED);
+		set v_emp_range_Plus30P = (v_vc_emp_range * 1.3);
+		set v_emp_range_Minus30P = (v_int_emp_range * 0.7);
 		
 		IF v_sales_range != 0 THEN
+			select '**** IN HERE: 111';
 			set v_annual_cash_flow = ROUND(FLOOR(RAND() * (v_sales_range_Plus50P - v_sales_range_Minus50P + 1) + v_sales_range_Minus50P), - 2);
 			set v_monthly_payroll_cost = ROUND(FLOOR(RAND() * (v_sales_range_Plus50P - v_sales_range_Minus50P + 1)+v_sales_range_Minus50P)/12 * 0.3, - 2);
 			set v_inventory_cost = ROUND(FLOOR(RAND() * (v_sales_range_Plus50P - v_sales_range_Minus50P + 1) + v_sales_range_Minus50P)/12 * 0.3, - 2);
@@ -105,6 +141,7 @@ BEGIN
 			set v_value_total_furniture = ROUND(FLOOR(RAND() * (v_sales_range_Plus50P - v_sales_range_Minus50P + 1) + v_sales_range_Minus50P), - 2);
 		ELSE
 			-- TODO: set these values based on comparable business
+			select '**** IN HERE: 222';
 			set v_annual_cash_flow = 0;
 			set v_monthly_payroll_cost = 0;
 			set v_inventory_cost = 0;
@@ -118,22 +155,25 @@ BEGIN
 			set v_value_total_furniture = 0;
 		END IF;
 		
-		
 		IF v_emp_range != 0 THEN
+			select '**** IN HERE: 333';
 			set v_emp_FT_num = ROUND(FLOOR(RAND() * (v_emp_range_Plus30P - v_emp_range_Minus30P + 1) + v_emp_range_Minus30P) * 0.7, - 1);
 			set v_emp_PT_num = ROUND(FLOOR(RAND() * (v_emp_range_Plus30P - v_emp_range_Minus30P + 1) + v_emp_range_Minus30P) * 0.3, - 1);
 		ELSE
+			select '**** IN HERE: 444';
 			set v_emp_FT_num = 0;
 			set v_emp_PT_num = 0;
         END IF;
         
         IF v_county_pop_den != 0 THEN
+        	select '**** IN HERE: 555';
 			set v_1mile_rad_popln = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den * 10;
 			set v_3mile_rad_popln = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den * 30;
 			set v_5mile_rad_popln = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den * 50;
 			set v_dailypeople_doorfront_num = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den/10;
 			set v_dailycar_parklot_num = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den/20;
         ELSE
+        	select '**** IN HERE: 666';
         	set v_1mile_rad_popln = 0;
 			set v_3mile_rad_popln = 0;
 			set v_5mile_rad_popln = 0;
@@ -141,6 +181,7 @@ BEGIN
 			set v_dailycar_parklot_num = 0;
         END IF;
 		
+        -- update the record with above values
 		update t_brw_business 
 			-- below attributes are based on type of business TODO: Write seperate SP for this one
 			-- naics_num = '',
@@ -223,7 +264,47 @@ BEGIN
 			update_date = CURDATE()
 			where 
 			biz_id = v_biz_id;
-    
+    		
+			select '**** DONE WITH UPDATE';
+            
+            -- reset all the variables
+            set v_biz_id = 0;
+			set v_state = '';
+			set v_county = '';
+			set v_vc_sales_range = '0';
+			set v_vc_emp_range = '0';
+            
+            set v_county_pop_den = 0.0;
+            
+            set v_int_sales_range = 0;
+			set v_sales_range_Plus50P = 0;
+			set v_sales_range_Minus50P = 0;
+            
+            set v_int_emp_range = 0;
+			set v_emp_range_Plus30P = 0;
+			set v_emp_range_Minus30P = 0;
+            
+            set v_annual_cash_flow = 0;
+			set v_monthly_payroll_cost = 0;
+			set v_inventory_cost = 0;
+			set v_market_based_est = 0;
+			set v_rev_monthly = 0;
+			set v_exp_monthly_rent = 0;
+			set v_exp_monthly_material = 0;
+			set v_exp_monthly_emp = 0;
+			set v_exp_monthly_utility = 0;
+			set v_value_total_equipment = 0;
+			set v_value_total_furniture = 0;
+            
+            set v_emp_FT_num = 0;
+			set v_emp_PT_num = 0;
+            
+            set v_1mile_rad_popln = 0;
+			set v_3mile_rad_popln = 0;
+			set v_5mile_rad_popln = 0;
+			set v_dailypeople_doorfront_num = 0;
+			set v_dailycar_parklot_num = 0;
+			
     end loop all_records_Loop;
 	close all_records_cursor;
 

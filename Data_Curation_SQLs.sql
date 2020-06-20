@@ -8,6 +8,61 @@
 -- 7. Enter password if it asks - PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
 -- 8. Execute SQLs by ending them with ;
 
+
+select id, pop_density 
+	from t_brw_state_counties 
+    where 
+    state_code = 'IN' 
+    and county_name = 'HAMILTON';
+
+select biz_id, add_state, add_county, sales_range, employee_range   
+	from t_brw_business 
+    where 
+    -- updatedby_user_id != 9999;
+    biz_id in(18796269, 18796263, 18796151);
+    
+    select biz_id, add_state, add_county, sales_range, employee_range   
+	from t_brw_business 
+    where 
+    -- updatedby_user_id != 9999;
+    biz_id = 18796269;
+
+update t_brw_business
+set employee_range = '1'
+where employee_range = '0100000000';
+
+
+
+
+select biz_id, employee_range 
+    from t_brw_business 
+    where 
+    -- employee_range like '%,%';
+    biz_id in(18796269, 18796263, 18796151);
+    
+    select * 
+    from t_brw_business 
+    where 
+    -- employee_range like '%,%';
+    biz_id in(18796269, 18796263, 18796151);
+
+
+select distinct(employee_range) from t_brw_business;
+
+select distinct(employee_range) 
+from t_brw_business order by cast(employee_range as UNSIGNED) asc;
+
+
+select count(biz_id) from t_brw_business  where employee_range like '%,%';
+
+select count(biz_id) from t_brw_business where employee_range = '3500';
+
+select biz_id, add_state, add_county, sales_range, employee_range   
+	from t_brw_business 
+    where 
+    -- updatedby_user_id != 9999;
+    biz_id in(18796269, 18796263, 18796151);
+
 SELECT count(*) FROM brwdev.t_brw_state_counties;
 
 SELECT * FROM brwdev.t_brw_state_counties where state_code = 'FL';
@@ -305,7 +360,7 @@ where
 SHOW FULL PROCESSLIST;
 
 -- To kill the DB process
-CALL mysql.rds_kill(8796);
+CALL mysql.rds_kill(11861);
 
 -- Delete SQL to delete duplicates for a particular business based on its 
 -- name and address
