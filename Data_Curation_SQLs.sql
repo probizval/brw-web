@@ -46,6 +46,35 @@ and t1.county_name = t2.county_name
 select * from t_brw_state_counties where CONCAT(state_code,',', county_name) 
 not in (select CONCAT(state_code,',', county_name) from t_brw_state_county_cities)
 
+SELECT * FROM brwdev.t_brw_state_counties where state_code = 'AL';
+
+SELECT * FROM brwdev.t_brw_state_county_cities where state_code = 'AK';
+
+********************************************************************************************************
+-- find difference/duplicates in two tables
+select * from t_brw_state_counties where CONCAT(state_code,',', county_name) 
+not in (select CONCAT(add_state,',', add_county) from t_brw_business)
+
+SELECT * FROM brwdev.t_brw_state_counties where state_code = 'GA';
+
+SELECT distinct add_county FROM brwdev.t_brw_business where add_state = 'KS' order by add_county asc;
+
+**********************
+SELECT *  FROM brwdev.t_brw_business where add_state = 'KS'  and add_county = 'Alameda'
+-- 1479
+
+SELECT count(*) FROM brwdev.t_brw_business where add_state = 'MO'  and add_county = 'Saint Louis'
+-- 1161
+
+update t_brw_business
+set add_county = 'St. Croix'
+where
+add_county = 'Saint Croix';
+
+********************************************************************************************************
+
+
+
 
 
 
@@ -537,7 +566,7 @@ and add_state = 'CA';
 
 -- To create a random integer number between two values (range), you can use the following formula: SELECT FLOOR(RAND()*(b-a+1))+a; Where a is the smallest number and b is the largest number that you want to generate a random number for.
 -- Return a random number >= 5 and <=10:
-SELECT FLOOR(RAND()*(100000-50000+1)+50000);
+SELECT FLOOR(RAND()*(10-5+1)+5);
 
 select count(*) from t_brw_business where market_based_est is null;
 -- 0
