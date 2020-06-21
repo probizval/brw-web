@@ -7,6 +7,7 @@ package com.brw.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -614,6 +615,41 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessDetailsDTO.setEmail(businessDetails.getEmail());
 			businessDetailsDTO.setWebsite(businessDetails.getWebsite());
 		}
+		
+		//Generate Random Numbers and Use floor function
+		Random randNum= new Random(); 
+		//int num = randNum.nextInt(10 - 5 + 1) + 5;
+		
+		int assetBasedEst = businessDetails.getAsset_based_est();
+		int abelmax = (int)(assetBasedEst * 0.9);
+		int abelmin = (int)(assetBasedEst * 0.8);
+		int abehmax = (int)(assetBasedEst * 1.3);
+		int abehmin = (int)(assetBasedEst * 1.2);
+		
+		businessDetailsDTO.setAssetBasedEst(assetBasedEst);
+		businessDetailsDTO.setAssetBasedEstLow(randNum.nextInt(abelmax - abelmin + 1) + abelmin);
+		businessDetailsDTO.setAssetBasedEstHigh(randNum.nextInt(abehmax - abelmin + 1) + abehmin);
+
+		int incomeBasedEst = businessDetails.getIncome_based_est();
+		int ibelmax = (int)(incomeBasedEst * 0.9);
+		int ibelmin = (int)(incomeBasedEst * 0.8);
+		int ibehmax = (int)(incomeBasedEst * 1.3);
+		int ibehmin = (int)(incomeBasedEst * 1.2);
+		
+		businessDetailsDTO.setIncomeBasedEst(incomeBasedEst);
+		businessDetailsDTO.setIncomeBasedEstLow(randNum.nextInt(ibelmax - ibelmin + 1) + ibelmin);
+		businessDetailsDTO.setIncomeBasedEstHigh(randNum.nextInt(ibehmax - ibehmin + 1) + ibehmin);
+
+		int marketBasedEst = businessDetails.getMarket_based_est();
+		int mbelmax = (int)(marketBasedEst * 0.9);
+		int mbelmin = (int)(marketBasedEst * 0.8);
+		int mbehmax = (int)(marketBasedEst * 1.3);
+		int mbehmin = (int)(marketBasedEst * 1.2);
+		
+		businessDetailsDTO.setMarketBasedEst(marketBasedEst);
+		businessDetailsDTO.setMarketBasedEstLow(randNum.nextInt(mbelmax - mbelmin + 1) + mbelmin);
+		businessDetailsDTO.setMarketBasedEstHigh(randNum.nextInt(mbehmax - mbehmin + 1) + mbehmin);
+		
 		businessDetailsDTO.setDescription(businessDetails.getFreeformDescription());
 		businessDetailsDTO.setNAICSNum(businessDetails.getNAICSNum());
 		businessDetailsDTO.setNAICSDescription(businessDetails.getNAICSDescription());
@@ -1611,6 +1647,9 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessDetailsDTO.setPhoneExt(businessDetails.getPhoneExtentionNumber());
 			businessDetailsDTO.setEmail(businessDetails.getEmail());
 			businessDetailsDTO.setWebsite(businessDetails.getWebsite());
+			
+			
+			
 			businessDetailsDTO.setDescription(businessDetails.getFreeformDescription());
 			businessDetailsDTO.setNAICSNum(businessDetails.getNAICSNum());
 			businessDetailsDTO.setNAICSDescription(businessDetails.getNAICSDescription());

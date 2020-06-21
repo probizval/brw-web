@@ -32,9 +32,17 @@ public class BusinessDetailsDTO {
 	private String brokerPhone;
 	private String brokerEmail;
 	private String isPaidListing;
-	private Integer asset_based_est;
-	private Integer income_based_est;
-	private Integer market_based_est;
+	
+	private Integer assetBasedEst;
+	private Integer assetBasedEstLow;
+	private Integer assetBasedEstHigh;
+	private Integer incomeBasedEst;
+	private Integer incomeBasedEstLow;
+	private Integer incomeBasedEstHigh;
+	private Integer marketBasedEst;
+	private Integer marketBasedEstLow;
+	private Integer marketBasedEstHigh;
+	
 	private String isForSell;
 	private String isHidden;
 	private Integer forSellPrice;
@@ -253,23 +261,60 @@ public class BusinessDetailsDTO {
 	public void setIsPaidListing(String isPaidListing) {
 		this.isPaidListing = isPaidListing;
 	}
-	public Integer getAsset_based_est() {
-		return asset_based_est;
+	
+	public Integer getAssetBasedEst() {
+		return assetBasedEst;
 	}
-	public void setAsset_based_est(Integer asset_based_est) {
-		this.asset_based_est = asset_based_est;
+	public void setAssetBasedEst(Integer assetBasedEst) {
+		this.assetBasedEst = assetBasedEst;
 	}
-	public Integer getIncome_based_est() {
-		return income_based_est;
+	public Integer getAssetBasedEstLow() {
+		return assetBasedEstLow;
 	}
-	public void setIncome_based_est(Integer income_based_est) {
-		this.income_based_est = income_based_est;
+	public void setAssetBasedEstLow(Integer assetBasedEstLow) {
+		this.assetBasedEstLow = assetBasedEstLow;
 	}
-	public Integer getMarket_based_est() {
-		return market_based_est;
+	public Integer getAssetBasedEstHigh() {
+		return assetBasedEstHigh;
 	}
-	public void setMarket_based_est(Integer market_based_est) {
-		this.market_based_est = market_based_est;
+	public void setAssetBasedEstHigh(Integer assetBasedEstHigh) {
+		this.assetBasedEstHigh = assetBasedEstHigh;
+	}
+	public Integer getIncomeBasedEst() {
+		return incomeBasedEst;
+	}
+	public void setIncomeBasedEst(Integer incomeBasedEst) {
+		this.incomeBasedEst = incomeBasedEst;
+	}
+	public Integer getIncomeBasedEstLow() {
+		return incomeBasedEstLow;
+	}
+	public void setIncomeBasedEstLow(Integer incomeBasedEstLow) {
+		this.incomeBasedEstLow = incomeBasedEstLow;
+	}
+	public Integer getIncomeBasedEstHigh() {
+		return incomeBasedEstHigh;
+	}
+	public void setIncomeBasedEstHigh(Integer incomeBasedEstHigh) {
+		this.incomeBasedEstHigh = incomeBasedEstHigh;
+	}
+	public Integer getMarketBasedEst() {
+		return marketBasedEst;
+	}
+	public void setMarketBasedEst(Integer marketBasedEst) {
+		this.marketBasedEst = marketBasedEst;
+	}
+	public Integer getMarketBasedEstLow() {
+		return marketBasedEstLow;
+	}
+	public void setMarketBasedEstLow(Integer marketBasedEstLow) {
+		this.marketBasedEstLow = marketBasedEstLow;
+	}
+	public Integer getMarketBasedEstHigh() {
+		return marketBasedEstHigh;
+	}
+	public void setMarketBasedEstHigh(Integer marketBasedEstHigh) {
+		this.marketBasedEstHigh = marketBasedEstHigh;
 	}
 	public String getIsForSell() {
 		if (null != isForSell) {

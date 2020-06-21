@@ -9,11 +9,17 @@
 -- 8. Execute SQLs by ending them with ;
 
 
+select *   
+	from t_brw_business 
+    where 
+    -- updatedby_user_id != 9999;
+    biz_id in(18796269, 18796263, 18796151);
+
 select id, pop_density 
 	from t_brw_state_counties 
     where 
     state_code = 'IN' 
-    and county_name = 'HAMILTON';
+    and county_name = 'MARION';
 
 select biz_id, add_state, add_county, sales_range, employee_range   
 	from t_brw_business 

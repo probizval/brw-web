@@ -95,12 +95,12 @@ BEGIN
 			set v_county_pop_den = 2171.5;
 		END IF;
         
-        IF v_biz_id = 2 THEN
+        IF v_count = 2 THEN
 			select '***** v_count: '+v_count;
 			set v_county_pop_den = 2171.5;
 		END IF;
         
-        IF v_biz_id = 3 THEN
+        IF v_count = 3 THEN
 			select '***** v_count: '+v_count;
 			set v_county_pop_den = 459.2;
 		END IF;
@@ -118,15 +118,21 @@ BEGIN
 		
 		-- sales range calculations	
 		set v_int_sales_range = cast(v_vc_sales_range as UNSIGNED);
+        select '**** 222 v_int_sales_range: '+v_int_sales_range;
 		set v_sales_range_Plus50P = (v_int_sales_range * 1.5);
+        select '**** 222 v_sales_range_Plus50P: '+v_sales_range_Plus50P;
 		set v_sales_range_Minus50P = (v_int_sales_range * 0.5);
+        select '**** 222 v_sales_range_Minus50P: '+v_sales_range_Minus50P;
         
         -- employee range calculations
         set v_int_emp_range = cast(v_vc_emp_range as UNSIGNED);
+        select '**** 222 v_int_emp_range: '+v_int_emp_range;
 		set v_emp_range_Plus30P = (v_vc_emp_range * 1.3);
+        select '**** 222 v_emp_range_Plus30P: '+v_emp_range_Plus30P;
 		set v_emp_range_Minus30P = (v_int_emp_range * 0.7);
+        select '**** 222 v_emp_range_Minus30P: '+v_emp_range_Minus30P;
 		
-		IF v_sales_range != 0 THEN
+		IF v_int_sales_range != 0 THEN
 			select '**** IN HERE: 111';
 			set v_annual_cash_flow = ROUND(FLOOR(RAND() * (v_sales_range_Plus50P - v_sales_range_Minus50P + 1) + v_sales_range_Minus50P), - 2);
 			set v_monthly_payroll_cost = ROUND(FLOOR(RAND() * (v_sales_range_Plus50P - v_sales_range_Minus50P + 1)+v_sales_range_Minus50P)/12 * 0.3, - 2);
@@ -155,7 +161,7 @@ BEGIN
 			set v_value_total_furniture = 0;
 		END IF;
 		
-		IF v_emp_range != 0 THEN
+		IF v_int_emp_range != 0 THEN
 			select '**** IN HERE: 333';
 			set v_emp_FT_num = ROUND(FLOOR(RAND() * (v_emp_range_Plus30P - v_emp_range_Minus30P + 1) + v_emp_range_Minus30P) * 0.7, - 1);
 			set v_emp_PT_num = ROUND(FLOOR(RAND() * (v_emp_range_Plus30P - v_emp_range_Minus30P + 1) + v_emp_range_Minus30P) * 0.3, - 1);
@@ -167,10 +173,10 @@ BEGIN
         
         IF v_county_pop_den != 0 THEN
         	select '**** IN HERE: 555';
-			set v_1mile_rad_popln = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den * 10;
-			set v_3mile_rad_popln = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den * 30;
-			set v_5mile_rad_popln = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den * 50;
-			set v_dailypeople_doorfront_num = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den/10;
+			set v_1mile_rad_popln = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den;
+			set v_3mile_rad_popln = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den * 3;
+			set v_5mile_rad_popln = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den * 5;
+			set v_dailypeople_doorfront_num = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den/40;
 			set v_dailycar_parklot_num = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den/20;
         ELSE
         	select '**** IN HERE: 666';
