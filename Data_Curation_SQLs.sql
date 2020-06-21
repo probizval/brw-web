@@ -9,11 +9,59 @@
 -- 8. Execute SQLs by ending them with ;
 
 
+select count(*) from t_brw_business where add_county = '';
+
+-- delete from t_brw_business where add_city = '';
+
+ -- where biz_id < 6000
+
+-- To list all DB process
+SHOW FULL PROCESSLIST;
+
+-- To kill the DB process
+CALL mysql.rds_kill(13974)
+
+select count(*) from t_brw_business t1, t_brw_state_county_cities t2 
+where 
+t1.add_state = t2.state_code 
+and t1.add_city = t2.city_name
+and t1.add_county = '';
+
+select t1.add_city, t1.add_county, t1.add_state, t2.city_name, t2.county_name, t2.state_code 
+from t_brw_business t1, t_brw_state_county_cities t2 
+where 
+t1.add_state = t2.state_code 
+and t1.add_city = t2.city_name
+and t1.add_county = '' limit 100;
+
+
+update t_brw_business t1, t_brw_state_county_cities t2 
+set t1.add_county = t2.county_name 
+where 
+t1.add_state = t2.state_code 
+and t1.add_city = t2.city_name
+and t1.add_county = '';
+
+
 select *   
 	from t_brw_business 
     where 
+    -- biz_id = 1003126
     -- updatedby_user_id != 9999;
     biz_id in(18796269, 18796263, 18796151);
+    
+select biz_id, sales_range, employee_range   
+	from t_brw_business 
+    where 
+    -- biz_id = 1003126
+    -- updatedby_user_id != 9999;
+    biz_id in(18796269, 18796263, 18796151);
+    
+-- '18796151','1000000000', '3500'
+-- '18796263','1000000', '5'
+-- '18796269','500000', '8'
+
+    
 
 select id, pop_density 
 	from t_brw_state_counties 
