@@ -939,6 +939,8 @@ h4.title {
   background-image: url(../img/demo/banner1.jpg);
   background-position: center;
   background-size: cover;
+  align-items: center;
+  justify-content: center;
   position: relative; }
 
 .search-form.main:before {
