@@ -18,9 +18,6 @@
         $scope.searchName = "";
         $scope.priceRangeList = constants.priceRangeList;
         var profile = JSON.parse(sessionStorage.getItem("profile"));
-        if (profile && profile.email) {
-            $scope.email = profile.email
-        }
 
 		$scope.filterCountyByState = function() {
             propertyService.getStateCounties({'stateName': $scope.businessState.name})
@@ -29,7 +26,10 @@
 		          $scope.businessCounty = $scope.businessCounties[0];
                   $scope.searchName = 'Business search in ' + $scope.businessState.name;
                   var profile = JSON.parse(sessionStorage.getItem("profile"));
-                  if (profile && profile.email) {
+                  if ($stateParams.email != null) {
+                      $scope.email = $stateParams.email
+                      document.getElementById("email").disabled = true;
+                  } else if (profile && profile.email) {
                       $scope.email = profile.email
                   }
 		        })
@@ -39,11 +39,13 @@
 		}
         $scope.saveSearchAgent = function() {
             var profile = JSON.parse(sessionStorage.getItem("profile"));
-			if (profile && profile.email) {
-			  $scope.email = profile.email
-			}
+			if ($stateParams.email != null) {
+                $scope.email = $stateParams.email
+                document.getElementById("email").disabled = true;
+            } else if (profile && profile.email) {
+                $scope.email = profile.email
+            }
             var searchAgentDetails = {
-	            userId: profile.userId,
 				email: $scope.email,
 				name: $scope.searchName,
 				frequency: $scope.frequency.code,
@@ -54,9 +56,14 @@
 				county: $scope.businessCounty.countyName,
 				city: $scope.businessCity,
             }
+            if (profile && profile.userId) {
+                searchAgentDetails["userId"] = profile.userId;
+            }
             propertyService.addSearchAgent(searchAgentDetails)
                 .success(function(res) {
-					if ($stateParams.fromSignIn === true) {
+                    if ($stateParams.email != null) {
+                        $state.go('home', null, {'reload': true})
+                    } else if ($stateParams.email === null && $stateParams.fromSignIn === true) {
 						window.location.href = sessionStorage.getItem("redirect_location");
 						location.reload();
 					} else {
@@ -68,7 +75,10 @@
                 });
         };
 		$scope.skipSearchAgent = function() {
-            if ($stateParams.fromSignIn === true) {
+			if ($stateParams.email != null) {
+				// subscribe case from home even if user skip it -> save search
+				$scope.saveSearchAgent();
+			} else if ($stateParams.fromSignIn === true) {
                 window.location.href = sessionStorage.getItem("redirect_location");
                 location.reload();
             } else {
@@ -81,9 +91,12 @@
             $scope.businessState = $scope.businessStates[4]; // California
             $scope.priceRange = $scope.priceRangeList[0];
             $scope.frequency = $scope.frequencies[0];
-            if (profile && profile.email) {
-			  $scope.email = profile.email
-			}
+            if ($stateParams.email != null) {
+                $scope.email = $stateParams.email
+                document.getElementById("email").disabled = true;
+            } else if (profile && profile.email) {
+                $scope.email = profile.email
+            }
             $scope.filterCountyByState()
         };
         $scope.initialize();

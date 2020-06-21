@@ -93,7 +93,7 @@
                                 <div id="feature-list" role="tablist" class="row">
                                     <div class="col-lg-6 col-xl-6" ng-if="businessDetails.isForSell === 'Y'">
                                         <div class="card shadow">
-                                            <div class="card-header" role="tab" id="headingOne" ng-if="businessDetails.isForSell === 'Y'">
+                                            <div class="card-header" role="tab" ng-if="businessDetails.isForSell === 'Y'">
                                                 <h4 class="panel-title">For sale</h4>
                                             </div>
                                             <div id="specification" class="panel-collapse collapse show" role="tabpanel">
@@ -113,45 +113,54 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <div class="card-header" role="tab"
-                                                     ng-if="businessDetails.asset_based_est || businessDetails.income_based_est || businessDetails.market_based_est">
-                                                    <h4 classs="panel-title">BRW estimates</h4>
-                                                </div>
-                                                <div id="specification" class="panel-collapse collapse show" role="tabpanel">
-                                                    <div class="card-body">
-                                                        <div ng-if="businessDetails.asset_based_est">
-                                                            <table class="table v1" style="border-bottom: 1rem">
-                                                                <tr style="border-style:hidden">
-                                                                    <td style="padding: 0.1rem"> Asset Based <i class="fa fa-question-circle"></i></td>
-                                                                    <td style="padding: 0.1rem">{{businessDetails.asset_based_est}}</td>
-                                                                </tr>
-<!--                                                                <tr style="border-style:hidden" ng-if="estimate.range">-->
-<!--                                                                    <td style="padding: 0.1rem">Range <i class="fa fa-question-circle"></i></td>-->
-<!--                                                                    <td style="padding: 0.1rem">{{estimate.range}}</td>-->
-<!--                                                                </tr>-->
-                                                            </table>
-                                                        </div>
-                                                        <div ng-if="businessDetails.income_based_est">
-                                                            <table class="table v1" style="border-bottom: 1rem">
-                                                                <tr style="border-style:hidden">
-                                                                    <td style="padding: 0.1rem"> Income Based <i class="fa fa-question-circle"></i></td>
-                                                                    <td style="padding: 0.1rem">{{businessDetails.income_based_est}}</td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div ng-if="businessDetails.market_based_est">
-                                                            <table class="table v1" style="border-bottom: 1rem">
-                                                                <tr style="border-style:hidden">
-                                                                    <td style="padding: 0.1rem"> Market Based <i class="fa fa-question-circle"></i></td>
-                                                                    <td style="padding: 0.1rem">{{businessDetails.market_based_est}}</td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                    </div>
+                                            </div>
+                                            <div class="card-header" role="tab">
+                                                <h4 class="panel-title">RealWorth Estimates</h4>
+                                            </div>
+                                            <div id="specification" class="panel-collapse collapse show" role="tabpanel">
+                                                <div class="card-body">
+                                                        <table class="table v1">
+                                                            <tr style="border-style:hidden">
+                                                                <td style="padding: 0.25rem"> Asset Based
+                                                                    <i class="fa fa-question-circle" data-toggle="popover" data-trigger="hover" data-content="Asset based estimation"></i>
+                                                                </td>
+                                                                <td ng-if="businessDetails.assetBasedEst" style="padding: 0.25rem">${{businessDetails.assetBasedEst | number }}</td>
+                                                                <td ng-if="!businessDetails.assetBasedEst" style="padding: 0.25rem">Not Available</td>
+                                                            </tr>
+                                                            <tr style="border-style:hidden" ng-if="businessDetails.assetBasedEstLow && businessDetails.assetBasedEstHigh">
+<!--                                                                <td style="padding: 0.25rem"></td>-->
+                                                                <td style="padding: 0.25rem">(${{businessDetails.assetBasedEstLow | number }} - ${{businessDetails.assetBasedEstHigh | number}})</td>
+                                                            </tr>
+
+                                                            <tr style="border-style:hidden">
+                                                                <td style="padding: 0.25rem"> Income Based
+                                                                    <i class="fa fa-question-circle" data-toggle="popover" data-trigger="hover" data-content="Income based estimation"></i>
+                                                                </td>
+                                                                <td ng-if="businessDetails.incomeBasedEst" style="padding: 0.25rem">${{businessDetails.incomeBasedEst | number }}</td>
+                                                                <td ng-if="!businessDetails.incomeBasedEst" style="padding: 0.25rem">Not Available</td>
+                                                            </tr>
+                                                            <tr style="border-style:hidden" ng-if="businessDetails.incomeBasedEstLow && businessDetails.incomeBasedEstHigh">
+<!--                                                                <td style="padding: 0.25rem"></td>-->
+                                                                <td style="padding: 0.25rem">(${{businessDetails.incomeBasedEstLow | number }} - ${{businessDetails.incomeBasedEstHigh | number }})</td>
+                                                            </tr>
+
+                                                            <tr style="border-style:hidden">
+                                                                <td style="padding: 0.25rem"> Market Based
+                                                                    <i class="fa fa-question-circle" data-toggle="popover" data-trigger="hover" data-content="Market based estimation"></i>
+                                                                </td>
+                                                                <td ng-if="businessDetails.marketBasedEst" style="padding: 0.25rem">${{businessDetails.marketBasedEst | number }}</td>
+                                                                <td ng-if="!businessDetails.marketBasedEst" style="padding: 0.25rem">Not Available</td>
+                                                            </tr>
+                                                            <tr style="border-style:hidden" ng-if="businessDetails.marketBasedEstLow && businessDetails.marketBasedEstHigh">
+<!--                                                                <td style="padding: 0.25rem"></td>-->
+                                                                <td style="padding: 0.25rem">(${{businessDetails.marketBasedEstLow | number }} - ${{businessDetails.marketBasedEstHigh | number }})</td>
+                                                            </tr>
+                                                        </table>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="col-lg-6 col-xl-6">
                                         <div class="card shadow">
                                             <div id="specification" class="panel-collapse collapse show" role="tabpanel">
@@ -243,14 +252,12 @@
                         <h3 class="headline" ng-if="businessDetails.description">Business description</h3>
                         <div class="row" style="margin:10px" ng-if="businessDetails.description">
                             <p style="margin-bottom: 0">{{businessDetails.description}}</p>
-                            <p style="margin-bottom: 0">Well established, profitable Chevron branded gas station and C-Store in Alameda County in the Fremont City, Central California. Located on a busy Highway that serves not only local patrons but travelers and the working population as well. Not only is it successful as it is, it has a tremendous upside.</p>
-                            <p style="margin-bottom: 0">The Convenience Store is setup to have a Deli in it and has room to expand. It has a drive through car wash and two large propane tanks. There are three tanks with a total volume of 30,000 gallons, four MPD’s with 12 gas nozzles and 2 diesel nozzles. Offering includes the business and real estate.</p>
                         </div>
 
                         <h3 class="headline" ng-if="businessCommonFeatures" >Business Details</h3>
                         <div class="row" style="margin:10px" ng-if="businessCommonFeatures">
                             <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3" ng-repeat="feature in businessCommonFeatures track by feature.id"
-                                 ng-if="feature.model || feature.model != '0'">
+                                 ng-if="feature.model && feature.model != '0' && feature.model != '$0'">
                                     <div class="details-group-title">{{feature.label}}</div>
                                     <div ng-if="isNumber(feature.model)">
                                         <p style="margin-bottom: 0">{{feature.model | number}}</p>

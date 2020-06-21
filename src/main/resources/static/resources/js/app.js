@@ -122,7 +122,8 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             url: '/addListing',
             templateUrl: 'resources/pages/addListingForm.html',
             controller: 'addListingController',
-            reload: true
+            reload: true,
+            requireLogin: true
         })
         .state('business.bookmarkedListing', {
             url: '/bookmarkedListing',
@@ -154,6 +155,7 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             reload: true,
             params: {
                 fromSignIn: {squash: true, value: true},
+                email: {squash: true, value: null},
             }
         })
         .state('business.listSearchAgent', {

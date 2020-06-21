@@ -934,10 +934,7 @@ h4.title {
   margin-top: -15px; }
 
 .search-form.main {
-  min-height: 620px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   margin-bottom: 0;
   background-image: url(../img/demo/banner1.jpg);
   background-position: center;
@@ -1066,11 +1063,9 @@ h4.title {
   display: none; }
 
 .search-form.main.v2, .search-form.main.v5 {
-  min-height: 700px;
   padding-top: 150px; }
 
 .search-form.main.v7 {
-  min-height: 700px;
   padding-top: 150px; }
 
 .search-form.main.v3 {

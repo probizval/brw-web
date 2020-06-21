@@ -6,9 +6,9 @@
         .module('myApp')
         .controller('homeController', homeController);
 
-    homeController.$inject = ['$rootScope', '$scope', '$state', 'authService', 'propertyService', 'constants'];
+    homeController.$inject = ['$document', '$rootScope', '$scope', '$state', 'authService', 'propertyService', 'constants'];
 
-    function homeController($rootScope, $scope, $state, authService, propertyService, constants) {
+    function homeController($document, $rootScope, $scope, $state, authService, propertyService, constants) {
         var postal_code = '', latitude = '', longitude = '';
         $scope.businessTypes = constants.searchBusinessTypes;
         $scope.businessStates = constants.businessStates;
@@ -162,6 +162,18 @@
                 HAVING distance < 25;
                 */
         };
+        $scope.subscribe = function (subscribeBusiness) {
+		    if (subscribeBusiness.$invalid) {
+				if (angular.element($document[0].querySelector('input.ng-invalid'))[0]) {
+					angular.element($document[0].querySelector('input.ng-invalid'))[0].focus();
+					return false
+				} else if (angular.element($document[0].querySelector('textarea.ng-invalid'))[0]) {
+					angular.element($document[0].querySelector('textarea.ng-invalid'))[0].focus();
+					return false
+				}
+            }
+			$state.go('business.createSearchAgent', {fromSignIn: true, email: $scope.subscribeEmail}, {reload: true})
+        }
 //        $scope.initialize();
     }
 
