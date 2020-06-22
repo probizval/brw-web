@@ -8,7 +8,7 @@
 -- 7. Enter password if it asks - PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
 -- 8. Execute SQLs by ending them with ;
 
-select * from t_brw_business where biz_id = 16445718;
+select * from t_brw_business where biz_id = 13447022;
 
 select count(*) from t_brw_business where add_zip is null;
 
