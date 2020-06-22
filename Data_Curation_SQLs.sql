@@ -8,8 +8,36 @@
 -- 7. Enter password if it asks - PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
 -- 8. Execute SQLs by ending them with ;
 
+select * from t_brw_business where biz_id = 16445718;
+
+select count(*) from t_brw_business where add_zip is null;
+
+select count(*) from t_brw_business where add_zip = '';
+
+
+select count(*) from t_brw_business where reg_city_date is null;
+
+select count(*) from t_brw_business where reg_city_date = '0000-00-00 00:00:00';
+
+select count(*) from t_brw_business where reg_state_date = '0000-00-00 00:00:00'; 
+
+select count(*) from t_brw_business where create_date = '0000-00-00 00:00:00';
+
+select distinct update_date from t_brw_business;
+-- 2020-05-10 00:00:00
+select count(*) from t_brw_business where update_date = '0000-00-00 00:00:00'; 
+
+update t_brw_business
+set create_date = '2020-05-10 00:00:00'
+where create_date = '0000-00-00 00:00:00';
+
+update t_brw_business
+set update_date = '2020-05-10 00:00:00'
+where update_date = '0000-00-00 00:00:00';
+
 
 select count(*) from t_brw_business where add_county = '';
+-- 1149030
 
 -- delete from t_brw_business where add_city = '';
 
@@ -33,7 +61,6 @@ where
 t1.add_state = t2.state_code 
 and t1.add_city = t2.city_name
 and t1.add_county = '' limit 100;
-
 
 update t_brw_business t1, t_brw_state_county_cities t2 
 set t1.add_county = t2.county_name 

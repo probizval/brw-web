@@ -11,7 +11,14 @@ import java.util.Random;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import com.brw.dao.BusinessDetailsDAO;
@@ -24,6 +31,7 @@ import com.brw.dto.BusinessInfoDTO;
 import com.brw.dto.BusinessInfoListDTO;
 import com.brw.dto.EstimatesDTO;
 import com.brw.dto.EstimatesListDTO;
+import com.brw.dto.GBusinessInfoDTO;
 import com.brw.dto.RelatedBusinessDTO;
 import com.brw.dto.RelatedBusinessListDTO;
 import com.brw.dto.UserActivityDTO;
@@ -37,6 +45,13 @@ import com.brw.service.BizTransactionService;
 import com.brw.service.EstimateService;
 import com.brw.service.ImageService;
 import com.brw.service.UserService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.maps.GeoApiContext;
+import com.google.maps.PlacesApi;
+import com.google.maps.model.PlacesSearchResponse;
+import com.google.maps.model.PlacesSearchResult;
+import com.google.maps.model.Photo;
 
 @Component
 public class BusinessServiceImpl implements com.brw.service.BusinessService {
@@ -153,7 +168,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		// End of request intercept
 		
 		//TODO:TEMPORARY translation of zip code - need to fix it on UI and then remove this code
-		if (businessDTO.getZip() == 94536) {
+		if (businessDTO.getZip().equals("94536")) {
 			businessDTO.setZip(null);
 		}
 				
@@ -188,7 +203,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		
 		List<BusinessInfo> businessList = null;
 		if(businessDTO.getIsForSell().equals(Constants.Y)) {
-			if (null != businessDTO.getZip() && 0 != businessDTO.getZip()) {
+			if (null != businessDTO.getZip() && businessDTO.getZip() == Constants.EMPTY_STRING) {
 				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
 					System.out.println("**** 333 Executing searchBusiness_1");
 					
@@ -319,7 +334,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				}
 			}
 		} else {
-			if (null != businessDTO.getZip() && 0 != businessDTO.getZip()) {
+			if (null != businessDTO.getZip() && businessDTO.getZip() != Constants.EMPTY_STRING) {
 				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
 					System.out.println("**** 333 Executing searchBusiness_1_FSN");
 					
@@ -450,28 +465,71 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				}
 			}
 		}
-		
+		System.out.println("**** TOTAL NUMBER OF RECORDS IN SEARCH RESULT: "+businessList.size());
+
 		List<BusinessInfoDTO> businessInfoDTOList = new ArrayList<BusinessInfoDTO>();
 		BusinessInfoListDTO businessInfoListDTO = new BusinessInfoListDTO();
+		GBusinessInfoDTO gBusinessInfoDTO = new GBusinessInfoDTO();
+		
+		int x = 0;
 		
 		for (BusinessInfo businessInfo: businessList) {
+			//TODO: Comment this code in PRODUCTION - Code to break out of this loop after 10 iterations, To avoide too many google calls while testing
+			x = x ++;
+			if(x == 10) {
+				System.out.println("**** INSIDE BREAK AFTER 10 COUNTER ****");
+				break;
+			}
+			
 			BusinessInfoDTO businessInfoDTO = new BusinessInfoDTO();
 			
 			businessInfoDTO.setInvokerId(businessDTO.getInvokerId());
 			businessInfoDTO.setBusinessId(businessInfo.getBusinessId());
 
+			//This IF block is written to avoid showing Hidden Business address
 			if (businessInfo.getIsHidden().equals(Constants.Y)) {
 				businessInfoDTO.setName("Business for Sell in " + businessInfo.getCity() + ", " + businessInfo.getCounty() + " " + "County" );
+				
 			} else {
+				//Call google API to get latitude and longitude and formatted address
+				
 				businessInfoDTO.setName(businessInfo.getName());
 				businessInfoDTO.setStreet1(businessInfo.getStreet1());
 				businessInfoDTO.setStreet2(businessInfo.getStreet2());
 				businessInfoDTO.setCity(businessInfo.getCity());
 				businessInfoDTO.setCounty(businessInfo.getCounty());
 				businessInfoDTO.setStateCode(businessInfo.getStateCode());
-				businessInfoDTO.setZip(businessInfo.getZip());	
-				businessInfoDTO.setLatitude(businessInfo.getLatitude());
-				businessInfoDTO.setLongitude(businessInfo.getLongitude());
+				businessInfoDTO.setZip(businessInfo.getZip());
+								
+				//call google if latitude and longitude do not exist in BRW DB
+				if (0.0 == businessInfo.getLatitude() || 0.0 == businessInfo.getLongitude()) {
+					System.out.println("**** No Lat/Lng in BRW DB");
+					
+					String address = ""+businessInfo.getStreet1()+", "+businessInfo.getCity()+", "+businessInfo.getStateCode()+", "+businessInfo.getZip()+"";
+					System.out.println("**** Input address to Google API: "+address);
+					
+					try {
+						gBusinessInfoDTO = getFormattedAddressAndLatLong(address);
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					businessInfoDTO.setGoogleName(gBusinessInfoDTO.getgBusinessName());
+					businessInfoDTO.setGoogleAddress(gBusinessInfoDTO.getgFormattedAddress());
+					businessInfoDTO.setLatitude(gBusinessInfoDTO.getgLatitude());
+					businessInfoDTO.setLongitude(gBusinessInfoDTO.getgLongitude());
+					businessInfoDTO.setGooglePhotoReferances(gBusinessInfoDTO.getgPhotoReferances());
+					
+					//TODO: Call Asynchronous Method to store lat/lng in BRW DB
+					//Reference - https://www.baeldung.com/spring-async
+					if (0.0 != gBusinessInfoDTO.getgLatitude() || 0.0 != gBusinessInfoDTO.getgLongitude()) {
+						asyncStoreLatLngToDB(businessDTO.getInvokerId(), businessInfo.getBusinessId(), businessInfoDTO.getLatitude(), businessInfoDTO.getLongitude());
+					}
+				} else {
+					System.out.println("**** YES Lat/Lng in BRW DB");
+					businessInfoDTO.setLatitude(businessInfo.getLatitude());
+					businessInfoDTO.setLongitude(businessInfo.getLongitude());
+				}
 			}
 			
 			businessInfoDTO.setIsHidden(businessInfo.getIsHidden());
@@ -479,17 +537,26 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessInfoDTO.setSubType(businessInfo.getSubType());
 			businessInfoDTO.setIsForSell(businessInfo.getIsForSell());
 			businessInfoDTO.setForSellPrice(businessInfo.getForSellPrice());
-			if(1001 == businessDTO.getInvokerId()) {
-				businessInfoDTO.setMarketBasedEst(businessInfo.getMarketBasedEst());
-			}
+			
 			//businessInfoDTO.setMarketBasedEst(businessInfo.getMarketBasedEst());
 			if(null != businessInfo.getImageFirst() || Constants.EMPTY_STRING != businessInfo.getImageFirst()) {
 				//If ImageFirst Exist then pick up Image First
 				businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
+			} else if (gBusinessInfoDTO.getgPhotoReferances().length > 0){
+
+				try {
+					getGooglePhotos(businessInfoDTO.getGooglePhotoReferances());
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 			} else {
+				//If there is no first imaged saved in BRW DB and also we can't get it from google then call this method
 				//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
 				businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
 			}
+			
 			businessInfoDTO.setIsVendorCall(businessInfo.getIsVendorCall());
 			businessInfoDTO.setIsFranchise(businessInfo.getIsFranchise());
 			
@@ -499,7 +566,118 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		return businessInfoListDTO;
 	}
 	
-	//Method to retrieve LIMITED Business Attributes from t_brw_busines table based on biz_id
+	private GeoApiContext getGoogleContext() {
+		GeoApiContext context = new GeoApiContext.Builder().apiKey("AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I").build();
+		return context;
+	}
+	
+	//Method to get Formatted Address and Latitude and Longitude from Google
+	private GBusinessInfoDTO getFormattedAddressAndLatLong(String address) throws Exception {
+		
+		GBusinessInfoDTO returnGBusinessInfoDTO = new GBusinessInfoDTO();
+		
+		System.out.println("**** Calling Google for lat/long and photo references");
+		PlacesSearchResponse results = PlacesApi.textSearchQuery(getGoogleContext(), address).await();
+		
+		Gson gson = null;
+		PlacesSearchResult result = null;
+		
+		if (null != results.results && results.results.length > 0) {
+			gson = new GsonBuilder().setPrettyPrinting().create();			
+			result = results.results[0];
+		
+			//System.out.println("**** Printing response from Google API results result.permanentlyClosed: "+gson.toJson(result.permanentlyClosed));
+			if (!result.permanentlyClosed) {
+				returnGBusinessInfoDTO.setgIsClosed(gson.toJson(result.permanentlyClosed));
+				returnGBusinessInfoDTO.setgBusinessName(gson.toJson(result.name));
+				returnGBusinessInfoDTO.setgFormattedAddress(gson.toJson(result.formattedAddress));
+				returnGBusinessInfoDTO.setgLatitude(new Double(gson.toJson(result.geometry.location.lat)));
+				returnGBusinessInfoDTO.setgLongitude(new Double(gson.toJson(result.geometry.location.lng)));
+				//capture up to 10 image references 
+				int x = 0;
+
+				if (null != result.photos && result.photos.length > 0) {
+					String[] photoReferances = new String[result.photos.length];
+					
+					for (Photo phoRef: result.photos) {
+						photoReferances[x] = phoRef.photoReference;
+						x ++;
+						//Collect only 5 image references from Google - To save Photos api cost and storage place
+						if(x == 5) {
+							System.out.println("**** INSIDE BREAK AFTER 5 COUNTER ****");
+							break;
+						}
+					}
+					returnGBusinessInfoDTO.setgPhotoReferances(photoReferances);
+				}
+			}
+		}
+		
+		return returnGBusinessInfoDTO;
+	}
+	
+	@Async
+	public void asyncStoreLatLngToDB(int invokerId, int bizId, double latitude, double longitude) {
+		System.out.println("**** CALLING updateBusinessDetails inside asyncStoreLatLngToDB()");
+		
+		BusinessDetailsDTO businessDetailsDTO = new BusinessDetailsDTO();
+		businessDetailsDTO.setInvokerId(invokerId);
+		businessDetailsDTO.setBusinessId(bizId);
+		businessDetailsDTO.setLatitude(latitude);
+		businessDetailsDTO.setLongitude(longitude);
+
+		System.out.println("**** CALLING updateBusinessDetails invokerId: "+invokerId);
+		System.out.println("**** CALLING updateBusinessDetails bizId: "+bizId);
+		System.out.println("**** CALLING updateBusinessDetails latitude: "+latitude);
+		System.out.println("**** CALLING updateBusinessDetails longitude: "+longitude);
+
+		
+		updateBusinessDetails(businessDetailsDTO);
+		System.out.println("**** updateBusinessDetails COMPLETE");
+	    //Write implementation to update lat/long based on bizId
+	}
+	
+	//TODO: Method is not implemented - The general pattern is to call Photos API based on references in JS
+	//Method to get Google Photos(Photos API call) based on Photo References we got from Google Places API
+	private String[] getGooglePhotos(String[] photoReferances) throws Exception {
+		
+		String[] photoUrls = new String[photoReferances.length];
+		
+		for (String phoRef: photoReferances) {
+			String gApiUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference={}&key={}".format(phoRef, "AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I");
+			
+			CloseableHttpClient httpClient = HttpClients.createDefault();
+
+	        try {
+	            HttpGet request = new HttpGet(gApiUrl);
+	            CloseableHttpResponse response = httpClient.execute(request);
+
+	            try {
+
+	                // Get HttpResponse Status
+	                System.out.println("**** CloseableHttpResponse response.getProtocolVersion(): "+response.getProtocolVersion());              // HTTP/1.1
+	                System.out.println("**** CloseableHttpResponse response.getProtocolVersion(): "+response.getStatusLine().getStatusCode());   // 200
+	                System.out.println("**** CloseableHttpResponse response.getProtocolVersion(): "+response.getStatusLine().getReasonPhrase()); // OK
+	                System.out.println("**** CloseableHttpResponse response.getProtocolVersion(): "+response.getStatusLine().toString());        // HTTP/1.1 200 OK
+
+	                HttpEntity entity = response.getEntity();
+	                if (entity != null) {
+	                    // return it as a String
+	                    String result = EntityUtils.toString(entity);
+	                    System.out.println("**** HttpEntity result: "+result);
+	                }
+
+	            } finally {
+	                response.close();
+	            }
+	        } finally {
+	            httpClient.close();
+	        }
+		}//end of for loop
+		return photoUrls;
+	}
+	
+	//Method to retrieve LIMITED Business Attributes from t_brw_busines table based on biz_id used in UserServiceImpl
 	@Override
 	public BusinessInfoDTO getBusinessInfoFromBRWDB(int businessId) {
 		// TODO Auto-generated method stub
@@ -1530,10 +1708,14 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		bizDTO.setSubType(business.getSubType());
 		bizDTO.setRegCityName(business.getRegCityName());
 		bizDTO.setRegCityCode(business.getRegCityCode());
-		bizDTO.setRegCityDate(business.getRegCityDate().toString());
+		if(null != business.getRegCityDate()) {
+			bizDTO.setRegCityDate(business.getRegCityDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		}
 		bizDTO.setRegStateName(business.getRegStateName());
 		bizDTO.setRegStateCode(business.getRegStateCode());
-		bizDTO.setRegStateDate(business.getRegStateDate().toString());
+		if(null != business.getRegStateDate()) {
+			bizDTO.setRegStateDate(business.getRegStateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		}
 		bizDTO.setDataCompletionScore(business.getDataCompletenessScore());
 		bizDTO.setIsForSell(business.getIsForSell());
 		bizDTO.setIsHidden(business.getIsHidden());
@@ -1599,7 +1781,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		bizDTO.setUpdateDate(business.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		
 		//Add Business and User relationship in t_brw_user_business table
-		addUserBusiness(bizDTO, businessDetailsDTO.getBuRelationship());
+		//addUserBusiness(bizDTO, businessDetailsDTO.getBuRelationship());
 		
 		return bizDTO;
 	}

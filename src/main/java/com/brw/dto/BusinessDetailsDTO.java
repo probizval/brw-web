@@ -53,7 +53,7 @@ public class BusinessDetailsDTO {
 	private String city;
 	private String county;
 	private String stateCode;
-	private Integer zip;
+	private String zip;
 	private double latitude;
 	private double longitude;
 	private Integer rangeMile;
@@ -384,15 +384,10 @@ public class BusinessDetailsDTO {
 	public void setStateCode(String stateCode) {
 		this.stateCode = stateCode;
 	}
-	public Integer getZip() {
-		if (null != zip) {
-			return zip;
-		} else {
-			return 0;
-		}
-		//return zip;
+	public String getZip() {
+		return zip;
 	}
-	public void setZip(Integer zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 	public double getLatitude() {

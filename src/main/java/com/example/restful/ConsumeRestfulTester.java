@@ -63,15 +63,15 @@ public class ConsumeRestfulTester {
 			//GeocodingResult[] results =  GeocodingApi.geocode(context, "1600 Amphitheatre Parkway Mountain View, CA 94043").await();
 			//GeocodingResult[] results =  GeocodingApi.geocode(context, "2140 Peralta Blvd STE 110 Fremont, CA 94539").await();
 				
-			PlacesSearchResponse results = PlacesApi.textSearchQuery(context, "Google Sydney").await();
+			PlacesSearchResponse results = PlacesApi.textSearchQuery(context, "4627 Rousillon Ave").await();
 			
-				System.out.println("**** Printing response from Google API results: "+results.toString());
+				//System.out.println("**** Printing response from Google API results: "+results.toString());
 				
 				Gson gson = new GsonBuilder().setPrettyPrinting().create();
 				//System.out.println(gson.toJson(results[0].addressComponents));
 				
 				PlacesSearchResult result = results.results[0];
-				System.out.println(gson.toJson(result.formattedAddress));
+				System.out.println("**** Printing response from Google API results: "+gson.toJson(result.formattedAddress));
 			//*/
 		
 				

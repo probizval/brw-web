@@ -34,7 +34,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND franchise_YN = :franchiseYN "
 			+ "AND for_sell_YN = :forSellYN "
 			+ "ORDER BY for_sell_YN DESC") 
-	List<BusinessInfo> searchBusiness_1(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
+	List<BusinessInfo> searchBusiness_1(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("zip") String zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Type
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, hidden_YN, for_sell_price, market_based_est, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN "
@@ -45,7 +45,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND franchise_YN = :franchiseYN "
 			+ "AND for_sell_YN = :forSellYN "
 			+ "ORDER BY for_sell_YN DESC")
-	List<BusinessInfo> searchBusiness_2(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
+	List<BusinessInfo> searchBusiness_2(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("zip") String zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Address
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, hidden_YN, for_sell_price, market_based_est, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN "
@@ -56,7 +56,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND franchise_YN = :franchiseYN "
 			+ "AND for_sell_YN = :forSellYN "
 			+ "ORDER BY for_sell_YN DESC")
-	List<BusinessInfo> searchBusiness_3(@Param ("businessName") String businessName, @Param ("street1") String street1, @Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
+	List<BusinessInfo> searchBusiness_3(@Param ("businessName") String businessName, @Param ("street1") String street1, @Param ("zip") String zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Type and Address
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, hidden_YN, for_sell_price, market_based_est, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN "
@@ -67,7 +67,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND franchise_YN = :franchiseYN "
 			+ "AND for_sell_YN = :forSellYN "
 			+ "ORDER BY for_sell_YN DESC")
-	List<BusinessInfo> searchBusiness_4(@Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
+	List<BusinessInfo> searchBusiness_4(@Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("zip") String zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where only 1 non-required attributes are part of the input - Name
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, hidden_YN, for_sell_price, market_based_est, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN "
@@ -77,7 +77,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND franchise_YN = :franchiseYN "
 			+ "AND for_sell_YN = :forSellYN "
 			+ "ORDER BY for_sell_YN DESC")
-	List<BusinessInfo> searchBusiness_5(@Param ("businessName") String businessName, @Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
+	List<BusinessInfo> searchBusiness_5(@Param ("businessName") String businessName, @Param ("zip") String zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where only 1 non-required attributes are part of the input - Type
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, hidden_YN, for_sell_price, market_based_est, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN "
@@ -87,7 +87,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND franchise_YN = :franchiseYN "
 			+ "AND for_sell_YN = :forSellYN "
 			+ "ORDER BY for_sell_YN DESC")
-	List<BusinessInfo> searchBusiness_6(@Param ("businessType") String businessType, @Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
+	List<BusinessInfo> searchBusiness_6(@Param ("businessType") String businessType, @Param ("zip") String zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 	
 	//Search where non of the non-required attributes are part of the input
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, hidden_YN, for_sell_price, market_based_est, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN "
@@ -96,7 +96,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND franchise_YN = :franchiseYN "
 			+ "AND for_sell_YN = :forSellYN "
 			+ "ORDER BY for_sell_YN DESC")
-	List<BusinessInfo> searchBusiness_7(@Param ("zip") int zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
+	List<BusinessInfo> searchBusiness_7(@Param ("zip") String zip, @Param ("franchiseYN") String franchiseYN, @Param ("forSellYN") String forSellYN);
 
 	//CITY
 	//Search where all 3 non-required attributes are part of the input - Type, Name and Address
@@ -303,7 +303,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_street1 LIKE '%:street1%' "
 			+ "AND add_zip = :zip "
 			+ "ORDER BY for_sell_YN DESC") 
-	List<BusinessInfo> searchBusiness_1_FSN(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("zip") int zip);
+	List<BusinessInfo> searchBusiness_1_FSN(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("zip") String zip);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Type
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, hidden_YN, for_sell_price, market_based_est, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN "
@@ -312,7 +312,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND type = :businessType "
 			+ "AND add_zip = :zip "
 			+ "ORDER BY for_sell_YN DESC")
-	List<BusinessInfo> searchBusiness_2_FSN(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("zip") int zip);
+	List<BusinessInfo> searchBusiness_2_FSN(@Param ("businessName") String businessName, @Param ("businessType") String businessType, @Param ("zip") String zip);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Name and Address
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, hidden_YN, for_sell_price, market_based_est, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN "
@@ -321,7 +321,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_street1 LIKE '%:street1%' "
 			+ "AND add_zip = :zip "
 			+ "ORDER BY for_sell_YN DESC")
-	List<BusinessInfo> searchBusiness_3_FSN(@Param ("businessName") String businessName, @Param ("street1") String street1, @Param ("zip") int zip);
+	List<BusinessInfo> searchBusiness_3_FSN(@Param ("businessName") String businessName, @Param ("street1") String street1, @Param ("zip") String zip);
 	
 	//Search where 2 out of 3 non-required attributes are part of the input - Type and Address
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, hidden_YN, for_sell_price, market_based_est, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN "
@@ -330,7 +330,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "AND add_street1 LIKE '%:street1%' "
 			+ "AND add_zip = :zip "
 			+ "ORDER BY for_sell_YN DESC")
-	List<BusinessInfo> searchBusiness_4_FSN(@Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("zip") int zip);
+	List<BusinessInfo> searchBusiness_4_FSN(@Param ("businessType") String businessType, @Param ("street1") String street1, @Param ("zip") String zip);
 	
 	//Search where only 1 non-required attributes are part of the input - Name
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, hidden_YN, for_sell_price, market_based_est, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN "
@@ -338,7 +338,7 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "WHERE name_dba LIKE %:businessName% "
 			+ "AND add_zip = :zip "
 			+ "ORDER BY for_sell_YN DESC")
-	List<BusinessInfo> searchBusiness_5_FSN(@Param ("businessName") String businessName, @Param ("zip") int zip);
+	List<BusinessInfo> searchBusiness_5_FSN(@Param ("businessName") String businessName, @Param ("zip") String zip);
 	
 	//Search where only 1 non-required attributes are part of the input - Type
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, hidden_YN, for_sell_price, market_based_est, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN "
@@ -346,14 +346,14 @@ public interface BusinessInfoDAO extends PagingAndSortingRepository<BusinessInfo
 			+ "WHERE type = :businessType "
 			+ "AND add_zip = :zip "
 			+ "ORDER BY for_sell_YN DESC")
-	List<BusinessInfo> searchBusiness_6_FSN(@Param ("businessType") String businessType, @Param ("zip") int zip);
+	List<BusinessInfo> searchBusiness_6_FSN(@Param ("businessType") String businessType, @Param ("zip") String zip);
 	
 	//Search where non of the non-required attributes are part of the input
 	@Query(nativeQuery=true, value="SELECT biz_id, name_dba, type, sub_type, for_sell_YN, hidden_YN, for_sell_price, market_based_est, image_first, add_street1, add_street2, add_city, add_zip, add_county, add_state, latitude, longitude, vendor_call_YN, franchise_YN "
 			+ "FROM t_brw_business "
 			+ "WHERE add_zip = :zip "
 			+ "ORDER BY for_sell_YN DESC")
-	List<BusinessInfo> searchBusiness_7_FSN(@Param ("zip") int zip);
+	List<BusinessInfo> searchBusiness_7_FSN(@Param ("zip") String zip);
 
 	//CITY
 	//Search where all 3 non-required attributes are part of the input - Type, Name and Address

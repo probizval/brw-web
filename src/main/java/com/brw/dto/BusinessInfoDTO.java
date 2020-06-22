@@ -11,6 +11,7 @@ public class BusinessInfoDTO {
 	private Integer invokerId;
 	private Integer businessId;
 	private String name;
+	private String googleName;
 	private String type;
 	private String subType;
 	private String isForSell;
@@ -19,6 +20,7 @@ public class BusinessInfoDTO {
 	private Integer marketBasedEst;
 	private String imageLogo;
 	private String imageFirst;
+	private String [] googlePhotoReferances;
 	private String street1;
 	private String street2;
 	private String city;
@@ -27,6 +29,7 @@ public class BusinessInfoDTO {
 	private String zip;
 	private double latitude;
 	private double longitude;
+	private String googleAddress;
 	private Integer rangeMile;
 	private String isFranchise;
 	private String isEstimateAvailable;
@@ -99,6 +102,12 @@ public class BusinessInfoDTO {
 	public void setImageFirst(String imageFirst) {
 		this.imageFirst = imageFirst;
 	}
+	public String[] getGooglePhotoReferances() {
+		return googlePhotoReferances;
+	}
+	public void setGooglePhotoReferances(String[] googlePhotoReferances) {
+		this.googlePhotoReferances = googlePhotoReferances;
+	}
 	public String getStreet1() {
 		return street1;
 	}
@@ -170,5 +179,17 @@ public class BusinessInfoDTO {
 	}
 	public void setIsVendorCall(String isVendorCall) {
 		this.isVendorCall = isVendorCall;
+	}
+	public String getGoogleName() {
+		return googleName;
+	}
+	public void setGoogleName(String googleName) {
+		this.googleName = googleName;
+	}
+	public String getGoogleAddress() {
+		return googleAddress;
+	}
+	public void setGoogleAddress(String googleAddress) {
+		this.googleAddress = googleAddress;
 	}
 }

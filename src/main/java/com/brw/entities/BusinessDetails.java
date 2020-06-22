@@ -3,6 +3,7 @@ package com.brw.entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.persistence.Access;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -129,7 +130,7 @@ public class BusinessDetails implements Serializable {
 	private String stateCode;
 	
 	@Column(name = "add_zip")
-	private int zip;
+	private String zip;
 	
 	@Column(name = "latitude")
 	private double latitude;
@@ -559,11 +560,11 @@ public class BusinessDetails implements Serializable {
 		this.stateCode = stateCode;
 	}
 
-	public int getZip() {
+	public String getZip() {
 		return zip;
 	}
 
-	public void setZip(int zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 
