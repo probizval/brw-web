@@ -522,9 +522,9 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 					
 					//TODO: Call Asynchronous Method to store lat/lng in BRW DB
 					//Reference - https://www.baeldung.com/spring-async
-					if (0.0 != gBusinessInfoDTO.getgLatitude() || 0.0 != gBusinessInfoDTO.getgLongitude()) {
-						asyncStoreLatLngToDB(businessDTO.getInvokerId(), businessInfo.getBusinessId(), businessInfoDTO.getLatitude(), businessInfoDTO.getLongitude());
-					}
+					//if (0.0 != gBusinessInfoDTO.getgLatitude() || 0.0 != gBusinessInfoDTO.getgLongitude()) {
+					//	asyncStoreLatLngToDB(businessDTO.getInvokerId(), businessInfo.getBusinessId(), businessInfoDTO.getLatitude(), businessInfoDTO.getLongitude());
+					//}
 				} else {
 					System.out.println("**** YES Lat/Lng in BRW DB");
 					businessInfoDTO.setLatitude(businessInfo.getLatitude());
