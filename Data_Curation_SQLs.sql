@@ -39,6 +39,20 @@ where update_date = '0000-00-00 00:00:00';
 select count(*) from t_brw_business where add_county = '';
 -- 1149030
 
+
+select count(*) from t_brw_business where type = '';
+-- 16438
+
+update t_brw_business 
+set type = 'BTYPE_MISC', 
+sub_type = 'BTYPE_MISC'
+where 
+type = '';
+-- 16438
+
+select count(*) from t_brw_business where type = 'BTYPE_MISC';
+-- 977334
+
 -- delete from t_brw_business where add_city = '';
 
  -- where biz_id < 6000
@@ -76,6 +90,8 @@ select *
     -- biz_id = 1003126
     -- updatedby_user_id != 9999;
     biz_id in(18796269, 18796263, 18796151);
+    
+    select biz_id, type, sales_range, market_based_est where bizId in (18796269, 18796263, 18796151);
     
 select biz_id, sales_range, employee_range   
 	from t_brw_business 
