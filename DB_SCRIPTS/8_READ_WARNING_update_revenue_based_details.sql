@@ -1,9 +1,21 @@
-CREATE DEFINER=`admin`@`%` PROCEDURE `7_update_other_details`()
+CREATE DEFINER=`admin`@`%` PROCEDURE `8_READ_WARNING_update_revenue_based_details`()
 BEGIN
-	-- This SP is to update rest of the bizness details as listed below in update statement
+	-- WARNING - complete below 2 pre-steps
+    -- 1. Find out how many counties that do not have value 
+    -- select count(*) from t_brw_business where add_county = '';
+    
+	-- 2. Update the counties in Business table based on city-county mapping from counti-cities table
+    -- update t_brw_business t1, t_brw_state_county_cities t2 
+	-- set t1.add_county = t2.county_name 
+	-- where 
+	-- t1.add_state = t2.state_code 
+	-- and t1.add_city = t2.city_name
+	-- and t1.add_county = '';
+    
+    -- This SP is to update rest of the bizness details as listed below in update statement
     -- declare an array with various business tyeps - this is achieved using temp tables in mysql
     -- CREATE TEMPORARY TABLE t_brw_temp_types SELECT type FROM t_brw_business_type_def;
-    -- call 7_update_other_details();
+    -- call 8_READ_WARNING_update_revenue_based_details();
     
     DECLARE cur_done INT DEFAULT 0;
 	declare v_count int(10) DEFAULT 0;
@@ -11,8 +23,8 @@ BEGIN
     declare v_id int(10) DEFAULT 99;
     
     declare v_biz_id int(10) DEFAULT 0;
-    declare v_state varchar(45) DEFAULT '';
-    declare v_county varchar(45) DEFAULT '';
+    declare v_state varchar(45);
+    declare v_county varchar(45);
     
 	declare v_vc_sales_range varchar(45) DEFAULT '0';
 	declare v_int_sales_range int(10) DEFAULT 0;
@@ -27,8 +39,8 @@ BEGIN
 	declare v_emp_range_Minus30P int(10) DEFAULT 0;
     
     -- declare v_county_pop int(10) DEFAULT 0;
-    declare v_county_pop_den double DEFAULT 0.0;
     declare v_vc_county_pop_den varchar(45) DEFAULT '0.0';
+    declare v_dbl_county_pop_den double DEFAULT 0.0;
     -- declare v_county_hos_den double DEFAULT 0.0;
     
     -- variables to capture the values to set in the table
@@ -61,21 +73,23 @@ BEGIN
     biz_id in(18796151, 18796263, 8796269);
     -- biz_id = 8796269;
     -- for validation run below sql
-	-- select biz_id, type, sales_range, market_based_est where bizId in (8796269, 18796263, 18796151);
+	-- select biz_id, type, sales_range, market_based_est where bizId in (18796269, 18796263, 18796151);
     
     -- declare cursor to get counties stats
     declare county_stats_cursor cursor for select pop_density 
-	from t_brw_state_counties 
-    where 
-    state_code = v_state 
-    and county_name = v_county_name;
-
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET cur_done = 1;
+		from t_brw_state_counties 
+        where 
+        state_code = v_state 
+        and county_name = v_county;
+        -- if ths doesnt work then try - 
+        
+	-- DECLARE CONTINUE HANDLER FOR NOT FOUND SET cur_done = 1;
 
     open all_records_cursor;
     all_records_Loop: loop fetch all_records_cursor into v_biz_id, v_state, v_county, v_vc_sales_range, v_vc_emp_range;
 		set v_count = v_count + 1;
-		
+		select 'INSIDE all_records_Loop v_count: '+v_count;
+        
         IF v_biz_id = 0 THEN
 			select '***** EXITING all_records_Loop *****';
 			LEAVE all_records_Loop;
@@ -87,35 +101,17 @@ BEGIN
 		select '**** v_vc_sales_range: '+v_vc_sales_range;
 		select '**** v_vc_emp_range: '+v_vc_emp_range;
 		
-        select '**** 111 v_county_pop_den: '+v_county_pop_den;
-        select '**** 111 v_id: '+v_id;
+        select '**** 111 v_county_pop_den: '+v_vc_county_pop_den;
         
-        IF v_count = 1 THEN
-			select '***** v_count: '+v_count;
-			set v_county_pop_den = 2171.5;
-		END IF;
+        if (v_biz_id != 0) then 
+			-- Open the county statistics cursor
+			open county_stats_cursor;
+			select '**** 111.1 v_dbl_county_pop_den: '+v_dbl_county_pop_den;
+			fetch county_stats_cursor into v_dbl_county_pop_den;
+			select '**** 222 v_dbl_county_pop_den: '+v_dbl_county_pop_den;
+			close county_stats_cursor;
+		end if;
         
-        IF v_count = 2 THEN
-			select '***** v_count: '+v_count;
-			set v_county_pop_den = 2171.5;
-		END IF;
-        
-        IF v_count = 3 THEN
-			select '***** v_count: '+v_count;
-			set v_county_pop_den = 459.2;
-		END IF;
-        
-		-- Open the county statistics cursor
-		-- open county_stats_cursor;
-        -- select '**** 111.1 v_id: '+v_id;
-		-- fetch county_stats_cursor into v_county_pop_den;
-        -- fetch county_stats_cursor into v_id;
-        -- select '**** 111.2 v_id: '+v_id;
-		-- close county_stats_cursor;
-        
-		select '**** 222 v_county_pop_den: '+v_county_pop_den;
-        select '**** 222 v_id: '+v_id;
-		
 		-- sales range calculations	
 		set v_int_sales_range = cast(v_vc_sales_range as UNSIGNED);
         select '**** 222 v_int_sales_range: '+v_int_sales_range;
@@ -171,7 +167,7 @@ BEGIN
 			set v_emp_PT_num = 0;
         END IF;
         
-        IF v_county_pop_den != 0 THEN
+        IF v_dbl_county_pop_den != 0 THEN
         	select '**** IN HERE: 555';
 			set v_1mile_rad_popln = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den;
 			set v_3mile_rad_popln = ROUND(FLOOR(RAND() * (10 - 2 + 2) + 1)) * v_county_pop_den * 3;
@@ -238,7 +234,7 @@ BEGIN
             -- below attributes will be updated by users/user activity or by customers or business owners
             view_counter = 0,
 			for_sell_YN = 'N',
-			hidden_YN = 'N',
+			hidden_YN = 'Y',
 			for_sell_price = 0,
 			total_debt = 0,
 			ff_and_e = 0,
@@ -280,7 +276,8 @@ BEGIN
 			set v_vc_sales_range = '0';
 			set v_vc_emp_range = '0';
             
-            set v_county_pop_den = 0.0;
+			set v_vc_county_pop_den = '0.0';
+            set v_dbl_county_pop_den = 0.0;
             
             set v_int_sales_range = 0;
 			set v_sales_range_Plus50P = 0;

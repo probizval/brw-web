@@ -8,7 +8,113 @@
 -- 7. Enter password if it asks - PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
 -- 8. Execute SQLs by ending them with ;
 
-select * from t_brw_business where biz_id = 13447022;
+
+
+
+
+update t_brw_business
+set sales_range = '0'
+where sales_range = '510';
+
+update t_brw_business
+set sales_range = '1000000000'
+where sales_range = '$1 bil and above';
+
+update t_brw_business
+set sales_range = '2500000'
+where sales_range = '$1 mil to less than $5 mi';
+
+update t_brw_business
+set sales_range = '0'
+where sales_range = '';
+
+update t_brw_business
+set sales_range = '15000000'
+where sales_range = '$10 mil to less than $25';
+
+update t_brw_business
+set sales_range = '35000000'
+where sales_range = '$25 mil to less than $50';
+
+update t_brw_business
+set sales_range = '150000000'
+where sales_range = '$100 mil to less than $25';
+
+update t_brw_business
+set sales_range = '350000000'
+where sales_range = '$250 mil to less than $50';
+
+update t_brw_business
+set sales_range = '750000000'
+where sales_range = '$500 mil to less than $1';
+
+update t_brw_business
+set sales_range = '7500000'
+where sales_range = '$5 mil to less than $10 m';
+
+update t_brw_business
+set sales_range = '75000000'
+where sales_range = '$50 mil to less than $100';
+
+update t_brw_business
+set sales_range = '1000000'
+where sales_range = 'Less than $1 mil';
+
+update t_brw_business
+set sales_range = '750000'
+where sales_range = '$500,000 TO $1 MILLION';
+
+update t_brw_business
+set sales_range = '500000'
+where sales_range = 'LESS THAN $500,000';
+
+update t_brw_business
+set sales_range = '0'
+where sales_range = 'UNKNOWN';
+
+update t_brw_business
+set sales_range = '15000000'
+where sales_range = '$10 TO 20 MILLION';
+
+update t_brw_business
+set sales_range = '7500000'
+where sales_range = '$5 TO 10 MILLION';
+
+update t_brw_business
+set sales_range = '3500000'
+where sales_range = '$2.5 TO 5 MILLION';
+
+update t_brw_business
+set sales_range = '350000000'
+where sales_range = '$100 TO 500 MILLION';
+
+update t_brw_business
+set sales_range = '1500000'
+where sales_range = '$1 TO 2.5 MILLION';
+
+update t_brw_business
+set sales_range = '35000000'
+where sales_range = '$20 TO 50 MILLION';
+
+update t_brw_business
+set sales_range = '750000000'
+where sales_range = '$500 MILLION TO $1 BILLION';
+
+update t_brw_business
+set sales_range = '75000000'
+where sales_range = '$50 TO 100 MILLION';
+
+update t_brw_business
+set sales_range = '1000000000'
+where sales_range = 'OVER $1 BILLION';
+
+
+select * from t_brw_business where biz_id = 1003688;
+
+select count(*) from t_brw_business where updatedby_user_id = 9999
+
+select * from t_brw_business where updatedby_user_id = 9999 order by biz_id desc limit 100;
+
 
 select count(*) from t_brw_business where add_zip is null;
 
@@ -38,6 +144,7 @@ where update_date = '0000-00-00 00:00:00';
 
 select count(*) from t_brw_business where add_county = '';
 -- 1149030
+-- 38972
 
 
 select count(*) from t_brw_business where type = '';
@@ -83,6 +190,7 @@ t1.add_state = t2.state_code
 and t1.add_city = t2.city_name
 and t1.add_county = '';
 
+select ROUND(FLOOR(RAND() * (10 - 2 + 1) + 2) * 2171.5, -1);
 
 select *   
 	from t_brw_business 
@@ -91,7 +199,7 @@ select *
     -- updatedby_user_id != 9999;
     biz_id in(18796269, 18796263, 18796151);
     
-    select biz_id, type, sales_range, market_based_est where bizId in (18796269, 18796263, 18796151);
+select biz_id, type, sales_range, market_based_est where bizId in (18796269, 18796263, 18796151);
     
 select biz_id, sales_range, employee_range   
 	from t_brw_business 
