@@ -9,8 +9,36 @@
 -- 8. Execute SQLs by ending them with ;
 
 
+select *   
+	from t_brw_business 
+    where 
+    -- biz_id = 1003126
+    -- updatedby_user_id != 9999;
+    biz_id in(18796269, 18796263, 18796151);
+    
 
+select distinct type from t_brw_business;
 
+select count(*) from t_brw_business where type = 'BTYPE_MISC';
+-- 977334
+
+select count(*) from t_brw_business;
+-- 26619004
+
+select count(biz_id) from t_brw_business where 
+createdby_user_id = 888 
+and updatedby_user_id = 8888 order by biz_id desc limit 100;
+-- 2477
+
+select max(biz_id) from t_brw_business 
+-- 18837135
+
+select max(biz_id) from t_brw_business where 
+createdby_user_id = 777 
+and updatedby_user_id = 7777 order by biz_id desc limit 100;
+-- 14179171
+
+select count(*) from t_brw_business where add_county = ''
 
 update t_brw_business
 set sales_range = '0'
