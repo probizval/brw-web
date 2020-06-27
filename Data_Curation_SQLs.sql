@@ -9,6 +9,32 @@
 -- 8. Execute SQLs by ending them with ;
 
 
+select count(*) from t_brw_business where market_based_est != '';
+-- 1114687
+
+select count(*) from t_brw_business where sales_range != '';
+-- 2619004
+
+select count(*) from t_brw_business where sales_range != 0;
+-- 1114688
+
+
+select * from t_brw_business where biz_id = 10618035;
+
+select biz_id from t_brw_business where 
+createdby_user_id = 777 
+and updatedby_user_id = 7777 order by biz_id desc limit 100;
+-- 18527507
+
+select biz_id from t_brw_business where 
+createdby_user_id = 888 
+and updatedby_user_id = 8888 order by biz_id desc limit 100;
+-- 15626023
+
+select count(*) from  t_brw_business where hidden_YN = 'Y';
+-- 0
+update t_brw_business set hidden_YN = 'N' where hidden_YN = 'Y';
+
 select *   
 	from t_brw_business 
     where 

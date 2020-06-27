@@ -7,24 +7,25 @@ package com.brw.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import com.brw.dao.BusinessDetailsDAO;
 import com.brw.dao.BusinessInfoDAO;
 import com.brw.dao.RelatedBusinessDAO;
 import com.brw.dao.UserBusinessDAO;
+import com.brw.dto.BizLatLongDTO;
 import com.brw.dto.BusinessDetailsDTO;
 import com.brw.dto.BusinessDetailsListDTO;
 import com.brw.dto.BusinessInfoDTO;
@@ -52,10 +53,13 @@ import com.google.maps.PlacesApi;
 import com.google.maps.model.PlacesSearchResponse;
 import com.google.maps.model.PlacesSearchResult;
 import com.google.maps.model.Photo;
+import com.google.maps.model.PlaceDetails;
 
 @Component
 public class BusinessServiceImpl implements com.brw.service.BusinessService {
-	
+    
+	private static final Logger logger = LoggerFactory.getLogger(BusinessServiceImpl.class);
+
 	@Autowired
 	private BusinessDetailsDAO businessDetailsDAO;
 	
@@ -112,7 +116,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
         final String response = EntityUtils.toString(execute.getEntity());
 
-        System.out.println(response);
+        logger.info(response);
     }
     */
 	
@@ -173,316 +177,319 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		}
 				
 		// TODO Auto-generated method stub
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getInvokerId: "+businessDTO.getInvokerId());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getInvokerId: "+businessDTO.getInvokerId());
 		
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getName: "+businessDTO.getName());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getName: "+businessDTO.getName());
 		
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getType: "+businessDTO.getType());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getType: "+businessDTO.getType());
 
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getStreet1: "+businessDTO.getStreet1());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getStreet1: "+businessDTO.getStreet1());
 
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getStreet2: "+businessDTO.getStreet2());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getStreet2: "+businessDTO.getStreet2());
 
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getCity: "+businessDTO.getCity());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getCity: "+businessDTO.getCity());
 
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getZip: "+businessDTO.getZip());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getZip: "+businessDTO.getZip());
 
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getCounty: "+businessDTO.getCounty());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getCounty: "+businessDTO.getCounty());
 
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getStateCode: "+businessDTO.getStateCode());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getStateCode: "+businessDTO.getStateCode());
 		
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getIsFranchise: "+businessDTO.getIsFranchise());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getIsFranchise: "+businessDTO.getIsFranchise());
 		
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getIsForSell: "+businessDTO.getIsForSell());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getIsForSell: "+businessDTO.getIsForSell());
 
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getLatitude: "+businessDTO.getLatitude());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getLatitude: "+businessDTO.getLatitude());
 
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getLongitude: "+businessDTO.getLongitude());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getLongitude: "+businessDTO.getLongitude());
 
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchBusiness() getRangeMile: "+businessDTO.getRangeMile());
+		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getRangeMile: "+businessDTO.getRangeMile());
 		
 		List<BusinessInfo> businessList = null;
 		if(businessDTO.getIsForSell().equals(Constants.Y)) {
 			if (null != businessDTO.getZip() && businessDTO.getZip() == Constants.EMPTY_STRING) {
 				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_1");
+					logger.info("**** 333 Executing searchBusiness_1");
 					
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_1(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
 				} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_2");
+					logger.info("**** 333 Executing searchBusiness_2");
 					
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_2(businessDTO.getName(), businessDTO.getType(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
 				} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_3");
+					logger.info("**** 333 Executing searchBusiness_3");
 					
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_3(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
 				} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_4");
+					logger.info("**** 333 Executing searchBusiness_4");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_4(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
 				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
-					System.out.println("**** 333 Executing searchBusiness_5");
+					logger.info("**** 333 Executing searchBusiness_5");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_5(businessDTO.getName(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
 				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_6");
+					logger.info("**** 333 Executing searchBusiness_6");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_6(businessDTO.getType(), businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 		
 				} else {
-					System.out.println("**** 333 Executing searchBusiness_7");
+					logger.info("**** 333 Executing searchBusiness_7");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_7(businessDTO.getZip(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				}
 			} else if (null != businessDTO.getCity() && Constants.EMPTY_STRING != businessDTO.getCity()) {
 				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_8");
+					logger.info("**** 333 Executing searchBusiness_8");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_8(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
 				} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_9");
+					logger.info("**** 333 Executing searchBusiness_9");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_9(businessDTO.getName(), businessDTO.getType(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 					
-					System.out.println("**** 333 Executing searchBusiness_9 businessList SIZE: "+businessList.size());
+					logger.info("**** 333 Executing searchBusiness_9 businessList SIZE: "+businessList.size());
 	
 				} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_10");
+					logger.info("**** 333 Executing searchBusiness_10");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_10(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
 				} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_11");
+					logger.info("**** 333 Executing searchBusiness_11");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_11(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
 				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
-					System.out.println("**** 333 Executing searchBusiness_12");
+					logger.info("**** 333 Executing searchBusiness_12");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_12(businessDTO.getName(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 					
-					System.out.println("**** 333 Executing searchBusiness_12 businessList SIZE: "+businessList.size());
+					logger.info("**** 333 Executing searchBusiness_12 businessList SIZE: "+businessList.size());
 	
 				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_13");
+					logger.info("**** 333 Executing searchBusiness_13");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_13(businessDTO.getType(), businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 		
 				} else {
-					System.out.println("**** 333 Executing searchBusiness_14");
+					logger.info("**** 333 Executing searchBusiness_14");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_14(businessDTO.getCity(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 	
 				}
 			} else if (null != businessDTO.getCounty() && Constants.EMPTY_STRING != businessDTO.getCounty()) {
 				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_15");
+					logger.info("**** 333 Executing searchBusiness_15");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_15(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
 				} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_16");
+					logger.info("**** 333 Executing searchBusiness_16");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_16(businessDTO.getName(),businessDTO.getType(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
 				} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_17");
+					logger.info("**** 333 Executing searchBusiness_17");
 					
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_17(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
 				} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_18");
+					logger.info("**** 333 Executing searchBusiness_18");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_18(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
 				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
-					System.out.println("**** 333 Executing searchBusiness_19");
+					logger.info("**** 333 Executing searchBusiness_19");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_19(businessDTO.getName(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 				
 				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_20");
+					logger.info("**** 333 Executing searchBusiness_20");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_20(businessDTO.getType(), businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 		
 				} else {
-					System.out.println("**** 333 Executing searchBusiness_21");
+					logger.info("**** 333 Executing searchBusiness_21");
 	
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_21(businessDTO.getCounty(), businessDTO.getStateCode(), businessDTO.getIsFranchise(), businessDTO.getIsForSell());
 	
 				}
 			} else if (businessDTO.getLatitude() != 0 && businessDTO.getLongitude() != 0) {
-				System.out.println("**** XXX Constants.PERCENT+businessDTO.getName()+Constants.PERCENT: "+Constants.PERCENT+businessDTO.getName()+Constants.PERCENT);
+				logger.info("**** XXX Constants.PERCENT+businessDTO.getName()+Constants.PERCENT: "+Constants.PERCENT+businessDTO.getName()+Constants.PERCENT);
 	
 				if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_22");
+					logger.info("**** 333 Executing searchBusiness_22");
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_22(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getType(), businessDTO.getIsFranchise(), businessDTO.getIsForSell(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
 				
 				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
-					System.out.println("**** 333 Executing searchBusiness_23");
+					logger.info("**** 333 Executing searchBusiness_23");
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_23(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getIsFranchise(), businessDTO.getIsForSell(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
 				
 				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_24");
+					logger.info("**** 333 Executing searchBusiness_24");
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_24(businessDTO.getType(), businessDTO.getIsFranchise(), businessDTO.getIsForSell(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
 				}
 			}
 		} else {
 			if (null != businessDTO.getZip() && businessDTO.getZip() != Constants.EMPTY_STRING) {
 				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_1_FSN");
+					logger.info("**** 333 Executing searchBusiness_1_FSN");
 					
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_1_FSN(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getZip());
 				
 				} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_2_FSN");
+					logger.info("**** 333 Executing searchBusiness_2_FSN");
 					
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_2_FSN(businessDTO.getName(), businessDTO.getType(), businessDTO.getZip());
 				
 				} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_3_FSN");
+					logger.info("**** 333 Executing searchBusiness_3_FSN");
 					
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_3_FSN(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getZip());
 				
 				} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_4_FSN");
+					logger.info("**** 333 Executing searchBusiness_4_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_4_FSN(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getZip());
 				
 				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
-					System.out.println("**** 333 Executing searchBusiness_5_FSN");
+					logger.info("**** 333 Executing searchBusiness_5_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_5_FSN(businessDTO.getName(), businessDTO.getZip());
 				
 				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_6_FSN");
+					logger.info("**** 333 Executing searchBusiness_6_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_6_FSN(businessDTO.getType(), businessDTO.getZip());
 		
 				} else {
-					System.out.println("**** 333 Executing searchBusiness_7_FSN");
+					logger.info("**** 333 Executing searchBusiness_7_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_7_FSN(businessDTO.getZip());
 				}
 			} else if (null != businessDTO.getCity() && Constants.EMPTY_STRING != businessDTO.getCity()) {
 				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_8_FSN");
+					logger.info("**** 333 Executing searchBusiness_8_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_8_FSN(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode());
 				
 				} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_9_FSN");
+					logger.info("**** 333 Executing searchBusiness_9_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_9_FSN(businessDTO.getName(), businessDTO.getType(), businessDTO.getCity(), businessDTO.getStateCode());
 					
-					System.out.println("**** 333 Executing searchBusiness_9_FSN businessList SIZE: "+businessList.size());
+					logger.info("**** 333 Executing searchBusiness_9_FSN businessList SIZE: "+businessList.size());
 
 				} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_10_FSN");
+					logger.info("**** 333 Executing searchBusiness_10_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_10_FSN(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode());
 				
 				} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_11_FSN");
+					logger.info("**** 333 Executing searchBusiness_11_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_11_FSN(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCity(), businessDTO.getStateCode());
 				
 				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
-					System.out.println("**** 333 Executing searchBusiness_12_FSN");
+					logger.info("**** 333 Executing searchBusiness_12_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_12_FSN(businessDTO.getName(), businessDTO.getCity(), businessDTO.getStateCode());
 					
-					System.out.println("**** 333 Executing searchBusiness_12 businessList SIZE: "+businessList.size());
+					logger.info("**** 333 Executing searchBusiness_12 businessList SIZE: "+businessList.size());
 
 				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_13_FSN");
+					logger.info("**** 333 Executing searchBusiness_13_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_13_FSN(businessDTO.getType(), businessDTO.getCity(), businessDTO.getStateCode());
 		
 				} else {
-					System.out.println("**** 333 Executing searchBusiness_14_FSN");
+					logger.info("**** 333 Executing searchBusiness_14_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_14_FSN(businessDTO.getCity(), businessDTO.getStateCode());
 
 				}
 			} else if (null != businessDTO.getCounty() && Constants.EMPTY_STRING != businessDTO.getCounty()) {
 				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_15_FSN");
+					logger.info("**** 333 Executing searchBusiness_15_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_15_FSN(businessDTO.getName(), businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode());
 				
 				} else if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_16_FSN");
+					logger.info("**** 333 Executing searchBusiness_16_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_16_FSN(businessDTO.getName(),businessDTO.getType(), businessDTO.getCounty(), businessDTO.getStateCode());
 				
 				} else if (null != businessDTO.getName() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_17_FSN");
+					logger.info("**** 333 Executing searchBusiness_17_FSN");
 					
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_17_FSN(businessDTO.getName(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode());
 				
 				} else if (null != businessDTO.getType() && null != businessDTO.getStreet1() && Constants.EMPTY_STRING != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getStreet1()) {
-					System.out.println("**** 333 Executing searchBusiness_18_FSN");
+					logger.info("**** 333 Executing searchBusiness_18_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_18_FSN(businessDTO.getType(), businessDTO.getStreet1(), businessDTO.getCounty(), businessDTO.getStateCode());
 				
 				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
-					System.out.println("**** 333 Executing searchBusiness_19_FSN");
+					logger.info("**** 333 Executing searchBusiness_19_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_19_FSN(businessDTO.getName(), businessDTO.getCounty(), businessDTO.getStateCode());
 				
 				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_20_FSN");
+					logger.info("**** 333 Executing searchBusiness_20_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_20_FSN(businessDTO.getType(), businessDTO.getCounty(), businessDTO.getStateCode());
 		
 				} else {
-					System.out.println("**** 333 Executing searchBusiness_21_FSN");
+					logger.info("**** 333 Executing searchBusiness_21_FSN");
 
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_21_FSN(businessDTO.getCounty(), businessDTO.getStateCode());
 
 				}
 			} else if (businessDTO.getLatitude() != 0 && businessDTO.getLongitude() != 0) {
-				System.out.println("**** XXX Constants.PERCENT+businessDTO.getName()+Constants.PERCENT: "+Constants.PERCENT+businessDTO.getName()+Constants.PERCENT);
+				logger.info("**** XXX Constants.PERCENT+businessDTO.getName()+Constants.PERCENT: "+Constants.PERCENT+businessDTO.getName()+Constants.PERCENT);
 
 				if (null != businessDTO.getName() && null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_22_FSN");
+					logger.info("**** 333 Executing searchBusiness_22_FSN");
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_22_FSN(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getType(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
 				
 				} else if (null != businessDTO.getName() && Constants.EMPTY_STRING != businessDTO.getName()) {
-					System.out.println("**** 333 Executing searchBusiness_23_FSN");
+					logger.info("**** 333 Executing searchBusiness_23_FSN");
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_23_FSN(Constants.PERCENT+businessDTO.getName()+Constants.PERCENT, businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
 				
 				} else if (null != businessDTO.getType() && Constants.EMPTY_STRING != businessDTO.getType()) {
-					System.out.println("**** 333 Executing searchBusiness_24_FSN");
+					logger.info("**** 333 Executing searchBusiness_24_FSN");
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_24_FSN(businessDTO.getType(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
 				}
 			}
 		}
-		System.out.println("**** TOTAL NUMBER OF RECORDS IN SEARCH RESULT: "+businessList.size());
+		logger.info("**** TOTAL NUMBER OF RECORDS IN SEARCH RESULT: "+businessList.size());
 
 		List<BusinessInfoDTO> businessInfoDTOList = new ArrayList<BusinessInfoDTO>();
 		BusinessInfoListDTO businessInfoListDTO = new BusinessInfoListDTO();
 		GBusinessInfoDTO gBusinessInfoDTO = new GBusinessInfoDTO();
 		
+		List <BizLatLongDTO> bizLatLongDTOList = new ArrayList<BizLatLongDTO>();
+
 		int x = 0;
 		
 		for (BusinessInfo businessInfo: businessList) {
 			//TODO: Comment this code in PRODUCTION - Code to break out of this loop after 10 iterations, To avoide too many google calls while testing
 			x = x ++;
 			if(x == 10) {
-				System.out.println("**** INSIDE BREAK AFTER 10 COUNTER ****");
+				logger.info("**** INSIDE BREAK AFTER 10 COUNTER ****");
 				break;
 			}
 			
-			BusinessInfoDTO businessInfoDTO = new BusinessInfoDTO();
+			BizLatLongDTO bizLatLongDTO = new BizLatLongDTO();
 			
+			BusinessInfoDTO businessInfoDTO = new BusinessInfoDTO();
 			businessInfoDTO.setInvokerId(businessDTO.getInvokerId());
 			businessInfoDTO.setBusinessId(businessInfo.getBusinessId());
 
@@ -500,34 +507,44 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				businessInfoDTO.setCounty(businessInfo.getCounty());
 				businessInfoDTO.setStateCode(businessInfo.getStateCode());
 				businessInfoDTO.setZip(businessInfo.getZip());
-								
+				
+				logger.info("**** I am here 111 *****");
 				//call google if latitude and longitude do not exist in BRW DB
 				if (0.0 == businessInfo.getLatitude() || 0.0 == businessInfo.getLongitude()) {
-					System.out.println("**** No Lat/Lng in BRW DB");
+					logger.info("**** No Lat/Lng in BRW DB");
 					
-					String address = ""+businessInfo.getStreet1()+", "+businessInfo.getCity()+", "+businessInfo.getStateCode()+", "+businessInfo.getZip()+"";
-					System.out.println("**** Input address to Google API: "+address);
+					String gSearchString = Constants.EMPTY_STRING;
 					
+					if(null != businessInfo.getStreet1() && !businessInfo.getStreet1().toLowerCase().contains("Po Box".toLowerCase()) ) {
+						gSearchString = ""+businessInfo.getStreet1()+", "+businessInfo.getCity()+", "+businessInfo.getStateCode()+", "+businessInfo.getZip()+"";
+						logger.info("**** Input gSearchString to Google API: "+gSearchString);
+						
+					} else {
+						gSearchString = ""+businessInfo.getName()+", "+businessInfo.getCity()+", "+businessInfo.getStateCode()+", "+businessInfo.getZip()+"";
+						logger.info("**** Input gSearchString to Google API: "+gSearchString);
+						
+					}
+
 					try {
-						gBusinessInfoDTO = getFormattedAddressAndLatLong(address);
+						gBusinessInfoDTO = getFormattedAddressAndLatLong(gSearchString);
 						
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					
 					businessInfoDTO.setGoogleName(gBusinessInfoDTO.getgBusinessName());
 					businessInfoDTO.setGoogleAddress(gBusinessInfoDTO.getgFormattedAddress());
 					businessInfoDTO.setLatitude(gBusinessInfoDTO.getgLatitude());
 					businessInfoDTO.setLongitude(gBusinessInfoDTO.getgLongitude());
 					businessInfoDTO.setGooglePhotoReferances(gBusinessInfoDTO.getgPhotoReferances());
-					
-					//TODO: Call Asynchronous Method to store lat/lng in BRW DB
-					//Reference - https://www.baeldung.com/spring-async
-					if (0.0 != gBusinessInfoDTO.getgLatitude() || 0.0 != gBusinessInfoDTO.getgLongitude()) {
-						asyncStoreLatLngToDB(businessDTO.getInvokerId(), businessInfo.getBusinessId(), businessInfoDTO.getLatitude(), businessInfoDTO.getLongitude());
-					}
+
+					//Collect all the lat/long for total search results
+					bizLatLongDTO.setBizId(businessInfo.getBusinessId());
+					bizLatLongDTO.setLatitude(gBusinessInfoDTO.getgLatitude());
+					bizLatLongDTO.setLongitude(gBusinessInfoDTO.getgLongitude());
 					
 				} else {
-					System.out.println("**** YES Lat/Lng in BRW DB");
+					logger.info("**** YES Lat/Lng in BRW DB");
 					businessInfoDTO.setLatitude(businessInfo.getLatitude());
 					businessInfoDTO.setLongitude(businessInfo.getLongitude());
 				}
@@ -562,8 +579,13 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessInfoDTO.setIsFranchise(businessInfo.getIsFranchise());
 			
 			businessInfoDTOList.add(businessInfoDTO);
-		}
+			bizLatLongDTOList.add(bizLatLongDTO);
+			
+		}// end of for loop
+		
 		businessInfoListDTO.setBusinessList(businessInfoDTOList);
+		businessInfoListDTO.setBizLatLongDTOList(bizLatLongDTOList);
+		
 		return businessInfoListDTO;
 	}
 	
@@ -574,10 +596,13 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
 	//Method to get Formatted Address and Latitude and Longitude from Google
 	private GBusinessInfoDTO getFormattedAddressAndLatLong(String address) throws Exception {
+		long start = System.currentTimeMillis();
 		
 		GBusinessInfoDTO returnGBusinessInfoDTO = new GBusinessInfoDTO();
 		
-		System.out.println("**** Calling Google for lat/long and photo references");
+		//logger.info("**** Calling Google for lat/long and photo references");
+		logger.info("Using LOGGER - Calling Google for lat/long and photo references");
+
 		PlacesSearchResponse results = PlacesApi.textSearchQuery(getGoogleContext(), address).await();
 		
 		Gson gson = null;
@@ -586,95 +611,117 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		if (null != results.results && results.results.length > 0) {
 			gson = new GsonBuilder().setPrettyPrinting().create();			
 			result = results.results[0];
-		
-			//System.out.println("**** Printing response from Google API results result.permanentlyClosed: "+gson.toJson(result.permanentlyClosed));
+			
+			//logger.info("**** Printing response from Google API results result.permanentlyClosed: "+gson.toJson(result.permanentlyClosed));
 			if (!result.permanentlyClosed) {
 				returnGBusinessInfoDTO.setgIsClosed(gson.toJson(result.permanentlyClosed));
 				returnGBusinessInfoDTO.setgBusinessName(gson.toJson(result.name));
 				returnGBusinessInfoDTO.setgFormattedAddress(gson.toJson(result.formattedAddress));
 				returnGBusinessInfoDTO.setgLatitude(new Double(gson.toJson(result.geometry.location.lat)));
 				returnGBusinessInfoDTO.setgLongitude(new Double(gson.toJson(result.geometry.location.lng)));
-				//capture up to 10 image references 
-				int x = 0;
-
 				if (null != result.photos && result.photos.length > 0) {
-					String[] photoReferances = new String[result.photos.length];
-					
-					for (Photo phoRef: result.photos) {
-						photoReferances[x] = phoRef.photoReference;
-						x ++;
-						//Collect only 5 image references from Google - To save Photos api cost and storage place
-						if(x == 5) {
-							System.out.println("**** INSIDE BREAK AFTER 5 COUNTER ****");
-							break;
-						}
-					}
-					returnGBusinessInfoDTO.setgPhotoReferances(photoReferances);
-				}
+					returnGBusinessInfoDTO.setgSinglePhotoReferance(result.photos[0].photoReference);
+					String[] photoReferances = new String[1];
+					photoReferances[0] = result.photos[0].photoReference;
+					getGooglePhotos(photoReferances);
+				}	
 			}
+			
+			//*********
+			/*
+			String placeId = gson.toJson(result.placeId);
+			logger.info("***  Calling PLACE DETAILS API for placeId: "+placeId);
+			//TODO: Make this call Async if possible
+			//Call Place Details
+			PlaceDetails gpdResult = PlacesApi.placeDetails(getGoogleContext(), placeId).await();
+			
+			//gpdResult.
+			
+			//capture up to 5 image references 
+			int x = 0;
+			if (null != gpdResult.photos && gpdResult.photos.length > 0) {
+				String[] photoReferances = new String[gpdResult.photos.length];
+				
+				for (Photo phoRef: gpdResult.photos) {
+					photoReferances[x] = phoRef.photoReference;
+					x ++;
+					//Collect only 5 image references from Google - To save Photos api cost and storage place
+					if(x == 5) {
+						logger.info("**** INSIDE BREAK AFTER 5 COUNTER ****");
+						break;
+					}
+				}
+				//returnGBusinessInfoDTO.setgPhotoReferances(photoReferances);
+				//Calling google again to get photo URls
+				getGooglePhotos(photoReferances);
+			}
+			*/
+			//*********
 		}
-		
+		logger.info("Elapsed time: " + (System.currentTimeMillis() - start));
 		return returnGBusinessInfoDTO;
 	}
-	
-	@Async
-	public void asyncStoreLatLngToDB(int invokerId, int bizId, double latitude, double longitude) {
-		System.out.println("**** CALLING updateBusinessDetails inside asyncStoreLatLngToDB()");
-		
-		BusinessDetailsDTO businessDetailsDTO = new BusinessDetailsDTO();
-		businessDetailsDTO.setInvokerId(invokerId);
-		businessDetailsDTO.setBusinessId(bizId);
-		businessDetailsDTO.setLatitude(latitude);
-		businessDetailsDTO.setLongitude(longitude);
 
-		System.out.println("**** CALLING updateBusinessDetails invokerId: "+invokerId);
-		System.out.println("**** CALLING updateBusinessDetails bizId: "+bizId);
-		System.out.println("**** CALLING updateBusinessDetails latitude: "+latitude);
-		System.out.println("**** CALLING updateBusinessDetails longitude: "+longitude);
-
-		
-		updateBusinessDetails(businessDetailsDTO);
-		System.out.println("**** updateBusinessDetails COMPLETE");
-	    //Write implementation to update lat/long based on bizId
-	}
-	
 	//TODO: Method is not implemented - The general pattern is to call Photos API based on references in JS
 	//Method to get Google Photos(Photos API call) based on Photo References we got from Google Places API
 	private String[] getGooglePhotos(String[] photoReferances) throws Exception {
+		logger.info("**** 444 Inside getGooglePhotos()");
 		
+		int x = 0;
 		String[] photoUrls = new String[photoReferances.length];
 		
 		for (String phoRef: photoReferances) {
-			String gApiUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference={}&key={}".format(phoRef, "AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I");
 			
-			CloseableHttpClient httpClient = HttpClients.createDefault();
+			//logger.info("**** phoRef: " + phoRef);
+			
+			String gPhotoUrl = "https://maps.googleapis.com/maps/api/place/photo?photoreference="+phoRef+"&sensor=false&maxheight=500&maxwidth=500&key=AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I";
+			
+			logger.info("**** gPhotoUrl: " + gPhotoUrl);
+			
+			StringBuilder result = new StringBuilder();
+			URL url = new URL(gPhotoUrl);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			//PhotoResult gPhotoResult = PlacesApi.photo(getGoogleContext(), phoRef).maxHeight(400).maxWidth(400).await();
+			try {
+				conn.setRequestMethod("GET");
+				
+				logger.info("**** TRYING TO GET PHOTO LINK 555: " + conn.getResponseCode());
+				logger.info("**** TRYING TO GET PHOTO LINK 555: " + conn.getResponseCode());
+				logger.info("**** TRYING TO GET PHOTO LINK 666: " + conn.getHeaderField("location"));
+				
+				//Traverse a map
+				
+				
+				Map<String, List<String>> map = conn.getHeaderFields();
+				for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+				    logger.info(entry.getKey() + "/" + entry.getValue());
+				}
+				
+				//END traverse a map
+				
+				
+				
+				/*
+				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				String line;
+				while ((line = rd.readLine()) != null) {
+					result.append(line);
+					result.append('\r');
+				}
+				rd.close();
+				logger.info("**** result.toString(): " + result.toString());
 
-	        try {
-	            HttpGet request = new HttpGet(gApiUrl);
-	            CloseableHttpResponse response = httpClient.execute(request);
-
-	            try {
-
-	                // Get HttpResponse Status
-	                System.out.println("**** CloseableHttpResponse response.getProtocolVersion(): "+response.getProtocolVersion());              // HTTP/1.1
-	                System.out.println("**** CloseableHttpResponse response.getProtocolVersion(): "+response.getStatusLine().getStatusCode());   // 200
-	                System.out.println("**** CloseableHttpResponse response.getProtocolVersion(): "+response.getStatusLine().getReasonPhrase()); // OK
-	                System.out.println("**** CloseableHttpResponse response.getProtocolVersion(): "+response.getStatusLine().toString());        // HTTP/1.1 200 OK
-
-	                HttpEntity entity = response.getEntity();
-	                if (entity != null) {
-	                    // return it as a String
-	                    String result = EntityUtils.toString(entity);
-	                    System.out.println("**** HttpEntity result: "+result);
-	                }
-
-	            } finally {
-	                response.close();
-	            }
-	        } finally {
-	            httpClient.close();
-	        }
-		}//end of for loop
+				photoUrls[x] = result.toString();
+				*/
+			} catch (Exception e) {
+			    e.printStackTrace();
+			    //return null;
+			  } finally {
+			    if (conn != null) {
+			    	conn.disconnect();
+			    }
+			  }
+		}
 		return photoUrls;
 	}
 	
@@ -682,7 +729,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	@Override
 	public BusinessInfoDTO getBusinessInfoFromBRWDB(int businessId) {
 		// TODO Auto-generated method stub
-		System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessInfoFromBRWDB() businessId: "+businessId);
+		logger.info("**** 222 Inside BusinessServiceImpl.getBusinessInfoFromBRWDB() businessId: "+businessId);
 		
 		BusinessInfo businessInfo = (BusinessInfo) businessInfoDAO.getBusinessInfo(businessId);
 		
@@ -702,12 +749,12 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
 		}
 		
-		System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetails.getIsHidden(): "+businessInfo.getIsHidden());
+		logger.info("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetails.getIsHidden(): "+businessInfo.getIsHidden());
 
 		if (businessInfo.getIsHidden().equals(Constants.Y)) {			
 			businessInfoDTO.setName("Business for Sell in " + businessInfo.getCity() + ", " + businessInfo.getCounty() + " " + "County" );
 			
-			System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessInfoDTO.getName(): "+businessInfoDTO.getName());
+			logger.info("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessInfoDTO.getName(): "+businessInfoDTO.getName());
 		} else {
 			businessInfoDTO.setName(businessInfo.getName());
 			businessInfoDTO.setStreet1(businessInfo.getStreet1());
@@ -727,7 +774,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	@Override
 	public BusinessDetailsDTO getBusinessDetailsFromBRWDB(int businessId) {
 		// TODO Auto-generated method stub
-		System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetailsFromBRWDB() businessId: "+businessId);
+		logger.info("**** 222 Inside BusinessServiceImpl.getBusinessDetailsFromBRWDB() businessId: "+businessId);
 		
 		BusinessDetails businessDetails = (BusinessDetails) businessDetailsDAO.getBusinessDetails(businessId);
 		
@@ -770,14 +817,14 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessDetails.setImageFirst(imageService.getDefaultImageForBizType(businessDetails.getType()));
 		}
 		
-		System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetails.getIsHidden(): "+businessDetails.getIsHidden());
+		logger.info("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetails.getIsHidden(): "+businessDetails.getIsHidden());
 
 		if (businessDetails.getIsHidden().equals(Constants.Y)) {
 			
 			businessDetailsDTO.setLegalName("Business for Sell in " + businessDetails.getCity() + ", " + businessDetails.getCounty() + " " + "County" );
 			businessDetailsDTO.setName("Business for Sell in " + businessDetails.getCity() + ", " + businessDetails.getCounty() + " " + "County" );
 			
-			System.out.println("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetailsDTO.getName(): "+businessDetailsDTO.getName());
+			logger.info("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetailsDTO.getName(): "+businessDetailsDTO.getName());
 		} else {
 			businessDetailsDTO.setLegalName(businessDetails.getLegalName());
 			businessDetailsDTO.setName(businessDetails.getName());
@@ -909,151 +956,151 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessDetailsDTO.setStateCode("CA");
 		}
 		
-		System.out.println("222 **** Inside BusinessServiceImpl.addBusinessDetails()");
+		logger.info("222 **** Inside BusinessServiceImpl.addBusinessDetails()");
 		
-		System.out.println("222 **** businessDetailsDTO.getInvokerId(): "+businessDetailsDTO.getInvokerId());
+		logger.info("222 **** businessDetailsDTO.getInvokerId(): "+businessDetailsDTO.getInvokerId());
 		
-		System.out.println("222 **** businessDetailsDTO.getBuRelationship(): "+businessDetailsDTO.getBuRelationship());
+		logger.info("222 **** businessDetailsDTO.getBuRelationship(): "+businessDetailsDTO.getBuRelationship());
 		
-		System.out.println("222 **** businessDetailsDTO.getName(): "+businessDetailsDTO.getName());
+		logger.info("222 **** businessDetailsDTO.getName(): "+businessDetailsDTO.getName());
 		
-		System.out.println("222 **** businessDetailsDTO.getLegalName(): "+businessDetailsDTO.getLegalName());
+		logger.info("222 **** businessDetailsDTO.getLegalName(): "+businessDetailsDTO.getLegalName());
 		
-		System.out.println("222 **** businessDetailsDTO.getFirstOwnerName(): "+businessDetailsDTO.getFirstOwnerName());
+		logger.info("222 **** businessDetailsDTO.getFirstOwnerName(): "+businessDetailsDTO.getFirstOwnerName());
 
-		System.out.println("222 **** businessDetailsDTO.getSecondOwnerName(): "+businessDetailsDTO.getSecondOwnerName());
+		logger.info("222 **** businessDetailsDTO.getSecondOwnerName(): "+businessDetailsDTO.getSecondOwnerName());
 
-		System.out.println("222 **** businessDetailsDTO.getBrandName(): "+businessDetailsDTO.getBrandName());
+		logger.info("222 **** businessDetailsDTO.getBrandName(): "+businessDetailsDTO.getBrandName());
 
-		System.out.println("222 **** businessDetailsDTO.getType(): "+businessDetailsDTO.getType());
+		logger.info("222 **** businessDetailsDTO.getType(): "+businessDetailsDTO.getType());
 
-		System.out.println("222 **** businessDetailsDTO.getSubType(): "+businessDetailsDTO.getSubType());
+		logger.info("222 **** businessDetailsDTO.getSubType(): "+businessDetailsDTO.getSubType());
 
-		System.out.println("222 **** businessDetailsDTO.getRegCityName(): "+businessDetailsDTO.getRegCityName());
+		logger.info("222 **** businessDetailsDTO.getRegCityName(): "+businessDetailsDTO.getRegCityName());
 
-		System.out.println("222 **** businessDetailsDTO.getRegCityCode(): "+businessDetailsDTO.getRegCityCode());
+		logger.info("222 **** businessDetailsDTO.getRegCityCode(): "+businessDetailsDTO.getRegCityCode());
 
-		System.out.println("222 **** businessDetailsDTO.getRegCityDate(): "+businessDetailsDTO.getRegCityDate());
+		logger.info("222 **** businessDetailsDTO.getRegCityDate(): "+businessDetailsDTO.getRegCityDate());
 
-		System.out.println("222 **** businessDetailsDTO.getRegStateName(): "+businessDetailsDTO.getRegStateName());
+		logger.info("222 **** businessDetailsDTO.getRegStateName(): "+businessDetailsDTO.getRegStateName());
 
-		System.out.println("222 **** businessDetailsDTO.getRegStateCode(): "+businessDetailsDTO.getRegStateCode());
+		logger.info("222 **** businessDetailsDTO.getRegStateCode(): "+businessDetailsDTO.getRegStateCode());
 
-		System.out.println("222 **** businessDetailsDTO.getRegStateDate(): "+businessDetailsDTO.getRegStateDate());
+		logger.info("222 **** businessDetailsDTO.getRegStateDate(): "+businessDetailsDTO.getRegStateDate());
 
-		System.out.println("222 **** businessDetailsDTO.getDataCompletionScore(): "+businessDetailsDTO.getDataCompletionScore());
+		logger.info("222 **** businessDetailsDTO.getDataCompletionScore(): "+businessDetailsDTO.getDataCompletionScore());
 
-		System.out.println("222 **** businessDetailsDTO.getIsForSell(): "+businessDetailsDTO.getIsForSell());
+		logger.info("222 **** businessDetailsDTO.getIsForSell(): "+businessDetailsDTO.getIsForSell());
 		
-		System.out.println("222 **** businessDetailsDTO.getIsHidden(): "+businessDetailsDTO.getIsHidden());
+		logger.info("222 **** businessDetailsDTO.getIsHidden(): "+businessDetailsDTO.getIsHidden());
 
-		System.out.println("222 **** businessDetailsDTO.getForSellPrice(): "+businessDetailsDTO.getForSellPrice());
+		logger.info("222 **** businessDetailsDTO.getForSellPrice(): "+businessDetailsDTO.getForSellPrice());
 
-		System.out.println("222 **** businessDetailsDTO.getImageLogo(): "+businessDetailsDTO.getImageLogo());
+		logger.info("222 **** businessDetailsDTO.getImageLogo(): "+businessDetailsDTO.getImageLogo());
 		
-		System.out.println("222 **** businessDetailsDTO.getImageFirst(): "+businessDetailsDTO.getImageFirst());
+		logger.info("222 **** businessDetailsDTO.getImageFirst(): "+businessDetailsDTO.getImageFirst());
 
-		System.out.println("222 **** businessDetailsDTO.getStreet1(): "+businessDetailsDTO.getStreet1());
+		logger.info("222 **** businessDetailsDTO.getStreet1(): "+businessDetailsDTO.getStreet1());
 
-		System.out.println("222 **** businessDetailsDTO.getStreet2(): "+businessDetailsDTO.getStreet2());
+		logger.info("222 **** businessDetailsDTO.getStreet2(): "+businessDetailsDTO.getStreet2());
 
-		System.out.println("222 **** businessDetailsDTO.getCity(): "+businessDetailsDTO.getCity());
+		logger.info("222 **** businessDetailsDTO.getCity(): "+businessDetailsDTO.getCity());
 
-		System.out.println("222 **** businessDetailsDTO.getCounty(): "+businessDetailsDTO.getCounty());
+		logger.info("222 **** businessDetailsDTO.getCounty(): "+businessDetailsDTO.getCounty());
 
-		System.out.println("222 **** businessDetailsDTO.getStateCode(): "+businessDetailsDTO.getStateCode());
+		logger.info("222 **** businessDetailsDTO.getStateCode(): "+businessDetailsDTO.getStateCode());
 
-		System.out.println("222 **** businessDetailsDTO.getZip(): "+businessDetailsDTO.getZip());
+		logger.info("222 **** businessDetailsDTO.getZip(): "+businessDetailsDTO.getZip());
 
-		System.out.println("222 **** businessDetailsDTO.getLatitude(): "+businessDetailsDTO.getLatitude());
+		logger.info("222 **** businessDetailsDTO.getLatitude(): "+businessDetailsDTO.getLatitude());
 
-		System.out.println("222 **** businessDetailsDTO.getLongitude(): "+businessDetailsDTO.getLongitude());
+		logger.info("222 **** businessDetailsDTO.getLongitude(): "+businessDetailsDTO.getLongitude());
 
-		System.out.println("222 **** businessDetailsDTO.getPhone(): "+businessDetailsDTO.getPhone());
+		logger.info("222 **** businessDetailsDTO.getPhone(): "+businessDetailsDTO.getPhone());
 
-		System.out.println("222 **** businessDetailsDTO.getPhoneExt(): "+businessDetailsDTO.getPhoneExt());
+		logger.info("222 **** businessDetailsDTO.getPhoneExt(): "+businessDetailsDTO.getPhoneExt());
 
-		System.out.println("222 **** businessDetailsDTO.getEmail(): "+businessDetailsDTO.getEmail());
+		logger.info("222 **** businessDetailsDTO.getEmail(): "+businessDetailsDTO.getEmail());
 
-		System.out.println("222 **** businessDetailsDTO.getWebsite(): "+businessDetailsDTO.getWebsite());
+		logger.info("222 **** businessDetailsDTO.getWebsite(): "+businessDetailsDTO.getWebsite());
 
-		System.out.println("222 **** businessDetailsDTO.getDescription(): "+businessDetailsDTO.getDescription());
+		logger.info("222 **** businessDetailsDTO.getDescription(): "+businessDetailsDTO.getDescription());
 
-		System.out.println("222 **** businessDetailsDTO.getNAICSNum(): "+businessDetailsDTO.getNAICSNum());
+		logger.info("222 **** businessDetailsDTO.getNAICSNum(): "+businessDetailsDTO.getNAICSNum());
 
-		System.out.println("222 **** businessDetailsDTO.getNAICSDescription(): "+businessDetailsDTO.getNAICSDescription());
+		logger.info("222 **** businessDetailsDTO.getNAICSDescription(): "+businessDetailsDTO.getNAICSDescription());
 
-		System.out.println("222 **** businessDetailsDTO.getIsFranchise(): "+businessDetailsDTO.getIsFranchise());
+		logger.info("222 **** businessDetailsDTO.getIsFranchise(): "+businessDetailsDTO.getIsFranchise());
 
-		System.out.println("222 **** businessDetailsDTO.getIsOwnerClaimed(): "+businessDetailsDTO.getIsOwnerClaimed());
+		logger.info("222 **** businessDetailsDTO.getIsOwnerClaimed(): "+businessDetailsDTO.getIsOwnerClaimed());
 
-		System.out.println("222 **** businessDetailsDTO.getSqftOutdoor(): "+businessDetailsDTO.getSqftOutdoor());
+		logger.info("222 **** businessDetailsDTO.getSqftOutdoor(): "+businessDetailsDTO.getSqftOutdoor());
 
-		System.out.println("222 **** businessDetailsDTO.getBuildingType(): "+businessDetailsDTO.getBuildingType());
+		logger.info("222 **** businessDetailsDTO.getBuildingType(): "+businessDetailsDTO.getBuildingType());
 
-		System.out.println("222 **** businessDetailsDTO.getIsBuildingOwned(): "+businessDetailsDTO.getIsBuildingOwned());
+		logger.info("222 **** businessDetailsDTO.getIsBuildingOwned(): "+businessDetailsDTO.getIsBuildingOwned());
 
-		System.out.println("222 **** businessDetailsDTO.getRevenueMonthly(): "+businessDetailsDTO.getRevenueMonthly());
+		logger.info("222 **** businessDetailsDTO.getRevenueMonthly(): "+businessDetailsDTO.getRevenueMonthly());
 		
-		System.out.println("222 **** businessDetailsDTO.getExpenseMonthlyRent(): "+businessDetailsDTO.getExpenseMonthlyRent());
+		logger.info("222 **** businessDetailsDTO.getExpenseMonthlyRent(): "+businessDetailsDTO.getExpenseMonthlyRent());
 
-		System.out.println("222 **** businessDetailsDTO.getExpenseMonthlyMortgage(): "+businessDetailsDTO.getExpenseMonthlyMortgage());
+		logger.info("222 **** businessDetailsDTO.getExpenseMonthlyMortgage(): "+businessDetailsDTO.getExpenseMonthlyMortgage());
 
-		System.out.println("222 **** businessDetailsDTO.getExpenseMonthlyMaterial(): "+businessDetailsDTO.getExpenseMonthlyMaterial());
+		logger.info("222 **** businessDetailsDTO.getExpenseMonthlyMaterial(): "+businessDetailsDTO.getExpenseMonthlyMaterial());
 
-		System.out.println("222 **** businessDetailsDTO.getExpenseMonthlyEmp(): "+businessDetailsDTO.getExpenseMonthlyEmp());
+		logger.info("222 **** businessDetailsDTO.getExpenseMonthlyEmp(): "+businessDetailsDTO.getExpenseMonthlyEmp());
 
-		System.out.println("222 **** businessDetailsDTO.getExpenseMonthlyUtility(): "+businessDetailsDTO.getExpenseMonthlyUtility());
+		logger.info("222 **** businessDetailsDTO.getExpenseMonthlyUtility(): "+businessDetailsDTO.getExpenseMonthlyUtility());
 
-		System.out.println("222 **** businessDetailsDTO.getExpenseMonthlyOther(): "+businessDetailsDTO.getExpenseMonthlyOther());
+		logger.info("222 **** businessDetailsDTO.getExpenseMonthlyOther(): "+businessDetailsDTO.getExpenseMonthlyOther());
 
-		System.out.println("222 **** businessDetailsDTO.getValueTotalEquipment(): "+businessDetailsDTO.getValueTotalEquipment());
+		logger.info("222 **** businessDetailsDTO.getValueTotalEquipment(): "+businessDetailsDTO.getValueTotalEquipment());
 
-		System.out.println("222 **** businessDetailsDTO.getValueTotalFurniture(): "+businessDetailsDTO.getValueTotalFurniture());
+		logger.info("222 **** businessDetailsDTO.getValueTotalFurniture(): "+businessDetailsDTO.getValueTotalFurniture());
 
-		System.out.println("222 **** businessDetailsDTO.getValueIndoorDeco(): "+businessDetailsDTO.getValueIndoorDeco());
+		logger.info("222 **** businessDetailsDTO.getValueIndoorDeco(): "+businessDetailsDTO.getValueIndoorDeco());
 
-		System.out.println("222 **** businessDetailsDTO.getValueOutdoorDeco(): "+businessDetailsDTO.getValueOutdoorDeco());
+		logger.info("222 **** businessDetailsDTO.getValueOutdoorDeco(): "+businessDetailsDTO.getValueOutdoorDeco());
 
-		System.out.println("222 **** businessDetailsDTO.getYearEquipment(): "+businessDetailsDTO.getYearEquipment());
+		logger.info("222 **** businessDetailsDTO.getYearEquipment(): "+businessDetailsDTO.getYearEquipment());
 
-		System.out.println("222 **** businessDetailsDTO.getYearFurniture(): "+businessDetailsDTO.getYearFurniture());
+		logger.info("222 **** businessDetailsDTO.getYearFurniture(): "+businessDetailsDTO.getYearFurniture());
 
-		System.out.println("222 **** businessDetailsDTO.getYearIndoorDeco(): "+businessDetailsDTO.getYearIndoorDeco());
+		logger.info("222 **** businessDetailsDTO.getYearIndoorDeco(): "+businessDetailsDTO.getYearIndoorDeco());
 
-		System.out.println("222 **** businessDetailsDTO.getYearOutdoorDeco(): "+businessDetailsDTO.getYearOutdoorDeco());
+		logger.info("222 **** businessDetailsDTO.getYearOutdoorDeco(): "+businessDetailsDTO.getYearOutdoorDeco());
 
-		System.out.println("222 **** businessDetailsDTO.getEmpFullTimeNum(): "+businessDetailsDTO.getEmpFullTimeNum());
+		logger.info("222 **** businessDetailsDTO.getEmpFullTimeNum(): "+businessDetailsDTO.getEmpFullTimeNum());
 
-		System.out.println("222 **** businessDetailsDTO.getEmpPartTimeNum(): "+businessDetailsDTO.getEmpPartTimeNum());
+		logger.info("222 **** businessDetailsDTO.getEmpPartTimeNum(): "+businessDetailsDTO.getEmpPartTimeNum());
 
-		System.out.println("222 **** businessDetailsDTO.getAreaCrimeScore(): "+businessDetailsDTO.getAreaCrimeScore());
+		logger.info("222 **** businessDetailsDTO.getAreaCrimeScore(): "+businessDetailsDTO.getAreaCrimeScore());
 
-		System.out.println("222 **** businessDetailsDTO.getAreaWalkScore(): "+businessDetailsDTO.getAreaWalkScore());
+		logger.info("222 **** businessDetailsDTO.getAreaWalkScore(): "+businessDetailsDTO.getAreaWalkScore());
 
-		System.out.println("222 **** businessDetailsDTO.getAreaAttractionsScore(): "+businessDetailsDTO.getAreaAttractionsScore());
+		logger.info("222 **** businessDetailsDTO.getAreaAttractionsScore(): "+businessDetailsDTO.getAreaAttractionsScore());
 
-		System.out.println("222 **** businessDetailsDTO.getAreaTransitScore(): "+businessDetailsDTO.getAreaTransitScore());
+		logger.info("222 **** businessDetailsDTO.getAreaTransitScore(): "+businessDetailsDTO.getAreaTransitScore());
 		
-		System.out.println("222 **** businessDetailsDTO.getSocialMediaScore(): "+businessDetailsDTO.getSocialMediaScore());
+		logger.info("222 **** businessDetailsDTO.getSocialMediaScore(): "+businessDetailsDTO.getSocialMediaScore());
 
-		System.out.println("222 **** businessDetailsDTO.getPopulationIn1mileRadius(): "+businessDetailsDTO.getPopulationIn1mileRadius());
+		logger.info("222 **** businessDetailsDTO.getPopulationIn1mileRadius(): "+businessDetailsDTO.getPopulationIn1mileRadius());
 
-		System.out.println("222 **** businessDetailsDTO.getIncomeScoreIn1mileRadius(): "+businessDetailsDTO.getIncomeScoreIn1mileRadius());
+		logger.info("222 **** businessDetailsDTO.getIncomeScoreIn1mileRadius(): "+businessDetailsDTO.getIncomeScoreIn1mileRadius());
 
-		System.out.println("222 **** businessDetailsDTO.getPopulationIn3mileRadius(): "+businessDetailsDTO.getPopulationIn3mileRadius());
+		logger.info("222 **** businessDetailsDTO.getPopulationIn3mileRadius(): "+businessDetailsDTO.getPopulationIn3mileRadius());
 
-		System.out.println("222 **** businessDetailsDTO.getIncomeScoreIn3mileRadius(): "+businessDetailsDTO.getIncomeScoreIn3mileRadius());
+		logger.info("222 **** businessDetailsDTO.getIncomeScoreIn3mileRadius(): "+businessDetailsDTO.getIncomeScoreIn3mileRadius());
 
-		System.out.println("222 **** businessDetailsDTO.getPopulationIn5mileRadius(): "+businessDetailsDTO.getPopulationIn5mileRadius());
+		logger.info("222 **** businessDetailsDTO.getPopulationIn5mileRadius(): "+businessDetailsDTO.getPopulationIn5mileRadius());
 
-		System.out.println("222 **** businessDetailsDTO.getIncomeScoreIn5mileRadius(): "+businessDetailsDTO.getIncomeScoreIn5mileRadius());
+		logger.info("222 **** businessDetailsDTO.getIncomeScoreIn5mileRadius(): "+businessDetailsDTO.getIncomeScoreIn5mileRadius());
 
-		System.out.println("222 **** businessDetailsDTO.getDailyPeoplAtDoorNum(): "+businessDetailsDTO.getDailyPeoplAtDoorNum());
+		logger.info("222 **** businessDetailsDTO.getDailyPeoplAtDoorNum(): "+businessDetailsDTO.getDailyPeoplAtDoorNum());
 
-		System.out.println("222 **** businessDetailsDTO.getDailyCarsAtParklotNum(): "+businessDetailsDTO.getDailyCarsAtParklotNum());
+		logger.info("222 **** businessDetailsDTO.getDailyCarsAtParklotNum(): "+businessDetailsDTO.getDailyCarsAtParklotNum());
 
-		System.out.println("222 **** businessDetailsDTO.getYearEstablished(): "+businessDetailsDTO.getYearEstablished());
+		logger.info("222 **** businessDetailsDTO.getYearEstablished(): "+businessDetailsDTO.getYearEstablished());
 		
 		BusinessDetails businessDetails = new BusinessDetails();
 
@@ -1396,8 +1443,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
 	@Override
 	public BusinessDetailsDTO updateBusinessDetails(BusinessDetailsDTO businessDetailsDTO) {
-		// TODO Auto-generated method stub
-		System.out.println("222 **** Inside BusinessServiceImpl.updateBusinessDetails() businessDetailsDTO.getRegCityDate(): "+businessDetailsDTO.getRegCityDate());
+		logger.info("222 **** Inside BusinessServiceImpl.updateBusinessDetails() businessDetailsDTO.getBusinessId(): "+businessDetailsDTO.getBusinessId());
+		logger.info("222 **** Inside BusinessServiceImpl.updateBusinessDetails() businessDetailsDTO.getLegalName(): "+businessDetailsDTO.getLegalName());
 
 		BusinessDetails businessDetails = businessDetailsDAO.findById(businessDetailsDTO.getBusinessId()).get();
 		//BusinessDetails businessDetails = new BusinessDetails();
@@ -1790,7 +1837,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	@Override
 	public BusinessDetailsListDTO searchComparableBusiness(BusinessDetailsDTO businessInQuestion) {
 		// TODO Auto-generated method stub
-		System.out.println("**** 222 Inside BusinessServiceImpl.searchComparableBusiness()");
+		logger.info("**** 222 Inside BusinessServiceImpl.searchComparableBusiness()");
 		
 		List<BusinessDetails> comparableBusinessList = (List<BusinessDetails>) businessDetailsDAO.searchComparableBusiness(businessInQuestion.getType(), businessInQuestion.getSubType(), businessInQuestion.getStateCode(), businessInQuestion.getCity());
 		List<BusinessDetailsDTO> businessDetailsDTOList = new ArrayList<BusinessDetailsDTO>();
@@ -1916,7 +1963,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	 */
 	public String estimateRealWorth(BusinessDetailsDTO businessInQuestionDTO) {
 		
-		System.out.println("**** 111 Inside BusinessController.estimateRealWorth()");
+		logger.info("**** 111 Inside BusinessController.estimateRealWorth()");
 		
 		EstimatesListDTO estimateslistToAddDTO = new EstimatesListDTO();		
 		List<EstimatesDTO> prosessedEstimatesDTOList = new ArrayList<EstimatesDTO>();
@@ -1950,7 +1997,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	 */
 	private EstimatesDTO estimateRealWorthBasedOnAssets(BusinessDetailsDTO businessInQuestion) {
 		
-		System.out.println("**** 111 Inside BusinessController.estimateRealWorthBasedOnAssets()");		
+		logger.info("**** 111 Inside BusinessController.estimateRealWorthBasedOnAssets()");		
 		
 		EstimatesDTO assetBasedEstimatesDTO = new EstimatesDTO();
 		// TODO Implement the logic to estimate the Business Worth Based on Assets and store to t_wgpr_estimate table
@@ -1964,7 +2011,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	 */
 	private EstimatesDTO estimateRealWorthBasedOnIncome(BusinessDetailsDTO businessInQuestion) {
 		
-		System.out.println("**** 111 Inside BusinessController.estimateRealWorthBasedOnIncome()");
+		logger.info("**** 111 Inside BusinessController.estimateRealWorthBasedOnIncome()");
 		
 		EstimatesDTO incomeBasedEstimatesDTO = new EstimatesDTO();
 		// TODO Implement the logic to estimate the Business Worth Based on Income and store to t_wgpr_estimate table
@@ -1978,7 +2025,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	 */
 	private EstimatesDTO estimateRealWorthBasedOnMarket(BusinessDetailsDTO businessInQuestionDTO) {
 		
-		System.out.println("**** 222 Inside BusinessController.estimateRealWorthBasedOnMarket()");
+		logger.info("**** 222 Inside BusinessController.estimateRealWorthBasedOnMarket()");
 			
 		EstimatesDTO marketBasedestimatesDTO = new EstimatesDTO();
 		Integer estimatedWorth = 0;
@@ -2094,15 +2141,15 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
     { 
         int arr[] = { 1, 2, 4, 5, 6, 6, 8, 10, 12}; 
         int target = 11; 
-        System.out.println(findClosest(arr, target)); 
+        logger.info(findClosest(arr, target)); 
     } 
     */
     
     @Override
 	public RelatedBusinessDTO addRelatedBusiness(RelatedBusinessDTO relatedBusinessDTO) {
 		
-		System.out.println("222 **** Inside UserServiceImpl.addRelatedBusiness() BusinessId: "+relatedBusinessDTO.getBusinessId());
-		System.out.println("222 **** Inside UserServiceImpl.addRelatedBusiness() RelatedBizId: "+relatedBusinessDTO.getRelatedBizId());
+		logger.info("222 **** Inside UserServiceImpl.addRelatedBusiness() BusinessId: "+relatedBusinessDTO.getBusinessId());
+		logger.info("222 **** Inside UserServiceImpl.addRelatedBusiness() RelatedBizId: "+relatedBusinessDTO.getRelatedBizId());
 		
 		RelatedBusiness relatedBusiness = new RelatedBusiness();
 		RelatedBusinessDTO returnRelatedBusinessDTO = new RelatedBusinessDTO();
@@ -2128,7 +2175,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
 	@Override
 	public RelatedBusinessListDTO getRelatedBusinesses(int businessId) {
-		System.out.println("222 **** Inside SearchAgentServiceImpl.getRelatedBusinesses()");
+		logger.info("222 **** Inside SearchAgentServiceImpl.getRelatedBusinesses()");
 		
 		List<RelatedBusiness> relatedBusinessList = (List<RelatedBusiness>)relatedBusinessDAO.getRelatedBusinesses(businessId);
 		List<RelatedBusinessDTO> relatedBusinessDTOList = new ArrayList<RelatedBusinessDTO>();
@@ -2152,16 +2199,16 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
 	@Override
 	public void deleteRelatedBusiness(int businessId, int relatedBizId) {
-		System.out.println("222 **** Inside BusinessServiceImpl.deleteRelatedBusiness()");
+		logger.info("222 **** Inside BusinessServiceImpl.deleteRelatedBusiness()");
 		
 		int nurDeleted = relatedBusinessDAO.deleteRelatedBusiness(businessId, relatedBizId);
 		
-		System.out.println("222 **** Inside BusinessServiceImpl.deleteRelatedBusiness() nurDeleted: "+nurDeleted);
+		logger.info("222 **** Inside BusinessServiceImpl.deleteRelatedBusiness() nurDeleted: "+nurDeleted);
 	}
 	
 	private void addUserBusiness(BusinessDetailsDTO businessDetailsDTO, String relationshipType) {
 		
-		System.out.println("222 **** Inside BusinessServiceImpl.addUserBusiness - businessDetailsDTO.getCreatedByUserId(): "+businessDetailsDTO.getCreatedByUserId());
+		logger.info("222 **** Inside BusinessServiceImpl.addUserBusiness - businessDetailsDTO.getCreatedByUserId(): "+businessDetailsDTO.getCreatedByUserId());
 		
 		UserBusiness userBusiness = new UserBusiness();
 		

@@ -3,6 +3,8 @@ package com.brw.service.impl;
 import java.nio.charset.Charset;
 
 import org.apache.commons.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
@@ -26,6 +28,8 @@ import com.brw.dto.Variable;
 @Component
 public class VendorDataServiceImpl implements com.brw.service.VendorDataService {
 	
+	private static final Logger logger = LoggerFactory.getLogger(VendorDataServiceImpl.class);
+
 	@Autowired
 	BusinessService businessService;
 	
@@ -35,7 +39,7 @@ public class VendorDataServiceImpl implements com.brw.service.VendorDataService 
 	
 	@Override
 	public BusinessDetailsDTO getBusinessDetailsFromPB(String street1, String street2, String city, String state, Integer zip) {
-		System.out.println("**** 222 Inside VendorDataServiceImpl.getBusinessDetailsFromPB()");
+		logger.info("**** 222 Inside VendorDataServiceImpl.getBusinessDetailsFromPB()");
 		BusinessDetailsDTO businessDetailsDTO = null;
 		/*
 		String key = "P7AHcLiRnqA4JL7R9wdtXjHQzcI0HlKh";
@@ -43,7 +47,7 @@ public class VendorDataServiceImpl implements com.brw.service.VendorDataService 
 		
 		String addressString = ""+street1+", "+street2+", "+city+", "+state+", "+zip;
 								
-		System.out.println("**** addressString: "+addressString);
+		logger.info("**** addressString: "+addressString);
 	    
 		//Call to PB geoproperty API
 		ResponseEntity<PropertyAttributesFromPBResponse> propertyAttributes = 
@@ -63,7 +67,7 @@ public class VendorDataServiceImpl implements com.brw.service.VendorDataService 
 	            auth.getBytes(Charset.forName("US-ASCII")) );
 	         String authHeader = "Basic " + new String( encodedAuth );
 	         
-	         System.out.println("Encoded Value: "+authHeader);
+	         logger.info("Encoded Value: "+authHeader);
 	         
 	         //set( "Authorization", authHeader );
 	         set( "Authorization", "Bearer 0Q1sv7jDlNAJiR45egAVCYMckPDQ");

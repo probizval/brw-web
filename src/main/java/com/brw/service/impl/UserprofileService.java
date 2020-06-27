@@ -2,6 +2,8 @@ package com.brw.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,8 @@ import com.brw.service.UserProfileService;
 
 @Component
 public class UserprofileService implements UserProfileService {
+
+	private static final Logger logger = LoggerFactory.getLogger(UserprofileService.class);
 
 	@Autowired
 	private UserProfileDAO userProfileDAO;
@@ -71,11 +75,11 @@ public class UserprofileService implements UserProfileService {
 		
 		userProfileDTO.setId(1001);
 		
-		System.out.println("**** 222 Inside UserProfileService.updateUserProfile() getId: "+userProfileDTO.getId());
-		System.out.println("**** 222 Inside UserProfileService.updateUserProfile() getEmailId: "+userProfileDTO.getEmailId());
-		System.out.println("**** 222 Inside UserProfileService.updateUserProfile() getFirstName: "+userProfileDTO.getFirstName());
-		System.out.println("**** 222 Inside UserProfileService.updateUserProfile() getLastName: "+userProfileDTO.getLastName());
-		System.out.println("**** 222 Inside UserProfileService.updateUserProfile() getAgentTitle: "+userProfileDTO.getAgentTitle());
+		logger.info("**** 222 Inside UserProfileService.updateUserProfile() getId: "+userProfileDTO.getId());
+		logger.info("**** 222 Inside UserProfileService.updateUserProfile() getEmailId: "+userProfileDTO.getEmailId());
+		logger.info("**** 222 Inside UserProfileService.updateUserProfile() getFirstName: "+userProfileDTO.getFirstName());
+		logger.info("**** 222 Inside UserProfileService.updateUserProfile() getLastName: "+userProfileDTO.getLastName());
+		logger.info("**** 222 Inside UserProfileService.updateUserProfile() getAgentTitle: "+userProfileDTO.getAgentTitle());
 		
 		UserProfile userProfile = userProfileDAO.findById(userProfileDTO.getId()).get();
 		userProfile.setFirstName(userProfileDTO.getFirstName());

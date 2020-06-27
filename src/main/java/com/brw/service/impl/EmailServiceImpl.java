@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,14 +40,16 @@ import com.brw.exceptions.EmailException;
 
 @Component
 public class EmailServiceImpl implements com.brw.service.EmailService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
 
 	@Autowired
 	private UserDAO userDAO;
 	
 	@Override
 	public EmailDTO sendEmail(EmailDTO emailDTO) throws EmailException, AddressException, MessagingException, IOException{
-		System.out.println("**** 222 Inside EmailServiceImpl.sendEmail()");
-		System.out.println("**** 222 Inside EmailServiceImpl.sendEmail() emailDTO.getFrom(): "+emailDTO.getFrom());
+		logger.info("**** 222 Inside EmailServiceImpl.sendEmail()");
+		logger.info("**** 222 Inside EmailServiceImpl.sendEmail() emailDTO.getFrom(): "+emailDTO.getFrom());
 
 		EmailDTO returnEmailDTO = new EmailDTO();
 		
@@ -66,18 +70,18 @@ public class EmailServiceImpl implements com.brw.service.EmailService {
 		String emailToList = Constants.EMPTY_STRING;
 		int i = 0;
 		for (String email: emailDTO.getToList()) {
-			System.out.println("**** 222 Inside EmailServiceImpl.sendEmail() i: "+i);
-			System.out.println("**** 222 Inside EmailServiceImpl.sendEmail() email: "+email);
+			logger.info("**** 222 Inside EmailServiceImpl.sendEmail() i: "+i);
+			logger.info("**** 222 Inside EmailServiceImpl.sendEmail() email: "+email);
 
 			if(i != 0) {
 				emailToList = emailToList.concat(Constants.COMMA);
 			}
 			emailToList = emailToList.concat(email);
-			System.out.println("**** 222 Inside EmailServiceImpl.sendEmail() emailToList: "+emailToList);
+			logger.info("**** 222 Inside EmailServiceImpl.sendEmail() emailToList: "+emailToList);
 
 			i++;
 		}
-		System.out.println("**** 222 Inside EmailServiceImpl.sendEmail() emailToList: "+emailToList);
+		logger.info("**** 222 Inside EmailServiceImpl.sendEmail() emailToList: "+emailToList);
 
 		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailToList));
 		msg.setSubject(emailDTO.getSubject());
@@ -109,7 +113,7 @@ public class EmailServiceImpl implements com.brw.service.EmailService {
 	
 	
 	private void sendAcknowledgementEmail(String email) throws EmailException, AddressException, MessagingException, IOException{
-		System.out.println("**** 222 Inside EmailServiceImpl.sendAcknowledgementEmail()");
+		logger.info("**** 222 Inside EmailServiceImpl.sendAcknowledgementEmail()");
 		
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -135,7 +139,7 @@ public class EmailServiceImpl implements com.brw.service.EmailService {
 		  
 		try {
 			Transport.send(msg);
-			System.out.println("**** 222 Inside EmailServiceImpl.sendAcknowledgementEmail() TO: "+email);
+			logger.info("**** 222 Inside EmailServiceImpl.sendAcknowledgementEmail() TO: "+email);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

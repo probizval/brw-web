@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,8 @@ import com.brw.service.UserService;
 
 @Component
 public class SearchAgentServiceImpl implements com.brw.service.SearchAgentService {
+
+	private static final Logger logger = LoggerFactory.getLogger(SearchAgentServiceImpl.class);
 
 	@Autowired
 	private SearchAgentDAO searchAgentDAO;
@@ -46,7 +50,7 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 		userService.trackUserActivity(userActivityDTO);
 		//Log the User Action - END
 		
-		System.out.println("222 **** Inside SearchAgentServiceImpl.addSearchAgent()");
+		logger.info("222 **** Inside SearchAgentServiceImpl.addSearchAgent()");
 		SearchAgent searchAgent = new SearchAgent();
 		searchAgent.setUserId(searchAgentDTO.getUserId());
 		searchAgent.setEmail(searchAgentDTO.getEmail());
@@ -81,7 +85,7 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 	@Override
 	public SearchAgentsListDTO getSearchAgents(int userId) {
 		
-		System.out.println("222 **** Inside SearchAgentServiceImpl.getSearchAgent()");
+		logger.info("222 **** Inside SearchAgentServiceImpl.getSearchAgent()");
 	
 		List<SearchAgent> searchAgentsList = (List<SearchAgent>)searchAgentDAO.getSearchAgents(userId);
 		List<SearchAgentDTO> searchAgentsDTOList = new ArrayList<SearchAgentDTO>();
@@ -110,11 +114,10 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 	@Override
 	public void deleteSearchAgent(int userId, int agentId) {
 		
-		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent()");
+		logger.info("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent()");
 		
 		int nurDeleted = searchAgentDAO.deleteSearchAgent(userId, agentId);
 		
-		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent() nurDeleted: "+nurDeleted);
-
+		logger.info("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent() nurDeleted: "+nurDeleted);
 	}
 }

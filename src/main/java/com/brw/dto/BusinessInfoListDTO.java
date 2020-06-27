@@ -6,6 +6,7 @@ package com.brw.dto;
  */
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BusinessInfoListDTO implements Serializable {
@@ -13,6 +14,8 @@ public class BusinessInfoListDTO implements Serializable {
 	private static final long serialVersionUID = -65223447914153444L;
 	
 	private List<BusinessInfoDTO> businessList;
+	
+	List <BizLatLongDTO> bizLatLongDTOList;
 	
 	private Long totalCount;
 	
@@ -26,6 +29,14 @@ public class BusinessInfoListDTO implements Serializable {
 
 	public void setBusinessList(List<BusinessInfoDTO> businessList) {
 		this.businessList = businessList;
+	}
+
+	public List<BizLatLongDTO> getBizLatLongDTOList() {
+		return bizLatLongDTOList;
+	}
+
+	public void setBizLatLongDTOList(List<BizLatLongDTO> bizLatLongDTOList) {
+		this.bizLatLongDTOList = bizLatLongDTOList;
 	}
 
 	public Long getTotalCount() {

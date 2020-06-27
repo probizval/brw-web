@@ -15,6 +15,8 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,12 +38,14 @@ import com.brw.entities.Image;
 @Component
 public class ImageServiceImpl implements com.brw.service.ImageService {
 		
+	private static final Logger logger = LoggerFactory.getLogger(ImageServiceImpl.class);
+
 	@Autowired
 	private ImageDAO imageDAO;
 	
 	@Override
 	public ImagesListDTO uploadImages(UploadImagesListDTO uploadImagesListDTO) {
-		System.out.println("222 **** Inside ImageServiceImpl.uploadImages()");
+		logger.info("222 **** Inside ImageServiceImpl.uploadImages()");
 
 		List<UploadImageDTO> uploadImagesDTOList = uploadImagesListDTO.getUploadImagesList();
 		//List<UploadImageDTO> returnImageDTOList = new ArrayList<UploadImageDTO>();
@@ -55,8 +59,8 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 		int i = 0;
 		
 		for (UploadImageDTO uploadImageDTO: uploadImagesDTOList) {
-			System.out.println("222 **** uploadImageDTO.name "+uploadImageDTO.getTitle());
-			System.out.println("222 **** uploadImageDTO.getImageBase64 "+uploadImageDTO.getImageBase64());
+			logger.info("222 **** uploadImageDTO.name "+uploadImageDTO.getTitle());
+			logger.info("222 **** uploadImageDTO.getImageBase64 "+uploadImageDTO.getImageBase64());
 			
 			//String base64String = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAHkAAAB5C...";
 			String base64String = uploadImageDTO.getImageBase64();
@@ -142,7 +146,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	        s3Client.putObject(objectRequest);
 	        s3Url = s3Client.getUrl(s3bucketName, key);
 	        
-	        System.out.println("333 **** AWS S3 URL for this IMAGE: " + s3Url.toString());
+	        logger.info("333 **** AWS S3 URL for this IMAGE: " + s3Url.toString());
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
@@ -151,7 +155,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	
 	@Override
 	public ImagesListDTO addImages(ImagesListDTO imagesListDTO) {
-		System.out.println("222 **** Inside ImageServiceImpl.addImages()");
+		logger.info("222 **** Inside ImageServiceImpl.addImages()");
 
 		List<ImageDTO> imagesDTOList = imagesListDTO.getImagesList();
 		List<ImageDTO> returnImageDTOList = new ArrayList<ImageDTO>();
@@ -198,7 +202,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	 */
 	@Override
 	public ImagesListDTO getImages(int businessId) {
-		System.out.println("222 **** Inside ImageServiceImpl.getImages()");
+		logger.info("222 **** Inside ImageServiceImpl.getImages()");
 
 		ImagesListDTO returnImageDTOList = new ImagesListDTO();
 		ImagesListDTO dbIamgesDTOList = getImagesFromDB(businessId);
@@ -240,7 +244,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	}
 	
 	private ImagesListDTO getImagesFromDB(int businessId) {
-		System.out.println("222 **** Inside ImageServiceImpl.getImages()");
+		logger.info("222 **** Inside ImageServiceImpl.getImages()");
 
 		List<Image> imageList = (List<Image>)imageDAO.getImages(businessId);
 		List<ImageDTO> returnImageListDTO = new ArrayList<ImageDTO>();
@@ -268,7 +272,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	
 	@Override
 	public int deleteImages(ImagesListDTO imagesListDTO) {
-		System.out.println("222 **** Inside ImageServiceImpl.getImages()");
+		logger.info("222 **** Inside ImageServiceImpl.getImages()");
 		
 		int businessId = imagesListDTO.getBusinessId();
 		int nurDeleted = 0;
@@ -284,7 +288,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	
 	@Override
 	public String getDefaultImageForBizType(String bizType) {
-		System.out.println("222 **** Inside ImageServiceImpl.getDefaultImageForBizType()");
+		logger.info("222 **** Inside ImageServiceImpl.getDefaultImageForBizType()");
 		
 		// switch case to pick up bizId range based on bizType
 		int min = 0;

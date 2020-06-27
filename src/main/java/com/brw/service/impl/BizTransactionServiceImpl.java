@@ -11,6 +11,8 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +23,8 @@ import com.brw.entities.BizTransactions;
 
 @Component
 public class BizTransactionServiceImpl implements com.brw.service.BizTransactionService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(BizTransactionServiceImpl.class);
 
 	@Autowired
 	private BizTransactionsDAO bizTransactionsDAO;
@@ -28,7 +32,7 @@ public class BizTransactionServiceImpl implements com.brw.service.BizTransaction
 	@Override
 	public BizTransactionsListDTO getBizTransactions(int businessId) {
 		// TODO Auto-generated method stub
-		System.out.println("**** 222 Inside BizTransactionServiceImpl.getBizTransactions() businessId: "+businessId);
+		logger.info("**** 222 Inside BizTransactionServiceImpl.getBizTransactions() businessId: "+businessId);
 		
 		List<BizTransactions> bizTransactionsList = (List<BizTransactions>)bizTransactionsDAO.getBizTransactions(businessId);
 		List<BizTransactionsDTO> bizTransactionsDTOList = new ArrayList<BizTransactionsDTO>();
@@ -59,7 +63,7 @@ public class BizTransactionServiceImpl implements com.brw.service.BizTransaction
 	@Override
 	public BizTransactionsDTO getBizLastSoldPrice(int businessId) {
 		// TODO Auto-generated method stub
-		System.out.println("**** 222 Inside BizTransactionServiceImpl.getBizLastSoldPrice() businessId: "+businessId);
+		logger.info("**** 222 Inside BizTransactionServiceImpl.getBizLastSoldPrice() businessId: "+businessId);
 		
 		BizTransactions compBizTransaction = bizTransactionsDAO.getBizLastSoldPrice(businessId, "SOLD");
 		
@@ -84,10 +88,10 @@ public class BizTransactionServiceImpl implements com.brw.service.BizTransaction
 	@Override
 	public BizTransactionsListDTO addBizTransactions(BizTransactionsListDTO bizTransactionsListDTO) {
 		
-		System.out.println("222 **** Inside BizTransactionServiceImpl.addBizTransactions()");
+		logger.info("222 **** Inside BizTransactionServiceImpl.addBizTransactions()");
 
 		List<BizTransactionsDTO> bizTransactionsDTOList = bizTransactionsListDTO.getBizTransactionsList();
-		System.out.println("222 **** Inside BizTransactionServiceImpl.addBizTransactions() bizTransactionsDTOList SIZE: "+bizTransactionsDTOList.size());
+		logger.info("222 **** Inside BizTransactionServiceImpl.addBizTransactions() bizTransactionsDTOList SIZE: "+bizTransactionsDTOList.size());
 		
 		List<BizTransactionsDTO> bizTransDTOList = new ArrayList<BizTransactionsDTO>();
 		BizTransactionsListDTO bizTransListDTO = new BizTransactionsListDTO();

@@ -18,6 +18,7 @@ public class GBusinessInfoDTO {
 	private double gLongitude;
 	private String gRating;
 	private String gIsClosed;
+	private String gSinglePhotoReferance;
 	private String[] gPhotoReferances;
 	private String[] gPhotoUrls;
 	
@@ -68,6 +69,12 @@ public class GBusinessInfoDTO {
 	}
 	public void setgIsClosed(String gIsClosed) {
 		this.gIsClosed = gIsClosed;
+	}
+	public String getgSinglePhotoReferance() {
+		return gSinglePhotoReferance;
+	}
+	public void setgSinglePhotoReferance(String gSinglePhotoReferance) {
+		this.gSinglePhotoReferance = gSinglePhotoReferance;
 	}
 	public String[] getgPhotoReferances() {
 		return gPhotoReferances;

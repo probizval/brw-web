@@ -11,6 +11,8 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +32,8 @@ import com.brw.entities.CountyCoordinates;
 @Component
 public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAttribService {
 
+	private static final Logger logger = LoggerFactory.getLogger(AdditionalAttribServiceImpl.class);
+
 	@Autowired
 	private AdditionalAttribsDAO additionalAttribsDAO;
 	
@@ -42,8 +46,8 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 	@Override
 	public AdditionalAttribDefinitionsListDTO getAdditionalAttribDefinitions(String bizType, String bizSubType) {
 		// TODO Auto-generated method stub
-		System.out.println("**** 222 Inside AdditionalAttribServiceImpl.getAdditionalAttribDefinitions bizType: "+bizType);
-		System.out.println("**** 222 Inside AdditionalAttribServiceImpl.getAdditionalAttribDefinitions bizSubType: "+bizSubType);
+		logger.info("**** 222 Inside AdditionalAttribServiceImpl.getAdditionalAttribDefinitions bizType: "+bizType);
+		logger.info("**** 222 Inside AdditionalAttribServiceImpl.getAdditionalAttribDefinitions bizSubType: "+bizSubType);
 		
 		List<AdditionalAttribDefinitions> additionalAttribDefinitionsList = (List<AdditionalAttribDefinitions>)additionalAttribDefinitionsDAO.getAdditionalAttribDefinitions(bizType, bizSubType);
 		List<AdditionalAttribDefinitionsDTO> additionalAttribDefinitionsDTOList = new ArrayList<AdditionalAttribDefinitionsDTO>();
@@ -65,7 +69,7 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 	@Override
 	public AdditionalAttribsListDTO getAdditionalAttributes(int businessId) {
 		// TODO Auto-generated method stub
-		System.out.println("**** 222 Inside AdditionalAttribServiceImpl.getAdditionalAttribs() businessId: "+businessId);
+		logger.info("**** 222 Inside AdditionalAttribServiceImpl.getAdditionalAttribs() businessId: "+businessId);
 		
 		List<AdditionalAttributes> additionalAttributesList = (List<AdditionalAttributes>)additionalAttribsDAO.getAdditionalAttributes(businessId);
 		List<AdditionalAttribsDTO> additionalAttribsDTOList = new ArrayList<AdditionalAttribsDTO>();
@@ -92,10 +96,10 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 	@Override
 	public AdditionalAttribsListDTO addAdditionalAttributes(AdditionalAttribsListDTO additionalAttribsListDTO) {
 		
-		System.out.println("222 **** Inside AdditionalAttribServiceImpl.addAdditionalAttributes()");
+		logger.info("222 **** Inside AdditionalAttribServiceImpl.addAdditionalAttributes()");
 
 		List<AdditionalAttribsDTO> additionalAttribsDTOList = additionalAttribsListDTO.getAddAttributesList();
-		System.out.println("222 **** Inside AdditionalAttribServiceImpl.addAdditionalAttributes() addAdditionalAttributes SIZE: "+additionalAttribsDTOList.size());
+		logger.info("222 **** Inside AdditionalAttribServiceImpl.addAdditionalAttributes() addAdditionalAttributes SIZE: "+additionalAttribsDTOList.size());
 		
 		List<AdditionalAttribsDTO> addAttribsDTOList = new ArrayList<AdditionalAttribsDTO>();
 		AdditionalAttribsListDTO addAttribsListDTO = new AdditionalAttribsListDTO();
@@ -149,11 +153,11 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 	
 	@Override
 	public boolean deleteAdditionalAttributes(int businessId) {
-		System.out.println("222 **** Inside AdditionalAttribServiceImpl.updateAdditionalAttributes()");
+		logger.info("222 **** Inside AdditionalAttribServiceImpl.updateAdditionalAttributes()");
 		
 		int records = additionalAttribsDAO.deleteAdditionalAttributes(businessId);
 		
-		System.out.println("222.1 **** Inside AdditionalAttribServiceImpl.updateAdditionalAttributes() Number of deletedRecords: "+ records);
+		logger.info("222.1 **** Inside AdditionalAttribServiceImpl.updateAdditionalAttributes() Number of deletedRecords: "+ records);
 
 		return true;
 	}
@@ -161,7 +165,7 @@ public class AdditionalAttribServiceImpl implements com.brw.service.AdditionalAt
 	@Override
 	public CountyListDTO getCountiesAndCoordinates(String stateName) {
 		// TODO Auto-generated method stub
-		System.out.println("**** 222 Inside AdditionalAttribServiceImpl.getCountiesAndCoordinates StateName: "+stateName);
+		logger.info("**** 222 Inside AdditionalAttribServiceImpl.getCountiesAndCoordinates StateName: "+stateName);
 		
 		List<CountyCoordinates> countyCoordinatesList = (List<CountyCoordinates>)stateAndCountiesDAO.getCountiesAndCoordinates(stateName);
 		

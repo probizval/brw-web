@@ -10,6 +10,8 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,13 +23,15 @@ import com.brw.entities.Estimates;
 @Component
 public class EstimateServiceImpl implements com.brw.service.EstimateService {
 
+	private static final Logger logger = LoggerFactory.getLogger(EstimateServiceImpl.class);
+
 	@Autowired
 	private EstimatesDAO estimatesDAO;
 	
 	@Override
 	public EstimatesListDTO getEstimates(int businessId) {
 		// TODO Auto-generated method stub
-		System.out.println("**** 222 Inside EstimateServiceImpl.getEstimates() businessId: "+businessId);
+		logger.info("**** 222 Inside EstimateServiceImpl.getEstimates() businessId: "+businessId);
 		
 		List<Estimates> estimateList = (List<Estimates>)estimatesDAO.getEstimates(businessId);
 		List<EstimatesDTO> estimatesDTOList = new ArrayList<EstimatesDTO>();
@@ -53,7 +57,7 @@ public class EstimateServiceImpl implements com.brw.service.EstimateService {
 	@Override
 	public EstimatesListDTO addEstimates(EstimatesListDTO estimateslistDTO) {
 		
-		System.out.println("222 **** Inside EstimateServiceImpl.addEstimates()");
+		logger.info("222 **** Inside EstimateServiceImpl.addEstimates()");
 
 		List<EstimatesDTO> estimatesDTOList = estimateslistDTO.getEstimatesList();
 		List<EstimatesDTO> estDTOList = new ArrayList<EstimatesDTO>();

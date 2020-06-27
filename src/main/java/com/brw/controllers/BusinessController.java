@@ -6,10 +6,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -27,6 +27,7 @@ import com.brw.dto.BusinessDetailsDTO;
 import com.brw.dto.BusinessInfoListDTO;
 import com.brw.dto.RelatedBusinessDTO;
 import com.brw.dto.RelatedBusinessListDTO;
+import com.brw.service.AsyncProcessingService;
 import com.brw.service.BusinessService;
 
 /**
@@ -34,9 +35,11 @@ import com.brw.service.BusinessService;
  * 2019-20
  */
 
+//@Lazy
+//@EnableAsync
+@Component
 @RestController
 @CrossOrigin(origins = "*")
-//@RequestMapping("/api/business/v1/")
 @RequestMapping(value = "/api/business/v1/", produces = "application/json")
 public class BusinessController implements ErrorController {
 
@@ -44,6 +47,9 @@ public class BusinessController implements ErrorController {
 
 	@Autowired
 	BusinessService businessService;
+	
+	@Autowired
+	AsyncProcessingService asyncProcessingService;
 	
 	//@Autowired
 	//VendorDataService vendorDataService;
@@ -59,10 +65,11 @@ public class BusinessController implements ErrorController {
 	 * searchBusiness - Service for simple search on home page based on business name, OR type, OR address returns list of matching businesses with limited attributes
 	 */
 	@RequestMapping(value = "searchBusiness", method = RequestMethod.POST, produces = "application/json")
-	//@PostMapping(value = "searchBusiness")
+	//@Async("AsyncStoreLatLngToDB")
+	//@Override
 	public ApiResponse<?> searchBusiness(@RequestBody BusinessDetailsDTO businessDetailsDTO) {
 		
-		System.out.println("**** 111 Inside BusinessController.searchBusiness() searchFilter: "+businessDetailsDTO.toString());
+		logger.info("**** 111 Inside BusinessController.searchBusiness() searchFilter: "+businessDetailsDTO.toString());
 
 		logger.info("Search Business based on search criteria");
 		
@@ -70,8 +77,11 @@ public class BusinessController implements ErrorController {
 
 		try {
 			businessList = businessService.searchBusiness(businessDetailsDTO);
+			//businessService.asyncStoreLatLngToDB(businessDetailsDTO.getInvokerId(), businessList.getBizLatLongDTOList());
+			asyncProcessingService.asyncStoreLatLngToDB(businessList.getBizLatLongDTOList());
 		
-		} catch (BusinessException be) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
 		}
 		return ApiResponse.withData(businessList);
@@ -91,7 +101,7 @@ public class BusinessController implements ErrorController {
 	@PostMapping(value = "getBusinessDetails")
 	public ApiResponse<?> getBusinessDetails(@RequestBody BusinessDetailsDTO businessDTO) {
 		
-		System.out.println("**** 111 Inside BusinessController.getBusinessDetails()");
+		logger.info("**** 111 Inside BusinessController.getBusinessDetails()");
 		
 		logger.info("GET the Business details based on business Id");
 
@@ -143,7 +153,7 @@ public class BusinessController implements ErrorController {
 	@PostMapping(value = "addBusinessDetails")
 	public ResponseEntity<BusinessDetailsDTO> addBusiness(@RequestBody BusinessDetailsDTO businessDetailsDTO) {
 		
-		System.out.println("111 **** Inside BusinessController.addBusiness()");
+		logger.info("111 **** Inside BusinessController.addBusiness()");
 		
 		logger.info("ADD the New Business Details");
 		
@@ -165,7 +175,7 @@ public class BusinessController implements ErrorController {
 	@PutMapping(value = "updateBusinessDetails")
 	public ResponseEntity<BusinessDetailsDTO> updateBusiness(@RequestBody BusinessDetailsDTO businessDetailsDTO) {
 		
-		System.out.println("111 **** Inside BusinessController.updateBusiness()");
+		logger.info("111 **** Inside BusinessController.updateBusiness()");
 		
 		logger.info("UPDATE the New Business Details");
 		
@@ -186,7 +196,7 @@ public class BusinessController implements ErrorController {
 	 */
 	public BusinessDetailsDTO updateBusinessWithVendorData(BusinessDetailsDTO businessDetailsDTO) {
 		
-		System.out.println("**** Inside updateBusinessWithVendorData()");
+		logger.info("**** Inside updateBusinessWithVendorData()");
 		
 		logger.info("UPDATE the Business Details based on Vendor Data");
 		

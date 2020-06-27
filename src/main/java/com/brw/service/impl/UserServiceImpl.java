@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +33,8 @@ import com.brw.service.UserService;
 @Component
 public class UserServiceImpl implements UserService {
 
+	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
 	@Autowired
 	private UserDAO userDAO;
 	
@@ -46,7 +50,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO addUserProfile(UserDTO userDTO) {
 		
-		System.out.println("222 **** Inside UserServiceImpl.addUser(): "+userDTO.getUserId());
+		logger.info("222 **** Inside UserServiceImpl.addUser(): "+userDTO.getUserId());
 		
 		User user = new User();
 		user.setUserId(userDTO.getUserId());
@@ -194,7 +198,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO getUserProfile(UserDTO userDTO) {
 		
-		System.out.println("222 **** Inside UserServiceImpl.getUserProfile(): "+userDTO.getEmail());
+		logger.info("222 **** Inside UserServiceImpl.getUserProfile(): "+userDTO.getEmail());
 		
 		User returnUser = userDAO.getUserProfile(userDTO.getEmail());
 	
@@ -264,7 +268,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO updateUserProfile(UserDTO userDTO) {
 		
-		System.out.println("222 **** Inside UserServiceImpl.updateUserDetails(): "+userDTO.getUserId());
+		logger.info("222 **** Inside UserServiceImpl.updateUserDetails(): "+userDTO.getUserId());
 		
 		User user = userDAO.findById(userDTO.getUserId()).get();
 
@@ -451,7 +455,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserBusinessDTO addUserBusiness(UserBusinessDTO userBusinessDTO) {
 		
-		System.out.println("222 **** Inside UserServiceImpl.addUserBusiness(): "+userBusinessDTO.getRelationship());
+		logger.info("222 **** Inside UserServiceImpl.addUserBusiness(): "+userBusinessDTO.getRelationship());
 		
 		UserBusiness userBusiness = new UserBusiness();
 		UserBusinessDTO returnUserBusinessDTO = new UserBusinessDTO();
@@ -479,7 +483,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public UserBusinessListDTO getUserBusinesses(int userId) {
-		System.out.println("222 **** Inside UserServiceImpl.getUserBusinesses()");
+		logger.info("222 **** Inside UserServiceImpl.getUserBusinesses()");
 		
 		List<UserBusiness> userBusinessList = (List<UserBusiness>)userBusinessDAO.getUserBusinesses(userId);
 		List<UserBusinessDTO> useBusinessDTOList = new ArrayList<UserBusinessDTO>();
@@ -492,7 +496,7 @@ public class UserServiceImpl implements UserService {
 			returnUserBusinessDTO.setRelationship(returnUserBusiness.getRelationship());
 			//returnUserBusinessDTO.setBusinessId(returnUserBusiness.getBusinessId());
 			//Call GetUserInfo based on the biz_Id to get few other details about the business and return as part of the response of getUserBusinesses
-			System.out.println("222 **** Inside UserServiceImpl.getUserBusinesses() bizId: "+returnUserBusiness.getBusinessId());
+			logger.info("222 **** Inside UserServiceImpl.getUserBusinesses() bizId: "+returnUserBusiness.getBusinessId());
 			BusinessInfoDTO businessInfoDTO = businessService.getBusinessInfoFromBRWDB(returnUserBusiness.getBusinessId());
 			returnUserBusinessDTO.setBusinessInfoDTO(businessInfoDTO);
 			//
@@ -509,17 +513,17 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void deleteUserBusiness(int userId, String relationship) {
-		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent()");
+		logger.info("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent()");
 		
 		int nurDeleted = userBusinessDAO.deleteUserBusiness(userId, relationship);
 		
-		System.out.println("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent() nurDeleted: "+nurDeleted);
+		logger.info("222 **** Inside SearchAgentServiceImpl.deleteSearchAgent() nurDeleted: "+nurDeleted);
 	}
 	
 	@Override
 	public UserActivityDTO trackUserActivity(UserActivityDTO userActivityDTO) {
 		
-		System.out.println("222 **** Inside UserServiceImpl.trackUserActivity()");
+		logger.info("222 **** Inside UserServiceImpl.trackUserActivity()");
 		
 		UserActivity userActivity = new UserActivity();
 		userActivity.setUserId(userActivityDTO.getUserId());
@@ -549,14 +553,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int getTotalBusinessViews(int userId) {
 		
-		System.out.println("222 **** Inside UserServiceImpl.getTotalBusinessViews()");
+		logger.info("222 **** Inside UserServiceImpl.getTotalBusinessViews()");
 		return 0;
 	}
 	
 	@Override
 	public int getBusinessViewsSince(int userId, String dateSince) {
 		
-		System.out.println("222 **** Inside UserServiceImpl.getTotalBusinessViews()");
+		logger.info("222 **** Inside UserServiceImpl.getTotalBusinessViews()");
 		return 0;
 	}
 }
