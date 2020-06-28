@@ -62,13 +62,14 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 		Integer x = 0;
 		
 		if (bizInfoDTOList.size() > 1) {
-			GBusinessInfoDTO returnGBusinessInfoDTO = new GBusinessInfoDTO();
+			
 			
 			for (BusinessInfoDTO businessInfoDTO: bizInfoDTOList) {
 				logger.info("**** businessInfoDTO.getGoogleBizSearchString(): "+businessInfoDTO.getGoogleBizSearchString());
 				if (null != businessInfoDTO.getGoogleBizSearchString()) {
 				
 					GBusinessInfoDTO gBusinessInfoDTO = new GBusinessInfoDTO();
+					GBusinessInfoDTO returnGBusinessInfoDTO = new GBusinessInfoDTO();
 		
 					try {
 						gBusinessInfoDTO = getFormattedAddressAndLatLong(businessInfoDTO.getGoogleBizSearchString());
@@ -85,11 +86,13 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 					businessDetailsDTO.setImageFirst(gBusinessInfoDTO.getgSinglePhotoUrl());
 					
 					//populate info in BizLatLongDTO
+					logger.info("**** businessInfoDTO.getBusinessId(): "+businessInfoDTO.getBusinessId());
 					returnGBusinessInfoDTO.setBizId(businessInfoDTO.getBusinessId());
+					logger.info("**** gBusinessInfoDTO.getgPlaceId(): "+gBusinessInfoDTO.getgPlaceId());
 					returnGBusinessInfoDTO.setgPlaceId(gBusinessInfoDTO.getgPlaceId());
-					returnGBusinessInfoDTO.setgSinglePhotoUrl(gBusinessInfoDTO.getgSinglePhotoUrl());
-					returnGBusinessInfoDTO.setgLatitude(gBusinessInfoDTO.getgLatitude());
-					returnGBusinessInfoDTO.setgLongitude(gBusinessInfoDTO.getgLongitude());
+					//returnGBusinessInfoDTO.setgSinglePhotoUrl(gBusinessInfoDTO.getgSinglePhotoUrl());
+					//returnGBusinessInfoDTO.setgLatitude(gBusinessInfoDTO.getgLatitude());
+					//returnGBusinessInfoDTO.setgLongitude(gBusinessInfoDTO.getgLongitude());
 					//
 					
 					logger.info("**** businessInfoDTO.isUpdateAfterGoogle(): "+businessInfoDTO.isUpdateAfterGoogle());
@@ -103,9 +106,8 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 					} else {
 						logger.info("**** CALL TO updateBusinessDetails is SKIPPED");
 					}
+					returnGBusinessInfoDTOList.add(returnGBusinessInfoDTO);
 				}
-				
-				returnGBusinessInfoDTOList.add(returnGBusinessInfoDTO);
 			}
 			//Call this method to get the Photo URLs for biz from google and Add them to image table
 			logger.info("**** calling asyncStoreImageUrlsToDB");
@@ -121,7 +123,7 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 	//@Async("threadPoolTaskExecutor")
 	//public CompletableFuture<List<GBusinessInfoDTO>> asyncStoreImageUrlsToDB(List<GBusinessInfoDTO> gBusinessInfoDTOList) throws InterruptedException {
 	public List<GBusinessInfoDTO> asyncStoreImageUrlsToDB(List<GBusinessInfoDTO> gBusinessInfoDTOList) throws InterruptedException {
-		logger.info("**** Inside AsyncProcessingServiceImpl.asyncStoreImageUrlsToDB()");
+		logger.info("**** Inside AsyncProcessingServiceImpl.asyncStoreImageUrlsToDB() gBusinessInfoDTOList.size() "+gBusinessInfoDTOList.size());
 		long start = System.currentTimeMillis();
 		
 		List<GBusinessInfoDTO> returnGBusinessInfoDTOList = new ArrayList();
@@ -131,58 +133,66 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 		List<ImageDTO> imageDTOList = new ArrayList();
 		
 		for (GBusinessInfoDTO gBusinessInfoDTO: gBusinessInfoDTOList) {
+			
+			logger.info("***  gBusinessInfoDTO.getBizId(): "+gBusinessInfoDTO.getBizId());
+			logger.info("***  gBusinessInfoDTO.getgPlaceId(): "+gBusinessInfoDTO.getgPlaceId());
+
 			String placeId = gBusinessInfoDTO.getgPlaceId();
 			logger.info("***  placeId: "+placeId);
 			
 			if (null != placeId){
-				PlaceDetails gpdResult = new PlaceDetails();
+				PlaceDetails gpdResult = null;
 				try {
 					logger.info("***  Calling PLACE DETAILS API based on placeId: "+placeId);
 					logger.info("***  Calling PLACE DETAILS API based on placeId for bizId: "+gBusinessInfoDTO.getBizId());
 					gpdResult = PlacesApi.placeDetails(getGoogleContext(), placeId).awaitIgnoreError();
-					
+					logger.info("***  AFTER Calling PLACE DETAILS API gpdResult: "+gpdResult);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
-				//capture up to 5 image references 
-				logger.info("***  AFTER Calling PLACE DETAILS API Total NUMBER of Photos FOUND : "+gpdResult.photos.length);
-
-				int x = 0;
-				String[] photoReferances = new String[gpdResult.photos.length];
-				if (null != gpdResult.photos && gpdResult.photos.length > 0) {
-					for (Photo phoRef: gpdResult.photos) {
-						photoReferances[x] = phoRef.photoReference;
-						x ++;
-						//Collect only 5 image references from Google - To save Photos api cost and storage space
-						if(x == 5) {
-							logger.info("**** INSIDE BREAK AFTER 5 COUNTER for gPhotos ****");
-							break;
+				if (null != gpdResult) {
+					//capture up to 5 image references 
+					logger.info("***  AFTER Calling PLACE DETAILS API Total NUMBER of Photos FOUND : "+gpdResult.photos.length);
+	
+					int x = 0;
+					String[] photoReferances = new String[gpdResult.photos.length];
+					if (null != gpdResult.photos && gpdResult.photos.length > 0) {
+						for (Photo phoRef: gpdResult.photos) {
+							photoReferances[x] = phoRef.photoReference;
+							x ++;
+							//Collect only 5 image references from Google - To save Photos api cost and storage space
+							if(x == 5) {
+								logger.info("**** INSIDE BREAK AFTER 5 COUNTER for gPhotos ****");
+								break;
+							}
 						}
 					}
-				}
-				
-				int y = 0;
-				String[] gPhotoUrls = new String[gBusinessInfoDTOList.size()];
-				for (String photoRef: photoReferances) {
-					String gPhotoUrl = "https://maps.googleapis.com/maps/api/place/photo?photoreference="+photoRef+"&sensor=false&maxheight=500&maxwidth=500&key=AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I";
 					
-					logger.info("***  BIZ Image found on GOOGLE gPhotoUrl: "+gPhotoUrl);
-
-					gPhotoUrls[y] = gPhotoUrl;
-					y++;
+					int y = 0;
+					String[] gPhotoUrls = new String[gBusinessInfoDTOList.size()];
+					for (String photoRef: photoReferances) {
+						String gPhotoUrl = "https://maps.googleapis.com/maps/api/place/photo?photoreference="+photoRef+"&sensor=false&maxheight=500&maxwidth=500&key=AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I";
+						
+						logger.info("***  BIZ Image found on GOOGLE gPhotoUrl: "+gPhotoUrl);
+	
+						gPhotoUrls[y] = gPhotoUrl;
+						y++;
+						
+						imageDTO.setUrl(gPhotoUrl);
+					}
+					imageDTOList.add(imageDTO);
+					returnGBusinessInfoDTO.setgPhotoUrls(gPhotoUrls);
 					
-					imageDTO.setUrl(gPhotoUrl);
+					imagesListDTO.setInvokerId(1001);
+					imagesListDTO.setBusinessId(gBusinessInfoDTO.getBizId());
+					imagesListDTO.setImagesList(imageDTOList);
+					
+					logger.info("**** calling addImages");
+					//Call the addImages() to store Images on BRW DB
+					addImages(imagesListDTO);
 				}
-				returnGBusinessInfoDTO.setgPhotoUrls(gPhotoUrls);
-				
-				imagesListDTO.setInvokerId(1001);
-				imagesListDTO.setBusinessId(gBusinessInfoDTO.getBizId());
-				imagesListDTO.setImagesList(imageDTOList);
-				
-				logger.info("**** calling addImages");
-				//Call the addImages() to store Images on BRW DB
-				addImages(imagesListDTO);
 			}
 		}
 		logger.info("Elapsed time: " + (System.currentTimeMillis() - start));
@@ -218,6 +228,7 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 			if (!result.permanentlyClosed) {
 				returnGBusinessInfoDTO.setgIsClosed(gson.toJson(result.permanentlyClosed));
 				returnGBusinessInfoDTO.setgBusinessName(gson.toJson(result.name));
+				logger.info("&&&&&&&&&&&&& result.placeId: "+result.placeId);
 				returnGBusinessInfoDTO.setgPlaceId(gson.toJson(result.placeId));
 				returnGBusinessInfoDTO.setgFormattedAddress(gson.toJson(result.formattedAddress));
 				returnGBusinessInfoDTO.setgLatitude(new Double(gson.toJson(result.geometry.location.lat)));
@@ -312,7 +323,8 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 		if (null != businessDetailsDTO.getImageLogo() && businessDetailsDTO.getImageLogo() != Constants.EMPTY_STRING) {
 			businessDetails.setImageLogo(businessDetailsDTO.getImageLogo());
 		}
-		
+
+		logger.info("businessDetailsDTO.getImageFirst(): "+businessDetailsDTO.getImageFirst());
 		if (null != businessDetailsDTO.getImageFirst() && businessDetailsDTO.getImageFirst() != Constants.EMPTY_STRING) {
 			businessDetails.setImageFirst(businessDetailsDTO.getImageFirst());
 		}

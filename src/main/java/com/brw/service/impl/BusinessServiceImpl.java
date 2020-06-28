@@ -493,13 +493,12 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 						logger.info("**** BIZ NAME Input gSearchString to Google API: "+gSearchString);
 						businessInfoDTO.setUpdateAfterGoogle(true);
 					}
-				} else {
-					logger.info("**** Lat/Lng FOUND in BRW DB");
-					businessInfoDTO.setLatitude(businessInfo.getLatitude());
-					businessInfoDTO.setLongitude(businessInfo.getLongitude());
 				}
 			}
 			
+			businessInfoDTO.setLatitude(businessInfo.getLatitude());
+			businessInfoDTO.setLongitude(businessInfo.getLongitude());
+			businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
 			businessInfoDTO.setIsHidden(businessInfo.getIsHidden());
 			businessInfoDTO.setType(businessInfo.getType());
 			businessInfoDTO.setSubType(businessInfo.getSubType());
