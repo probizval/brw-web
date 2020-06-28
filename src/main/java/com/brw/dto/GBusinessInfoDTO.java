@@ -1,7 +1,5 @@
 package com.brw.dto;
 
-import com.google.maps.model.PlacesSearchResult;
-
 /**
  * @author sidpatil
  * 2020
@@ -10,16 +8,17 @@ import com.google.maps.model.PlacesSearchResult;
 public class GBusinessInfoDTO {
 
 	private Integer invokerId;
-	
-	private Integer gPlaceId;
+	private Integer bizId;
+
+	private boolean updateAfterGoogle;
+	private String gPlaceId;
 	private String gBusinessName;
 	private String gFormattedAddress;
 	private double gLatitude;
 	private double gLongitude;
 	private String gRating;
 	private String gIsClosed;
-	private String gSinglePhotoReferance;
-	private String[] gPhotoReferances;
+	private String gSinglePhotoUrl;
 	private String[] gPhotoUrls;
 	
 	public Integer getInvokerId() {
@@ -28,10 +27,22 @@ public class GBusinessInfoDTO {
 	public void setInvokerId(Integer invokerId) {
 		this.invokerId = invokerId;
 	}
-	public Integer getgPlaceId() {
+	public Integer getBizId() {
+		return bizId;
+	}
+	public void setBizId(Integer bizId) {
+		this.bizId = bizId;
+	}
+	public boolean isUpdateAfterGoogle() {
+		return updateAfterGoogle;
+	}
+	public void setUpdateAfterGoogle(boolean updateAfterGoogle) {
+		this.updateAfterGoogle = updateAfterGoogle;
+	}
+	public String getgPlaceId() {
 		return gPlaceId;
 	}
-	public void setgPlaceId(Integer gPlaceId) {
+	public void setgPlaceId(String gPlaceId) {
 		this.gPlaceId = gPlaceId;
 	}
 	public String getgBusinessName() {
@@ -70,17 +81,12 @@ public class GBusinessInfoDTO {
 	public void setgIsClosed(String gIsClosed) {
 		this.gIsClosed = gIsClosed;
 	}
-	public String getgSinglePhotoReferance() {
-		return gSinglePhotoReferance;
+	
+	public String getgSinglePhotoUrl() {
+		return gSinglePhotoUrl;
 	}
-	public void setgSinglePhotoReferance(String gSinglePhotoReferance) {
-		this.gSinglePhotoReferance = gSinglePhotoReferance;
-	}
-	public String[] getgPhotoReferances() {
-		return gPhotoReferances;
-	}
-	public void setgPhotoReferances(String[] gPhotoReferances) {
-		this.gPhotoReferances = gPhotoReferances;
+	public void setgSinglePhotoUrl(String gSinglePhotoUrl) {
+		this.gSinglePhotoUrl = gSinglePhotoUrl;
 	}
 	public String[] getgPhotoUrls() {
 		return gPhotoUrls;
@@ -88,6 +94,4 @@ public class GBusinessInfoDTO {
 	public void setgPhotoUrls(String[] gPhotoUrls) {
 		this.gPhotoUrls = gPhotoUrls;
 	}
-	
-	
 }

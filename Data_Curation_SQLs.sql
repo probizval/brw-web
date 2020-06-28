@@ -29,7 +29,7 @@ and updatedby_user_id = 7777 order by biz_id desc limit 100;
 select biz_id from t_brw_business where 
 createdby_user_id = 888 
 and updatedby_user_id = 8888 order by biz_id desc limit 100;
--- 15626023
+-- 18837135
 
 select count(*) from  t_brw_business where hidden_YN = 'Y';
 -- 0

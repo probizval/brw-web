@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -25,7 +23,6 @@ import com.brw.dao.BusinessDetailsDAO;
 import com.brw.dao.BusinessInfoDAO;
 import com.brw.dao.RelatedBusinessDAO;
 import com.brw.dao.UserBusinessDAO;
-import com.brw.dto.BizLatLongDTO;
 import com.brw.dto.BusinessDetailsDTO;
 import com.brw.dto.BusinessDetailsListDTO;
 import com.brw.dto.BusinessInfoDTO;
@@ -61,15 +58,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	private static final Logger logger = LoggerFactory.getLogger(BusinessServiceImpl.class);
 
 	@Autowired
-	private BusinessDetailsDAO businessDetailsDAO;
-	
-	@Autowired
-	private BusinessInfoDAO businessInfoDAO;
-	
-	@Autowired
-	private RelatedBusinessDAO relatedBusinessDAO;
-	
-	@Autowired
 	EstimateService estimateService;
 	
 	@Autowired
@@ -84,42 +72,15 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	@Autowired
 	private UserBusinessDAO userBusinessDAO;
 	
+	@Autowired
+	private BusinessDetailsDAO businessDetailsDAO;
 	
-	//private static final String GOOGLE_API_KEY  = "***";
-    //private final HttpClient client = new DefaultHttpClient();
-    
-	/**
-	 * @author sidpatil
-	 * getCoordinates - This method calls Google API to get location co-ordinates based on the address
-	 */
-    /*
-    public static void main(final String[] args) throws ParseException, IOException, URISyntaxException
-    {
-        new GooglePlacesClient().performSearch("establishment", 8.6668310, 50.1093060);
-    }
-    */
-    
-	/*
-    public void performSearch(final String types, final double lon, final double lat) throws ParseException, IOException, URISyntaxException
-    {
-        final URIBuilder builder = new URIBuilder().setScheme("https").setHost("maps.googleapis.com").setPath("/maps/api/place/search/json");
-
-        builder.addParameter("location", lat + "," + lon);
-        builder.addParameter("radius", "5");
-        builder.addParameter("types", types);
-        builder.addParameter("sensor", "true");
-        builder.addParameter("key", "AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I");
-
-        final HttpUriRequest request = new HttpGet(builder.build());
-
-        final HttpResponse execute = this.client.execute(request);
-
-        final String response = EntityUtils.toString(execute.getEntity());
-
-        logger.info(response);
-    }
-    */
+	@Autowired
+	private BusinessInfoDAO businessInfoDAO;
 	
+	@Autowired
+	private RelatedBusinessDAO relatedBusinessDAO;
+
 	@Override
 	public BusinessInfoListDTO searchBusiness(BusinessDetailsDTO businessDTO) {
 		
@@ -473,9 +434,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
 		List<BusinessInfoDTO> businessInfoDTOList = new ArrayList<BusinessInfoDTO>();
 		BusinessInfoListDTO businessInfoListDTO = new BusinessInfoListDTO();
-		GBusinessInfoDTO gBusinessInfoDTO = new GBusinessInfoDTO();
-		
-		List <BizLatLongDTO> bizLatLongDTOList = new ArrayList<BizLatLongDTO>();
 
 		int x = 0;
 		
@@ -486,8 +444,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				logger.info("**** INSIDE BREAK AFTER 10 COUNTER ****");
 				break;
 			}
-			
-			BizLatLongDTO bizLatLongDTO = new BizLatLongDTO();
 			
 			BusinessInfoDTO businessInfoDTO = new BusinessInfoDTO();
 			businessInfoDTO.setInvokerId(businessDTO.getInvokerId());
@@ -508,43 +464,37 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				businessInfoDTO.setStateCode(businessInfo.getStateCode());
 				businessInfoDTO.setZip(businessInfo.getZip());
 				
-				logger.info("**** I am here 111 *****");
+				logger.info("**** LAT in BRW DB businessInfo.getLatitude(): "+businessInfo.getLatitude());
+				logger.info("**** LONG in BRW DB businessInfo.getLongitude(): "+businessInfo.getLongitude());
+				logger.info("**** LONG in BRW DB businessInfo.getImageFirst(): "+businessInfo.getImageFirst());
+
 				//call google if latitude and longitude do not exist in BRW DB
-				if (0.0 == businessInfo.getLatitude() || 0.0 == businessInfo.getLongitude()) {
-					logger.info("**** No Lat/Lng in BRW DB");
+				if (0.0 == businessInfo.getLatitude() || 0.0 == businessInfo.getLongitude() || businessInfo.getImageFirst().equals(Constants.EMPTY_STRING)) {
+					logger.info("**** Lat/Lng NOT-FOUND in BRW DB");
 					
 					String gSearchString = Constants.EMPTY_STRING;
+
+					List<String> pobAddress = new ArrayList<>();
+					pobAddress.add(Constants.PO_BOX_1);
+					pobAddress.add(Constants.PO_BOX_2);
+					pobAddress.add(Constants.PO_BOX_3);
+					pobAddress.add(Constants.PO_BOX_4);
+					pobAddress.add(Constants.PO_BOX_5);
 					
-					if(null != businessInfo.getStreet1() && !businessInfo.getStreet1().toLowerCase().contains("Po Box".toLowerCase()) ) {
-						gSearchString = ""+businessInfo.getStreet1()+", "+businessInfo.getCity()+", "+businessInfo.getStateCode()+", "+businessInfo.getZip()+"";
-						logger.info("**** Input gSearchString to Google API: "+gSearchString);
-						
+					logger.info("**** businessInfo.getStreet1(): "+businessInfo.getStreet1());
+					if (null != businessInfo.getStreet1() && pobAddress.stream().anyMatch(s -> s.equals(businessInfo.getStreet1().toLowerCase()))) {
+						gSearchString = ""+businessInfo.getStreet1()+", "+businessInfo.getCity()+", "+businessInfo.getStateCode()+", "+businessInfo.getZip()+Constants.EMPTY_STRING;
+						businessInfoDTO.setGoogleBizSearchString(gSearchString);
+						logger.info("**** ADDRESS Input gSearchString to Google API: "+gSearchString);
+						businessInfoDTO.setUpdateAfterGoogle(true);
 					} else {
-						gSearchString = ""+businessInfo.getName()+", "+businessInfo.getCity()+", "+businessInfo.getStateCode()+", "+businessInfo.getZip()+"";
-						logger.info("**** Input gSearchString to Google API: "+gSearchString);
-						
+						gSearchString = ""+businessInfo.getName()+", "+businessInfo.getCity()+", "+businessInfo.getStateCode()+", "+businessInfo.getZip()+Constants.EMPTY_STRING;
+						businessInfoDTO.setGoogleBizSearchString(gSearchString);
+						logger.info("**** BIZ NAME Input gSearchString to Google API: "+gSearchString);
+						businessInfoDTO.setUpdateAfterGoogle(true);
 					}
-
-					try {
-						gBusinessInfoDTO = getFormattedAddressAndLatLong(gSearchString);
-						
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					
-					businessInfoDTO.setGoogleName(gBusinessInfoDTO.getgBusinessName());
-					businessInfoDTO.setGoogleAddress(gBusinessInfoDTO.getgFormattedAddress());
-					businessInfoDTO.setLatitude(gBusinessInfoDTO.getgLatitude());
-					businessInfoDTO.setLongitude(gBusinessInfoDTO.getgLongitude());
-					businessInfoDTO.setGooglePhotoReferances(gBusinessInfoDTO.getgPhotoReferances());
-
-					//Collect all the lat/long for total search results
-					bizLatLongDTO.setBizId(businessInfo.getBusinessId());
-					bizLatLongDTO.setLatitude(gBusinessInfoDTO.getgLatitude());
-					bizLatLongDTO.setLongitude(gBusinessInfoDTO.getgLongitude());
-					
 				} else {
-					logger.info("**** YES Lat/Lng in BRW DB");
+					logger.info("**** Lat/Lng FOUND in BRW DB");
 					businessInfoDTO.setLatitude(businessInfo.getLatitude());
 					businessInfoDTO.setLongitude(businessInfo.getLongitude());
 				}
@@ -560,171 +510,23 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			if(null != businessInfo.getImageFirst() || Constants.EMPTY_STRING != businessInfo.getImageFirst()) {
 				//If ImageFirst Exist then pick up Image First
 				businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
-			} else if (gBusinessInfoDTO.getgPhotoReferances().length > 0){
-
-				try {
-					getGooglePhotos(businessInfoDTO.getGooglePhotoReferances());
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
 			} else {
 				//If there is no first imaged saved in BRW DB and also we can't get it from google then call this method
 				//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
-				businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
+				//businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
 			}
 			
 			businessInfoDTO.setIsVendorCall(businessInfo.getIsVendorCall());
 			businessInfoDTO.setIsFranchise(businessInfo.getIsFranchise());
 			
-			businessInfoDTOList.add(businessInfoDTO);
-			bizLatLongDTOList.add(bizLatLongDTO);
-			
+			businessInfoDTOList.add(businessInfoDTO);			
 		}// end of for loop
 		
 		businessInfoListDTO.setBusinessList(businessInfoDTOList);
-		businessInfoListDTO.setBizLatLongDTOList(bizLatLongDTOList);
 		
 		return businessInfoListDTO;
 	}
-	
-	private GeoApiContext getGoogleContext() {
-		GeoApiContext context = new GeoApiContext.Builder().apiKey("AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I").build();
-		return context;
-	}
-	
-	//Method to get Formatted Address and Latitude and Longitude from Google
-	private GBusinessInfoDTO getFormattedAddressAndLatLong(String address) throws Exception {
-		long start = System.currentTimeMillis();
-		
-		GBusinessInfoDTO returnGBusinessInfoDTO = new GBusinessInfoDTO();
-		
-		//logger.info("**** Calling Google for lat/long and photo references");
-		logger.info("Using LOGGER - Calling Google for lat/long and photo references");
 
-		PlacesSearchResponse results = PlacesApi.textSearchQuery(getGoogleContext(), address).await();
-		
-		Gson gson = null;
-		PlacesSearchResult result = null;
-		
-		if (null != results.results && results.results.length > 0) {
-			gson = new GsonBuilder().setPrettyPrinting().create();			
-			result = results.results[0];
-			
-			//logger.info("**** Printing response from Google API results result.permanentlyClosed: "+gson.toJson(result.permanentlyClosed));
-			if (!result.permanentlyClosed) {
-				returnGBusinessInfoDTO.setgIsClosed(gson.toJson(result.permanentlyClosed));
-				returnGBusinessInfoDTO.setgBusinessName(gson.toJson(result.name));
-				returnGBusinessInfoDTO.setgFormattedAddress(gson.toJson(result.formattedAddress));
-				returnGBusinessInfoDTO.setgLatitude(new Double(gson.toJson(result.geometry.location.lat)));
-				returnGBusinessInfoDTO.setgLongitude(new Double(gson.toJson(result.geometry.location.lng)));
-				if (null != result.photos && result.photos.length > 0) {
-					returnGBusinessInfoDTO.setgSinglePhotoReferance(result.photos[0].photoReference);
-					String[] photoReferances = new String[1];
-					photoReferances[0] = result.photos[0].photoReference;
-					getGooglePhotos(photoReferances);
-				}	
-			}
-			
-			//*********
-			/*
-			String placeId = gson.toJson(result.placeId);
-			logger.info("***  Calling PLACE DETAILS API for placeId: "+placeId);
-			//TODO: Make this call Async if possible
-			//Call Place Details
-			PlaceDetails gpdResult = PlacesApi.placeDetails(getGoogleContext(), placeId).await();
-			
-			//gpdResult.
-			
-			//capture up to 5 image references 
-			int x = 0;
-			if (null != gpdResult.photos && gpdResult.photos.length > 0) {
-				String[] photoReferances = new String[gpdResult.photos.length];
-				
-				for (Photo phoRef: gpdResult.photos) {
-					photoReferances[x] = phoRef.photoReference;
-					x ++;
-					//Collect only 5 image references from Google - To save Photos api cost and storage place
-					if(x == 5) {
-						logger.info("**** INSIDE BREAK AFTER 5 COUNTER ****");
-						break;
-					}
-				}
-				//returnGBusinessInfoDTO.setgPhotoReferances(photoReferances);
-				//Calling google again to get photo URls
-				getGooglePhotos(photoReferances);
-			}
-			*/
-			//*********
-		}
-		logger.info("Elapsed time: " + (System.currentTimeMillis() - start));
-		return returnGBusinessInfoDTO;
-	}
-
-	//TODO: Method is not implemented - The general pattern is to call Photos API based on references in JS
-	//Method to get Google Photos(Photos API call) based on Photo References we got from Google Places API
-	private String[] getGooglePhotos(String[] photoReferances) throws Exception {
-		logger.info("**** 444 Inside getGooglePhotos()");
-		
-		int x = 0;
-		String[] photoUrls = new String[photoReferances.length];
-		
-		for (String phoRef: photoReferances) {
-			
-			//logger.info("**** phoRef: " + phoRef);
-			
-			String gPhotoUrl = "https://maps.googleapis.com/maps/api/place/photo?photoreference="+phoRef+"&sensor=false&maxheight=500&maxwidth=500&key=AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I";
-			
-			logger.info("**** gPhotoUrl: " + gPhotoUrl);
-			
-			StringBuilder result = new StringBuilder();
-			URL url = new URL(gPhotoUrl);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			//PhotoResult gPhotoResult = PlacesApi.photo(getGoogleContext(), phoRef).maxHeight(400).maxWidth(400).await();
-			try {
-				conn.setRequestMethod("GET");
-				
-				logger.info("**** TRYING TO GET PHOTO LINK 555: " + conn.getResponseCode());
-				logger.info("**** TRYING TO GET PHOTO LINK 555: " + conn.getResponseCode());
-				logger.info("**** TRYING TO GET PHOTO LINK 666: " + conn.getHeaderField("location"));
-				
-				//Traverse a map
-				
-				
-				Map<String, List<String>> map = conn.getHeaderFields();
-				for (Map.Entry<String, List<String>> entry : map.entrySet()) {
-				    logger.info(entry.getKey() + "/" + entry.getValue());
-				}
-				
-				//END traverse a map
-				
-				
-				
-				/*
-				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-				String line;
-				while ((line = rd.readLine()) != null) {
-					result.append(line);
-					result.append('\r');
-				}
-				rd.close();
-				logger.info("**** result.toString(): " + result.toString());
-
-				photoUrls[x] = result.toString();
-				*/
-			} catch (Exception e) {
-			    e.printStackTrace();
-			    //return null;
-			  } finally {
-			    if (conn != null) {
-			    	conn.disconnect();
-			    }
-			  }
-		}
-		return photoUrls;
-	}
-	
 	//Method to retrieve LIMITED Business Attributes from t_brw_busines table based on biz_id used in UserServiceImpl
 	@Override
 	public BusinessInfoDTO getBusinessInfoFromBRWDB(int businessId) {

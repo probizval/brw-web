@@ -12,6 +12,8 @@ public class BusinessInfoDTO {
 	private Integer businessId;
 	private String name;
 	private String googleName;
+	private String googleBizSearchString;
+	private boolean updateAfterGoogle;
 	private String type;
 	private String subType;
 	private String isForSell;
@@ -20,7 +22,7 @@ public class BusinessInfoDTO {
 	private Integer marketBasedEst;
 	private String imageLogo;
 	private String imageFirst;
-	private String [] googlePhotoReferances;
+	//private String [] googlePhotoReferances;
 	private String street1;
 	private String street2;
 	private String city;
@@ -102,12 +104,14 @@ public class BusinessInfoDTO {
 	public void setImageFirst(String imageFirst) {
 		this.imageFirst = imageFirst;
 	}
+	/*
 	public String[] getGooglePhotoReferances() {
 		return googlePhotoReferances;
 	}
 	public void setGooglePhotoReferances(String[] googlePhotoReferances) {
 		this.googlePhotoReferances = googlePhotoReferances;
 	}
+	*/
 	public String getStreet1() {
 		return street1;
 	}
@@ -191,5 +195,17 @@ public class BusinessInfoDTO {
 	}
 	public void setGoogleAddress(String googleAddress) {
 		this.googleAddress = googleAddress;
+	}
+	public String getGoogleBizSearchString() {
+		return googleBizSearchString;
+	}
+	public void setGoogleBizSearchString(String googleBizSearchString) {
+		this.googleBizSearchString = googleBizSearchString;
+	}
+	public boolean isUpdateAfterGoogle() {
+		return updateAfterGoogle;
+	}
+	public void setUpdateAfterGoogle(boolean updateAfterGoogle) {
+		this.updateAfterGoogle = updateAfterGoogle;
 	}
 }

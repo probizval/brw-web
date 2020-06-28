@@ -15,7 +15,7 @@ public class BusinessInfoListDTO implements Serializable {
 	
 	private List<BusinessInfoDTO> businessList;
 	
-	List <BizLatLongDTO> bizLatLongDTOList;
+	//List <BizLatLongDTO> bizLatLongDTOList;
 	
 	private Long totalCount;
 	
@@ -31,6 +31,7 @@ public class BusinessInfoListDTO implements Serializable {
 		this.businessList = businessList;
 	}
 
+	/*
 	public List<BizLatLongDTO> getBizLatLongDTOList() {
 		return bizLatLongDTOList;
 	}
@@ -38,7 +39,8 @@ public class BusinessInfoListDTO implements Serializable {
 	public void setBizLatLongDTOList(List<BizLatLongDTO> bizLatLongDTOList) {
 		this.bizLatLongDTOList = bizLatLongDTOList;
 	}
-
+	*/
+	
 	public Long getTotalCount() {
 		return totalCount;
 	}

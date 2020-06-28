@@ -105,5 +105,15 @@ public interface Constants {
 	public static final String BTYPE_WHLSL_DIST = "BTYPE_WHLSL_DIST";
 	
 	public static final String BTYPE_MISC = "BTYPE_MISC";
+	
+	public static final String PO_BOX_1 = "po box";
+	
+	public static final String PO_BOX_2 = "p.o. box";
+	
+	public static final String PO_BOX_3 = "po box";
+	
+	public static final String PO_BOX_4 = "po box";
+	
+	public static final String PO_BOX_5 = "po box";
 
 }

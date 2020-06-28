@@ -19,9 +19,9 @@ public class BrwApplication extends SpringBootServletInitializer {
 	@Bean("threadPoolTaskExecutor")
 	public TaskExecutor getAyncExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(2);
-		executor.setMaxPoolSize(2);
-		executor.setQueueCapacity(500);
+		executor.setCorePoolSize(20);
+		executor.setMaxPoolSize(20);
+		executor.setQueueCapacity(5000);
 		executor.setThreadNamePrefix("*** StoreLatLongToBRWDB-");
 		executor.initialize();
 		return executor;

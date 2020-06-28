@@ -5,11 +5,6 @@ package com.brw.service;
  * 2019
  */
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-
-import com.brw.dto.BizLatLongDTO;
-
 import com.brw.dto.BusinessDetailsDTO;
 import com.brw.dto.BusinessDetailsListDTO;
 import com.brw.dto.BusinessInfoDTO;

@@ -8,12 +8,12 @@ package com.brw.service;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import com.brw.dto.BizLatLongDTO;
-import com.brw.dto.BusinessDetailsDTO;
+import com.brw.dto.GBusinessInfoDTO;
+import com.brw.dto.BusinessInfoDTO;
 
 public interface AsyncProcessingService {
 	
-	public CompletableFuture<Integer> asyncStoreLatLngToDB(List <BizLatLongDTO> bizLatLongDTOList) throws InterruptedException;
-	public BusinessDetailsDTO updateBusinessDetails(BusinessDetailsDTO businessDetailsDTO) throws Exception;
-
+	//public CompletableFuture<List<GBusinessInfoDTO>> asyncStoreLatLngToDB(List <BusinessInfoDTO> bizInfoDTOList) throws InterruptedException;
+	public CompletableFuture<Integer> asyncStoreLatLngToDB(List <BusinessInfoDTO> bizInfoDTOList) throws InterruptedException;
+	//public CompletableFuture<List<GBusinessInfoDTO>> asyncStoreImageUrlsToDB(List<GBusinessInfoDTO> gBusinessInfoDTOList) throws InterruptedException;
 }

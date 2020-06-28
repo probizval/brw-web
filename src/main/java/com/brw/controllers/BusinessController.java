@@ -1,5 +1,8 @@
 package com.brw.controllers;
 
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,7 @@ import com.brw.common.response.ApiResponse;
 import com.brw.exceptions.BusinessException;
 import com.brw.dto.BusinessDetailsDTO;
 import com.brw.dto.BusinessInfoListDTO;
+import com.brw.dto.GBusinessInfoDTO;
 import com.brw.dto.RelatedBusinessDTO;
 import com.brw.dto.RelatedBusinessListDTO;
 import com.brw.service.AsyncProcessingService;
@@ -65,25 +68,33 @@ public class BusinessController implements ErrorController {
 	 * searchBusiness - Service for simple search on home page based on business name, OR type, OR address returns list of matching businesses with limited attributes
 	 */
 	@RequestMapping(value = "searchBusiness", method = RequestMethod.POST, produces = "application/json")
-	//@Async("AsyncStoreLatLngToDB")
-	//@Override
 	public ApiResponse<?> searchBusiness(@RequestBody BusinessDetailsDTO businessDetailsDTO) {
 		
 		logger.info("**** 111 Inside BusinessController.searchBusiness() searchFilter: "+businessDetailsDTO.toString());
-
-		logger.info("Search Business based on search criteria");
+		long start = System.currentTimeMillis();
 		
 		BusinessInfoListDTO businessList = null;
 
 		try {
 			businessList = businessService.searchBusiness(businessDetailsDTO);
-			//businessService.asyncStoreLatLngToDB(businessDetailsDTO.getInvokerId(), businessList.getBizLatLongDTOList());
-			asyncProcessingService.asyncStoreLatLngToDB(businessList.getBizLatLongDTOList());
-		
+			
+			//Asynchronous method to store lat/long to BRW DB
+			//CompletableFuture<List<GBusinessInfoDTO>> bizLatLongPlaceIdDTOList  = asyncProcessingService.asyncStoreLatLngToDB(businessList.getBusinessList());
+			CompletableFuture<Integer> bizLatLongPlaceIdDTOList  = asyncProcessingService.asyncStoreLatLngToDB(businessList.getBusinessList());
+			
+			/*
+			//Asynchronous method to call google PlaceDetails API then Photos API and store images to BRW DB
+			if(null != bizLatLongPlaceIdDTOList.get() && bizLatLongPlaceIdDTOList.get().size() > 1) {
+				CompletableFuture<List<GBusinessInfoDTO>> bizLatLongDTOList  = asyncProcessingService.asyncStoreImageUrlsToDB(bizLatLongPlaceIdDTOList.get());
+			}
+			*/
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
 		}
+		logger.info("$$$$$$ RETURNING THE RESPONSE BEFORE THE ASYNC METHODS $$$$$");
+		logger.info("BusinessController.searchBusiness Elapsed time: " + (System.currentTimeMillis() - start));
+
 		return ApiResponse.withData(businessList);
 	}
 	
