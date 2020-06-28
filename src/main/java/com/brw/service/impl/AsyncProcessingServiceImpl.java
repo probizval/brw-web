@@ -142,10 +142,11 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 			
 			if (null != placeId){
 				PlaceDetails gpdResult = null;
+				//PlaceDetailsRequest gpdResult = null;
 				try {
 					logger.info("***  Calling PLACE DETAILS API based on placeId: "+placeId);
 					logger.info("***  Calling PLACE DETAILS API based on placeId for bizId: "+gBusinessInfoDTO.getBizId());
-					gpdResult = PlacesApi.placeDetails(getGoogleContext(), placeId).awaitIgnoreError();
+					gpdResult = (PlacesApi.placeDetails(getGoogleContext(), placeId)).await();
 					logger.info("***  AFTER Calling PLACE DETAILS API gpdResult: "+gpdResult);
 
 				} catch (Exception e) {
