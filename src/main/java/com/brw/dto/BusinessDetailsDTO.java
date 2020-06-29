@@ -48,6 +48,8 @@ public class BusinessDetailsDTO {
 	private Integer forSellPrice;
 	private String imageLogo;
 	private String imageFirst;
+	private String alternateImageFirst;
+
 	private String street1;
 	private String street2;
 	private String city;
@@ -353,6 +355,12 @@ public class BusinessDetailsDTO {
 	}
 	public void setImageFirst(String imageFirst) {
 		this.imageFirst = imageFirst;
+	}
+	public String getAlternateImageFirst() {
+		return alternateImageFirst;
+	}
+	public void setAlternateImageFirst(String alternateImageFirst) {
+		this.alternateImageFirst = alternateImageFirst;
 	}
 	public String getStreet1() {
 		return street1;

@@ -253,39 +253,39 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 		
 		BusinessDetails businessDetails = businessDetailsDAO.findById(businessDetailsDTO.getBusinessId()).get();
 		//BusinessDetails businessDetails = new BusinessDetails();
-		if (null != businessDetailsDTO.getLegalName() && businessDetailsDTO.getLegalName() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getLegalName() && !businessDetailsDTO.getLegalName().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setLegalName(businessDetailsDTO.getLegalName());
 		}
 		
-		if (null != businessDetailsDTO.getName() && businessDetailsDTO.getName() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getName() && !businessDetailsDTO.getName().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setName(businessDetailsDTO.getName());
 		}
 		
-		if (null != businessDetailsDTO.getFirstOwnerName() && businessDetailsDTO.getFirstOwnerName() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getFirstOwnerName() && !businessDetailsDTO.getFirstOwnerName().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setFirstOwnerName(businessDetailsDTO.getFirstOwnerName());
 		}
 		
-		if (null != businessDetailsDTO.getSecondOwnerName() && businessDetailsDTO.getSecondOwnerName() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getSecondOwnerName() && !businessDetailsDTO.getSecondOwnerName().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setSecondOwnerName(businessDetailsDTO.getSecondOwnerName());
 		}
 		
-		if (null != businessDetailsDTO.getBrandName() && businessDetailsDTO.getBrandName() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getBrandName() && !businessDetailsDTO.getBrandName().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setBrandName(businessDetailsDTO.getBrandName());
 		}
 		
-		if (null != businessDetailsDTO.getType() && businessDetailsDTO.getType() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getType() && !businessDetailsDTO.getType().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setType(businessDetailsDTO.getType());
 		}
 		
-		if (null != businessDetailsDTO.getSubType() && businessDetailsDTO.getSubType() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getSubType() && !businessDetailsDTO.getSubType().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setSubType(businessDetailsDTO.getSubType());
 		}
 		
-		if (null != businessDetailsDTO.getRegCityName() && businessDetailsDTO.getRegCityName() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getRegCityName() && !businessDetailsDTO.getRegCityName().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setRegCityName(businessDetailsDTO.getRegCityName());
 		}
 		
-		if (null != businessDetailsDTO.getRegCityCode() && businessDetailsDTO.getRegCityCode() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getRegCityCode() && !businessDetailsDTO.getRegCityCode().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setRegCityCode(businessDetailsDTO.getRegCityCode());
 		}
 		
@@ -293,11 +293,11 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 			businessDetails.setRegCityDate(LocalDateTime.parse(businessDetailsDTO.getRegCityDate(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		}
 		
-		if (null != businessDetailsDTO.getRegStateName() && businessDetailsDTO.getRegCityCode() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getRegStateName() && !businessDetailsDTO.getRegCityCode().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setRegStateName(businessDetailsDTO.getRegStateName());
 		}
 		
-		if (null != businessDetailsDTO.getRegStateCode() && businessDetailsDTO.getRegCityCode() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getRegStateCode() && !businessDetailsDTO.getRegCityCode().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setRegStateCode(businessDetailsDTO.getRegStateCode());
 		}
 		
@@ -309,11 +309,11 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 			businessDetails.setDataCompletenessScore(businessDetailsDTO.getDataCompletionScore());
 		}
 		
-		if (null != businessDetailsDTO.getIsForSell() && businessDetailsDTO.getIsForSell() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getIsForSell() && !businessDetailsDTO.getIsForSell().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setIsForSell(businessDetailsDTO.getIsForSell());
 		}
 		
-		if (null != businessDetailsDTO.getIsHidden() && businessDetailsDTO.getIsHidden() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getIsHidden() && !businessDetailsDTO.getIsHidden().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setIsHidden(businessDetailsDTO.getIsHidden());
 		}
 		
@@ -321,32 +321,32 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 			businessDetails.setForSellPrice(businessDetailsDTO.getForSellPrice());
 		}
 		
-		if (null != businessDetailsDTO.getImageLogo() && businessDetailsDTO.getImageLogo() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getImageLogo() && !businessDetailsDTO.getImageLogo().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setImageLogo(businessDetailsDTO.getImageLogo());
 		}
 
 		logger.info("businessDetailsDTO.getImageFirst(): "+businessDetailsDTO.getImageFirst());
-		if (null != businessDetailsDTO.getImageFirst() && businessDetailsDTO.getImageFirst() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getImageFirst() && !businessDetailsDTO.getImageFirst().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setImageFirst(businessDetailsDTO.getImageFirst());
 		}
 		
-		if (null != businessDetailsDTO.getStreet1() && businessDetailsDTO.getStreet1() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getStreet1() && !businessDetailsDTO.getStreet1().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setStreet1(businessDetailsDTO.getStreet1());
 		}
 		
-		if (null != businessDetailsDTO.getStreet2() && businessDetailsDTO.getStreet2() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getStreet2() && !businessDetailsDTO.getStreet2().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setStreet2(businessDetailsDTO.getStreet2());
 		}
 		
-		if (null != businessDetailsDTO.getCity() && businessDetailsDTO.getCity() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getCity() && !businessDetailsDTO.getCity().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setCity(businessDetailsDTO.getCity());
 		}
 		
-		if (null != businessDetailsDTO.getCounty() && businessDetailsDTO.getCounty() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getCounty() && !businessDetailsDTO.getCounty().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setCounty(businessDetailsDTO.getCounty());
 		}
 		
-		if (null != businessDetailsDTO.getStateCode() && businessDetailsDTO.getStateCode() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getStateCode() && !businessDetailsDTO.getStateCode().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setStateCode(businessDetailsDTO.getStateCode());
 		}
 		
@@ -364,23 +364,23 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 			businessDetails.setLongitude(businessDetailsDTO.getLongitude());
 		}
 		
-		if (null != businessDetailsDTO.getPhone() && businessDetailsDTO.getPhone() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getPhone() && !businessDetailsDTO.getPhone().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setPhoneNumber(businessDetailsDTO.getPhone());
 		}
 		
-		if (null != businessDetailsDTO.getPhoneExt() && businessDetailsDTO.getPhoneExt() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getPhoneExt() && !businessDetailsDTO.getPhoneExt().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setPhoneExtentionNumber(businessDetailsDTO.getPhoneExt());
 		}
 		
-		if (null != businessDetailsDTO.getEmail() && businessDetailsDTO.getEmail() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getEmail() && !businessDetailsDTO.getEmail().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setEmail(businessDetailsDTO.getEmail());
 		}
 		
-		if (null != businessDetailsDTO.getWebsite() && businessDetailsDTO.getWebsite() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getWebsite() && !businessDetailsDTO.getWebsite().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setWebsite(businessDetailsDTO.getWebsite());
 		}
 		
-		if (null != businessDetailsDTO.getDescription() && businessDetailsDTO.getDescription() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getDescription() && !businessDetailsDTO.getDescription().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setFreeformDescription(businessDetailsDTO.getDescription());
 		}
 		
@@ -388,15 +388,15 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 			businessDetails.setNAICSNum(businessDetailsDTO.getNAICSNum());
 		}
 		
-		if (null != businessDetailsDTO.getNAICSDescription() && businessDetailsDTO.getNAICSDescription() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getNAICSDescription() && !businessDetailsDTO.getNAICSDescription().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setNAICSDescription(businessDetailsDTO.getNAICSDescription());
 		}
 		
-		if (null != businessDetailsDTO.getIsFranchise() && businessDetailsDTO.getIsFranchise() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getIsFranchise() && !businessDetailsDTO.getIsFranchise().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setIsFranchise(businessDetailsDTO.getIsFranchise());
 		}
 		
-		if (null != businessDetailsDTO.getIsOwnerClaimed() && businessDetailsDTO.getIsOwnerClaimed() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getIsOwnerClaimed() && !businessDetailsDTO.getIsOwnerClaimed().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setIsOwnerClaimed(businessDetailsDTO.getIsOwnerClaimed());
 		}
 		
@@ -412,11 +412,11 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 			businessDetails.setSqftLot(businessDetailsDTO.getSqftLot());
 		}
 		
-		if (null != businessDetailsDTO.getBuildingType() && businessDetailsDTO.getBuildingType() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getBuildingType() && !businessDetailsDTO.getBuildingType().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setBuildingType(businessDetailsDTO.getBuildingType());
 		}
 		
-		if (null != businessDetailsDTO.getIsBuildingOwned() && businessDetailsDTO.getIsBuildingOwned() != Constants.EMPTY_STRING) {
+		if (null != businessDetailsDTO.getIsBuildingOwned() && !businessDetailsDTO.getIsBuildingOwned().equals(Constants.EMPTY_STRING)) {
 			businessDetails.setIsBuildingOwned(businessDetailsDTO.getIsBuildingOwned());
 		}
 		
