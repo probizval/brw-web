@@ -137,7 +137,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	        PutObjectRequest objectRequest = new PutObjectRequest(s3bucketName, key, stream, metadata);
 	        objectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
 	        
-	        BasicAWSCredentials creds = new BasicAWSCredentials("AKIAITCWQF4LXNVAICBQ", "BfXEr/91/bmzShibB5xnzNIqb3LOucwpyPo/usCT");
+	        BasicAWSCredentials creds = new BasicAWSCredentials("AKIAIV7P5V63PEUDQOLA", "/VeP0cUjlpif6NFWToCOJE5SCxthT2VIFaC/AVAF");
 	        AmazonS3 s3Client = AmazonS3Client.builder()
 	        	    .withRegion(Constants.US_WEST_1)
 	        	    .withCredentials(new AWSStaticCredentialsProvider(creds))
@@ -380,7 +380,8 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 		// so add 1 to make it inclusive
 		int bizId = ThreadLocalRandom.current().nextInt(min, max + 1);
 
-		String imageFirst = imageDAO.getImage(bizId);
+		//String imageFirst = imageDAO.getImage(bizId);
+		String imageFirst = imageDAO.getImage(990131);
 		
 		return imageFirst;
 	}

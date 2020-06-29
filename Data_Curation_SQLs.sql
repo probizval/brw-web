@@ -9,6 +9,13 @@
 -- 8. Execute SQLs by ending them with ;
 
 
+select count(biz_id) from t_brw_business where hidden_YN = 'N';
+
+select distinct(image_first) from t_brw_business;
+
+select count(biz_id) from t_brw_business where image_first is null;
+
+
 select count(*) from t_brw_business where market_based_est != '';
 -- 1114687
 

@@ -7,10 +7,7 @@ package com.brw.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -29,7 +26,6 @@ import com.brw.dto.BusinessInfoDTO;
 import com.brw.dto.BusinessInfoListDTO;
 import com.brw.dto.EstimatesDTO;
 import com.brw.dto.EstimatesListDTO;
-import com.brw.dto.GBusinessInfoDTO;
 import com.brw.dto.RelatedBusinessDTO;
 import com.brw.dto.RelatedBusinessListDTO;
 import com.brw.dto.UserActivityDTO;
@@ -43,14 +39,6 @@ import com.brw.service.BizTransactionService;
 import com.brw.service.EstimateService;
 import com.brw.service.ImageService;
 import com.brw.service.UserService;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.maps.GeoApiContext;
-import com.google.maps.PlacesApi;
-import com.google.maps.model.PlacesSearchResponse;
-import com.google.maps.model.PlacesSearchResult;
-import com.google.maps.model.Photo;
-import com.google.maps.model.PlaceDetails;
 
 @Component
 public class BusinessServiceImpl implements com.brw.service.BusinessService {
@@ -505,14 +493,20 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessInfoDTO.setIsForSell(businessInfo.getIsForSell());
 			businessInfoDTO.setForSellPrice(businessInfo.getForSellPrice());
 			
-			//businessInfoDTO.setMarketBasedEst(businessInfo.getMarketBasedEst());
-			if(null != businessInfo.getImageFirst() || Constants.EMPTY_STRING != businessInfo.getImageFirst()) {
+			logger.info("**** businessInfo.getImageFirst(): "+businessInfo.getImageFirst());
+			if(!businessInfo.getImageFirst().equals(Constants.EMPTY_STRING)) {
+				logger.info("**** IM IN HERE 111");
+
 				//If ImageFirst Exist then pick up Image First
 				businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
 			} else {
+				logger.info("**** IM IN HERE 222");
+
 				//If there is no first imaged saved in BRW DB and also we can't get it from google then call this method
 				//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
-				//businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
+				businessInfoDTO.setAlternateImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
+				logger.info("**** businessInfoDTO.getBusinessId(): "+businessInfoDTO.getBusinessId());
+				logger.info("**** RANDOM alternate First Image URL: "+businessInfoDTO.getAlternateImageFirst());
 			}
 			
 			businessInfoDTO.setIsVendorCall(businessInfo.getIsVendorCall());

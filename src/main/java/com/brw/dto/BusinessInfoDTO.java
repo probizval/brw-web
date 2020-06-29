@@ -22,7 +22,7 @@ public class BusinessInfoDTO {
 	private Integer marketBasedEst;
 	private String imageLogo;
 	private String imageFirst;
-	//private String [] googlePhotoReferances;
+	private String alternateImageFirst;
 	private String street1;
 	private String street2;
 	private String city;
@@ -103,6 +103,12 @@ public class BusinessInfoDTO {
 	}
 	public void setImageFirst(String imageFirst) {
 		this.imageFirst = imageFirst;
+	}
+	public String getAlternateImageFirst() {
+		return alternateImageFirst;
+	}
+	public void setAlternateImageFirst(String alternateImageFirst) {
+		this.alternateImageFirst = alternateImageFirst;
 	}
 	/*
 	public String[] getGooglePhotoReferances() {

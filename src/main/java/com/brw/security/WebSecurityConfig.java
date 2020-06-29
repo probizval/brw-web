@@ -55,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		//Trying to make getStateCounties unprotected
 		unprotectedUserUris.append("/api/business/v1/searchBusiness")
 		.append(",/api/additionalAttributes/v1/getStateCounties")
+		.append(",/api/image/v1/uploadImages")
 		;
 		//
 		//unprotectedUserUris.append("/api/additionalAttributes/v1/getStateCounties");
