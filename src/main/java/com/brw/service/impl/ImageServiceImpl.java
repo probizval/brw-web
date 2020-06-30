@@ -288,6 +288,8 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	
 	@Override
 	public String getDefaultImageForBizType(String bizType) {
+		long start = System.currentTimeMillis();
+
 		logger.info("222 **** Inside ImageServiceImpl.getDefaultImageForBizType()");
 		
 		// switch case to pick up bizId range based on bizType
@@ -381,8 +383,635 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 		int bizId = ThreadLocalRandom.current().nextInt(min, max + 1);
 
 		//String imageFirst = imageDAO.getImage(bizId);
-		String imageFirst = imageDAO.getImage(990131);
+		//String imageFirst = imageDAO.getImage(990131);
 		
+		String imageFirst = Constants.EMPTY_STRING;
+		
+		switch (bizId) {
+			//BTYPE_AGRI
+		  	case 990001:
+		  		imageFirst = "";
+		  		break;
+		  	case 990002:
+				imageFirst = "";
+				break;
+		  	case 990003:
+			  	imageFirst = "";
+			  	break;
+		  	case 990004:
+			  	imageFirst = "";
+			  	break;
+		  	case 990005:
+		  		imageFirst = "";
+		  		break;
+		  	case 990006:
+		  		imageFirst = "";
+		  		break;
+		  	case 990007:
+		  		imageFirst = "";
+		  		break;
+		  	case 990008:
+		  		imageFirst = "";
+		  		break;
+		  	case 990009:
+		  		imageFirst = "";
+		  		break;
+		  	case 990010:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_AUTO_BOAT
+		  	case 990011:
+		  		imageFirst = "";
+		  		break;
+		  	case 990012:
+				imageFirst = "";
+				break;
+		  	case 990013:
+			  	imageFirst = "";
+			  	break;
+		  	case 990014:
+			  	imageFirst = "";
+			  	break;
+		  	case 990015:
+		  		imageFirst = "";
+		  		break;
+		  	case 990016:
+		  		imageFirst = "";
+		  		break;
+		  	case 990017:
+		  		imageFirst = "";
+		  		break;
+		  	case 990018:
+		  		imageFirst = "";
+		  		break;
+		  	case 990019:
+		  		imageFirst = "";
+		  		break;
+		  	case 990020:
+		  		imageFirst = "";
+		  		break;	 
+		  	//BTYPE_BEAUTY_PERSONA
+		  	case 990021:
+		  		imageFirst = "";
+		  		break;
+		  	case 990022:
+				imageFirst = "";
+				break;
+		  	case 990023:
+			  	imageFirst = "";
+			  	break;
+		  	case 990024:
+			  	imageFirst = "";
+			  	break;
+		  	case 990025:
+		  		imageFirst = "";
+		  		break;
+		  	case 990026:
+		  		imageFirst = "";
+		  		break;
+		  	case 990027:
+		  		imageFirst = "";
+		  		break;
+		  	case 990028:
+		  		imageFirst = "";
+		  		break;
+		  	case 990029:
+		  		imageFirst = "";
+		  		break;
+		  	case 990030:
+		  		imageFirst = "";
+		  		break;	
+		  	//BTYPE_BUILD_CONS
+		  	case 990031:
+		  		imageFirst = "";
+		  		break;
+		  	case 990032:
+				imageFirst = "";
+				break;
+		  	case 990033:
+			  	imageFirst = "";
+			  	break;
+		  	case 990034:
+			  	imageFirst = "";
+			  	break;
+		  	case 990035:
+		  		imageFirst = "";
+		  		break;
+		  	case 990036:
+		  		imageFirst = "";
+		  		break;
+		  	case 990037:
+		  		imageFirst = "";
+		  		break;
+		  	case 990038:
+		  		imageFirst = "";
+		  		break;
+		  	case 990039:
+		  		imageFirst = "";
+		  		break;
+		  	case 990040:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_COM_MEDIA
+		  	case 990041:
+		  		imageFirst = "";
+		  		break;
+		  	case 990042:
+				imageFirst = "";
+				break;
+		  	case 990043:
+			  	imageFirst = "";
+			  	break;
+		  	case 990044:
+			  	imageFirst = "";
+			  	break;
+		  	case 990045:
+		  		imageFirst = "";
+		  		break;
+		  	case 990046:
+		  		imageFirst = "";
+		  		break;
+		  	case 990047:
+		  		imageFirst = "";
+		  		break;
+		  	case 990048:
+		  		imageFirst = "";
+		  		break;
+		  	case 990049:
+		  		imageFirst = "";
+		  		break;
+		  	case 990050:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_EDU_CHILD
+		  	case 990051:
+		  		imageFirst = "";
+		  		break;
+		  	case 990052:
+				imageFirst = "";
+				break;
+		  	case 990053:
+			  	imageFirst = "";
+			  	break;
+		  	case 990054:
+			  	imageFirst = "";
+			  	break;
+		  	case 990055:
+		  		imageFirst = "";
+		  		break;
+		  	case 990056:
+		  		imageFirst = "";
+		  		break;
+		  	case 990057:
+		  		imageFirst = "";
+		  		break;
+		  	case 990058:
+		  		imageFirst = "";
+		  		break;
+		  	case 990059:
+		  		imageFirst = "";
+		  		break;
+		  	case 990060:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_ENT_REC
+		  	case 990061:
+		  		imageFirst = "";
+		  		break;
+		  	case 990062:
+				imageFirst = "";
+				break;
+		  	case 990063:
+			  	imageFirst = "";
+			  	break;
+		  	case 990064:
+			  	imageFirst = "";
+			  	break;
+		  	case 990065:
+		  		imageFirst = "";
+		  		break;
+		  	case 990066:
+		  		imageFirst = "";
+		  		break;
+		  	case 990067:
+		  		imageFirst = "";
+		  		break;
+		  	case 990068:
+		  		imageFirst = "";
+		  		break;
+		  	case 990069:
+		  		imageFirst = "";
+		  		break;
+		  	case 990070:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_FINANCIAL
+		  	case 990071:
+		  		imageFirst = "";
+		  		break;
+		  	case 990072:
+				imageFirst = "";
+				break;
+		  	case 990073:
+			  	imageFirst = "";
+			  	break;
+		  	case 990074:
+			  	imageFirst = "";
+			  	break;
+		  	case 990075:
+		  		imageFirst = "";
+		  		break;
+		  	case 990076:
+		  		imageFirst = "";
+		  		break;
+		  	case 990077:
+		  		imageFirst = "";
+		  		break;
+		  	case 990078:
+		  		imageFirst = "";
+		  		break;
+		  	case 990079:
+		  		imageFirst = "";
+		  		break;
+		  	case 990080:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_HEALTH_FIT
+		  	case 990081:
+		  		imageFirst = "";
+		  		break;
+		  	case 990082:
+				imageFirst = "";
+				break;
+		  	case 990083:
+			  	imageFirst = "";
+			  	break;
+		  	case 990084:
+			  	imageFirst = "";
+			  	break;
+		  	case 990085:
+		  		imageFirst = "";
+		  		break;
+		  	case 990086:
+		  		imageFirst = "";
+		  		break;
+		  	case 990087:
+		  		imageFirst = "";
+		  		break;
+		  	case 990088:
+		  		imageFirst = "";
+		  		break;
+		  	case 990089:
+		  		imageFirst = "";
+		  		break;
+		  	case 990090:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_MANUFACTURING
+		  	case 990091:
+		  		imageFirst = "";
+		  		break;
+		  	case 990092:
+				imageFirst = "";
+				break;
+		  	case 990093:
+			  	imageFirst = "";
+			  	break;
+		  	case 990094:
+			  	imageFirst = "";
+			  	break;
+		  	case 990095:
+		  		imageFirst = "";
+		  		break;
+		  	case 990096:
+		  		imageFirst = "";
+		  		break;
+		  	case 990097:
+		  		imageFirst = "";
+		  		break;
+		  	case 990098:
+		  		imageFirst = "";
+		  		break;
+		  	case 990099:
+		  		imageFirst = "";
+		  		break;
+		  	case 990100:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_ONLINE_TECH
+		  	case 990101:
+		  		imageFirst = "";
+		  		break;
+		  	case 990102:
+				imageFirst = "";
+				break;
+		  	case 990103:
+			  	imageFirst = "";
+			  	break;
+		  	case 990104:
+			  	imageFirst = "";
+			  	break;
+		  	case 990105:
+		  		imageFirst = "";
+		  		break;
+		  	case 990106:
+		  		imageFirst = "";
+		  		break;
+		  	case 990107:
+		  		imageFirst = "";
+		  		break;
+		  	case 990108:
+		  		imageFirst = "";
+		  		break;
+		  	case 990109:
+		  		imageFirst = "";
+		  		break;
+		  	case 990110:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_PET_SER
+		  	case 990111:
+		  		imageFirst = "";
+		  		break;
+		  	case 990112:
+				imageFirst = "";
+				break;
+		  	case 990113:
+			  	imageFirst = "";
+			  	break;
+		  	case 990114:
+			  	imageFirst = "";
+			  	break;
+		  	case 990115:
+		  		imageFirst = "";
+		  		break;
+		  	case 990116:
+		  		imageFirst = "";
+		  		break;
+		  	case 990117:
+		  		imageFirst = "";
+		  		break;
+		  	case 990118:
+		  		imageFirst = "";
+		  		break;
+		  	case 990119:
+		  		imageFirst = "";
+		  		break;
+		  	case 990120:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_REAL_EST
+		  	case 990121:
+		  		imageFirst = "";
+		  		break;
+		  	case 990122:
+				imageFirst = "";
+				break;
+		  	case 990123:
+			  	imageFirst = "";
+			  	break;
+		  	case 990124:
+			  	imageFirst = "";
+			  	break;
+		  	case 990125:
+		  		imageFirst = "";
+		  		break;
+		  	case 990126:
+		  		imageFirst = "";
+		  		break;
+		  	case 990127:
+		  		imageFirst = "";
+		  		break;
+		  	case 990128:
+		  		imageFirst = "";
+		  		break;
+		  	case 990129:
+		  		imageFirst = "";
+		  		break;
+		  	case 990130:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_REST_FOOD
+		  	case 990131:
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/1000000/1000000_0.JPEG";
+		  		break;
+		  	case 990132:
+				imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/1000000/1000000_0.JPEG";
+				break;
+		  	case 990133:
+			  	imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/1000000/1000000_0.JPEG";
+			  	break;
+		  	case 990134:
+			  	imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/1000000/1000000_0.JPEG";
+			  	break;
+		  	case 990135:
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/1000000/1000000_0.JPEG";
+		  		break;
+		  	case 990136:
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/1000000/1000000_0.JPEG";
+		  		break;
+		  	case 990137:
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/1000000/1000000_0.JPEG";
+		  		break;
+		  	case 990138:
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/1000000/1000000_0.JPEG";
+		  		break;
+		  	case 990139:
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/1000000/1000000_0.JPEG";
+		  		break;
+		  	case 990140:
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/1000000/1000000_0.JPEG";
+		  		break;
+		  	//BTYPE_RETAIL
+		  	case 990141:
+		  		imageFirst = "";
+		  		break;
+		  	case 990142:
+				imageFirst = "";
+				break;
+		  	case 990143:
+			  	imageFirst = "";
+			  	break;
+		  	case 990144:
+			  	imageFirst = "";
+			  	break;
+		  	case 990145:
+		  		imageFirst = "";
+		  		break;
+		  	case 990146:
+		  		imageFirst = "";
+		  		break;
+		  	case 990147:
+		  		imageFirst = "";
+		  		break;
+		  	case 990148:
+		  		imageFirst = "";
+		  		break;
+		  	case 990149:
+		  		imageFirst = "";
+		  		break;
+		  	case 990150:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_SER_BIZ
+		  	case 990151:
+		  		imageFirst = "";
+		  		break;
+		  	case 990152:
+				imageFirst = "";
+				break;
+		  	case 990153:
+			  	imageFirst = "";
+			  	break;
+		  	case 990154:
+			  	imageFirst = "";
+			  	break;
+		  	case 990155:
+		  		imageFirst = "";
+		  		break;
+		  	case 990156:
+		  		imageFirst = "";
+		  		break;
+		  	case 990157:
+		  		imageFirst = "";
+		  		break;
+		  	case 990158:
+		  		imageFirst = "";
+		  		break;
+		  	case 990159:
+		  		imageFirst = "";
+		  		break;
+		  	case 990160:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_TRANS_STOR
+		  	case 990161:
+		  		imageFirst = "";
+		  		break;
+		  	case 990162:
+				imageFirst = "";
+				break;
+		  	case 990163:
+			  	imageFirst = "";
+			  	break;
+		  	case 990164:
+			  	imageFirst = "";
+			  	break;
+		  	case 990165:
+		  		imageFirst = "";
+		  		break;
+		  	case 990166:
+		  		imageFirst = "";
+		  		break;
+		  	case 990167:
+		  		imageFirst = "";
+		  		break;
+		  	case 990168:
+		  		imageFirst = "";
+		  		break;
+		  	case 990169:
+		  		imageFirst = "";
+		  		break;
+		  	case 990170:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_TRAVEL
+		  	case 990171:
+		  		imageFirst = "";
+		  		break;
+		  	case 990172:
+				imageFirst = "";
+				break;
+		  	case 990173:
+			  	imageFirst = "";
+			  	break;
+		  	case 990174:
+			  	imageFirst = "";
+			  	break;
+		  	case 990175:
+		  		imageFirst = "";
+		  		break;
+		  	case 990176:
+		  		imageFirst = "";
+		  		break;
+		  	case 990177:
+		  		imageFirst = "";
+		  		break;
+		  	case 990178:
+		  		imageFirst = "";
+		  		break;
+		  	case 990179:
+		  		imageFirst = "";
+		  		break;
+		  	case 990180:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_WHLSL_DIST
+		  	case 990181:
+		  		imageFirst = "";
+		  		break;
+		  	case 990182:
+				imageFirst = "";
+				break;
+		  	case 990183:
+			  	imageFirst = "";
+			  	break;
+		  	case 990184:
+			  	imageFirst = "";
+			  	break;
+		  	case 990185:
+		  		imageFirst = "";
+		  		break;
+		  	case 990186:
+		  		imageFirst = "";
+		  		break;
+		  	case 990187:
+		  		imageFirst = "";
+		  		break;
+		  	case 990188:
+		  		imageFirst = "";
+		  		break;
+		  	case 990189:
+		  		imageFirst = "";
+		  		break;
+		  	case 990190:
+		  		imageFirst = "";
+		  		break;
+		  	//BTYPE_MISC
+		  	case 990191:
+		  		imageFirst = "";
+		  		break;
+		  	case 990192:
+				imageFirst = "";
+				break;
+		  	case 990193:
+			  	imageFirst = "";
+			  	break;
+		  	case 990194:
+			  	imageFirst = "";
+			  	break;
+		  	case 990195:
+		  		imageFirst = "";
+		  		break;
+		  	case 990196:
+		  		imageFirst = "";
+		  		break;
+		  	case 990197:
+		  		imageFirst = "";
+		  		break;
+		  	case 990198:
+		  		imageFirst = "";
+		  		break;
+		  	case 990199:
+		  		imageFirst = "";
+		  		break;
+		  	case 990200:
+		  		imageFirst = "";
+		  		break;
+		}
+		
+		logger.info("Elapsed time in getDefaultImageForBizType: " + (System.currentTimeMillis() - start));
+
 		return imageFirst;
 	}
 }

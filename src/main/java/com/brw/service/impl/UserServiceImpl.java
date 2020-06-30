@@ -19,7 +19,6 @@ import com.brw.common.constants.Constants;
 import com.brw.dao.UserActivityDAO;
 import com.brw.dao.UserBusinessDAO;
 import com.brw.dao.UserDAO;
-import com.brw.dto.BusinessDetailsDTO;
 import com.brw.dto.BusinessInfoDTO;
 import com.brw.dto.UserActivityDTO;
 import com.brw.dto.UserBusinessDTO;
@@ -522,7 +521,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public UserActivityDTO trackUserActivity(UserActivityDTO userActivityDTO) {
-		
+		long start = System.currentTimeMillis();
+
 		logger.info("222 **** Inside UserServiceImpl.trackUserActivity()");
 		
 		UserActivity userActivity = new UserActivity();
@@ -547,6 +547,8 @@ public class UserServiceImpl implements UserService {
 		returnUserActivityDTO.setUpdatedByUserId(returnUserActivity.getUserId());
 		returnUserActivityDTO.setUpdateDate(returnUserActivity.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		
+		logger.info("Elapsed time in trackUserActivity: " + (System.currentTimeMillis() - start));
+
 		return returnUserActivityDTO;
 	}
 	

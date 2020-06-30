@@ -71,7 +71,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
 	@Override
 	public BusinessInfoListDTO searchBusiness(BusinessDetailsDTO businessDTO) {
-		
+		long start = System.currentTimeMillis();
+
 		//Log the User Action - START - TODO Make this call Asynchronous
 		UserActivityDTO userActivityDTO = new UserActivityDTO();
 
@@ -155,6 +156,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		logger.info("**** 222 Inside BusinessServiceImpl.searchBusiness() getRangeMile: "+businessDTO.getRangeMile());
 		
 		List<BusinessInfo> businessList = null;
+		
+		/*
 		if(businessDTO.getIsForSell().equals(Constants.Y)) {
 			if (null != businessDTO.getZip() && businessDTO.getZip().equals(Constants.EMPTY_STRING)) {
 				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && !Constants.EMPTY_STRING.equals(businessDTO.getName()) && !Constants.EMPTY_STRING.equals(businessDTO.getType()) && !Constants.EMPTY_STRING.equals(businessDTO.getStreet1())) {
@@ -287,6 +290,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				}
 			}
 		} else {
+			*/
 			if (null != businessDTO.getZip() && businessDTO.getZip() != Constants.EMPTY_STRING) {
 				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && !Constants.EMPTY_STRING.equals(businessDTO.getName()) && !Constants.EMPTY_STRING.equals(businessDTO.getType()) && !Constants.EMPTY_STRING.equals(businessDTO.getStreet1())) {
 					logger.info("**** 333 Executing searchBusiness_1_FSN");
@@ -417,7 +421,9 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_24_FSN(businessDTO.getType(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
 				}
 			}
-		}
+		//}
+		
+		
 		logger.info("**** TOTAL NUMBER OF RECORDS IN SEARCH RESULT: "+businessList.size());
 
 		List<BusinessInfoDTO> businessInfoDTOList = new ArrayList<BusinessInfoDTO>();
@@ -504,7 +510,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
 				//If there is no first imaged saved in BRW DB and also we can't get it from google then call this method
 				//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
-				businessInfoDTO.setAlternateImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
+				//businessInfoDTO.setAlternateImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
+				businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
 				logger.info("**** businessInfoDTO.getBusinessId(): "+businessInfoDTO.getBusinessId());
 				logger.info("**** RANDOM alternate First Image URL: "+businessInfoDTO.getAlternateImageFirst());
 			}
@@ -516,14 +523,16 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		}// end of for loop
 		
 		businessInfoListDTO.setBusinessList(businessInfoDTOList);
-		
+		logger.info("Elapsed time in SearchBusiness: " + (System.currentTimeMillis() - start));
+
 		return businessInfoListDTO;
 	}
 
 	//Method to retrieve LIMITED Business Attributes from t_brw_busines table based on biz_id used in UserServiceImpl
 	@Override
 	public BusinessInfoDTO getBusinessInfoFromBRWDB(int businessId) {
-		// TODO Auto-generated method stub
+		long start = System.currentTimeMillis();
+
 		logger.info("**** 222 Inside BusinessServiceImpl.getBusinessInfoFromBRWDB() businessId: "+businessId);
 		
 		BusinessInfo businessInfo = (BusinessInfo) businessInfoDAO.getBusinessInfo(businessId);
@@ -561,13 +570,16 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessInfoDTO.setLatitude(businessInfo.getLatitude());
 			businessInfoDTO.setLongitude(businessInfo.getLongitude());
 		}
-		
+		logger.info("Elapsed time in GetBusinessInfoFromBRWDB: " + (System.currentTimeMillis() - start));
+
 		return businessInfoDTO;
 	}
 	
 	//Method to retrieve ALL Business Attributes from t_brw_busines table based on biz_id
 	@Override
 	public BusinessDetailsDTO getBusinessDetailsFromBRWDB(int businessId) {
+		long start = System.currentTimeMillis();
+
 		// TODO Auto-generated method stub
 		logger.info("**** 222 Inside BusinessServiceImpl.getBusinessDetailsFromBRWDB() businessId: "+businessId);
 		
@@ -716,7 +728,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		businessDetailsDTO.setCreateDate(businessDetails.getCreateDate().toString());
 		businessDetailsDTO.setUpdatedByUserId(businessDetails.getUpdatedByUserId());
 		businessDetailsDTO.setUpdateDate(businessDetails.getUpdateDate().toString());
-		
+		logger.info("Elapsed time in GetBusinessDetailsFromBRWDB: " + (System.currentTimeMillis() - start));
+
 		return businessDetailsDTO;
 	}
 	
@@ -1730,6 +1743,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	/**
 	 * 
 	 * @author sidpatil
+	 * 2018-20
 	 * 
 	 * estimateRealWorth
 	 * 
