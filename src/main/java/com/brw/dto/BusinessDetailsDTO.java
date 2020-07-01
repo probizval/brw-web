@@ -56,6 +56,8 @@ public class BusinessDetailsDTO {
 	private String county;
 	private String stateCode;
 	private String zip;
+	private String formattedAddress;
+
 	private double latitude;
 	private double longitude;
 	private Integer rangeMile;
@@ -397,6 +399,12 @@ public class BusinessDetailsDTO {
 	}
 	public void setZip(String zip) {
 		this.zip = zip;
+	}
+	public String getFormattedAddress() {
+		return formattedAddress;
+	}
+	public void setFormattedAddress(String formattedAddress) {
+		this.formattedAddress = formattedAddress;
 	}
 	public double getLatitude() {
 		return latitude;

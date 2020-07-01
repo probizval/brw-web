@@ -452,6 +452,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				businessInfoDTO.setCounty(businessInfo.getCounty());
 				businessInfoDTO.setStateCode(businessInfo.getStateCode());
 				businessInfoDTO.setZip(businessInfo.getZip());
+				businessInfoDTO.setFormattedAddress(businessInfo.getgFormattedAdd());
 				businessInfoDTO.setLatitude(businessInfo.getLatitude());
 				businessInfoDTO.setLongitude(businessInfo.getLongitude());
 				

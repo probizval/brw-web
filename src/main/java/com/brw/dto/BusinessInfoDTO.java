@@ -28,6 +28,8 @@ public class BusinessInfoDTO {
 	private String county;
 	private String stateCode;
 	private String zip;
+	private String formattedAddress;
+
 	private double latitude;
 	private double longitude;
 	private String googleAddress;
@@ -152,6 +154,12 @@ public class BusinessInfoDTO {
 	}
 	public void setZip(String zip) {
 		this.zip = zip;
+	}
+	public String getFormattedAddress() {
+		return formattedAddress;
+	}
+	public void setFormattedAddress(String formattedAddress) {
+		this.formattedAddress = formattedAddress;
 	}
 	public double getLatitude() {
 		return latitude;

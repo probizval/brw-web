@@ -90,6 +90,9 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 
 						bizGoogleInfoDTO.setImageFirst(gBusinessInfoDTO.getgSinglePhotoUrl());
 						logger.info("**** bizgoogleInfoDTO.getBusinessId(): "+bizGoogleInfoDTO.getImageFirst());
+						
+						bizGoogleInfoDTO.setFormattedAddress(gBusinessInfoDTO.getgFormattedAddress());
+						logger.info("**** bizgoogleInfoDTO.getBusinessId(): "+bizGoogleInfoDTO.getImageFirst());
 
 						bizGoogleInfoDTO.setIsVendorCall(Constants.Y);
 						logger.info("**** bizgoogleInfoDTO.getBusinessId(): "+bizGoogleInfoDTO.getIsVendorCall());
@@ -270,6 +273,11 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 		logger.info("businessDetailsDTO.getLongitude(): "+bizGoogleInfoDTO.getLongitude());
 		if (0.0 != bizGoogleInfoDTO.getLongitude()) {
 			bizGoogleInfo.setLongitude(bizGoogleInfoDTO.getLongitude());
+		}
+		
+		logger.info("businessDetailsDTO.getFormattedAddress(): "+bizGoogleInfoDTO.getFormattedAddress());
+		if (null != bizGoogleInfoDTO.getFormattedAddress() && !bizGoogleInfoDTO.getFormattedAddress().equals(Constants.EMPTY_STRING)) {
+			bizGoogleInfo.setgFormattedAdd(bizGoogleInfoDTO.getFormattedAddress());
 		}
 
 		logger.info("businessDetailsDTO.getIsVendorCall(): "+bizGoogleInfoDTO.getIsVendorCall());

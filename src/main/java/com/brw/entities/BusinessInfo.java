@@ -73,6 +73,9 @@ public class BusinessInfo implements Serializable {
 	@Column(name = "add_zip")
 	private String zip;
 	
+	@Column(name = "gg_formatted_add")
+	private String gFormattedAdd;
+	
 	@Column(name = "latitude")
 	private double latitude;
 	
@@ -208,6 +211,14 @@ public class BusinessInfo implements Serializable {
 
 	public void setZip(String zip) {
 		this.zip = zip;
+	}
+
+	public String getgFormattedAdd() {
+		return gFormattedAdd;
+	}
+
+	public void setgFormattedAdd(String gFormattedAdd) {
+		this.gFormattedAdd = gFormattedAdd;
 	}
 
 	public double getLatitude() {
