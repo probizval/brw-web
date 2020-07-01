@@ -157,7 +157,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		
 		List<BusinessInfo> businessList = null;
 		
-		/*
 		if(businessDTO.getIsForSell().equals(Constants.Y)) {
 			if (null != businessDTO.getZip() && businessDTO.getZip().equals(Constants.EMPTY_STRING)) {
 				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && !Constants.EMPTY_STRING.equals(businessDTO.getName()) && !Constants.EMPTY_STRING.equals(businessDTO.getType()) && !Constants.EMPTY_STRING.equals(businessDTO.getStreet1())) {
@@ -290,7 +289,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				}
 			}
 		} else {
-			*/
 			if (null != businessDTO.getZip() && businessDTO.getZip() != Constants.EMPTY_STRING) {
 				if (null != businessDTO.getName() && null != businessDTO.getType() && null != businessDTO.getStreet1() && !Constants.EMPTY_STRING.equals(businessDTO.getName()) && !Constants.EMPTY_STRING.equals(businessDTO.getType()) && !Constants.EMPTY_STRING.equals(businessDTO.getStreet1())) {
 					logger.info("**** 333 Executing searchBusiness_1_FSN");
@@ -421,35 +419,32 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 					businessList = (List<BusinessInfo>) businessInfoDAO.searchBusiness_24_FSN(businessDTO.getType(), businessDTO.getLatitude(), businessDTO.getLongitude(), businessDTO.getRangeMile());
 				}
 			}
-		//}
+		}
 		
 		
 		logger.info("**** TOTAL NUMBER OF RECORDS IN SEARCH RESULT: "+businessList.size());
 
 		List<BusinessInfoDTO> businessInfoDTOList = new ArrayList<BusinessInfoDTO>();
 		BusinessInfoListDTO businessInfoListDTO = new BusinessInfoListDTO();
-
-		int x = 0;
 		
 		for (BusinessInfo businessInfo: businessList) {
-			//TODO: Comment this code in PRODUCTION - Code to break out of this loop after 10 iterations, To avoide too many google calls while testing
-			x = x ++;
-			if(x == 10) {
-				logger.info("**** INSIDE BREAK AFTER 10 COUNTER ****");
-				break;
-			}
 			
 			BusinessInfoDTO businessInfoDTO = new BusinessInfoDTO();
 			businessInfoDTO.setInvokerId(businessDTO.getInvokerId());
 			businessInfoDTO.setBusinessId(businessInfo.getBusinessId());
+			businessInfoDTO.setIsHidden(businessInfo.getIsHidden());
+			businessInfoDTO.setType(businessInfo.getType());
+			businessInfoDTO.setSubType(businessInfo.getSubType());
+			businessInfoDTO.setIsForSell(businessInfo.getIsForSell());
+			businessInfoDTO.setForSellPrice(businessInfo.getForSellPrice());
+			businessInfoDTO.setIsVendorCall(businessInfo.getIsVendorCall());
+			businessInfoDTO.setIsFranchise(businessInfo.getIsFranchise());
 
-			//This IF block is written to avoid showing Hidden Business address
+			//This IF block is written to avoid showing Hidden Business address and lat/long
 			if (businessInfo.getIsHidden().equals(Constants.Y)) {
-				businessInfoDTO.setName("Business for Sell in " + businessInfo.getCity() + ", " + businessInfo.getCounty() + " " + "County" );
+				businessInfoDTO.setName("Business for Sell in " + businessInfo.getCity() + " city of " + businessInfo.getCounty() + " " + "County" );
 				
-			} else {
-				//Call google API to get latitude and longitude and formatted address
-				
+			} else {		
 				businessInfoDTO.setName(businessInfo.getName());
 				businessInfoDTO.setStreet1(businessInfo.getStreet1());
 				businessInfoDTO.setStreet2(businessInfo.getStreet2());
@@ -457,16 +452,17 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				businessInfoDTO.setCounty(businessInfo.getCounty());
 				businessInfoDTO.setStateCode(businessInfo.getStateCode());
 				businessInfoDTO.setZip(businessInfo.getZip());
+				businessInfoDTO.setLatitude(businessInfo.getLatitude());
+				businessInfoDTO.setLongitude(businessInfo.getLongitude());
 				
 				logger.info("**** LAT in BRW DB businessInfo.getLatitude(): "+businessInfo.getLatitude());
 				logger.info("**** LONG in BRW DB businessInfo.getLongitude(): "+businessInfo.getLongitude());
 				logger.info("**** LONG in BRW DB businessInfo.getImageFirst(): "+businessInfo.getImageFirst());
 
-				//call google if latitude and longitude do not exist in BRW DB
-				if (0.0 == businessInfo.getLatitude() || 0.0 == businessInfo.getLongitude() || businessInfo.getImageFirst().equals(Constants.EMPTY_STRING)) {
-					logger.info("**** Lat/Lng NOT-FOUND in BRW DB");
-					
-					String gSearchString = Constants.EMPTY_STRING;
+				//set call google flag true if latitude and longitude do not exist in BRW DB
+				if (businessInfo.getIsVendorCall().equals(Constants.N) && (0.0 == businessInfo.getLatitude() || 0.0 == businessInfo.getLongitude() || businessInfo.getImageFirst().equals(Constants.EMPTY_STRING))) {
+					logger.info("**** Lat/Lng NOT-FOUND in BRW DB");					
+					String gSearchString = null;
 
 					List<String> pobAddress = new ArrayList<>();
 					pobAddress.add(Constants.PO_BOX_1);
@@ -480,50 +476,32 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 						gSearchString = ""+businessInfo.getStreet1()+", "+businessInfo.getCity()+", "+businessInfo.getStateCode()+", "+businessInfo.getZip()+Constants.EMPTY_STRING;
 						businessInfoDTO.setGoogleBizSearchString(gSearchString);
 						logger.info("**** ADDRESS Input gSearchString to Google API: "+gSearchString);
-						businessInfoDTO.setUpdateAfterGoogle(true);
+						
 					} else {
 						gSearchString = ""+businessInfo.getName()+", "+businessInfo.getCity()+", "+businessInfo.getStateCode()+", "+businessInfo.getZip()+Constants.EMPTY_STRING;
 						businessInfoDTO.setGoogleBizSearchString(gSearchString);
 						logger.info("**** BIZ NAME Input gSearchString to Google API: "+gSearchString);
-						businessInfoDTO.setUpdateAfterGoogle(true);
+						
 					}
 				}
 			}
-			
-			businessInfoDTO.setLatitude(businessInfo.getLatitude());
-			businessInfoDTO.setLongitude(businessInfo.getLongitude());
-			businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
-			businessInfoDTO.setIsHidden(businessInfo.getIsHidden());
-			businessInfoDTO.setType(businessInfo.getType());
-			businessInfoDTO.setSubType(businessInfo.getSubType());
-			businessInfoDTO.setIsForSell(businessInfo.getIsForSell());
-			businessInfoDTO.setForSellPrice(businessInfo.getForSellPrice());
-			
+
 			logger.info("**** businessInfo.getImageFirst(): "+businessInfo.getImageFirst());
 			if(!businessInfo.getImageFirst().equals(Constants.EMPTY_STRING)) {
-				logger.info("**** IM IN HERE 111");
-
 				//If ImageFirst Exist then pick up Image First
 				businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
 			} else {
-				logger.info("**** IM IN HERE 222");
-
-				//If there is no first imaged saved in BRW DB and also we can't get it from google then call this method
+				//If there is no first image saved in BRW DB and also we can't get it from google then call this method
 				//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
-				//businessInfoDTO.setAlternateImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
-				businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
-				logger.info("**** businessInfoDTO.getBusinessId(): "+businessInfoDTO.getBusinessId());
-				logger.info("**** RANDOM alternate First Image URL: "+businessInfoDTO.getAlternateImageFirst());
+				businessInfoDTO.setAlternateImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
+				//businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
 			}
-			
-			businessInfoDTO.setIsVendorCall(businessInfo.getIsVendorCall());
-			businessInfoDTO.setIsFranchise(businessInfo.getIsFranchise());
-			
-			businessInfoDTOList.add(businessInfoDTO);			
+
+			businessInfoDTOList.add(businessInfoDTO);	
 		}// end of for loop
 		
 		businessInfoListDTO.setBusinessList(businessInfoDTOList);
-		logger.info("Elapsed time in SearchBusiness: " + (System.currentTimeMillis() - start));
+		logger.info("Elapsed time in SearchBusiness(): " + (System.currentTimeMillis() - start));
 
 		return businessInfoListDTO;
 	}

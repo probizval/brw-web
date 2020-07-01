@@ -13,7 +13,6 @@ public class BusinessInfoDTO {
 	private String name;
 	private String googleName;
 	private String googleBizSearchString;
-	private boolean updateAfterGoogle;
 	private String type;
 	private String subType;
 	private String isForSell;
@@ -207,11 +206,5 @@ public class BusinessInfoDTO {
 	}
 	public void setGoogleBizSearchString(String googleBizSearchString) {
 		this.googleBizSearchString = googleBizSearchString;
-	}
-	public boolean isUpdateAfterGoogle() {
-		return updateAfterGoogle;
-	}
-	public void setUpdateAfterGoogle(boolean updateAfterGoogle) {
-		this.updateAfterGoogle = updateAfterGoogle;
 	}
 }

@@ -9,8 +9,6 @@ public class GBusinessInfoDTO {
 
 	private Integer invokerId;
 	private Integer bizId;
-
-	private boolean updateAfterGoogle;
 	private String gPlaceId;
 	private String gBusinessName;
 	private String gFormattedAddress;
@@ -32,12 +30,6 @@ public class GBusinessInfoDTO {
 	}
 	public void setBizId(Integer bizId) {
 		this.bizId = bizId;
-	}
-	public boolean isUpdateAfterGoogle() {
-		return updateAfterGoogle;
-	}
-	public void setUpdateAfterGoogle(boolean updateAfterGoogle) {
-		this.updateAfterGoogle = updateAfterGoogle;
 	}
 	public String getgPlaceId() {
 		return gPlaceId;
