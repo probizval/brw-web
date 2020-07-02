@@ -39,8 +39,6 @@ import com.brw.service.BusinessService;
  * 2019-20
  */
 
-//@Lazy
-//@EnableAsync
 @Component
 @RestController
 @CrossOrigin(origins = "*")
