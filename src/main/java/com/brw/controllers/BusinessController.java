@@ -30,6 +30,7 @@ import com.brw.dto.BusinessInfoListDTO;
 import com.brw.dto.GBusinessInfoDTO;
 import com.brw.dto.RelatedBusinessDTO;
 import com.brw.dto.RelatedBusinessListDTO;
+import com.brw.dto.UserActivityDTO;
 import com.brw.service.AsyncProcessingService;
 import com.brw.service.BusinessService;
 
@@ -76,11 +77,31 @@ public class BusinessController implements ErrorController {
 		BusinessInfoListDTO businessList = null;
 
 		try {
+
 			businessList = businessService.searchBusiness(businessDetailsDTO);
+			//Log the User Action - START - TODO Make this call Asynchronous
+			UserActivityDTO userActivityDTO = new UserActivityDTO();
+
+			if(null == businessDetailsDTO.getInvokerId()) {
+				businessDetailsDTO.setInvokerId(1001);
+			}
+			userActivityDTO.setUserId(businessDetailsDTO.getInvokerId());
+			
+			if(null == businessDetailsDTO.getBusinessId()) {
+				businessDetailsDTO.setBusinessId(1000000);
+			}
+			userActivityDTO.setBusinessId(businessDetailsDTO.getBusinessId());
+			
+			userActivityDTO.setType(Constants.BUTTON_CLICK);
+			userActivityDTO.setSubType(Constants.SEARCH_BUSINESS);
+
+			asyncProcessingService.asyncTrackUserActivity(userActivityDTO);
+			//Log the User Action - END
 			
 			//Asynchronous method to store lat/long to BRW DB
 			//CompletableFuture<List<GBusinessInfoDTO>> bizLatLongPlaceIdDTOList  = asyncProcessingService.asyncStoreLatLngToDB(businessList.getBusinessList());
-			CompletableFuture<Integer> bizLatLongPlaceIdDTOList  = asyncProcessingService.asyncStoreLatLngToDB(businessList.getBusinessList());
+			//CompletableFuture<Integer> bizLatLongPlaceIdDTOList  = 
+			asyncProcessingService.asyncStoreLatLngToDB(businessList.getBusinessList());
 			
 			/*
 			//Asynchronous method to call google PlaceDetails API then Photos API and store images to BRW DB

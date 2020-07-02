@@ -607,8 +607,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
 		if (businessDetails.getIsHidden().equals(Constants.Y)) {
 			
-			businessDetailsDTO.setLegalName("Business for Sell in " + businessDetails.getCity() + ", " + businessDetails.getCounty() + " " + "County" );
-			businessDetailsDTO.setName("Business for Sell in " + businessDetails.getCity() + ", " + businessDetails.getCounty() + " " + "County" );
+			businessDetailsDTO.setLegalName("Business for Sell in " + businessDetails.getCity() + ", of " + businessDetails.getCounty() + " " + "County" );
+			businessDetailsDTO.setName("Business for Sell in " + businessDetails.getCity() + ", of " + businessDetails.getCounty() + " " + "County" );
 			
 			logger.info("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetailsDTO.getName(): "+businessDetailsDTO.getName());
 		} else {
@@ -714,7 +714,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	
 	@Override
 	public BusinessDetailsDTO addBusinessDetails(BusinessDetailsDTO businessDetailsDTO) {
-		
+		long start = System.currentTimeMillis();
+
 		//Log the User Action - START
 		UserActivityDTO userActivityDTO = new UserActivityDTO();
 		
@@ -1225,11 +1226,15 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		//Add Business and User relationship in t_brw_user_business table
 		addUserBusiness(bizDTO, businessDetailsDTO.getBuRelationship());
 		
+		logger.info("Elapsed time in AddBusinessDetails: " + (System.currentTimeMillis() - start));
+
 		return bizDTO;
 	}
 	
 	@Override
 	public BusinessDetailsDTO updateBusinessDetails(BusinessDetailsDTO businessDetailsDTO) {
+		long start = System.currentTimeMillis();
+
 		logger.info("222 **** Inside BusinessServiceImpl.updateBusinessDetails() businessDetailsDTO.getBusinessId(): "+businessDetailsDTO.getBusinessId());
 		logger.info("222 **** Inside BusinessServiceImpl.updateBusinessDetails() businessDetailsDTO.getLegalName(): "+businessDetailsDTO.getLegalName());
 
@@ -1617,7 +1622,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		
 		//Add Business and User relationship in t_brw_user_business table
 		//addUserBusiness(bizDTO, businessDetailsDTO.getBuRelationship());
-		
+		logger.info("Elapsed time in UpdateBusinessDetails: " + (System.currentTimeMillis() - start));
+
 		return bizDTO;
 	}
 	
