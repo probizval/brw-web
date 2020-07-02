@@ -1,5 +1,8 @@
 package com.brw.service.impl;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -33,7 +36,9 @@ import com.brw.entities.UserActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.maps.GeoApiContext;
+import com.google.maps.PlaceDetailsRequest;
 import com.google.maps.PlacesApi;
+import com.google.maps.errors.OverDailyLimitException;
 import com.google.maps.model.Photo;
 import com.google.maps.model.PlaceDetails;
 import com.google.maps.model.PlacesSearchResponse;
@@ -65,9 +70,10 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 		
 		List<GBusinessInfoDTO> gBusinessInfoDTOList = null;
 		
-		if (bizInfoDTOList.size() >= 1) {
-
+		if (bizInfoDTOList.size() > 0) {
+			gBusinessInfoDTOList = new ArrayList();
 			for (BusinessInfoDTO businessInfoDTO: bizInfoDTOList) {
+				
 				logger.info("**** businessInfoDTO.getGoogleBizSearchString(): "+businessInfoDTO.getGoogleBizSearchString());
 				if (null != businessInfoDTO.getGoogleBizSearchString()) {
 				
@@ -81,7 +87,7 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 						e.printStackTrace();
 					}
 					if (null != gBusinessInfoDTO) {
-						gBusinessInfoDTOList = new ArrayList();
+						
 						BusinessDetailsDTO bizGoogleInfoDTO = new BusinessDetailsDTO();
 						bizGoogleInfoDTO.setInvokerId(1001);
 						bizGoogleInfoDTO.setBusinessId(businessInfoDTO.getBusinessId());
@@ -120,99 +126,13 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 			}
 			//Call this method to get the Photo URLs for biz from google and Add them to image table
 			if (null != gBusinessInfoDTOList) {
-				logger.info("**** calling asyncStoreImageUrlsToBRWDB");
-				asyncStoreImageUrlsToBRWDB(gBusinessInfoDTOList);
+				storeOtherImageUrlsToBRWDB(gBusinessInfoDTOList);
 			}
 		}
 		logger.info("**** Total updateCount: "+updateCount);
 		logger.info("Elapsed time in asyncStoreLatLngToDB: " + (System.currentTimeMillis() - start));
 		//return CompletableFuture.completedFuture(returnGBusinessInfoDTOList);
 		return CompletableFuture.completedFuture(0);
-	}
-
-	//Method to get Google Photos(Photos API call) based on PlaceId and Photo References we got from Google Places API
-	//@Async("threadPoolTaskExecutor")
-	//public CompletableFuture<List<GBusinessInfoDTO>> asyncStoreImageUrlsToDB(List<GBusinessInfoDTO> gBusinessInfoDTOList) throws InterruptedException {
-	public List<GBusinessInfoDTO> asyncStoreImageUrlsToBRWDB(List<GBusinessInfoDTO> gBusinessInfoDTOList) {
-		logger.info("**** Inside AsyncProcessingServiceImpl.asyncStoreImageUrlsToDB() gBusinessInfoDTOList.size() "+gBusinessInfoDTOList.size());
-		long start = System.currentTimeMillis();
-		
-		List<GBusinessInfoDTO> returnGBusinessInfoDTOList = new ArrayList();
-		GBusinessInfoDTO returnGBusinessInfoDTO = new GBusinessInfoDTO();
-		ImagesListDTO imagesListDTO = new ImagesListDTO();
-		ImageDTO imageDTO = new ImageDTO();
-		List<ImageDTO> imageDTOList = new ArrayList();
-		
-		for (GBusinessInfoDTO gBusinessInfoDTO: gBusinessInfoDTOList) {
-			
-			logger.info("***  gBusinessInfoDTO.getBizId(): "+gBusinessInfoDTO.getBizId());
-			logger.info("***  gBusinessInfoDTO.getgPlaceId(): "+gBusinessInfoDTO.getgPlaceId());
-
-			String placeId = gBusinessInfoDTO.getgPlaceId();
-			logger.info("***  placeId: "+placeId);
-			
-			if (null != placeId){
-				PlaceDetails gpdResult = null;
-				//PlaceDetailsRequest gpdResult = null;
-				try {
-					logger.info("***  Calling PLACE DETAILS API based on placeId: "+placeId);
-					logger.info("***  Calling PLACE DETAILS API based on placeId for bizId: "+gBusinessInfoDTO.getBizId());
-					//TODO: This call is failing for whatever reason - need fixing 06/30/2020
-					//Failure is a reason of we not able to get Google Images stored in BRW DB
-					gpdResult = (PlacesApi.placeDetails(getGoogleContext(), placeId)).await();
-					logger.info("***  AFTER Calling PLACE DETAILS API gpdResult: "+gpdResult);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-				if (null != gpdResult) {
-					//capture up to 5 image references 
-					logger.info("***  AFTER Calling PLACE DETAILS API Total NUMBER of Photos FOUND : "+gpdResult.photos.length);
-	
-					int x = 0;
-					String[] photoReferances = new String[gpdResult.photos.length];
-					if (null != gpdResult.photos && gpdResult.photos.length > 0) {
-						for (Photo phoRef: gpdResult.photos) {
-							photoReferances[x] = phoRef.photoReference;
-							x ++;
-							//Collect only 5 image references from Google - To save Photos api cost and storage space
-							if(x == 5) {
-								logger.info("**** INSIDE BREAK AFTER 5 COUNTER for gPhotos ****");
-								break;
-							}
-						}
-					}
-					
-					int y = 0;
-					String[] gPhotoUrls = new String[gBusinessInfoDTOList.size()];
-					for (String photoRef: photoReferances) {
-						String gPhotoUrl = "https://maps.googleapis.com/maps/api/place/photo?photoreference="+photoRef+"&sensor=false&maxheight=500&maxwidth=500&key=AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I";
-						
-						logger.info("***  BIZ Image found on GOOGLE gPhotoUrl: "+gPhotoUrl);
-	
-						gPhotoUrls[y] = gPhotoUrl;
-						y++;
-						
-						imageDTO.setUrl(gPhotoUrl);
-					}
-					imageDTOList.add(imageDTO);
-					returnGBusinessInfoDTO.setgPhotoUrls(gPhotoUrls);
-					
-					imagesListDTO.setInvokerId(1001);
-					imagesListDTO.setBusinessId(gBusinessInfoDTO.getBizId());
-					imagesListDTO.setImagesList(imageDTOList);
-					
-					logger.info("**** calling addImages");
-					//Call the addImages() to store Images on BRW DB
-					addImages(imagesListDTO);
-				}
-			}
-		}
-		logger.info("Elapsed time: " + (System.currentTimeMillis() - start));
-		returnGBusinessInfoDTOList.add(returnGBusinessInfoDTO);
-		//return CompletableFuture.completedFuture(returnGBusinessInfoDTOList);
-		return returnGBusinessInfoDTOList;
 	}
 
 	private GeoApiContext getGoogleContext() {
@@ -247,6 +167,11 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 				returnGBusinessInfoDTO.setgLongitude(new Double(gson.toJson(result.geometry.location.lng)));
 				if (null != result.photos && result.photos.length > 0) {
 					String gPhotoUrl = "https://maps.googleapis.com/maps/api/place/photo?photoreference="+result.photos[0].photoReference+"&sensor=false&maxheight=500&maxwidth=500&key=AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I";
+					
+					//TODO: How to get DIRECt image URL instead of above URL that has our Google API Key?
+					//Below blog post says its not possible
+					//https://stackoverflow.com/questions/40572232/processing-google-photo-reference-to-get-the-image-url
+
 					returnGBusinessInfoDTO.setgSinglePhotoUrl(gPhotoUrl);
 
 				}
@@ -254,6 +179,94 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 		}
 		logger.info("Elapsed time in getBizGoggleInfo(): " + (System.currentTimeMillis() - start));
 		return returnGBusinessInfoDTO;
+	}
+	
+	//Method to get Google Photos(Photos API call) based on PlaceId and Photo References we got from Google Places API
+	public List<GBusinessInfoDTO> storeOtherImageUrlsToBRWDB(List<GBusinessInfoDTO> gBusinessInfoDTOList) {
+		logger.info("****$$$$ Inside AsyncProcessingServiceImpl.storeOtherImageUrlsToBRWDB() gBusinessInfoDTOList.size() "+gBusinessInfoDTOList.size());
+		
+		long start = System.currentTimeMillis();
+		
+		List<GBusinessInfoDTO> returnGBusinessInfoDTOList = new ArrayList();
+		GBusinessInfoDTO returnGBusinessInfoDTO = null;
+		ImagesListDTO imagesListDTO = null;
+		ImageDTO imageDTO = null;
+		List<ImageDTO> imageDTOList = null;
+		
+		for (GBusinessInfoDTO gBusinessInfoDTO: gBusinessInfoDTOList) {
+			
+			if (null != gBusinessInfoDTO.getgPlaceId()){
+				PlaceDetails placeDetails = null;
+				//PlaceDetailsRequest gpdResult = null;
+			
+				try {
+					logger.info("***  Calling PLACE DETAILS API based on placeId: "+gBusinessInfoDTO.getgPlaceId());
+					logger.info("***  Calling PLACE DETAILS API based on placeId for bizId: "+gBusinessInfoDTO.getBizId());
+					//TODO: This call is failing for whatever reason - need fixing 06/30/2020
+					//Failure is a reason of we not able to get Google Images stored in BRW DB
+					placeDetails = (PlacesApi.placeDetails(getGoogleContext(), gBusinessInfoDTO.getgPlaceId())).awaitIgnoreError();
+
+				} catch (Exception e) {
+					e.printStackTrace();
+
+				}
+				
+				if (null != placeDetails) {
+					returnGBusinessInfoDTO = new GBusinessInfoDTO();
+					imagesListDTO = new ImagesListDTO();
+					imageDTO = new ImageDTO();
+					imageDTOList = new ArrayList();
+					
+					//capture up to 5 image references 
+					logger.info("***%%%%  AFTER Calling PLACE DETAILS API Total NUMBER of Photos FOUND : "+placeDetails.photos.length);
+	
+					int x = 0;
+					String[] photoReferances = new String[placeDetails.photos.length];
+					if (null != placeDetails.photos && placeDetails.photos.length > 0) {
+						for (Photo phoRef: placeDetails.photos) {
+							photoReferances[x] = phoRef.photoReference;
+							x ++;
+							//Collect only 5 image references from Google - To save Photos api cost and storage space
+							if(x == 5) {
+								logger.info("**** INSIDE BREAK AFTER 5 COUNTER for gPhotos ****");
+								break;
+							}
+						}
+					}
+					
+					int y = 0;
+					String[] gPhotoUrls = new String[gBusinessInfoDTOList.size()];
+					for (String photoRef: photoReferances) {
+						String gPhotoUrl = "https://maps.googleapis.com/maps/api/place/photo?photoreference="+photoRef+"&sensor=false&maxheight=500&maxwidth=500&key=AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I";
+						
+						logger.info("***  BIZ Image found on GOOGLE gPhotoUrl: "+gPhotoUrl);
+	
+						gPhotoUrls[y] = gPhotoUrl;
+						y++;
+						
+						imageDTO.setUrl(gPhotoUrl);
+					}
+					imageDTOList.add(imageDTO);
+					returnGBusinessInfoDTO.setgPhotoUrls(gPhotoUrls);
+					
+					imagesListDTO.setInvokerId(1001);
+					imagesListDTO.setBusinessId(gBusinessInfoDTO.getBizId());
+					imagesListDTO.setImagesList(imageDTOList);
+					
+					logger.info(" &&&&&& PlacesApi.placeDetails RESPONSE is NOT NULL");
+					logger.info("**** calling addImages");
+					//Call the addImages() to store Images on BRW DB
+					addImages(imagesListDTO);
+					
+				} else {
+					logger.info(" $$$$$$ PlacesApi.placeDetails RESPONSE is NULL");
+				}
+			} 
+		}
+		logger.info("Elapsed time in storeOtherImageUrlsToBRWDB: " + (System.currentTimeMillis() - start));
+		returnGBusinessInfoDTOList.add(returnGBusinessInfoDTO);
+		//return CompletableFuture.completedFuture(returnGBusinessInfoDTOList);
+		return returnGBusinessInfoDTOList;
 	}
 
 	/*
