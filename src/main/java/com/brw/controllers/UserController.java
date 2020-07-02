@@ -24,6 +24,7 @@ import com.brw.dto.UserActivityDTO;
 import com.brw.dto.UserBusinessDTO;
 import com.brw.dto.UserBusinessListDTO;
 import com.brw.dto.UserDTO;
+import com.brw.service.AsyncProcessingService;
 import com.brw.service.UserService;
 
 @RestController
@@ -33,6 +34,9 @@ public class UserController implements ErrorController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	AsyncProcessingService asyncProcessingService;
 
 	@Override
 	public String getErrorPath() {
@@ -117,9 +121,27 @@ public class UserController implements ErrorController {
 	@PostMapping(value = "trackUserActivity")
 	public ResponseEntity<UserActivityDTO> trackUserActivity(@RequestBody UserActivityDTO userActivityDTO) {
 		try {
-			UserActivityDTO returnUserActivityDTO = userService.trackUserActivity(userActivityDTO);
+			UserActivityDTO returnUserActivityDTO = new UserActivityDTO();
+			
+			//Log the User Action - START - TODO Make this call Asynchronous
+			//UserActivityDTO userActivityDTO = new UserActivityDTO();
+
+			if(userActivityDTO.getUserId() == 0) {
+				userActivityDTO.setUserId(1001);
+			}
+			
+			if(userActivityDTO.getBusinessId() == 0) {
+				userActivityDTO.setBusinessId(1000000);
+			}
+			
+			//userActivityDTO.setType(Constants.BUTTON_CLICK);
+			//userActivityDTO.setSubType(Constants.SEARCH_BUSINESS);
+
+			asyncProcessingService.asyncTrackUserActivity(userActivityDTO);
+			//Log the User Action - END
+			
 			return new ResponseEntity<>(returnUserActivityDTO, HttpStatus.OK);
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(userActivityDTO, HttpStatus.INTERNAL_SERVER_ERROR);

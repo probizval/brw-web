@@ -354,11 +354,11 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 	 * asyncTrackUserActivity calls Google Places API to get the lat/long, firstImage and placeId
 	 * The placeId will then be used by asyncStoreImagesToDB method 
 	 */
-	@Override
+	@Async("threadPoolTaskExecutor")
 	public CompletableFuture<Integer> asyncTrackUserActivity(UserActivityDTO userActivityDTO) throws InterruptedException {
 		long start = System.currentTimeMillis();
 
-		logger.info("222 **** Inside AsyncProcessingServiceImpl.asyncTrackUserActivity()");
+		logger.info("$$$$ **** Inside AsyncProcessingServiceImpl.asyncTrackUserActivity()");
 		
 		UserActivity userActivity = new UserActivity();
 		userActivity.setUserId(userActivityDTO.getUserId());

@@ -73,6 +73,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	public BusinessInfoListDTO searchBusiness(BusinessDetailsDTO businessDTO) {
 		long start = System.currentTimeMillis();
 
+		/*
 		//Log the User Action - START - TODO Make this call Asynchronous
 		UserActivityDTO userActivityDTO = new UserActivityDTO();
 
@@ -91,7 +92,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
 		userService.trackUserActivity(userActivityDTO);
 		//Log the User Action - END
-		
+		*/
 		//Increase the View Counter for Business - START - TODO Make this call Asynchronous
 		//Need to write the code to update View Counter on Business table
 		//Increase the View Counter for Business - END
@@ -420,8 +421,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				}
 			}
 		}
-		
-		
+
 		logger.info("**** TOTAL NUMBER OF RECORDS IN SEARCH RESULT: "+businessList.size());
 
 		List<BusinessInfoDTO> businessInfoDTOList = new ArrayList<BusinessInfoDTO>();

@@ -101,7 +101,9 @@ public class BusinessController implements ErrorController {
 			//Asynchronous method to store lat/long to BRW DB
 			//CompletableFuture<List<GBusinessInfoDTO>> bizLatLongPlaceIdDTOList  = asyncProcessingService.asyncStoreLatLngToDB(businessList.getBusinessList());
 			//CompletableFuture<Integer> bizLatLongPlaceIdDTOList  = 
-			asyncProcessingService.asyncStoreLatLngToDB(businessList.getBusinessList());
+			if (businessList.getBusinessList().size() > 0) {
+				asyncProcessingService.asyncStoreLatLngToDB(businessList.getBusinessList());
+			}
 			
 			/*
 			//Asynchronous method to call google PlaceDetails API then Photos API and store images to BRW DB
