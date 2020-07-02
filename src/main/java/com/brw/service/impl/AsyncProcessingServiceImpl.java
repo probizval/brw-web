@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import com.brw.common.constants.Constants;
 import com.brw.dao.BizGoogleInfoDAO;
+import com.brw.dao.BusinessActivityDAO;
 import com.brw.dao.ImageDAO;
 import com.brw.dao.UserActivityDAO;
 import com.brw.dto.BusinessDetailsDTO;
@@ -31,6 +32,8 @@ import com.brw.dto.ImageDTO;
 import com.brw.dto.ImagesListDTO;
 import com.brw.dto.UserActivityDTO;
 import com.brw.entities.BizGoogleInfo;
+import com.brw.entities.BusinessActivity;
+import com.brw.entities.BusinessInfo;
 import com.brw.entities.Image;
 import com.brw.entities.UserActivity;
 import com.google.gson.Gson;
@@ -57,6 +60,9 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 	
 	@Autowired
 	private UserActivityDAO userActivityDAO;
+	
+	@Autowired
+	private BusinessActivityDAO bizActivityDAO;
 	
 	/*
 	 * asyncStoreLatLngToDB calls Google Places API to get the lat/long, firstImage and placeId
@@ -364,8 +370,8 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 	}
 
 	/*
-	 * asyncTrackUserActivity calls Google Places API to get the lat/long, firstImage and placeId
-	 * The placeId will then be used by asyncStoreImagesToDB method 
+	 * asyncTrackUserActivity stores User Activity in User Table and also increments the view counter for business in business table
+	 * 
 	 */
 	@Async("threadPoolTaskExecutor")
 	public CompletableFuture<Integer> asyncTrackUserActivity(UserActivityDTO userActivityDTO) throws InterruptedException {
@@ -383,17 +389,16 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 		userActivity.setUpdatedByUserId(userActivityDTO.getUserId());
 		userActivity.setUpdateDate(LocalDateTime.now());
 		
-		UserActivity returnUserActivity = userActivityDAO.save(userActivity);
+		//store user activity against userId in user activity table
+		userActivityDAO.save(userActivity);
+				
+		//getBizViewCounter()
+		BusinessActivity bizActivity = new BusinessActivity();
+		bizActivity.setBusinessId(userActivityDTO.getBusinessId());
+		bizActivity.setViewCounter(bizActivityDAO.getBizViewCounter(userActivityDTO.getBusinessId()) + 1);
 		
-		UserActivityDTO returnUserActivityDTO = new UserActivityDTO();
-		returnUserActivityDTO.setUserId(returnUserActivity.getUserId());
-		returnUserActivityDTO.setBusinessId(returnUserActivity.getBusinessId());
-		returnUserActivityDTO.setType(returnUserActivity.getType());
-		returnUserActivityDTO.setSubType(returnUserActivity.getSubType());
-		returnUserActivityDTO.setCreatedByUserId(returnUserActivity.getUserId());
-		returnUserActivityDTO.setCreateDate(returnUserActivity.getCreateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
-		returnUserActivityDTO.setUpdatedByUserId(returnUserActivity.getUserId());
-		returnUserActivityDTO.setUpdateDate(returnUserActivity.getUpdateDate().format(DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
+		//Increment business view counter in business table - to see view view a particular business need to make a join sql query on user activity table
+		bizActivityDAO.save(bizActivity);
 		
 		logger.info("Elapsed time in asyncTrackUserActivity: " + (System.currentTimeMillis() - start));
 

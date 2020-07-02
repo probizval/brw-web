@@ -61,19 +61,15 @@ For Business Type specific details use AddAdditionalAttributes.
 
 25. AddUserActivity - Service to capture User Activity on the BRW Website.
 
-26. GetTotalBusinessViews - Service to get Total Business Detail page Views.
+26. AddImages - Service to add Business Images.
 
-27. GetBusinessViewsSince - Service to get Business Detail page Views since a specific date.
+27. GetImages - Service to get Business Images based on Business Id.
 
-28. AddImages - Service to add Business Images.
+28. DeleteImages - Service to delete one or many images at a time.
 
-29. GetImages - Service to get Business Images based on Business Id.
+29. UploadImages - Service to upload user given images to S3 and then saving the S3 URLs to BRW DB.
 
-30. DeleteImages - Service to delete one or many images at a time.
-
-31. UploadImages - Service to upload user given images to S3 and then saving the S3 URLs to BRW DB.
-
-32.	GetStateCounties - This service returns list of counties based on StateName
+30.	GetStateCounties - This service returns list of counties based on StateName
 
 Pending from Phase 1-
 1. RunSearchAgent
@@ -1941,10 +1937,6 @@ Response-
     "updateDate": "2020-01-14 18:55"
 }
 
-25. GetTotalBusinessViews - Service to get Total Business Detail page Views.
-
-26. GetBusinessViewsSince - Service to get Business Detail page Views since a specific date.
-
 27.	AddImages
 Method - Post
 End Point –
@@ -2271,4 +2263,4 @@ to the API or at least has the roles to access the APIs.
 	b. Added spring-boot-starter-security, spring-security-oauth2-resource-server, spring-security-oauth2-jose and 
 	spring-security-config for Auth0 JWT token authentication implementation.
 	
-	
+***************************************************************************************************************

@@ -147,6 +147,21 @@ public class BusinessController implements ErrorController {
 			returnBusinessDetailsDTO = businessService.getBusinessDetailsFromBRWDB(businessDTO.getBusinessId());
 			//businessDetailsDTO1.setIsEstimateAvailable(businessService.estimateRealWorth(businessDetailsDTO1));
 			
+			//Log the User Action - START - TODO Make this call Asynchronous
+			UserActivityDTO userActivityDTO = new UserActivityDTO();
+
+			if(null == businessDTO.getInvokerId()) {
+				businessDTO.setInvokerId(1001);
+			}
+			userActivityDTO.setUserId(businessDTO.getInvokerId());
+			userActivityDTO.setBusinessId(businessDTO.getBusinessId());
+			
+			userActivityDTO.setType(Constants.BUTTON_CLICK);
+			userActivityDTO.setSubType(Constants.SEARCH_BUSINESS);
+
+			asyncProcessingService.asyncTrackUserActivity(userActivityDTO);
+			//Log the User Action - END
+			
 			return ApiResponse.withData(returnBusinessDetailsDTO);
 			
 			/* Code in case we decide to make Vendor API call run-time
@@ -174,8 +189,8 @@ public class BusinessController implements ErrorController {
 				return ApiResponse.withData(businessDetailsDTO2);
 			}
 			*/
-		} catch (BusinessException be) {
-			be.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Data Not Found");
 		}
 	}
