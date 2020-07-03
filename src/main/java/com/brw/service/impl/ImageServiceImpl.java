@@ -421,127 +421,127 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 		  		break;
 		  	//BTYPE_AUTO_BOAT
 		  	case 990011:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990011/990011_0.JPEG";
 		  		break;
 		  	case 990012:
-				imageFirst = "";
+				imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990012/990012_0.JPEG";
 				break;
 		  	case 990013:
-			  	imageFirst = "";
+			  	imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990013/990013_0.JPEG";
 			  	break;
 		  	case 990014:
-			  	imageFirst = "";
+			  	imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990014/990014_0.JPEG";
 			  	break;
 		  	case 990015:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990015/990015_0.JPEG";
 		  		break;
 		  	case 990016:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990016/990016_0.JPEG";
 		  		break;
 		  	case 990017:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990017/990017_0.JPEG";
 		  		break;
 		  	case 990018:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990018/990018_0.JPEG";
 		  		break;
 		  	case 990019:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990019/990019_0.JPEG";
 		  		break;
 		  	case 990020:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990020/990020_0.JPEG";
 		  		break;	 
 		  	//BTYPE_BEAUTY_PERSONA
 		  	case 990021:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990021/990021_0.JPEG";
 		  		break;
 		  	case 990022:
-				imageFirst = "";
+				imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990022/990022_0.JPEG";
 				break;
 		  	case 990023:
-			  	imageFirst = "";
+			  	imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990023/990023_0.JPEG";
 			  	break;
 		  	case 990024:
-			  	imageFirst = "";
+			  	imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990024/990024_0.JPEG";
 			  	break;
 		  	case 990025:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990025/990025_0.JPEG";
 		  		break;
 		  	case 990026:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990026/990026_0.JPEG";
 		  		break;
 		  	case 990027:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990027/990027_0.JPEG";
 		  		break;
 		  	case 990028:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990028/990028_0.JPEG";
 		  		break;
 		  	case 990029:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990029/990029_0.JPEG";
 		  		break;
 		  	case 990030:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990030/990030_0.JPEG";
 		  		break;	
 		  	//BTYPE_BUILD_CONS
 		  	case 990031:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990031/990031_0.JPEG";
 		  		break;
 		  	case 990032:
-				imageFirst = "";
+				imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990032/990032_0.JPEG";
 				break;
 		  	case 990033:
-			  	imageFirst = "";
+			  	imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990033/990033_0.JPEG";
 			  	break;
 		  	case 990034:
-			  	imageFirst = "";
+			  	imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990034/990034_0.JPEG";
 			  	break;
 		  	case 990035:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990035/990035_0.JPEG";
 		  		break;
 		  	case 990036:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990036/990036_0.JPEG";
 		  		break;
 		  	case 990037:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990037/990037_0.JPEG";
 		  		break;
 		  	case 990038:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990038/990038_0.JPEG";
 		  		break;
 		  	case 990039:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990039/990039_0.JPEG";
 		  		break;
 		  	case 990040:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990039/990039_0.JPEG";
 		  		break;
 		  	//BTYPE_COM_MEDIA
 		  	case 990041:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990041/990041_0.JPEG";
 		  		break;
 		  	case 990042:
-				imageFirst = "";
+				imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990042/990042_0.JPEG";
 				break;
 		  	case 990043:
-			  	imageFirst = "";
+			  	imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990043/990043_0.JPEG";
 			  	break;
 		  	case 990044:
-			  	imageFirst = "";
+			  	imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990044/990044_0.JPEG";
 			  	break;
 		  	case 990045:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990045/990045_0.JPEG";
 		  		break;
 		  	case 990046:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990046/990046_0.JPEG";
 		  		break;
 		  	case 990047:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990047/990047_0.JPEG";
 		  		break;
 		  	case 990048:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990048/990048_0.JPEG";
 		  		break;
 		  	case 990049:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990049/990049_0.JPEG";
 		  		break;
 		  	case 990050:
-		  		imageFirst = "";
+		  		imageFirst = "https://brwbusinessimages.s3.us-west-1.amazonaws.com/990050/990050_0.JPEG";
 		  		break;
 		  	//BTYPE_EDU_CHILD
 		  	case 990051:

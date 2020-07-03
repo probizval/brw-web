@@ -1,8 +1,5 @@
 package com.brw.controllers;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,10 +21,8 @@ import com.brw.common.constants.Constants;
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
 
-import com.brw.exceptions.BusinessException;
 import com.brw.dto.BusinessDetailsDTO;
 import com.brw.dto.BusinessInfoListDTO;
-import com.brw.dto.GBusinessInfoDTO;
 import com.brw.dto.RelatedBusinessDTO;
 import com.brw.dto.RelatedBusinessListDTO;
 import com.brw.dto.UserActivityDTO;
