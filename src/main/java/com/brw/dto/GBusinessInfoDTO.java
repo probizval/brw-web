@@ -15,7 +15,7 @@ public class GBusinessInfoDTO {
 	private double gLatitude;
 	private double gLongitude;
 	private String gRating;
-	private String gIsClosed;
+	private boolean gIsClosed;
 	private String gSinglePhotoUrl;
 	private String[] gPhotoUrls;
 	
@@ -67,10 +67,10 @@ public class GBusinessInfoDTO {
 	public void setgRating(String gRating) {
 		this.gRating = gRating;
 	}
-	public String getgIsClosed() {
+	public boolean getgIsClosed() {
 		return gIsClosed;
 	}
-	public void setgIsClosed(String gIsClosed) {
+	public void setgIsClosed(boolean gIsClosed) {
 		this.gIsClosed = gIsClosed;
 	}
 	
