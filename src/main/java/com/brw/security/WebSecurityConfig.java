@@ -38,30 +38,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.append(",/api/image/v1/**")
 			.append(",/api/user/v1/**")
 			;
-		
-		//http://localhost:8080/api/additionalAttributes/v1/getStateCounties
-			
-		/*
-		protectedUserUris.append("/api/estimates/v1/**")
-		.append("/api/stripePayment/v1/**")
-		.append("/api/additionalAttributes/v1/**")
-		.append("/api/transactions/v1/**")
-		.append("/api/image/v1/**")
-		.append("/api/user/v1/**")
-		;
-		*/
-		// Multiple URI should be comma separated in the buffer
-		//unprotectedUserUris.append("/api/business/v1/searchBusiness")
-		//Trying to make getStateCounties unprotected
-		unprotectedUserUris.append("/api/business/v1/searchBusiness")
-		.append(",/api/additionalAttributes/v1/getStateCounties")
-		.append(",/api/image/v1/uploadImages")
-		;
-		//
-		//unprotectedUserUris.append("/api/additionalAttributes/v1/getStateCounties");
-		//unprotectedUserUris.append("/api/business/v1/searchBusiness").append("/api/business/v1/**");
 
-		// TODO : user management and property management api should be protected via different role
+		// Multiple URI should be comma separated in the buffer
+		unprotectedUserUris.append("/api/business/v1/searchBusiness")
+			.append(",/api/additionalAttributes/v1/getStateCounties")
+			.append(",/api/image/v1/uploadImages")
+			;
 	}
 
 	@Override

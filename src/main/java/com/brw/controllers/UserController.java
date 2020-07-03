@@ -49,7 +49,7 @@ public class UserController implements ErrorController {
 		try {
 			UserDTO returnUserDTO = userService.addUserProfile(userDTO);
 			return new ResponseEntity<>(returnUserDTO, HttpStatus.OK);
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(userDTO, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -61,7 +61,7 @@ public class UserController implements ErrorController {
 		try {
 			UserDTO retUserDTO = userService.getUserProfile(userDTO);
 			return new ResponseEntity<>(retUserDTO, HttpStatus.OK);
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(userDTO, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,7 +73,7 @@ public class UserController implements ErrorController {
 		try {
 			UserDTO userDTO1 = userService.updateUserProfile(userDTO);
 			return new ResponseEntity<>(userDTO1, HttpStatus.OK);
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(userDTO, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -85,7 +85,7 @@ public class UserController implements ErrorController {
 		try {
 			UserBusinessDTO returnUserBusinessDTO = userService.addUserBusiness(userBusinessDTO);
 			return new ResponseEntity<>(returnUserBusinessDTO, HttpStatus.OK);
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(userBusinessDTO, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -99,7 +99,7 @@ public class UserController implements ErrorController {
 		try {
 			userBusinessListDTO = userService.getUserBusinesses(userBusinessDTO.getUserId());
 			return ApiResponse.withData(userBusinessListDTO);
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
@@ -111,7 +111,7 @@ public class UserController implements ErrorController {
 		try {
 			userService.deleteUserBusiness(userBusinessDTO.getUserId(), userBusinessDTO.getRelationship());
 			return ApiResponse.withData(Constants.RESPONSE_SUCCESS);
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
@@ -153,7 +153,7 @@ public class UserController implements ErrorController {
 		try {
 			int viewCount = userService.getTotalBusinessViews(userActivityDTO.getBusinessId());
 			return ApiResponse.withData(viewCount);
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
@@ -165,7 +165,7 @@ public class UserController implements ErrorController {
 		try {
 			int viewCount = userService.getBusinessViewsSince(userActivityDTO.getBusinessId(), userActivityDTO.getDateSince());
 			return ApiResponse.withData(viewCount);
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");

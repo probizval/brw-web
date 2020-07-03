@@ -12,14 +12,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import com.brw.common.constants.Constants;
 import com.brw.common.constants.ErrorCodes;
@@ -63,7 +61,8 @@ public class ImageController implements ErrorController {
 			returnImagesListDTO = imageService.uploadImages(uploadImagesListDTO);
 			return new ResponseEntity<>(returnImagesListDTO, HttpStatus.OK);
 			
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(returnImagesListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -84,7 +83,8 @@ public class ImageController implements ErrorController {
 			ImagesListDTO returnImagesListDTO = imageService.addImages(imagesListDTO);
 			return new ResponseEntity<>(returnImagesListDTO, HttpStatus.OK);
 			
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(imagesListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -104,7 +104,8 @@ public class ImageController implements ErrorController {
 		try {
 			ImagesListDTO returnImagesListDTO = imageService.getImages(imagesListDTO.getBusinessId());
 			return new ResponseEntity<>(returnImagesListDTO, HttpStatus.OK);
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(imagesListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -124,7 +125,8 @@ public class ImageController implements ErrorController {
 		try {
 			int numOfDelImg = imageService.deleteImages(imagesListDTO);
 			return ApiResponse.withData(Constants.RESPONSE_SUCCESS);
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 			return ApiResponse.withError(ErrorCodes.INTERNAL_SERVER_ERROR, "Record not found");
 		}
