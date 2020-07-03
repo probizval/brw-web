@@ -290,7 +290,7 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 	public String getDefaultImageForBizType(String bizType) {
 		long start = System.currentTimeMillis();
 
-		logger.info("222 **** Inside ImageServiceImpl.getDefaultImageForBizType()");
+		logger.info("222 **** Inside ImageServiceImpl.getDefaultImageForBizType() bizType: "+bizType);
 		
 		// switch case to pick up bizId range based on bizType
 		int min = 0;
