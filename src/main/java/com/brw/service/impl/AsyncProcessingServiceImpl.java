@@ -206,8 +206,14 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 					logger.info("***%%%%  AFTER Calling PLACE DETAILS API Total NUMBER of Photos FOUND : "+placeDetails.photos.length);
 	
 					int x = 0;
+					String[] photoReferances = null;
 					//Collect only 9 image references from Google - To save Photos api cost and storage space
-					String[] photoReferances = new String[5];
+					if (placeDetails.photos.length > 9) {
+						photoReferances = new String[9];
+					}else {
+						photoReferances = new String[placeDetails.photos.length];
+					}
+
 					if (null != placeDetails.photos && placeDetails.photos.length > 0) {
 						for (Photo phoRef: placeDetails.photos) {
 							//logger.info("***%%%%  phoRef.photoReference : "+phoRef.photoReference);

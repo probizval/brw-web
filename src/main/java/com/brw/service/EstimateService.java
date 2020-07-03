@@ -11,7 +11,7 @@ import com.brw.exceptions.EstimateException;
 public interface EstimateService {
 	
 	public EstimatesListDTO getEstimates(int businessId) throws EstimateException;
-	public EstimatesListDTO addEstimates(EstimatesListDTO estimatesListDTO);
+	public EstimatesListDTO addEstimates(EstimatesListDTO estimatesListDTO) throws EstimateException;
 	//public EstimatesDTO updateEstimates(EstimatesDTO estimatesDTO);
 
 }

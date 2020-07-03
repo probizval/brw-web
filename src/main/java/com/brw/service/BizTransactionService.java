@@ -13,6 +13,6 @@ public interface BizTransactionService {
 	
 	public BizTransactionsListDTO getBizTransactions(int businessId) throws BizTransactionsException;
 	public BizTransactionsDTO getBizLastSoldPrice(int businessId) throws BizTransactionsException;
-	public BizTransactionsListDTO addBizTransactions(BizTransactionsListDTO bizTransactionsListDTO);
+	public BizTransactionsListDTO addBizTransactions(BizTransactionsListDTO bizTransactionsListDTO) throws BizTransactionsException;
 	//public EstimatesDTO updateEstimates(EstimatesDTO estimatesDTO);
 }

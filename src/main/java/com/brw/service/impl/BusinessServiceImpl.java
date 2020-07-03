@@ -73,55 +73,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 	public BusinessInfoListDTO searchBusiness(BusinessDetailsDTO businessDTO) {
 		long start = System.currentTimeMillis();
 
-		/*
-		//Log the User Action - START - TODO Make this call Asynchronous
-		UserActivityDTO userActivityDTO = new UserActivityDTO();
-
-		if(null == businessDTO.getInvokerId()) {
-			businessDTO.setInvokerId(1001);
-		}
-		userActivityDTO.setUserId(businessDTO.getInvokerId());
-		
-		if(null == businessDTO.getBusinessId()) {
-			businessDTO.setBusinessId(1000000);
-		}
-		userActivityDTO.setBusinessId(businessDTO.getBusinessId());
-		
-		userActivityDTO.setType(Constants.BUTTON_CLICK);
-		userActivityDTO.setSubType(Constants.SEARCH_BUSINESS);
-
-		userService.trackUserActivity(userActivityDTO);
-		//Log the User Action - END
-		*/
-		//Increase the View Counter for Business - START - TODO Make this call Asynchronous
-		//Need to write the code to update View Counter on Business table
-		//Increase the View Counter for Business - END
-		
-		//Intercept the request to test visual impact of some test scenarios.
-		//Test 1 - County Level search
-		//businessDTO.setCounty("ALAMEDA");
-		//businessDTO.setCity(null);
-		//businessDTO.setLongitude(0.0);
-		//businessDTO.setLatitude(0.0);
-		
-		/*
-		//Test 2 - County Level search with no biz type
-		businessDTO.setType(null);
-		businessDTO.setStateCode("FL");
-		businessDTO.setCounty("Miami-dade");
-		businessDTO.setCity(null);
-		businessDTO.setLongitude(-80.1982);
-		businessDTO.setLatitude(25.779);
-		*/
-		
-		//Test 3 - State Level search
-		//businessDTO.setState("ALAMEDA");
-		//businessDTO.setCity(null);
-		//businessDTO.setLongitude(0.0);
-		//businessDTO.setLatitude(0.0);
-		
-		// End of request intercept
-		
 		//TODO:TEMPORARY translation of zip code - need to fix it on UI and then remove this code
 		if (businessDTO.getZip().equals("94536")) {
 			businessDTO.setZip(null);
@@ -456,9 +407,9 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				businessInfoDTO.setLatitude(businessInfo.getLatitude());
 				businessInfoDTO.setLongitude(businessInfo.getLongitude());
 				
-				logger.info("**** LAT in BRW DB businessInfo.getLatitude(): "+businessInfo.getLatitude());
-				logger.info("**** LONG in BRW DB businessInfo.getLongitude(): "+businessInfo.getLongitude());
-				logger.info("**** LONG in BRW DB businessInfo.getImageFirst(): "+businessInfo.getImageFirst());
+				//logger.info("**** LAT in BRW DB businessInfo.getLatitude(): "+businessInfo.getLatitude());
+				//logger.info("**** LONG in BRW DB businessInfo.getLongitude(): "+businessInfo.getLongitude());
+				//logger.info("**** LONG in BRW DB businessInfo.getImageFirst(): "+businessInfo.getImageFirst());
 
 				//set call google flag true if latitude and longitude do not exist in BRW DB
 				if (businessInfo.getIsVendorCall().equals(Constants.N) && (0.0 == businessInfo.getLatitude() || 0.0 == businessInfo.getLongitude() || businessInfo.getImageFirst().equals(Constants.EMPTY_STRING))) {
@@ -487,15 +438,19 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				}
 			}
 
-			logger.info("**** businessInfo.getImageFirst(): "+businessInfo.getImageFirst());
+			//logger.info("**** businessInfo.getImageFirst(): "+businessInfo.getImageFirst());
 			if(!businessInfo.getImageFirst().equals(Constants.EMPTY_STRING)) {
 				//If ImageFirst Exist then pick up Image First
 				businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
 			} else {
 				//If there is no first image saved in BRW DB and also we can't get it from google then call this method
 				//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
-				businessInfoDTO.setAlternateImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
-				//businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
+				try {
+					businessInfoDTO.setAlternateImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
+					//businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 
 			businessInfoDTOList.add(businessInfoDTO);	
@@ -528,8 +483,12 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			//If ImageFirst Exist then pick up Image First
 			businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
 		} else {
-			//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
-			businessInfoDTO.setAlternateImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
+			try {
+				//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
+				businessInfoDTO.setAlternateImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		logger.info("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetails.getIsHidden(): "+businessInfo.getIsHidden());
@@ -599,8 +558,12 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			//If ImageFirst Exist then pick up Image First
 			businessDetailsDTO.setImageFirst(businessDetails.getImageFirst());
 		} else {
-			//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
-			businessDetailsDTO.setAlternateImageFirst(imageService.getDefaultImageForBizType(businessDetails.getType()));
+			try {
+				//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
+				businessDetailsDTO.setAlternateImageFirst(imageService.getDefaultImageForBizType(businessDetails.getType()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		logger.info("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetails.getIsHidden(): "+businessDetails.getIsHidden());
@@ -731,8 +694,11 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		
 		userActivityDTO.setType(Constants.CREATE);
 		userActivityDTO.setSubType(Constants.BUSINESS);
-
-		userService.trackUserActivity(userActivityDTO);
+		try {
+			userService.trackUserActivity(userActivityDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		//Log the User Action - END
 		
 		//TODO:TEMPORARY translation of City and State Code - need to fix it on UI and then remove this code

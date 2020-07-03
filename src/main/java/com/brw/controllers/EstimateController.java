@@ -84,7 +84,7 @@ public class EstimateController implements ErrorController {
 			EstimatesListDTO eListDTo = estimateService.addEstimates(estimatesListDTO);
 			return new ResponseEntity<>(eListDTo, HttpStatus.OK);
 			
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			return new ResponseEntity<>(estimatesListDTO, HttpStatus.INTERNAL_SERVER_ERROR);

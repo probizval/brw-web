@@ -46,8 +46,12 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 		userActivityDTO.setBusinessId(1000000);
 		userActivityDTO.setType(Constants.BUTTON_CLICK);
 		userActivityDTO.setSubType(Constants.SUBSCRIBE);
-
-		userService.trackUserActivity(userActivityDTO);
+		
+		try {
+			userService.trackUserActivity(userActivityDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		//Log the User Action - END
 		
 		logger.info("222 **** Inside SearchAgentServiceImpl.addSearchAgent()");

@@ -63,9 +63,8 @@ public class BusinessController implements ErrorController {
 	 */
 	@RequestMapping(value = "searchBusiness", method = RequestMethod.POST, produces = "application/json")
 	public ApiResponse<?> searchBusiness(@RequestBody BusinessDetailsDTO businessDetailsDTO) {
-		
-		logger.info("**** 111 Inside BusinessController.searchBusiness() searchFilter: "+businessDetailsDTO.toString());
 		long start = System.currentTimeMillis();
+		logger.info("**** 111 Inside BusinessController.searchBusiness()");
 		
 		BusinessInfoListDTO businessList = null;
 

@@ -83,7 +83,8 @@ public class BizTransactionController implements ErrorController {
 			BizTransactionsListDTO btListDTo = bizTransactionService.addBizTransactions(bizTransactionsListDTO);
 			return new ResponseEntity<>(btListDTo, HttpStatus.OK);
 			
-		} catch (InternalServerError e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 			return new ResponseEntity<>(bizTransactionsListDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
