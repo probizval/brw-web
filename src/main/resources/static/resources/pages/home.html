@@ -19,7 +19,7 @@
     }
 
     .search-form.main.v2, .search-form.main.v5{
-        background-image: url("../img/home-pr-1.jpg");
+        background-image: url("../img/Home_Page_1.jpg");
         opacity: 0.8;
         background-size: cover;
         min-height: 500px;
@@ -62,7 +62,7 @@
       <div class="col-md-12 col-lg-12 col-xl-12 central-content">
         <div class="heading">
           <h2>Find <i>RealWorth</i><small>&trade;</small> of Business!</h2>
-	  <h6 style="color:#FF0000">We have valuation data for millions of businesses all over US.</h6>
+	  <h6 style="color:#FFFF00">See critical information and valuation data for millions of businesses all over US.</h6>
 	  <!-- 
 	  	<h6 style="color:#FF0000">See thousands of Business that are for sell.</h6>
 	  -->
@@ -71,13 +71,13 @@
           <div class="justify-content-md-center">
             <div class="row form-group justify-content-md-center">
               <div class="col-md-4 col-lg-3 col-xl-3">
-                <label style="margin:0">Business Name</label>
+                <label style="margin:0;color:#FFFFFF">Business Name</label>
                 <input type="text" id="businessName" name="businessName" ng-model="businessName" class="form-control"
                        placeholder="Enter a Business name">
               </div>
 
               <div class="col-md-3 col-lg-3 col-xl-3">
-                <label style="margin:0">Business Type*</label>
+                <label style="margin:0;color:#FFFFFF">Business Type*</label>
                 <select class="form-control" name="businessType" ng-init="businessType = businessType || businessTypes[0]"
                         ng-model="businessType" ng-options="businessType.name for businessType in businessTypes" id="businessType" required>
 <!--                  <option style="color:#868e96;" value="">All</option>-->
@@ -107,7 +107,7 @@
 <!--                       ng-init="initialize" placeholder="Enter an address, city or zipcode">-->
 <!--              </div>-->
                 <div class="col-md-2 col-lg-2 col-xl-2">
-                    <label style="margin:0">State*</label>
+                    <label style="margin:0;color:#FFFFFF">State*</label>
                     <select class="form-control" name="businessState" ng-model="businessState"
                             ng-options="state.name for state in businessStates track by state.id"
                             id="administrative_area_level_1" ng-change="getCounties()" required>
@@ -117,7 +117,7 @@
                 </div>
 
                 <div class="col-md-3 col-lg-2 col-xl-2">
-                    <label style="margin:0">County*</label>
+                    <label style="margin:0;color:#FFFFFF">County*</label>
                     <select class="form-control" name="businessCounty" ng-model="businessCounty"
                             ng-options="county.countyName for county in businessCounties track by county.countyName"
                             required>
@@ -130,7 +130,7 @@
 <!--            <div class="row form-group justify-content-md-center">-->
 
                 <div class="col-md-3 col-lg-2 col-xl-2">
-                    <label style="margin:0">Price Range</label>
+                    <label style="margin:0;color:#FFFFFF">Price Range</label>
                     <select class="form-control" name="priceRange" ng-model="priceRange"
                             ng-options="priceRange.price for priceRange in priceRangeList track by priceRange.id">
                         <!--                  <option style="color:#868e96;" value="">Select a state</option>-->
@@ -148,7 +148,7 @@
                     <div class="checkbox checkbox-inline">
                         <input type="checkbox" name="isForSell" id="isForSell" ng-model="isForSell" ng-false-value="N"
                                ng-true-value="Y">
-                        <label style="color:white;margin-top:30px" for="isForSell">Show For Sale Business Only</label>
+                        <label style="color:#FFFFFF;margin-top:30px" for="isForSell">Show For Sale Business Only</label>
                     </div>
                 </div>
 
@@ -179,7 +179,7 @@
                     <div class="carousel-item active">
                         <div class="row">
                             <div class="col-md-5 col-lg-5 col-xl-5">
-                                <img style="width:100%;height:400px;" src="../img/1.jpg" alt="First slide">
+                                <img style="width:100%;height:400px;" src="../img/Banner_1.jpg" alt="First slide">
                             </div>
                             <div class="col-md-5 col-lg-5 col-xl-5">
                                 <h5 style="color:white;">Business Real Worth Matters!</h5>
@@ -194,7 +194,7 @@
                     <div class="carousel-item">
                         <div class="row">
                             <div class="col-md-5 col-lg-5 col-xl-5">
-                                <img style="width:100%;height:400px;" src="../img/2.jpg" alt="First slide">
+                                <img style="width:100%;height:400px;" src="../img/Banner_2.jpg" alt="First slide">
                             </div>
                             <div class="col-md-5 col-lg-5 col-xl-5">
                                 <h5 style="color:white;">We Stand United!</h5>
@@ -208,7 +208,7 @@
                     <div class="carousel-item">
                         <div class="row">
                             <div class="col-md-5 col-lg-5 col-xl-5">
-                                <img style="width:100%;height:400px;" src="../img/3.jpg" alt="First slide">
+                                <img style="width:100%;height:400px;" src="../img/Banner_3.jpg" alt="First slide">
                             </div>
                             <div class="col-md-5 col-lg-5 col-xl-5">
                                 <h5 style="color:white;">How to Select a Business Valuation Expert?</h5>
