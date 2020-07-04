@@ -363,6 +363,7 @@
             map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
             addMarker(dataset);
             showMarkers();
+            filterNonLatLngBusinesses(dataset);
             // When map becomes idle after zoom ing or panning
             map.addListener('zoom_changed', function (e) {
                 mapZoomPanChangeListeners();
@@ -465,11 +466,67 @@
                     addMarker(arrDestinations);
                     showMarkers();
                     $scope.searchList = arrDestinations;
+                    filterNonLatLngBusinesses(arrDestinations);
                 })
                 .error(function (error) {
                     $scope.status = 'Unable to load store data: ' + error.message;
                 });
         }
+		function sleep(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		}
+		async function filterNonLatLngBusinesses(arrDestinations) {
+			var nonLatLngBusinesses = [];
+			var latLngBusinesses = [];
+			for (var i = 0; i < arrDestinations.length; i++) {
+                if (arrDestinations[i].isHidden === 'Y') {
+                    continue
+                }
+                if (arrDestinations[i].latitude === 0 && arrDestinations[i].longitude === 0) {
+                    nonLatLngBusinesses.push(arrDestinations[i])
+                } else {
+                    latLngBusinesses.push(arrDestinations[i])
+                }
+            }
+            var geocoder =  new google.maps.Geocoder();
+            for (i = 0; i<10 && i < nonLatLngBusinesses.length; i++) {
+                if (nonLatLngBusinesses[i].googleBizSearchString === null || nonLatLngBusinesses[i].isVendorCall === "Y")
+                    continue
+                geocoder.geocode({ 'address': nonLatLngBusinesses[i].googleBizSearchString}, function(results, status) {
+                    if (status === 'OK') {
+                        nonLatLngBusinesses[i].latitude = results[0].geometry.location.lat();
+                        nonLatLngBusinesses[i].longitude = results[0].geometry.location.lng()
+                        console.log("Latttttt", nonLatLngBusinesses[i], results[0].geometry.location.lat(), results[0].geometry.location.lng())
+                    } else {
+                        console.log("Something got wrong " + status);
+                    }
+                })
+                await sleep(300);
+            }
+            var allBusinesses = nonLatLngBusinesses.concat(latLngBusinesses);
+            addMarker(allBusinesses);
+            showMarkers();
+
+//            for (var j = 0; j < nonLatLngBusinesses.length; j+=10) {
+//                var i = 0
+//                for (i = j; i < j+10, i < nonLatLngBusinesses.length; i++) {
+//                    if (nonLatLngBusinesses[i].googleBizSearchString === null || nonLatLngBusinesses[i].isVendorCall === "Y")
+//                        continue
+//                    geocoder.geocode({ 'address': nonLatLngBusinesses[i].googleBizSearchString}, function(results, status) {
+//                        if (status === 'OK') {
+//                            nonLatLngBusinesses[i].latitude = results[0].geometry.location.lat();
+//                            nonLatLngBusinesses[i].longitude = results[0].geometry.location.lng()
+//                            console.log("Latttttt", results[0].geometry.location.lat(), results[0].geometry.location.lng())
+//                        } else {
+//                            console.log("Something got wrong " + status);
+//                        }
+//                    })
+//                    await sleep(250);
+//                }
+//                await sleep(2000);
+//            }
+
+		}
 
         async function addMarker(arrDestinations) {
             markers = [];

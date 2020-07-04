@@ -251,7 +251,7 @@
                     <div>
                         <h3 class="headline" ng-if="businessDetails.description">Business description</h3>
                         <div class="row" style="margin:10px" ng-if="businessDetails.description">
-                            <p style="margin-bottom: 0">{{businessDetails.description}}</p>
+                            <p ng-bind-html="businessDetails.description"></p>
                         </div>
 
                         <h3 class="headline" ng-if="businessCommonFeatures" >Business Details</h3>

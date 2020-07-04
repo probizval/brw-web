@@ -1,4 +1,4 @@
-var myapp = angular.module('myApp', ['auth0.auth0', 'ui.router', 'propertyService']);
+var myapp = angular.module('myApp', ['auth0.auth0', 'ui.router', 'propertyService', 'ngSanitize']);
 myapp.config.$inject = ['$routeProvider', '$httpProvider', 'angularAuth0Provider', 'propertyService'];
 myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider, $httpProvider, angularAuth0Provider) {
 
