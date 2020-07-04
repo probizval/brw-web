@@ -81,8 +81,9 @@
             {id:32, label: "Data Completeness Score", model: $scope.businessDetails.dataCompletionScore},
             {id:33, label: "Website", model: $scope.businessDetails.website},
             {id:34, label: "NAICS", model: $scope.businessDetails.naicsnum},
-            {id:35, label: "Claimed by Owner", model: $scope.businessDetails.isOwnerClaimed},
-            {id:36, label: "Last Data Update Date", model: $scope.businessDetails.updateDate},
+            {id:35, label: "NAICS Description", model: $scope.businessDetails.naicsdescription},
+            {id:36, label: "Claimed by Owner", model: $scope.businessDetails.isOwnerClaimed},
+            {id:37, label: "Last Data Update Date", model: $scope.businessDetails.updateDate},
         ];
         $scope.estimateList = [];
         $scope.equipmentList = [];
