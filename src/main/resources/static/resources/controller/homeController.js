@@ -12,7 +12,7 @@
         var postal_code = '', latitude = '', longitude = '';
         $scope.businessTypes = constants.searchBusinessTypes;
         $scope.businessStates = constants.businessStates;
-        $scope.businessState = $scope.businessStates[4]; // california
+        $scope.businessState = $scope.businessStates[0]; // california
         $scope.priceRangeList = constants.priceRangeList;
 		$scope.priceRange = $scope.priceRangeList[0];
 		propertyService.getStateCounties({'stateName': $scope.businessState.name})

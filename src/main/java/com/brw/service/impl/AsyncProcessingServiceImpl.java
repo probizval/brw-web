@@ -143,7 +143,7 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 		
 		PlacesSearchResult result = new PlacesSearchResult();
 		
-		if (null != results.results && results.results.length > 0) {
+		if (null != results && null != results.results && results.results.length > 0) {
 			result = results.results[0];
 			
 			if (!result.permanentlyClosed) {
