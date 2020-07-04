@@ -439,7 +439,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			}
 
 			//logger.info("**** businessInfo.getImageFirst(): "+businessInfo.getImageFirst());
-			if(!businessInfo.getImageFirst().equals(Constants.EMPTY_STRING)) {
+			if(null != businessInfo.getImageFirst() || !businessInfo.getImageFirst().equals(Constants.EMPTY_STRING)) {
 				//If ImageFirst Exist then pick up Image First
 				businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
 			} else {
@@ -447,7 +447,6 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
 				try {
 					businessInfoDTO.setAlternateImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
-					//businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -1636,9 +1635,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 			businessDetailsDTO.setPhoneExt(businessDetails.getPhoneExtentionNumber());
 			businessDetailsDTO.setEmail(businessDetails.getEmail());
 			businessDetailsDTO.setWebsite(businessDetails.getWebsite());
-			
-			
-			
+
 			businessDetailsDTO.setDescription(businessDetails.getFreeformDescription());
 			businessDetailsDTO.setNAICSNum(businessDetails.getNAICSNum());
 			businessDetailsDTO.setNAICSDescription(businessDetails.getNAICSDescription());
