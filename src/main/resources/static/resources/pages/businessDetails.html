@@ -35,7 +35,7 @@
             <div class="page-header bordered">
                 <div class="row">
                     <div class="col-md-10"> <a href="#" class="btn-return" title="Back"><i class="fa fa-angle-left"></i></a>
-                        <h1>{{businessDetails.name}} ({{businessDetails.type}})
+                        <h1>{{businessDetails.name}}
                             <div ng-if="businessDetails.street1 || businessDetails.city">
                                 <small ng-if="businessDetails.street1 && businessDetails.street2"><i class="fa fa-map-marker"></i> {{businessDetails.street1}}, {{businessDetails.street2}}, {{businessDetails.city}} {{businessDetails.stateCode}}</small>
                                 <small ng-if="businessDetails.street1 && !businessDetails.street2"><i class="fa fa-map-marker"></i> {{businessDetails.street1}}, {{businessDetails.city}} {{businessDetails.stateCode}}</small>
@@ -232,7 +232,7 @@
                                             <div id="specification" class="panel-collapse collapse show" role="tabpanel">
                                                 <div class="card-body">
                                                     <div class="media-left">
-                                                        <p style="margin: 0"><a href="#contactUs">Local Area Expert</a></p>
+                                                        <!-- <p style="margin: 0"><a href="#contactUs">Local Area Expert</a></p> -->
                                                     </div>
                                                 </div>
                                             </div>
