@@ -24,6 +24,7 @@
             }
         }
         $scope.businessCity = businessAddress.city
+		$scope.businessCounty = businessAddress.county
         $scope.businessState = businessAddress.state
         $scope.itemsPerPage = $scope.viewby;
         $scope.searchList = propList.data.data.businessList;

@@ -250,7 +250,14 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             templateUrl: 'resources/pages/profileconfirmation.html',
             requireLogin: true
         })
-
+		.state('termsOfService', {
+            url: '/termsOfService',
+            templateUrl: 'resources/pages/termsOfService.html',
+        })
+		.state('privacyPolicy', {
+            url: '/privacyPolicy',
+            templateUrl: 'resources/pages/privacyPolicy.html',
+        })
         .state('contactUs', {
             url: '/contactUs',
             templateUrl: 'resources/pages/contactUs.html',

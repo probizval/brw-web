@@ -1,68 +1,112 @@
 <style>
-
-.iframe-body {
-  align-self: center;
-  align-items: center;
-  height: 80vh;
-  width:100%;
-}
-.modal-full {
-    min-width: 80%;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
 }
 
-.modal-full .modal-content {
-    min-height: 90vh;
+html {
+  box-sizing: border-box;
 }
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.about-section {
+  padding: 50px;
+  padding-top: 20px;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+}
+
 </style>
-<div id="content" class="item-single" >
-  <div class="container">
-<div class="item-description">
-                  <h3 class="headline">Buy a Business</h3>
-                  <p>
-					  <button class="btn btn-primary" data-toggle="modal" data-target="#businessGuidanceModal" ng-click="submit('gasStation')">How to Buy a Gas Station Business</button>
-				  </p>
-	              <p>
-					  <button class="btn btn-primary" data-toggle="modal" data-target="#businessGuidanceModal" ng-click="submit('groceryStore')">How to Buy a Grocery store Business</button>
-	              </p>
-	              <p>
-					  <button class="btn btn-primary" data-toggle="modal" data-target="#businessGuidanceModal" ng-click="submit('liquorstore')">How to Buy a Liquor store Business</button>
-	              </p>
-	              <p>
-					  <button class="btn btn-primary" data-toggle="modal" data-target="#businessGuidanceModal" ng-click="submit('motel')">How to Buy a Motel Business</button>
-	              </p>
-	              <p>
-					  <button class="btn btn-primary" data-toggle="modal" data-target="#businessGuidanceModal" ng-click="submit('restaurant')">How to Buy Restaurant Business</button>
-	              </p>
-                </div>
-            </div>
-        </div>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" id="businessGuidanceModal">
-	<div class="modal-dialog modal-full" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			</div>
-			<div class="modal-body">
-				<div ng-if="businessType === 'gasStation'">
-					<iframe class="iframe-body" src="https://docs.google.com/document/d/e/2PACX-1vRuN2pk3a1JcEyLwu_LrV821c-nDMj0NlyeCndAu3kXw-KNHpv65Nvfd6BdqAijSg/pub?embedded=true"></iframe>
-				</div>
-				<div ng-if="businessType === 'groceryStore'">
-					<iframe class="iframe-body" src="https://docs.google.com/document/d/e/2PACX-1vSS15g6CQk0JNzKyz0MdMf8zNQXKhzt1H3fG_f8z4okDpjHPPIziz3H2TJ2qJjiww/pub?embedded=true"></iframe>
-				</div>
-				<div ng-if="businessType === 'liquorstore'">
-					<iframe class="iframe-body" src="https://docs.google.com/document/d/e/2PACX-1vQuJ4t8GrcO7pXL7TejD74wZKSOr9HLoa73LdbaP7minyD_w14VLs3qBrOYp2OwKQ/pub?embedded=true"></iframe>
-				</div>
-				<div ng-if="businessType === 'motel'">
-					<iframe class="iframe-body" src="https://docs.google.com/document/d/e/2PACX-1vT2IUURRwn7xNmBMR9tG1npF5kfmDxJlOlDJquZ71PHJC3O3E68mb74qjx1Td1qcA/pub?embedded=true"></iframe>
-				</div>
-				<div ng-if="businessType === 'restaurant'">
-					<iframe class="iframe-body" src="https://docs.google.com/document/d/e/2PACX-1vRr30wcnEmBbxAeP4Uk41SY3PgQ0TnqfPf6XyS-MhTEWlGYGwIc1UaOBiFUqOre0Q/pub?embedded=true"></iframe>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
+<div class="about-section">
+<p>This article is to explain process of buying an existing business or franchise.</p>
+
+<p>It is written with gathering data from multiple sources but primarily from
+    <a href="https://www.sba.gov/business-guide/plan-your-business/buy-existing-business-or-franchise" target="_blank">
+        https://www.sba.gov/business-guide/plan-your-business/buy-existing-business-or-franchise
+    </a>
+</p>
+
+<p>Starting a business from scratch can be challenging. Franchising or buying an existing business can simplify the initial planning process.</p>
+<h4>Know the difference between franchising and buying a business</h4>
+	
+    <p>Before you decide if one of these options is right for you, make sure you know the basics of franchising and buying an existing business. The main difference between franchising and buying an existing business is the level of control you’ll have over your business.</p>
+    <p><b>Franchising gives you more guidance but less control.</b></p>
+    <p>A franchise is a business model where one business owner (the “franchisor”) sells the rights to their business logo, name, and model to an independent entrepreneur (the “franchisee”). Restaurants, hotels, and service-oriented businesses are commonly franchised.</p>
+    
+    <p>Two common forms of franchising are:</p>
+    <p><b>1. Product/trade name franchising:</b> The franchisor owns the right to the name or trademark of a business, and sells the right to use that name and trademark to a franchisee. This style of franchising normally focuses on supply chain management. Typically, products are manufactured or supplied by the franchisor and delivered to the franchisee to sell.</p>
+    <p><b>2. Business format franchising:</b> The franchisor and franchisee have an ongoing relationship. This style of franchising normally focuses on full-spectrum business management. Typically, the franchisor offers services like site selection, training, product supply, marketing plans, and even help getting funding.</p>
+	<p>When you buy a franchise, you get the right to use the name, logo, and products of a larger brand. You’ll also get to benefit from brand recognition, promotions, and marketing. But, it also means you have to follow rules from the larger brand about how you run your business.</p>
+    
+    <p><b>Buying an existing business gives you more control but less guidance</b></p>
+    <p>Buying an existing business is exactly what it sounds like. The buyer typically takes over full ownership of the business. The largest advantage is having an existing blueprint that can include important factors like an established customer base, defined operating expenses, and fully trained employees. Regardless of business type, almost any kind of business could be bought or sold.</p>
+    <p>When you buy an existing business, you typically get complete control over its direction. However, with no set vision, infrastructure, or external guidance, your business could struggle as you figure out the best way to run things.</p>
+
+<h4>Consider 3 factors before franchising or buying a business</h4>
+	<p>Though the business models differ, there are three common steps to take that will help you determine whether you should franchise or buy a business.</p>
+	<p><b>1. Quantify your investment:</b> Review your financial landscape and decide how much you’re willing to spend to purchase — and ultimately manage — the business. This will help you determine what type of businesses or brands are best for your budget.</p>
+	<p><b>2. Consider your talents and lifestyle:</b> Be honest about your skills and experience, as they can help you eliminate unrealistic business ventures. For example, if you prefer hands-on assistance, then franchising might be best for you. On the contrary, if you’re an experienced business owner, you may want to consider buying an existing business.</p>
+	<p><b>3. Review the full landscape:</b> Look at the existing infrastructure and make sure you understand everything that comes along with the purchase. Don’t be afraid to ask questions about contracts, leases, existing cash flow, and inventory. The more you know, the better equipped you’ll be to make a sound decision.</p>
+
+<p><b>Pick the right franchise or existing business for you</b></p>
+<p>Once you know whether you want to franchise or buy a business, you’ll need to evaluate each specific opportunity. In short, it boils down to this: do your due diligence.</p>
+
+<p>Your research should help you understand the business from both a financial standpoint and in the overall landscape.</p>
+
+<p>If you’re interested in franchising, you should explore the following:</p>
+
+<p><b>1. Any and all existing reports:</b> Now’s the time to put your detective hat on. To start, get a Uniform Franchise Offering Circular (UFOC). This form contains vital details about the franchise's legal, financial, and personnel history.</p>
+
+<p><b>2. Associated rules and regulations:</b> Every franchise is different. Confirm that you'll have the right to use the franchise name, trademark, and do business in an area protected from other franchisees. You can also find out if you'll get training and management help from the franchisor, and be able to use the franchisor's expertise in marketing and advertising.</p>
+
+<p><b>3. Contracts:</b> The contract between the two parties usually benefits the franchisor more than the franchisee. The franchisee generally needs to meet sales quotas and buy equipment, supplies, and inventory. Make sure you understand it all before signing.</p>
+
+<p>If you’re interested in buying an existing business, here’s what to look into:</p>
+
+<p><b>1. Licenses and permits:</b> You'll need to get any needed licenses and permits from the current owner or apply for them yourself. Find out which federal, state, and local permits and licenses you'll need to run your business.</p>
+
+<p><b>2. Zoning requirements:</b> Zoning requirements may affect your business. Make sure your business follows all the basic zoning laws in your area.</p>
+
+<p><b>3. Environmental concerns:</b> If you're buying real property along with the business, it is important to check the environmental regulations in the area.</p>
+
+<p><b>4. The value of the business:</b> There are many different methods to determine a fair price for the sale of the business. Here are a few:</p>
+
+<p><b>4.1 Capitalized earning approach:</b> This method refers to the return on the investment that the investor expects.</p>
+
+<p><b>4.2 Excess earning method:</b> Like the capitalized earning method, except it separates return on assets from other earnings.</p>
+
+<p><b>4.3 Cash flow method:</b> This method is typically used to determine how much of a loan the business' cash flow can support.</p>
+
+<p><b>4.4 Tangible assets (balance sheet) method:</b> This method values the business by the tangible assets.</p>
+
+<p><b>4.5 Value of specific intangible assets method:</b> This method compares buying a wanted intangible asset versus creating it.</p>
+
+<p><b>4.6 Market based approach:</b> This method compares assets, cash flow, based on type of business in similar potential locale and reach to a value prediction. This is the approach www.BizRealWorth.com is primarily taking.</p>
+
+<h4>Get ready to buy your franchise or business</h4>
+
+<p>Once you’ve found a franchise or business to buy, it’s important to conduct a thorough, objective investigation.</p>
+
+<p>At this stage, you’ll probably want professional help. Consider hiring an attorney and an accountant. The tax rules surrounding franchises in particular are often complex. A specialist in franchise law can assist you with evaluating the franchise package and tax considerations. An accountant can help you determine the full costs of purchasing and operating the business, and even help estimate potential profit.</p>
+
+<p>An attorney and an accountant together can help you create and evaluate important documents. Typically that includes:</p>
+
+<p>1. Letter of intent</p>
+<p>2. Confidentiality agreement</p>
+<p>3. Contracts and leases</p>
+<p>4. Financial statements</p>
+<p>5. Tax returns</p>
+<p>6. Sales agreement</p>
+<p>7. Purchase price adjustment</p>
+
 </div>
