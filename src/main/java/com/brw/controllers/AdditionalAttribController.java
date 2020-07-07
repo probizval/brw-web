@@ -50,9 +50,9 @@ public class AdditionalAttribController implements ErrorController {
 	@PostMapping(value = "getAdditionalAttribDefinitions")
 	public ApiResponse<?> getAdditionalAttribDefinitions(@RequestBody BusinessDetailsDTO businessDTO) {
 		
-		System.out.println("**** 111 Inside AdditionalAttribController.getAdditionalAttribDefinitions()");
+		logger.info("**** 111 Inside AdditionalAttribController.getAdditionalAttribDefinitions()");
 		
-		logger.info("Get the Business Transactions based on business Id");
+		//logger.info("Get the Business Transactions based on business Id");
 
 		AdditionalAttribDefinitionsListDTO additionalAttribDefinitionsListDTO = null;
 		
@@ -73,9 +73,9 @@ public class AdditionalAttribController implements ErrorController {
 	@PostMapping(value = "getAdditionalAttributes")
 	public ApiResponse<?> getAdditionalAttribs(@RequestBody BusinessDetailsDTO businessDTO) {
 		
-		System.out.println("**** 111 Inside AdditionalAttribController.getAdditionalAttributes()");
+		logger.info("**** 111 Inside AdditionalAttribController.getAdditionalAttributes()");
 		
-		logger.info("Get the Business Transactions based on business Id");
+		//logger.info("Get the Business Transactions based on business Id");
 
 		AdditionalAttribsListDTO additionalAttributesListDTO = null;
 		
@@ -97,9 +97,9 @@ public class AdditionalAttribController implements ErrorController {
 	@PostMapping(value = "addAdditionalAttributes")
 	public ResponseEntity<AdditionalAttribsListDTO> addAdditionalAttribs(@RequestBody AdditionalAttribsListDTO additionalAttribsListDTO) {
 		
-		System.out.println("111 **** Inside AdditionalAttribController.addAdditionalAttributes()");
+		logger.info("111 **** Inside AdditionalAttribController.addAdditionalAttributes()");
 				
-		logger.info("Add the New Business Transaction Details");
+		//logger.info("Add the New Business Transaction Details");
 		
 		AdditionalAttribsListDTO addAttribsListDTO = null;
 		
@@ -121,9 +121,9 @@ public class AdditionalAttribController implements ErrorController {
 	@PostMapping(value = "updateAdditionalAttributes")
 	public ResponseEntity<AdditionalAttribsListDTO> updateAdditionalAttribs(@RequestBody AdditionalAttribsListDTO additionalAttribsListDTO) {
 		
-		System.out.println("111 **** Inside AdditionalAttribController.addAdditionalAttributes()");
+		logger.info("111 **** Inside AdditionalAttribController.addAdditionalAttributes()");
 				
-		logger.info("Update Additional Business Attributes");
+		//logger.info("Update Additional Business Attributes");
 		
 		AdditionalAttribsListDTO addAttribsListDTO = null;		
 		
@@ -163,9 +163,9 @@ public class AdditionalAttribController implements ErrorController {
 	@PostMapping(value = "getStateCounties")
 	public ApiResponse<?> getStateCounties(@RequestBody StateCountyCitiesDTO stateCountyCitiesDTO) {
 		
-		System.out.println("**** 111 Inside AdditionalAttribController.getAdditionalAttributes()");
+		logger.info("**** 111 Inside AdditionalAttribController.getAdditionalAttributes()");
 		
-		logger.info("Get the Business Transactions based on business Id");
+		//logger.info("Get the Business Transactions based on business Id");
 
 		//StateCountyCitiesDTO returnStateCountyCitiesDTO = null;
 		CountyListDTO returnCountyListDTO = null;

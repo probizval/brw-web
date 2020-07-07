@@ -49,9 +49,9 @@ public class BizTransactionController implements ErrorController {
 	@RequestMapping(value = "getBizTransactions/{businessId}", method = RequestMethod.GET, produces = "application/json")
 	public ApiResponse<?> getBizTransactions(@PathVariable int businessId) {
 		
-		System.out.println("**** 111 Inside BizTransactionController.getBizTransactions()");
+		logger.info("**** 111 Inside BizTransactionController.getBizTransactions()");
 		
-		logger.info("Get the Business Transactions based on business Id");
+		//logger.info("Get the Business Transactions based on business Id");
 
 		BizTransactionsListDTO bizTransactionsListDTO = null;
 		
@@ -73,9 +73,9 @@ public class BizTransactionController implements ErrorController {
 	@PostMapping(value = "addBizTransactions")
 	public ResponseEntity<BizTransactionsListDTO> addBizTransactions(@RequestBody BizTransactionsListDTO bizTransactionsListDTO) {
 		
-		System.out.println("111 **** Inside BizTransactionController.addBizTransactions()");
+		logger.info("111 **** Inside BizTransactionController.addBizTransactions()");
 		
-		System.out.println("111 **** Inside BizTransactionController.addBizTransactions() bizTransactionsListDTO: "+bizTransactionsListDTO.getBizTransactionsList().size());
+		//System.out.println("111 **** Inside BizTransactionController.addBizTransactions() bizTransactionsListDTO: "+bizTransactionsListDTO.getBizTransactionsList().size());
 		
 		logger.info("Add the New Business Transaction Details");
 		

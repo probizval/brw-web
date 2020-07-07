@@ -12,21 +12,15 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import com.brw.common.constants.ErrorCodes;
 import com.brw.common.response.ApiResponse;
-import com.brw.dto.EstimatesListDTO;
 import com.brw.dto.SearchAgentDTO;
 import com.brw.dto.SearchAgentsListDTO;
-import com.brw.dto.UserDTO;
-import com.brw.exceptions.EstimateException;
 import com.brw.exceptions.SearchAgentException;
 import com.brw.service.SearchAgentService;
 import com.brw.common.constants.Constants;
@@ -54,9 +48,7 @@ public class SearchAgentController implements ErrorController {
 	@PostMapping(value = "addSearchAgent")
 	public ResponseEntity<SearchAgentDTO> addSearchAgent(@RequestBody SearchAgentDTO searchAgentDTO) {
 		
-		System.out.println("111 **** Inside SearchAgentController.addSearchAgent()");
-		
-		logger.info("Add the New Estimates");
+		logger.info("111 **** Inside SearchAgentController.addSearchAgent()");
 		
 		try {
 			SearchAgentDTO returnSearchAgent = searchAgentService.addSearchAgent(searchAgentDTO);
@@ -71,7 +63,7 @@ public class SearchAgentController implements ErrorController {
 	@PostMapping(value = "getSearchAgents")
 	public ApiResponse<?> getSearchAgents(@RequestBody SearchAgentDTO searchAgentDTO) {
 		
-		System.out.println("111 **** Inside SearchAgentController.getSearchAgents()");
+		logger.info("111 **** Inside SearchAgentController.getSearchAgents()");
 		
 		try {
 			SearchAgentsListDTO searchAgentsListDTO = searchAgentService.getSearchAgents(searchAgentDTO.getUserId());
@@ -85,7 +77,7 @@ public class SearchAgentController implements ErrorController {
 	@PostMapping(value = "deleteSearchAgent")
 	public ApiResponse<?> deleteSearchAgent(@RequestBody SearchAgentDTO searchAgentDTO) {
 		
-		System.out.println("111 **** Inside SearchAgentController.deleteSearchAgent()");
+		logger.info("111 **** Inside SearchAgentController.deleteSearchAgent()");
 
 		try {
 			searchAgentService.deleteSearchAgent(searchAgentDTO.getUserId(), searchAgentDTO.getAgentId());

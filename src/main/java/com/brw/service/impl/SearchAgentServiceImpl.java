@@ -16,10 +16,12 @@ import org.springframework.stereotype.Component;
 
 import com.brw.common.constants.Constants;
 import com.brw.dao.SearchAgentDAO;
+import com.brw.dto.EmailDTO;
 import com.brw.dto.SearchAgentDTO;
 import com.brw.dto.SearchAgentsListDTO;
 import com.brw.dto.UserActivityDTO;
 import com.brw.entities.SearchAgent;
+import com.brw.service.EmailService;
 import com.brw.service.UserService;
 
 @Component
@@ -33,9 +35,12 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	EmailService emailService;
+	
 	@Override
 	public SearchAgentDTO addSearchAgent(SearchAgentDTO searchAgentDTO) {
-		
+		long start = System.currentTimeMillis();
 		//Log the User Action - START
 		UserActivityDTO userActivityDTO = new UserActivityDTO();
 		
@@ -83,6 +88,24 @@ public class SearchAgentServiceImpl implements com.brw.service.SearchAgentServic
 		returnSearchAgentDTO.setState(returnSearchAgent.getState());
 		returnSearchAgentDTO.setCounty(returnSearchAgent.getCounty());
 		
+		//Send an email to user who is saving the Search Agent
+		List<String> toList = new ArrayList();
+		toList.add(searchAgentDTO.getEmail());
+		
+		EmailDTO emailDTO = new EmailDTO();
+		emailDTO.setToList(toList);
+		emailDTO.setFrom("admin@bizrealworth.com");
+		emailDTO.setSubject("Confirmation: Subscription to www.BizRealWorth.com");
+		emailDTO.setContent("Thank you for subcription with www.BizRealWorth.com, stay tuned!");
+		emailDTO.setInvokerId(1001);
+		
+		try {
+			emailService.sendEmail(emailDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		logger.info("Elapsed time in addSearchAgent(): " + (System.currentTimeMillis() - start));
 		return returnSearchAgentDTO;
 	}
 	

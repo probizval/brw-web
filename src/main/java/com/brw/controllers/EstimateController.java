@@ -51,9 +51,9 @@ public class EstimateController implements ErrorController {
 	@PostMapping(value = "getEstimates")
 	public ApiResponse<?> getEstimates(@RequestBody EstimatesDTO estimatesDTO) {
 		
-		System.out.println("**** 111 Inside EstimateController.getEstimateDetails()");
+		logger.info("**** 111 Inside EstimateController.getEstimateDetails()");
 		
-		logger.info("Get the Business estimates based on business Id");
+		//logger.info("Get the Business estimates based on business Id");
 
 		EstimatesListDTO estimatesListDTO = null;
 		
@@ -76,9 +76,9 @@ public class EstimateController implements ErrorController {
 	@PostMapping(value = "addEstimates")
 	public ResponseEntity<EstimatesListDTO> addEstimates(@RequestBody EstimatesListDTO estimatesListDTO) {
 		
-		System.out.println("111 **** Inside BusinessController.addBusiness()");
+		logger.info("111 **** Inside BusinessController.addBusiness()");
 		
-		logger.info("Add the New Estimates");
+		//logger.info("Add the New Estimates");
 		
 		try {
 			EstimatesListDTO eListDTo = estimateService.addEstimates(estimatesListDTO);

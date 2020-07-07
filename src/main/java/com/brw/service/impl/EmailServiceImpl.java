@@ -47,9 +47,10 @@ public class EmailServiceImpl implements com.brw.service.EmailService {
 	private UserDAO userDAO;
 	
 	@Override
-	public EmailDTO sendEmail(EmailDTO emailDTO) throws EmailException, AddressException, MessagingException, IOException{
-		logger.info("**** 222 Inside EmailServiceImpl.sendEmail()");
-		logger.info("**** 222 Inside EmailServiceImpl.sendEmail() emailDTO.getFrom(): "+emailDTO.getFrom());
+	public EmailDTO sendEmail(EmailDTO emailDTO) throws EmailException, AddressException, MessagingException, IOException {
+		long start = System.currentTimeMillis();
+		
+		logger.info("**** 222 Inside EmailServiceImpl.sendEmail()" + emailDTO.getToList().toString());
 
 		EmailDTO returnEmailDTO = new EmailDTO();
 		
@@ -108,6 +109,8 @@ public class EmailServiceImpl implements com.brw.service.EmailService {
 			e.printStackTrace();
 			
 		}
+		
+		logger.info("Elapsed time in sendEmail(): " + (System.currentTimeMillis() - start));
 		return returnEmailDTO;
 	}
 	

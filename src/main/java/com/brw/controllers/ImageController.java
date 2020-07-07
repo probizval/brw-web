@@ -51,9 +51,9 @@ public class ImageController implements ErrorController {
 	
 	public ResponseEntity<ImagesListDTO> uploadImages(@RequestBody UploadImagesListDTO uploadImagesListDTO) throws IOException{
 		
-		System.out.println("111 **** Inside BusinessController.uploadImages()");
+		logger.info("111 **** Inside BusinessController.uploadImages()");
 		
-		logger.info("Upload the Business Images to S3 and add URLs to BRW DB");
+		//logger.info("Upload the Business Images to S3 and add URLs to BRW DB");
 		
 		ImagesListDTO returnImagesListDTO = new ImagesListDTO();
 		
@@ -75,9 +75,9 @@ public class ImageController implements ErrorController {
 	@PostMapping(value = "addImages")
 	public ResponseEntity<ImagesListDTO> addImages(@RequestBody ImagesListDTO imagesListDTO) {
 		
-		System.out.println("111 **** Inside BusinessController.addImages()");
+		logger.info("111 **** Inside BusinessController.addImages()");
 		
-		logger.info("Add the Business Image URLs");
+		//logger.info("Add the Business Image URLs");
 		
 		try {
 			ImagesListDTO returnImagesListDTO = imageService.addImages(imagesListDTO);
@@ -97,9 +97,9 @@ public class ImageController implements ErrorController {
 	@PostMapping(value = "getImages")
 	public ResponseEntity<ImagesListDTO> getImages(@RequestBody ImagesListDTO imagesListDTO) {
 		
-		System.out.println("**** 111 Inside ImageController.getImages() getBusinessId: "+imagesListDTO.getBusinessId());
+		logger.info("**** 111 Inside ImageController.getImages() getBusinessId: "+imagesListDTO.getBusinessId());
 		
-		logger.info("Get the Business images based on business Id");
+		//logger.info("Get the Business images based on business Id");
 		
 		try {
 			ImagesListDTO returnImagesListDTO = imageService.getImages(imagesListDTO.getBusinessId());
@@ -118,9 +118,9 @@ public class ImageController implements ErrorController {
 	@PostMapping(value = "deleteImages")
 	public ApiResponse<?> deleteImages(@RequestBody ImagesListDTO imagesListDTO) {
 		
-		System.out.println("**** 111 Inside ImageController.getImages() getBusinessId: "+imagesListDTO.getBusinessId());
+		logger.info("**** 111 Inside ImageController.getImages() getBusinessId: "+imagesListDTO.getBusinessId());
 		
-		logger.info("Get the Business images based on business Id");
+		//logger.info("Get the Business images based on business Id");
 		
 		try {
 			int numOfDelImg = imageService.deleteImages(imagesListDTO);
