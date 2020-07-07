@@ -276,9 +276,29 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             url: '/productsAndServices',
             templateUrl: 'resources/pages/productsAndServices.html',
         })
-		.state('howToSelectBVExpert', {
+	.state('howToSelectBVExpert', {
             url: '/howToSelectBVExpert',
             templateUrl: 'resources/pages/howToSelectBVExpert.html',
+        })
+	.state('claimYourBusiness', {
+            url: '/claimYourBusiness',
+            templateUrl: 'resources/pages/claimYourBusiness.html',
+        })
+	.state('findTheRealWorthOfBusiness', {
+            url: '/findTheRealWorthOfBusiness',
+            templateUrl: 'resources/pages/findTheRealWorthOfBusiness.html',
+        })
+	.state('registerAsBSPs', {
+            url: '/registerAsBSPs',
+            templateUrl: 'resources/pages/registerAsBSPs.html',
+        })
+	.state('searchBusinessToBuy', {
+            url: '/searchBusinessToBuy',
+            templateUrl: 'resources/pages/searchBusinessToBuy.html',
+        })
+	.state('sellABusiness', {
+            url: '/sellABusiness',
+            templateUrl: 'resources/pages/sellABusiness.html',
         })
     ;
 
