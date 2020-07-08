@@ -8,6 +8,10 @@
 -- 7. Enter password if it asks - PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
 -- 8. Execute SQLs by ending them with ;
 
+select count(*) from t_brw_business 
+where 
+sales_range < 500000
+and sales_range != 0
 
 select count(biz_id) from t_brw_business where hidden_YN = 'N';
 
