@@ -127,7 +127,7 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 	}
 
 	private GeoApiContext getGoogleContext() {
-		GeoApiContext context = new GeoApiContext.Builder().apiKey("AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I").build();
+		GeoApiContext context = new GeoApiContext.Builder().apiKey("AIzaSyAdUjAX3eXY5GxQBqVV4DDFFflfxAcDeSY").build();
 		return context;
 	}
 
