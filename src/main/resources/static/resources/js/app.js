@@ -43,7 +43,7 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
         })
         .state('search', {
             url: '/search/:type',
-            templateUrl: 'resources/pages/search.html',
+            templateUrl: 'resources/pages/search_business.html',
             controller: 'searchController',
             reload: true,
             resolve: {
@@ -229,15 +229,15 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                 }
             }
         })
-        .state('businessBuyGuidance', {
-            url: '/businessBuyGuidance',
-            templateUrl: 'resources/pages/businessBuyGuidance.html',
+        .state('business_buying_guidance', {
+            url: '/business_buying_guidance',
+            templateUrl: 'resources/pages/business_buying_guidance.html',
             controller: 'businessBuyGuidanceController',
             reload: true
         })
-        .state('businessSellGuidance', {
-            url: '/businessSellGuidance',
-            templateUrl: 'resources/pages/businessSellGuidance.html'
+        .state('business_selling_guidance', {
+            url: '/business_selling_guidance',
+            templateUrl: 'resources/pages/business_selling_guidance.html'
         })
 
         .state('postbuyconfirmation', {
@@ -258,9 +258,9 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             url: '/privacyPolicy',
             templateUrl: 'resources/pages/privacyPolicy.html',
         })
-        .state('contactUs', {
-            url: '/contactUs',
-            templateUrl: 'resources/pages/contactUs.html',
+        .state('contact_us', {
+            url: '/contact_us',
+            templateUrl: 'resources/pages/contact_us.html',
             controller: 'contactUsController',
             reload: true,
             params: {
@@ -268,37 +268,37 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                     action: {squash: true, value: null},
                 }
         })
-        .state('aboutUs', {
-            url: '/aboutUs',
-            templateUrl: 'resources/pages/aboutUs.html',
+        .state('about_us', {
+            url: '/about_us',
+            templateUrl: 'resources/pages/about_us.html',
         })
-        .state('productsAndServices', {
-            url: '/productsAndServices',
-            templateUrl: 'resources/pages/productsAndServices.html',
+        .state('products_and_services', {
+            url: '/products_and_services',
+            templateUrl: 'resources/pages/products_and_services.html',
         })
-	.state('howToSelectBVExpert', {
-            url: '/howToSelectBVExpert',
-            templateUrl: 'resources/pages/howToSelectBVExpert.html',
+	.state('how_to_select_business_valuation_expert', {
+            url: '/how_to_select_business_valuation_expert',
+            templateUrl: 'resources/pages/how_to_select_business_valuation_expert.html',
         })
 	.state('claimYourBusiness', {
             url: '/claimYourBusiness',
             templateUrl: 'resources/pages/claimYourBusiness.html',
         })
-	.state('findTheRealWorthOfBusiness', {
-            url: '/findTheRealWorthOfBusiness',
-            templateUrl: 'resources/pages/findTheRealWorthOfBusiness.html',
+	.state('find_value_of_business', {
+            url: '/find_value_of_business',
+            templateUrl: 'resources/pages/find_value_of_business.html',
         })
 	.state('registerAsBSPs', {
             url: '/registerAsBSPs',
             templateUrl: 'resources/pages/registerAsBSPs.html',
         })
-	.state('searchBusinessToBuy', {
-            url: '/searchBusinessToBuy',
-            templateUrl: 'resources/pages/searchBusinessToBuy.html',
+	.state('search_business_for_sell', {
+            url: '/search_business_for_sell',
+            templateUrl: 'resources/pages/search_business_for_sell.html',
         })
-	.state('sellABusiness', {
-            url: '/sellABusiness',
-            templateUrl: 'resources/pages/sellABusiness.html',
+	.state('sell_a_business', {
+            url: '/sell_a_business',
+            templateUrl: 'resources/pages/sell_a_business.html',
         })
     ;
 
