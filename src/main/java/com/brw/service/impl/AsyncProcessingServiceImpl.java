@@ -156,7 +156,7 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 				returnGBusinessInfoDTO.setgLatitude(new Double(result.geometry.location.lat));
 				returnGBusinessInfoDTO.setgLongitude(new Double(result.geometry.location.lng));
 				if (null != result.photos && result.photos.length > 0) {
-					String gPhotoUrl = "https://maps.googleapis.com/maps/api/place/photo?photoreference="+result.photos[0].photoReference+"&sensor=false&maxheight=500&maxwidth=500&key=AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I";
+					String gPhotoUrl = "https://maps.googleapis.com/maps/api/place/photo?photoreference="+result.photos[0].photoReference+"&sensor=false&maxheight=500&maxwidth=500&key=AIzaSyAdUjAX3eXY5GxQBqVV4DDFFflfxAcDeSY";
 					
 					//TODO: How to get DIRECt image URL instead of above URL that has our Google API Key?
 					//Below blog post says its not possible
@@ -239,7 +239,7 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 						imageDTO = new ImageDTO();
 						//logger.info("**** photoRef: "+photoRef);
 
-						String gPhotoUrl = "https://maps.googleapis.com/maps/api/place/photo?photoreference="+photoRef+"&sensor=false&maxheight=500&maxwidth=500&key=AIzaSyAc0CLCHpUtmyrQmfcEgESIy_OYVICHT6I";
+						String gPhotoUrl = "https://maps.googleapis.com/maps/api/place/photo?photoreference="+photoRef+"&sensor=false&maxheight=500&maxwidth=500&key=AIzaSyAdUjAX3eXY5GxQBqVV4DDFFflfxAcDeSY";
 						//logger.info("***  BIZ Image found on GOOGLE gPhotoUrl: "+gPhotoUrl);
 	
 						gPhotoUrls[y] = gPhotoUrl;
