@@ -364,7 +364,7 @@
             map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
             addMarker(dataset);
             showMarkers();
-            filterNonLatLngBusinesses(dataset);
+//            filterNonLatLngBusinesses(dataset);
             // When map becomes idle after zoom ing or panning
             map.addListener('zoom_changed', function (e) {
                 mapZoomPanChangeListeners();
@@ -467,7 +467,7 @@
                     addMarker(arrDestinations);
                     showMarkers();
                     $scope.searchList = arrDestinations;
-                    filterNonLatLngBusinesses(arrDestinations);
+//                    filterNonLatLngBusinesses(arrDestinations);
                 })
                 .error(function (error) {
                     $scope.status = 'Unable to load store data: ' + error.message;
