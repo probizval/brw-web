@@ -1,12 +1,8 @@
 <div class="modal fade" id="createSearchAgentModal">
-    <div class="modal-dialog ng-modal-dialog modal-lg">
     <div class="modal-dialog ng-modal-dialog modal-md">
         <div class="modal-content">
 
             <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Save search business subscription</h4>
-                <button type="button" class="close" data-ng-click="skipSearchAgent()" data-dismiss="modal">&times;</button>
             <div class="modal-header" style="padding: 5px 5px 5px 15px;">
                 <h4 class="modal-title" style="margin: 5px 0px">Save search business subscription</h4>
                 <button type="button" class="close" data-ng-click="skipSearchAgent()">&times;</button>
@@ -14,86 +10,86 @@
 
             <!-- Modal body -->
             <form name="subscriptionForm">
-            <div class="modal-body">
             <div class="modal-body" style="padding: 5px;">
                 <div class="col-md-12 col-lg-12 col-xl-12">
                     <small>Fields marked with an * are required.</small>
-                    <br/><br/>
                     <br>
                     <div class="row form-group">
                         <div class="col-md-6 col-lg-6 col-xl-6">
                             <label style="margin:0">Email Address*</label>
+                            <input type="email" class="form-control form-control-md" name="email" ng-model="email"
+                                   id="email" placeholder="" required>
+                            <div class="errors" ng-show="subscriptionForm.email.$touched || subscriptionForm.email.$invalid">
+                                <div style="color:red" ng-show="subscriptionForm.email.$error.required">E-mail is required.</div>
+                                <div style="color:red" ng-show="subscriptionForm.email.$error.email">Email is invalid.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-6">
+                            <label style="margin:0">Business Type*</label>
+                            <select class="form-control form-control-md" name="businessType"
+                                    ng-model="businessType" ng-options="businessType.name for businessType in businessTypes"
+                                    id="businessType" required>
+<!--                                <option style="color:#868e96;" value="all">All</option>-->
+                            </select>
+                            <span style="color:red" ng-show="submitted || subscriptionForm.businessType.$error.required">Business Type is required.</span>
+                        </div>
+
                     </div>
                     <div class="row form-group">
                         <div class="col-md-6 col-lg-6 col-xl-6">
-                            <label style="margin:0">State*</label>
                             <label style="margin:0">State</label>
                             <select class="form-control form-control-md" name="businessState" ng-model="businessState"
                                     ng-options="state.label for state in businessStates track by state.id"
                                     id="businessState" ng-change="filterCountyByState()">
+                            </select>
+<!--                            <span style="color:red" ng-show="subscriptionForm.businessState.$error.required">State is required.</span>-->
                         </div>
 
                         <div class="col-md-6 col-lg-6 col-xl-6">
-                            <label style="margin:0">County*</label>
                             <label style="margin:0">County</label>
                             <select class="form-control form-control-md" name="businessCounty" ng-model="businessCounty"
                                     ng-options="county.countyName for county in businessCounties" id="businessCounty" required>
                             </select>
-                            <span style="color:red" ng-show="subscriptionForm.businessCounty.$error.required">County is required.</span>
 <!--                            <span style="color:red" ng-show="subscriptionForm.businessCounty.$error.required">County is required.</span>-->
                         </div>
                     </div>
                     <div class="row form-group">
 <!--                        <div class="col-md-6 col-lg-6 col-xl-6">-->
 <!--                            <label style="margin:0">City</label>-->
-<!--                            <select class="form-control form-control-md" name="businessCity" ng-model="businessCity"-->
-<!--                                    ng-options="city as city.label for city in businessCities track by city.id"-->
-<!--                                    id="businessCity">-->
-<!--                            </select>-->
 <!--                            <input type="text" class="form-control form-control-md" name="businessCity" ng-model="businessCity"-->
 <!--                                   id="businessCity">-->
 <!--                        </div>-->
-                        <div class="col-md-6 col-lg-6 col-xl-6">
-                            <label style="margin:0">City</label>
-                            <input type="text" class="form-control form-control-md" name="businessCity" ng-model="businessCity"
-                                   id="businessCity">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-xl-6">
                         <div class="col-md-4 col-lg-4 col-xl-3">
                             <label style="margin:0">Price Range</label>
                             <select class="form-control form-control-md" name="priceRange" ng-model="priceRange"
                                     ng-options="priceRange.price for priceRange in priceRangeList track by priceRange.id">
                             </select>
                         </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-6 col-lg-6 col-xl-6">
-                            <label style="margin:0">Frequency of email</label>
                         <div class="col-md-4 col-lg-4 col-xl-3">
                             <label style="margin:0">Frequency</label>
                             <select class="form-control form-control-md" name="frequency" ng-model="frequency"
                                     ng-options="frequency.label for frequency in frequencies track by frequency.id">
                             </select>
                         </div>
-                        <div class="col-md-6 col-lg-6 col-xl-6">
-                            <label style="margin:0">Name of search*</label>
                         <div class="col-md-4 col-lg-4 col-xl-6">
                             <label style="margin:0">Name of search</label>
                             <input type="text" class="form-control form-control-md" name="searchName" ng-model="searchName"
                                    id="searchName" required>
-                            <span style="color:red" ng-show="subscriptionForm.searchName.$error.required">Name is required.</span>
 <!--                            <span style="color:red" ng-show="subscriptionForm.searchName.$error.required">Name is required.</span>-->
                         </div>
                     </div>
                 </div>
+
+            </div>
             </form>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"
                 <button type="button" class="btn btn-secondary"
                         data-ng-click="skipSearchAgent()">Skip</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal"
                 <button type="button" class="btn btn-primary"
                         ng-disabled="subscriptionForm.$invalid" ng-class="{ 'disabled': subscriptionForm.$invalid }"
                         data-ng-click="saveSearchAgent()">Save search</button>
             </div>
+        </div>
+    </div>
+</div>
