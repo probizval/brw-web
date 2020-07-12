@@ -438,18 +438,19 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 				}
 			}
 			
-			logger.info("111 businessInfo.getImageFirst(): " + businessInfo.getImageFirst());
 			//logger.info("**** businessInfo.getImageFirst(): "+businessInfo.getImageFirst());
 			if(null != businessInfo.getImageFirst() && !businessInfo.getImageFirst().equals(Constants.EMPTY_STRING)) {
 				//If ImageFirst Exist then pick up Image First
 				businessInfoDTO.setImageFirst(businessInfo.getImageFirst());
+				logger.info("222 Setting REGULAR IMAGE FIRST");
+
 			} else {
 				//If there is no first image saved in BRW DB and also we can't get it from google then call this method
 				//TODO: Come up with better Solution - Right now we are picking up random image based on the business type
 				try {
 					//businessInfoDTO.setAlternateImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
 					businessInfoDTO.setImageFirst(imageService.getDefaultImageForBizType(businessInfo.getType()));
-					logger.info("222 businessInfoDTO.getImageFirst(): " + businessInfoDTO.getImageFirst());
+					logger.info("222 Setting ALTERNATE IMAGE FIRST");
 
 				} catch (Exception e) {
 					e.printStackTrace();
