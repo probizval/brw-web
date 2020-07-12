@@ -52,8 +52,6 @@ public interface Constants {
 	
 	public static final String SEARCH_BUSINESS = "SEARCH_BUSINESS";
 	
-	public static final String GET_BUSINESS_DETAILS = "GET_BUSINESS_DETAILS";
-	
 	public static final String CREATE = "CREATE";
 
 	public static final String BUSINESS = "BUSINESS";
