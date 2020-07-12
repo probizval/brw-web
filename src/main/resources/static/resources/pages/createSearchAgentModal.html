@@ -6,9 +6,6 @@
             <div class="modal-header" style="padding: 5px 5px 5px 15px;">
                 <h4 class="modal-title" style="margin: 5px 0px">Save search business subscription</h4>
                 <button type="button" class="close" data-ng-click="skipSearchAgent()">&times;</button>
-            <div class="modal-header">
-                <h4 class="modal-title">Save search business subscription</h4>
-                <button type="button" class="close" data-ng-click="skipSearchAgent()" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
@@ -63,12 +60,6 @@
 <!--                                   id="businessCity">-->
 <!--                        </div>-->
                         <div class="col-md-4 col-lg-4 col-xl-3">
-                        <div class="col-md-6 col-lg-6 col-xl-6">
-                            <label style="margin:0">City</label>
-                            <input type="text" class="form-control form-control-md" name="businessCity" ng-model="businessCity"
-                                   id="businessCity">
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-xl-6">
                             <label style="margin:0">Price Range</label>
                             <select class="form-control form-control-md" name="priceRange" ng-model="priceRange"
                                     ng-options="priceRange.price for priceRange in priceRangeList track by priceRange.id">

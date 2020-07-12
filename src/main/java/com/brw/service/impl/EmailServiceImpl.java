@@ -107,7 +107,7 @@ public class EmailServiceImpl implements com.brw.service.EmailService {
 			sendAcknowledgementEmail(emailDTO.getFrom());
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
 		
 		logger.info("Elapsed time in sendEmail(): " + (System.currentTimeMillis() - start));
