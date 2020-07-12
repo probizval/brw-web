@@ -50,7 +50,7 @@ public class EmailServiceImpl implements com.brw.service.EmailService {
 	public EmailDTO sendEmail(EmailDTO emailDTO) throws EmailException, AddressException, MessagingException, IOException {
 		long start = System.currentTimeMillis();
 		
-		logger.info("**** 222 Inside EmailServiceImpl.sendEmail()" + emailDTO.getToList().toString());
+		logger.info("**** 222 Inside EmailServiceImpl.sendEmail()" + emailDTO.getToList().size());
 
 		EmailDTO returnEmailDTO = new EmailDTO();
 		

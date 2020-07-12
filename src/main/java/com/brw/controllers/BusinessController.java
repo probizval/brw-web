@@ -126,11 +126,8 @@ public class BusinessController implements ErrorController {
 	//@RequestMapping(value = "getBusinessDetails/{businessId}", method = RequestMethod.GET, produces = "application/json")
 	@PostMapping(value = "getBusinessDetails")
 	public ApiResponse<?> getBusinessDetails(@RequestBody BusinessDetailsDTO businessDTO) {
-		
 		logger.info("**** 111 Inside BusinessController.getBusinessDetails()");
 		
-		logger.info("GET the Business details based on business Id");
-
 		BusinessDetailsDTO returnBusinessDetailsDTO = null;
 		//BusinessDetailsDTO businessDetailsDTO2 = null;
 
@@ -149,7 +146,7 @@ public class BusinessController implements ErrorController {
 			userActivityDTO.setBusinessId(businessDTO.getBusinessId());
 			
 			userActivityDTO.setType(Constants.BUTTON_CLICK);
-			userActivityDTO.setSubType(Constants.SEARCH_BUSINESS);
+			userActivityDTO.setSubType(Constants.GET_BUSINESS_DETAILS);
 
 			asyncProcessingService.asyncTrackUserActivity(userActivityDTO);
 			//Log the User Action - END
