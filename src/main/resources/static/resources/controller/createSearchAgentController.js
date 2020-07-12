@@ -61,21 +61,23 @@
             }
             propertyService.addSearchAgent(searchAgentDetails)
                 .success(function(res) {
-                    $("#createSearchAgentModal").modal("hide");
-                    if ($stateParams.email != null) {
-//                        $state.go('home', null, {'reload': true})
-                        window.location.href = sessionStorage.getItem("redirect_location");
-                        location.reload();
-                    } else if ($stateParams.email === null && $stateParams.fromSignIn === true) {
-						window.location.href = sessionStorage.getItem("redirect_location");
-						location.reload();
-					} else {
-						$state.go('business.list_search_agent',null, {'reload':true});
-					}
+					var res = res;
                 })
                 .error(function (error) {
                     $scope.status = 'Unable to load store data: ' + error.message;
                 });
+            $("#createSearchAgentModal").modal("hide");
+            if ($stateParams.email != null) {
+                $state.go('home', null, {'reload': true})
+//                window.location.href = sessionStorage.getItem("redirect_location");
+//                location.reload();
+            } else if ($stateParams.email === null && $stateParams.fromSignIn === true) {
+                window.location.href = sessionStorage.getItem("redirect_location");
+                location.reload();
+            } else {
+                $state.go('business.list_search_agent',null, {'reload':true});
+            }
+
         };
 		$scope.skipSearchAgent = function() {
 			if ($stateParams.email != null) {
