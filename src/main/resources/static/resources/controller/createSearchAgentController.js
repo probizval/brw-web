@@ -54,13 +54,14 @@
 				priceHigh: $scope.priceRange.maxPrice,
 				state: $scope.businessState.code,
 				county: $scope.businessCounty.countyName,
-				city: $scope.businessCity,
+//				city: $scope.businessCity,
             }
             if (profile && profile.userId) {
                 searchAgentDetails["userId"] = profile.userId;
             }
             propertyService.addSearchAgent(searchAgentDetails)
                 .success(function(res) {
+                    $("#createSearchAgentModal").modal("hide");
                     if ($stateParams.email != null) {
 //                        $state.go('home', null, {'reload': true})
                         window.location.href = sessionStorage.getItem("redirect_location");
@@ -73,7 +74,7 @@
 					}
                 })
                 .error(function (error) {
-                 $scope.status = 'Unable to load store data: ' + error.message;
+                    $scope.status = 'Unable to load store data: ' + error.message;
                 });
         };
 		$scope.skipSearchAgent = function() {
@@ -81,9 +82,11 @@
 				// subscribe case from home even if user skip it -> save search
 				$scope.saveSearchAgent();
 			} else if ($stateParams.fromSignIn === true) {
+				$("#createSearchAgentModal").modal("hide");
                 window.location.href = sessionStorage.getItem("redirect_location");
                 location.reload();
             } else {
+                $("#createSearchAgentModal").modal("hide");
                 $state.go('business.list_search_agent',null, {'reload':true});
             }
         }
