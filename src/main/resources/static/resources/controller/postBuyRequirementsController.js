@@ -271,7 +271,7 @@
             $scope.business.userProfile = JSON.parse(localStorage.getItem('userprofile'));
             propertyService.sendEmailWithBuyRequirements($scope.business)
               .success(function(res) {
-                     $state.go("postbuyconfirmation", {status: res.status});
+                     $state.go("post_buy_confirmation", {status: res.status});
                      //$state.go("business.confirmation");
                 })
                 .error(function (error) {

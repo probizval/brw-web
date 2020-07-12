@@ -62,12 +62,14 @@
             propertyService.addSearchAgent(searchAgentDetails)
                 .success(function(res) {
                     if ($stateParams.email != null) {
-                        $state.go('home', null, {'reload': true})
+//                        $state.go('home', null, {'reload': true})
+                        window.location.href = sessionStorage.getItem("redirect_location");
+                        location.reload();
                     } else if ($stateParams.email === null && $stateParams.fromSignIn === true) {
 						window.location.href = sessionStorage.getItem("redirect_location");
 						location.reload();
 					} else {
-						$state.go('business.listSearchAgent',null, {'reload':true});
+						$state.go('business.list_search_agent',null, {'reload':true});
 					}
                 })
                 .error(function (error) {
@@ -82,7 +84,7 @@
                 window.location.href = sessionStorage.getItem("redirect_location");
                 location.reload();
             } else {
-                $state.go('business.listSearchAgent',null, {'reload':true});
+                $state.go('business.list_search_agent',null, {'reload':true});
             }
         }
         $scope.initialize = function() {

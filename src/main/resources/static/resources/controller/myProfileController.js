@@ -33,7 +33,7 @@
     	  
     	  propertyService.updateProfile($scope.profileDetails)
           .success(function(res) {
-                 $state.go("profileconfirmation", {status: res.status});
+                 $state.go("profile_confirmation", {status: res.status});
                  //$state.go("business.confirmation");
             })
             .error(function (error) {

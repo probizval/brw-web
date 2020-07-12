@@ -153,7 +153,7 @@
         latitude: latitude,
         longitude: longitude
       }));
-      $state.go('listAgents', {
+      $state.go('list_agents', {
         type: propertyFor
       });
     };

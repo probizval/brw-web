@@ -172,7 +172,7 @@
 					return false
 				}
             }
-			$state.go('business.createSearchAgent', {fromSignIn: true, email: $scope.subscribeEmail}, {reload: true})
+			$state.go('business.create_search_agent', {fromSignIn: true, email: $scope.subscribeEmail}, {reload: true})
         }
 //        $scope.initialize();
     }

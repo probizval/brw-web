@@ -19,9 +19,13 @@
                     <i class="fa fa-info-circle" style="font-size:14px;" data-toggle="popover" data-trigger="hover"
                        data-content="Confidential Business Listing will not display name, address or any information that may reveal its identity."></i>
                 </div>
-                <div class="page-header">
+                <div class="page-header" ng-if="searchList.length > 0">
                     <h1 ng-if="businessName">{{businessName}} found in county of {{businessCounty}}, {{businessState}}</h1>
                     <h1 ng-if="!businessName">{{businessType}} found in county of{{businessCounty}}, {{businessState}}</h1>
+                </div>
+                <div class="page-header" ng-if="searchList.length === 0">
+                    <h1 ng-if="businessName">We did not find {{businessName}} in county of {{businessCounty}}, {{businessState}}</h1>
+                    <h1 ng-if="!businessName">We did not find {{businessType}} in county of{{businessCounty}}, {{businessState}}</h1>
                 </div>
 <!--                <div class="sorting">-->
 <!--                  <div class="row justify-content-between">-->
@@ -46,7 +50,7 @@
 
                 <div class="row item-listing grid">
                     <div ng-repeat="prop in searchList | startFrom:currentPage*itemsPerPage | limitTo:itemsPerPage" class="item col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-6" id="prop{{$index}}">
-                            <a href="#businessDetails/{{prop.businessId}}">
+                            <a href="#business_details/{{prop.businessId}}">
                                 <div class="item-image" style="height:200px">
                                     <img src="{{prop.imageFirst}}" style="width:350px;height:200px" class="img-fluid" alt="">
                                     <div class="row item-badge-left save-item-left" ng-if="prop.isForSell">
@@ -65,7 +69,7 @@
 
                                 </div>
                             </a>
-                            <a href="#businessDetails/{{prop.businessId}}">
+                            <a href="#business_details/{{prop.businessId}}">
                                 <div style="padding:5px;">
                                     <p class="item-price" ng-if="prop.isForSell === 'Y'">Asking Price ${{ prop.forSellPrice.toLocaleString('en', {useGrouping:true}) }}</p>
                                     <p class="item-price" style="color:blue" style="font-family:ariel">See RealWorth&trade; & more details!</p>

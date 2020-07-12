@@ -15,7 +15,6 @@
     function login() {
       var location_hash = window.location.hash;
       var location = window.location.href;
-//      location = location.substring(2, location.length);
       sessionStorage.setItem("redirect_location", location);
       sessionStorage.setItem("redirect_hash", location_hash);
       angularAuth0.authorize({redirectUri: location});
@@ -25,10 +24,10 @@
       angularAuth0.parseHash(function(err, authResult) {
         if (authResult && authResult.idToken) {
           setSession(authResult);
-//          var redirect_location = sessionStorage.getItem("redirect_location");
-//          window.location.href = redirect_location
-//          location.reload();
-			$state.go('business.createSearchAgent', {fromSignIn: true}, {reload: true})
+          var redirect_location = sessionStorage.getItem("redirect_location");
+          window.location.href = redirect_location
+          location.reload();
+//			$state.go('business.createSearchAgent', {fromSignIn: true}, {reload: true})
 //          if (redirect_location.includes("/")){
 //            let sub_type = redirect_location.split("/")[1]
 //            redirect_location = redirect_location.split("/")[0]

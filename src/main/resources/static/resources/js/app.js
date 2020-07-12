@@ -1,7 +1,7 @@
 var myapp = angular.module('myApp', ['auth0.auth0', 'ui.router', 'propertyService', 'ngSanitize']);
 myapp.config.$inject = ['$routeProvider', '$httpProvider', 'angularAuth0Provider', 'propertyService'];
-myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider, $httpProvider, angularAuth0Provider) {
-
+myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider, $httpProvider, $locationProvider,
+	angularAuth0Provider) {
 
     var lochash = window.location.hash.substr(1),
         token = localStorage.getItem('access_token');
@@ -15,15 +15,15 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
 
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    //$urlRouterProvider.otherwise('/index');
     $uiViewScrollProvider.useAnchorScroll();
-    $urlRouterProvider.otherwise('/home');
+//    $locationProvider.html5Mode(true);
+    $urlRouterProvider.otherwise('/');
     $stateProvider
 
 
     //adpages
         .state('home', {
-            url: '/home',
+            url: '/',
             templateUrl: 'resources/pages/home.html',
             controller: 'homeController',
             reload: true
@@ -53,15 +53,15 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                 }
             }
         })
-        .state('postBuy', {
-            url: '/postBuy',
+        .state('post_buy', {
+            url: '/post_buy',
             templateUrl: 'resources/pages/postBuyRequirements.html',
             controller: 'postBuyRequirementsController',
             reload: true,
             requireLogin: true
         })
-        .state('businessDetails', {
-            url: '/businessDetails/:id',
+        .state('business_details', {
+            url: '/business_details/:id',
             templateUrl: 'resources/pages/businessDetails.html',
             controller: 'businessDetailsController',
             reload: true,
@@ -84,8 +84,8 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                 // }
             }
         })
-        .state('myProfile', {
-            url: '/myProfile',
+        .state('my_profile', {
+            url: '/my_profile',
             templateUrl: 'resources/pages/myProfile.html',
             controller: 'myProfileController',
             reload: true,
@@ -97,20 +97,20 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             }
         })
 
-        .state('accountSettings', {
-            url: '/accountSettings',
+        .state('account_settings', {
+            url: '/account_settings',
             templateUrl: 'resources/pages/accountSettings.html'
         })
-        .state('accountSettings.changePassword', {
-            url: '/changePassword',
+        .state('account_settings.change_password', {
+            url: '/change_password',
             templateUrl: 'resources/pages/changepassword.html'
         })
-        .state('accountSettings.notification', {
+        .state('account_settings.notification', {
             url: '/notification',
             templateUrl: 'resources/pages/notification.html'
         })
-        .state('accountSettings.socialAccounts', {
-            url: '/socialAccounts',
+        .state('account_settings.social_accounts', {
+            url: '/social_accounts',
             templateUrl: 'resources/pages/socialAccounts.html'
         })
 
@@ -118,15 +118,15 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             url: '/business',
             templateUrl: 'resources/pages/nav.html'
         })
-        .state('business.addListing', {
-            url: '/addListing',
+        .state('business.add_listing', {
+            url: '/add_listing',
             templateUrl: 'resources/pages/addListingForm.html',
             controller: 'addListingController',
             reload: true,
             requireLogin: true
         })
-        .state('business.bookmarkedListing', {
-            url: '/bookmarkedListing',
+        .state('business.bookmarked_listing', {
+            url: '/bookmarked_listing',
             templateUrl: 'resources/pages/bookmarkedListing.html',
             controller: 'bookmarkedListingController',
             reload: true,
@@ -136,8 +136,8 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                 }
             }
         })
-        .state('business.myListing', {
-            url: '/myListing',
+        .state('business.my_listing', {
+            url: '/my_listing',
             templateUrl: 'resources/pages/myListing.html',
             controller: 'myListingController',
             reload: true,
@@ -148,8 +148,8 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                 }
             }
         })
-        .state('business.createSearchAgent', {
-            url: '/createSearchAgent',
+        .state('business.create_search_agent', {
+            url: '/create_search_agent',
             templateUrl: 'resources/pages/createSearchAgentModal.html',
             controller: 'createSearchAgentController',
             reload: true,
@@ -158,8 +158,8 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
                 email: {squash: true, value: null},
             }
         })
-        .state('business.listSearchAgent', {
-            url: '/listSearchAgent',
+        .state('business.list_search_agent', {
+            url: '/list_search_agent',
             templateUrl: 'resources/pages/listSearchAgents.html',
             controller: 'listSearchAgentController',
             reload: true,
@@ -170,8 +170,8 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             }
         })
 
-        .state('business.editBusiness', {
-            url: '/editBusiness/:id',
+        .state('business.edit_business', {
+            url: '/edit_business/:id',
             templateUrl: 'resources/pages/editListingForm.html',
             controller: 'editBusinessDetailsController',
             reload: true,
@@ -198,27 +198,27 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             templateUrl: 'resources/pages/confirmation.html'
         })
 
-        .state('membershipPayment', {
-            url: '/membershipPayment',
+        .state('membership_payment', {
+            url: '/membership_payment',
             templateUrl: 'resources/pages/membershipPayment.html'
         })
-        .state('membershipPayment.membership', {
+        .state('membership_payment.membership', {
             url: '/membership',
             templateUrl: 'resources/pages/membership.html'
         })
-        .state('membershipPayment.payment', {
+        .state('membership_payment.payment', {
             url: '/payment',
             templateUrl: 'resources/pages/payment.html'
         })
 
-        .state('searchAgents', {
-            url: '/searchAgents',
+        .state('search_agents', {
+            url: '/search_agents',
             templateUrl: 'resources/pages/searchAgents.html',
             controller: 'searchAgentsController',
             reload: true
         })
-        .state('listAgents', {
-            url: '/listAgents/:type',
+        .state('list_agents', {
+            url: '/list_agents/:type',
             templateUrl: 'resources/pages/agentsListing.html',
             controller: 'listAgentsController',
             reload: true,
@@ -240,22 +240,22 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             templateUrl: 'resources/pages/business_selling_guidance.html'
         })
 
-        .state('postbuyconfirmation', {
-            url: '/postbuyconfirmation',
+        .state('post_buy_confirmation', {
+            url: '/post_buy_confirmation',
             templateUrl: 'resources/pages/postbuyconfirmation.html',
             requireLogin: true
         })
-        .state('profileconfirmation', {
-            url: '/profileconfirmation',
+        .state('profile_confirmation', {
+            url: '/profile_confirmation',
             templateUrl: 'resources/pages/profileconfirmation.html',
             requireLogin: true
         })
-		.state('termsOfService', {
-            url: '/termsOfService',
+		.state('terms_of_service', {
+            url: '/terms_of_service',
             templateUrl: 'resources/pages/termsOfService.html',
         })
-		.state('privacyPolicy', {
-            url: '/privacyPolicy',
+		.state('privacy_policy', {
+            url: '/privacy_policy',
             templateUrl: 'resources/pages/privacyPolicy.html',
         })
         .state('contact_us', {
@@ -280,16 +280,16 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             url: '/how_to_select_business_valuation_expert',
             templateUrl: 'resources/pages/how_to_select_business_valuation_expert.html',
         })
-	.state('claimYourBusiness', {
-            url: '/claimYourBusiness',
+	.state('claim_your_business', {
+            url: '/claim_your_business',
             templateUrl: 'resources/pages/claimYourBusiness.html',
         })
 	.state('find_value_of_business', {
             url: '/find_value_of_business',
             templateUrl: 'resources/pages/find_value_of_business.html',
         })
-	.state('registerAsBSPs', {
-            url: '/registerAsBSPs',
+	.state('register_as_bsps', {
+            url: '/register_as_bsps',
             templateUrl: 'resources/pages/registerAsBSPs.html',
         })
 	.state('search_business_for_sell', {
