@@ -71,7 +71,7 @@
 						console.log("res ", res);
 						console.log("res ", res.status);
 						// TODO need to show some success model
-						$state.go("business.myListing");
+						$state.go("business.my_listing");
 					})
 					.error(function (error) {
 						$scope.status = 'Unable to load store data: ' + error.message;
@@ -79,7 +79,7 @@
 			};
 			
 			$scope.cancelBusinessUpdate = function (editListingForm) {
-        $state.go("business.myListing");
+        $state.go("business.my_listing");
       };
 	
       $scope.imagesAsDataURL = [];

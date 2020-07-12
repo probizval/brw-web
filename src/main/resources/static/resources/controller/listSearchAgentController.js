@@ -26,7 +26,7 @@
         };
 
         $scope.createSearchAgent = function() {
-            $state.go('business.createSearchAgent', {fromSignIn: false})
+            $state.go('business.create_search_agent', {fromSignIn: false})
         }
     }
 })();
