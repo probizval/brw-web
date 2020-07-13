@@ -8,6 +8,8 @@
 -- 7. Enter password if it asks - PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
 -- 8. Execute SQLs by ending them with ;
 
+SELECT * FROM brwdev.t_brw_user_activity order by create_date desc;
+
 select * from t_brw_business where biz_id = 17821340;
 
 delete from t_brw_image where biz_id = 17821340;
