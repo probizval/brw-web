@@ -8,11 +8,11 @@
 -- 7. Enter password if it asks - PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
 -- 8. Execute SQLs by ending them with ;
 
-
 SELECT * FROM brwdev.t_brw_user_activity order by create_date desc;
 07/13 - 2622
 07/16 - 2626
-07/18 - 2631
+07/18 - 2641
+07/18 - 2657
 
 SELECT * FROM brwdev.t_brw_user_activity order by create_date desc;
 
@@ -41,11 +41,9 @@ select count(*) from t_brw_business where sales_range != '';
 select count(*) from t_brw_business where sales_range != 0;
 -- 1114688
 
-
 select * from t_brw_business where biz_id = 17821340;
 
 delete from t_brw_image where biz_id = 17821340;
-
 
 select biz_id from t_brw_business where 
 createdby_user_id = 777 

@@ -205,7 +205,9 @@ public class ImageServiceImpl implements com.brw.service.ImageService {
 
 		ImagesListDTO returnImageDTOList = new ImagesListDTO();
 		ImagesListDTO dbIamgesDTOList = getImagesFromDB(businessId);
-		
+		logger.info("222 **** calling getImagesFromDB for businessId: "+businessId);
+		logger.info("222 **** dbIamgesDTOList.getImagesList().size(): "+dbIamgesDTOList.getImagesList().size());
+
 		if (dbIamgesDTOList.getImagesList().size() > 0) {
 			returnImageDTOList = dbIamgesDTOList;
 		} else {

@@ -190,8 +190,8 @@ public class AsyncProcessingServiceImpl implements com.brw.service.AsyncProcessi
 				//PlaceDetailsRequest gpdResult = null;
 			
 				try {
-					logger.info("***  Calling PLACE DETAILS API based on placeId: "+gBusinessInfoDTO.getgPlaceId());
-					logger.info("***  Calling PLACE DETAILS API based on placeId for bizId: "+gBusinessInfoDTO.getBizId());
+					//logger.info("***  Calling PLACE DETAILS API based on placeId: "+gBusinessInfoDTO.getgPlaceId());
+					//logger.info("***  Calling PLACE DETAILS API based on placeId for bizId: "+gBusinessInfoDTO.getBizId());
 
 					placeDetails = (PlacesApi.placeDetails(getGoogleContext(), gBusinessInfoDTO.getgPlaceId())).custom("fields", "photo").await();
 					//logger.info("***%%%%  AFTER Calling PLACE DETAILS API Total NUMBER of Photos FOUND : "+placeDetails.photos.length);
