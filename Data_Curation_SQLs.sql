@@ -6,13 +6,14 @@
 -- 5. rum command - \connect admin@brwdev.cx4tgyitha5s.us-east-1.rds.amazonaws.com/brwdev
 -- 6. Switch to SQL mode by command - \sql
 -- 7. Enter password if it asks - PWD - HDYnCWRnjn8qxTA81y3iNAikCeCJ
--- 8. Execute SQLs by ending them with ;
+-- 8. Execute SQLs by ending them with;
 
 SELECT * FROM brwdev.t_brw_user_activity order by create_date desc;
 07/13 - 2622
 07/16 - 2626
 07/18 - 2641
 07/18 - 2657
+07/29 - 2669
 
 SELECT * FROM brwdev.t_brw_user_activity order by create_date desc;
 
