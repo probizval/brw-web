@@ -300,6 +300,22 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             url: '/sell_a_business',
             templateUrl: 'resources/pages/sell_a_business.html',
         })
+	.state('buyers_faq', {
+            url: '/buyers_faq',
+            templateUrl: 'resources/pages/buyers_faq.html',
+        })
+	.state('sellers_faq', {
+            url: '/sellers_faq',
+            templateUrl: 'resources/pages/sellers_faq.html',
+        })
+	.state('general_faq', {
+            url: '/general_faq',
+            templateUrl: 'resources/pages/general_faq.html',
+        })
+	.state('service_fees_faq', {
+            url: '/service_fees_faq',
+            templateUrl: 'resources/pages/service_fees_faq.html',
+        })
     ;
 
     // Initialization for the angular-auth0 library
