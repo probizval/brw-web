@@ -218,10 +218,10 @@
 
         </div>
 
-        <h3 class="subheadline">Sell Details</h3>
+        <h3 class="subheadline">Sale Details</h3>
         <div class="row form-group">
             <div class="col-md-4 col-lg-4 col-xl-4">
-                <label>Is this business for sell?</label><br/>
+                <label>Is this business for sale?</label><br/>
                 <div class="radio radio-inline">
                     <input type="radio" id="isForSell" ng-model="isForSell" value="Y">
                     <label for="isForSell">Yes</label>
@@ -232,11 +232,11 @@
                 </div>
             </div>
             <div class="col-md-4 col-lg-4 col-xl-4" ng-show="isForSell">
-                <label>Asking Sell Price*</label>
+                <label>Asking Sale Price*</label>
                 <input type="text" class="form-control form-control-md" ng-model="forSellPrice" id="forSellPrice"
-                       placeholder="Asking Sell Price" ng-required = "isForSell === 'Y'">
+                       placeholder="Asking Sale Price" ng-required = "isForSell === 'Y'">
                 <div class="errors" ng-show="submitted || addListingForm.isForSell.$touched">
-                    <div style="color:red" ng-show="!forSellPrice">Asking Sell Price is
+                    <div style="color:red" ng-show="!forSellPrice">Asking Sale Price is
                         required.
                     </div>
                 </div>

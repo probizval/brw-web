@@ -14,6 +14,8 @@ SELECT * FROM brwdev.t_brw_user_activity order by create_date desc;
 07/18 - 2641
 07/18 - 2657
 07/29 - 2669
+08/01 - 2705
+08/04 - 2745
 
 SELECT * FROM brwdev.t_brw_user_activity order by create_date desc;
 
