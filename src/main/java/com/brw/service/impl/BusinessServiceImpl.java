@@ -393,7 +393,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
 			//This IF block is written to avoid showing Hidden Business address and lat/long
 			if (businessInfo.getIsHidden().equals(Constants.Y)) {
-				businessInfoDTO.setName("Business for Sell in " + businessInfo.getCity() + " city of " + businessInfo.getCounty() + " " + "County" );
+				businessInfoDTO.setName("Businesses for Sale in " + businessInfo.getCity() + " city of " + businessInfo.getCounty() + " " + "County" );
 				
 			} else {		
 				businessInfoDTO.setName(businessInfo.getName());
@@ -498,7 +498,7 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 		logger.info("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetails.getIsHidden(): "+businessInfo.getIsHidden());
 
 		if (businessInfo.getIsHidden().equals(Constants.Y)) {			
-			businessInfoDTO.setName("Business for Sell in " + businessInfo.getCity() + ", " + businessInfo.getCounty() + " " + "County" );
+			businessInfoDTO.setName("Businesses for Sale in " + businessInfo.getCity() + ", " + businessInfo.getCounty() + " " + "County" );
 			
 			logger.info("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessInfoDTO.getName(): "+businessInfoDTO.getName());
 		} else {
@@ -574,8 +574,8 @@ public class BusinessServiceImpl implements com.brw.service.BusinessService {
 
 		if (businessDetails.getIsHidden().equals(Constants.Y)) {
 			
-			businessDetailsDTO.setLegalName("Business for Sell in " + businessDetails.getCity() + ", of " + businessDetails.getCounty() + " " + "County" );
-			businessDetailsDTO.setName("Business for Sell in " + businessDetails.getCity() + ", of " + businessDetails.getCounty() + " " + "County" );
+			businessDetailsDTO.setLegalName("Businesses for Sale in " + businessDetails.getCity() + ", of " + businessDetails.getCounty() + " " + "County" );
+			businessDetailsDTO.setName("Businesses for Sale in " + businessDetails.getCity() + ", of " + businessDetails.getCounty() + " " + "County" );
 			
 			logger.info("**** 222 Inside BusinessServiceImpl.getBusinessDetails() businessDetailsDTO.getName(): "+businessDetailsDTO.getName());
 		} else {
