@@ -2,4 +2,10 @@
 Created On: 08/11/2020
 
 
-How to login to EC2 instance
+How to login to EC2 instance -
+1. Log into AWS console
+2. Select EC2 instance - 
+
+
+
+How to check application logs -
