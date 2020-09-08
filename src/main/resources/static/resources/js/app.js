@@ -294,7 +294,7 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
         })
 	.state('search_business_for_sell', {
             url: '/search_business_for_sell',
-            templateUrl: 'resources/pages/search_business_for_sell.html',
+            templateUrl: 'resources/pages/search_business_for_sale.html',
         })
 	.state('sell_a_business', {
             url: '/sell_a_business',
