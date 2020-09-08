@@ -292,7 +292,7 @@ myapp.config(function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider
             url: '/register_as_bsps',
             templateUrl: 'resources/pages/registerAsBSPs.html',
         })
-	.state('search_business_for_sell', {
+	.state('search_business_for_sale', {
             url: '/search_business_for_sale',
             templateUrl: 'resources/pages/search_business_for_sale.html',
         })
